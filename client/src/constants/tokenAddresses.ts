@@ -1,0 +1,5 @@
+export const pbr = '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'
+export const pbrv2 = '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'
+export const pbrAddress = '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'
+export const masterChefAddress = '0xfEfD5a6aD8407a7582A7207E3095dBbcec7CBE9E'
+export const pbrAddressMainnet = '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'

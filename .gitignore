@@ -1,0 +1,10 @@
+/test
+/.env
+/truffle-config.js
+/migrations
+/node_modules/*
+!node_modules/@openzeppelin/
+/node_modules
+/client-new/node_modules
+/client-new/.next
+/.vscode
