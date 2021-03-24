@@ -19,7 +19,6 @@ import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Contract } from 'web3-eth-contract';
-import usePoolActive from '../../hooks/usePoolActive';
 
 const Launchpad: React.FC = () => {
   const { launchpadId } = (useParams() as any)
@@ -71,9 +70,7 @@ const Launchpad: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const poolActive = usePoolActive(startAt)
   const pbr = usePolkaBridge()
-
   const [progress, setProgress] = useState<BigNumber>()
 
   useEffect(() => {
@@ -84,7 +81,7 @@ const Launchpad: React.FC = () => {
     if (pid >= 0) {
       fetchData()
     }
-  }, [pbr, setProgress, poolActive])
+  }, [pbr, setProgress])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -129,11 +126,11 @@ const Launchpad: React.FC = () => {
           <StyledInfo>
             <StyledBox className="col-4">
               <Button
-                disabled={!poolActive || progress == new BigNumber("100")}
-                text={poolActive ? 'Join pool' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
+                disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100")}
+                text={startAt * 1000 <= new Date().getTime() ? 'Join pool' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
                 to={`/launchpads/${id}/join`}
               >
-                {!poolActive && (
+                {startAt * 1000 > new Date().getTime() && (
                   <Countdown
                     date={new Date(startAt * 1000)}
                     renderer={renderer}
