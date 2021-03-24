@@ -319,8 +319,8 @@ export const approveAddress = async (lpContract, address, account) => {
 }
 
 export const checkPoolActive = async (startAt) => {
-  let now = new Date().getTime() / 1000
-  return now >= startAt
+  let now = new Date().getTime()
+  return startAt > 0 ? now * 1000 >= startAt : false
 }
 
 export const getProgress = async (lpContract) => {
