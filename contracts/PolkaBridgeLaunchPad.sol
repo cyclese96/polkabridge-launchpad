@@ -41,7 +41,7 @@ contract PolkaBridgeLaunchPad is Ownable {
 
     IDOPool[] pools;
 
-    constructor()public {}
+    constructor() public {}
 
     function addWhitelist(address user, uint256 pid) public onlyOwner {
         whitelist[pid][user].Id = pid;
@@ -65,7 +65,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         string memory name,
         uint256 begin,
         uint256 end,
-        uint256 type,
+        uint256 _type,
         IERC20 idoToken,
         uint256 minPurchase,
         uint256 maxPurchase,
@@ -73,26 +73,26 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint25 amountPBRRequire,
         uint256 ratePerETH
     ) public onlyOwner {
-        uint256 id = pools.length+1;
-        pools.push(IDOPool({
-            Id:id,
-            Name:name,
-            Begin:begin,
-            End:end,
-            Type:type,
-AmountPBRRequire:amountPBRRequire,
-        IDOToken:idoToken,
-        MinPurchase:minPurchase,
-        MaxPurchase: maxPurchase,
-        TotalCap: totalCap,
-        RatePerETH:ratePerETH,
-        IsActived:true,
-IsStoped:false,
-ActivedDate:block.timestamp,
-StopDate:0
-
-
-        }));
+        uint256 id = pools.length + 1;
+        pools.push(
+            IDOPool({
+                Id: id,
+                Name: name,
+                Begin: begin,
+                End: end,
+                Type: _type,
+                AmountPBRRequire: amountPBRRequire,
+                IDOToken: idoToken,
+                MinPurchase: minPurchase,
+                MaxPurchase: maxPurchase,
+                TotalCap: totalCap,
+                RatePerETH: ratePerETH,
+                IsActived: true,
+                IsStoped: false,
+                ActivedDate: block.timestamp,
+                StopDate: 0
+            })
+        );
     }
 
     receive() external payable {}
