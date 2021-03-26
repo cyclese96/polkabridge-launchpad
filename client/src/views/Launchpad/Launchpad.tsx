@@ -119,7 +119,7 @@ const Launchpad: React.FC = () => {
                 {website && <StyledMediaLink href={website} target="_blank">Website</StyledMediaLink>}
                 {twitter && <StyledMediaLink href={twitter} target="_blank">Twitter</StyledMediaLink>}
                 {telegram && <StyledMediaLink href={telegram} target="_blank">Telegram</StyledMediaLink>}
-                {whitepaper && <StyledMediaLink href={whitepaper} target="_blank">Whitepaper</StyledMediaLink>}
+                {/* {whitepaper && <StyledMediaLink href={whitepaper} target="_blank">Whitepaper</StyledMediaLink>} */}
               </StyledSocialMedia>
             </StyledBox>
           </StyledInfo>
@@ -128,7 +128,7 @@ const Launchpad: React.FC = () => {
               <Button
                 disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100")}
                 text={startAt * 1000 <= new Date().getTime() ? 'Join pool' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
-                to={`/launchpads/${id}/join`}
+                to={`/launchpads/join/${id}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown

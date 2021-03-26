@@ -323,6 +323,11 @@ export const checkPoolActive = async (startAt) => {
   return startAt > 0 ? now * 1000 >= startAt : false
 }
 
+export const getHistory = async (account) => {
+  let history = []
+  return history
+}
+
 export const getProgress = async (lpContract) => {
   try {
     // const progress = await lpContract.methods

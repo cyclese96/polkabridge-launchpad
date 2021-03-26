@@ -3,6 +3,7 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import Logo from '../../../assets/img/balance.png'
 import PageHeader from '../../../components/PageHeader'
 import Launchpad from '../../Launchpad'
+import JoinLaunchpad from '../../JoinLaunchpad'
 import LaunchpadCards from './LaunchpadCards'
 
 
@@ -20,8 +21,11 @@ const LaunchpadsContainer: React.FC = () => {
       />
       <LaunchpadCards />
     </Route>
-    <Route path={`${path}/:launchpadId`}>
+    <Route path={`${path}/view/:launchpadId`}>
       <Launchpad />
+    </Route>
+    <Route path={`${path}/join/:launchpadId`}>
+      <JoinLaunchpad />
     </Route>
   </>
 }
