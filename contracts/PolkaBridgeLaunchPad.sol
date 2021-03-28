@@ -213,7 +213,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (pools[poolIndex].Type == 2) //private, check hold PBR
         {
             require(
-                polkaBridgeToken.balanceOf(msg.sender) >
+                polkaBridgeToken.balanceOf(msg.sender) >=
                     pools[poolIndex].AmountPBRRequire,
                 "must hold PBR"
             );
