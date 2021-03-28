@@ -9,6 +9,7 @@ contract PolkaBridgeLaunchPad is Ownable {
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
     uint256 private CONST_MINIMUM = 1000000000000000000;
+    IERC20 polkaBridgeToken;
 
     address payable private ReceiveToken;
 
@@ -18,7 +19,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 Begin;
         uint256 End;
         uint256 Type; //1:public, 2:private
-        uint256 AmountPBRRequire;
+        uint256 AmountPBRRequire; //must e18,important when init
         IERC20 IDOToken;
         uint256 MinPurchase;
         uint256 MaxPurchase;
@@ -50,8 +51,9 @@ contract PolkaBridgeLaunchPad is Ownable {
 
     IDOPool[] pools;
 
-    constructor(address payable receiveTokenAdd) public {
+    constructor(address payable receiveTokenAdd, IERC20 polkaBridge) public {
         ReceiveToken = receiveTokenAdd;
+        polkaBridgeToken = polkaBridge;
     }
 
     function addWhitelist(address user, uint256 pid) public onlyOwner {
@@ -201,6 +203,22 @@ contract PolkaBridgeLaunchPad is Ownable {
             ethAmount <= pools[poolIndex].MaxPurchase,
             "invalid maximum contribute"
         );
+
+        //check user
+        require(
+            whitelist[pid][msg.sender].IsWhitelist &&
+                whitelist[pid][msg.sender].IsActived,
+            "invalid user"
+        );
+        if (pools[poolIndex].Type == 2) //private, check hold PBR
+        {
+            require(
+                polkaBridgeToken.balanceOf(msg.sender) >
+                    pools[poolIndex].AmountPBRRequire,
+                "must hold PBR"
+            );
+        }
+
         whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][msg.sender]
             .TotalETHPurchase
             .add(ethAmount);
@@ -241,6 +259,8 @@ contract PolkaBridgeLaunchPad is Ownable {
         );
 
         uint256 userBalance = getUserTotalPurchase(pid);
+
+        require(userBalance > 0, "invalid claim");
 
         pools[poolIndex].IDOToken.transfer(msg.sender, userBalance);
         whitelist[pid][msg.sender].IsClaimed = true;
