@@ -10,6 +10,8 @@ contract PolkaBridgeLaunchPad is Ownable {
     using SafeERC20 for IERC20;
     uint256 private CONST_MINIMUM = 1000000000000000000;
 
+    address payable private ReceiveToken;
+
     struct IDOPool {
         uint256 Id;
         string Name;
@@ -48,7 +50,9 @@ contract PolkaBridgeLaunchPad is Ownable {
 
     IDOPool[] pools;
 
-    constructor() public {}
+    constructor(address payable receiveTokenAdd) public {
+        ReceiveToken = receiveTokenAdd;
+    }
 
     function addWhitelist(address user, uint256 pid) public onlyOwner {
         whitelist[pid][user].Id = pid;
@@ -103,7 +107,10 @@ contract PolkaBridgeLaunchPad is Ownable {
                 IsStoped: false,
                 ActivedDate: block.timestamp,
                 StopDate: 0,
-                LockDuration: lockDuration
+                LockDuration: lockDuration,
+                TotalSold: 0,
+                IsSoldOut: false,
+                SoldOutAt: 0
             })
         );
     }
@@ -158,10 +165,11 @@ contract PolkaBridgeLaunchPad is Ownable {
         token.transfer(owner(), token.balanceOf(address(this)));
     }
 
+    //withdraw ETH after IDO
     function withdrawPoolFund() public onlyOwner {
         uint256 balance = address(this).balance;
         require(balance > 0, "not enough fund");
-        owner().transfer(balance);
+        ReceiveToken.transfer(balance);
     }
 
     function purchaseIDO(uint256 pid) public payable {
@@ -177,10 +185,12 @@ contract PolkaBridgeLaunchPad is Ownable {
             "invalid time"
         );
         uint256 remainToken = remainIDOToken(poolIndex);
-        require(
-            remainToken > CONST_MINIMUM && !pools[poolIndex].IsSoldOut,
-            "IDO sold out"
-        );
+        if (remainToken <= CONST_MINIMUM) {
+            pools[poolIndex].IsSoldOut = true;
+            pools[poolIndex].SoldOutAt = block.timestamp;
+        }
+
+        require(!pools[poolIndex].IsSoldOut, "IDO sold out");
 
         uint256 ethAmount = msg.value;
         require(
