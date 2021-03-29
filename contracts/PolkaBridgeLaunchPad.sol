@@ -179,7 +179,7 @@ contract PolkaBridgeLaunchPad is Ownable {
 
     function purchaseIDO(uint256 pid) public payable {
         uint256 poolIndex = pid.sub(1);
-        require(poolIndex >= 0, "invalid pool");
+
         require(
             pools[poolIndex].IsActived && !pools[poolIndex].IsStoped,
             "invalid pool"
@@ -189,7 +189,7 @@ contract PolkaBridgeLaunchPad is Ownable {
                 block.timestamp <= pools[poolIndex].End,
             "invalid time"
         );
-        uint256 remainToken = remainIDOToken(poolIndex);
+        uint256 remainToken = getRemainIDOToken(pid);
         if (remainToken <= CONST_MINIMUM) {
             pools[poolIndex].IsSoldOut = true;
             pools[poolIndex].SoldOutAt = block.timestamp;
@@ -238,7 +238,8 @@ contract PolkaBridgeLaunchPad is Ownable {
         }
 
         //storage
-        uint256 tokenAmount = ethAmount.mul(pools[poolIndex].RatePerETH);
+        uint256 tokenAmount =
+            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
         ]
@@ -253,7 +254,6 @@ contract PolkaBridgeLaunchPad is Ownable {
     function claimToken(uint256 pid) public {
         require(!whitelist[pid][msg.sender].IsClaimed, "user already claimed");
         uint256 poolIndex = pid.sub(1);
-        require(poolIndex >= 0, "invalid pool");
 
         require(
             block.timestamp >=
@@ -273,11 +273,29 @@ contract PolkaBridgeLaunchPad is Ownable {
         return whitelist[pid][msg.sender].TotalTokenPurchase;
     }
 
-    function remainIDOToken(uint256 poolIndex) public view returns (uint256) {
-        return
-            pools[poolIndex].IDOToken.balanceOf(address(this)).sub(
-                pools[poolIndex].TotalSold
-            );
+    function getRemainIDOToken(uint256 pid) public view returns (uint256) {
+        uint256 poolIndex = pid.sub(1);
+        uint256 tokenBalance = getBalanceTokenByPoolId(pid);
+        return tokenBalance.sub(pools[poolIndex].TotalSold);
+    }
+
+    function testGetRemainIDOToken(uint256 pid)
+        public
+        view
+        returns (uint256, uint256)
+    {
+        uint256 poolIndex = pid.sub(1);
+        uint256 tokenBalance = getBalanceTokenByPoolId(pid);
+        return (tokenBalance, pools[poolIndex].TotalSold);
+    }
+
+    function getBalanceTokenByPoolId(uint256 pid)
+        public
+        view
+        returns (uint256)
+    {
+        uint256 poolIndex = pid.sub(1);
+        return pools[poolIndex].IDOToken.balanceOf(address(this));
     }
 
     function getPoolInfo(uint256 pid)
@@ -321,7 +339,6 @@ contract PolkaBridgeLaunchPad is Ownable {
             bool
         )
     {
-        
         return (
             whitelist[pid][msg.sender].UserAddress,
             whitelist[pid][msg.sender].IsWhitelist,
