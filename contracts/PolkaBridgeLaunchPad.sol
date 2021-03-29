@@ -125,6 +125,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 minPurchase,
         uint256 maxPurchase,
         uint256 totalCap,
+        uint256 ratePerETH,
         bool isActived,
         bool isStoped,
         uint256 lockDuration
@@ -145,17 +146,19 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (maxPurchase > 0) {
             pools[poolIndex].MaxPurchase = maxPurchase;
         }
-        if (maxPurchase > 0) {
+        if (totalCap > 0) {
             pools[poolIndex].TotalCap = totalCap;
+        }
+        if (ratePerETH > 0) {
+            pools[poolIndex].RatePerETH = ratePerETH;
+        }
+        if (lockDuration > 0) {
+            pools[poolIndex].LockDuration = lockDuration;
         }
         pools[poolIndex].IsActived = isActived;
         pools[poolIndex].IsStoped = isStoped;
         if (isStoped) {
             pools[poolIndex].StopDate = block.timestamp;
-        }
-
-        if (lockDuration > 0) {
-            pools[poolIndex].LockDuration = lockDuration;
         }
     }
 
@@ -195,29 +198,14 @@ contract PolkaBridgeLaunchPad is Ownable {
         require(!pools[poolIndex].IsSoldOut, "IDO sold out");
 
         uint256 ethAmount = msg.value;
-        require(
-            ethAmount >= pools[poolIndex].MinPurchase,
-            "invalid minimum contribute"
-        );
+        // require(
+        //     ethAmount >= pools[poolIndex].MinPurchase,
+        //     "invalid minimum contribute"
+        // );
         require(
             ethAmount <= pools[poolIndex].MaxPurchase,
             "invalid maximum contribute"
         );
-
-        //check user
-        require(
-            whitelist[pid][msg.sender].IsWhitelist &&
-                whitelist[pid][msg.sender].IsActived,
-            "invalid user"
-        );
-        if (pools[poolIndex].Type == 2) //private, check hold PBR
-        {
-            require(
-                polkaBridgeToken.balanceOf(msg.sender) >=
-                    pools[poolIndex].AmountPBRRequire,
-                "must hold PBR"
-            );
-        }
 
         whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][msg.sender]
             .TotalETHPurchase
@@ -232,6 +220,21 @@ contract PolkaBridgeLaunchPad is Ownable {
                 .TotalETHPurchase
                 .sub(ethAmount);
             revert("invalid maximum contribute");
+        }
+
+        //check user
+        require(
+            whitelist[pid][msg.sender].IsWhitelist &&
+                whitelist[pid][msg.sender].IsActived,
+            "invalid user"
+        );
+        if (pools[poolIndex].Type == 2) //private, check hold PBR
+        {
+            require(
+                polkaBridgeToken.balanceOf(msg.sender) >=
+                    pools[poolIndex].AmountPBRRequire,
+                "must hold PBR"
+            );
         }
 
         //storage
@@ -275,6 +278,58 @@ contract PolkaBridgeLaunchPad is Ownable {
             pools[poolIndex].IDOToken.balanceOf(address(this)).sub(
                 pools[poolIndex].TotalSold
             );
+    }
+
+    function getPoolInfo(uint256 pid)
+        public
+        view
+        returns (
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            uint256,
+            bool
+        )
+    {
+        uint256 poolIndex = pid.sub(1);
+        return (
+            pools[poolIndex].Begin,
+            pools[poolIndex].End,
+            pools[poolIndex].Type,
+            pools[poolIndex].AmountPBRRequire,
+            pools[poolIndex].MaxPurchase,
+            pools[poolIndex].RatePerETH,
+            pools[poolIndex].LockDuration,
+            pools[poolIndex].TotalSold,
+            pools[poolIndex].IsActived
+        );
+    }
+
+    function getWhitelistfo(uint256 pid)
+        public
+        view
+        returns (
+            address,
+            bool,
+            uint256,
+            uint256,
+            uint256,
+            bool
+        )
+    {
+        
+        return (
+            whitelist[pid][msg.sender].UserAddress,
+            whitelist[pid][msg.sender].IsWhitelist,
+            whitelist[pid][msg.sender].WhitelistDate,
+            whitelist[pid][msg.sender].TotalTokenPurchase,
+            whitelist[pid][msg.sender].TotalETHPurchase,
+            whitelist[pid][msg.sender].IsClaimed
+        );
     }
 
     receive() external payable {}
