@@ -64,13 +64,13 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(launchpad.lpContract)
+      const newProgress = await getProgress(launchpad.lpContract, launchpad.pid)
       setProgress(newProgress)
     }
     if (launchpad) {
       fetchData()
     }
-  }, [pbr, setProgress, poolActive])
+  }, [launchpad.pid, setProgress, poolActive])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -97,7 +97,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             <div style={{ display: 'flex' }}>
               <CardIcon><img src={launchpad.icon} alt="" height="60" /></CardIcon>
             </div>
-            <StyledTitle>{launchpad.name}</StyledTitle>
+            <StyledTitle>{launchpad.name} {launchpad.access}</StyledTitle>
             {/* <StyledDetails>
               <StyledDetail>{launchpad.description}</StyledDetail>
             </StyledDetails> */}
@@ -113,7 +113,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Ratio</span>
 
               <span>
-                <b>{launchpad.ratio}</b>
+                <b>1 ETH = {launchpad.ratio} {launchpad.tokenSymbol}</b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -132,7 +132,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
                   <StyledProgress>
                     <StyledProgressBar style={{ width: progress.toString() + `%` }} />
                   </StyledProgress>
-                  <StyledProgressText>{progress.toString()}%</StyledProgressText>
+                  <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
                 </div>
                 <Spacer />
               </>)

@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useWallet } from 'use-wallet'
@@ -14,12 +14,23 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getProgress } from '../../pbr/utils'
+import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Contract } from 'web3-eth-contract';
-import useHistory from '../../hooks/useHistory';
+import useJoinPool from '../../hooks/useJoinPool';
+import useHarvest from '../../hooks/useHarvest';
+import ModalSuccess from '../../components/ModalSuccess';
+import ModalSuccessHarvest from '../../components/ModalSuccessHarvest';
+import Modal from '../../components/Modal';
+
+interface JoinHistory {
+  amount: number,
+  symbol: string,
+  status: string,
+  joinDate: string
+}
 
 const JoinLaunchpad: React.FC = () => {
   const { launchpadId } = (useParams() as any)
@@ -41,9 +52,14 @@ const JoinLaunchpad: React.FC = () => {
     tokenExplorer,
     tokenSymbol,
     total,
+    totalSupply,
     ratio,
+    min,
+    max,
     access,
-    startAt
+    distribution,
+    startAt,
+    claimAt
   } = useLaunchpad(launchpadId) || {
     pid: 0,
     name: '',
@@ -62,9 +78,14 @@ const JoinLaunchpad: React.FC = () => {
     tokenExplorer: '',
     tokenSymbol: '',
     total: '',
-    ratio: '',
+    totalSupply: '',
+    ratio: 0,
+    min: 0,
+    max: 0,
     access: '',
-    startAt: 0
+    distribution: '',
+    startAt: 0,
+    claimAt: 0
   }
 
   useEffect(() => {
@@ -74,17 +95,35 @@ const JoinLaunchpad: React.FC = () => {
   const pbr = usePolkaBridge()
   const { ethereum, account } = useWallet()
   const [progress, setProgress] = useState<BigNumber>()
-  const history = useHistory(account)
+  const [ethValue, setETHValue] = useState('')
+  const [tokenValue, setTokenValue] = useState('')
+  const [pendingTx, setPendingTx] = useState(false)
+  const [successTx, setSuccessTx] = useState(false)
+  const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
+  const [successHarvestTx, setSuccessHarvestTx] = useState(false)
+  const [txhash, setTxhash] = useState('')
+  const [ethBalance, setETHBalance] = useState(0)
+  const [history, setHistory] = useState<JoinHistory[]>([])
+  const [purchasedAmount, setPurchasedAmount] = useState(0)
+  const { onJoinPool } = useJoinPool(pid)
+  const { onHarvest } = useHarvest(pid)
+  const onDismiss = () => { }
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(lpContract)
+      const newETHBalance = await getETHBalance(ethereum, account)
+      const newHistory = await getHistory(account)
+      const newProgress = await getProgress(lpContract, pid)
+      const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
+      setETHBalance(newETHBalance)
+      setHistory(newHistory)
       setProgress(newProgress)
+      setPurchasedAmount(newPurchasedAmount)
     }
     if (pid >= 0) {
       fetchData()
     }
-  }, [pbr, setProgress])
+  }, [ethereum, account, lpContract, pid, setETHBalance, setHistory, setProgress, setPurchasedAmount])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -99,6 +138,77 @@ const JoinLaunchpad: React.FC = () => {
     )
   }
 
+  const onChangeETH = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      var newTokenValue = parseFloat(e.currentTarget.value) * ratio
+      setETHValue(e.currentTarget.value)
+      setTokenValue(newTokenValue.toString())
+    },
+    [ratio, setETHValue, setTokenValue],
+  )
+
+  const onChangeToken = useCallback(
+    (e: React.FormEvent<HTMLInputElement>) => {
+      var newETHValue = parseFloat(e.currentTarget.value) / ratio
+      setTokenValue(e.currentTarget.value)
+      setETHValue(newETHValue.toString())
+    },
+    [ratio, setTokenValue, setETHValue],
+  )
+
+  const onMax = useCallback(
+    () => {
+      var maxValue = ethBalance > max ? max : ethBalance;
+      if (maxValue < 0) maxValue = 0;
+      var newTokenValue = maxValue * ratio
+      setETHValue(maxValue.toString())
+      setTokenValue(newTokenValue.toString())
+    },
+    [ethBalance, ratio, setTokenValue, setETHValue],
+  )
+
+  const reset = useCallback(
+    async () => {
+      const newETHBalance = await getETHBalance(ethereum, account)
+      const newHistory = await getHistory(account)
+      const newProgress = await getProgress(lpContract, pid)
+      const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
+      setETHBalance(newETHBalance)
+      setHistory(newHistory)
+      setProgress(newProgress)
+      setPurchasedAmount(newPurchasedAmount)
+      setETHValue("")
+      setTokenValue("")
+    },
+    [ethereum, account, lpContract, pid, setETHBalance, setHistory, setProgress, setPurchasedAmount, setTokenValue, setETHValue],
+  )
+
+  const [onPresentSuccess] = useModal(
+    <Modal>
+      <ModalSuccess
+        amount={tokenValue}
+        symbol={name}
+        txhash="4f95c6770c75ddd3388f525" text="purchase" />
+      <Spacer size="md" />
+      <Button text="Close" variant="secondary" onClick={onDismiss} />
+
+      <Spacer size="md" />
+    </Modal>,
+  )
+
+  const [onPresentSuccessHarvest] = useModal(
+    <Modal>
+      <ModalSuccessHarvest
+        amount={tokenValue}
+        symbol={name}
+        txhash={txhash} text="harvest" />
+      <Spacer size="md" />
+      <Button text="Close" variant="secondary" onClick={onDismiss} />
+
+      <Spacer size="md" />
+    </Modal>,
+  )
+
   return (
     <>
       <PageHeader
@@ -107,8 +217,8 @@ const JoinLaunchpad: React.FC = () => {
             <img src={icon} height="70" />
           </div>
         }
-        title={name}
-        subtitle={lpAddress}
+        title={name + ' ' + access}
+        subtitle={tokenAddress}
       />
 
       <StyledLaunchpad>
@@ -121,7 +231,7 @@ const JoinLaunchpad: React.FC = () => {
                     <StyledProgress>
                       <StyledProgressBar style={{ width: progress.toString() + `%` }} />
                     </StyledProgress>
-                    <StyledProgressText>{progress.toString()}%</StyledProgressText>
+                    <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
                   </div>
                   <Spacer />
                 </>)
@@ -135,12 +245,12 @@ const JoinLaunchpad: React.FC = () => {
                 <StyledInputContainer>
                   <StyledRow>
                     <StyledLabel>INPUT</StyledLabel>
-                    <StyledLabel>Your Wallet Balance: 0</StyledLabel>
+                    <StyledLabel>Your Wallet Balance: {ethBalance}</StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
-                    <StyledInput type="number" placeholder="0.0" />
+                    <StyledInput value={ethValue} onChange={onChangeETH} type="number" placeholder="0.0" />
                     <StyledRow>
-                      <StyledMaxButton>MAX</StyledMaxButton>
+                      <StyledMaxButton onClick={onMax}>MAX</StyledMaxButton>
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
                           <StyledTokenIcon src="/img/tokens/eth.png" alt="icon"></StyledTokenIcon>
@@ -164,13 +274,13 @@ const JoinLaunchpad: React.FC = () => {
                     <StyledLabel>OUTPUT</StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
-                    <StyledInput type="number" placeholder="0.0" />
+                    <StyledInput value={tokenValue} onChange={onChangeToken} type="number" placeholder="0.0" />
                     <StyledRow>
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
-                          <StyledTokenIcon src="/img/tokens/pbr.png" alt="icon"></StyledTokenIcon>
+                          <StyledTokenIcon src={icon} alt="icon"></StyledTokenIcon>
                         </StyledTokenIconWrap>
-                        <StyledTokenSymbol>PBR</StyledTokenSymbol>
+                        <StyledTokenSymbol>{tokenSymbol}</StyledTokenSymbol>
                       </StyledTokenGroup>
                     </StyledRow>
                   </StyledInputRow>
@@ -178,8 +288,23 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100")}
-                  text={startAt * 1000 <= new Date().getTime() ? 'Join pool' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
+                  disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
+                  text={pendingTx ? 'Pending Confirmation' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))}
+                  onClick={async () => {
+                    if (ethValue && parseFloat(ethValue) > 0) {
+                      setPendingTx(true)
+                      var tx: any = await onJoinPool(ethValue)
+                      setPendingTx(false)
+                      if (tx) {
+                        onPresentSuccess()
+                        reset()
+                        setSuccessTx(true)
+                      }
+                      else {
+                        onDismiss()
+                      }
+                    }
+                  }}
                 >
                   {startAt * 1000 > new Date().getTime() && (
                     <Countdown
@@ -200,17 +325,34 @@ const JoinLaunchpad: React.FC = () => {
                 <StyledTitle>Reward tokens will be available to harvest in approx.</StyledTitle>
                 <StyledInputContainer>
                   <StyledCenterRow>
-                    <StyledHarvestAmount>890.02 PBR</StyledHarvestAmount>
+                    <StyledHarvestAmount>{purchasedAmount} {tokenSymbol}</StyledHarvestAmount>
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
                 <Button
-                  disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100")}
-                  text={startAt * 1000 <= new Date().getTime() ? 'Harvest' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
+                  disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx}
+                  text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? 'Harvest' : undefined)}
+                  onClick={async () => {
+                    if (purchasedAmount > 0) {
+                      setPendingHarvestTx(true)
+                      var tx: any = await onHarvest()
+                      setPendingHarvestTx(false)
+                      if (tx) {
+                        debugger
+                        setTxhash(tx)
+                        onPresentSuccessHarvest()
+                        reset()
+                        setSuccessHarvestTx(true)
+                      }
+                      else {
+                        onDismiss()
+                      }
+                    }
+                  }}
                 >
-                  {startAt * 1000 > new Date().getTime() && (
+                  {claimAt * 1000 > new Date().getTime() && (
                     <Countdown
-                      date={new Date(startAt * 1000)}
+                      date={new Date(claimAt * 1000)}
                       renderer={renderer}
                     />
                   )}

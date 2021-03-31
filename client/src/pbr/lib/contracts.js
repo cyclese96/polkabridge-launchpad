@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js/bignumber'
 import ERC20Abi from './abi/erc20.json'
 import MasterChefAbi from './abi/masterchef.json'
 import PolkaBridgeAbi from './abi/pbr.json'
-import LaunchpadAbi from './abi/uni_v2_lp.json'
+import LaunchpadAbi from './abi/masterLaunchpad.json'
 import WETHAbi from './abi/weth.json'
 import {
   contractAddresses,
@@ -22,7 +22,7 @@ export class Contracts {
     this.defaultGasPrice = options.defaultGasPrice
 
     this.pbr = new this.web3.eth.Contract(PolkaBridgeAbi)
-    this.masterChef = new this.web3.eth.Contract(MasterChefAbi)
+    this.masterLaunchpad = new this.web3.eth.Contract(LaunchpadAbi)
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
     this.pools = supportedPools.map((pool) =>
@@ -46,7 +46,7 @@ export class Contracts {
     }
 
     setProvider(this.pbr, contractAddresses.pbr[networkId])
-    setProvider(this.masterChef, contractAddresses.masterChef[networkId])
+    setProvider(this.masterLaunchpad, contractAddresses.masterLaunchpad[networkId])
 
     setProvider(this.weth, contractAddresses.weth[networkId])
 
@@ -60,6 +60,6 @@ export class Contracts {
 
   setDefaultAccount(account) {
     this.pbr.options.from = account
-    this.masterChef.options.from = account
+    this.masterLaunchpad.options.from = account
   }
 }

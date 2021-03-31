@@ -40,9 +40,14 @@ const Launchpad: React.FC = () => {
     tokenExplorer,
     tokenSymbol,
     total,
+    totalSupply,
     ratio,
+    min,
+    max,
     access,
-    startAt
+    distribution,
+    startAt,
+    claimAt
   } = useLaunchpad(launchpadId) || {
     pid: 0,
     name: '',
@@ -61,9 +66,14 @@ const Launchpad: React.FC = () => {
     tokenExplorer: '',
     tokenSymbol: '',
     total: '',
-    ratio: '',
+    totalSupply: '',
+    ratio: 0,
+    min: 0,
+    max: 0,
     access: '',
-    startAt: 0
+    distribution: '',
+    startAt: 0,
+    claimAt: 0
   }
 
   useEffect(() => {
@@ -75,13 +85,13 @@ const Launchpad: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(lpContract)
+      const newProgress = await getProgress(lpContract, pid)
       setProgress(newProgress)
     }
     if (pid >= 0) {
       fetchData()
     }
-  }, [pbr, setProgress])
+  }, [pid, lpContract, setProgress])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -104,8 +114,8 @@ const Launchpad: React.FC = () => {
             <img src={icon} height="70" />
           </div>
         }
-        title={name}
-        subtitle={lpAddress}
+        title= {name + ' ' + access}
+        subtitle={tokenAddress}
       />
 
       <StyledLaunchpad>
@@ -155,7 +165,7 @@ const Launchpad: React.FC = () => {
                     <StyledProgress>
                       <StyledProgressBar style={{ width: progress.toString() + `%` }} />
                     </StyledProgress>
-                    <StyledProgressText>{progress.toString()}%</StyledProgressText>
+                    <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
                   </div>
                   <Spacer />
                 </>)
@@ -181,7 +191,7 @@ const Launchpad: React.FC = () => {
                           Token distribution
                       </StyledTableLabel>
                         <StyledTableValue>
-                          Tuesday 10th 2021, 8:00PM SGT
+                          {distribution}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -194,7 +204,7 @@ const Launchpad: React.FC = () => {
                           Min - Max Allocation
                       </StyledTableLabel>
                         <StyledTableValue>
-                          Loading
+                          {min} ETH - {max} ETH
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -237,7 +247,7 @@ const Launchpad: React.FC = () => {
                           Name
                       </StyledTableLabel>
                         <StyledTableValue>
-                          PolakBridge
+                          {name}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -250,7 +260,7 @@ const Launchpad: React.FC = () => {
                           Address
                       </StyledTableLabel>
                         <StyledTableValue>
-                          Loading
+                          {tokenAddress}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -263,7 +273,7 @@ const Launchpad: React.FC = () => {
                           Total Supply
                         </StyledTableLabel>
                         <StyledTableValue>
-                          Loading
+                          {totalSupply}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

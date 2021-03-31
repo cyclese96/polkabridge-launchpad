@@ -33,9 +33,9 @@ export const contractAddresses = {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
     4: '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'
   },
-  masterChef: {
-    1: '0x75B8c48Bdb04d426aeD57b36BB835aD2dC321c30',
-    4: '0xfEfD5a6aD8407a7582A7207E3095dBbcec7CBE9E' // farming contract
+  masterLaunchpad: {
+    1: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
+    4: '0xa24022a3ce78bbe328c401390783b7ea55d77392' // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -45,57 +45,35 @@ export const contractAddresses = {
 
 export const supportedPools = [
   {
-    pid: 0,
-    lpAddresses: {
-      1: '0xCb37b0027858796ce60ECCe4B54C45afdfF02Aca',
-      4: '0x4105b114634dd5ac07a4fbf5bd3925932fcc6e0d',
-    },
-    tokenAddresses: {
-      1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695',
-      4: '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f',
-    },
-    lpExplorer: '',
-    name: 'PolkaBridge PBR',
-    symbol: 'polkabridge-pbr',
-    description: `PBR/ETH`,
-    introduce: `PolkaBridge is a decentralized all-in-one financial application platform. The ecosystem will include Cross-chain AMM, Farming, Launchpad, Lending, Prediction, and more in future.`,
-    website: 'https://polkabridge.org/',
-    twitter: 'https://twitter.com/realpolkabridge',
-    telegram: 'https://t.me/polkabridgegroup',
-    whitepaper: 'https://polkabridge.org/assets/docs/whitepaper.pdf',
-    tokenSymbol: 'PBR',
-    tokenExplorer: '',
-    icon: '/img/tokens/pbr.png',
-    total: '200 ETH',
-    ratio: '100,000 PBR/ETH',
-    access: 'Private',
-    startAt: 1609255800 // 2020/12/29 22h30
-  },
-  {
     pid: 1,
     lpAddresses: {
-      1: '0xCb37b0027858796ce60ECCe4B54C45afdfF02Aca',
-      4: '0x4105b114634dd5ac07a4fbf5bd3925932fcc6e0d',
+      1: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
+      4: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
     },
     tokenAddresses: {
-      1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695',
-      4: '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f',
+      1: '0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
+      4: '0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
     },
-    lpExplorer: '',
-    name: 'PolkaBridge Public',
-    symbol: 'polkabridge-public',
-    description: `PBR/ETH`,
-    introduce: `PolkaBridge is a decentralized all-in-one financial application platform. The ecosystem will include Cross-chain AMM, Farming, Launchpad, Lending, Prediction, and more in future.`,
-    website: 'https://polkabridge.org/',
-    twitter: 'https://twitter.com/realpolkabridge',
-    telegram: 'https://t.me/polkabridgegroup',
-    whitepaper: 'https://polkabridge.org/assets/docs/whitepaper.pdf',
-    tokenSymbol: 'PBR',
-    tokenExplorer: '',
-    icon: '/img/tokens/pbr.png',
-    total: '200 ETH',
-    ratio: '100,000 PBR/ETH',
-    access: 'Public',
-    startAt: 1618065796 // 2021/04/10 22h30
+    lpExplorer: 'https://etherscan.io/address/0xa24022a3ce78bbe328c401390783b7ea55d77392',
+    name: 'Beyond Finance',
+    symbol: 'beyond-pbr',
+    description: `BYN/ETH`,
+    introduce: `Beyond Finance is a decentralized platform for creating and trading synthetic financial products.`,
+    website: 'https://beyondfinance.io/',
+    twitter: 'https://twitter.com/beyondfinancee',
+    telegram: 'https://t.me/beyondfinanceglobal',
+    whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
+    tokenSymbol: 'BYN',
+    tokenExplorer: 'https://etherscan.io/token/0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
+    icon: '/img/tokens/byn.png',
+    totalSupply: '100,000,000 BYN',
+    total: '17.54 ETH',
+    ratio: 3400, // 1 ETH = 3400 BYN
+    min: 0.0294, // 0.0294 ETH
+    max: 0.0588, // 0.0588 ETH
+    access: 'Private',
+    distribution: 'April 12th 2021, 15:15 UTC',
+    startAt: 1609255800, // 2020/12/29 22h30
+    claimAt: 1609255800 // 2020/12/29 22h30
   }
 ]

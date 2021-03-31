@@ -10,7 +10,7 @@ interface SuccessProps {
   symbol: string
   txhash: string
 }
-const ModalSuccess: React.FC<SuccessProps> = ({
+const ModalSuccessHarvest: React.FC<SuccessProps> = ({
     text,
     amount,
     symbol,
@@ -21,17 +21,17 @@ const ModalSuccess: React.FC<SuccessProps> = ({
       <StyledModalSuccess>
         <img height="200px" src={Cup} alt="Confirm Success"/>
         <Spacer size="md" />
-        <StyleMaxText>Congratulations, you are reserved tokens!</StyleMaxText>
+        <StyleMaxText>Harvest successfully!</StyleMaxText>
         <Spacer size="md" />
         <StyleInfo>
             <StyleLabel>Amount:</StyleLabel>
             <StyleContent>{amount} {symbol}</StyleContent>
         </StyleInfo>
-        {/* <Spacer size="md" />
+        <Spacer size="md" />
         <StyleInfo>
             <StyleLabel>Tx hash:</StyleLabel>
-            <StyledLink target="_blank" href={txhash}>{txhash}</StyledLink>
-        </StyleInfo> */}
+            <StyledLink target="_blank" href={'https://etherscan.io/tx/' + txhash}>{txhash}</StyledLink>
+        </StyleInfo>
       </StyledModalSuccess>
     </StyledSuccessWrap>
 
@@ -73,4 +73,4 @@ const StyledLink = styled.a`
   }
 `
 
-export default ModalSuccess
+export default ModalSuccessHarvest

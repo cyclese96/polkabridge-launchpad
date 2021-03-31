@@ -6,6 +6,8 @@ import { supportedPools, START_NEW_POOL_AT } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
+import { useWallet } from 'use-wallet';
+import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80,
@@ -56,6 +58,9 @@ export const getXPolkaBridgeStakingContract = (pbr) => {
   return pbr && pbr.contracts && pbr.contracts.xPolkaBridgeStaking
 }
 
+export const getLaunchpadContract = (pbr) => {
+  return pbr && pbr.contracts && pbr.contracts.masterLaunchpad
+}
 
 export const getLaunchpads = (pbr) => {
   return pbr
@@ -79,9 +84,14 @@ export const getLaunchpads = (pbr) => {
         tokenExplorer,
         tokenSymbol,
         total,
+        totalSupply,
         ratio,
+        min,
+        max,
         access,
-        startAt
+        distribution,
+        startAt,
+        claimAt
       }) => ({
         pid,
         name,
@@ -101,9 +111,14 @@ export const getLaunchpads = (pbr) => {
         tokenExplorer,
         tokenSymbol,
         total,
+        totalSupply,
         ratio,
+        min,
+        max,
         access,
-        startAt
+        distribution,
+        startAt,
+        claimAt
       }),
     )
     : []
@@ -323,21 +338,85 @@ export const checkPoolActive = async (startAt) => {
   return startAt > 0 ? now * 1000 >= startAt : false
 }
 
+export const getETHBalance = async (provider, account) => {
+  if (!provider || !account) {
+    return 0;
+  }
+  const web3 = new Web3(provider || config.rpc)
+  let balance = await web3.eth.getBalance(account)
+  return getBalanceNumber(new BigNumber(balance))
+}
+
 export const getHistory = async (account) => {
   let history = []
   return history
 }
 
-export const getProgress = async (lpContract) => {
+export const getProgress = async (lpContract, pid) => {
   try {
-    // const progress = await lpContract.methods
-    //   .getProgress()
-    //   .call()
-    // return new BigNumber(progress)
-    return new BigNumber("88")
+    const remainToken = await lpContract.methods
+      .getRemainIDOToken(pid)
+      .call()
+    const totalToken = await lpContract.methods
+      .getBalanceTokenByPoolId(pid)
+      .call()
+
+    if (remainToken && totalToken) {
+      let remain = new BigNumber(remainToken);
+      let total = new BigNumber(totalToken);
+      if (total > 0) {
+        return total.minus(remain).div(total).times(100)
+      }
+    }
   } catch (e) {
     return
   }
+}
+
+export const getPurchasesAmount = async (lpContract, pid, account) => {
+  try {
+    debugger
+    const info = await lpContract.methods
+      .getWhitelistfo(pid)
+      .call({ from: account })
+
+    if (info[5]) {
+      return getBalanceNumber(new BigNumber("0"))
+    }
+
+    const purchasesAmount = await lpContract.methods
+      .getUserTotalPurchase(pid)
+      .call({ from: account })
+
+    return getBalanceNumber(new BigNumber(purchasesAmount))
+  } catch (e) {
+    console.log(e)
+    return
+  }
+}
+
+export const joinpool = async (launchpadContract, pid, ethValue, account) => {
+  return launchpadContract.methods
+    .purchaseIDO(
+      pid
+    )
+    .send({ from: account, value: new BigNumber(ethValue).times(new BigNumber(10).pow(18)).toString() })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
+}
+
+export const harvest = async (launchpadContract, pid, account) => {
+  return launchpadContract.methods
+    .claimToken(
+      pid
+    )
+    .send({ from: account })
+    .on('transactionHash', (tx) => {
+      console.log(tx)
+      return tx.transactionHash
+    })
 }
 
 export const stake = async (masterChefContract, pid, amount, account) => {
@@ -365,15 +444,15 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
       return tx.transactionHash
     })
 }
-export const harvest = async (masterChefContract, pid, account) => {
-  return masterChefContract.methods
-    .claimReward(pid)
-    .send({ from: account })
-    .on('transactionHash', (tx) => {
-      console.log(tx)
-      return tx.transactionHash
-    })
-}
+// export const harvest = async (masterChefContract, pid, account) => {
+//   return masterChefContract.methods
+//     .claimReward(pid)
+//     .send({ from: account })
+//     .on('transactionHash', (tx) => {
+//       console.log(tx)
+//       return tx.transactionHash
+//     })
+// }
 
 export const getStaked = async (masterChefContract, pid, account) => {
   try {

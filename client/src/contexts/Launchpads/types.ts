@@ -19,10 +19,15 @@ export interface Launchpad {
   telegram: string
   whitepaper: string
   id: string
+  totalSupply: string
   total: string
-  ratio: string
+  ratio: number
+  min: number
+  max: number
   access: string,
-  startAt: number
+  distribution: string,
+  startAt: number,
+  claimAt: number
 }
 
 export interface LaunchpadsContext {
