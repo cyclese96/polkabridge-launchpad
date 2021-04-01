@@ -373,9 +373,21 @@ export const getProgress = async (lpContract, pid) => {
   }
 }
 
+export const getIsWhitelist = async (lpContract, pid, account) => {
+  try {
+    const isWhitelist = await lpContract.methods
+      .IsWhitelist(account, pid)
+      .call()
+
+    return isWhitelist
+  } catch (e) {
+    console.log(e)
+    return
+  }
+}
+
 export const getPurchasesAmount = async (lpContract, pid, account) => {
   try {
-    debugger
     const info = await lpContract.methods
       .getWhitelistfo(pid)
       .call({ from: account })

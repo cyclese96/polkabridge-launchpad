@@ -14,13 +14,14 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount } from '../../pbr/utils'
+import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount, getIsWhitelist } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Contract } from 'web3-eth-contract';
 import useJoinPool from '../../hooks/useJoinPool';
 import useHarvest from '../../hooks/useHarvest';
+import ModalError from '../../components/ModalError';
 import ModalSuccess from '../../components/ModalSuccess';
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest';
 import Modal from '../../components/Modal';
@@ -95,26 +96,29 @@ const JoinLaunchpad: React.FC = () => {
   const pbr = usePolkaBridge()
   const { ethereum, account } = useWallet()
   const [progress, setProgress] = useState<BigNumber>()
+  const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('')
   const [tokenValue, setTokenValue] = useState('')
   const [pendingTx, setPendingTx] = useState(false)
-  const [successTx, setSuccessTx] = useState(false)
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
+  const [successTx, setSuccessTx] = useState(false)
   const [successHarvestTx, setSuccessHarvestTx] = useState(false)
+  const [errorTxt, setErrorTxt] = useState('')
   const [txhash, setTxhash] = useState('')
   const [ethBalance, setETHBalance] = useState(0)
   const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const { onJoinPool } = useJoinPool(pid)
   const { onHarvest } = useHarvest(pid)
-  const onDismiss = () => { }
 
   useEffect(() => {
     async function fetchData() {
+      const newIsWhitelist = await getIsWhitelist(lpContract, pid, account)
       const newETHBalance = await getETHBalance(ethereum, account)
       const newHistory = await getHistory(account)
       const newProgress = await getProgress(lpContract, pid)
       const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
+      setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
       setHistory(newHistory)
       setProgress(newProgress)
@@ -184,29 +188,23 @@ const JoinLaunchpad: React.FC = () => {
   )
 
   const [onPresentSuccess] = useModal(
-    <Modal>
-      <ModalSuccess
-        amount={tokenValue}
-        symbol={name}
-        txhash="4f95c6770c75ddd3388f525" text="purchase" />
-      <Spacer size="md" />
-      <Button text="Close" variant="secondary" onClick={onDismiss} />
+    <ModalSuccess
+      amount={tokenValue}
+      symbol={name}
+      txhash="4f95c6770c75ddd3388f525" text="purchase" />,
+  )
 
-      <Spacer size="md" />
-    </Modal>,
+  const [onPresentError] = useModal(
+    <ModalError
+      text="Transaction failed"
+      txhash={txhash} />,
   )
 
   const [onPresentSuccessHarvest] = useModal(
-    <Modal>
-      <ModalSuccessHarvest
-        amount={tokenValue}
-        symbol={name}
-        txhash={txhash} text="harvest" />
-      <Spacer size="md" />
-      <Button text="Close" variant="secondary" onClick={onDismiss} />
-
-      <Spacer size="md" />
-    </Modal>,
+    <ModalSuccessHarvest
+      amount={purchasedAmount ? purchasedAmount.toString() : ''}
+      symbol={name}
+      txhash={txhash} text="harvest" />,
   )
 
   return (
@@ -288,20 +286,20 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={startAt * 1000 > new Date().getTime() || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
-                  text={pendingTx ? 'Pending Confirmation' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))}
+                  disabled={startAt * 1000 > new Date().getTime() || !isWhitelist || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
+                  text={pendingTx ? 'Pending Confirmation' : (!isWhitelist ? 'You are not whitelisted' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined)))}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
                       var tx: any = await onJoinPool(ethValue)
                       setPendingTx(false)
                       if (tx) {
+                        setSuccessTx(true)
                         onPresentSuccess()
                         reset()
-                        setSuccessTx(true)
                       }
                       else {
-                        onDismiss()
+                        onPresentError()
                       }
                     }
                   }}
@@ -338,14 +336,13 @@ const JoinLaunchpad: React.FC = () => {
                       var tx: any = await onHarvest()
                       setPendingHarvestTx(false)
                       if (tx) {
-                        debugger
-                        setTxhash(tx)
+                        console.log("harvest " + tx)
+                        setSuccessHarvestTx(true)
                         onPresentSuccessHarvest()
                         reset()
-                        setSuccessHarvestTx(true)
                       }
                       else {
-                        onDismiss()
+                        onPresentError()
                       }
                     }
                   }}

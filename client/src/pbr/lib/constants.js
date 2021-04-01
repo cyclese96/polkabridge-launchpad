@@ -31,7 +31,7 @@ export const INTEGERS = {
 export const contractAddresses = {
   pbr: {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
-    4: '0xebca1a8010c16cdc4a10c7f3035b709cb992cd1f'
+    4: '0xb00f8f951dc0c66f5b2a0c4b2343f1dc7c896732'
   },
   masterLaunchpad: {
     1: '0xa24022a3ce78bbe328c401390783b7ea55d77392',

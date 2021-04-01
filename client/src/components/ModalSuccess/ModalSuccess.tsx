@@ -3,37 +3,43 @@ import styled from 'styled-components'
 import Button from '../../components/Button'
 import Spacer from '../../components/Spacer'
 import Cup from '../../assets/img/Cup.svg'
+import Modal, { ModalProps } from '../Modal/Modal';
 
-interface SuccessProps {
+interface SuccessProps extends ModalProps {
   text: string
   amount: string
   symbol: string
   txhash: string
 }
 const ModalSuccess: React.FC<SuccessProps> = ({
-    text,
-    amount,
-    symbol,
-    txhash
+  text,
+  amount,
+  symbol,
+  txhash,
+  onDismiss
 }) => {
   return (
-    <StyledSuccessWrap>
-      <StyledModalSuccess>
-        <img height="200px" src={Cup} alt="Confirm Success"/>
-        <Spacer size="md" />
-        <StyleMaxText>Congratulations, you are reserved tokens!</StyleMaxText>
-        <Spacer size="md" />
-        <StyleInfo>
+    <Modal>
+      <StyledSuccessWrap>
+        <StyledModalSuccess>
+          <img height="200px" src={Cup} alt="Confirm Success" />
+          <Spacer size="md" />
+          <StyleMaxText>Congratulations, you are reserved tokens!</StyleMaxText>
+          <Spacer size="md" />
+          <StyleInfo>
             <StyleLabel>Amount:</StyleLabel>
             <StyleContent>{amount} {symbol}</StyleContent>
-        </StyleInfo>
-        {/* <Spacer size="md" />
-        <StyleInfo>
-            <StyleLabel>Tx hash:</StyleLabel>
-            <StyledLink target="_blank" href={txhash}>{txhash}</StyledLink>
-        </StyleInfo> */}
-      </StyledModalSuccess>
-    </StyledSuccessWrap>
+          </StyleInfo>
+          {/* <Spacer size="md" />
+          <StyleInfo>
+              <StyleLabel>Tx hash:</StyleLabel>
+              <StyledLink target="_blank" href={'https://etherscan.io/tx/' + txhash}>{txhash}</StyledLink>
+          </StyleInfo> */}
+          <Spacer size="md" />
+          <Button text="Close" variant="secondary" onClick={onDismiss} />
+        </StyledModalSuccess>
+      </StyledSuccessWrap>
+    </Modal>
 
   )
 }
