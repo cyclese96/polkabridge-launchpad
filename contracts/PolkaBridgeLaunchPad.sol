@@ -24,6 +24,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 MinPurchase;
         uint256 MaxPurchase;
         uint256 TotalCap;
+        uint256 TotalToken; //total sale token for this pool
         uint256 RatePerETH;
         bool IsActived;
         bool IsStoped;
@@ -87,6 +88,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 minPurchase,
         uint256 maxPurchase,
         uint256 totalCap,
+        uint256 totalToken,
         uint256 amountPBRRequire,
         uint256 ratePerETH,
         uint256 lockDuration
@@ -104,6 +106,7 @@ contract PolkaBridgeLaunchPad is Ownable {
                 MinPurchase: minPurchase,
                 MaxPurchase: maxPurchase,
                 TotalCap: totalCap,
+                TotalToken: totalToken,
                 RatePerETH: ratePerETH,
                 IsActived: true,
                 IsStoped: false,
@@ -125,6 +128,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 minPurchase,
         uint256 maxPurchase,
         uint256 totalCap,
+        uint256 totalToken,
         uint256 ratePerETH,
         bool isActived,
         bool isStoped,
@@ -148,6 +152,9 @@ contract PolkaBridgeLaunchPad is Ownable {
         }
         if (totalCap > 0) {
             pools[poolIndex].TotalCap = totalCap;
+        }
+        if (totalToken > 0) {
+            pools[poolIndex].TotalToken = totalToken;
         }
         if (ratePerETH > 0) {
             pools[poolIndex].RatePerETH = ratePerETH;
@@ -257,7 +264,7 @@ contract PolkaBridgeLaunchPad is Ownable {
 
         require(
             block.timestamp >=
-                pools[poolIndex].Begin.add(pools[poolIndex].LockDuration),
+                pools[poolIndex].End.add(pools[poolIndex].LockDuration),
             "not on time"
         );
 
@@ -279,23 +286,14 @@ contract PolkaBridgeLaunchPad is Ownable {
         return tokenBalance.sub(pools[poolIndex].TotalSold);
     }
 
-    function testGetRemainIDOToken(uint256 pid)
-        public
-        view
-        returns (uint256, uint256)
-    {
-        uint256 poolIndex = pid.sub(1);
-        uint256 tokenBalance = getBalanceTokenByPoolId(pid);
-        return (tokenBalance, pools[poolIndex].TotalSold);
-    }
-
     function getBalanceTokenByPoolId(uint256 pid)
         public
         view
         returns (uint256)
     {
         uint256 poolIndex = pid.sub(1);
-        return pools[poolIndex].IDOToken.balanceOf(address(this));
+        //return pools[poolIndex].IDOToken.balanceOf(address(this));
+        return pools[poolIndex].TotalToken;
     }
 
     function getPoolInfo(uint256 pid)
