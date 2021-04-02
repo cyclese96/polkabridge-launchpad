@@ -31,11 +31,11 @@ export const INTEGERS = {
 export const contractAddresses = {
   pbr: {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
-    4: '0xb00f8f951dc0c66f5b2a0c4b2343f1dc7c896732'
+    4: '0xbe2a72cb56817f9a8c8fce6a40c2fa387022d431'
   },
   masterLaunchpad: {
-    1: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
-    4: '0xa24022a3ce78bbe328c401390783b7ea55d77392' // launchpad contract
+    1: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
+    4: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac' // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -47,14 +47,14 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
-      4: '0xa24022a3ce78bbe328c401390783b7ea55d77392',
+      1: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
+      4: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
     },
     tokenAddresses: {
       1: '0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
-      4: '0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
+      4: '0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
     },
-    lpExplorer: 'https://etherscan.io/address/0xa24022a3ce78bbe328c401390783b7ea55d77392',
+    lpExplorer: 'https://etherscan.io/address/0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
     name: 'Beyond Finance',
     symbol: 'beyond-pbr',
     description: `BYN/ETH`,
@@ -64,7 +64,7 @@ export const supportedPools = [
     telegram: 'https://t.me/beyondfinanceglobal',
     whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
     tokenSymbol: 'BYN',
-    tokenExplorer: 'https://etherscan.io/token/0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
+    tokenExplorer: 'https://etherscan.io/token/0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
     icon: '/img/tokens/byn.png',
     totalSupply: '100,000,000 BYN',
     total: '17.54 ETH',
@@ -73,7 +73,7 @@ export const supportedPools = [
     max: 0.0588, // 0.0588 ETH
     access: 'Private',
     distribution: 'April 12th 2021, 15:15 UTC',
-    startAt: 1609255800, // 2020/12/29 22h30
-    claimAt: 1609255800 // 2020/12/29 22h30
+    startAt: 1609255800,
+    claimAt: 1609255800
   }
 ]
