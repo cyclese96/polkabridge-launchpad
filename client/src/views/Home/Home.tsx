@@ -34,7 +34,7 @@ const Home: React.FC = () => {
             <CustomCountDown date={atDate}/>
             <Spacer size="md" />
             <div>
-                <ReadMore href="https://t.me/polkabridge" target="__blank"> Read The Announcement</ReadMore>
+                <ReadMore href="#" target="__blank"> How To Join LaunchPad </ReadMore>
             </div>
             <Spacer size="lg" />
             </>
@@ -42,7 +42,7 @@ const Home: React.FC = () => {
         {block >= launchBlock && <>
             <Spacer size="lg" />
             <div style={{textAlign: 'center'}}>
-                <ReadMore href="https://t.me/polkabridge" target="__blank"> Read The Announcement </ReadMore>
+                <ReadMore href="#" target="__blank"> How To Join LaunchPad </ReadMore>
             </div>
             {/*<Spacer size="lg" />*/}
             </>
