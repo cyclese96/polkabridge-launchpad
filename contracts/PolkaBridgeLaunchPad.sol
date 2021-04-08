@@ -200,6 +200,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (remainToken <= CONST_MINIMUM) {
             pools[poolIndex].IsSoldOut = true;
             pools[poolIndex].SoldOutAt = block.timestamp;
+            
         }
 
         require(!pools[poolIndex].IsSoldOut, "IDO sold out");
@@ -308,7 +309,8 @@ contract PolkaBridgeLaunchPad is Ownable {
             uint256,
             uint256,
             uint256,
-            bool
+            bool,
+            IERC20
         )
     {
         uint256 poolIndex = pid.sub(1);
@@ -321,7 +323,27 @@ contract PolkaBridgeLaunchPad is Ownable {
             pools[poolIndex].RatePerETH,
             pools[poolIndex].LockDuration,
             pools[poolIndex].TotalSold,
-            pools[poolIndex].IsActived
+            pools[poolIndex].IsActived,
+            pools[poolIndex].IDOToken
+        );
+    }
+
+    function getPoolSoldInfo(uint256 pid)
+        public
+        view
+        returns (
+            uint256,
+            uint256,
+            bool,
+            uint256
+        )
+    {
+        uint256 poolIndex = pid.sub(1);
+        return (
+            pools[poolIndex].LockDuration,
+            pools[poolIndex].TotalSold,
+            pools[poolIndex].IsSoldOut,
+            pools[poolIndex].SoldOutAt
         );
     }
 

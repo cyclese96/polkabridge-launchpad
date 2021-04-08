@@ -31,11 +31,11 @@ export const INTEGERS = {
 export const contractAddresses = {
   pbr: {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
-    4: '0xbe2a72cb56817f9a8c8fce6a40c2fa387022d431'
+    4: '0xEaa9e6F799366Ca952fE58a93D8711602AAa5d5b'
   },
   masterLaunchpad: {
-    1: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
-    4: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac' // launchpad contract
+    1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+    4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65' // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -46,15 +46,15 @@ export const contractAddresses = {
 export const supportedPools = [
   {
     pid: 1,
-    lpAddresses: {
-      1: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
-      4: '0xd334c991a723441b26de68bfb22ca27ecb7e40ac',
+    lpAddresses: {//launchpad ct
+      1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
     },
     tokenAddresses: {
       1: '0xcd38874f05fc2672bbdb4e2b62b56da38c63f586',
-      4: '0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
+      4: '0x07F2Ae0305b5eadA9e159A05cB1141fBE220bB28',
     },
-    lpExplorer: 'https://etherscan.io/address/0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
+    lpExplorer: 'https://etherscan.io/address/0x07F2Ae0305b5eadA9e159A05cB1141fBE220bB28',
     name: 'Beyond Finance',
     symbol: 'beyond-pbr',
     description: `BYN/ETH`,
@@ -64,7 +64,7 @@ export const supportedPools = [
     telegram: 'https://t.me/beyondfinanceglobal',
     whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
     tokenSymbol: 'BYN',
-    tokenExplorer: 'https://etherscan.io/token/0x79e66c17299aa31fa6249a9a4d4ee6783a5c47ed',
+    tokenExplorer: 'https://etherscan.io/token/0x07F2Ae0305b5eadA9e159A05cB1141fBE220bB28',
     icon: '/img/tokens/byn.png',
     totalSupply: '100,000,000 BYN',
     total: '17.54 ETH',
@@ -73,7 +73,7 @@ export const supportedPools = [
     max: 0.0588, // 0.0588 ETH
     access: 'Private',
     distribution: 'April 12th 2021, 15:15 UTC',
-    startAt: 1609255800,
-    claimAt: 1609255800
+    startAt: 1617641400,
+    claimAt: 1617642000
   }
 ]
