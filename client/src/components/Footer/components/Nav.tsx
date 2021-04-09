@@ -10,7 +10,7 @@ const Nav: React.FC = () => {
       >
         Contract
       </StyledLink>
-      <StyledLink target="_blank" href="#">
+      <StyledLink target="_blank" href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit">
         Apply for IDO
       </StyledLink>
       <StyledLink target="_blank" href="https://twitter.com/realpolkabridge">
