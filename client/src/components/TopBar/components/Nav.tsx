@@ -11,12 +11,12 @@ const Nav: React.FC<NavProp> = ({showMenu}) => {
     <StyledNav showMenu={showMenu}>
       <StyledAbsoluteLink href="https://farm.polkabridge.org">
         Farm
+      </StyledAbsoluteLink>  
+      <StyledAbsoluteLink href="/">
+        Launchpad
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://swap.polkabridge.org">
         Swap
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink href="/">
-        Launchpad
       </StyledAbsoluteLink>
       <StyledAbsoluteLink href="https://lending.polkabridge.org">
         Lending
