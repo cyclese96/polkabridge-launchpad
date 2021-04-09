@@ -424,8 +424,9 @@ const StyledTableLabel = styled.span`
 
 `
 const StyledTableValue = styled.span`
-text-align: right;
-color: #ffffff;
+  text-align: right;
+  color: #ffffff;
+  word-break: break-all;
 `
 
 export default Launchpad
