@@ -60,7 +60,7 @@ export const supportedPools = [
     description: `BYN/ETH`,
     introduce: `Beyond Finance is a decentralized platform for creating and trading synthetic financial products.`,
     website: 'https://beyondfinance.io/',
-    twitter: 'https://twitter.com/beyondfinancee',
+    twitter: 'https://twitter.com/beyondfinanceio',
     telegram: 'https://t.me/beyondfinanceglobal',
     whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
     tokenSymbol: 'BYN',

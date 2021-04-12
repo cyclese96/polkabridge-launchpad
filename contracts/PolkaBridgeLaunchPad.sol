@@ -65,6 +65,19 @@ contract PolkaBridgeLaunchPad is Ownable {
         whitelist[pid][user].IsActived = true;
     }
 
+    function addMulWhitelist(address[] memory user, uint256 pid)
+        public
+        onlyOwner
+    {
+        for (uint256 i = 0; i < user.length; i++) {
+            whitelist[pid][user].Id = pid;
+            whitelist[pid][user].UserAddress = user[i];
+            whitelist[pid][user].IsWhitelist = true;
+            whitelist[pid][user].WhitelistDate = block.timestamp;
+            whitelist[pid][user].IsActived = true;
+        }
+    }
+
     function updateWhitelist(
         address user,
         uint256 pid,
@@ -132,7 +145,8 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 ratePerETH,
         bool isActived,
         bool isStoped,
-        uint256 lockDuration
+        uint256 lockDuration,
+        IERC20 idoToken
     ) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         if (begin > 0) {
@@ -162,6 +176,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (lockDuration > 0) {
             pools[poolIndex].LockDuration = lockDuration;
         }
+        pools[poolIndex].IDOToken = idoToken;
         pools[poolIndex].IsActived = isActived;
         pools[poolIndex].IsStoped = isStoped;
         if (isStoped) {
@@ -200,7 +215,6 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (remainToken <= CONST_MINIMUM) {
             pools[poolIndex].IsSoldOut = true;
             pools[poolIndex].SoldOutAt = block.timestamp;
-            
         }
 
         require(!pools[poolIndex].IsSoldOut, "IDO sold out");
@@ -366,6 +380,27 @@ contract PolkaBridgeLaunchPad is Ownable {
             whitelist[pid][msg.sender].TotalTokenPurchase,
             whitelist[pid][msg.sender].TotalETHPurchase,
             whitelist[pid][msg.sender].IsClaimed
+        );
+    }
+
+    function getUserInfo(uint256 pid, address user)
+        public
+        view
+        returns (
+            address,
+            bool,
+            uint256,
+            uint256,
+            uint256,
+            bool
+        )
+    {
+        return (
+            whitelist[pid][user].IsWhitelist,
+            whitelist[pid][user].WhitelistDate,
+            whitelist[pid][user].TotalTokenPurchase,
+            whitelist[pid][user].TotalETHPurchase,
+            whitelist[pid][user].IsClaimed
         );
     }
 

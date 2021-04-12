@@ -327,7 +327,7 @@ const JoinLaunchpad: React.FC = () => {
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
-                <Button
+                {/* <Button
                   disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx}
                   text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? 'Harvest' : undefined)}
                   onClick={async () => {
@@ -353,7 +353,7 @@ const JoinLaunchpad: React.FC = () => {
                       renderer={renderer}
                     />
                   )}
-                </Button>
+                </Button> */}
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
