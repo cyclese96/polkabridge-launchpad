@@ -91,6 +91,7 @@ export const getLaunchpads = (pbr) => {
         access,
         distribution,
         startAt,
+        endAt,
         claimAt
       }) => ({
         pid,
@@ -118,6 +119,7 @@ export const getLaunchpads = (pbr) => {
         access,
         distribution,
         startAt,
+        endAt,
         claimAt
       }),
     )
