@@ -55,8 +55,6 @@ const Home: React.FC = () => {
             </div>
         </Container>
         <Box className="mt-4">
-            <StyledHeading>FEATURED POOLS</StyledHeading>
-            <Spacer size="lg" />
             <LaunchpadCards />
         </Box>
     </Page>

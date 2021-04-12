@@ -32,10 +32,32 @@ const LaunchpadCards: React.FC = () => {
 
   return (
     <StyledCards>
+      <StyledHeading>UPCOMING POOLS</StyledHeading>
+      <Spacer size="lg" />
+
       {!!rows[0].length ? (
         rows.map((launchpadRow, i) => (
           <StyledRow key={i}>
-            {launchpadRow.map((launchpad, j) => (
+            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 > new Date().getTime() && (
+              <React.Fragment key={j}>
+                <LaunchpadCard launchpad={launchpad} />
+                {(j === 0 || j === 1) && <StyledSpacer />}
+              </React.Fragment>
+            ))}
+          </StyledRow>
+        ))
+      ) : (
+          <StyledLoadingWrapper>
+            <Loader text="Fly on the sky ..." />
+          </StyledLoadingWrapper>
+        )}
+
+      <StyledHeading>ENDED POOLS</StyledHeading>
+      <Spacer size="lg" />
+      {!!rows[0].length ? (
+        rows.map((launchpadRow, i) => (
+          <StyledRow key={i}>
+            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 <= new Date().getTime() && (
               <React.Fragment key={j}>
                 <LaunchpadCard launchpad={launchpad} />
                 {(j === 0 || j === 1) && <StyledSpacer />}
@@ -128,7 +150,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             </StyledInsight>
             {progress &&
               (<>
-                <div style={{width: `100%`}}>
+                <div style={{ width: `100%` }}>
                   <StyledProgress>
                     <StyledProgressBar style={{ width: progress.toString() + `%` }} />
                   </StyledProgress>
@@ -195,6 +217,13 @@ const StyledCardAccent = styled.div`
   bottom: -2px;
   left: -2px;
   z-index: -1;
+`
+const StyledHeading = styled.h2`
+  color: ${(props) => props.theme.color.white};
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 0;
+  margin-top: 0;
 `
 
 const StyledCards = styled.div`

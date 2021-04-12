@@ -27,6 +27,7 @@ export interface Launchpad {
   access: string,
   distribution: string,
   startAt: number,
+  endAt: number,
   claimAt: number
 }
 

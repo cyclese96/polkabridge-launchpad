@@ -60,6 +60,7 @@ const JoinLaunchpad: React.FC = () => {
     access,
     distribution,
     startAt,
+    endAt,
     claimAt
   } = useLaunchpad(launchpadId) || {
     pid: 0,
@@ -86,6 +87,7 @@ const JoinLaunchpad: React.FC = () => {
     access: '',
     distribution: '',
     startAt: 0,
+    endAt: 0,
     claimAt: 0
   }
 
@@ -286,8 +288,8 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={startAt * 1000 > new Date().getTime() || !isWhitelist || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
-                  text={pendingTx ? 'Pending Confirmation' : (!isWhitelist ? 'You are not whitelisted' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined)))}
+                  disabled={startAt * 1000 > new Date().getTime() || endAt * 1000 <= new Date().getTime() || !isWhitelist || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
+                  text={endAt * 1000 <= new Date().getTime() ? 'Ended' : (pendingTx ? 'Pending Confirmation' : (!isWhitelist ? 'You are not whitelisted' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))))}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
