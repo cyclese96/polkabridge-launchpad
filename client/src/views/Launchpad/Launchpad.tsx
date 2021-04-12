@@ -138,8 +138,8 @@ const Launchpad: React.FC = () => {
           <StyledInfo>
             <StyledBox className="col-4">
               <Button
-                disabled={startAt * 1000 > new Date().getTime() || endAt * 1000 <= new Date().getTime() || progress == new BigNumber("100")}
-                text={endAt * 1000 <= new Date().getTime() ? 'Ended' : (startAt * 1000 <= new Date().getTime() ? 'Join pool' : (progress == new BigNumber("100") ? 'Ended' : undefined))}
+                disabled={startAt * 1000 > new Date().getTime()}
+                text={ (startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
                 to={`/launchpads/join/${id}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
