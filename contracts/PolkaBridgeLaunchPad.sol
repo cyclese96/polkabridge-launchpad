@@ -48,7 +48,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         bool IsClaimed;
     }
 
-    mapping(uint256 => mapping(address => User)) whitelist; //poolid - listuser
+    mapping(uint256 => mapping(address => User)) public whitelist; //poolid - listuser
 
     IDOPool[] pools;
 
@@ -70,11 +70,11 @@ contract PolkaBridgeLaunchPad is Ownable {
         onlyOwner
     {
         for (uint256 i = 0; i < user.length; i++) {
-            whitelist[pid][user].Id = pid;
-            whitelist[pid][user].UserAddress = user[i];
-            whitelist[pid][user].IsWhitelist = true;
-            whitelist[pid][user].WhitelistDate = block.timestamp;
-            whitelist[pid][user].IsActived = true;
+            whitelist[pid][user[i]].Id = pid;
+            whitelist[pid][user[i]].UserAddress = user[i];
+            whitelist[pid][user[i]].IsWhitelist = true;
+            whitelist[pid][user[i]].WhitelistDate = block.timestamp;
+            whitelist[pid][user[i]].IsActived = true;
         }
     }
 
@@ -387,7 +387,6 @@ contract PolkaBridgeLaunchPad is Ownable {
         public
         view
         returns (
-            address,
             bool,
             uint256,
             uint256,
@@ -403,6 +402,4 @@ contract PolkaBridgeLaunchPad is Ownable {
             whitelist[pid][user].IsClaimed
         );
     }
-
-    receive() external payable {}
 }

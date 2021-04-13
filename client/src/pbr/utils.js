@@ -356,6 +356,7 @@ export const getHistory = async (account) => {
 
 export const getProgress = async (lpContract, pid) => {
   try {
+    if (pid == 1) return new BigNumber(100)
     const remainToken = await lpContract.methods
       .getRemainIDOToken(pid)
       .call()

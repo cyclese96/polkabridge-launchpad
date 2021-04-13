@@ -51,10 +51,10 @@ export const supportedPools = [
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
     },
     tokenAddresses: {
-      1: '0x515992E40f188c64eF5f592b0B22Ae470ce385C5',
-      4: '0x515992E40f188c64eF5f592b0B22Ae470ce385C5',
+      1: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
+      4: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     },
-    lpExplorer: 'https://etherscan.io/address/0x515992E40f188c64eF5f592b0B22Ae470ce385C5',
+    lpExplorer: 'https://etherscan.io/address/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     name: 'Beyond Finance',
     symbol: 'beyond-pbr',
     description: `BYN/ETH`,
@@ -64,17 +64,17 @@ export const supportedPools = [
     telegram: 'https://t.me/beyondfinanceglobal',
     whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
     tokenSymbol: 'BYN',
-    tokenExplorer: 'https://etherscan.io/token/0x515992E40f188c64eF5f592b0B22Ae470ce385C5',
+    tokenExplorer: 'https://etherscan.io/token/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     icon: '/img/tokens/byn.png',
     totalSupply: '100,000,000 BYN',
-    total: '13.96 ETH',
+    total: '13.95 ETH',
     ratio: 4300, // 1 ETH = 4300 BYN, 1eth=2150$
-    min: 0.023, // 50$
-    max: 0.0465, // 100$
+    min: 0.1, // 215$
+    max: 0.233, // 500$ , 0.28 600$
     access: 'Private',
-    distribution: 'April 12th 2021, 16:00 UTC',
-    startAt: 1618236000,
-    endAt: 1618239600,
-    claimAt: 1618243200
+    distribution: 'April 13th 2021, 18:00 UTC',
+    startAt: 1618329600,
+    endAt: 1618333140,
+    claimAt: 1618336800
   }
 ]
