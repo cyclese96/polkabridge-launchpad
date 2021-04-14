@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "./ReentrancyGuard.sol";
 
 contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
-    string public name = "PolkaBridge: LaunchPad";
+    string public name = "PolkaBridge: LaunchPad v2";
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
@@ -260,7 +260,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             require(
                 polkaBridgeToken.balanceOf(msg.sender) >=
                     pools[poolIndex].AmountPBRRequire,
-                "must hold PBR"
+                "must hold enough PBR"
             );
         }
 
@@ -284,7 +284,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         require(
             block.timestamp >=
                 pools[poolIndex].End.add(pools[poolIndex].LockDuration),
-            "not on time"
+            "not on time for claiming token"
         );
 
         uint256 userBalance = getUserTotalPurchase(pid);
