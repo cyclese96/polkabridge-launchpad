@@ -3,19 +3,19 @@ pragma solidity >=0.6.0;
 import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
+import "./ReentrancyGuard.sol";
 
-contract PolkaBridgeLaunchPad is Ownable {
+contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
     string public name = "PolkaBridge: LaunchPad";
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
-    uint256 private CONST_MINIMUM = 1000000000000000000;
+
     IERC20 polkaBridgeToken;
 
     address payable private ReceiveToken;
 
     struct IDOPool {
         uint256 Id;
-        string Name;
         uint256 Begin;
         uint256 End;
         uint256 Type; //1:public, 2:private
@@ -24,6 +24,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 MinPurchase;
         uint256 MaxPurchase;
         uint256 TotalCap;
+        uint256 MinimumTokenSoldout;
         uint256 TotalToken; //total sale token for this pool
         uint256 RatePerETH;
         bool IsActived;
@@ -32,8 +33,6 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 StopDate;
         uint256 LockDuration; //lock after purchase
         uint256 TotalSold; //total number of token sold
-        bool IsSoldOut; //reach hardcap
-        uint256 SoldOutAt; //sold out at time
     }
 
     struct User {
@@ -93,7 +92,6 @@ contract PolkaBridgeLaunchPad is Ownable {
     }
 
     function addPool(
-        string memory name,
         uint256 begin,
         uint256 end,
         uint256 _type,
@@ -104,13 +102,13 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 totalToken,
         uint256 amountPBRRequire,
         uint256 ratePerETH,
-        uint256 lockDuration
+        uint256 lockDuration,
+        uint256 minimumTokenSoldout
     ) public onlyOwner {
         uint256 id = pools.length.add(1);
         pools.push(
             IDOPool({
                 Id: id,
-                Name: name,
                 Begin: begin,
                 End: end,
                 Type: _type,
@@ -127,8 +125,7 @@ contract PolkaBridgeLaunchPad is Ownable {
                 StopDate: 0,
                 LockDuration: lockDuration,
                 TotalSold: 0,
-                IsSoldOut: false,
-                SoldOutAt: 0
+                MinimumTokenSoldout: minimumTokenSoldout
             })
         );
     }
@@ -143,10 +140,9 @@ contract PolkaBridgeLaunchPad is Ownable {
         uint256 totalCap,
         uint256 totalToken,
         uint256 ratePerETH,
-        bool isActived,
-        bool isStoped,
         uint256 lockDuration,
-        IERC20 idoToken
+        IERC20 idoToken,
+        uint256 minimumTokenSoldout
     ) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         if (begin > 0) {
@@ -176,12 +172,26 @@ contract PolkaBridgeLaunchPad is Ownable {
         if (lockDuration > 0) {
             pools[poolIndex].LockDuration = lockDuration;
         }
-        pools[poolIndex].IDOToken = idoToken;
-        pools[poolIndex].IsActived = isActived;
-        pools[poolIndex].IsStoped = isStoped;
-        if (isStoped) {
-            pools[poolIndex].StopDate = block.timestamp;
+        if (minimumTokenSoldout > 0) {
+            pools[poolIndex].MinimumTokenSoldout = minimumTokenSoldout;
         }
+        pools[poolIndex].IDOToken = idoToken;
+    }
+
+    function stopPool(uint256 pid) public onlyOwner {
+        uint256 poolIndex = pid.sub(1);
+        pools[poolIndex].IsActived = false;
+        pools[poolIndex].IsStoped = true;
+
+        pools[poolIndex].StopDate = block.timestamp;
+    }
+
+    function activePool(uint256 pid) public onlyOwner {
+        uint256 poolIndex = pid.sub(1);
+        pools[poolIndex].IsActived = true;
+        pools[poolIndex].IsStoped = false;
+
+        pools[poolIndex].StopDate = 0;
     }
 
     //withdraw contract token
@@ -199,7 +209,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         ReceiveToken.transfer(balance);
     }
 
-    function purchaseIDO(uint256 pid) public payable {
+    function purchaseIDO(uint256 pid) public payable nonReentrant {
         uint256 poolIndex = pid.sub(1);
 
         require(
@@ -211,19 +221,18 @@ contract PolkaBridgeLaunchPad is Ownable {
                 block.timestamp <= pools[poolIndex].End,
             "invalid time"
         );
-        uint256 remainToken = getRemainIDOToken(pid);
-        if (remainToken <= CONST_MINIMUM) {
-            pools[poolIndex].IsSoldOut = true;
-            pools[poolIndex].SoldOutAt = block.timestamp;
-        }
+        //check user
+        require(
+            whitelist[pid][msg.sender].IsWhitelist &&
+                whitelist[pid][msg.sender].IsActived,
+            "invalid user"
+        );
 
-        require(!pools[poolIndex].IsSoldOut, "IDO sold out");
-
+        //check amount
         uint256 ethAmount = msg.value;
-        // require(
-        //     ethAmount >= pools[poolIndex].MinPurchase,
-        //     "invalid minimum contribute"
-        // );
+        uint256 tokenAmount =
+            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
+
         require(
             ethAmount <= pools[poolIndex].MaxPurchase,
             "invalid maximum contribute"
@@ -236,20 +245,16 @@ contract PolkaBridgeLaunchPad is Ownable {
             whitelist[pid][msg.sender].TotalETHPurchase >
             pools[poolIndex].MaxPurchase
         ) {
-            whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][
-                msg.sender
-            ]
-                .TotalETHPurchase
-                .sub(ethAmount);
-            revert("invalid maximum contribute");
+            revert("invalid maximum contribute"); //already revert state
         }
 
-        //check user
+        uint256 remainToken = getRemainIDOToken(pid);
         require(
-            whitelist[pid][msg.sender].IsWhitelist &&
-                whitelist[pid][msg.sender].IsActived,
-            "invalid user"
+            remainToken > pools[poolIndex].MinimumTokenSoldout,
+            "IDO sold out"
         );
+        require(remainToken >= tokenAmount, "IDO sold out");
+
         if (pools[poolIndex].Type == 2) //private, check hold PBR
         {
             require(
@@ -259,9 +264,8 @@ contract PolkaBridgeLaunchPad is Ownable {
             );
         }
 
-        //storage
-        uint256 tokenAmount =
-            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
+        //recheck amount
+
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
         ]
@@ -273,7 +277,7 @@ contract PolkaBridgeLaunchPad is Ownable {
         );
     }
 
-    function claimToken(uint256 pid) public {
+    function claimToken(uint256 pid) public nonReentrant {
         require(!whitelist[pid][msg.sender].IsClaimed, "user already claimed");
         uint256 poolIndex = pid.sub(1);
 
@@ -298,6 +302,10 @@ contract PolkaBridgeLaunchPad is Ownable {
     function getRemainIDOToken(uint256 pid) public view returns (uint256) {
         uint256 poolIndex = pid.sub(1);
         uint256 tokenBalance = getBalanceTokenByPoolId(pid);
+        if (pools[poolIndex].TotalSold > tokenBalance) {
+            return 0;
+        }
+
         return tokenBalance.sub(pools[poolIndex].TotalSold);
     }
 
@@ -345,20 +353,10 @@ contract PolkaBridgeLaunchPad is Ownable {
     function getPoolSoldInfo(uint256 pid)
         public
         view
-        returns (
-            uint256,
-            uint256,
-            bool,
-            uint256
-        )
+        returns (uint256, uint256)
     {
         uint256 poolIndex = pid.sub(1);
-        return (
-            pools[poolIndex].LockDuration,
-            pools[poolIndex].TotalSold,
-            pools[poolIndex].IsSoldOut,
-            pools[poolIndex].SoldOutAt
-        );
+        return (pools[poolIndex].LockDuration, pools[poolIndex].TotalSold);
     }
 
     function getWhitelistfo(uint256 pid)
