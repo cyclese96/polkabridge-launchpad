@@ -36,6 +36,9 @@ const Home: React.FC = () => {
             <div>
                 <ReadMore href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4" target="__blank"> How To Join LaunchPad </ReadMore>
             </div>
+            <div>
+                <ReadMore href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit" target="__blank"> Apply for IDO </ReadMore>
+            </div>
             <Spacer size="lg" />
             </>
         }
@@ -43,6 +46,9 @@ const Home: React.FC = () => {
             <Spacer size="lg" />
             <div style={{textAlign: 'center'}}>
                 <ReadMore href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4" target="__blank"> How To Join LaunchPad </ReadMore>
+            </div>
+            <div style={{textAlign: 'center'}}>
+                <ReadMore href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit" target="__blank"> Apply for IDO </ReadMore>
             </div>
             {/*<Spacer size="lg" />*/}
             </>
