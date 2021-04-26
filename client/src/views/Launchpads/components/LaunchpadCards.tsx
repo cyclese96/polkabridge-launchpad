@@ -60,7 +60,7 @@ const LaunchpadCards: React.FC = () => {
             {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 <= new Date().getTime() && (
               <React.Fragment key={j}>
                 <LaunchpadCard launchpad={launchpad} />
-                {(j === 0 || j === 1) && <StyledSpacer />}
+                {(j === 0 || j === 1 || j===2) && <StyledSpacer />}
               </React.Fragment>
             ))}
           </StyledRow>
@@ -227,7 +227,7 @@ const StyledHeading = styled.h2`
 `
 
 const StyledCards = styled.div`
-  width: 900px;
+  
   @media (max-width: 768px) {
     width: 100%;
   }

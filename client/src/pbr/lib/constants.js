@@ -34,7 +34,7 @@ export const contractAddresses = {
     4: '0xEaa9e6F799366Ca952fE58a93D8711602AAa5d5b'
   },
   masterLaunchpad: {
-    1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+    1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
     4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65' // launchpad contract
   },
   weth: {
@@ -47,7 +47,7 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {//launchpad ct
-      1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
     },
     tokenAddresses: {
@@ -80,7 +80,7 @@ export const supportedPools = [
   {
     pid: 2,
     lpAddresses: {
-      1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
     },
     tokenAddresses: {
@@ -113,7 +113,7 @@ export const supportedPools = [
   {
     pid: 3,
     lpAddresses: {
-      1: '0x22c97f0c1b37926dca457b9416ca1e9bc12b32be',
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
     },
     tokenAddresses: {
@@ -138,6 +138,72 @@ export const supportedPools = [
     min: 0,
     max: 0,
     access: 'Public',
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1621106022,
+    claimAt: 0
+  },
+  {
+    pid: 4,
+    lpAddresses: {
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+    },
+    tokenAddresses: {
+      1: '',
+      4: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'DragonBite',
+    symbol: 'BITE-PBR',
+    description: `BITE/ETH`,
+    introduce: `DragonBite is a truly open decentralised Asset Management platform for customers to store and swap all kinds of digital assets in One App with One password`,
+    website: 'https://dragonbite.io',
+    twitter: 'https://twitter.com/DragonBiteDB',
+    telegram: 'https://t.me/DragonBite',
+    whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
+    tokenSymbol: 'BITE',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/bite.png',
+    totalSupply: '1,000,000,000 BITE',
+    total: 'TBA',
+    ratio: 0,
+    min: 0,
+    max: 0,
+    access: 'Public',
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1621106022,
+    claimAt: 0
+  },
+  {
+    pid: 5,
+    lpAddresses: {
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+    },
+    tokenAddresses: {
+      1: '',
+      4: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'DragonBite',
+    symbol: 'BITE-PBR',
+    description: `BITE/ETH`,
+    introduce: `DragonBite is a truly open decentralised Asset Management platform for customers to store and swap all kinds of digital assets in One App with One password`,
+    website: 'https://dragonbite.io',
+    twitter: 'https://twitter.com/DragonBiteDB',
+    telegram: 'https://t.me/DragonBite',
+    whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
+    tokenSymbol: 'BITE',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/bite.png',
+    totalSupply: '1,000,000,000 BITE',
+    total: 'TBA',
+    ratio: 0,
+    min: 0,
+    max: 0,
+    access: 'Private',
     distribution: 'TBA',
     startAt: 0,
     endAt: 1621106022,

@@ -264,7 +264,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             );
         }
 
-        //recheck amount
+       
 
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
