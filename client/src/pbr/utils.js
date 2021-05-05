@@ -92,7 +92,8 @@ export const getLaunchpads = (pbr) => {
         distribution,
         startAt,
         endAt,
-        claimAt
+        claimAt,
+        startDate
       }) => ({
         pid,
         name,
@@ -120,7 +121,8 @@ export const getLaunchpads = (pbr) => {
         distribution,
         startAt,
         endAt,
-        claimAt
+        claimAt,
+        startDate
       }),
     )
     : []
@@ -356,7 +358,7 @@ export const getHistory = async (account) => {
 
 export const getProgress = async (lpContract, pid) => {
   try {
-    if (pid == 1) return new BigNumber(100)
+    //if (pid == 1) return new BigNumber(100)
     const remainToken = await lpContract.methods
       .getRemainIDOToken(pid)
       .call()

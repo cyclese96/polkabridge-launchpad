@@ -19,6 +19,7 @@ import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Contract } from 'web3-eth-contract';
+import { white } from '../../theme/colors'
 
 const Launchpad: React.FC = () => {
   const { launchpadId } = (useParams() as any)
@@ -48,7 +49,8 @@ const Launchpad: React.FC = () => {
     distribution,
     startAt,
     endAt,
-    claimAt
+    claimAt,
+    startDate
   } = useLaunchpad(launchpadId) || {
     pid: 0,
     name: '',
@@ -75,7 +77,8 @@ const Launchpad: React.FC = () => {
     distribution: '',
     startAt: 0,
     endAt: 0,
-    claimAt: 0
+    claimAt: 0,
+    startDate: 'TBA'
   }
 
   useEffect(() => {
@@ -102,7 +105,7 @@ const Launchpad: React.FC = () => {
     // hours = days * 24 + hours
     const paddedHours = hours < 10 ? `0${hours}` : hours
     return (
-      <span style={{ width: '100%' }}>
+      <span style={{ width: '100%', color: white }}>
         {days}D:{hours}H:{minutes}m:{seconds}s
       </span>
     )
@@ -116,7 +119,7 @@ const Launchpad: React.FC = () => {
             <img src={icon} height="70" />
           </div>
         }
-        title= {name + ' ' + access}
+        title={name + ' ' + access}
         subtitle={tokenAddress}
       />
 
@@ -139,7 +142,7 @@ const Launchpad: React.FC = () => {
             <StyledBox className="col-4">
               <Button
                 disabled={startAt * 1000 > new Date().getTime()}
-                text={ (startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
+                text={(startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
                 to={`/launchpads/join/${id}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
@@ -194,7 +197,7 @@ const Launchpad: React.FC = () => {
                       </StyledTableLabel>
                         <StyledTableValue>
                           {distribution}
-                      </StyledTableValue>
+                        </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -230,7 +233,7 @@ const Launchpad: React.FC = () => {
           </StyledInfoSolid>
 
           <Spacer />
-          
+
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledTable>
@@ -250,7 +253,7 @@ const Launchpad: React.FC = () => {
                       </StyledTableLabel>
                         <StyledTableValue>
                           {name}
-                      </StyledTableValue>
+                        </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -263,7 +266,7 @@ const Launchpad: React.FC = () => {
                       </StyledTableLabel>
                         <StyledTableValue>
                           {tokenAddress}
-                      </StyledTableValue>
+                        </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>

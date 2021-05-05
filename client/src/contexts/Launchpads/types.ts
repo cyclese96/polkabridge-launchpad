@@ -28,7 +28,8 @@ export interface Launchpad {
   distribution: string,
   startAt: number,
   endAt: number,
-  claimAt: number
+  claimAt: number,
+  startDate: string
 }
 
 export interface LaunchpadsContext {

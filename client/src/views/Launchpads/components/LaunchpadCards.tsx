@@ -20,7 +20,7 @@ const LaunchpadCards: React.FC = () => {
   const rows = launchpads.reduce<Launchpad[][]>(
     (launchpadRows, launchpad, i) => {
       const newLaunchpadRows = [...launchpadRows]
-      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 3) {
+      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 2) {
         newLaunchpadRows.push([launchpad])
       } else {
         newLaunchpadRows[newLaunchpadRows.length - 1].push(launchpad)
@@ -31,7 +31,7 @@ const LaunchpadCards: React.FC = () => {
   )
 
   return (
-    <StyledCards>
+    <StyledCards >
       <StyledHeading>UPCOMING POOLS</StyledHeading>
       <Spacer size="lg" />
 
@@ -41,16 +41,17 @@ const LaunchpadCards: React.FC = () => {
             {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 > new Date().getTime() && (
               <React.Fragment key={j}>
                 <LaunchpadCard launchpad={launchpad} />
-                {(j === 0 || j === 1) && <StyledSpacer />}
+                {<StyledSpacer />}
               </React.Fragment>
             ))}
           </StyledRow>
         ))
+
       ) : (
-          <StyledLoadingWrapper>
-            <Loader text="Fly on the sky ..." />
-          </StyledLoadingWrapper>
-        )}
+        <StyledLoadingWrapper>
+          <Loader text="Fly on the sky ..." />
+        </StyledLoadingWrapper>
+      )}
 
       <StyledHeading>ENDED POOLS</StyledHeading>
       <Spacer size="lg" />
@@ -60,16 +61,16 @@ const LaunchpadCards: React.FC = () => {
             {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 <= new Date().getTime() && (
               <React.Fragment key={j}>
                 <LaunchpadCard launchpad={launchpad} />
-                {(j === 0 || j === 1 || j===2) && <StyledSpacer />}
+                {<StyledSpacer />}
               </React.Fragment>
             ))}
           </StyledRow>
         ))
       ) : (
-          <StyledLoadingWrapper>
-            <Loader text="Fly on the sky ..." />
-          </StyledLoadingWrapper>
-        )}
+        <StyledLoadingWrapper>
+          <Loader text="Fly on the sky ..." />
+        </StyledLoadingWrapper>
+      )}
     </StyledCards>
   )
 }
@@ -111,8 +112,8 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
     <StyledCardWrapper>
       {launchpad.tokenSymbol === 'PBR' && <StyledCardAccent />}
-      <Card>
-        <CardContent>
+      <Card >
+        <CardContent >
           <StyledContent>
             <StyledTopIcon>
             </StyledTopIcon>
@@ -143,6 +144,13 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span style={{ color: '#ff3465' }}>
                 <b>{launchpad.access}</b>
+              </span>
+            </StyledInsight>
+            <StyledInsight>
+              <span>Date</span>
+
+              <span style={{ color: '#ff3465' }}>
+                <b>{launchpad.startDate}</b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -244,6 +252,9 @@ const StyledRow = styled.div`
   display: flex;
   margin-bottom: ${(props) => props.theme.spacing[4]}px;
   flex-flow: row wrap;
+  justify-content: center;
+  gap: 10px;
+
   @media (max-width: 768px) {
     width: 100%;
     flex-flow: column nowrap;

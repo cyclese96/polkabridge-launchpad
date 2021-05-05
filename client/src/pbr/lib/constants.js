@@ -45,7 +45,7 @@ export const contractAddresses = {
 
 export const supportedPools = [
   {
-    pid: 1,
+    pid: 0,
     lpAddresses: {//launchpad ct
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -75,7 +75,42 @@ export const supportedPools = [
     distribution: 'April 13th 2021, 18:00 UTC',
     startAt: 1618329600,
     endAt: 1618333140,
-    claimAt: 1618336800
+    claimAt: 1618336800,
+    startDate: "TBA"
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+    },
+    tokenAddresses: {
+      1: '',
+      4: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'Zenchain',
+    symbol: 'ZEN-PBR',
+    description: `ZEN/ETH`,
+    introduce: `ZenChain is a dedicated blockchain that is optimized specifically for DeFi and NFT applications`,
+    website: 'https://zenchain.co',
+    twitter: 'https://twitter.com/zenchainco',
+    telegram: 'https://t.me/zenchaingroup',
+    whitepaper: 'https://docs.zenchain.co',
+    tokenSymbol: 'ZEN',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/zen.png',
+    totalSupply: '100,000,000 ZEN',
+    total: '20 ETH',//1eth=3k$
+    ratio: 10000,
+    min: 0.1,
+    max: 0.133,
+    access: 'Private',
+    distribution: 'May 18th 2021, 17:00 UTC',
+    startAt: 1621350000,
+    endAt: 1621353600,
+    claimAt: 1621357200,
+    startDate: "May 18th 2021, 15:00 UTC"
   },
   {
     pid: 2,
@@ -108,7 +143,8 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 0,
     endAt: 1621106022,
-    claimAt: 0
+    claimAt: 0,
+    startDate: "TBA"
   },
   {
     pid: 3,
@@ -141,7 +177,8 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 0,
     endAt: 1621106022,
-    claimAt: 0
+    claimAt: 0,
+    startDate: "TBA"
   },
   {
     pid: 4,
@@ -174,7 +211,8 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 0,
     endAt: 1621106022,
-    claimAt: 0
+    claimAt: 0,
+    startDate: "TBA"
   },
   {
     pid: 5,
@@ -207,6 +245,8 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 0,
     endAt: 1621106022,
-    claimAt: 0
+    claimAt: 0,
+    startDate: "TBA"
   }
+
 ]
