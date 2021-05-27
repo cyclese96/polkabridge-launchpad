@@ -101,19 +101,19 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/zen.png',
     totalSupply: '100,000,000 ZEN',
-    total: '20 ETH',//1eth=3k$
-    ratio: 10000,
+    total: '17.647 ETH',//1eth=3k5$
+    ratio: 11333,
     min: 0.1,
-    max: 0.133,
+    max: 0.1176,
     access: 'Private',
-    distribution: 'May 18th 2021, 17:00 UTC',
+    distribution: 'May 24th 2021, 21:00 UTC',
     startAt: 1621350000,
     endAt: 1621353600,
-    claimAt: 1621357200,
+    claimAt: 1621894200,
     startDate: "May 18th 2021, 15:00 UTC"
   },
   {
-    pid: 2,
+    pid:3,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -147,7 +147,7 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 3,
+    pid: 4,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -181,7 +181,7 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 4,
+    pid: 5,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -215,7 +215,7 @@ export const supportedPools = [
     startDate: "May 31th 2021"
   },
   {
-    pid: 5,
+    pid: 6,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
