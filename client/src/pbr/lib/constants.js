@@ -212,7 +212,8 @@ export const supportedPools = [
     maxTier3: 0.2,//500$
     access: 'Public',
     distribution: 'June 11th 2021, 15:30 UTC',
-    startAt: 1623420000,
+    // startAt: 1623420000,
+    startAt: 1523420000,//test
     endAt: 1623423600,
     claimAt: 1623425400,
     startDate: "June 11th 2021"
@@ -249,7 +250,8 @@ export const supportedPools = [
     maxTier3: 0.2,//500$
     access: 'Private',
     distribution: 'June 11th 2021, 15:30 UTC',
-    startAt: 1623420000,
+    //startAt: 1623420000,
+    startAt: 1523420000,//test
     endAt: 1623423600,
     claimAt: 1623425400,
     startDate: "June 11th 2021"
