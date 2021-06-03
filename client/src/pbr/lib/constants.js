@@ -206,6 +206,7 @@ export const supportedPools = [
     total: '16 ETH',//1eth=2k500
     ratio: 100000,
     min: 0.12,//300$
+    max: 0.2,//500$
     maxTier1: 0.12,//300$
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
@@ -242,6 +243,7 @@ export const supportedPools = [
     total: '24 ETH',
     ratio: 100000,
     min: 0.12,//300$
+    max: 0.2,//500$
     maxTier1: 0.12,//300$
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
