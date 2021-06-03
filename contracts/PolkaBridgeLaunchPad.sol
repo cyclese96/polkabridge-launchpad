@@ -4,13 +4,15 @@ import "@openzeppelin/contracts/token/ERC20/SafeERC20.sol";
 import "@openzeppelin/contracts/math/SafeMath.sol";
 import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "./ReentrancyGuard.sol";
+import "./PolkaBridgeStaking.sol";
 
 contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
-    string public name = "PolkaBridge: LaunchPad v2";
+    string public name = "PolkaBridge: LaunchPad v3";
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
     IERC20 polkaBridgeToken;
+    PolkaBridgeStaking polkaBridgeStaking;
 
     address payable private ReceiveToken;
 
@@ -19,18 +21,15 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         uint256 Begin;
         uint256 End;
         uint256 Type; //1:public, 2:private
-        uint256 AmountPBRRequire; //must e18,important when init
         IERC20 IDOToken;
-        uint256 MinPurchase;
-        uint256 MaxPurchase;
+        uint256 MaxPurchaseTier1;
+        uint256 MaxPurchaseTier2; //==public tier
+        uint256 MaxPurchaseTier3;
         uint256 TotalCap;
         uint256 MinimumTokenSoldout;
         uint256 TotalToken; //total sale token for this pool
         uint256 RatePerETH;
         bool IsActived;
-        bool IsStoped;
-        uint256 ActivedDate;
-        uint256 StopDate;
         uint256 LockDuration; //lock after purchase
         uint256 TotalSold; //total number of token sold
     }
@@ -39,7 +38,6 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         uint256 Id;
         address UserAddress;
         bool IsWhitelist;
-        uint256 WhitelistDate;
         uint256 TotalTokenPurchase;
         uint256 TotalETHPurchase;
         uint256 PurchaseTime;
@@ -51,16 +49,21 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
 
     IDOPool[] pools;
 
-    constructor(address payable receiveTokenAdd, IERC20 polkaBridge) public {
+    constructor(
+        address payable receiveTokenAdd,
+        IERC20 polkaBridge,
+        PolkaBridgeStaking _polkaBridgeStaking
+    ) public {
         ReceiveToken = receiveTokenAdd;
         polkaBridgeToken = polkaBridge;
+        polkaBridgeStaking = _polkaBridgeStaking;
     }
 
     function addWhitelist(address user, uint256 pid) public onlyOwner {
         whitelist[pid][user].Id = pid;
         whitelist[pid][user].UserAddress = user;
         whitelist[pid][user].IsWhitelist = true;
-        whitelist[pid][user].WhitelistDate = block.timestamp;
+
         whitelist[pid][user].IsActived = true;
     }
 
@@ -72,7 +75,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             whitelist[pid][user[i]].Id = pid;
             whitelist[pid][user[i]].UserAddress = user[i];
             whitelist[pid][user[i]].IsWhitelist = true;
-            whitelist[pid][user[i]].WhitelistDate = block.timestamp;
+
             whitelist[pid][user[i]].IsActived = true;
         }
     }
@@ -88,7 +91,40 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
     }
 
     function IsWhitelist(address user, uint256 pid) public view returns (bool) {
-        return whitelist[pid][user].IsWhitelist;
+        uint256 poolIndex = pid.sub(1);
+        if (pools[poolIndex].Type == 1) //public
+        {
+            return (whitelist[pid][user].IsWhitelist &&
+                whitelist[pid][user].IsActived);
+        } else if (pools[poolIndex].Type == 2) //private
+        {
+            (
+                uint256 amount,
+                uint256 rewardDebt,
+                uint256 rewardClaimed,
+                uint256 lastBlock,
+                uint256 beginTime,
+                uint256 endTime
+            ) = getUserStakingData(user, 0);
+            return (amount > 0);
+        } else {
+            return false;
+        }
+    }
+
+    function getUserStakingData(address user, uint256 poolId)
+        public
+        view
+        returns (
+            uint256 amount,
+            uint256 rewardDebt,
+            uint256 rewardClaimed,
+            uint256 lastBlock,
+            uint256 beginTime,
+            uint256 endTime
+        )
+    {
+        return (polkaBridgeStaking.userInfo(poolId, user));
     }
 
     function addPool(
@@ -96,11 +132,11 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         uint256 end,
         uint256 _type,
         IERC20 idoToken,
-        uint256 minPurchase,
-        uint256 maxPurchase,
+        uint256 maxPurchaseTier1,
+        uint256 maxPurchaseTier2,
+        uint256 maxPurchaseTier3,
         uint256 totalCap,
         uint256 totalToken,
-        uint256 amountPBRRequire,
         uint256 ratePerETH,
         uint256 lockDuration,
         uint256 minimumTokenSoldout
@@ -112,17 +148,14 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 Begin: begin,
                 End: end,
                 Type: _type,
-                AmountPBRRequire: amountPBRRequire,
                 IDOToken: idoToken,
-                MinPurchase: minPurchase,
-                MaxPurchase: maxPurchase,
+                MaxPurchaseTier1: maxPurchaseTier1,
+                MaxPurchaseTier2: maxPurchaseTier2,
+                MaxPurchaseTier3: maxPurchaseTier3,
                 TotalCap: totalCap,
                 TotalToken: totalToken,
                 RatePerETH: ratePerETH,
                 IsActived: true,
-                IsStoped: false,
-                ActivedDate: block.timestamp,
-                StopDate: 0,
                 LockDuration: lockDuration,
                 TotalSold: 0,
                 MinimumTokenSoldout: minimumTokenSoldout
@@ -134,9 +167,9 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         uint256 pid,
         uint256 begin,
         uint256 end,
-        uint256 amountPBRRequire,
-        uint256 minPurchase,
-        uint256 maxPurchase,
+        uint256 maxPurchaseTier1,
+        uint256 maxPurchaseTier2,
+        uint256 maxPurchaseTier3,
         uint256 totalCap,
         uint256 totalToken,
         uint256 ratePerETH,
@@ -151,14 +184,15 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         if (end > 0) {
             pools[poolIndex].End = end;
         }
-        if (amountPBRRequire > 0) {
-            pools[poolIndex].AmountPBRRequire = amountPBRRequire;
+
+        if (maxPurchaseTier1 > 0) {
+            pools[poolIndex].MaxPurchaseTier1 = maxPurchaseTier1;
         }
-        if (minPurchase > 0) {
-            pools[poolIndex].MinPurchase = minPurchase;
+        if (maxPurchaseTier2 > 0) {
+            pools[poolIndex].MaxPurchaseTier2 = maxPurchaseTier2;
         }
-        if (maxPurchase > 0) {
-            pools[poolIndex].MaxPurchase = maxPurchase;
+        if (maxPurchaseTier3 > 0) {
+            pools[poolIndex].MaxPurchaseTier3 = maxPurchaseTier3;
         }
         if (totalCap > 0) {
             pools[poolIndex].TotalCap = totalCap;
@@ -181,17 +215,11 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
     function stopPool(uint256 pid) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         pools[poolIndex].IsActived = false;
-        pools[poolIndex].IsStoped = true;
-
-        pools[poolIndex].StopDate = block.timestamp;
     }
 
     function activePool(uint256 pid) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         pools[poolIndex].IsActived = true;
-        pools[poolIndex].IsStoped = false;
-
-        pools[poolIndex].StopDate = 0;
     }
 
     //withdraw contract token
@@ -212,41 +240,62 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
     function purchaseIDO(uint256 pid) public payable nonReentrant {
         uint256 poolIndex = pid.sub(1);
 
-        require(
-            pools[poolIndex].IsActived && !pools[poolIndex].IsStoped,
-            "invalid pool"
-        );
+        require(pools[poolIndex].IsActived, "invalid pool");
         require(
             block.timestamp >= pools[poolIndex].Begin &&
                 block.timestamp <= pools[poolIndex].End,
             "invalid time"
         );
         //check user
-        require(
-            whitelist[pid][msg.sender].IsWhitelist &&
-                whitelist[pid][msg.sender].IsActived,
-            "invalid user"
-        );
+        require(IsWhitelist(msg.sender, pid), "invalid user");
 
         //check amount
         uint256 ethAmount = msg.value;
-        uint256 tokenAmount =
-            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
-
-        require(
-            ethAmount <= pools[poolIndex].MaxPurchase,
-            "invalid maximum contribute"
-        );
-
         whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][msg.sender]
             .TotalETHPurchase
             .add(ethAmount);
-        if (
-            whitelist[pid][msg.sender].TotalETHPurchase >
-            pools[poolIndex].MaxPurchase
-        ) {
-            revert("invalid maximum contribute"); //already revert state
+
+        if (pools[poolIndex].Type == 2) {
+            (
+                uint256 stakeAmount,
+                uint256 rewardDebt,
+                uint256 rewardClaimed,
+                uint256 lastBlock,
+                uint256 beginTime,
+                uint256 endTime
+            ) = getUserStakingData(msg.sender, 0);
+            if (stakeAmount < 3000 * 1e18) {
+                require(
+                    whitelist[pid][msg.sender].TotalETHPurchase <=
+                        pools[poolIndex].MaxPurchaseTier1,
+                    "invalid maximum contribute for tier1"
+                );
+            } else if (
+                stakeAmount >= 3000 * 1e18 && stakeAmount < 5000 * 1e18
+            ) {
+                require(
+                    whitelist[pid][msg.sender].TotalETHPurchase <=
+                        pools[poolIndex].MaxPurchaseTier2,
+                    "invalid maximum contribute for tier2"
+                );
+            } else {
+                require(
+                    whitelist[pid][msg.sender].TotalETHPurchase <=
+                        pools[poolIndex].MaxPurchaseTier3,
+                    "invalid maximum contribute for tier3"
+                );
+            }
+        } else {
+            //public pool follow tier2
+            require(
+                whitelist[pid][msg.sender].TotalETHPurchase <=
+                    pools[poolIndex].MaxPurchaseTier2,
+                "invalid maximum contribute"
+            );
         }
+
+        uint256 tokenAmount =
+            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
 
         uint256 remainToken = getRemainIDOToken(pid);
         require(
@@ -254,17 +303,6 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             "IDO sold out"
         );
         require(remainToken >= tokenAmount, "IDO sold out");
-
-        if (pools[poolIndex].Type == 2) //private, check hold PBR
-        {
-            require(
-                polkaBridgeToken.balanceOf(msg.sender) >=
-                    pools[poolIndex].AmountPBRRequire,
-                "must hold enough PBR"
-            );
-        }
-
-       
 
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
@@ -325,8 +363,8 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         returns (
             uint256,
             uint256,
-            uint256,
-            uint256,
+            // uint256,
+            // uint256,
             uint256,
             uint256,
             uint256,
@@ -340,8 +378,8 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             pools[poolIndex].Begin,
             pools[poolIndex].End,
             pools[poolIndex].Type,
-            pools[poolIndex].AmountPBRRequire,
-            pools[poolIndex].MaxPurchase,
+            //pools[poolIndex].AmountPBRRequire,
+            //pools[poolIndex].MaxPurchase,
             pools[poolIndex].RatePerETH,
             pools[poolIndex].LockDuration,
             pools[poolIndex].TotalSold,
@@ -367,14 +405,12 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             bool,
             uint256,
             uint256,
-            uint256,
             bool
         )
     {
         return (
             whitelist[pid][msg.sender].UserAddress,
             whitelist[pid][msg.sender].IsWhitelist,
-            whitelist[pid][msg.sender].WhitelistDate,
             whitelist[pid][msg.sender].TotalTokenPurchase,
             whitelist[pid][msg.sender].TotalETHPurchase,
             whitelist[pid][msg.sender].IsClaimed
@@ -388,13 +424,11 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
             bool,
             uint256,
             uint256,
-            uint256,
             bool
         )
     {
         return (
             whitelist[pid][user].IsWhitelist,
-            whitelist[pid][user].WhitelistDate,
             whitelist[pid][user].TotalTokenPurchase,
             whitelist[pid][user].TotalETHPurchase,
             whitelist[pid][user].IsClaimed

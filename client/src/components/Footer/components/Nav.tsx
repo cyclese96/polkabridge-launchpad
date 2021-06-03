@@ -6,7 +6,7 @@ const Nav: React.FC = () => {
     <StyledNav>
       <StyledLink
         target="_blank"
-        href="https://etherscan.io/address/0x22c97f0c1b37926dca457b9416ca1e9bc12b32be"
+        href="https://etherscan.io/address/0x0d9b8d30d17acec29b71088cc61fb013fbce0e12"
       >
         Contract
       </StyledLink>
@@ -16,6 +16,9 @@ const Nav: React.FC = () => {
       </StyledLink>
       <StyledLink target="_blank" href="https://t.me/polkabridgegroup">
         Telegram
+      </StyledLink>
+      <StyledLink target="_blank" href="https://discord.gg/G3NDrcq6GW">
+        Discord
       </StyledLink>
     </StyledNav>
   )

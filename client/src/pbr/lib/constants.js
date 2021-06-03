@@ -45,7 +45,7 @@ export const contractAddresses = {
 
 export const supportedPools = [
   {
-    pid: 0,
+    pid: -1,
     lpAddresses: {//launchpad ct
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -76,10 +76,10 @@ export const supportedPools = [
     startAt: 1618329600,
     endAt: 1618333140,
     claimAt: 1618336800,
-    startDate: "TBA"
+    startDate: "April 14th 2021, 15:00 UTC"
   },
   {
-    pid: 1,
+    pid: -2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -113,7 +113,7 @@ export const supportedPools = [
     startDate: "May 18th 2021, 15:00 UTC"
   },
   {
-    pid:3,
+    pid: 3,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
       4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
@@ -181,10 +181,10 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 5,
+    pid: 1,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      4: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
@@ -203,22 +203,24 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
-    total: '11.42 ETH',//1eth=3k500
-    ratio: 0,
-    min: 0.1,
-    max: 0.1428,
+    total: '16 ETH',//1eth=2k500
+    ratio: 100000,
+    min: 0.12,//300$
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
     access: 'Public',
-    distribution: 'TBA',
-    startAt: 1622469600,
-    endAt: 1622473200,
-    claimAt: 1622475000,
-    startDate: "May 31th 2021"
+    distribution: 'June 11th 2021, 15:30 UTC',
+    startAt: 1623420000,
+    endAt: 1623423600,
+    claimAt: 1623425400,
+    startDate: "June 11th 2021"
   },
   {
-    pid: 6,
+    pid: 2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      4: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
@@ -237,17 +239,18 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
-    total: '17.14 ETH',
-    ratio: 0,
-    min: 0.1,
-    max: 0.1428,
+    total: '24 ETH',
+    ratio: 100000,
+    min: 0.12,//300$
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
     access: 'Private',
-    distribution: 'TBA',
-    startAt: 0,
-    startAt: 1622469600,
-    endAt: 1622473200,
-    claimAt: 1622475000,
-    startDate: "May 31th 2021"
+    distribution: 'June 11th 2021, 15:30 UTC',
+    startAt: 1623420000,
+    endAt: 1623423600,
+    claimAt: 1623425400,
+    startDate: "June 11th 2021"
   }
 
 ]
