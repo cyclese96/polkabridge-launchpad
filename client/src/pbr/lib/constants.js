@@ -184,11 +184,11 @@ export const supportedPools = [
     pid: 1,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
-      4: '',
+      42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
     name: 'DragonBite',
@@ -222,11 +222,11 @@ export const supportedPools = [
     pid: 2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
-      4: '',
+      42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
     name: 'DragonBite',

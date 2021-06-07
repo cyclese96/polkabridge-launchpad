@@ -106,7 +106,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 uint256 beginTime,
                 uint256 endTime
             ) = getUserStakingData(user, 0);
-            return (amount > 0);
+            return (amount >= 500 * 1e18);
         } else {
             return false;
         }
@@ -268,7 +268,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 require(
                     whitelist[pid][msg.sender].TotalETHPurchase <=
                         pools[poolIndex].MaxPurchaseTier1,
-                    "invalid maximum contribute for tier1"
+                    "invalid maximum purchase for tier1"
                 );
             } else if (
                 stakeAmount >= 3000 * 1e18 && stakeAmount < 5000 * 1e18
@@ -276,13 +276,13 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 require(
                     whitelist[pid][msg.sender].TotalETHPurchase <=
                         pools[poolIndex].MaxPurchaseTier2,
-                    "invalid maximum contribute for tier2"
+                    "invalid maximum purchase for tier2"
                 );
             } else {
                 require(
                     whitelist[pid][msg.sender].TotalETHPurchase <=
                         pools[poolIndex].MaxPurchaseTier3,
-                    "invalid maximum contribute for tier3"
+                    "invalid maximum purchase for tier3"
                 );
             }
         } else {
