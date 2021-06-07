@@ -35,7 +35,7 @@ export const contractAddresses = {
   },
   masterLaunchpad: {
     1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-    42: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65' // launchpad contract
+    42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d' // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
