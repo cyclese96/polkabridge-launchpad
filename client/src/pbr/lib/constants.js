@@ -31,7 +31,7 @@ export const INTEGERS = {
 export const contractAddresses = {
   pbr: {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
-    42: '0xEaa9e6F799366Ca952fE58a93D8711602AAa5d5b'
+    42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0'
   },
   masterLaunchpad: {
     1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
@@ -39,7 +39,7 @@ export const contractAddresses = {
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-    42: '0xc778417e063141139fce010982780140aa0cd5ab' // weth
+    42: '0xd0a1e359811322d97991e03f863a0c30c2cf029c' // weth
   }
 }
 
@@ -48,11 +48,11 @@ export const supportedPools = [
     pid: -1,
     lpAddresses: {//launchpad ct
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
-      4: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
+      42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0',
     },
     lpExplorer: 'https://etherscan.io/address/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     name: 'Beyond Finance',
@@ -82,11 +82,11 @@ export const supportedPools = [
     pid: -2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
-      4: '',
+      42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
     name: 'Zenchain',
@@ -116,11 +116,11 @@ export const supportedPools = [
     pid: 3,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
-      4: '',
+      42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
     name: 'Cryptopunt',
@@ -150,11 +150,11 @@ export const supportedPools = [
     pid: 4,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      4: '0x7FAE7A374C1DBfcB189ad8B8BF3b4B83A0D16F65',
+      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
     },
     tokenAddresses: {
       1: '',
-      4: '',
+      42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
     name: 'Cryptopunt',
