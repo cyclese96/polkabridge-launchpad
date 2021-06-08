@@ -171,7 +171,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               // disabled={!poolActive || progress == new BigNumber("100")}
               // text={poolActive ? 'View' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
               text='View'
-              to={`/launchpads/view/${launchpad.id}`}
+              to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
             >
               {/* {!poolActive && (
                 <Countdown

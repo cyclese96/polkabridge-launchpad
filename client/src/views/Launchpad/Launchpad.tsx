@@ -22,7 +22,7 @@ import { Contract } from 'web3-eth-contract';
 import { white } from '../../theme/colors'
 
 const Launchpad: React.FC = () => {
-  const { launchpadId } = (useParams() as any)
+  const { launchpadId, poolId } = (useParams() as any)
   const {
     pid,
     name,
@@ -51,7 +51,7 @@ const Launchpad: React.FC = () => {
     endAt,
     claimAt,
     startDate
-  } = useLaunchpad(launchpadId) || {
+  } = useLaunchpad(launchpadId, Number(poolId)) || {
     pid: 0,
     name: '',
     id: '',
@@ -143,7 +143,7 @@ const Launchpad: React.FC = () => {
               <Button
                 disabled={startAt * 1000 > new Date().getTime()}
                 text={(startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
-                to={`/launchpads/join/${id}`}
+                to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown

@@ -23,7 +23,10 @@ export interface Launchpad {
   total: string
   ratio: number
   min: number
-  max: number
+  max: number,
+  maxTier1: number,
+  maxTier2: number,
+  maxTier3: number,
   access: string,
   distribution: string,
   startAt: number,

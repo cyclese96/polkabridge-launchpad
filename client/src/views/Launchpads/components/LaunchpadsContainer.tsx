@@ -21,10 +21,10 @@ const LaunchpadsContainer: React.FC = () => {
       />
       <LaunchpadCards />
     </Route>
-    <Route path={`${path}/view/:launchpadId`}>
+    <Route path={`${path}/view/:launchpadId/:poolId`}>
       <Launchpad />
     </Route>
-    <Route path={`${path}/join/:launchpadId`}>
+    <Route path={`${path}/join/:launchpadId/:poolId`}>
       <JoinLaunchpad />
     </Route>
   </>

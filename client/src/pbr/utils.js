@@ -88,6 +88,9 @@ export const getLaunchpads = (pbr) => {
         ratio,
         min,
         max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
         access,
         distribution,
         startAt,
@@ -117,6 +120,9 @@ export const getLaunchpads = (pbr) => {
         ratio,
         min,
         max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
         access,
         distribution,
         startAt,
@@ -542,4 +548,34 @@ export const leave = async (contract, amount, account) => {
       console.log(tx)
       return tx.transactionHash
     })
+}
+
+export const getUserStakingData = async (lpContract, pid, account) => {
+
+  // getUserStakingData
+  try {
+    const stakedData = await lpContract.methods
+      .getUserStakingData(account, pid)
+      .call()
+
+    return stakedData
+  } catch (e) {
+    console.log(e)
+    return
+  }
+}
+
+export const getUserInfo = async (lpContract, pid, account) => {
+
+  // getUserStakingData
+  try {
+    const userInfo = await lpContract.methods
+      .getUserInfo(pid,account)
+      .call()
+
+    return userInfo
+  } catch (e) {
+    console.log(e)
+    return
+  }
 }

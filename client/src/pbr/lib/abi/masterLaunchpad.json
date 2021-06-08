@@ -10,6 +10,11 @@
                 "internalType": "contract IERC20",
                 "name": "polkaBridge",
                 "type": "address"
+            },
+            {
+                "internalType": "contract PolkaBridgeStaking",
+                "name": "_polkaBridgeStaking",
+                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
@@ -61,10 +66,36 @@
     {
         "inputs": [
             {
-                "internalType": "string",
-                "name": "name",
-                "type": "string"
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "activePool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "address[]",
+                "name": "user",
+                "type": "address[]"
             },
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "addMulWhitelist",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
             {
                 "internalType": "uint256",
                 "name": "begin",
@@ -87,12 +118,17 @@
             },
             {
                 "internalType": "uint256",
-                "name": "minPurchase",
+                "name": "maxPurchaseTier1",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "maxPurchase",
+                "name": "maxPurchaseTier2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "maxPurchaseTier3",
                 "type": "uint256"
             },
             {
@@ -102,7 +138,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "amountPBRRequire",
+                "name": "totalToken",
                 "type": "uint256"
             },
             {
@@ -113,6 +149,11 @@
             {
                 "internalType": "uint256",
                 "name": "lockDuration",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "minimumTokenSoldout",
                 "type": "uint256"
             }
         ],
@@ -212,6 +253,83 @@
                 "type": "uint256"
             },
             {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            },
+            {
+                "internalType": "contract IERC20",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "getPoolSoldInfo",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "getRemainIDOToken",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "getUserInfo",
+        "outputs": [
+            {
+                "internalType": "bool",
+                "name": "",
+                "type": "bool"
+            },
+            {
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
@@ -233,16 +351,46 @@
     {
         "inputs": [
             {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            },
+            {
                 "internalType": "uint256",
-                "name": "pid",
+                "name": "poolId",
                 "type": "uint256"
             }
         ],
-        "name": "getRemainIDOToken",
+        "name": "getUserStakingData",
         "outputs": [
             {
                 "internalType": "uint256",
-                "name": "",
+                "name": "amount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardDebt",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "rewardClaimed",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "lastBlock",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "beginTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "endTime",
                 "type": "uint256"
             }
         ],
@@ -287,11 +435,6 @@
                 "internalType": "bool",
                 "name": "",
                 "type": "bool"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
             },
             {
                 "internalType": "uint256",
@@ -379,20 +522,9 @@
                 "type": "uint256"
             }
         ],
-        "name": "testGetRemainIDOToken",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            }
-        ],
-        "stateMutability": "view",
+        "name": "stopPool",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
     },
     {
@@ -427,17 +559,17 @@
             },
             {
                 "internalType": "uint256",
-                "name": "amountPBRRequire",
+                "name": "maxPurchaseTier1",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "minPurchase",
+                "name": "maxPurchaseTier2",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "maxPurchase",
+                "name": "maxPurchaseTier3",
                 "type": "uint256"
             },
             {
@@ -447,22 +579,27 @@
             },
             {
                 "internalType": "uint256",
+                "name": "totalToken",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "ratePerETH",
                 "type": "uint256"
             },
             {
-                "internalType": "bool",
-                "name": "isActived",
-                "type": "bool"
+                "internalType": "uint256",
+                "name": "lockDuration",
+                "type": "uint256"
             },
             {
-                "internalType": "bool",
-                "name": "isStoped",
-                "type": "bool"
+                "internalType": "contract IERC20",
+                "name": "idoToken",
+                "type": "address"
             },
             {
                 "internalType": "uint256",
-                "name": "lockDuration",
+                "name": "minimumTokenSoldout",
                 "type": "uint256"
             }
         ],
@@ -502,6 +639,65 @@
     {
         "inputs": [
             {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "",
+                "type": "address"
+            }
+        ],
+        "name": "whitelist",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "Id",
+                "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "UserAddress",
+                "type": "address"
+            },
+            {
+                "internalType": "bool",
+                "name": "IsWhitelist",
+                "type": "bool"
+            },
+            {
+                "internalType": "uint256",
+                "name": "TotalTokenPurchase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "TotalETHPurchase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PurchaseTime",
+                "type": "uint256"
+            },
+            {
+                "internalType": "bool",
+                "name": "IsActived",
+                "type": "bool"
+            },
+            {
+                "internalType": "bool",
+                "name": "IsClaimed",
+                "type": "bool"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "contract IERC20",
                 "name": "token",
                 "type": "address"
@@ -518,9 +714,5 @@
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
-    },
-    {
-        "stateMutability": "payable",
-        "type": "receive"
     }
 ]

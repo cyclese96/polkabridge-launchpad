@@ -139,6 +139,9 @@ export const supportedPools = [
     ratio: 0,
     min: 0,
     max: 0,
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
     access: 'Private',
     distribution: 'TBA',
     startAt: 0,
@@ -173,6 +176,9 @@ export const supportedPools = [
     ratio: 0,
     min: 0,
     max: 0,
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
     access: 'Public',
     distribution: 'TBA',
     startAt: 0,

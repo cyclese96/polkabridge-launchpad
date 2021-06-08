@@ -14,7 +14,7 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount, getIsWhitelist } from '../../pbr/utils'
+import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount, getIsWhitelist, getUserStakingData, getUserInfo } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
@@ -34,7 +34,7 @@ interface JoinHistory {
 }
 
 const JoinLaunchpad: React.FC = () => {
-  const { launchpadId } = (useParams() as any)
+  const { launchpadId, poolId } = (useParams() as any)
   const {
     pid,
     name,
@@ -57,12 +57,15 @@ const JoinLaunchpad: React.FC = () => {
     ratio,
     min,
     max,
+    maxTier1,
+    maxTier2,
+    maxTier3,
     access,
     distribution,
     startAt,
     endAt,
     claimAt
-  } = useLaunchpad(launchpadId) || {
+  } = useLaunchpad(launchpadId, Number(poolId)) || {
     pid: 0,
     name: '',
     id: '',
@@ -84,6 +87,9 @@ const JoinLaunchpad: React.FC = () => {
     ratio: 0,
     min: 0,
     max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: '',
     distribution: '',
     startAt: 0,
@@ -110,6 +116,8 @@ const JoinLaunchpad: React.FC = () => {
   const [ethBalance, setETHBalance] = useState(0)
   const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
+  const [stakedAmount, setStakedAmount] = useState(0)
+  const [tokenPurchased, setTokenPurchased] = useState(0)
   const { onJoinPool } = useJoinPool(pid)
   const { onHarvest } = useHarvest(pid)
 
@@ -120,11 +128,17 @@ const JoinLaunchpad: React.FC = () => {
       const newHistory = await getHistory(account)
       const newProgress = await getProgress(lpContract, pid)
       const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
+      const stakedData = await getUserStakingData(lpContract, pid, account)
+      const userInfo = await getUserInfo(lpContract, pid, account)
+
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
+      setTokenPurchased(userInfo ? userInfo[1] : 0)
+      setStakedAmount(stakedData ? stakedData.amount : 0)
+
     }
     if (pid >= 0) {
       fetchData()
@@ -164,9 +178,19 @@ const JoinLaunchpad: React.FC = () => {
 
   const onMax = useCallback(
     () => {
-      var maxValue = ethBalance > max ? max : ethBalance;
-      if (maxValue < 0) maxValue = 0;
-      var newTokenValue = maxValue * ratio
+
+      let maxValue;
+      if (stakedAmount > -3000 && stakedAmount < 500) {
+        maxValue = maxTier2
+      } else if (stakedAmount >= 500 && stakedAmount < 3000) {
+        maxValue = maxTier1
+      } else if (stakedAmount > 5000) {
+        maxValue = maxTier3
+      } else {
+        maxValue = maxTier3
+      }
+
+      let newTokenValue = maxValue * ratio
       setETHValue(maxValue.toString())
       setTokenValue(newTokenValue.toString())
     },
@@ -289,7 +313,7 @@ const JoinLaunchpad: React.FC = () => {
 
                 <Button
                   disabled={startAt * 1000 > new Date().getTime() || endAt * 1000 <= new Date().getTime() || !isWhitelist || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
-                  text={endAt * 1000 <= new Date().getTime() ? 'Ended' : (pendingTx ? 'Pending Confirmation' : (!isWhitelist ? 'You are not whitelisted' : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))))}
+                  text={endAt * 1000 <= new Date().getTime() ? 'Ended' : (pendingTx ? 'Pending Confirmation' : (!isWhitelist ? (access === 'Public' ? "You are not whitelisted" : 'You have not participated in the staking') : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))))}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
@@ -325,7 +349,7 @@ const JoinLaunchpad: React.FC = () => {
                 <StyledTitle>Reward tokens will be available to harvest in approx.</StyledTitle>
                 <StyledInputContainer>
                   <StyledCenterRow>
-                    <StyledHarvestAmount>{purchasedAmount} {tokenSymbol}</StyledHarvestAmount>
+                    <StyledHarvestAmount>{tokenPurchased} {tokenSymbol}</StyledHarvestAmount>
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
