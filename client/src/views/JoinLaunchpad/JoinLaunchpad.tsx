@@ -179,14 +179,12 @@ const JoinLaunchpad: React.FC = () => {
   const onMax = useCallback(
     () => {
 
-      let maxValue;
-      if (stakedAmount > -3000 && stakedAmount < 500) {
-        maxValue = maxTier2
-      } else if (stakedAmount >= 500 && stakedAmount < 3000) {
+      let maxValue = 0;
+      if (stakedAmount >= 500 && stakedAmount < 3000) {
         maxValue = maxTier1
-      } else if (stakedAmount > 5000) {
-        maxValue = maxTier3
-      } else {
+      } else if (stakedAmount >= 3000 && stakedAmount < 5000) {
+        maxValue = maxTier2
+      } else if (stakedAmount >= 5000) {
         maxValue = maxTier3
       }
 
