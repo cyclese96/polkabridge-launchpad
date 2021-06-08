@@ -137,8 +137,8 @@ export const supportedPools = [
     totalSupply: '160,000,000 PUN',
     total: 'TBA',
     ratio: 0,
-    min: 0,
-    max: 0,
+    min: 0.12,//300$
+    max: 0.2,//500$
     maxTier1: 0.12,//300$
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
@@ -174,8 +174,8 @@ export const supportedPools = [
     totalSupply: '160,000,000 PUN',
     total: 'TBA',
     ratio: 0,
-    min: 0,
-    max: 0,
+    min: 0.12,//300$
+    max: 0.2,//500$
     maxTier1: 0.12,//300$
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$

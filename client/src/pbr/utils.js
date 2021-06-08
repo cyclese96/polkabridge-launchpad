@@ -579,3 +579,19 @@ export const getUserInfo = async (lpContract, pid, account) => {
     return
   }
 }
+
+export const toWei = (tokens) => {
+
+  if (!tokens) {
+    tokens = '0'
+  }
+  return Web3.utils.toWei(tokens, 'ether')
+}
+
+export const fromWei = (tokens) => {
+  if (!tokens) {
+    tokens = '0'
+  }
+
+  return  Web3.utils.fromWei(tokens, 'ether')
+}

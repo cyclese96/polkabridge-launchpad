@@ -14,27 +14,37 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getProgress, getHistory, getETHBalance, getPurchasesAmount, getIsWhitelist, getUserStakingData, getUserInfo } from '../../pbr/utils'
+import {
+  getMasterChefContract,
+  getProgress,
+  getHistory,
+  getETHBalance,
+  getPurchasesAmount,
+  getIsWhitelist,
+  getUserStakingData,
+  getUserInfo,
+  fromWei,
+} from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
-import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { Contract } from 'web3-eth-contract';
-import useJoinPool from '../../hooks/useJoinPool';
-import useHarvest from '../../hooks/useHarvest';
-import ModalError from '../../components/ModalError';
-import ModalSuccess from '../../components/ModalSuccess';
-import ModalSuccessHarvest from '../../components/ModalSuccessHarvest';
-import Modal from '../../components/Modal';
+import Countdown, { CountdownRenderProps } from 'react-countdown'
+import { Contract } from 'web3-eth-contract'
+import useJoinPool from '../../hooks/useJoinPool'
+import useHarvest from '../../hooks/useHarvest'
+import ModalError from '../../components/ModalError'
+import ModalSuccess from '../../components/ModalSuccess'
+import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
+import Modal from '../../components/Modal'
 
 interface JoinHistory {
-  amount: number,
-  symbol: string,
-  status: string,
+  amount: number
+  symbol: string
+  status: string
   joinDate: string
 }
 
 const JoinLaunchpad: React.FC = () => {
-  const { launchpadId, poolId } = (useParams() as any)
+  const { launchpadId, poolId } = useParams() as any
   const {
     pid,
     name,
@@ -64,7 +74,7 @@ const JoinLaunchpad: React.FC = () => {
     distribution,
     startAt,
     endAt,
-    claimAt
+    claimAt,
   } = useLaunchpad(launchpadId, Number(poolId)) || {
     pid: 0,
     name: '',
@@ -94,7 +104,7 @@ const JoinLaunchpad: React.FC = () => {
     distribution: '',
     startAt: 0,
     endAt: 0,
-    claimAt: 0
+    claimAt: 0,
   }
 
   useEffect(() => {
@@ -127,7 +137,11 @@ const JoinLaunchpad: React.FC = () => {
       const newETHBalance = await getETHBalance(ethereum, account)
       const newHistory = await getHistory(account)
       const newProgress = await getProgress(lpContract, pid)
-      const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
+      const newPurchasedAmount = await getPurchasesAmount(
+        lpContract,
+        pid,
+        account,
+      )
       const stakedData = await getUserStakingData(lpContract, pid, account)
       const userInfo = await getUserInfo(lpContract, pid, account)
 
@@ -136,14 +150,22 @@ const JoinLaunchpad: React.FC = () => {
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
-      setTokenPurchased(userInfo ? userInfo[1] : 0)
-      setStakedAmount(stakedData ? stakedData.amount : 0)
-
+      setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
+      setStakedAmount(stakedData ? Number(fromWei(stakedData.amount)) : 0)
     }
     if (pid >= 0) {
       fetchData()
     }
-  }, [ethereum, account, lpContract, pid, setETHBalance, setHistory, setProgress, setPurchasedAmount])
+  }, [
+    ethereum,
+    account,
+    lpContract,
+    pid,
+    setETHBalance,
+    setHistory,
+    setProgress,
+    setPurchasedAmount,
+  ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -176,59 +198,113 @@ const JoinLaunchpad: React.FC = () => {
     [ratio, setTokenValue, setETHValue],
   )
 
-  const onMax = useCallback(
-    () => {
+  const getMaxValue = () => {
+    let maxValue = 0
+    if (stakedAmount >= 500 && stakedAmount < 3000) {
+      maxValue = maxTier1
+    } else if (stakedAmount >= 3000 && stakedAmount < 5000) {
+      maxValue = maxTier2
+    } else if (stakedAmount >= 5000) {
+      maxValue = maxTier3
+    }
+    return maxValue
+  }
 
-      let maxValue = 0;
-      if (stakedAmount >= 500 && stakedAmount < 3000) {
-        maxValue = maxTier1
-      } else if (stakedAmount >= 3000 && stakedAmount < 5000) {
-        maxValue = maxTier2
-      } else if (stakedAmount >= 5000) {
-        maxValue = maxTier3
-      }
+  const onMax = useCallback(() => {
+    console.log('staked amount', stakedAmount)
+    console.log('purchased tokens ', tokenPurchased)
 
-      let newTokenValue = maxValue * ratio
-      setETHValue(maxValue.toString())
-      setTokenValue(newTokenValue.toString())
-    },
-    [ethBalance, ratio, setTokenValue, setETHValue],
-  )
+    const maxValue = getMaxValue()
 
-  const reset = useCallback(
-    async () => {
-      const newETHBalance = await getETHBalance(ethereum, account)
-      const newHistory = await getHistory(account)
-      const newProgress = await getProgress(lpContract, pid)
-      const newPurchasedAmount = await getPurchasesAmount(lpContract, pid, account)
-      setETHBalance(newETHBalance)
-      setHistory(newHistory)
-      setProgress(newProgress)
-      setPurchasedAmount(newPurchasedAmount)
-      setETHValue("")
-      setTokenValue("")
-    },
-    [ethereum, account, lpContract, pid, setETHBalance, setHistory, setProgress, setPurchasedAmount, setTokenValue, setETHValue],
-  )
+    let newTokenValue = maxValue * ratio
+    setETHValue(maxValue.toString())
+    setTokenValue(newTokenValue.toString())
+  }, [ethBalance, ratio, setTokenValue, setETHValue])
+
+  const getButtonText = () => {
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+
+    return endAt * 1000 <= new Date().getTime()
+      ? 'Ended'
+      : pendingTx
+        ? 'Pending Confirmation'
+        : !isWhitelist
+          ? access === 'Public'
+            ? 'You are not whitelisted'
+            : 'You have not participated in the staking'
+          : startAt * 1000 <= new Date().getTime()
+            ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
+              ? 'Join pool'
+              : 'Min: ' + min + ' ETH - Max: ' + _max + ' ETH'
+            : progress == new BigNumber('100')
+              ? 'Ended'
+              : undefined
+  }
+
+  const isButtonDisable = () => {
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+
+    return (
+      startAt * 1000 > new Date().getTime() ||
+      endAt * 1000 <= new Date().getTime() ||
+      !isWhitelist ||
+      progress == new BigNumber('100') ||
+      pendingTx ||
+      !ethValue ||
+      !tokenValue ||
+      parseFloat(ethValue) < min ||
+      parseFloat(ethValue) > _max
+    )
+  }
+
+  const reset = useCallback(async () => {
+    const newETHBalance = await getETHBalance(ethereum, account)
+    const newHistory = await getHistory(account)
+    const newProgress = await getProgress(lpContract, pid)
+    const newPurchasedAmount = await getPurchasesAmount(
+      lpContract,
+      pid,
+      account,
+    )
+    setETHBalance(newETHBalance)
+    setHistory(newHistory)
+    setProgress(newProgress)
+    setPurchasedAmount(newPurchasedAmount)
+    setETHValue('')
+    setTokenValue('')
+  }, [
+    ethereum,
+    account,
+    lpContract,
+    pid,
+    setETHBalance,
+    setHistory,
+    setProgress,
+    setPurchasedAmount,
+    setTokenValue,
+    setETHValue,
+  ])
 
   const [onPresentSuccess] = useModal(
     <ModalSuccess
       amount={tokenValue}
       symbol={name}
-      txhash="4f95c6770c75ddd3388f525" text="purchase" />,
+      txhash="4f95c6770c75ddd3388f525"
+      text="purchase"
+    />,
   )
 
   const [onPresentError] = useModal(
-    <ModalError
-      text="Transaction failed"
-      txhash={txhash} />,
+    <ModalError text="Transaction failed" txhash={txhash} />,
   )
 
   const [onPresentSuccessHarvest] = useModal(
     <ModalSuccessHarvest
       amount={purchasedAmount ? purchasedAmount.toString() : ''}
       symbol={name}
-      txhash={txhash} text="harvest" />,
+      txhash={txhash}
+      text="harvest"
+    />,
   )
 
   return (
@@ -247,17 +323,21 @@ const JoinLaunchpad: React.FC = () => {
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">
-              {progress &&
-                (<>
+              {progress && (
+                <>
                   <div style={{ width: `100%` }}>
                     <StyledProgress>
-                      <StyledProgressBar style={{ width: progress.toString() + `%` }} />
+                      <StyledProgressBar
+                        style={{ width: progress.toString() + `%` }}
+                      />
                     </StyledProgress>
-                    <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
+                    <StyledProgressText>
+                      {progress.toFixed(2).toString()}%
+                    </StyledProgressText>
                   </div>
                   <Spacer />
-                </>)
-              }
+                </>
+              )}
             </StyledBox>
           </StyledInfo>
 
@@ -270,12 +350,20 @@ const JoinLaunchpad: React.FC = () => {
                     <StyledLabel>Your Wallet Balance: {ethBalance}</StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
-                    <StyledInput value={ethValue} onChange={onChangeETH} type="number" placeholder="0.0" />
+                    <StyledInput
+                      value={ethValue}
+                      onChange={onChangeETH}
+                      type="number"
+                      placeholder="0.0"
+                    />
                     <StyledRow>
                       <StyledMaxButton onClick={onMax}>MAX</StyledMaxButton>
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
-                          <StyledTokenIcon src="/img/tokens/eth.png" alt="icon"></StyledTokenIcon>
+                          <StyledTokenIcon
+                            src="/img/tokens/eth.png"
+                            alt="icon"
+                          ></StyledTokenIcon>
                         </StyledTokenIconWrap>
                         <StyledTokenSymbol>ETH</StyledTokenSymbol>
                       </StyledTokenGroup>
@@ -286,7 +374,20 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="sm" />
                 <StyledCenterRow>
                   <StyledTokenIconWrap>
-                    <StyledTokenIconSvg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#C3C5CB" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></StyledTokenIconSvg>
+                    <StyledTokenIconSvg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="#C3C5CB"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    >
+                      <line x1="12" y1="5" x2="12" y2="19"></line>
+                      <polyline points="19 12 12 19 5 12"></polyline>
+                    </StyledTokenIconSvg>
                   </StyledTokenIconWrap>
                 </StyledCenterRow>
                 <Spacer size="sm" />
@@ -296,11 +397,19 @@ const JoinLaunchpad: React.FC = () => {
                     <StyledLabel>OUTPUT</StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
-                    <StyledInput value={tokenValue} onChange={onChangeToken} type="number" placeholder="0.0" />
+                    <StyledInput
+                      value={tokenValue}
+                      onChange={onChangeToken}
+                      type="number"
+                      placeholder="0.0"
+                    />
                     <StyledRow>
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
-                          <StyledTokenIcon src={icon} alt="icon"></StyledTokenIcon>
+                          <StyledTokenIcon
+                            src={icon}
+                            alt="icon"
+                          ></StyledTokenIcon>
                         </StyledTokenIconWrap>
                         <StyledTokenSymbol>{tokenSymbol}</StyledTokenSymbol>
                       </StyledTokenGroup>
@@ -310,8 +419,8 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={startAt * 1000 > new Date().getTime() || endAt * 1000 <= new Date().getTime() || !isWhitelist || progress == new BigNumber("100") || pendingTx || !ethValue || !tokenValue || parseFloat(ethValue) < min || parseFloat(ethValue) > max}
-                  text={endAt * 1000 <= new Date().getTime() ? 'Ended' : (pendingTx ? 'Pending Confirmation' : (!isWhitelist ? (access === 'Public' ? "You are not whitelisted" : 'You have not participated in the staking') : (startAt * 1000 <= new Date().getTime() ? (parseFloat(ethValue) >= min && parseFloat(ethValue) <= max ? 'Join pool' : 'Min: ' + min + ' ETH - Max: ' + max + ' ETH') : (progress == new BigNumber("100") ? 'Ended' : undefined))))}
+                  disabled={isButtonDisable()}
+                  text={getButtonText()}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
@@ -321,8 +430,7 @@ const JoinLaunchpad: React.FC = () => {
                         setSuccessTx(true)
                         onPresentSuccess()
                         reset()
-                      }
-                      else {
+                      } else {
                         onPresentError()
                       }
                     }
@@ -337,17 +445,20 @@ const JoinLaunchpad: React.FC = () => {
                 </Button>
               </StyledSwapWrap>
             </StyledBox>
-
           </StyledInfoSolid>
           <Spacer size="md" />
 
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
-                <StyledTitle>Reward tokens will be available to harvest in approx.</StyledTitle>
+                <StyledTitle>
+                  Reward tokens will be available to harvest in approx.
+                </StyledTitle>
                 <StyledInputContainer>
                   <StyledCenterRow>
-                    <StyledHarvestAmount>{tokenPurchased} {tokenSymbol}</StyledHarvestAmount>
+                    <StyledHarvestAmount>
+                      {tokenPurchased} {tokenSymbol}
+                    </StyledHarvestAmount>
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
@@ -390,9 +501,7 @@ const JoinLaunchpad: React.FC = () => {
                   <StyledTable>
                     <StyledTableHead>
                       <StyledTableRow>
-                        <StyledTableHeadCell>
-                          History
-                  </StyledTableHeadCell>
+                        <StyledTableHeadCell>History</StyledTableHeadCell>
                       </StyledTableRow>
                     </StyledTableHead>
                     <StyledTableBody>
@@ -416,9 +525,7 @@ const JoinLaunchpad: React.FC = () => {
               </StyledInfoSolid>
               <Spacer size="md" />
             </>
-          )
-          }
-
+          )}
         </StyledInfoWrap>
       </StyledLaunchpad>
     </>
@@ -426,11 +533,11 @@ const JoinLaunchpad: React.FC = () => {
 }
 
 const StyledInfoWrap = styled.div`
-          width: 600px;
+  width: 600px;
   @media (max-width: 767px) {
-            width: 100%;
-        }
-      `
+    width: 100%;
+  }
+`
 
 const StyledLaunchpad = styled.div`
             align-items: center;
@@ -564,8 +671,10 @@ const StyledTokenIconWrap = styled.div`
   -ms-flex-pack: center;
   justify-content: center;
   border-radius: 50%;
-  -webkit-box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
-  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+  -webkit-box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%),
+    0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%);
+  box-shadow: 0 2px 4px -1px rgb(0 0 0 / 20%), 0 4px 5px 0 rgb(0 0 0 / 14%),
+    0 1px 10px 0 rgb(0 0 0 / 12%);
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
   display: flex;
@@ -596,106 +705,104 @@ const StyledTokenSymbol = styled.span`
 `
 
 const StyledInfo = styled.div`
-      display: flex;
-      justify-content: space-between;
-      box-sizing: border-box;
-    // padding: ${(props) => props.theme.spacing[3]}px;
-    // border: 2px solid ${(props) => props.theme.color.grey[200]};
-          border-radius: 12px;
-    margin: ${(props) => props.theme.spacing[3]}px auto;
-    @media (max-width: 767px) {
-            width: 100%;
-          text-align: center;
-      }
-  `
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  // padding: ${(props) => props.theme.spacing[3]}px;
+  // border: 2px solid ${(props) => props.theme.color.grey[200]};
+  border-radius: 12px;
+  margin: ${(props) => props.theme.spacing[3]}px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
+`
 
 const StyledInfoSolid = styled.div`
-        display: flex;
-        padding: 15px 10px;
-        background: #00ff5d0f;
-        border-radius: 12px;
-      `
+  display: flex;
+  padding: 15px 10px;
+  background: #00ff5d0f;
+  border-radius: 12px;
+`
 
 const StyledBox = styled.div`
-    &.col-2 {
-            width: 20%;
-    }
-    &.col-4 {
-            width: 40%;
-    }
-    &.col-5 {
-            width: 50%;
-    }
-    &.col-8 {
-            width: 80%;
-    }
-    &.col-10 {
-            width: 100%;
-    }
-  `
+  &.col-2 {
+    width: 20%;
+  }
+  &.col-4 {
+    width: 40%;
+  }
+  &.col-5 {
+    width: 50%;
+  }
+  &.col-8 {
+    width: 80%;
+  }
+  &.col-10 {
+    width: 100%;
+  }
+`
 
 const StyledProgress = styled.a`
-    position: relative;
-    display: block;
-    width: 100%;
-    height: 8px;
-    background: #f2f0eb;
-    border-radius: 5px;
-  `
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 8px;
+  background: #f2f0eb;
+  border-radius: 5px;
+`
 
 const StyledProgressText = styled.p`
-    margin-top: 4px;
-    margin-bottom: 0;
-    font-size: 12px;
-    color: #e0077d;
-    line-height: 12px;
-  `
+  margin-top: 4px;
+  margin-bottom: 0;
+  font-size: 12px;
+  color: #e0077d;
+  line-height: 12px;
+`
 
 const StyledProgressBar = styled.i`
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 8px;
-    background: #e0077d;
-    border-radius: 5px;
-    font-size: 14px;
-  `
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 8px;
+  background: #e0077d;
+  border-radius: 5px;
+  font-size: 14px;
+`
 
 const StyledTable = styled.table`
-    width: 100%;
-    border-radius: 5px;
-  `
+  width: 100%;
+  border-radius: 5px;
+`
 const StyledTableHead = styled.thead``
 const StyledTableBody = styled.tbody``
 const StyledTableRow = styled.tr`
-    height: 60px;
-    border-bottom: 1px solid #ebe9e3;
-  `
+  height: 60px;
+  border-bottom: 1px solid #ebe9e3;
+`
 const StyledTableHeadCell = styled.th`
-    padding: 0 50px 0 30px;
-    font-size: 14px;
-    font-weight: 700;
-    color: #ffffff;
-    // line-height: 60px;
-    text-align: left;
-  `
+  padding: 0 50px 0 30px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #ffffff;
+  // line-height: 60px;
+  text-align: left;
+`
 const StyledTableBodyCell = styled.td`
-    padding: 0 50px 0 30px;
-    font-size: 14px;
-    color: #7a7f82;
-    // line-height: 60px;
-  `
+  padding: 0 50px 0 30px;
+  font-size: 14px;
+  color: #7a7f82;
+  // line-height: 60px;
+`
 const StyledTableText = styled.p`
-    display: flex;
-    justify-content: space-between;
-    margin: 0;
-  `
-const StyledTableLabel = styled.span`
-  
-  `
+  display: flex;
+  justify-content: space-between;
+  margin: 0;
+`
+const StyledTableLabel = styled.span``
 const StyledTableValue = styled.span`
   text-align: right;
   color: #ffffff;
-  `
+`
 
 export default JoinLaunchpad
