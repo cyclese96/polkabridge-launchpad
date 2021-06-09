@@ -357,10 +357,10 @@ const JoinLaunchpad: React.FC = () => {
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Staked amount: {stakedAmount + " PBR"}
+                  Your staked amount: {stakedAmount + " PBR"}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Max purchase: {getMaxValue() + " ETH"}
+                Your max purchase: {getMaxValue() + " ETH"}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
