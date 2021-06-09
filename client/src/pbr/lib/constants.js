@@ -220,8 +220,9 @@ export const supportedPools = [
     distribution: 'June 11th 2021, 15:30 UTC',
     // startAt: 1623420000,
     startAt: 1523420000,//test
-    endAt: 1623423600,
-    claimAt: 1623425400,
+    //endAt: 1623423600,
+    endAt: 1623219170,
+    claimAt: 1623223500,
     startDate: "June 11th 2021"
   },
   {
@@ -258,8 +259,9 @@ export const supportedPools = [
     distribution: 'June 11th 2021, 15:30 UTC',
     //startAt: 1623420000,
     startAt: 1523420000,//test
-    endAt: 1623423600,
-    claimAt: 1623425400,
+    //endAt: 1623423600,
+    endAt: 1623219170,
+    claimAt: 1623223500,
     startDate: "June 11th 2021"
   }
 
