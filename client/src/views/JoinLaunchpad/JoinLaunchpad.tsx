@@ -349,6 +349,21 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
+          {access === "Private" ? (
+            <StyledBox className="col-10">
+              <StyledCenterRow>
+                <StyledInfoLabel>
+                  Staked amount: {stakedAmount + " PBR"}
+                </StyledInfoLabel>
+                <StyledInfoLabel>
+                  Max purchase: {getMaxValue() + " ETH"}
+                </StyledInfoLabel>
+              </StyledCenterRow>
+            </StyledBox>
+          ) : ""}
+
+
+
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
@@ -459,9 +474,17 @@ const JoinLaunchpad: React.FC = () => {
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
-                <StyledTitle>
-                  Reward tokens will be available to harvest in approx.
-                </StyledTitle>
+
+                {claimAt * 1000 > new Date().getTime() ? (
+                  <StyledTitle>
+                    Reward tokens will be available to harvest in approx -   <Countdown
+                      date={new Date(claimAt * 1000)}
+                      renderer={renderer}
+                    />
+                  </StyledTitle>
+
+                ) : <StyledTitle>Reward tokens are now available to harvest</StyledTitle>}
+
                 <StyledInputContainer>
                   <StyledCenterRow>
                     <StyledHarvestAmount>
@@ -470,7 +493,7 @@ const JoinLaunchpad: React.FC = () => {
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
-                {/* <Button
+                <Button
                   disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx}
                   text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? 'Harvest' : undefined)}
                   onClick={async () => {
@@ -496,7 +519,7 @@ const JoinLaunchpad: React.FC = () => {
                       renderer={renderer}
                     />
                   )}
-                </Button> */}
+                </Button>
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
@@ -622,6 +645,15 @@ const StyledHarvestAmount = styled.div`
 `
 
 const StyledLabel = styled.div``
+
+const StyledInfoLabel = styled.div`
+  text-align: center;
+  width: 100%;
+  margin-bottom: 32px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #ffffff;
+`
 
 const StyledInput = styled.input`
   font-size: 24px;
