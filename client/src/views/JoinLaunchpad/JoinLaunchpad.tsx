@@ -128,6 +128,7 @@ const JoinLaunchpad: React.FC = () => {
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState(0)
   const [tokenPurchased, setTokenPurchased] = useState(0)
+  const [isClaimed, setClaimed] = useState(false)
   const { onJoinPool } = useJoinPool(pid)
   const { onHarvest } = useHarvest(pid)
 
@@ -158,6 +159,7 @@ const JoinLaunchpad: React.FC = () => {
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedData ? Number(fromWei(stakedData.amount)) : 0)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
+      setClaimed(userInfo ? userInfo[3] : false)
     }
     if (pid >= 0) {
       fetchData()
@@ -170,6 +172,7 @@ const JoinLaunchpad: React.FC = () => {
     pid,
     stakedAmount,
     tokenPurchased,
+    isClaimed,
     setIsWhitelist,
     setETHBalance,
     setHistory,
@@ -177,6 +180,7 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount,
     setStakedAmount,
     setTokenPurchased,
+    setClaimed
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -494,8 +498,8 @@ const JoinLaunchpad: React.FC = () => {
                 </StyledInputContainer>
                 <Spacer size="md" />
                 <Button
-                  disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx}
-                  text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? 'Harvest' : undefined)}
+                  disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx || isClaimed}
+                  text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? (isClaimed ? 'Already claimed' : 'Harvest') : undefined)}
                   onClick={async () => {
                     if (purchasedAmount > 0) {
                       setPendingHarvestTx(true)
