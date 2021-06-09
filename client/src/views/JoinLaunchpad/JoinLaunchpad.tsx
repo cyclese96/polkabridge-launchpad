@@ -133,38 +133,50 @@ const JoinLaunchpad: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const newIsWhitelist = await getIsWhitelist(lpContract, pid, account)
-      const newETHBalance = await getETHBalance(ethereum, account)
-      const newHistory = await getHistory(account)
-      const newProgress = await getProgress(lpContract, pid)
-      const newPurchasedAmount = await getPurchasesAmount(
-        lpContract,
-        pid,
-        account,
-      )
-      const stakedData = await getUserStakingData(lpContract, pid, account)
-      const userInfo = await getUserInfo(lpContract, pid, account)
+      const [
+        newIsWhitelist,
+        newETHBalance,
+        newHistory,
+        newProgress,
+        newPurchasedAmount,
+        stakedData,
+        userInfo
+      ] = await Promise.all([
+        getIsWhitelist(lpContract, pid, account),
+        getETHBalance(ethereum, account),
+        getHistory(account),
+        getProgress(lpContract, pid),
+        getPurchasesAmount(lpContract, pid, account),
+        getUserStakingData(lpContract, pid, account),
+        getUserInfo(lpContract, pid, account)
+      ])
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
-      setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
       setStakedAmount(stakedData ? Number(fromWei(stakedData.amount)) : 0)
+      setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
     }
     if (pid >= 0) {
       fetchData()
     }
   }, [
+    isWhitelist,
     ethereum,
     account,
     lpContract,
     pid,
+    stakedAmount,
+    tokenPurchased,
+    setIsWhitelist,
     setETHBalance,
     setHistory,
     setProgress,
     setPurchasedAmount,
+    setStakedAmount,
+    setTokenPurchased,
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -211,15 +223,11 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onMax = useCallback(() => {
-    console.log('staked amount', stakedAmount)
-    console.log('purchased tokens ', tokenPurchased)
-
-    const maxValue = getMaxValue()
-
-    let newTokenValue = maxValue * ratio
-    setETHValue(maxValue.toString())
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+    let newTokenValue = _max * ratio
+    setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
-  }, [ethBalance, ratio, setTokenValue, setETHValue])
+  }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
   const getButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()

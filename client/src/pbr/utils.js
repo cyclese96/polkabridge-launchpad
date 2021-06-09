@@ -555,7 +555,7 @@ export const getUserStakingData = async (lpContract, pid, account) => {
   // getUserStakingData
   try {
     const stakedData = await lpContract.methods
-      .getUserStakingData(account, pid)
+      .getUserStakingData(account, 0)
       .call()
 
     return stakedData

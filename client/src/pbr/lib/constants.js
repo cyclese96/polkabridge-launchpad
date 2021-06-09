@@ -35,7 +35,7 @@ export const contractAddresses = {
   },
   masterLaunchpad: {
     1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-    42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d' // launchpad contract
+    42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD' // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -48,7 +48,7 @@ export const supportedPools = [
     pid: -1,
     lpAddresses: {//launchpad ct
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
@@ -82,7 +82,7 @@ export const supportedPools = [
     pid: -2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
@@ -116,7 +116,7 @@ export const supportedPools = [
     pid: 3,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
@@ -153,7 +153,7 @@ export const supportedPools = [
     pid: 4,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
@@ -190,7 +190,7 @@ export const supportedPools = [
     pid: 1,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
@@ -228,7 +228,7 @@ export const supportedPools = [
     pid: 2,
     lpAddresses: {
       1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
-      42: '0x78Cd3c70C0fF8Dc088A4208E7d26C97CF8a5331d',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
