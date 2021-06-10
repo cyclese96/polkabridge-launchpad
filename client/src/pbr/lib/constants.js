@@ -34,7 +34,7 @@ export const contractAddresses = {
     42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0'
   },
   masterLaunchpad: {
-    1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+    1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD' // launchpad contract
   },
   weth: {
@@ -47,7 +47,7 @@ export const supportedPools = [
   {
     pid: -1,
     lpAddresses: {//launchpad ct
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -81,7 +81,7 @@ export const supportedPools = [
   {
     pid: -2,
     lpAddresses: {
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -113,9 +113,9 @@ export const supportedPools = [
     startDate: "May 18th 2021, 15:00 UTC"
   },
   {
-    pid: 3,
+    pid: 4,
     lpAddresses: {
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -150,9 +150,9 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 4,
+    pid: 5,
     lpAddresses: {
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -189,7 +189,7 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -218,17 +218,17 @@ export const supportedPools = [
     maxTier3: 0.2,//500$
     access: 'Public',
     distribution: 'June 11th 2021, 15:30 UTC',
-    // startAt: 1623420000,
-    startAt: 1523420000,//test
-    //endAt: 1623423600,
-    endAt: 1623219170,
-    claimAt: 1623223500,
+    startAt: 1623420000,
+    //startAt: 1523420000,//test
+    endAt: 1623423600,
+    //endAt: 1623219170,
+    claimAt: 1623428100,
     startDate: "June 11th 2021"
   },
   {
     pid: 2,
     lpAddresses: {
-      1: '0x0d9b8d30d17acec29b71088cc61fb013fbce0e12',
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -257,11 +257,11 @@ export const supportedPools = [
     maxTier3: 0.2,//500$
     access: 'Private',
     distribution: 'June 11th 2021, 15:30 UTC',
-    //startAt: 1623420000,
-    startAt: 1523420000,//test
-    //endAt: 1623423600,
-    endAt: 1623219170,
-    claimAt: 1623223500,
+    startAt: 1623420000,
+    // startAt: 1523420000,//test
+    endAt: 1623423600,
+    //endAt: 1623219170,
+    claimAt: 1623428100,
     startDate: "June 11th 2021"
   }
 
