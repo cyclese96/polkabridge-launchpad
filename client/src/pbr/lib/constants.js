@@ -119,10 +119,10 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      1: '',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    lpExplorer: 'https://bscscan.com/token/',
     name: 'PolkaWar',
     symbol: 'PWAR',
     description: `PWAR/BNB`,
@@ -132,7 +132,7 @@ export const supportedPools = [
     telegram: 'https://t.me/polkawarchat',
     whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
     tokenSymbol: 'PWAR',
-    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/polkawar.png',
     totalSupply: '1000,000,000 PWAR',
     total: '32 ETH',//1eth=2k500
@@ -158,10 +158,10 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      1: '',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    lpExplorer: 'https://bscscan.com/token/',
     name: 'PolkaWar',
     symbol: 'PWAR',
     description: `PWAR/BNB`,
@@ -171,7 +171,7 @@ export const supportedPools = [
     telegram: 'https://t.me/polkawarchat',
     whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
     tokenSymbol: 'PWAR',
-    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/polkawar.png',
     totalSupply: '1000,000,000 PWAR',
     total: '48 ETH',//1eth=2k500
