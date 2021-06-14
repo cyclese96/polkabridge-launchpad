@@ -27,6 +27,9 @@ const Nav: React.FC<NavProp> = ({showMenu}) => {
       <StyledAbsoluteLink href="https://prediction.polkabridge.org">
         Prediction
       </StyledAbsoluteLink>
+      <StyledAbsoluteLink href="https://corgib.polkabridge.org/bet">
+        Betting
+      </StyledAbsoluteLink>
     </StyledNav>
   )
 }

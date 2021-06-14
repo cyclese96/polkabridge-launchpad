@@ -101,7 +101,7 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/zen.png',
     totalSupply: '100,000,000 ZEN',
-    total: '17.647 ETH',//1eth=3k5$
+    total: '17.647 ETH',//1eth=3k4$
     ratio: 11333,
     min: 0.1,
     max: 0.1176,
@@ -114,6 +114,84 @@ export const supportedPools = [
   },
   {
     pid: 4,
+    lpAddresses: {
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    },
+    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    name: 'PolkaWar',
+    symbol: 'PWAR',
+    description: `PWAR/BNB`,
+    introduce: `PolkaWar is a blockchain based NFT gaming platform and marketplace. Inspired by the recent crypto NFT and gaming narratives, PolkaWar will combine and synergize them both to build an attractive platform.`,
+    website: 'https://polkawar.com/',
+    twitter: 'https://twitter.com/polkawarnft',
+    telegram: 'https://t.me/polkawarchat',
+    whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
+    tokenSymbol: 'PWAR',
+    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    icon: '/img/tokens/polkawar.png',
+    totalSupply: '1000,000,000 PWAR',
+    total: '32 ETH',//1eth=2k500
+    ratio: 16666,
+    min: 0.16,//400$
+    max: 0.24,//500$
+    maxTier1: 0.16,//400$
+    maxTier2: 0.2,//500$
+    maxTier3: 0.24,//600$
+    access: 'Public',
+    distribution: 'June 28th 2021, 16:15 UTC',
+    startAt: 1624888800,
+    //startAt: 1523420000,//test
+    endAt: 1624892400,
+    //endAt: 1623219170,
+    claimAt: 1624896900,
+    startDate: "June 28th 2021"
+  },
+  {
+    pid: 5,
+    lpAddresses: {
+      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    },
+    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    name: 'PolkaWar',
+    symbol: 'PWAR',
+    description: `PWAR/BNB`,
+    introduce: `PolkaWar is a blockchain based NFT gaming platform and marketplace. Inspired by the recent crypto NFT and gaming narratives, PolkaWar will combine and synergize them both to build an attractive platform.`,
+    website: 'https://polkawar.com/',
+    twitter: 'https://twitter.com/polkawarnft',
+    telegram: 'https://t.me/polkawarchat',
+    whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
+    tokenSymbol: 'PWAR',
+    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    icon: '/img/tokens/polkawar.png',
+    totalSupply: '1000,000,000 PWAR',
+    total: '48 ETH',//1eth=2k500
+    ratio: 16666,
+    min: 0.16,//400$
+    max: 0.24,//500$
+    maxTier1: 0.16,//400$
+    maxTier2: 0.2,//500$
+    maxTier3: 0.24,//600$
+    access: 'Private',
+    distribution: 'June 28th 2021, 16:15 UTC',
+    startAt: 1624888800,
+    //startAt: 1523420000,//test
+    endAt: 1624892400,
+    //endAt: 1623219170,
+    claimAt: 1624896900,
+    startDate: "June 28th 2021"
+  },
+  {
+    pid: 6,
     lpAddresses: {
       1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -150,7 +228,7 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 5,
+    pid: 7,
     lpAddresses: {
       1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -193,10 +271,10 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
+      1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpExplorer: 'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     name: 'DragonBite',
     symbol: 'BITE-PBR',
     description: `BITE/ETH`,
@@ -206,7 +284,7 @@ export const supportedPools = [
     telegram: 'https://t.me/DragonBite',
     whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
     tokenSymbol: 'BITE',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
     total: '16 ETH',//1eth=2k500
@@ -217,8 +295,8 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Public',
-    distribution: 'June 11th 2021, 15:30 UTC',
-    startAt: 1523420000,
+    distribution: 'June 11th 2021, 16:15 UTC',
+    startAt: 1623420000,
     //startAt: 1523420000,//test
     endAt: 1623423600,
     //endAt: 1623219170,
@@ -232,10 +310,10 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
+      1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpExplorer: 'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     name: 'DragonBite',
     symbol: 'BITE-PBR',
     description: `BITE/ETH`,
@@ -245,7 +323,7 @@ export const supportedPools = [
     telegram: 'https://t.me/DragonBite',
     whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
     tokenSymbol: 'BITE',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
     total: '24 ETH',
@@ -256,8 +334,8 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Private',
-    distribution: 'June 11th 2021, 15:30 UTC',
-    startAt: 1523420000,
+    distribution: 'June 11th 2021, 16:15 UTC',
+    startAt: 1623420000,
     // startAt: 1523420000,//test
     endAt: 1623423600,
     //endAt: 1623219170,
