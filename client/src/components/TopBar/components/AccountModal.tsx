@@ -1,6 +1,7 @@
 import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
+// import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
 import { getPolkaBridgeAddress } from '../../../pbr/utils'
@@ -23,7 +24,7 @@ import useUnlock from '../../../hooks/useUnlock'
 
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, reset } = useWallet()
+  const { account, reset, balance } = useWallet()
 
   const handleSignOutClick = useCallback(() => {
     onDismiss!()

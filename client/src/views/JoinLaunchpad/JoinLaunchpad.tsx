@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { provider } from 'web3-core'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
@@ -58,6 +58,8 @@ const JoinLaunchpad: React.FC = () => {
     whitepaper,
     lpAddress,
     lpContract,
+    lpBscAddress,
+    lpBscContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -88,6 +90,8 @@ const JoinLaunchpad: React.FC = () => {
     whitepaper: '',
     lpAddress: '',
     lpContract: null,
+    lpBscAddress: '',
+    lpBscContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -143,7 +147,7 @@ const JoinLaunchpad: React.FC = () => {
         stakedData,
         userInfo
       ] = await Promise.all([
-        getIsWhitelist(lpContract, pid, account),
+        getIsWhitelist(lpBscContract, pid, account),
         getETHBalance(ethereum, account),
         getHistory(account),
         getProgress(lpContract, pid),
@@ -151,6 +155,12 @@ const JoinLaunchpad: React.FC = () => {
         getUserStakingData(lpContract, pid, account),
         getUserInfo(lpContract, pid, account)
       ])
+
+      // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
+      console.log('stakedData--->  ',stakedData)
+      console.log('userInfo--->  ',userInfo)
+      console.log('newIsWhitelist--->  ',newIsWhitelist)
+      // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)

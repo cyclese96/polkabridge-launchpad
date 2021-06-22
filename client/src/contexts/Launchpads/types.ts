@@ -7,6 +7,9 @@ export interface Launchpad {
   lpAddress: string
   lpContract: Contract
   lpExplorer: string
+  lpBscAddress: string
+  lpBscContract: Contract
+  lpBscExplorer: string
   tokenAddress: string
   tokenContract: Contract
   tokenExplorer: string
@@ -28,6 +31,7 @@ export interface Launchpad {
   maxTier2: number,
   maxTier3: number,
   access: string,
+  network:string,
   distribution: string,
   startAt: number,
   endAt: number,

@@ -26,6 +26,8 @@ export const INTEGERS = {
   INTEREST_RATE_BASE: new BigNumber('1e18'),
 }
 
+export const ethereumNetwork = 'ethereum';
+export const bscNetwork = 'bsc';
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
@@ -40,6 +42,10 @@ export const contractAddresses = {
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
     42: '0xd0a1e359811322d97991e03f863a0c30c2cf029c' // weth
+  },
+  launchpadBsc: {
+    56: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
   }
 }
 
@@ -113,15 +119,20 @@ export const supportedPools = [
     startDate: "May 18th 2021, 15:00 UTC"
   },
   {
-    pid: 4,
+    pid: 1,
     lpAddresses: {
       1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
+    lpBscAddresses: {
+      56:'0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',//todo update
+      97:'0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+    },
     tokenAddresses: {
-      1: '',
+      1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
+    lpBscExplorer: 'https://testnet.bscscan.com/address/0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',//
     lpExplorer: 'https://bscscan.com/token/',
     name: 'PolkaWar',
     symbol: 'PWAR',
@@ -135,7 +146,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/polkawar.png',
     totalSupply: '1000,000,000 PWAR',
-    total: '32 ETH',//1eth=2k500
+    total: '48 ETH',//1eth=2k500
     ratio: 16666,
     min: 0.16,//400$
     max: 0.24,//500$
@@ -143,19 +154,24 @@ export const supportedPools = [
     maxTier2: 0.2,//500$
     maxTier3: 0.24,//600$
     access: 'Public',
+    network:bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624888800,
+    startAt: 1623420000,
     //startAt: 1523420000,//test
-    endAt: 1624892400,
+    endAt: 1623423600,
     //endAt: 1623219170,
     claimAt: 1624896900,
     startDate: "June 28th 2021"
   },
   {
-    pid: 5,
+    pid: 2,
     lpAddresses: {
       1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    lpBscAddresses: {
+      56:'0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',//todo update
+      97:'0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
       1: '',
@@ -182,6 +198,7 @@ export const supportedPools = [
     maxTier2: 0.2,//500$
     maxTier3: 0.24,//600$
     access: 'Private',
+    network:bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
     startAt: 1624888800,
     //startAt: 1523420000,//test
@@ -221,6 +238,7 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Private',
+    network:ethereumNetwork,
     distribution: 'TBA',
     startAt: 0,
     endAt: 1921147665,
@@ -258,6 +276,7 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Public',
+    network:ethereumNetwork,
     distribution: 'TBA',
     startAt: 0,
     endAt: 1921147665,
@@ -295,6 +314,7 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Public',
+    network:ethereumNetwork,
     distribution: 'June 11th 2021, 16:15 UTC',
     startAt: 1623420000,
     //startAt: 1523420000,//test
@@ -334,6 +354,7 @@ export const supportedPools = [
     maxTier2: 0.16,//400$
     maxTier3: 0.2,//500$
     access: 'Private',
+    network:ethereumNetwork,
     distribution: 'June 11th 2021, 16:15 UTC',
     startAt: 1623420000,
     // startAt: 1523420000,//test
@@ -344,3 +365,5 @@ export const supportedPools = [
   }
 
 ]
+
+export const bscChainIds = [ 56, 97 ]

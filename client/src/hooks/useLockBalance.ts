@@ -2,7 +2,7 @@ import { useCallback, useEffect, useState } from 'react'
 import { provider } from 'web3-core'
 
 import BigNumber from 'bignumber.js'
-import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 import { getEarned, getLockOf, getMasterChefContract } from '../pbr/utils'
 import usePolkaBridge from './usePolkaBridge'

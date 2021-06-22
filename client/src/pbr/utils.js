@@ -6,7 +6,7 @@ import { supportedPools, START_NEW_POOL_AT } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
-import { useWallet } from 'use-wallet';
+
 import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -79,6 +79,9 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
+        lpBscAddress,
+        lpBscContract,
+        lpBscExplorer,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -92,6 +95,7 @@ export const getLaunchpads = (pbr) => {
         maxTier2,
         maxTier3,
         access,
+        network,
         distribution,
         startAt,
         endAt,
@@ -111,6 +115,9 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
+        lpBscAddress,
+        lpBscContract,
+        lpBscExplorer,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -124,6 +131,7 @@ export const getLaunchpads = (pbr) => {
         maxTier2,
         maxTier3,
         access,
+        network,
         distribution,
         startAt,
         endAt,
@@ -389,10 +397,10 @@ export const getIsWhitelist = async (lpContract, pid, account) => {
     const isWhitelist = await lpContract.methods
       .IsWhitelist(account, pid)
       .call()
-
+    console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
     return isWhitelist
   } catch (e) {
-    console.log(e)
+    console.log('getIsWhitelist', e)
     return
   }
 }
@@ -403,6 +411,7 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getWhitelistfo(pid)
       .call({ from: account })
 
+      console.log('getPurchased amount from lpcontarct ', info)
     if (info[5]) {
       return getBalanceNumber(new BigNumber("0"))
     }
@@ -560,8 +569,8 @@ export const getUserStakingData = async (lpContract, pid, account) => {
 
     return stakedData
   } catch (e) {
-    console.log(e)
-    return
+    // console.log(e)
+    return {}
   }
 }
 
@@ -575,10 +584,11 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
     return userInfo
   } catch (e) {
-    console.log(e)
-    return
+    // console.log(e)
+    return {}
   }
 }
+
 
 export const toWei = (tokens) => {
 
@@ -595,3 +605,30 @@ export const fromWei = (tokens) => {
 
   return  Web3.utils.fromWei(tokens, 'ether')
 }
+
+export const getCurrentNetworkId =  () => {
+
+  // if (window.ethereum) {
+  //   const id =  await window.ethereum.networkVersion;
+    
+  //   if (id) {
+  //     return id
+  //   }else{
+  //     const web3 = new Web3(window.web3.currentProvider);
+  //     return await web3.eth.getChainId()
+  //   }
+  // }else{
+
+  //   const infura = currentConnection === 'testnet' ? `https://kovan.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b` : `https://mainnet.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b`;
+    
+  //   web3 = new Web3(new Web3.providers.HttpProvider(infura));
+  //   const web3 = new Web3(window.web3.currentProvider);
+
+  //   return await web3.eth.getChainId()
+  // }
+  try {
+    return window.ethereum.networkVersion
+  } catch (error) {
+      return 1
+  }
+};

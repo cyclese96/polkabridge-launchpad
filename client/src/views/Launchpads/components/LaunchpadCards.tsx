@@ -147,6 +147,13 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               </span>
             </StyledInsight>
             <StyledInsight>
+              <span>Network</span>
+
+              <span style={{ color: '#ff3465' }}>
+                <b>{launchpad.network}</b>
+              </span>
+            </StyledInsight>
+            <StyledInsight>
               <span>Date</span>
 
               <span style={{ color: '#ff3465' }}>

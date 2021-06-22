@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import Button from '../../components/Button'
 import Container from '../../components/Container'

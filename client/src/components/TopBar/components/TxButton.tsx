@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
+// import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import usePendingTransactions from '../../../hooks/usePendingTransactions'
 import Button from '../../Button'
 

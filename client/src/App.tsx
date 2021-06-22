@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { UseWalletProvider } from 'use-wallet'
+import { UseWalletProvider } from '@binance-chain/bsc-use-wallet'
 import DisclaimerModal from './components/DisclaimerModal'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
@@ -14,6 +14,7 @@ import theme from './theme'
 import Launchpads from './views/Launchpads'
 import Home from './views/Home'
 import config from './config'
+import { getCurrentNetworkId } from './pbr/utils'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -50,7 +51,7 @@ const Providers: React.FC = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <UseWalletProvider
-        chainId={config.chainId}
+        chainId={Number(getCurrentNetworkId())}
         connectors={{
           walletconnect: { rpcUrl: config.rpc },
         }}

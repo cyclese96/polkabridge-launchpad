@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 
 import usePolkaBridge from './usePolkaBridge'
-import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 import { unstake, getMasterChefContract } from '../pbr/utils'
 
