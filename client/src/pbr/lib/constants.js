@@ -134,7 +134,7 @@ export const supportedPools = [
     tokenSymbol: 'PWAR',
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/polkawar.png',
-    totalSupply: '1000,000,000 PWAR',
+    totalSupply: '100,000,000 PWAR',
     total: '32 ETH',//1eth=2k500
     ratio: 16666,
     min: 0.16,//400$
@@ -173,7 +173,7 @@ export const supportedPools = [
     tokenSymbol: 'PWAR',
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/polkawar.png',
-    totalSupply: '1000,000,000 PWAR',
+    totalSupply: '100,000,000 PWAR',
     total: '48 ETH',//1eth=2k500
     ratio: 16666,
     min: 0.16,//400$
