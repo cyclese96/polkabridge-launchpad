@@ -7,6 +7,9 @@ import MenuIcon from '../../assets/img/menu.svg'
 
 import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
+import { useEffect } from 'react'
+import useNetwork from '../../hooks/useNetwork'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 interface TopBarProps {
   onPresentMobileMenu: () => void
@@ -14,6 +17,21 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   const [showMenu, setShowMenu] = useState(false)
+  const {chainId, status } = useNetwork() 
+  const { account, connect } = useWallet()
+
+
+  function tryConnect() {
+    connect(localStorage.useWalletConnectType)
+  }
+
+  useEffect(() => {
+    console.log('TopBar:  network id', chainId)
+    console.log('TopBar: status', status)
+    setTimeout( () => {
+      tryConnect()
+    },1000)
+  },[chainId] )
 
   return (
     <StyledTopBar>

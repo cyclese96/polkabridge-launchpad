@@ -15,6 +15,7 @@ import Launchpads from './views/Launchpads'
 import Home from './views/Home'
 import config from './config'
 import { getCurrentNetworkId } from './pbr/utils'
+import useNetwork from './hooks/useNetwork'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -48,11 +49,21 @@ const App: React.FC = () => {
 }
 
 const Providers: React.FC = ({ children }) => {
-  console.log('network id ', getCurrentNetworkId())
+  const {chainId ,changeNetwork, setConnected, status } = useNetwork()
+  
+  useEffect(() => {
+    (async () => {
+      console.log('prev chain id', chainId)
+      const _id =  await getCurrentNetworkId()
+      changeNetwork(_id)
+       console.log('network id ', _id)
+  })();
+    
+  },[chainId,changeNetwork ] )
   return (
     <ThemeProvider theme={theme}>
-      <UseWalletProvider
-        chainId={Number(getCurrentNetworkId())}
+        <UseWalletProvider
+        chainId={chainId}
         connectors={{
           walletconnect: { rpcUrl: config.rpc },
         }}

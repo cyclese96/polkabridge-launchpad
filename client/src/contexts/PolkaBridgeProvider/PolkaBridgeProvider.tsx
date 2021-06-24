@@ -22,7 +22,6 @@ declare global {
 
 const PolkaBridgeProvider: React.FC = ({ children }) => {
   const { ethereum }: { ethereum: any } = useWallet()
-  const temp = useWallet()
   const [pbr, setPolkaBridge] = useState<any>()
 
   // @ts-ignore
@@ -30,7 +29,7 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
   // @ts-ignore
   window.eth = ethereum
 
-  useEffect(() => {
+  const setupConnection = (ethereum:any) => {
     if (ethereum) {
       console.log('using ethereum provider')
       const chainId = Number(ethereum.chainId)
@@ -93,6 +92,10 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
       setPolkaBridge(pbrLib)
       window.pbrsauce = pbrLib
     }
+
+  }
+  useEffect(() => {
+      setupConnection(ethereum)
   }, [ethereum])
 
   return <Context.Provider value={{ pbr }}>{children}</Context.Provider>

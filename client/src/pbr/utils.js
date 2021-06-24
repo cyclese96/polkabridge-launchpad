@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
@@ -610,29 +610,31 @@ export const fromWei = (tokens) => {
   return  Web3.utils.fromWei(tokens, 'ether')
 }
 
-export const getCurrentNetworkId =  () => {
+export const getCurrentNetworkId = async () => {
 
-  // if (window.ethereum) {
-  //   const id =  await window.ethereum.networkVersion;
+  if (isMetaMaskInstalled()) {
+    const id =  await window.ethereum.networkVersion;
     
-  //   if (id) {
-  //     return id
-  //   }else{
-  //     const web3 = new Web3(window.web3.currentProvider);
-  //     return await web3.eth.getChainId()
-  //   }
-  // }else{
+    if (id) {
+      return id
+    }else{
+      const web3 = new Web3(window.web3.currentProvider);
+      return await web3.eth.getChainId()
+    }
+  }else{
 
-  //   const infura = currentConnection === 'testnet' ? `https://kovan.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b` : `https://mainnet.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b`;
-    
-  //   web3 = new Web3(new Web3.providers.HttpProvider(infura));
-  //   const web3 = new Web3(window.web3.currentProvider);
-
-  //   return await web3.eth.getChainId()
-  // }
-  try {
-    return window.ethereum.networkVersion
-  } catch (error) {
-      return 1
+    return config.chainId
   }
 };
+
+export const isMetaMaskInstalled = () => {
+  return typeof window.web3 !== "undefined";
+};
+
+export const getNetworkName = (networkId) => {
+  if ( [56, 97].includes( parseInt(networkId) ) ){
+    return bscNetwork
+  }else{
+    return ethereumNetwork
+  }
+}

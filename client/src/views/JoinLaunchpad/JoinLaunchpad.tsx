@@ -35,7 +35,7 @@ import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 import Modal from '../../components/Modal'
-import { bscNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
 
 interface JoinHistory {
   amount: number
@@ -150,13 +150,13 @@ const JoinLaunchpad: React.FC = () => {
         stakedData,
         userInfo
       ] = await Promise.all([
-        getIsWhitelist( network === bscNetwork ? lpBscContract : lpBscContract, pid, account),
+        getIsWhitelist( network === bscNetwork ? lpBscContract : lpContract, pid, account),
         getETHBalance(ethereum, account),
         getHistory(account),
         getProgress(lpContract, pid),
-        getPurchasesAmount(network === bscNetwork ? lpBscContract : lpBscContract, pid, account),
+        getPurchasesAmount(network === bscNetwork ? lpBscContract : lpContract, pid, account),
         getUserStakingData(lpContract, pid, account),
-        getUserInfo(lpBscContract, pid, account)
+        getUserInfo(network === bscNetwork ? lpBscContract : lpContract, pid, account)
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
@@ -247,6 +247,10 @@ const JoinLaunchpad: React.FC = () => {
     setTokenValue(newTokenValue.toString())
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
+  const networkSymbol = () => {
+    return network === bscNetwork ? 'BNB' : 'ETH';
+  }
+
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -261,7 +265,7 @@ const JoinLaunchpad: React.FC = () => {
           : startAt * 1000 <= new Date().getTime()
             ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
               ? 'Join pool'
-              : 'Min: ' + min + ' ETH - Max: ' + _max + ' ETH'
+              : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
             : progress == new BigNumber('100')
               ? 'Ended'
               : undefined
@@ -374,7 +378,7 @@ const JoinLaunchpad: React.FC = () => {
                   Your staked amount: {stakedAmount + " PBR"}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                Your max purchase: {getMaxValue() + " ETH"}
+                Your max purchase: {getMaxValue() + " "+ networkSymbol()}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -402,11 +406,11 @@ const JoinLaunchpad: React.FC = () => {
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
                           <StyledTokenIcon
-                            src="/img/tokens/eth.png"
+                            src={network === ethereumNetwork ? "/img/tokens/eth.png" : "/img/tokens/bnb.png"}
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
-                        <StyledTokenSymbol>ETH</StyledTokenSymbol>
+                        <StyledTokenSymbol>{networkSymbol()}</StyledTokenSymbol>
                       </StyledTokenGroup>
                     </StyledRow>
                   </StyledInputRow>

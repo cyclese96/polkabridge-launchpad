@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useTokenBalance from '../../../hooks/useTokenBalance'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { getPolkaBridgeAddress } from '../../../pbr/utils'
+import { getNetworkName, getPolkaBridgeAddress } from '../../../pbr/utils'
 import { getBalanceNumber } from '../../../utils/formatBalance'
 import Button from '../../Button'
 import CardIcon from '../../CardIcon'
@@ -21,10 +21,14 @@ import { Link, useHistory } from 'react-router-dom'
 
 import useLockBalance from '../../../hooks/useLockBalance'
 import useUnlock from '../../../hooks/useUnlock'
+import useNetwork from '../../../hooks/useNetwork'
+import { bscNetwork } from '../../../pbr/lib/constants'
+import BigNumber from 'bignumber.js'
 
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, reset, balance } = useWallet()
+  const { account, reset } = useWallet()
+  const {chainId} = useNetwork()
 
   const handleSignOutClick = useCallback(() => {
     onDismiss!()
@@ -35,8 +39,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }, [onDismiss])
 
   const pbr = usePolkaBridge()
-  const pbrBalance = useTokenBalance(getPolkaBridgeAddress(pbr))
-  
+  const {pbrBalance , ether} = useTokenBalance(getPolkaBridgeAddress(pbr))
+  const {ethereum , networkName}  = useWallet()
   
   
   const history = useHistory();
@@ -44,6 +48,13 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const [pendingTx, setPendingTx] = useState(false)
   const { onUnlock } = useUnlock()
 
+  const getTokenSymbol = () => {
+       return getNetworkName(chainId) === bscNetwork ? 'BNB' : 'PBR' 
+  }
+
+  const getCurrBalance = () => {
+      return getNetworkName(chainId) === bscNetwork ? new BigNumber(Number(ether) )  : pbrBalance
+  }
   return (
       <ModalLarge>
         <Modal>
@@ -72,8 +83,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
                                                 Balance <img src={IconView} alt="View"/>
                                             </TextMin>
                                             <TextMedium>
-                                                <strong>{parseFloat(getBalanceNumber(pbrBalance).toFixed(4)).toLocaleString('en-US')}</strong>
-                                                <span>PBR</span>
+                                                <strong>{parseFloat(getBalanceNumber(getCurrBalance()).toFixed(4)).toLocaleString('en-US')}</strong>
+                                                <span>{getTokenSymbol()}</span>
                                             </TextMedium>
                                           
                                         </Col>

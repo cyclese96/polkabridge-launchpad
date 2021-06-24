@@ -24,7 +24,7 @@ const Balances = memo(() => {
   // const totalSupply = useTokenSupply(getPolkaBridgeAddress(pbr))
   let circulatingSupply = useTokenTotalSupply(getPolkaBridgeAddress(pbr))
   const lockedBalance = useTokenBalanceOf(getPolkaBridgeAddress(pbr), "0x6a97eedd28becb3590c19dead324e0fc203dd2a6").plus(useTokenBalanceOf(getPolkaBridgeAddress(pbr), "0x624b06b8452c9bdb8d558b591bf1b6825a133937"))
-  const pbrBalance = useTokenBalance(getPolkaBridgeAddress(pbr))
+  const {pbrBalance} = useTokenBalance(getPolkaBridgeAddress(pbr))
   circulatingSupply = circulatingSupply.minus(lockedBalance)
   const { account, ethereum }: { account: any; ethereum: any } = useWallet()
 
