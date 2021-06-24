@@ -14,14 +14,12 @@ import {
 import * as Types from './types.js'
 
 import Web3 from 'web3'
+import { options } from 'numeral'
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
     this.web3 = web3
     
-    if (options.isBsc){
-      this.web3bsc = new Web3(window.ethereum)
-    }
 
     this.defaultConfirmations = options.defaultConfirmations
     this.autoGasMultiplier = options.autoGasMultiplier || 1.5
@@ -32,11 +30,14 @@ export class Contracts {
 
     this.pbr = new this.web3.eth.Contract(PolkaBridgeAbi)
     this.masterLaunchpad = new this.web3.eth.Contract(LaunchpadAbi)
+  
+    this.web3bsc = new Web3(window.ethereum)
     this.lanchpadBsc = new this.web3bsc.eth.Contract(LanchpadBscAbi)
+    
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
     this.pools = supportedPools.map((pool) => {
-      if (pool.network === bscNetwork) {
+      if (pool.network === bscNetwork ) {
         return Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
           tokenAddress: pool.tokenAddresses[networkId],

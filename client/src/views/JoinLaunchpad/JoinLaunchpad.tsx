@@ -35,6 +35,7 @@ import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 import Modal from '../../components/Modal'
+import { bscNetwork } from '../../pbr/lib/constants'
 
 interface JoinHistory {
   amount: number
@@ -73,6 +74,7 @@ const JoinLaunchpad: React.FC = () => {
     maxTier2,
     maxTier3,
     access,
+    network,
     distribution,
     startAt,
     endAt,
@@ -105,6 +107,7 @@ const JoinLaunchpad: React.FC = () => {
     maxTier2: 0,
     maxTier3: 0,
     access: '',
+    network: '',
     distribution: '',
     startAt: 0,
     endAt: 0,
@@ -133,8 +136,8 @@ const JoinLaunchpad: React.FC = () => {
   const [stakedAmount, setStakedAmount] = useState(0)
   const [tokenPurchased, setTokenPurchased] = useState(0)
   const [isClaimed, setClaimed] = useState(false)
-  const { onJoinPool } = useJoinPool(pid)
-  const { onHarvest } = useHarvest(pid)
+  const { onJoinPool } = useJoinPool(pid, network)
+  const { onHarvest } = useHarvest(pid, network)
 
   useEffect(() => {
     async function fetchData() {
@@ -147,20 +150,21 @@ const JoinLaunchpad: React.FC = () => {
         stakedData,
         userInfo
       ] = await Promise.all([
-        getIsWhitelist(lpBscContract, pid, account),
+        getIsWhitelist( network === bscNetwork ? lpBscContract : lpBscContract, pid, account),
         getETHBalance(ethereum, account),
         getHistory(account),
         getProgress(lpContract, pid),
-        getPurchasesAmount(lpContract, pid, account),
+        getPurchasesAmount(network === bscNetwork ? lpBscContract : lpBscContract, pid, account),
         getUserStakingData(lpContract, pid, account),
-        getUserInfo(lpContract, pid, account)
+        getUserInfo(lpBscContract, pid, account)
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      console.log('stakedData--->  ',stakedData)
-      console.log('userInfo--->  ',userInfo)
-      console.log('newIsWhitelist--->  ',newIsWhitelist)
+      // console.log('stakedData--->  ',stakedData)
+      // console.log('userInfo--->  ',userInfo)
       // console.log('newIsWhitelist--->  ',newIsWhitelist)
+      // console.log('getUserTotalPurchased  ', newPurchasedAmount)
+      // // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -243,7 +247,7 @@ const JoinLaunchpad: React.FC = () => {
     setTokenValue(newTokenValue.toString())
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
-  const getButtonText = () => {
+  const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
     return endAt * 1000 <= new Date().getTime()
@@ -457,7 +461,7 @@ const JoinLaunchpad: React.FC = () => {
 
                 <Button
                   disabled={isButtonDisable()}
-                  text={getButtonText()}
+                  text={getJoinButtonText()}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
@@ -511,7 +515,7 @@ const JoinLaunchpad: React.FC = () => {
                   disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx || isClaimed}
                   text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? (isClaimed ? 'Already claimed' : 'Harvest') : undefined)}
                   onClick={async () => {
-                    if (purchasedAmount > 0) {
+                    if (tokenPurchased > 0) {
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest()
                       setPendingHarvestTx(false)

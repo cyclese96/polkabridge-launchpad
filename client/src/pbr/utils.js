@@ -62,6 +62,10 @@ export const getLaunchpadContract = (pbr) => {
   return pbr && pbr.contracts && pbr.contracts.masterLaunchpad
 }
 
+export const getBscLaunchpadContract = (pbr) => {
+  return pbr && pbr.contracts && pbr.contracts.lanchpadBsc
+}
+
 export const getLaunchpads = (pbr) => {
   return pbr
     ? pbr.contracts.pools.map(

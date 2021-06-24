@@ -48,6 +48,7 @@ const App: React.FC = () => {
 }
 
 const Providers: React.FC = ({ children }) => {
+  console.log('network id ', getCurrentNetworkId())
   return (
     <ThemeProvider theme={theme}>
       <UseWalletProvider
