@@ -265,7 +265,7 @@ const Launchpad: React.FC = () => {
                           Network
                           </StyledTableLabel>
                         <StyledTableValue>
-                          {network || ethereumNetwork}
+                          {network==="bsc"?"Binance Smart Chain":"Ethereum"}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
