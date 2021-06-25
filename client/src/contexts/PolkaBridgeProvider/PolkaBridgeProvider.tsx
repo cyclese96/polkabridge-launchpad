@@ -31,13 +31,13 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
 
   const setupConnection = (ethereum:any) => {
     if (ethereum) {
-      console.log('using ethereum provider')
+      // console.log('using ethereum provider')
       const chainId = Number(ethereum.chainId)
-      console.log('current chain Id  ', chainId)
+      // console.log('current chain Id  ', chainId)
 
       //use infura provider for eth contract and window.ethereum for bsc contract
       if (bscChainIds.includes(chainId)) {
-        console.log('using bsc configurations')
+        // console.log('using bsc configurations')
         const ethChainId  =  config.chainId
         const pbrLib = new PolkaBridge(config.rpc, ethChainId, false, {
           defaultAccount: ethereum.selectedAddress,
@@ -75,7 +75,7 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
      
     }
     else {
-      console.log('using non ethereum provider lol')
+      // console.log('using non ethereum provider lol')
       const chainId = config.chainId
       const pbrLib = new PolkaBridge(config.rpc, chainId, false, {
         defaultAccount: '0x0000000000000000000000000000000000000000',

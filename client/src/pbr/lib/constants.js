@@ -44,7 +44,7 @@ export const contractAddresses = {
     42: '0xd0a1e359811322d97991e03f863a0c30c2cf029c' // weth
   },
   launchpadBsc: {
-    56: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
     97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
   }
 }
@@ -125,13 +125,13 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     lpBscAddresses: {
-      56: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',//todo update
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
       1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
-      56: "0x16153214e683018d5aa318864c8e692b66e16778",
+      56: "0x16153214E683018D5aA318864c8e692b66E16778",
       97: "0x16153214e683018d5aa318864c8e692b66e16778"
     },
     lpBscExplorer: 'https://bscscan.com/address/0x16153214e683018d5aa318864c8e692b66e16778',//
@@ -170,13 +170,13 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     lpBscAddresses: {
-      56: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',//todo update
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
       1: '',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
-      56: "0x16153214e683018d5aa318864c8e692b66e16778",
+      56: "0x16153214E683018D5aA318864c8e692b66E16778",
       97: "0x16153214e683018d5aa318864c8e692b66e16778"
     },
     lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',

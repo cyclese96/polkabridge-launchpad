@@ -392,6 +392,7 @@ export const getProgress = async (lpContract, pid) => {
       }
     }
   } catch (e) {
+    console.log('getProgress: ', e)
     return
   }
 }
@@ -426,7 +427,7 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
 
     return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
-    console.log(e)
+    console.log('getPurchasesAmount', e)
     return
   }
 }
@@ -586,7 +587,7 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
     return userInfo
   } catch (e) {
-    // console.log(e)
+    console.log('getUserInfo ', e)
     return {}
   }
 }

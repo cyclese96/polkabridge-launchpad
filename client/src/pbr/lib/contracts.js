@@ -15,6 +15,7 @@ import * as Types from './types.js'
 
 import Web3 from 'web3'
 import { options } from 'numeral'
+import config from '../../config'
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
@@ -41,7 +42,7 @@ export class Contracts {
         return Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
           tokenAddress: pool.tokenAddresses[networkId],
-          lpBscAddress: pool.lpBscAddresses['97'],//set network id for bsc
+          lpBscAddress: pool.lpBscAddresses['56'],//set network id for current bsc
           lpBscContract: new this.web3bsc.eth.Contract(LanchpadBscAbi),
           lpContract: new this.web3.eth.Contract(LaunchpadAbi),
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
@@ -71,7 +72,7 @@ export class Contracts {
 
     setProvider(this.pbr, contractAddresses.pbr[networkId])
     setProvider(this.masterLaunchpad, contractAddresses.masterLaunchpad[networkId])
-    setProvider(this.lanchpadBsc, contractAddresses.launchpadBsc[97])
+    setProvider(this.lanchpadBsc, contractAddresses.launchpadBsc['56'])//set network id for current bsc
   
     setProvider(this.weth, contractAddresses.weth[networkId])
 
