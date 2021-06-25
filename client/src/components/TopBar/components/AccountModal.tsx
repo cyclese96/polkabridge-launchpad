@@ -40,7 +40,6 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
 
   const pbr = usePolkaBridge()
   const {pbrBalance , ether} = useTokenBalance(getPolkaBridgeAddress(pbr))
-  const {ethereum , networkName}  = useWallet()
   
   
   const history = useHistory();
@@ -52,9 +51,6 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
        return getNetworkName(chainId) === bscNetwork ? 'BNB' : 'PBR' 
   }
 
-  const getCurrBalance = () => {
-      return getNetworkName(chainId) === bscNetwork ? new BigNumber(Number(ether) )  : pbrBalance
-  }
   return (
       <ModalLarge>
         <Modal>
@@ -83,7 +79,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
                                                 Balance <img src={IconView} alt="View"/>
                                             </TextMin>
                                             <TextMedium>
-                                                <strong>{parseFloat(getBalanceNumber(getCurrBalance()).toFixed(4)).toLocaleString('en-US')}</strong>
+                                                <strong>{ getNetworkName(chainId) === bscNetwork ?  parseFloat(ether.toString()).toLocaleString('en-US')  : parseFloat(getBalanceNumber(pbrBalance).toFixed(4)).toLocaleString('en-US')}</strong>
                                                 <span>{getTokenSymbol()}</span>
                                             </TextMedium>
                                           

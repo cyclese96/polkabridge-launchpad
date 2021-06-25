@@ -10,7 +10,7 @@ import { getETHBalance } from '../pbr/utils'
 
 const useTokenBalance = (tokenAddress: string) => {
   const [balance, setBalance] = useState(new BigNumber(0))
-  const [ether, setEthBalance] = useState(new BigNumber(0))
+  const [ether, setEthBalance] = useState(0)
 
   const {
     account,
@@ -21,9 +21,9 @@ const useTokenBalance = (tokenAddress: string) => {
     const balance = await getBalance(ethereum, tokenAddress, account)
     const eth  = await  getETHBalance(ethereum, account)
     setBalance(new BigNumber(balance))
-    setEthBalance(new BigNumber(eth))
+    setEthBalance(eth)
 
-  }, [account, ethereum, tokenAddress])
+  }, [account, ether, tokenAddress])
 
   useEffect(() => {
     const interval = setInterval(async () => {

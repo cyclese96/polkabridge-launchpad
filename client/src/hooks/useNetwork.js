@@ -28,6 +28,7 @@ const useNetwork = () => {
             // console.log('network changed ', networkId)
           setStatus('network changing')
           setChainId(Number(networkId))
+          setStatus('connected')
         });
     }
     

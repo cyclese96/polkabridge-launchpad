@@ -13,6 +13,7 @@ import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
 import { getProgress } from '../../../pbr/utils'
+import { bscNetwork, ethereumNetwork } from '../../../pbr/lib/constants'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
@@ -87,7 +88,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(launchpad.lpContract, launchpad.pid)
+      const newProgress = await getProgress(launchpad.network === bscNetwork ? launchpad.lpBscContract : launchpad.lpContract, launchpad.pid)
       setProgress(newProgress)
     }
     if (launchpad) {
@@ -136,7 +137,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Ratio</span>
 
               <span>
-                <b>1 ETH = {launchpad.ratio} {launchpad.tokenSymbol}</b>
+                <b>1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH' } = {launchpad.ratio} {launchpad.tokenSymbol}</b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -150,7 +151,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Network</span>
 
               <span style={{ color: '#ff3465' }}>
-                <b>{launchpad.network}</b>
+                <b>{launchpad.network || ethereumNetwork}</b>
               </span>
             </StyledInsight>
             <StyledInsight>

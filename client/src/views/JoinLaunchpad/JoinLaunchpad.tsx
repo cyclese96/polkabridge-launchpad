@@ -153,7 +153,7 @@ const JoinLaunchpad: React.FC = () => {
         getIsWhitelist( network === bscNetwork ? lpBscContract : lpContract, pid, account),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(lpContract, pid),
+        getProgress(network === bscNetwork ? lpBscContract : lpContract, pid),
         getPurchasesAmount(network === bscNetwork ? lpBscContract : lpContract, pid, account),
         getUserStakingData(lpContract, pid, account),
         getUserInfo(network === bscNetwork ? lpBscContract : lpContract, pid, account)
@@ -264,7 +264,7 @@ const JoinLaunchpad: React.FC = () => {
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
             ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? 'Join pool'
+              ? tokenPurchased > 0 ? 'Already purchased' : 'Join pool'
               : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
             : progress == new BigNumber('100')
               ? 'Ended'
@@ -282,6 +282,7 @@ const JoinLaunchpad: React.FC = () => {
       pendingTx ||
       !ethValue ||
       !tokenValue ||
+      tokenPurchased > 0 ||
       parseFloat(ethValue) < min ||
       parseFloat(ethValue) > _max
     )

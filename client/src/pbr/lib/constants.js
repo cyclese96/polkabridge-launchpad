@@ -159,8 +159,8 @@ export const supportedPools = [
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
     startAt: 1624378323,//test data
-    endAt: 1724378323,//test data
-    claimAt: 1624378623,//1724378323,//test data
+    endAt: 1624701202,//test data
+    claimAt: 1624701202,//1724378323,//test data
     startDate: "June 28th 2021"
   },
   {

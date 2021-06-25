@@ -401,7 +401,7 @@ export const getIsWhitelist = async (lpContract, pid, account) => {
     const isWhitelist = await lpContract.methods
       .IsWhitelist(account, pid)
       .call()
-    console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
+    // console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
     return isWhitelist
   } catch (e) {
     console.log('getIsWhitelist', e)
@@ -415,7 +415,7 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getWhitelistfo(pid)
       .call({ from: account })
 
-      console.log('getPurchased amount from lpcontarct ', info)
+      // console.log('getPurchased amount from lpcontarct ', info)
     if (info[5]) {
       return getBalanceNumber(new BigNumber("0"))
     }
@@ -565,7 +565,6 @@ export const leave = async (contract, amount, account) => {
 
 export const getUserStakingData = async (lpContract, pid, account) => {
 
-  // getUserStakingData
   try {
     const stakedData = await lpContract.methods
       .getUserStakingData(account, 0)
@@ -580,7 +579,6 @@ export const getUserStakingData = async (lpContract, pid, account) => {
 
 export const getUserInfo = async (lpContract, pid, account) => {
 
-  // getUserStakingData
   try {
     const userInfo = await lpContract.methods
       .getUserInfo(pid,account)
