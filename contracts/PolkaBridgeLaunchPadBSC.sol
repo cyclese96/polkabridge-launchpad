@@ -210,17 +210,27 @@ contract PolkaBridgeLaunchPadBSC is Ownable, ReentrancyGuard {
         //check amount
         uint256 ethAmount = msg.value;
         whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][msg.sender]
-            .TotalETHPurchase
-            .add(ethAmount);
+        .TotalETHPurchase
+        .add(ethAmount);
+        if (pools[poolIndex].Type == 2) {
+            //private
+            require(
+                whitelist[pid][msg.sender].TotalETHPurchase <=
+                    pools[poolIndex].MaxPurchaseTier3,
+                "invalid maximum contribute"
+            );
+        } else {
+            //public
+            require(
+                whitelist[pid][msg.sender].TotalETHPurchase <=
+                    pools[poolIndex].MaxPurchaseTier2,
+                "invalid maximum contribute"
+            );
+        }
 
-        require(
-            whitelist[pid][msg.sender].TotalETHPurchase <=
-                pools[poolIndex].MaxPurchaseTier3,
-            "invalid maximum contribute"
+        uint256 tokenAmount = ethAmount.mul(pools[poolIndex].RatePerETH).div(
+            1e18
         );
-
-        uint256 tokenAmount =
-            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
 
         uint256 remainToken = getRemainIDOToken(pid);
         require(
@@ -232,8 +242,8 @@ contract PolkaBridgeLaunchPadBSC is Ownable, ReentrancyGuard {
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
         ]
-            .TotalTokenPurchase
-            .add(tokenAmount);
+        .TotalTokenPurchase
+        .add(tokenAmount);
 
         pools[poolIndex].TotalSold = pools[poolIndex].TotalSold.add(
             tokenAmount
