@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { HashRouter as Router, Route, Switch } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import { UseWalletProvider } from 'use-wallet'
+import { UseWalletProvider } from '@binance-chain/bsc-use-wallet'
 import DisclaimerModal from './components/DisclaimerModal'
 import MobileMenu from './components/MobileMenu'
 import TopBar from './components/TopBar'
@@ -14,6 +14,8 @@ import theme from './theme'
 import Launchpads from './views/Launchpads'
 import Home from './views/Home'
 import config from './config'
+import { getCurrentNetworkId } from './pbr/utils'
+import useNetwork from './hooks/useNetwork'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -47,10 +49,21 @@ const App: React.FC = () => {
 }
 
 const Providers: React.FC = ({ children }) => {
+  const {chainId ,changeNetwork, setConnected, status } = useNetwork()
+  
+  useEffect(() => {
+    (async () => {
+      console.log('prev chain id', chainId)
+      const _id =  await getCurrentNetworkId()
+      changeNetwork(_id)
+       console.log('network id ', _id)
+  })();
+    
+  },[chainId,changeNetwork ] )
   return (
     <ThemeProvider theme={theme}>
-      <UseWalletProvider
-        chainId={config.chainId}
+        <UseWalletProvider
+        chainId={chainId}
         connectors={{
           walletconnect: { rpcUrl: config.rpc },
         }}

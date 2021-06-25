@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
 import { provider } from 'web3-core'
 import Button from '../../components/Button'
 import Container from '../../components/Container'
@@ -14,12 +13,14 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getProgress } from '../../pbr/utils'
+import { getMasterChefContract, getNetworkName, getProgress } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
 import { Contract } from 'web3-eth-contract';
 import { white } from '../../theme/colors'
+import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
+import useNetwork from '../../hooks/useNetwork'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = (useParams() as any)
@@ -36,6 +37,8 @@ const Launchpad: React.FC = () => {
     whitepaper,
     lpAddress,
     lpContract,
+    lpBscAddress,
+    lpBscContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -45,7 +48,11 @@ const Launchpad: React.FC = () => {
     ratio,
     min,
     max,
+    maxTier1,
+    maxTier2,
+    maxTier3,
     access,
+    network,
     distribution,
     startAt,
     endAt,
@@ -64,6 +71,8 @@ const Launchpad: React.FC = () => {
     whitepaper: '',
     lpAddress: '',
     lpContract: null,
+    lpBscAddress: '' ,
+    lpBscContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -73,7 +82,11 @@ const Launchpad: React.FC = () => {
     ratio: 0,
     min: 0,
     max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: '',
+    network: '' ,
     distribution: '',
     startAt: 0,
     endAt: 0,
@@ -88,9 +101,12 @@ const Launchpad: React.FC = () => {
   const pbr = usePolkaBridge()
   const [progress, setProgress] = useState<BigNumber>()
 
+  const history = useHistory()
+  const {chainId} = useNetwork()
+
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(lpContract, pid)
+      const newProgress = await getProgress(network === bscNetwork ? lpBscContract : lpContract, pid)
       setProgress(newProgress)
     }
     if (pid >= 0) {
@@ -109,6 +125,19 @@ const Launchpad: React.FC = () => {
         {days}D:{hours}H:{minutes}m:{seconds}s
       </span>
     )
+  }
+
+  const netWorkTokenSymbol = () => {
+      return network === bscNetwork ? 'BNB' : 'ETH'
+  }
+
+  const handleJoinPool = () => {
+      const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+      if ( getNetworkName(chainId) !== network  ) {
+        alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+        return
+      }
+      history.push(`/launchpads/join/${launchpadId}/${poolId}`)
   }
 
   return (
@@ -143,7 +172,8 @@ const Launchpad: React.FC = () => {
               <Button
                 disabled={startAt * 1000 > new Date().getTime()}
                 text={(startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
-                to={`/launchpads/join/${launchpadId}/${poolId}`}
+                onClick = { handleJoinPool} 
+                // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -206,10 +236,10 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          Min - Max Allocation
+                          {access === 'Public' ? 'Allocation' : 'Min - Max Allocation' } 
                       </StyledTableLabel>
                         <StyledTableValue>
-                          {min} ETH - {max} ETH
+                          {access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -227,6 +257,20 @@ const Launchpad: React.FC = () => {
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
+
+                  <StyledTableRow>
+                    <StyledTableBodyCell>
+                      <StyledTableText>
+                        <StyledTableLabel>
+                          Network
+                          </StyledTableLabel>
+                        <StyledTableValue>
+                          {network==="bsc"?"Binance Smart Chain":"Ethereum"}
+                        </StyledTableValue>
+                      </StyledTableText>
+                    </StyledTableBodyCell>
+                  </StyledTableRow>
+
                 </StyledTableBody>
               </StyledTable>
             </StyledBox>

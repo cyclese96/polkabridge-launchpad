@@ -2,11 +2,11 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
-import { useWallet } from 'use-wallet';
+
 import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
@@ -62,6 +62,10 @@ export const getLaunchpadContract = (pbr) => {
   return pbr && pbr.contracts && pbr.contracts.masterLaunchpad
 }
 
+export const getBscLaunchpadContract = (pbr) => {
+  return pbr && pbr.contracts && pbr.contracts.lanchpadBsc
+}
+
 export const getLaunchpads = (pbr) => {
   return pbr
     ? pbr.contracts.pools.map(
@@ -79,6 +83,9 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
+        lpBscAddress,
+        lpBscContract,
+        lpBscExplorer,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -92,6 +99,7 @@ export const getLaunchpads = (pbr) => {
         maxTier2,
         maxTier3,
         access,
+        network,
         distribution,
         startAt,
         endAt,
@@ -111,6 +119,9 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
+        lpBscAddress,
+        lpBscContract,
+        lpBscExplorer,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -124,6 +135,7 @@ export const getLaunchpads = (pbr) => {
         maxTier2,
         maxTier3,
         access,
+        network,
         distribution,
         startAt,
         endAt,
@@ -389,10 +401,10 @@ export const getIsWhitelist = async (lpContract, pid, account) => {
     const isWhitelist = await lpContract.methods
       .IsWhitelist(account, pid)
       .call()
-
+    // console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
     return isWhitelist
   } catch (e) {
-    console.log(e)
+    console.log('getIsWhitelist', e)
     return
   }
 }
@@ -403,6 +415,7 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getWhitelistfo(pid)
       .call({ from: account })
 
+      // console.log('getPurchased amount from lpcontarct ', info)
     if (info[5]) {
       return getBalanceNumber(new BigNumber("0"))
     }
@@ -552,7 +565,6 @@ export const leave = async (contract, amount, account) => {
 
 export const getUserStakingData = async (lpContract, pid, account) => {
 
-  // getUserStakingData
   try {
     const stakedData = await lpContract.methods
       .getUserStakingData(account, 0)
@@ -560,14 +572,13 @@ export const getUserStakingData = async (lpContract, pid, account) => {
 
     return stakedData
   } catch (e) {
-    console.log(e)
-    return
+    // console.log(e)
+    return {}
   }
 }
 
 export const getUserInfo = async (lpContract, pid, account) => {
 
-  // getUserStakingData
   try {
     const userInfo = await lpContract.methods
       .getUserInfo(pid,account)
@@ -575,10 +586,11 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
     return userInfo
   } catch (e) {
-    console.log(e)
-    return
+    // console.log(e)
+    return {}
   }
 }
+
 
 export const toWei = (tokens) => {
 
@@ -594,4 +606,33 @@ export const fromWei = (tokens) => {
   }
 
   return  Web3.utils.fromWei(tokens, 'ether')
+}
+
+export const getCurrentNetworkId = async () => {
+
+  if (isMetaMaskInstalled()) {
+    const id =  await window.ethereum.networkVersion;
+    
+    if (id) {
+      return id
+    }else{
+      const web3 = new Web3(window.web3.currentProvider);
+      return await web3.eth.getChainId()
+    }
+  }else{
+
+    return config.chainId
+  }
+};
+
+export const isMetaMaskInstalled = () => {
+  return typeof window.web3 !== "undefined";
+};
+
+export const getNetworkName = (networkId) => {
+  if ( [56, 97].includes( parseInt(networkId) ) ){
+    return bscNetwork
+  }else{
+    return ethereumNetwork
+  }
 }

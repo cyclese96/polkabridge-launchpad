@@ -1,9 +1,10 @@
 import React, { createContext, useEffect, useState } from 'react'
 
-import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import config from '../../config'
 
 import { PolkaBridge } from '../../pbr'
+import { bscChainIds } from '../../pbr/lib/constants'
 
 export interface PolkaBridgeContext {
   pbr?: typeof PolkaBridge
@@ -28,29 +29,61 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
   // @ts-ignore
   window.eth = ethereum
 
-  useEffect(() => {
+  const setupConnection = (ethereum:any) => {
     if (ethereum) {
+      console.log('using ethereum provider')
       const chainId = Number(ethereum.chainId)
-      const pbrLib = new PolkaBridge(ethereum, chainId, false, {
-        defaultAccount: ethereum.selectedAddress,
-        defaultConfirmations: 1,
-        autoGasMultiplier: 1.5,
-        testing: false,
-        defaultGas: '200',
-        defaultGasPrice: '250000',
-        accounts: [],
-        ethereumNodeTimeout: 10000,
-      })
-      setPolkaBridge(pbrLib)
-      window.pbrsauce = pbrLib
+      console.log('current chain Id  ', chainId)
+
+      //use infura provider for eth contract and window.ethereum for bsc contract
+      if (bscChainIds.includes(chainId)) {
+        console.log('using bsc configurations')
+        const ethChainId  =  config.chainId
+        const pbrLib = new PolkaBridge(config.rpc, ethChainId, false, {
+          defaultAccount: ethereum.selectedAddress,
+          defaultConfirmations: 1,
+          autoGasMultiplier: 1.5,
+          testing: false,
+          isBsc: true,
+          infuraProvider: config.rpc,
+          defaultGas: '200',
+          defaultGasPrice: '250000',
+          accounts: [],
+          ethereumNodeTimeout: 10000,
+        })
+        setPolkaBridge(pbrLib)
+        window.pbrsauce = pbrLib
+
+      }else{
+
+        const pbrLib = new PolkaBridge(ethereum, chainId, false, {
+          defaultAccount: ethereum.selectedAddress,
+          defaultConfirmations: 1,
+          autoGasMultiplier: 1.5,
+          testing: false,
+          isBsc: false,
+          infuraProvider: config.rpc,
+          defaultGas: '200',
+          defaultGasPrice: '250000',
+          accounts: [],
+          ethereumNodeTimeout: 10000,
+        })
+        setPolkaBridge(pbrLib)
+        window.pbrsauce = pbrLib
+        
+      }
+     
     }
     else {
+      console.log('using non ethereum provider lol')
       const chainId = config.chainId
       const pbrLib = new PolkaBridge(config.rpc, chainId, false, {
         defaultAccount: '0x0000000000000000000000000000000000000000',
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,
         testing: false,
+        isBsc: false,
+        infuraProvider:config.rpc,
         defaultGas: '200',
         defaultGasPrice: '250000',
         accounts: [],
@@ -59,6 +92,10 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
       setPolkaBridge(pbrLib)
       window.pbrsauce = pbrLib
     }
+
+  }
+  useEffect(() => {
+      setupConnection(ethereum)
   }, [ethereum])
 
   return <Context.Provider value={{ pbr }}>{children}</Context.Provider>

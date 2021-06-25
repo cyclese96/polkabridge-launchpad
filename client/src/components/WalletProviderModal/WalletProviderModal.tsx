@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { useWallet } from 'use-wallet'
+// import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
 import walletConnectLogo from '../../assets/img/wallet-connect.svg'
@@ -17,7 +18,7 @@ import Spacer from '../Spacer'
 import WalletCard from './components/WalletCard'
 
 const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, connect } = useWallet()
+  const { account, connect, status , error} = useWallet()
 
   useEffect(() => {
     if (account) {
@@ -29,6 +30,8 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }, [account, onDismiss])
 
   function tryConnect(type: any) {
+    console.log('account ', account)
+    console.log('status ', {status,error} )
     if (type == 'injected') {
       localStorage.useWalletConnectType = type
       localStorage.useWalletConnectStatus = 'pending'

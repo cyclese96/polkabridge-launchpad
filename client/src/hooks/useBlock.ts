@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react'
 import Web3 from 'web3'
 import { provider } from 'web3-core'
-import { useWallet } from 'use-wallet'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 import config from '../config'
 import axios from 'axios'
 // import debounce from 'debounce'

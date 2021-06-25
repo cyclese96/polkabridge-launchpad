@@ -1,7 +1,7 @@
 import {useCallback} from 'react'
 
 import usePolkaBridge from './usePolkaBridge'
-import {useWallet} from 'use-wallet'
+import {useWallet} from '@binance-chain/bsc-use-wallet'
 import {provider} from 'web3-core'
 import {
   approve,
