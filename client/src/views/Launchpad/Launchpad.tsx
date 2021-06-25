@@ -236,10 +236,10 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          Min - Max Allocation
+                          {access === 'Public' ? 'Allocation' : 'Min - Max Allocation' } 
                       </StyledTableLabel>
                         <StyledTableValue>
-                          {access === 'Public' ? maxTier2 : min} {netWorkTokenSymbol()} - {max} {netWorkTokenSymbol()}
+                          {access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

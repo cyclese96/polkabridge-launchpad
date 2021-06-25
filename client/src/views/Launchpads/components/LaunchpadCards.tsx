@@ -151,7 +151,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Network</span>
 
               <span style={{ color: '#ff3465' }}>
-                <b>{launchpad.network || ethereumNetwork}</b>
+                <b>{launchpad.network==="bsc"?"Binance Smart Chain":"Ethereum"}</b>
               </span>
             </StyledInsight>
             <StyledInsight>
