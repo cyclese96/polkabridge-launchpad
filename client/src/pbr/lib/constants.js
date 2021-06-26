@@ -129,8 +129,8 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
-      1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
-      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      42: '0x16153214e683018d5aa318864c8e692b66e16778',
       56: "0x16153214E683018D5aA318864c8e692b66E16778",
       97: "0x16153214e683018d5aa318864c8e692b66e16778"
     },
@@ -158,9 +158,9 @@ export const supportedPools = [
     access: 'Public',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624378323,//test data
-    endAt: 1624636245,//test data
-    claimAt: 1624636245,//1724378323,//test data
+    startAt: 1624888800,//test data
+    endAt: 1624892400,//test data
+    claimAt: 1624896900,//1724378323,//test data
     startDate: "June 28th 2021"
   },
   {
@@ -174,8 +174,8 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
-      1: '',
-      42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+      1: '0x16153214e683018d5aa318864c8e692b66e16778',
+      42: '0x16153214e683018d5aa318864c8e692b66e16778',
       56: "0x16153214E683018D5aA318864c8e692b66E16778",
       97: "0x16153214e683018d5aa318864c8e692b66e16778"
     },
@@ -202,9 +202,9 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624378323,//test data
-    endAt: 1624636245,//test data
-    claimAt: 1624636245,//test data
+    startAt: 1624888800,//test data
+    endAt: 1624892400,//test data
+    claimAt: 1624896900,//test data
     startDate: "June 28th 2021"
   },
   {
