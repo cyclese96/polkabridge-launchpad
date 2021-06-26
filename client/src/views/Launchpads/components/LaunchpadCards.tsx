@@ -12,8 +12,10 @@ import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { getProgress } from '../../../pbr/utils'
+import { getNetworkName, getProgress } from '../../../pbr/utils'
 import { bscNetwork, ethereumNetwork } from '../../../pbr/lib/constants'
+import { useHistory } from 'react-router-dom'
+import useNetwork from '../../../hooks/useNetwork'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
@@ -83,6 +85,8 @@ interface LaunchpadCardProps {
 const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const poolActive = usePoolActive(launchpad.startAt)
   const pbr = usePolkaBridge()
+  const history = useHistory()
+  const {chainId} = useNetwork()
 
   const [progress, setProgress] = useState<BigNumber>()
 
@@ -107,6 +111,15 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
         {days}D:{hours}H:{minutes}m:{seconds}s
       </span>
     )
+  }
+
+  const handleLaunchpadClick = (launchpad : any) => {
+    const _networkName = launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+    if ( getNetworkName(chainId) !== launchpad.network  ) {
+      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      return
+    }
+    history.push(`/launchpads/view/${launchpad.id}/${launchpad.pid}`)
   }
 
   return (
@@ -179,7 +192,8 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               // disabled={!poolActive || progress == new BigNumber("100")}
               // text={poolActive ? 'View' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
               text='View'
-              to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
+              onClick = {() => handleLaunchpadClick(launchpad)}
+              // to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
             >
               {/* {!poolActive && (
                 <Countdown

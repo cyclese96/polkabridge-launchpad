@@ -13,7 +13,7 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { getMasterChefContract, getNetworkName, getProgress } from '../../pbr/utils'
+import { fromWei, getMasterChefContract, getNetworkName, getProgress, getUserStakingData } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
@@ -21,6 +21,7 @@ import { Contract } from 'web3-eth-contract';
 import { white } from '../../theme/colors'
 import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = (useParams() as any)
@@ -100,6 +101,8 @@ const Launchpad: React.FC = () => {
 
   const pbr = usePolkaBridge()
   const [progress, setProgress] = useState<BigNumber>()
+  const [stakedAmount, setStakedAmount] = useState(0)
+  const { ethereum, account } = useWallet()
 
   const history = useHistory()
   const {chainId} = useNetwork()
@@ -107,12 +110,16 @@ const Launchpad: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       const newProgress = await getProgress(network === bscNetwork ? lpBscContract : lpContract, pid)
+      const stakeData   = await getUserStakingData(lpContract, pid, account)
+      
       setProgress(newProgress)
+      setStakedAmount(stakeData ? Number(fromWei(stakeData.amount)) : 0)
     }
     if (pid >= 0) {
       fetchData()
     }
-  }, [pid, lpContract, setProgress])
+  }, [pid, lpContract, setProgress, stakedAmount, setStakedAmount])
+
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -131,13 +138,31 @@ const Launchpad: React.FC = () => {
       return network === bscNetwork ? 'BNB' : 'ETH'
   }
 
+  const showNetworkAlert  = () => {
+    const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+      if ( getNetworkName(chainId) !== network  ) {
+        alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      }
+  }
   const handleJoinPool = () => {
       const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
       if ( getNetworkName(chainId) !== network  ) {
         alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
-        return
+        // return
       }
       history.push(`/launchpads/join/${launchpadId}/${poolId}`)
+  }
+
+  const getMaxValue = () => {
+    let maxValue = 0
+    if (stakedAmount >= 500 && stakedAmount < 3000) {
+      maxValue = maxTier1
+    } else if (stakedAmount >= 3000 && stakedAmount < 5000) {
+      maxValue = maxTier2
+    } else if (stakedAmount >= 5000) {
+      maxValue = maxTier3
+    }
+    return maxValue
   }
 
   return (
@@ -167,6 +192,21 @@ const Launchpad: React.FC = () => {
               </StyledSocialMedia>
             </StyledBox>
           </StyledInfo>
+
+          {access === "Private" ? (
+            <StyledBox className="col-10">
+              <StyledCenterRow>
+                <StyledInfoLabel>
+                  Your staked amount: {stakedAmount + " PBR"}
+                </StyledInfoLabel>
+                <StyledInfoLabel>
+                Your max purchase: {getMaxValue() + " "+ netWorkTokenSymbol()}
+                </StyledInfoLabel>
+              </StyledCenterRow>
+            </StyledBox>
+          ) : ""}
+
+
           <StyledInfo>
             <StyledBox className="col-4">
               <Button
@@ -476,6 +516,28 @@ const StyledTableValue = styled.span`
   text-align: right;
   color: #ffffff;
   word-break: break-all;
+`
+const StyledCenterRow = styled.div`
+  // display: -webkit-box;
+  // display: -ms-flexbox;
+  display: flex;
+  
+  -webkit-box-pack: justify;
+  // -ms-flex-pack: justify;
+  justify-content: center;
+  -webkit-box-align: center;
+  // -ms-flex-align: center;
+  align-items: center;
+`
+
+const StyledInfoLabel = styled.div`
+  margin-top: 30px;
+  text-align: center;
+  width: 100%;
+  margin-bottom: 25px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #ffffff;
 `
 
 export default Launchpad
