@@ -537,7 +537,7 @@ const StyledInfoLabel = styled.div`
   margin-bottom: 25px;
   font-weight: 400;
   font-size: 13px;
-  color: #ffffff;
+  color: #ffff4e;
 `
 
 export default Launchpad
