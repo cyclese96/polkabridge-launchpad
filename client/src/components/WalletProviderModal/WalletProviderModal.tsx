@@ -16,9 +16,11 @@ import ModalTitle from '../ModalTitle'
 import Spacer from '../Spacer'
 
 import WalletCard from './components/WalletCard'
+import useNetwork from '../../hooks/useNetwork'
 
 const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, connect, status , error} = useWallet()
+  const {chainId} = useNetwork()
 
   useEffect(() => {
     if (account) {
@@ -30,6 +32,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }, [account, onDismiss])
 
   function tryConnect(type: any) {
+    console.log('chain id', chainId )
     console.log('account ', account)
     console.log('status ', {status,error} )
     if (type == 'injected') {

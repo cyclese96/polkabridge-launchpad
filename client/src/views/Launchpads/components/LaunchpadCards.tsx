@@ -16,6 +16,7 @@ import { getNetworkName, getProgress } from '../../../pbr/utils'
 import { bscNetwork, ethereumNetwork } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
+import { isMobile } from 'react-device-detect'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
@@ -115,7 +116,10 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const handleLaunchpadClick = (launchpad : any) => {
     const _networkName = launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
-    if ( getNetworkName(chainId) !== launchpad.network  ) {
+    // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
+    // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
+    if ( getNetworkName( isMobile ? localStorage.chainId : chainId) !== launchpad.network  ) {
+      // alert(`Your networ: ${_yourNetwork} `)
       alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
       return
     }

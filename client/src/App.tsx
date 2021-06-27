@@ -14,8 +14,9 @@ import theme from './theme'
 import Launchpads from './views/Launchpads'
 import Home from './views/Home'
 import config from './config'
-import { getCurrentNetworkId } from './pbr/utils'
+import { getCurrentAccount, getCurrentNetworkId } from './pbr/utils'
 import useNetwork from './hooks/useNetwork'
+import {isMobile } from 'react-device-detect'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -53,10 +54,15 @@ const Providers: React.FC = ({ children }) => {
   
   useEffect(() => {
     (async () => {
-      console.log('prev chain id', chainId)
+      if (isMobile) {
+        //enable window.ethereum for mobile device
+        const account = await getCurrentAccount()
+      }
+      console.log('prev  id', chainId)
       const _id =  await getCurrentNetworkId()
+      console.log('network id ', _id)
       changeNetwork(_id)
-       console.log('network id ', _id)
+      localStorage.chainId = _id
   })();
     
   },[chainId,changeNetwork ] )

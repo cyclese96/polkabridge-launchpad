@@ -611,19 +611,38 @@ export const fromWei = (tokens) => {
 
 export const getCurrentNetworkId = async () => {
 
-  if (isMetaMaskInstalled()) {
+  if (window.ethereum) {
     const id =  await window.ethereum.networkVersion;
     
     if (id) {
       return id
-    }else{
-      const web3 = new Web3(window.web3.currentProvider);
-      return await web3.eth.getChainId()
+    }else {
+      try {
+        const web3 = new Web3(window.web3.currentProvider);
+        return await web3.eth.getChainId()
+      } catch (error) {
+        
+        return config.chainId  
+      }
     }
   }else{
 
     return config.chainId
   }
+};
+
+export const getCurrentAccount = async () => {
+  let accounts = [];
+  
+  try {
+    accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
+    const accountAddress = accounts.length > 0 ? accounts[0] : null;
+    return accountAddress
+  } catch (error) {
+    console.log('getAccounts', error)
+    return error;
+  }
+
 };
 
 export const isMetaMaskInstalled = () => {
