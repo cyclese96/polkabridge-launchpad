@@ -241,7 +241,7 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onMax = useCallback(() => {
-    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+    const _max = access === 'Public' ? maxTier2 : maxTier2
     let newTokenValue = _max * ratio
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
@@ -252,14 +252,14 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const getJoinButtonText = () => {
-    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+    const _max = access === 'Public' ? maxTier2 : maxTier2
 
     return endAt * 1000 <= new Date().getTime()
       ? 'Ended'
       : pendingTx
         ? 'Pending Confirmation'
         : !isWhitelist
-          ? access === 'Public'
+          ? access === 'Public' || 'Private'
             ? 'You are not whitelisted'
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
@@ -272,7 +272,7 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const isButtonDisable = () => {
-    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+    const _max = access === 'Public' || 'Private' ? maxTier2 : getMaxValue()
 
     return (
       startAt * 1000 > new Date().getTime() ||
@@ -372,7 +372,7 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === "Private" ? (
+          {access === "Private_" ? (
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
