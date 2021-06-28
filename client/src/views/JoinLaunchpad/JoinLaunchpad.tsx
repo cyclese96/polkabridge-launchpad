@@ -282,7 +282,6 @@ const JoinLaunchpad: React.FC = () => {
       pendingTx ||
       !ethValue ||
       !tokenValue ||
-      tokenPurchased > 0 ||
       parseFloat(ethValue) < min ||
       parseFloat(ethValue) > _max
     )
