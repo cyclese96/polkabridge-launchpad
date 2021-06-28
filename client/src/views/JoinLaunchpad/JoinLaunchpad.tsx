@@ -264,7 +264,7 @@ const JoinLaunchpad: React.FC = () => {
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
             ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? tokenPurchased > 0 ? 'Already purchased' : 'Join pool'
+              ? 'Join pool'
               : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
             : progress == new BigNumber('100')
               ? 'Ended'
