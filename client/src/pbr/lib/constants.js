@@ -152,9 +152,9 @@ export const supportedPools = [
     totalSupply: '100,000,000 PWAR',
     total: '433.3 BNB',//1BNB=300$
     ratio: 2000,
-    min: 1.33,//400$
+    min: 1,//300$
     max: 2.66,//800$
-    maxTier1: 1.33,//400$
+    maxTier1: 1,//300$
     maxTier2: 2,//600$
     maxTier3: 2.66,//800$
     access: 'Public',
@@ -196,9 +196,9 @@ export const supportedPools = [
     totalSupply: '100,000,000 PWAR',
     total: '566.6 BNB',//1BNB=300$
     ratio: 2000,
-    min: 1.33,//400$
+    min: 1,//300$
     max: 2.66,//800$
-    maxTier1: 1.33,//400$
+    maxTier1: 1,//300$
     maxTier2: 2,//600$
     maxTier3: 2.66,//800$
     access: 'Private',
