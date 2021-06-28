@@ -78,6 +78,7 @@ export const supportedPools = [
     min: 0.1, // 215$
     max: 0.233, // 500$ , 0.28 600$
     access: 'Private',
+    network: ethereumNetwork,
     distribution: 'April 13th 2021, 18:00 UTC',
     startAt: 1618329600,
     endAt: 1618333140,
@@ -112,6 +113,7 @@ export const supportedPools = [
     min: 0.1,
     max: 0.1176,
     access: 'Private',
+    network: ethereumNetwork,
     distribution: 'May 24th 2021, 21:00 UTC',
     startAt: 1621350000,
     endAt: 1621353600,

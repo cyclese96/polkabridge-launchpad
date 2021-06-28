@@ -62,6 +62,11 @@ const Providers: React.FC = ({ children }) => {
       const _id =  await getCurrentNetworkId()
       console.log('network id ', _id)
       changeNetwork(_id)
+      if (Number(_id) !== Number(chainId)) {
+        if(isMobile) {
+          window.location.reload()
+        }
+      }
       localStorage.chainId = _id
   })();
     
