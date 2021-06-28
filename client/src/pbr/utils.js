@@ -393,7 +393,11 @@ export const getProgress = async (lpContract, pid) => {
     }
   } catch (e) {
     console.log('getProgress: ', e)
-     return  new BigNumber(100)
+      if ([1, 2, -1, -2, 8, 9].includes(pid) ) {
+        return  new BigNumber(100)
+      }else{
+        return
+      }
   }
 }
 
