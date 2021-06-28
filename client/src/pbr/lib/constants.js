@@ -152,16 +152,16 @@ export const supportedPools = [
     totalSupply: '100,000,000 PWAR',
     total: '433.3 BNB',//1BNB=300$
     ratio: 2000,
-    min: 1.33,//400$
+    min: 1,//300$
     max: 2.66,//800$
-    maxTier1: 1.33,//400$
+    maxTier1: 1,//300$
     maxTier2: 2,//600$
     maxTier3: 2.66,//800$
     access: 'Public',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624888815,//test data
-    endAt: 1624892400,//test data
+    startAt: 1624894215,//test data
+    endAt: 1624896000,//test data
     claimAt: 1624896900,//1724378323,//test data
     startDate: "June 28th 2021"
   },
@@ -196,16 +196,16 @@ export const supportedPools = [
     totalSupply: '100,000,000 PWAR',
     total: '566.6 BNB',//1BNB=300$
     ratio: 2000,
-    min: 1.33,//400$
+    min: 1,//300$
     max: 2.66,//800$
-    maxTier1: 1.33,//400$
+    maxTier1: 1,//300$
     maxTier2: 2,//600$
     maxTier3: 2.66,//800$
     access: 'Private',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624888815,//test data
-    endAt: 1624892400,//test data
+    startAt: 1624894215,//test data
+    endAt: 1624896000,//test data
     claimAt: 1624896900,//test data
     startDate: "June 28th 2021"
   },
