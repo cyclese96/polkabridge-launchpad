@@ -393,7 +393,7 @@ export const getProgress = async (lpContract, pid) => {
     }
   } catch (e) {
     console.log('getProgress: ', e)
-    return
+     return  new BigNumber(100)
   }
 }
 
