@@ -388,7 +388,7 @@ export const getProgress = async (lpContract, pid) => {
       let remain = new BigNumber(remainToken);
       let total = new BigNumber(totalToken);
       if (total > 0) {
-        return total.minus(remain).div(total).times(100)
+        return  new BigNumber(100) //total.minus(remain).div(total).times(100)
       }
     }
   } catch (e) {
