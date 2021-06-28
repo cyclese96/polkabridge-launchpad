@@ -160,8 +160,8 @@ export const supportedPools = [
     access: 'Public',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624888815,//test data
-    endAt: 1624892400,//test data
+    startAt: 1624894215,//test data
+    endAt: 1624896000,//test data
     claimAt: 1624896900,//1724378323,//test data
     startDate: "June 28th 2021"
   },
@@ -204,8 +204,8 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624888815,//test data
-    endAt: 1624892400,//test data
+    startAt: 1624894215,//test data
+    endAt: 1624896000,//test data
     claimAt: 1624896900,//test data
     startDate: "June 28th 2021"
   },
