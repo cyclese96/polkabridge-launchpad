@@ -388,16 +388,16 @@ export const getProgress = async (lpContract, pid) => {
       let remain = new BigNumber(remainToken);
       let total = new BigNumber(totalToken);
       if (total > 0) {
-        return  new BigNumber(100) //total.minus(remain).div(total).times(100)
+        return new BigNumber(100) //total.minus(remain).div(total).times(100)
       }
     }
   } catch (e) {
     console.log('getProgress: ', e)
-      if ([1, 2, -1, -2, 8, 9].includes(pid) ) {
-        return  new BigNumber(100)
-      }else{
-        return
-      }
+    if (pid < 0) {
+      return new BigNumber(100)
+    } else {
+      return
+    }
   }
 }
 
@@ -420,7 +420,7 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getWhitelistfo(pid)
       .call({ from: account })
 
-      // console.log('getPurchased amount from lpcontarct ', info)
+    // console.log('getPurchased amount from lpcontarct ', info)
     if (info[5]) {
       return getBalanceNumber(new BigNumber("0"))
     }
@@ -586,7 +586,7 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
   try {
     const userInfo = await lpContract.methods
-      .getUserInfo(pid,account)
+      .getUserInfo(pid, account)
       .call()
 
     return userInfo
@@ -610,26 +610,26 @@ export const fromWei = (tokens) => {
     tokens = '0'
   }
 
-  return  Web3.utils.fromWei(tokens, 'ether')
+  return Web3.utils.fromWei(tokens, 'ether')
 }
 
 export const getCurrentNetworkId = async () => {
 
   if (window.ethereum) {
-    const id =  await window.ethereum.networkVersion;
-    
+    const id = await window.ethereum.networkVersion;
+
     if (id) {
       return id
-    }else {
+    } else {
       try {
         const web3 = new Web3(window.web3.currentProvider);
         return await web3.eth.getChainId()
       } catch (error) {
-        
-        return config.chainId  
+
+        return config.chainId
       }
     }
-  }else{
+  } else {
 
     return config.chainId
   }
@@ -637,7 +637,7 @@ export const getCurrentNetworkId = async () => {
 
 export const getCurrentAccount = async () => {
   let accounts = [];
-  
+
   try {
     accounts = await window.ethereum.request({ method: "eth_requestAccounts" });
     const accountAddress = accounts.length > 0 ? accounts[0] : null;
@@ -654,9 +654,9 @@ export const isMetaMaskInstalled = () => {
 };
 
 export const getNetworkName = (networkId) => {
-  if ( [56, 97].includes( parseInt(networkId) ) ){
+  if ([56, 97].includes(parseInt(networkId))) {
     return bscNetwork
-  }else{
+  } else {
     return ethereumNetwork
   }
 }

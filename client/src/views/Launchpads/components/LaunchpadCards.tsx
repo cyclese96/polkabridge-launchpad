@@ -24,7 +24,7 @@ const LaunchpadCards: React.FC = () => {
   const rows = launchpads.reduce<Launchpad[][]>(
     (launchpadRows, launchpad, i) => {
       const newLaunchpadRows = [...launchpadRows]
-      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 2) {
+      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 3) {
         newLaunchpadRows.push([launchpad])
       } else {
         newLaunchpadRows[newLaunchpadRows.length - 1].push(launchpad)

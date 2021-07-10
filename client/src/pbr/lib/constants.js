@@ -36,7 +36,7 @@ export const contractAddresses = {
     42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0'
   },
   masterLaunchpad: {
-    1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+    1: '',
     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD' // launchpad contract
   },
   weth: {
@@ -53,7 +53,7 @@ export const supportedPools = [
   {
     pid: -1,
     lpAddresses: {//launchpad ct
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -88,7 +88,7 @@ export const supportedPools = [
   {
     pid: -2,
     lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -121,9 +121,9 @@ export const supportedPools = [
     startDate: "May 18th 2021, 15:00 UTC"
   },
   {
-    pid: 1,
+    pid: -3,
     lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     lpBscAddresses: {
@@ -166,9 +166,9 @@ export const supportedPools = [
     startDate: "June 28th 2021"
   },
   {
-    pid: 2,
+    pid: -4,
     lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     lpBscAddresses: {
@@ -210,85 +210,9 @@ export const supportedPools = [
     startDate: "June 28th 2021"
   },
   {
-    pid: 6,
+    pid: -5,
     lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
       1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address',
-    name: 'Cryptopunt',
-    symbol: 'PUN-PBR',
-    description: `PUN/ETH`,
-    introduce: `Cryptopunt is quickly becoming the leading blockchain-based gaming and gambling platform.`,
-    website: 'https://www.cryptopunt.com/',
-    twitter: 'https://twitter.com/PuntCrypto',
-    telegram: 'https://t.me/CryptoPunt',
-    whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
-    tokenSymbol: 'PUN',
-    tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/punt.jpg',
-    totalSupply: '160,000,000 PUN',
-    total: 'TBA',
-    ratio: 0,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: 'TBA',
-    startAt: 0,
-    endAt: 1921147665,
-    claimAt: 0,
-    startDate: "TBA"
-  },
-  {
-    pid: 7,
-    lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address',
-    name: 'Cryptopunt',
-    symbol: 'PUN-PBR',
-    description: `PUN/ETH`,
-    introduce: `Cryptopunt is quickly becoming the leading blockchain-based gaming and gambling platform.`,
-    website: 'https://www.cryptopunt.com/',
-    twitter: 'https://twitter.com/PuntCrypto',
-    telegram: 'https://t.me/CryptoPunt',
-    whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
-    tokenSymbol: 'PUN',
-    tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/punt.jpg',
-    totalSupply: '160,000,000 PUN',
-    total: 'TBA',
-    ratio: 0,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
-    access: 'Public',
-    network: ethereumNetwork,
-    distribution: 'TBA',
-    startAt: 0,
-    endAt: 1921147665,
-    claimAt: 0,
-    startDate: "TBA"
-  },
-  {
-    pid: 8,
-    lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -326,9 +250,9 @@ export const supportedPools = [
     startDate: "June 11th 2021"
   },
   {
-    pid: 9,
+    pid: -6,
     lpAddresses: {
-      1: '0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -364,6 +288,120 @@ export const supportedPools = [
     //endAt: 1623219170,
     claimAt: 1623428100,
     startDate: "June 11th 2021"
+  },
+  {
+    pid: 1,
+    lpAddresses: {
+      1: '',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'CFL365 Finance',
+    symbol: 'CFL365-ETH',
+    description: `CFL365/ETH`,
+    introduce: `CFL365 Finance is a trustless, decentralized oracle for skill based virtual trading contests for cryptocurrencies and stocks markets.`,
+    website: 'https://www.cfl365.finance',
+    twitter: 'https://twitter.com/cfl365_finance',
+    telegram: 'https://t.me/cfl365finance',
+    whitepaper: 'https://docsend.com/view/99u5akxhmcpfai3i',
+    tokenSymbol: 'CFL365',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/cfl.svg',
+    totalSupply: '400,000,000 CFL365',
+    total: '30 ETH',
+    ratio: 41666,//1eth=2k5
+    min: 0.16,//400$
+    max: 0.24,//600$
+    maxTier1: 0.16,//400$
+    maxTier2: 0.2,//500$
+    maxTier3: 0.24,//600$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'Aug 05th 2021',
+    startAt: 1628172000,
+    endAt: 1628175600,
+    claimAt: 1628180100,
+    startDate: "Aug 05th 2021"
+  },
+  {
+    pid: 4,
+    lpAddresses: {
+      1: '',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'Cryptopunt',
+    symbol: 'PUN-PBR',
+    description: `PUN/ETH`,
+    introduce: `Cryptopunt is quickly becoming the leading blockchain-based gaming and gambling platform.`,
+    website: 'https://www.cryptopunt.com/',
+    twitter: 'https://twitter.com/PuntCrypto',
+    telegram: 'https://t.me/CryptoPunt',
+    whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
+    tokenSymbol: 'PUN',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/punt.jpg',
+    totalSupply: '160,000,000 PUN',
+    total: 'TBA',
+    ratio: 0,
+    min: 0.12,//300$
+    max: 0.2,//500$
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1921147665,
+    claimAt: 0,
+    startDate: "TBA"
+  },
+  {
+    pid: 5,
+    lpAddresses: {
+      1: '',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'Cryptopunt',
+    symbol: 'PUN-PBR',
+    description: `PUN/ETH`,
+    introduce: `Cryptopunt is quickly becoming the leading blockchain-based gaming and gambling platform.`,
+    website: 'https://www.cryptopunt.com/',
+    twitter: 'https://twitter.com/PuntCrypto',
+    telegram: 'https://t.me/CryptoPunt',
+    whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
+    tokenSymbol: 'PUN',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/punt.jpg',
+    totalSupply: '160,000,000 PUN',
+    total: 'TBA',
+    ratio: 0,
+    min: 0.12,//300$
+    max: 0.2,//500$
+    maxTier1: 0.12,//300$
+    maxTier2: 0.16,//400$
+    maxTier3: 0.2,//500$
+    access: 'Public',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1921147665,
+    claimAt: 0,
+    startDate: "TBA"
   }
 
 ]
