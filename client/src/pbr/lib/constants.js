@@ -36,7 +36,7 @@ export const contractAddresses = {
     42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0'
   },
   masterLaunchpad: {
-    1: '',
+    1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD' // launchpad contract
   },
   weth: {
@@ -292,7 +292,7 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1: '',
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {

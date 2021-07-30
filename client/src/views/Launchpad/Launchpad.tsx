@@ -193,7 +193,7 @@ const Launchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === "Private_" ? (
+          {access === "Private" ? ( //disabled
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
@@ -276,10 +276,11 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {access === 'Public' || 'Private' ? 'Allocation' : 'Min - Max Allocation' } 
+                          {access === 'Public'  ? 'Allocation' : 'Min - Max Allocation' } 
                       </StyledTableLabel>
                         <StyledTableValue>
-                          {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
+                          {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
+                          {access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
                       </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

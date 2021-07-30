@@ -384,11 +384,12 @@ export const getProgress = async (lpContract, pid) => {
       .getBalanceTokenByPoolId(pid)
       .call()
 
+    // console.log({remainToken, totalToken } )
     if (remainToken && totalToken) {
       let remain = new BigNumber(remainToken);
       let total = new BigNumber(totalToken);
       if (total > 0) {
-        return new BigNumber(100) //total.minus(remain).div(total).times(100)
+        return pid === 1 ? total.minus(remain).div(total).times(100) : new BigNumber(100) //
       }
     }
   } catch (e) {
