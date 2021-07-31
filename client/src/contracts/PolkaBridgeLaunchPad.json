@@ -52,7 +52,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -65,7 +66,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -78,7 +80,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [],
@@ -157,7 +160,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -245,7 +249,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -294,7 +299,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -489,7 +495,8 @@
       "name": "purchaseIDO",
       "outputs": [],
       "stateMutability": "payable",
-      "type": "function"
+      "type": "function",
+      "payable": true
     },
     {
       "inputs": [
@@ -521,7 +528,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -540,7 +548,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -559,7 +568,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -613,7 +623,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -637,7 +648,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -676,7 +688,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     },
     {
       "inputs": [
@@ -715,7 +728,8 @@
         }
       ],
       "stateMutability": "view",
-      "type": "function"
+      "type": "function",
+      "constant": true
     }
   ],
   "metadata": "{\"compiler\":{\"version\":\"0.6.2+commit.bacdbe57\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address payable\",\"name\":\"receiveTokenAdd\",\"type\":\"address\"},{\"internalType\":\"contract IERC20\",\"name\":\"polkaBridge\",\"type\":\"address\"},{\"internalType\":\"contract PolkaBridgeStaking\",\"name\":\"_polkaBridgeStaking\",\"type\":\"address\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"previousOwner\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"OwnershipTransferred\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"IsWhitelist\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"activePool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address[]\",\"name\":\"user\",\"type\":\"address[]\"},{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"addMulWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"begin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"end\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_type\",\"type\":\"uint256\"},{\"internalType\":\"contract IERC20\",\"name\":\"idoToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier1\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier2\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier3\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalCap\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalToken\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ratePerETH\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lockDuration\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"minimumTokenSoldout\",\"type\":\"uint256\"}],\"name\":\"addPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"addWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"claimToken\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getBalanceTokenByPoolId\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getPoolInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"contract IERC20\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getPoolSoldInfo\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getRemainIDOToken\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"}],\"name\":\"getUserInfo\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"poolId\",\"type\":\"uint256\"}],\"name\":\"getUserStakingData\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rewardDebt\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rewardClaimed\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lastBlock\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"beginTime\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"endTime\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getUserTotalPurchase\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"getWhitelistfo\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"isOwner\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"name\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"\",\"type\":\"string\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"owner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"purchaseIDO\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"renounceOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"}],\"name\":\"stopPool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"newOwner\",\"type\":\"address\"}],\"name\":\"transferOwnership\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"begin\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"end\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier1\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier2\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"maxPurchaseTier3\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalCap\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"totalToken\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"ratePerETH\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"lockDuration\",\"type\":\"uint256\"},{\"internalType\":\"contract IERC20\",\"name\":\"idoToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"minimumTokenSoldout\",\"type\":\"uint256\"}],\"name\":\"updatePool\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"user\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"pid\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"isWhitelist\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"isActived\",\"type\":\"bool\"}],\"name\":\"updateWhitelist\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"name\":\"whitelist\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"Id\",\"type\":\"uint256\"},{\"internalType\":\"address\",\"name\":\"UserAddress\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"IsWhitelist\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"TotalTokenPurchase\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"TotalETHPurchase\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"PurchaseTime\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"IsActived\",\"type\":\"bool\"},{\"internalType\":\"bool\",\"name\":\"IsClaimed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"contract IERC20\",\"name\":\"token\",\"type\":\"address\"}],\"name\":\"withdrawErc20\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"withdrawPoolFund\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"methods\":{\"isOwner()\":{\"details\":\"Returns true if the caller is the current owner.\"},\"owner()\":{\"details\":\"Returns the address of the current owner.\"},\"renounceOwnership()\":{\"details\":\"Leaves the contract without owner. It will not be possible to call `onlyOwner` functions anymore. Can only be called by the current owner.     * NOTE: Renouncing ownership will leave the contract without an owner, thereby removing any functionality that is only available to the owner.\"},\"transferOwnership(address)\":{\"details\":\"Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner.\"}}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"/C/Users/Thanh Phi/Desktop/PolkaBridgeSolution/PolkaBridge-LaunchPad/contracts/PolkaBridgeLaunchPad.sol\":\"PolkaBridgeLaunchPad\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"/C/Users/Thanh Phi/Desktop/PolkaBridgeSolution/PolkaBridge-LaunchPad/contracts/PolkaBridgeLaunchPad.sol\":{\"keccak256\":\"0x351148a6d9ffff106f8c773c51421d368bb027c31e32834e5cdade810fb60b10\",\"urls\":[\"bzz-raw://61598db7d14b5082c6fb8377f930a785e4ca28603c94d1d6d7c70773dd4f5194\",\"dweb:/ipfs/QmeBGUVeBtotjk2GWKGbMfUmAysTZvzyBgC6U4MiTzuADY\"]},\"/C/Users/Thanh Phi/Desktop/PolkaBridgeSolution/PolkaBridge-LaunchPad/contracts/PolkaBridgeStaking.sol\":{\"keccak256\":\"0x0caf39f1726f9e3ca2fc248bf4d1fd86eb9a36ebf9a55575aea2b3a472898dfc\",\"urls\":[\"bzz-raw://b74fc7e8f9ac7afca36ea7cfb0013eabc4e255c323ac102526be1cbf1e403765\",\"dweb:/ipfs/QmWNKViSLqHrMuZdmXDfhtSbagALLrVAvV12AR5o1bjbLr\"]},\"/C/Users/Thanh Phi/Desktop/PolkaBridgeSolution/PolkaBridge-LaunchPad/contracts/ReentrancyGuard.sol\":{\"keccak256\":\"0x989b6045416a9e7b42135dff62e422590e5e355b7dc29c8799e9080c6de78929\",\"urls\":[\"bzz-raw://5d40019ba61f0b0a1dd75358461c23bbf52e26e2e0809d1421cb13163145a1da\",\"dweb:/ipfs/QmVLBnzjg3EYfWJ1PodgoAB7e3J99fybo1yMNqwz4htnXq\"]},\"@openzeppelin/contracts/GSN/Context.sol\":{\"keccak256\":\"0x2a30ecaee5d7d6a381a036ae32a6df337cf778eaa7dc31056802c687d2f16188\",\"urls\":[\"bzz-raw://8d5b068f57807528083e9f79ad1368c117a59ba19d328e93bf8c144b4f0b40d8\",\"dweb:/ipfs/QmTaAFD1ivVkHjbb2ijtfGAjrrH6kZW4fM4sKPs8KtYHjv\"]},\"@openzeppelin/contracts/math/SafeMath.sol\":{\"keccak256\":\"0xd96c449f424a3ef59b86758e9ea65fba9db3c7a02534c2b77c716dbfa0fe367b\",\"urls\":[\"bzz-raw://b021a3e4a1aab5558c30d34324d47bc20499208cc7baad2d7c8ad5520d4f14f3\",\"dweb:/ipfs/QmaPdx7N3K2Bu9sCfkRVVPH22KdyDAYotVkWr3wGVpPg6Y\"]},\"@openzeppelin/contracts/ownership/Ownable.sol\":{\"keccak256\":\"0x415ae9497a022fb9299a509ffae2490449ca513d0bc541ec063e79224afa4250\",\"urls\":[\"bzz-raw://3bf730f4cb9cd6d23c358157ee0c69710624cdfa369ee7b616ffa94130cab53a\",\"dweb:/ipfs/QmY1K4jfG4mxECdbsbkYjaqXhvu5Mqv7CJ9ECSXPjoD7ab\"]},\"@openzeppelin/contracts/token/ERC20/IERC20.sol\":{\"keccak256\":\"0x3d9bcfd283b7e9f7ea451666444f519d57c53e5d21216e64654e00f206e93c07\",\"urls\":[\"bzz-raw://2d8fdb265b9381007a24867fba3ba92562e149faaaa3eed3140e9df1da2915fe\",\"dweb:/ipfs/QmQHkKLyMfxC5jxpVZ9muFbK2WcW2WEkodmGUTraZaLNn3\"]},\"@openzeppelin/contracts/token/ERC20/SafeERC20.sol\":{\"keccak256\":\"0x694157db506e282b703e469c9e5843d8a0120947a6de6b6e8ccd8d808d037234\",\"urls\":[\"bzz-raw://e83680e0074c54c2bd7ddf1e6d73525d9c8027d43cb60706acbe12b81c4276f7\",\"dweb:/ipfs/QmZ5C4duBeYSGej3KrURVGUUMUGjFAKZdNKPRGhV2uJ67A\"]},\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x0dda04d1cbd7c09e7187c8d5c30074cc32f17e247adb84034c0b3e40dd96c74f\",\"urls\":[\"bzz-raw://2f06fa27e220da3d4e949b69ffc6225091ec031ad64cd5f9e9ea7c66c54304ae\",\"dweb:/ipfs/QmYBiLxdMBbhevWsGLLLSjpV92FqDVv5tB2LwiQsgwvLQz\"]}},\"version\":1}",
@@ -36210,8 +36224,8 @@
         }
       },
       "links": {},
-      "address": "0x60CcE9764F55298cbB54a04E408Cd1CD06061aa0",
-      "transactionHash": "0x1e4ba6a033b9a1d9b4963bbdfe5bc6695bffd64a7c8481920a595a07d0d24197"
+      "address": "0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664",
+      "transactionHash": "0x2f4c2db761836f93f8339b52a675dd8de127ede97bd31fdd1a0201b70a5a5a64"
     },
     "4": {
       "events": {
@@ -36267,7 +36281,7 @@
     }
   },
   "schemaVersion": "3.4.1",
-  "updatedAt": "2021-06-20T06:37:26.410Z",
+  "updatedAt": "2021-07-29T08:04:44.415Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
