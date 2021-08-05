@@ -321,10 +321,10 @@ export const supportedPools = [
     maxTier3: 0.24,//600$
     access: 'Private',
     network: ethereumNetwork,
-    distribution: 'Aug 06th 2021',
+    distribution: 'Aug 05th 2021',
     startAt: 1628172000,
     endAt: 1628175600,
-    claimAt: 1628265600,
+    claimAt: 1628191800,
     startDate: "Aug 05th 2021"
   },
   {
