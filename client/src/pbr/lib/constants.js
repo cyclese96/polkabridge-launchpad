@@ -296,10 +296,10 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '0xD342EEBE6FE7e12d727815e532dF53e27E1E6be7',
-      42: '0xD342EEBE6FE7e12d727815e532dF53e27E1E6be7',
+      1: '0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
+      42: '0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     },
-    lpExplorer: 'https://etherscan.io/address/0xD342EEBE6FE7e12d727815e532dF53e27E1E6be7',
+    lpExplorer: 'https://etherscan.io/address/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     name: 'CFL365 Finance',
     symbol: 'CFL365-ETH',
     description: `CFL365/ETH`,
@@ -309,7 +309,7 @@ export const supportedPools = [
     telegram: 'https://t.me/cfl365finance',
     whitepaper: 'https://docsend.com/view/99u5akxhmcpfai3i',
     tokenSymbol: 'CFL365',
-    tokenExplorer: 'https://etherscan.io/token/0xD342EEBE6FE7e12d727815e532dF53e27E1E6be7',
+    tokenExplorer: 'https://etherscan.io/token/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     icon: '/img/tokens/cfl.svg',
     totalSupply: '400,000,000 CFL365',
     total: '30 ETH',
@@ -321,10 +321,10 @@ export const supportedPools = [
     maxTier3: 0.24,//600$
     access: 'Private',
     network: ethereumNetwork,
-    distribution: 'Aug 05th 2021',
+    distribution: 'Aug 06th 2021',
     startAt: 1628172000,
     endAt: 1628175600,
-    claimAt: 1628180100,
+    claimAt: 1628265600,
     startDate: "Aug 05th 2021"
   },
   {
