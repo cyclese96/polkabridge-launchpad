@@ -371,7 +371,7 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === "Private_" ? (
+          {access === "Private" ? (
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
