@@ -150,7 +150,7 @@ const JoinLaunchpad: React.FC = () => {
         stakedData,
         userInfo
       ] = await Promise.all([
-        getIsWhitelist( network === bscNetwork ? lpBscContract : lpContract, pid, account),
+        getIsWhitelist(network === bscNetwork ? lpBscContract : lpContract, pid, account),
         getETHBalance(ethereum, account),
         getHistory(account),
         getProgress(network === bscNetwork ? lpBscContract : lpContract, pid),
@@ -241,7 +241,7 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onMax = useCallback(() => {
-    const _max = access === 'Public' ? maxTier2 : maxTier2
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
     let newTokenValue = _max * ratio
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
@@ -252,14 +252,14 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const getJoinButtonText = () => {
-    const _max = access === 'Public' ? maxTier2 : maxTier2
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
     return endAt * 1000 <= new Date().getTime()
       ? 'Ended'
       : pendingTx
         ? 'Pending Confirmation'
         : !isWhitelist
-          ? access === 'Public' || 'Private'
+          ? access === 'Public'
             ? 'You are not whitelisted'
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
@@ -272,7 +272,7 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const isButtonDisable = () => {
-    const _max = access === 'Public' || 'Private' ? maxTier2 : getMaxValue()
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
     return (
       startAt * 1000 > new Date().getTime() ||
@@ -378,7 +378,7 @@ const JoinLaunchpad: React.FC = () => {
                   Your staked amount: {stakedAmount + " PBR"}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                Your max purchase: {getMaxValue() + " "+ networkSymbol()}
+                  Your max purchase: {getMaxValue() + " " + networkSymbol()}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
