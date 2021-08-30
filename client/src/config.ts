@@ -1,7 +1,7 @@
 export default {
-  // rpc: 'https://kovan.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b',
+  // rpc: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
   // chainId: 42,
-  rpc: 'https://mainnet.infura.io/v3/6f0ba6da417340e6b1511be0f2bc389b',
+  rpc: `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
   chainId: 1,
   bscChain: 56,
   // bscChain: 97,
