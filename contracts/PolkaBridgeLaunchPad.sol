@@ -107,6 +107,10 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 uint256 endTime
             ) = getUserStakingData(user, 0);
             return (amount >= 500 * 1e18);
+        } else if (pools[poolIndex].Type == 3) {
+            //community round
+
+            return true;
         } else {
             return false;
         }
@@ -175,7 +179,8 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         uint256 ratePerETH,
         uint256 lockDuration,
         IERC20 idoToken,
-        uint256 minimumTokenSoldout
+        uint256 minimumTokenSoldout,
+        uint256 pooltype
     ) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         if (begin > 0) {
@@ -208,6 +213,9 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
         }
         if (minimumTokenSoldout > 0) {
             pools[poolIndex].MinimumTokenSoldout = minimumTokenSoldout;
+        }
+        if (pooltype > 0) {
+            pools[poolIndex].Type = pooltype;
         }
         pools[poolIndex].IDOToken = idoToken;
     }
@@ -285,17 +293,26 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                     "invalid maximum purchase for tier3"
                 );
             }
-        } else {
-            //public pool follow tier2
+        } else if (pools[poolIndex].Type == 1) {
+            //public pool
+
             require(
                 whitelist[pid][msg.sender].TotalETHPurchase <=
                     pools[poolIndex].MaxPurchaseTier2,
                 "invalid maximum contribute"
             );
+        } else {
+            //community round
+            require(
+                whitelist[pid][msg.sender].TotalETHPurchase <=
+                    pools[poolIndex].MaxPurchaseTier3 * 2,
+                "invalid maximum contribute"
+            );
         }
 
-        uint256 tokenAmount =
-            ethAmount.mul(pools[poolIndex].RatePerETH).div(1e18);
+        uint256 tokenAmount = ethAmount.mul(pools[poolIndex].RatePerETH).div(
+            1e18
+        );
 
         uint256 remainToken = getRemainIDOToken(pid);
         require(
@@ -306,9 +323,7 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
 
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
-        ]
-            .TotalTokenPurchase
-            .add(tokenAmount);
+        ].TotalTokenPurchase.add(tokenAmount);
 
         pools[poolIndex].TotalSold = pools[poolIndex].TotalSold.add(
             tokenAmount
