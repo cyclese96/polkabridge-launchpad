@@ -314,7 +314,7 @@ export const supportedPools = [
     totalSupply: '400,000,000 CFL365',
     total: '30 ETH',
     ratio: 41666,//1eth=2k5
-    min: 0.16,//400$
+    min: 0.01,//400$
     max: 0.24,//600$
     maxTier1: 0.16,//400$
     maxTier2: 0.2,//500$
