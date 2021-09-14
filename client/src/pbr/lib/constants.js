@@ -352,11 +352,11 @@ export const supportedPools = [
     totalSupply: '160,000,000 PUN',
     total: 'TBA',
     ratio: 0,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
+    min: 0.1,//300$
+    max: 0.166,//500$
+    maxTier1: 0.1,//300$
+    maxTier2: 0.133,//400$
+    maxTier3: 0.166,//500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
@@ -376,33 +376,35 @@ export const supportedPools = [
       42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
-    name: 'Cryptopunt',
-    symbol: 'PUN-PBR',
-    description: `PUN/ETH`,
-    introduce: `Cryptopunt is quickly becoming the leading blockchain-based gaming and gambling platform.`,
-    website: 'https://www.cryptopunt.com/',
-    twitter: 'https://twitter.com/PuntCrypto',
-    telegram: 'https://t.me/CryptoPunt',
-    whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
-    tokenSymbol: 'PUN',
+    name: 'DefiRating',
+    symbol: 'DRATE-PBR',
+    description: `DRATE/ETH`,
+    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
+    website: 'https://about.defirating.finance/',
+    twitter: 'https://twitter.com/QDefi',
+    telegram: 'https://t.me/qdr_ann',
+    whitepaper: 'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+    tokenSymbol: 'DRATE',
     tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/punt.jpg',
-    totalSupply: '160,000,000 PUN',
-    total: 'TBA',
-    ratio: 0,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
-    access: 'Public',
+    icon: '/img/tokens/defirate.png',
+    totalSupply: '200,000,000 DRATE',
+    total: '17 ETH',
+    ratio: 79155,
+    min: 0.1,//300$
+    max: 0.166,//500$
+    maxTier1: 0.1,//300$
+    maxTier2: 0.133,//400$
+    maxTier3: 0.166,//500$
+    access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 0,
-    endAt: 1921147665,
-    claimAt: 0,
-    startDate: "TBA"
+    startAt: 1634713200,
+    endAt: 1634716800,
+    claimAt: 1634721300,
+    startDate: "Oct 20th 2021"
   }
+
+
 
 ]
 
