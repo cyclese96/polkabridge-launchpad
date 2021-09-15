@@ -375,28 +375,28 @@ export const supportedPools = [
       1: '',
       42: '',
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpExplorer: 'https://bscscan.com/address',
     name: 'DefiRating',
     symbol: 'DRATE-PBR',
-    description: `DRATE/ETH`,
+    description: `DRATE/BNB`,
     introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
     website: 'https://about.defirating.finance/',
     twitter: 'https://twitter.com/QDefi',
     telegram: 'https://t.me/qdr_ann',
     whitepaper: 'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
     tokenSymbol: 'DRATE',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defirate.png',
     totalSupply: '200,000,000 DRATE',
-    total: '17 ETH',
-    ratio: 79155,
-    min: 0.1,//300$
-    max: 0.166,//500$
-    maxTier1: 0.1,//300$
-    maxTier2: 0.133,//400$
-    maxTier3: 0.166,//500$
+    total: '125 BNB',
+    ratio: 10554,//token price 0.0379, 1BNB = 400$
+    min: 0.75,//300$
+    max: 1.25,//500$
+    maxTier1: 0.75,//300$
+    maxTier2: 1,//400$
+    maxTier3: 1.25,//500$
     access: 'Private',
-    network: ethereumNetwork,
+    network: bscNetwork,
     distribution: 'TBA',
     startAt: 1634713200,
     endAt: 1634716800,

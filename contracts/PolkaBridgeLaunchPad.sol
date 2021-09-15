@@ -272,14 +272,14 @@ contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
                 uint256 beginTime,
                 uint256 endTime
             ) = getUserStakingData(msg.sender, 0);
-            if (stakeAmount < 3000 * 1e18) {
+            if (stakeAmount < 1500 * 1e18) {
                 require(
                     whitelist[pid][msg.sender].TotalETHPurchase <=
                         pools[poolIndex].MaxPurchaseTier1,
                     "invalid maximum purchase for tier1"
                 );
             } else if (
-                stakeAmount >= 3000 * 1e18 && stakeAmount < 5000 * 1e18
+                stakeAmount >= 1500 * 1e18 && stakeAmount < 3000 * 1e18
             ) {
                 require(
                     whitelist[pid][msg.sender].TotalETHPurchase <=
