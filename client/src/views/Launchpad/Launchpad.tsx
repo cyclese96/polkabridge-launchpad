@@ -13,7 +13,7 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { fromWei, getMasterChefContract, getNetworkName, getProgress, getUserStakingData } from '../../pbr/utils'
+import { fromWei, getMasterChefContract, getNetworkName, getProgress, getStaked, getUserStakingData } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown';
@@ -72,7 +72,7 @@ const Launchpad: React.FC = () => {
     whitepaper: '',
     lpAddress: '',
     lpContract: null,
-    lpBscAddress: '' ,
+    lpBscAddress: '',
     lpBscContract: null,
     lpExplorer: '',
     tokenAddress: '',
@@ -87,7 +87,7 @@ const Launchpad: React.FC = () => {
     maxTier2: 0,
     maxTier3: 0,
     access: '',
-    network: '' ,
+    network: '',
     distribution: '',
     startAt: 0,
     endAt: 0,
@@ -105,14 +105,18 @@ const Launchpad: React.FC = () => {
   const { ethereum, account } = useWallet()
 
   const history = useHistory()
-  const {chainId} = useNetwork()
+  const { chainId } = useNetwork()
 
   useEffect(() => {
     async function fetchData() {
       const newProgress = await getProgress(network === bscNetwork ? lpBscContract : lpContract, pid)
-      const stakeData   = await getUserStakingData(lpContract, pid, account)
-      
+      // const stakeData   = await   getUserStakingData(lpContract, pid, account)
+      const stakeData = await getStaked(lpContract, pid, account)
+
+      // console.log('progress data ', newProgress)
+      // console.log('stake data ', stakeData)
       setProgress(newProgress)
+
       setStakedAmount(stakeData ? Number(fromWei(stakeData.amount)) : 0)
     }
     if (pid >= 0) {
@@ -135,22 +139,22 @@ const Launchpad: React.FC = () => {
   }
 
   const netWorkTokenSymbol = () => {
-      return network === bscNetwork ? 'BNB' : 'ETH'
+    return network === bscNetwork ? 'BNB' : 'ETH'
   }
 
-  const showNetworkAlert  = () => {
+  const showNetworkAlert = () => {
     const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
-      if ( getNetworkName(chainId) !== network  ) {
-        alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
-      }
+    if (getNetworkName(chainId) !== network) {
+      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+    }
   }
   const handleJoinPool = () => {
-      const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
-      if ( getNetworkName(chainId) !== network  ) {
-        alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
-        // return
-      }
-      history.push(`/launchpads/join/${launchpadId}/${poolId}`)
+    const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+    if (getNetworkName(chainId) !== network) {
+      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      // return
+    }
+    history.push(`/launchpads/join/${launchpadId}/${poolId}`)
   }
 
   const getMaxValue = () => {
@@ -200,7 +204,7 @@ const Launchpad: React.FC = () => {
                   Your staked amount: {stakedAmount + " PBR"}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                Your max purchase: {getMaxValue() + " "+ netWorkTokenSymbol()}
+                  Your max purchase: {getMaxValue() + " " + netWorkTokenSymbol()}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -212,8 +216,8 @@ const Launchpad: React.FC = () => {
               <Button
                 disabled={startAt * 1000 > new Date().getTime()}
                 text={(startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
-                onClick = { handleJoinPool} 
-                // to={`/launchpads/join/${launchpadId}/${poolId}`}
+                onClick={handleJoinPool}
+              // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -255,7 +259,7 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableHeadCell>
                       Pool Information
-                  </StyledTableHeadCell>
+                    </StyledTableHeadCell>
                   </StyledTableRow>
                 </StyledTableHead>
                 <StyledTableBody>
@@ -264,7 +268,7 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>
                           Token distribution
-                      </StyledTableLabel>
+                        </StyledTableLabel>
                         <StyledTableValue>
                           {distribution}
                         </StyledTableValue>
@@ -276,12 +280,12 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {access === 'Public'  ? 'Allocation' : 'Min - Max Allocation' } 
-                      </StyledTableLabel>
+                          {access === 'Public' ? 'Allocation' : 'Min - Max Allocation'}
+                        </StyledTableLabel>
                         <StyledTableValue>
                           {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
                           {access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
-                      </StyledTableValue>
+                        </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -291,7 +295,7 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>
                           Access Type
-                          </StyledTableLabel>
+                        </StyledTableLabel>
                         <StyledTableValue>
                           {access}
                         </StyledTableValue>
@@ -304,9 +308,9 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>
                           Network
-                          </StyledTableLabel>
+                        </StyledTableLabel>
                         <StyledTableValue>
-                          {network==="bsc"?"Binance Smart Chain":"Ethereum"}
+                          {network === "bsc" ? "Binance Smart Chain" : "Ethereum"}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -326,7 +330,7 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableHeadCell>
                       Token Information
-                  </StyledTableHeadCell>
+                    </StyledTableHeadCell>
                   </StyledTableRow>
                 </StyledTableHead>
                 <StyledTableBody>
@@ -335,7 +339,7 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>
                           Name
-                      </StyledTableLabel>
+                        </StyledTableLabel>
                         <StyledTableValue>
                           {name}
                         </StyledTableValue>
@@ -348,7 +352,7 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>
                           Address
-                      </StyledTableLabel>
+                        </StyledTableLabel>
                         <StyledTableValue>
                           {tokenAddress}
                         </StyledTableValue>

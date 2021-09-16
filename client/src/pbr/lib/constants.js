@@ -330,7 +330,7 @@ export const supportedPools = [
   {
     pid: 4,
     lpAddresses: {
-      1: '',
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -381,6 +381,10 @@ export const supportedPools = [
       56: "",
       97: ""
     },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+    },
     lpExplorer: 'https://bscscan.com/address',
     name: 'DefiRating',
     symbol: 'DRATE-PBR',
@@ -413,5 +417,7 @@ export const supportedPools = [
 
 
 ]
+
+export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D';
 
 export const bscChainIds = [56, 97]

@@ -2,10 +2,11 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
+import maticStakeAbi from '../contracts/MaticStakeContract.json'
 
 import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
@@ -501,12 +502,15 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
 
 export const getStaked = async (masterChefContract, pid, account) => {
   try {
-    const { amountLP } = await masterChefContract.methods
-      .userInfo(pid, account)
+
+    const maticStakeContract = getContractInstance(maticStakeAbi, stakeAddressMatic)
+    const stakeDate = await maticStakeContract.methods
+      .userInfo(0, account)
       .call()
-    return new BigNumber(amountLP)
-  } catch {
-    return new BigNumber(0)
+    return stakeDate
+  } catch (e) {
+    console.log('getStaked', e)
+    return {}
   }
 }
 
@@ -664,3 +668,12 @@ export const getNetworkName = (networkId) => {
     return ethereumNetwork
   }
 }
+
+//matic connector
+const getContractInstance = (abi, contractAddress) => {
+  const rpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+
+  const web3 = new Web3(rpc);
+
+  return new web3.eth.Contract(abi, contractAddress);
+};
