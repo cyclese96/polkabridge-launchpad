@@ -24,6 +24,7 @@ import {
   getUserStakingData,
   getUserInfo,
   fromWei,
+  getStaked,
 } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
@@ -155,13 +156,13 @@ const JoinLaunchpad: React.FC = () => {
         getHistory(account),
         getProgress(network === bscNetwork ? lpBscContract : lpContract, pid),
         getPurchasesAmount(network === bscNetwork ? lpBscContract : lpContract, pid, account),
-        getUserStakingData(lpContract, pid, account),
+        getStaked(lpContract, pid, account),
         getUserInfo(network === bscNetwork ? lpBscContract : lpContract, pid, account)
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('stakedData--->  ',stakedData)
-      // console.log('userInfo--->  ',userInfo)
+      // console.log('stakedData--->  ', stakedData)
+      // console.log('userInfo--->  ', userInfo)
       // console.log('newIsWhitelist--->  ',newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
