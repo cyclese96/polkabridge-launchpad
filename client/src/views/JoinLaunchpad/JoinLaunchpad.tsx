@@ -163,7 +163,7 @@ const JoinLaunchpad: React.FC = () => {
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('stakedData--->  ', stakedData)
       // console.log('userInfo--->  ', userInfo)
-      // console.log('newIsWhitelist--->  ',newIsWhitelist)
+      // console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
@@ -231,11 +231,11 @@ const JoinLaunchpad: React.FC = () => {
 
   const getMaxValue = () => {
     let maxValue = 0
-    if (stakedAmount >= 500 && stakedAmount < 3000) {
+    if (stakedAmount >= 500 && stakedAmount < 1500) {
       maxValue = maxTier1
-    } else if (stakedAmount >= 3000 && stakedAmount < 5000) {
+    } else if (stakedAmount >= 1500 && stakedAmount < 3000) {
       maxValue = maxTier2
-    } else if (stakedAmount >= 5000) {
+    } else if (stakedAmount >= 3000) {
       maxValue = maxTier3
     }
     return maxValue
