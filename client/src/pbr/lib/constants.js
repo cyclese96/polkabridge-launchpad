@@ -371,9 +371,15 @@ export const supportedPools = [
       1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+    },
     tokenAddresses: {
       1: '',
       42: '',
+      56: "",
+      97: ""
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
