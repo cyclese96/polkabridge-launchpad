@@ -360,9 +360,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 0,
-    endAt: 1921147665,
-    claimAt: 0,
+    startAt: 1633010400,
+    endAt: 1633014000,
+    claimAt: 1633022100,
     startDate: "TBA"
   },
   {
@@ -411,7 +411,7 @@ export const supportedPools = [
     startAt: 1634713200,
     endAt: 1634716800,
     claimAt: 1634721300,
-    startDate: "Oct 20th 2021"
+    startDate: "TBA"
   }
 
 
