@@ -290,7 +290,7 @@ export const supportedPools = [
     startDate: "June 11th 2021"
   },
   {
-    pid: 1,
+    pid: -7,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -328,7 +328,7 @@ export const supportedPools = [
     startDate: "Aug 05th 2021"
   },
   {
-    pid: 4,
+    pid: 1,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -350,7 +350,7 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
-    total: 'TBA',
+    total: '20 ETH',//1ETH =3k$
     ratio: 0,
     min: 0.1,//300$
     max: 0.166,//500$
@@ -360,13 +360,13 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1633010400,
-    endAt: 1633014000,
-    claimAt: 1633022100,
-    startDate: "TBA"
+    startAt: 1634565600,
+    endAt: 1634569200,
+    claimAt: 1634573700,
+    startDate: "Oct 18th 2021"
   },
   {
-    pid: 5,
+    pid: 2,
     lpAddresses: {
       1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -412,8 +412,83 @@ export const supportedPools = [
     endAt: 1634716800,
     claimAt: 1634721300,
     startDate: "TBA"
+  },
+  {
+    pid: 3,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'ADASwap',
+    symbol: 'ASW-PBR',
+    description: `ASW/ETH`,
+    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
+    website: 'https://adaswap.app/',
+    twitter: 'https://twitter.com/adaswapapp',
+    telegram: 'https://t.me/adaswapcommunity',
+    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
+    tokenSymbol: 'ASW',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/adaswap.PNG',
+    totalSupply: '16,500,000,000 ASW',
+    total: '16.6 ETH',//1ETH =3k$
+    ratio: 0,
+    min: 0.1,//300$
+    max: 0.166,//500$
+    maxTier1: 0.1,//300$
+    maxTier2: 0.133,//400$
+    maxTier3: 0.166,//500$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: "TBA"
   }
-
+  // {
+  //   pid: 4,
+  //   lpAddresses: {
+  //     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+  //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+  //   },
+  //   tokenAddresses: {
+  //     1: '',
+  //     42: '',
+  //   },
+  //   lpExplorer: 'https://etherscan.io/address',
+  //   name: 'Shoefy',
+  //   symbol: 'SHOE-PBR',
+  //   description: `SHOE/ETH`,
+  //   introduce: `Shoefy - Contemporary way of repositioning the Non-Fungible Token (NFT) in an unprecedented method with the help of Fungible Tokens (FT`,
+  //   website: 'https://www.shoefy.io/',
+  //   twitter: 'https://twitter.com/ShoeFyio',
+  //   telegram: 'https://t.me/ShoeFy_Official',
+  //   whitepaper: 'https://docsend.com/view/s/3y24gmfcbcdnvmmg',
+  //   tokenSymbol: 'SHOE',
+  //   tokenExplorer: 'https://etherscan.io/token',
+  //   icon: '/img/tokens/shoefy.png',
+  //   totalSupply: '100,000,000 SHOE',
+  //   total: '33 ETH',//1ETH =3k$
+  //   ratio: 0,
+  //   min: 0.166,//500$
+  //   max: 0.233,//700$
+  //   maxTier1: 0.166,//500$
+  //   maxTier2: 0.2,//600$
+  //   maxTier3: 0.233,//700$
+  //   access: 'Private',
+  //   network: ethereumNetwork,
+  //   distribution: 'TBA',
+  //   startAt: 0,
+  //   endAt: 1734569200,
+  //   claimAt: 0,
+  //   startDate: "TBA"
+  // },
 
 
 ]

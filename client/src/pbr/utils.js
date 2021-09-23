@@ -393,7 +393,8 @@ export const getProgress = async (lpContract, pid) => {
         return new BigNumber(100);
       }
       if (total > 0) {
-        return pid === 1 ? total.minus(remain).div(total).times(100) : new BigNumber(100) //
+        //return pid === 1 ? total.minus(remain).div(total).times(100) : new BigNumber(100) //
+        return total.minus(remain).div(total).times(100);
       }
     }
   } catch (e) {
