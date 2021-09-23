@@ -110,14 +110,15 @@ const Launchpad: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       const newProgress = await getProgress(network === bscNetwork ? lpBscContract : lpContract, pid)
-      // const stakeData   = await   getUserStakingData(lpContract, pid, account)
-      const stakeData = await getStaked(lpContract, pid, account)
+      const stakeData = await getUserStakingData(lpContract, pid, account)
+      const stakeDataPolygon = await getStaked(lpContract, pid, account)
 
       // console.log('progress data ', newProgress)
+      // console.log('stake data polygon', stakeDataPolygon)
       // console.log('stake data ', stakeData)
       setProgress(newProgress)
-
-      setStakedAmount(stakeData ? Number(fromWei(stakeData.amount)) : 0)
+      const _totalStakedAmount = stakeData && stakeDataPolygon ? Number(fromWei(stakeData.amount)) + Number(fromWei(stakeDataPolygon.amount)) : 0;
+      setStakedAmount(_totalStakedAmount)
     }
     if (pid >= 0) {
       fetchData()

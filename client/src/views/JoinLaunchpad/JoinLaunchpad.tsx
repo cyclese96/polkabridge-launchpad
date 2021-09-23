@@ -149,6 +149,7 @@ const JoinLaunchpad: React.FC = () => {
         newProgress,
         newPurchasedAmount,
         stakedData,
+        stakedDataPolygon,
         userInfo
       ] = await Promise.all([
         getIsWhitelist(network === bscNetwork ? lpBscContract : lpContract, pid, account),
@@ -156,12 +157,14 @@ const JoinLaunchpad: React.FC = () => {
         getHistory(account),
         getProgress(network === bscNetwork ? lpBscContract : lpContract, pid),
         getPurchasesAmount(network === bscNetwork ? lpBscContract : lpContract, pid, account),
+        getUserStakingData(lpContract, pid, account),
         getStaked(lpContract, pid, account),
         getUserInfo(network === bscNetwork ? lpBscContract : lpContract, pid, account)
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('stakedData--->  ', stakedData)
+      // console.log('stakedData--->  ', stakedDataPolygon)
       // console.log('userInfo--->  ', userInfo)
       // console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
@@ -172,7 +175,8 @@ const JoinLaunchpad: React.FC = () => {
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
-      setStakedAmount(stakedData ? Number(fromWei(stakedData.amount)) : 0)
+      const _totalStakedAmount = stakedData && stakedDataPolygon ? Number(fromWei(stakedData.amount)) + Number(fromWei(stakedDataPolygon.amount)) : 0;
+      setStakedAmount(_totalStakedAmount)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
       setClaimed(userInfo ? userInfo[3] : false)
     }
