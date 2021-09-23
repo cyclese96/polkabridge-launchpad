@@ -328,7 +328,7 @@ export const supportedPools = [
     startDate: "Aug 05th 2021"
   },
   {
-    pid: 1,
+    pid: 3,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -366,14 +366,10 @@ export const supportedPools = [
     startDate: "Oct 18th 2021"
   },
   {
-    pid: 2,
+    pid: 4,
     lpAddresses: {
       1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
     },
     tokenAddresses: {
       1: '',
@@ -414,37 +410,43 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 3,
+    pid: 5,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
       42: '',
+      56: "",
+      97: ""
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+    },
+    lpExplorer: 'https://bscscan.com/address',
     name: 'ADASwap',
     symbol: 'ASW-PBR',
-    description: `ASW/ETH`,
+    description: `ASW/BNB`,
     introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
     website: 'https://adaswap.app/',
     twitter: 'https://twitter.com/adaswapapp',
     telegram: 'https://t.me/adaswapcommunity',
     whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
     tokenSymbol: 'ASW',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/adaswap.PNG',
     totalSupply: '16,500,000,000 ASW',
-    total: '16.6 ETH',//1ETH =3k$
+    total: '125 BNB',//1BNB = 400$
     ratio: 0,
-    min: 0.1,//300$
-    max: 0.166,//500$
-    maxTier1: 0.1,//300$
-    maxTier2: 0.133,//400$
-    maxTier3: 0.166,//500$
+    min: 0.75,//300$
+    max: 1.25,//500$
+    maxTier1: 0.75,//300$
+    maxTier2: 1,//400$
+    maxTier3: 1.25,//500$
     access: 'Private',
-    network: ethereumNetwork,
+    network: bscNetwork,
     distribution: 'TBA',
     startAt: 0,
     endAt: 1734569200,
@@ -452,7 +454,7 @@ export const supportedPools = [
     startDate: "TBA"
   }
   // {
-  //   pid: 4,
+  //   pid: 6,
   //   lpAddresses: {
   //     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
   //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
