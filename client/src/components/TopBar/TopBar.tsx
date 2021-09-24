@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 
 import Container from '../Container'
@@ -16,27 +16,26 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   const [showMenu, setShowMenu] = useState(false)
-  const {chainId, status } = useNetwork() 
-
+  const { chainId, status } = useNetwork()
 
   useEffect(() => {
     console.log('TopBar:  network id', chainId)
     console.log('TopBar: status', status)
     if (status === 'network changing') {
-      var result =  window.confirm( "Do you want reload the page ?" );
-    if ( result ) {
+      var result = window.confirm('Do you want reload the page ?')
+      if (result) {
         window.location.reload()
-    } else {
+      } else {
         console.log('closed')
+      }
     }
-    }
-  },[chainId] )
+  }, [chainId])
 
   return (
     <StyledTopBar>
       <Container size="lg">
         <StyledTopBarInner>
-          <div style={{display: 'flex', alignItems: 'center'}}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <StyledLogoWrapper>
               <Logo />
             </StyledLogoWrapper>
@@ -47,7 +46,17 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
           <StyledAccountButtonWrapper>
             <AccountButton />
             <WrapIconMenu>
-              <img onClick={()=> setShowMenu(!showMenu)} className="d-md-none" src={MenuIcon} width="25" style={{ marginLeft: '10px', marginTop: '5px', cursor: 'pointer' }} />
+              <img
+                onClick={() => setShowMenu(!showMenu)}
+                className="d-md-none"
+                src={MenuIcon}
+                width="25"
+                style={{
+                  marginLeft: '10px',
+                  marginTop: '5px',
+                  cursor: 'pointer',
+                }}
+              />
             </WrapIconMenu>
           </StyledAccountButtonWrapper>
         </StyledTopBarInner>
@@ -113,7 +122,7 @@ const StyledAccountButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
-//   width: 156px;
+  //   width: 156px;
   @media (max-width: 767px) {
     justify-content: center;
     width: auto;
