@@ -24,6 +24,7 @@ const LaunchpadCards: React.FC = () => {
   const rows = launchpads.reduce<Launchpad[][]>(
     (launchpadRows, launchpad, i) => {
       const newLaunchpadRows = [...launchpadRows]
+
       if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 3) {
         newLaunchpadRows.push([launchpad])
       } else {
@@ -35,22 +36,23 @@ const LaunchpadCards: React.FC = () => {
   )
 
   return (
-    <StyledCards >
+    <StyledCards>
       <StyledHeading>UPCOMING POOLS</StyledHeading>
-      <Spacer size="lg" />
-
       {!!rows[0].length ? (
         rows.map((launchpadRow, i) => (
           <StyledRow key={i}>
-            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 > new Date().getTime() && (
-              <React.Fragment key={j}>
-                <LaunchpadCard launchpad={launchpad} />
-                {<StyledSpacer />}
-              </React.Fragment>
-            ))}
+            {console.log(launchpadRow)}
+            {launchpadRow.map(
+              (launchpad, j) =>
+                launchpad.endAt * 1000 > new Date().getTime() && (
+                  <React.Fragment key={j}>
+                    <LaunchpadCard launchpad={launchpad} />
+                    {<StyledSpacer />}
+                  </React.Fragment>
+                ),
+            )}
           </StyledRow>
         ))
-
       ) : (
         <StyledLoadingWrapper>
           <Loader text="Fly on the sky ..." />
@@ -62,12 +64,15 @@ const LaunchpadCards: React.FC = () => {
       {!!rows[0].length ? (
         rows.map((launchpadRow, i) => (
           <StyledRow key={i}>
-            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 <= new Date().getTime() && (
-              <React.Fragment key={j}>
-                <LaunchpadCard launchpad={launchpad} />
-                {<StyledSpacer />}
-              </React.Fragment>
-            ))}
+            {launchpadRow.map(
+              (launchpad, j) =>
+                launchpad.endAt * 1000 <= new Date().getTime() && (
+                  <React.Fragment key={j}>
+                    <LaunchpadCard launchpad={launchpad} />
+                    {<StyledSpacer />}
+                  </React.Fragment>
+                ),
+            )}
           </StyledRow>
         ))
       ) : (
@@ -87,13 +92,18 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const poolActive = usePoolActive(launchpad.startAt)
   const pbr = usePolkaBridge()
   const history = useHistory()
-  const {chainId} = useNetwork()
+  const { chainId } = useNetwork()
 
   const [progress, setProgress] = useState<BigNumber>()
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(launchpad.network === bscNetwork ? launchpad.lpBscContract : launchpad.lpContract, launchpad.pid)
+      const newProgress = await getProgress(
+        launchpad.network === bscNetwork
+          ? launchpad.lpBscContract
+          : launchpad.lpContract,
+        launchpad.pid,
+      )
       setProgress(newProgress)
     }
     if (launchpad) {
@@ -114,31 +124,39 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
     )
   }
 
-  const handleLaunchpadClick = (launchpad : any) => {
-    const _networkName = launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+  const handleLaunchpadClick = (launchpad: any) => {
+    const _networkName =
+      launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
     // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
     // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
-    if ( getNetworkName( isMobile ? localStorage.chainId : chainId) !== launchpad.network  ) {
+    if (
+      getNetworkName(isMobile ? localStorage.chainId : chainId) !==
+      launchpad.network
+    ) {
       // alert(`Your networ: ${_yourNetwork} `)
-      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      alert(
+        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+      )
       return
     }
     history.push(`/launchpads/view/${launchpad.id}/${launchpad.pid}`)
   }
 
   return (
-
     <StyledCardWrapper>
       {launchpad.tokenSymbol === 'PBR' && <StyledCardAccent />}
-      <Card >
-        <CardContent >
+      <Card>
+        <CardContent>
           <StyledContent>
-            <StyledTopIcon>
-            </StyledTopIcon>
+            <StyledTopIcon></StyledTopIcon>
             <div style={{ display: 'flex' }}>
-              <CardIcon><img src={launchpad.icon} alt="" height="60" /></CardIcon>
+              <CardIcon>
+                <img src={launchpad.icon} alt="" height="60" />
+              </CardIcon>
             </div>
-            <StyledTitle>{launchpad.name} {launchpad.access}</StyledTitle>
+            <StyledTitle>
+              {launchpad.name} {launchpad.access}
+            </StyledTitle>
             {/* <StyledDetails>
               <StyledDetail>{launchpad.description}</StyledDetail>
             </StyledDetails> */}
@@ -154,7 +172,10 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Ratio</span>
 
               <span>
-                <b>1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH' } = {launchpad.ratio} {launchpad.tokenSymbol}</b>
+                <b>
+                  1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH'} ={' '}
+                  {launchpad.ratio} {launchpad.tokenSymbol}
+                </b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -168,7 +189,11 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Network</span>
 
               <span style={{ color: '#ff3465' }}>
-                <b>{launchpad.network==="bsc"?"Binance Smart Chain":"Ethereum"}</b>
+                <b>
+                  {launchpad.network === 'bsc'
+                    ? 'Binance Smart Chain'
+                    : 'Ethereum'}
+                </b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -181,22 +206,26 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             <StyledInsight>
               <span>Progress</span>
             </StyledInsight>
-            {progress &&
-              (<>
+            {progress && (
+              <>
                 <div style={{ width: `100%` }}>
                   <StyledProgress>
-                    <StyledProgressBar style={{ width: progress.toString() + `%` }} />
+                    <StyledProgressBar
+                      style={{ width: progress.toString() + `%` }}
+                    />
                   </StyledProgress>
-                  <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
+                  <StyledProgressText>
+                    {progress.toFixed(2).toString()}%
+                  </StyledProgressText>
                 </div>
                 <Spacer />
-              </>)
-            }
+              </>
+            )}
             <Button
               // disabled={!poolActive || progress == new BigNumber("100")}
               // text={poolActive ? 'View' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
-              text='View'
-              onClick = {() => handleLaunchpadClick(launchpad)}
+              text="View"
+              onClick={() => handleLaunchpadClick(launchpad)}
               // to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
             >
               {/* {!poolActive && (
@@ -258,10 +287,10 @@ const StyledHeading = styled.h2`
   text-align: center;
   margin-bottom: 0;
   margin-top: 0;
+  font-size: 26px;
 `
 
 const StyledCards = styled.div`
-  
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -293,7 +322,8 @@ const StyledCardWrapper = styled.div`
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 24px;
+  border: 3px solid #212121;
 `
 
 const StyledTitle = styled.h4`
@@ -362,7 +392,7 @@ const StyledInsight = styled.div`
   box-sizing: border-box;
   border-radius: 8px;
   background: transparent;
-  color: #9E9E9E;
+  color: #bdbdbd;
   width: 100%;
   line-height: 25px;
   font-size: 13px;

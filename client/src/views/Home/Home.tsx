@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Button from '../../components/Button'
 import Container from '../../components/Container'
 import Page from '../../components/Page'
 // import PageHeader from '../../components/PageHeader'
@@ -11,7 +10,7 @@ import { START_REWARD_AT_BLOCK } from '../../pbr/lib/constants'
 import PolkaBridgeLogo from '../../assets/img/logo-icon.svg'
 import LaunchpadCards from '../Launchpads/components/LaunchpadCards'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar } from '@material-ui/core'
+import { Avatar, Button } from '@material-ui/core'
 import LaunchpadRight from '../Launchpads/components/LaunchpadRight'
 
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +24,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: 600,
     textAlign: 'left',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 22,
+    },
   },
 
   desktop: {
@@ -122,12 +124,42 @@ const useStyles = makeStyles((theme) => ({
     width: 130,
     height: 3,
     background: 'linear-gradient(to right, #e0077d, rgba(0, 0, 0, 0.4))',
+    [theme.breakpoints.down('sm')]: {
+      marginBottom: 15,
+    },
   },
-  butt: {
+  actionButton: {
+    background: `linear-gradient(to bottom,#D9047C, #BF1088)`,
+    color: 'white',
+    width: 'fit-content',
+    height: 40,
+    textTransform: 'none',
+    borderRadius: 30,
+    fontSize: 15,
+    marginRight: 5,
+    marginLeft: 5,
     display: 'flex',
-    justifyContent: 'center',
+    alignItems: 'center',
+    padding: '5px 20px 5px 20px',
+    '&:hover': {
+      background: 'rgba(224, 7, 125, 0.7)',
+    },
+    [theme.breakpoints.down('sm')]: {
+      width: 'fit-content',
+      fontSize: 13,
+    },
+  },
+
+  headStyle: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 10,
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      justifyContent: 'space-between',
+    },
   },
 }))
 
@@ -141,67 +173,34 @@ const Home: React.FC = () => {
     <Page>
       <div className="container">
         <div className={classes.background}>
-          <h1 className={classes.title}>Launchpad</h1>
-          <div className={classes.divider} />
-          <div className="row mt-5">
-            <div className="col-md-8 mb-3">
-              <div className={classes.card}>
-                <div>
-                  <div className={classes.butt}>
-                    <Avatar
-                      src={'https://stake.polkabridge.org/img/symbol.png'}
-                      className={classes.logo}
-                    />
-                  </div>
-                  <div className={classes.butt}>
-                    <h6 className={classes.title}>
-                      Decentralized Fundraising Platform
-                    </h6>
-                  </div>
-                  <div className="d-flex justify-content-center align-items-center">
-                    <div
-                      style={{
-                        backgroundColor: '#C80C81',
-                        borderRadius: '50%',
-                        height: '5px',
-                        width: '5px',
-                        marginRight: 5,
-                      }}
-                    >
-                      .
-                    </div>
-                    <div className={classes.earn}>
-                      All in one defi application
-                    </div>
-                  </div>
-                  <div className={classes.butt}>
-                    <a
-                      target="_blank"
-                      href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4"
-                    >
-                      <div className={classes.buynow}>
-                        How to join Launchpad
-                      </div>
-                    </a>
-                  </div>
-                  <div className={classes.butt}>
-                    <a
-                      target="_blank"
-                      href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
-                    >
-                      <div className={classes.buynow}>Apply for IDO</div>
-                    </a>
-                  </div>
-                </div>
-              </div>
+          <div className={classes.headStyle}>
+            <div>
+              <h1 className={classes.title}>Launchpad</h1>
+              <div className={classes.divider} />
             </div>
-            <div className="col-md-4">
-              <LaunchpadRight />
+            <div className="d-flex justify-content-end">
+              <a
+                style={{ textDecoration: 'none', marginRight: 10 }}
+                target="_blank"
+                href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4"
+              >
+                <Button className={classes.actionButton} variant="contained">
+                  How to join Launchpad
+                </Button>
+                <div></div>
+              </a>
+              <a
+                style={{ textDecoration: 'none' }}
+                target="_blank"
+                href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
+              >
+                <div className={classes.actionButton}>Apply for IDO</div>
+              </a>
             </div>
           </div>
         </div>
       </div>
-      <Box className="mt-4">
+      <Box className="mt-3">
         <LaunchpadCards />
       </Box>
     </Page>

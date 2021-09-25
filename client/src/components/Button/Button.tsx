@@ -62,20 +62,20 @@ const Button: React.FC<ButtonProps> = ({
       boxShadow = `none`
       buttonPadding = spacing[3]
       buttonSize = 36
-      fontSize = 14
+      fontSize = 13
       break
     case 'lg':
       boxShadow = `none`
       buttonPadding = spacing[4]
       buttonSize = 72
-      fontSize = 16
+      fontSize = 15
       break
     case 'md':
     default:
       boxShadow = `none`
       buttonPadding = spacing[4]
       buttonSize = 48
-      fontSize = 16
+      fontSize = 15
   }
 
   const ButtonChild = useMemo(() => {
@@ -127,12 +127,14 @@ interface StyledButtonProps {
 
 const StyledButton = styled.button<StyledButtonProps>`
   align-items: center;
-  background-color: ${(props) =>
-    !props.disabled ? props.bgColor : `${props.bgColor}50`};
+  background: ${(props) =>
+    !props.disabled
+      ? `linear-gradient(to bottom,#D9047C, #BF1088)`
+      : `${props.bgColor}50`};
   border: solid 1px;
-  border-radius: 8px;
+  border-radius: 30px;
   box-shadow: ${(props) => props.boxShadow};
-  color: ${(props) => (!props.disabled ? props.color : `${props.color}1`)};
+  color: ${(props) => (!props.disabled ? `white` : `${props.color}1`)};
   cursor: pointer;
   display: flex;
   font-size: ${(props) => props.fontSize}px;

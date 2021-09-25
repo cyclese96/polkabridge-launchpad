@@ -13,18 +13,25 @@ import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
-import { fromWei, getMasterChefContract, getNetworkName, getProgress, getStaked, getUserStakingData } from '../../pbr/utils'
+import {
+  fromWei,
+  getMasterChefContract,
+  getNetworkName,
+  getProgress,
+  getStaked,
+  getUserStakingData,
+} from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
-import Countdown, { CountdownRenderProps } from 'react-countdown';
-import { Contract } from 'web3-eth-contract';
+import Countdown, { CountdownRenderProps } from 'react-countdown'
+import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
 import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 const Launchpad: React.FC = () => {
-  const { launchpadId, poolId } = (useParams() as any)
+  const { launchpadId, poolId } = useParams() as any
   const {
     pid,
     name,
@@ -58,7 +65,7 @@ const Launchpad: React.FC = () => {
     startAt,
     endAt,
     claimAt,
-    startDate
+    startDate,
   } = useLaunchpad(launchpadId, Number(poolId)) || {
     pid: 0,
     name: '',
@@ -92,7 +99,7 @@ const Launchpad: React.FC = () => {
     startAt: 0,
     endAt: 0,
     claimAt: 0,
-    startDate: 'TBA'
+    startDate: 'TBA',
   }
 
   useEffect(() => {
@@ -109,7 +116,10 @@ const Launchpad: React.FC = () => {
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(network === bscNetwork ? lpBscContract : lpContract, pid)
+      const newProgress = await getProgress(
+        network === bscNetwork ? lpBscContract : lpContract,
+        pid,
+      )
       const stakeData = await getUserStakingData(lpContract, pid, account)
       const stakeDataPolygon = await getStaked(lpContract, pid, account)
 
@@ -117,14 +127,17 @@ const Launchpad: React.FC = () => {
       // console.log('stake data polygon', stakeDataPolygon)
       // console.log('stake data ', stakeData)
       setProgress(newProgress)
-      const _totalStakedAmount = stakeData && stakeDataPolygon ? Number(fromWei(stakeData.amount)) + Number(fromWei(stakeDataPolygon.amount)) : 0;
+      const _totalStakedAmount =
+        stakeData && stakeDataPolygon
+          ? Number(fromWei(stakeData.amount)) +
+            Number(fromWei(stakeDataPolygon.amount))
+          : 0
       setStakedAmount(_totalStakedAmount)
     }
     if (pid >= 0) {
       fetchData()
     }
   }, [pid, lpContract, setProgress, stakedAmount, setStakedAmount])
-
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -144,15 +157,21 @@ const Launchpad: React.FC = () => {
   }
 
   const showNetworkAlert = () => {
-    const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+    const _networkName =
+      network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
     if (getNetworkName(chainId) !== network) {
-      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      alert(
+        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+      )
     }
   }
   const handleJoinPool = () => {
-    const _networkName = network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+    const _networkName =
+      network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
     if (getNetworkName(chainId) !== network) {
-      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      alert(
+        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+      )
       // return
     }
     history.push(`/launchpads/join/${launchpadId}/${poolId}`)
@@ -186,39 +205,55 @@ const Launchpad: React.FC = () => {
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">
-              <StyledText>
-                {introduce}
-              </StyledText>
+              <StyledText>{introduce}</StyledText>
               <StyledSocialMedia>
-                {website && <StyledMediaLink href={website} target="_blank">Website</StyledMediaLink>}
-                {twitter && <StyledMediaLink href={twitter} target="_blank">Twitter</StyledMediaLink>}
-                {telegram && <StyledMediaLink href={telegram} target="_blank">Telegram</StyledMediaLink>}
+                {website && (
+                  <StyledMediaLink href={website} target="_blank">
+                    Website
+                  </StyledMediaLink>
+                )}
+                {twitter && (
+                  <StyledMediaLink href={twitter} target="_blank">
+                    Twitter
+                  </StyledMediaLink>
+                )}
+                {telegram && (
+                  <StyledMediaLink href={telegram} target="_blank">
+                    Telegram
+                  </StyledMediaLink>
+                )}
                 {/* {whitepaper && <StyledMediaLink href={whitepaper} target="_blank">Whitepaper</StyledMediaLink>} */}
               </StyledSocialMedia>
             </StyledBox>
           </StyledInfo>
 
-          {access === "Private" ? ( //disabled
+          {access === 'Private' ? ( //disabled
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {stakedAmount + " PBR"}
+                  Your staked amount: {stakedAmount + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Your max purchase: {getMaxValue() + " " + netWorkTokenSymbol()}
+                  Your max purchase:{' '}
+                  {getMaxValue() + ' ' + netWorkTokenSymbol()}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
-          ) : ""}
-
+          ) : (
+            ''
+          )}
 
           <StyledInfo>
             <StyledBox className="col-4">
               <Button
                 disabled={startAt * 1000 > new Date().getTime()}
-                text={(startAt * 1000 <= new Date().getTime() ? 'Join pool' : undefined)}
+                text={
+                  startAt * 1000 <= new Date().getTime()
+                    ? 'Join pool'
+                    : undefined
+                }
                 onClick={handleJoinPool}
-              // to={`/launchpads/join/${launchpadId}/${poolId}`}
+                // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -231,25 +266,29 @@ const Launchpad: React.FC = () => {
             <StyledBox className="col-2"></StyledBox>
             <StyledBox className="col-4">
               <Button
-                variant='tertiary'
-                text='View Explorer'
+                variant="tertiary"
+                text="View Explorer"
                 href={lpExplorer}
               ></Button>
             </StyledBox>
           </StyledInfo>
           <StyledInfo>
             <StyledBox className="col-10">
-              {progress &&
-                (<>
+              {progress && (
+                <>
                   <div style={{ width: `100%` }}>
                     <StyledProgress>
-                      <StyledProgressBar style={{ width: progress.toString() + `%` }} />
+                      <StyledProgressBar
+                        style={{ width: progress.toString() + `%` }}
+                      />
                     </StyledProgress>
-                    <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
+                    <StyledProgressText>
+                      {progress.toFixed(2).toString()}%
+                    </StyledProgressText>
                   </div>
                   <Spacer />
-                </>)
-              }
+                </>
+              )}
             </StyledBox>
           </StyledInfo>
 
@@ -258,21 +297,15 @@ const Launchpad: React.FC = () => {
               <StyledTable>
                 <StyledTableHead>
                   <StyledTableRow>
-                    <StyledTableHeadCell>
-                      Pool Information
-                    </StyledTableHeadCell>
+                    <StyledTableHeadCell>Pool Information</StyledTableHeadCell>
                   </StyledTableRow>
                 </StyledTableHead>
                 <StyledTableBody>
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Token distribution
-                        </StyledTableLabel>
-                        <StyledTableValue>
-                          {distribution}
-                        </StyledTableValue>
+                        <StyledTableLabel>Token distribution</StyledTableLabel>
+                        <StyledTableValue>{distribution}</StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -281,11 +314,15 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {access === 'Public' ? 'Allocation' : 'Min - Max Allocation'}
+                          {access === 'Public'
+                            ? 'Allocation'
+                            : 'Min - Max Allocation'}
                         </StyledTableLabel>
                         <StyledTableValue>
                           {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
-                          {access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
+                          {access === 'Public'
+                            ? `${maxTier2}  ${netWorkTokenSymbol()}`
+                            : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -294,12 +331,8 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Access Type
-                        </StyledTableLabel>
-                        <StyledTableValue>
-                          {access}
-                        </StyledTableValue>
+                        <StyledTableLabel>Access Type</StyledTableLabel>
+                        <StyledTableValue>{access}</StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -307,16 +340,15 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Network
-                        </StyledTableLabel>
+                        <StyledTableLabel>Network</StyledTableLabel>
                         <StyledTableValue>
-                          {network === "bsc" ? "Binance Smart Chain" : "Ethereum"}
+                          {network === 'bsc'
+                            ? 'Binance Smart Chain'
+                            : 'Ethereum'}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
-
                 </StyledTableBody>
               </StyledTable>
             </StyledBox>
@@ -329,21 +361,15 @@ const Launchpad: React.FC = () => {
               <StyledTable>
                 <StyledTableHead>
                   <StyledTableRow>
-                    <StyledTableHeadCell>
-                      Token Information
-                    </StyledTableHeadCell>
+                    <StyledTableHeadCell>Token Information</StyledTableHeadCell>
                   </StyledTableRow>
                 </StyledTableHead>
                 <StyledTableBody>
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Name
-                        </StyledTableLabel>
-                        <StyledTableValue>
-                          {name}
-                        </StyledTableValue>
+                        <StyledTableLabel>Name</StyledTableLabel>
+                        <StyledTableValue>{name}</StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -351,12 +377,8 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Address
-                        </StyledTableLabel>
-                        <StyledTableValue>
-                          {tokenAddress}
-                        </StyledTableValue>
+                        <StyledTableLabel>Address</StyledTableLabel>
+                        <StyledTableValue>{tokenAddress}</StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -364,12 +386,8 @@ const Launchpad: React.FC = () => {
                   <StyledTableRow>
                     <StyledTableBodyCell>
                       <StyledTableText>
-                        <StyledTableLabel>
-                          Total Supply
-                        </StyledTableLabel>
-                        <StyledTableValue>
-                          {totalSupply}
-                        </StyledTableValue>
+                        <StyledTableLabel>Total Supply</StyledTableLabel>
+                        <StyledTableValue>{totalSupply}</StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
@@ -421,41 +439,42 @@ const StyledMediaLink = styled.a`
 `
 
 const StyledInfo = styled.div`
-    display: flex;
-    justify-content: space-between;
-    box-sizing: border-box;
-    // padding: ${(props) => props.theme.spacing[3]}px;
-    // border: 2px solid ${(props) => props.theme.color.grey[200]};
-    border-radius: 12px;
-    margin: ${(props) => props.theme.spacing[3]}px auto;
-    @media (max-width: 767px) {
-        width: 100%;
-        text-align: center;
-    }
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  // padding: ${(props) => props.theme.spacing[3]}px;
+  // border: 2px solid ${(props) => props.theme.color.grey[200]};
+  border-radius: 12px;
+  margin: ${(props) => props.theme.spacing[3]}px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
 `
 
 const StyledInfoSolid = styled.div`
-      display: flex;
-      padding: 15px 10px;
-      background: #00ff5d0f;
-      border-radius: 12px;
-    `
+  display: flex;
+  padding: 15px 10px;
+  background: rgba(41, 42, 66, 0.5);
+  border-radius: 12px;
+  border: 1px solid #454545;
+`
 
 const StyledBox = styled.div`
-    &.col-2 {
-        width: 20%;
+  &.col-2 {
+    width: 20%;
   }
-    &.col-4 {
-        width: 40%;
+  &.col-4 {
+    width: 40%;
   }
-    &.col-5 {
-        width: 50%;
+  &.col-5 {
+    width: 50%;
   }
-    &.col-8 {
-        width: 80%;
+  &.col-8 {
+    width: 80%;
   }
-    &.col-10 {
-        width: 100%;
+  &.col-10 {
+    width: 100%;
   }
 `
 
@@ -494,7 +513,7 @@ const StyledTableHead = styled.thead``
 const StyledTableBody = styled.tbody``
 const StyledTableRow = styled.tr`
   height: 60px;
-  border-bottom: 1px solid #ebe9e3;
+  border-bottom: 1px solid #454545;
 `
 const StyledTableHeadCell = styled.th`
   padding: 0 50px 0 30px;
@@ -516,18 +535,22 @@ const StyledTableText = styled.p`
   margin: 0;
 `
 const StyledTableLabel = styled.span`
-
+  text-align: right;
+  color: #bdbdbd;
+  font-weight: 400;
+  word-break: break-all;
 `
 const StyledTableValue = styled.span`
   text-align: right;
   color: #ffffff;
+  font-weight: 500;
   word-break: break-all;
 `
 const StyledCenterRow = styled.div`
   // display: -webkit-box;
   // display: -ms-flexbox;
   display: flex;
-  
+
   -webkit-box-pack: justify;
   // -ms-flex-pack: justify;
   justify-content: center;

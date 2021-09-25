@@ -61,7 +61,7 @@ const BoxWallet = styled.div`
   position: relative;
   z-index: 1;
   div {
-    background: #4c5050;
+    background: rgba(41, 42, 66, 1);
     padding: 0 16px;
     display: flex;
     align-items: center;
@@ -73,7 +73,7 @@ const BoxWallet = styled.div`
     &:before {
       position: absolute;
       content: '';
-      background: #4c5050;
+      background: rgba(41, 42, 66, 1);
       height: 100%;
       width: 50%;
       z-index: -1;
