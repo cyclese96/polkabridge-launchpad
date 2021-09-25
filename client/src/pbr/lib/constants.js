@@ -26,33 +26,34 @@ export const INTEGERS = {
   INTEREST_RATE_BASE: new BigNumber('1e18'),
 }
 
-export const ethereumNetwork = 'ethereum';
-export const bscNetwork = 'bsc';
+export const ethereumNetwork = 'ethereum'
+export const bscNetwork = 'bsc'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
   pbr: {
     1: '0x298d492e8c1d909d3f63bc4a36c66c64acb3d695', // pbr token
-    42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0'
+    42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0',
   },
   masterLaunchpad: {
     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-    42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD' // launchpad contract
+    42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD', // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
-    42: '0xd0a1e359811322d97991e03f863a0c30c2cf029c' // weth
+    42: '0xd0a1e359811322d97991e03f863a0c30c2cf029c', // weth
   },
   launchpadBsc: {
     56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-    97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
-  }
+    97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+  },
 }
 
 export const supportedPools = [
   {
     pid: -1,
-    lpAddresses: {//launchpad ct
+    lpAddresses: {
+      //launchpad ct
       1: '',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
@@ -60,7 +61,8 @@ export const supportedPools = [
       1: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
       42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0',
     },
-    lpExplorer: 'https://etherscan.io/address/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
+    lpExplorer:
+      'https://etherscan.io/address/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     name: 'Beyond Finance',
     symbol: 'beyond-pbr',
     description: `BYN/ETH`,
@@ -70,7 +72,8 @@ export const supportedPools = [
     telegram: 'https://t.me/beyondfinanceglobal',
     whitepaper: 'https://beyond-finance.gitbook.io/beyond-finance/',
     tokenSymbol: 'BYN',
-    tokenExplorer: 'https://etherscan.io/token/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
+    tokenExplorer:
+      'https://etherscan.io/token/0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
     icon: '/img/tokens/byn.png',
     totalSupply: '100,000,000 BYN',
     total: '13.95 ETH',
@@ -83,7 +86,7 @@ export const supportedPools = [
     startAt: 1618329600,
     endAt: 1618333140,
     claimAt: 1618336800,
-    startDate: "April 14th 2021, 15:00 UTC"
+    startDate: 'April 14th 2021, 15:00 UTC',
   },
   {
     pid: -2,
@@ -108,7 +111,7 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/zen.png',
     totalSupply: '100,000,000 ZEN',
-    total: '17.647 ETH',//1eth=3k4$
+    total: '17.647 ETH', //1eth=3k4$
     ratio: 11333,
     min: 0.1,
     max: 0.1176,
@@ -118,7 +121,7 @@ export const supportedPools = [
     startAt: 1621350000,
     endAt: 1621353600,
     claimAt: 1621894200,
-    startDate: "May 18th 2021, 15:00 UTC"
+    startDate: 'May 18th 2021, 15:00 UTC',
   },
   {
     pid: -3,
@@ -128,16 +131,18 @@ export const supportedPools = [
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '0x16153214e683018d5aa318864c8e692b66e16778',
       42: '0x16153214e683018d5aa318864c8e692b66e16778',
-      56: "0x16153214E683018D5aA318864c8e692b66E16778",
-      97: "0x16153214e683018d5aa318864c8e692b66e16778"
+      56: '0x16153214E683018D5aA318864c8e692b66E16778',
+      97: '0x16153214e683018d5aa318864c8e692b66e16778',
     },
-    lpBscExplorer: 'https://bscscan.com/address/0x16153214e683018d5aa318864c8e692b66e16778',//
-    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    lpBscExplorer:
+      'https://bscscan.com/address/0x16153214e683018d5aa318864c8e692b66e16778', //
+    lpExplorer:
+      'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
     name: 'PolkaWar',
     symbol: 'PWAR',
     description: `PWAR/BNB`,
@@ -147,23 +152,24 @@ export const supportedPools = [
     telegram: 'https://t.me/polkawarchat',
     whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
     tokenSymbol: 'PWAR',
-    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    tokenExplorer:
+      'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
     icon: '/img/tokens/polkawar.png',
     totalSupply: '100,000,000 PWAR',
-    total: '433.3 BNB',//1BNB=300$
+    total: '433.3 BNB', //1BNB=300$
     ratio: 2000,
-    min: 1,//300$
-    max: 2.66,//800$
-    maxTier1: 1,//300$
-    maxTier2: 2,//600$
-    maxTier3: 2.66,//800$
+    min: 1, //300$
+    max: 2.66, //800$
+    maxTier1: 1, //300$
+    maxTier2: 2, //600$
+    maxTier3: 2.66, //800$
     access: 'Public',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624894215,//test data
-    endAt: 1624896000,//test data
-    claimAt: 1624896900,//1724378323,//test data
-    startDate: "June 28th 2021"
+    startAt: 1624894215, //test data
+    endAt: 1624896000, //test data
+    claimAt: 1624896900, //1724378323,//test data
+    startDate: 'June 28th 2021',
   },
   {
     pid: -4,
@@ -173,15 +179,16 @@ export const supportedPools = [
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '0x16153214e683018d5aa318864c8e692b66e16778',
       42: '0x16153214e683018d5aa318864c8e692b66e16778',
-      56: "0x16153214E683018D5aA318864c8e692b66E16778",
-      97: "0x16153214e683018d5aa318864c8e692b66e16778"
+      56: '0x16153214E683018D5aA318864c8e692b66E16778',
+      97: '0x16153214e683018d5aa318864c8e692b66e16778',
     },
-    lpExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    lpExplorer:
+      'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
     name: 'PolkaWar',
     symbol: 'PWAR',
     description: `PWAR/BNB`,
@@ -191,23 +198,24 @@ export const supportedPools = [
     telegram: 'https://t.me/polkawarchat',
     whitepaper: 'https://polkawar.com/docs/whitepaper.pdf',
     tokenSymbol: 'PWAR',
-    tokenExplorer: 'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
+    tokenExplorer:
+      'https://bscscan.com/token/0x16153214e683018d5aa318864c8e692b66e16778',
     icon: '/img/tokens/polkawar.png',
     totalSupply: '100,000,000 PWAR',
-    total: '566.6 BNB',//1BNB=300$
+    total: '566.6 BNB', //1BNB=300$
     ratio: 2000,
-    min: 1,//300$
-    max: 2.66,//800$
-    maxTier1: 1,//300$
-    maxTier2: 2,//600$
-    maxTier3: 2.66,//800$
+    min: 1, //300$
+    max: 2.66, //800$
+    maxTier1: 1, //300$
+    maxTier2: 2, //600$
+    maxTier3: 2.66, //800$
     access: 'Private',
     network: bscNetwork,
     distribution: 'June 28th 2021, 16:15 UTC',
-    startAt: 1624894215,//test data
-    endAt: 1624896000,//test data
-    claimAt: 1624896900,//test data
-    startDate: "June 28th 2021"
+    startAt: 1624894215, //test data
+    endAt: 1624896000, //test data
+    claimAt: 1624896900, //test data
+    startDate: 'June 28th 2021',
   },
   {
     pid: -5,
@@ -219,7 +227,8 @@ export const supportedPools = [
       1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    lpExplorer:
+      'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     name: 'DragonBite',
     symbol: 'BITE-PBR',
     description: `BITE/ETH`,
@@ -227,18 +236,20 @@ export const supportedPools = [
     website: 'https://dragonbite.io',
     twitter: 'https://twitter.com/DragonBiteDB',
     telegram: 'https://t.me/DragonBite',
-    whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
+    whitepaper:
+      'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
     tokenSymbol: 'BITE',
-    tokenExplorer: 'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    tokenExplorer:
+      'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
-    total: '16 ETH',//1eth=2k500
+    total: '16 ETH', //1eth=2k500
     ratio: 100000,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
+    min: 0.12, //300$
+    max: 0.2, //500$
+    maxTier1: 0.12, //300$
+    maxTier2: 0.16, //400$
+    maxTier3: 0.2, //500$
     access: 'Public',
     network: ethereumNetwork,
     distribution: 'June 11th 2021, 16:15 UTC',
@@ -247,7 +258,7 @@ export const supportedPools = [
     endAt: 1623423600,
     //endAt: 1623219170,
     claimAt: 1623428100,
-    startDate: "June 11th 2021"
+    startDate: 'June 11th 2021',
   },
   {
     pid: -6,
@@ -259,7 +270,8 @@ export const supportedPools = [
       1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
       42: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     },
-    lpExplorer: 'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    lpExplorer:
+      'https://etherscan.io/address/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     name: 'DragonBite',
     symbol: 'BITE-PBR',
     description: `BITE/ETH`,
@@ -267,18 +279,20 @@ export const supportedPools = [
     website: 'https://dragonbite.io',
     twitter: 'https://twitter.com/DragonBiteDB',
     telegram: 'https://t.me/DragonBite',
-    whitepaper: 'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
+    whitepaper:
+      'https://dragonbite-media.s3-ap-southeast-1.amazonaws.com/media/DragonBiteWhitePaper_8c67.pdf',
     tokenSymbol: 'BITE',
-    tokenExplorer: 'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
+    tokenExplorer:
+      'https://etherscan.io/token/0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
     icon: '/img/tokens/bite.png',
     totalSupply: '1,000,000,000 BITE',
     total: '24 ETH',
     ratio: 100000,
-    min: 0.12,//300$
-    max: 0.2,//500$
-    maxTier1: 0.12,//300$
-    maxTier2: 0.16,//400$
-    maxTier3: 0.2,//500$
+    min: 0.12, //300$
+    max: 0.2, //500$
+    maxTier1: 0.12, //300$
+    maxTier2: 0.16, //400$
+    maxTier3: 0.2, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'June 11th 2021, 16:15 UTC',
@@ -287,7 +301,7 @@ export const supportedPools = [
     endAt: 1623423600,
     //endAt: 1623219170,
     claimAt: 1623428100,
-    startDate: "June 11th 2021"
+    startDate: 'June 11th 2021',
   },
   {
     pid: -7,
@@ -299,7 +313,8 @@ export const supportedPools = [
       1: '0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
       42: '0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     },
-    lpExplorer: 'https://etherscan.io/address/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
+    lpExplorer:
+      'https://etherscan.io/address/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     name: 'CFL365 Finance',
     symbol: 'CFL365-ETH',
     description: `CFL365/ETH`,
@@ -309,23 +324,24 @@ export const supportedPools = [
     telegram: 'https://t.me/cfl365finance',
     whitepaper: 'https://docsend.com/view/99u5akxhmcpfai3i',
     tokenSymbol: 'CFL365',
-    tokenExplorer: 'https://etherscan.io/token/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
+    tokenExplorer:
+      'https://etherscan.io/token/0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
     icon: '/img/tokens/cfl.svg',
     totalSupply: '400,000,000 CFL365',
     total: '30 ETH',
-    ratio: 41666,//1eth=2k5
-    min: 0.01,//400$
-    max: 0.24,//600$
-    maxTier1: 0.16,//400$
-    maxTier2: 0.2,//500$
-    maxTier3: 0.24,//600$
+    ratio: 41666, //1eth=2k5
+    min: 0.01, //400$
+    max: 0.24, //600$
+    maxTier1: 0.16, //400$
+    maxTier2: 0.2, //500$
+    maxTier3: 0.24, //600$
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'Aug 05th 2021',
     startAt: 1628172000,
     endAt: 1628175600,
     claimAt: 1628191800,
-    startDate: "Aug 05th 2021"
+    startDate: 'Aug 05th 2021',
   },
   {
     pid: 3,
@@ -350,36 +366,36 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
-    total: '20 ETH',//1ETH =3k$
+    total: '20 ETH', //1ETH =3k$
     ratio: 0,
-    min: 0.1,//300$
-    max: 0.166,//500$
-    maxTier1: 0.1,//300$
-    maxTier2: 0.133,//400$
-    maxTier3: 0.166,//500$
+    min: 0.1, //300$
+    max: 0.166, //500$
+    maxTier1: 0.1, //300$
+    maxTier2: 0.133, //400$
+    maxTier3: 0.166, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
     startAt: 1634565600,
     endAt: 1634569200,
     claimAt: 1634573700,
-    startDate: "Oct 18th 2021"
+    startDate: 'Oct 18th 2021',
   },
   {
     pid: 4,
     lpAddresses: {
-      1: '',
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
       42: '',
-      56: "",
-      97: ""
+      56: '',
+      97: '',
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'DefiRating',
@@ -389,41 +405,42 @@ export const supportedPools = [
     website: 'https://about.defirating.finance/',
     twitter: 'https://twitter.com/QDefi',
     telegram: 'https://t.me/qdr_ann',
-    whitepaper: 'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+    whitepaper:
+      'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
     tokenSymbol: 'DRATE',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defirate.png',
     totalSupply: '200,000,000 DRATE',
     total: '125 BNB',
-    ratio: 10554,//token price 0.0379, 1BNB = 400$
-    min: 0.75,//300$
-    max: 1.25,//500$
-    maxTier1: 0.75,//300$
-    maxTier2: 1,//400$
-    maxTier3: 1.25,//500$
+    ratio: 10554, //token price 0.0379, 1BNB = 400$
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
     startAt: 1634713200,
     endAt: 1634716800,
     claimAt: 1634721300,
-    startDate: "TBA"
+    startDate: 'TBA',
   },
   {
     pid: 5,
     lpAddresses: {
-      1: '',
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
       1: '',
       42: '',
-      56: "",
-      97: ""
+      56: '',
+      97: '',
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930'
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'ADASwap',
@@ -438,21 +455,21 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/adaswap.PNG',
     totalSupply: '16,500,000,000 ASW',
-    total: '125 BNB',//1BNB = 400$
+    total: '125 BNB', //1BNB = 400$
     ratio: 0,
-    min: 0.75,//300$
-    max: 1.25,//500$
-    maxTier1: 0.75,//300$
-    maxTier2: 1,//400$
-    maxTier3: 1.25,//500$
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
     startAt: 0,
     endAt: 1734569200,
     claimAt: 0,
-    startDate: "TBA"
-  }
+    startDate: 'TBA',
+  },
   // {
   //   pid: 6,
   //   lpAddresses: {
@@ -491,10 +508,8 @@ export const supportedPools = [
   //   claimAt: 0,
   //   startDate: "TBA"
   // },
-
-
 ]
 
-export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D';
+export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
 
 export const bscChainIds = [56, 97]

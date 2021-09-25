@@ -114,8 +114,8 @@ const Launchpad: React.FC = () => {
       const stakeDataPolygon = await getStaked(lpContract, pid, account)
 
       // console.log('progress data ', newProgress)
-      // console.log('stake data polygon', stakeDataPolygon)
-      // console.log('stake data ', stakeData)
+      console.log('stake data polygon', stakeDataPolygon)
+      console.log('stake data ', stakeData)
       setProgress(newProgress)
       const _totalStakedAmount = stakeData && stakeDataPolygon ? Number(fromWei(stakeData.amount)) + Number(fromWei(stakeDataPolygon.amount)) : 0;
       setStakedAmount(_totalStakedAmount)

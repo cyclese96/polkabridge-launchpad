@@ -163,8 +163,8 @@ const JoinLaunchpad: React.FC = () => {
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('stakedData--->  ', stakedData)
-      // console.log('stakedData--->  ', stakedDataPolygon)
+      console.log('stakedData--->  ', stakedData)
+      console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('userInfo--->  ', userInfo)
       // console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
