@@ -20,66 +20,62 @@ import { isMobile } from 'react-device-detect'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
-
-  const rows = launchpads.reduce<Launchpad[][]>(
-    (launchpadRows, launchpad, i) => {
-      const newLaunchpadRows = [...launchpadRows]
-
-      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 3) {
-        newLaunchpadRows.push([launchpad])
-      } else {
-        newLaunchpadRows[newLaunchpadRows.length - 1].push(launchpad)
-      }
-      return newLaunchpadRows
-    },
-    [[]],
-  )
+  console.log('launchpads')
+  console.log(launchpads)
+  const rows = launchpads
 
   return (
     <StyledCards>
       <StyledHeading>UPCOMING POOLS</StyledHeading>
-      {!!rows[0].length ? (
-        rows.map((launchpadRow, i) => (
-          <StyledRow key={i}>
-            {console.log(launchpadRow)}
-            {launchpadRow.map(
-              (launchpad, j) =>
-                launchpad.endAt * 1000 > new Date().getTime() && (
-                  <React.Fragment key={j}>
-                    <LaunchpadCard launchpad={launchpad} />
-                    {<StyledSpacer />}
-                  </React.Fragment>
-                ),
-            )}
-          </StyledRow>
-        ))
-      ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Fly on the sky ..." />
-        </StyledLoadingWrapper>
-      )}
+      <Wrapper>
+        <div className="container mt-4" style={{ marginBottom: 60 }}>
+          {rows.length > 0 && (
+            <div className="row d-flex justify-content-center">
+              {rows.map((singleLaunchpad, i) => {
+                {
+                  return (
+                    singleLaunchpad.endAt * 1000 > new Date().getTime() && (
+                      <div
+                        className="col-md-4 d-flex justify-content-center mt-4"
+                        key={i}
+                      >
+                        <LaunchpadCard launchpad={singleLaunchpad} />
+                        {<StyledSpacer />}
+                      </div>
+                    )
+                  )
+                }
+              })}
+            </div>
+          )}
+        </div>
+      </Wrapper>
+      <Spacer size="lg" />
 
       <StyledHeading>ENDED POOLS</StyledHeading>
-      <Spacer size="lg" />
-      {!!rows[0].length ? (
-        rows.map((launchpadRow, i) => (
-          <StyledRow key={i}>
-            {launchpadRow.map(
-              (launchpad, j) =>
-                launchpad.endAt * 1000 <= new Date().getTime() && (
-                  <React.Fragment key={j}>
-                    <LaunchpadCard launchpad={launchpad} />
-                    {<StyledSpacer />}
-                  </React.Fragment>
-                ),
-            )}
-          </StyledRow>
-        ))
-      ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Fly on the sky ..." />
-        </StyledLoadingWrapper>
-      )}
+      <Wrapper>
+        <div className="container mt-4">
+          {rows.length > 0 && (
+            <div className="row d-flex justify-content-center">
+              {rows.map((singleLaunchpad, i) => {
+                {
+                  return (
+                    singleLaunchpad.endAt * 1000 < new Date().getTime() && (
+                      <div
+                        className="col-md-4 d-flex justify-content-center mt-4"
+                        key={i}
+                      >
+                        <LaunchpadCard launchpad={singleLaunchpad} />
+                        {<StyledSpacer />}
+                      </div>
+                    )
+                  )
+                }
+              })}
+            </div>
+          )}
+        </div>
+      </Wrapper>
     </StyledCards>
   )
 }
@@ -286,10 +282,13 @@ const StyledHeading = styled.h2`
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 25px;
   font-size: 26px;
 `
 
+const Wrapper = styled.div`
+  max-width: 1000px;
+`
 const StyledCards = styled.div`
   @media (max-width: 768px) {
     width: 100%;
