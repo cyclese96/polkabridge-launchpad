@@ -1,5 +1,8 @@
 body {
-  background: #121827;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
+    url("https://images.squarespace-cdn.com/content/v1/51c1e5a0e4b02e7fb0ce5e45/1371683464639-7XNBPL9KKWY7WLN244PQ/ground-crack.jpg?format=1000w")
+      fixed;
+  min-height: 100vh;
   margin: 0;
   font-family: 'Nunito Sans', sans-serif;
   font-size: 16px;

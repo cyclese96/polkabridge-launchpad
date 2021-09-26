@@ -6,7 +6,6 @@ import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
-import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
 import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
@@ -20,61 +19,62 @@ import { isMobile } from 'react-device-detect'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
-
-  const rows = launchpads.reduce<Launchpad[][]>(
-    (launchpadRows, launchpad, i) => {
-      const newLaunchpadRows = [...launchpadRows]
-      if (newLaunchpadRows[newLaunchpadRows.length - 1].length === 3) {
-        newLaunchpadRows.push([launchpad])
-      } else {
-        newLaunchpadRows[newLaunchpadRows.length - 1].push(launchpad)
-      }
-      return newLaunchpadRows
-    },
-    [[]],
-  )
+  console.log('launchpads')
+  console.log(launchpads)
+  const rows = launchpads
 
   return (
-    <StyledCards >
+    <StyledCards>
       <StyledHeading>UPCOMING POOLS</StyledHeading>
+      <Wrapper>
+        <div className="container mt-4" style={{ marginBottom: 60 }}>
+          {rows.length > 0 && (
+            <div className="row d-flex justify-content-center">
+              {rows.map((singleLaunchpad, i) => {
+                {
+                  return (
+                    singleLaunchpad.endAt * 1000 > new Date().getTime() && (
+                      <div
+                        className="col-md-4 d-flex justify-content-center mt-4"
+                        key={i}
+                      >
+                        <LaunchpadCard launchpad={singleLaunchpad} />
+                        {<StyledSpacer />}
+                      </div>
+                    )
+                  )
+                }
+              })}
+            </div>
+          )}
+        </div>
+      </Wrapper>
       <Spacer size="lg" />
-
-      {!!rows[0].length ? (
-        rows.map((launchpadRow, i) => (
-          <StyledRow key={i}>
-            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 > new Date().getTime() && (
-              <React.Fragment key={j}>
-                <LaunchpadCard launchpad={launchpad} />
-                {<StyledSpacer />}
-              </React.Fragment>
-            ))}
-          </StyledRow>
-        ))
-
-      ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Fly on the sky ..." />
-        </StyledLoadingWrapper>
-      )}
 
       <StyledHeading>ENDED POOLS</StyledHeading>
-      <Spacer size="lg" />
-      {!!rows[0].length ? (
-        rows.map((launchpadRow, i) => (
-          <StyledRow key={i}>
-            {launchpadRow.map((launchpad, j) => launchpad.endAt * 1000 <= new Date().getTime() && (
-              <React.Fragment key={j}>
-                <LaunchpadCard launchpad={launchpad} />
-                {<StyledSpacer />}
-              </React.Fragment>
-            ))}
-          </StyledRow>
-        ))
-      ) : (
-        <StyledLoadingWrapper>
-          <Loader text="Fly on the sky ..." />
-        </StyledLoadingWrapper>
-      )}
+      <Wrapper>
+        <div className="container mt-4">
+          {rows.length > 0 && (
+            <div className="row d-flex justify-content-center">
+              {rows.map((singleLaunchpad, i) => {
+                {
+                  return (
+                    singleLaunchpad.endAt * 1000 < new Date().getTime() && (
+                      <div
+                        className="col-md-4 d-flex justify-content-center mt-4"
+                        key={i}
+                      >
+                        <LaunchpadCard launchpad={singleLaunchpad} />
+                        {<StyledSpacer />}
+                      </div>
+                    )
+                  )
+                }
+              })}
+            </div>
+          )}
+        </div>
+      </Wrapper>
     </StyledCards>
   )
 }
@@ -87,13 +87,18 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const poolActive = usePoolActive(launchpad.startAt)
   const pbr = usePolkaBridge()
   const history = useHistory()
-  const {chainId} = useNetwork()
+  const { chainId } = useNetwork()
 
   const [progress, setProgress] = useState<BigNumber>()
 
   useEffect(() => {
     async function fetchData() {
-      const newProgress = await getProgress(launchpad.network === bscNetwork ? launchpad.lpBscContract : launchpad.lpContract, launchpad.pid)
+      const newProgress = await getProgress(
+        launchpad.network === bscNetwork
+          ? launchpad.lpBscContract
+          : launchpad.lpContract,
+        launchpad.pid,
+      )
       setProgress(newProgress)
     }
     if (launchpad) {
@@ -114,31 +119,39 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
     )
   }
 
-  const handleLaunchpadClick = (launchpad : any) => {
-    const _networkName = launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+  const handleLaunchpadClick = (launchpad: any) => {
+    const _networkName =
+      launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
     // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
     // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
-    if ( getNetworkName( isMobile ? localStorage.chainId : chainId) !== launchpad.network  ) {
+    if (
+      getNetworkName(isMobile ? localStorage.chainId : chainId) !==
+      launchpad.network
+    ) {
       // alert(`Your networ: ${_yourNetwork} `)
-      alert(`This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`)
+      alert(
+        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+      )
       return
     }
     history.push(`/launchpads/view/${launchpad.id}/${launchpad.pid}`)
   }
 
   return (
-
     <StyledCardWrapper>
       {launchpad.tokenSymbol === 'PBR' && <StyledCardAccent />}
-      <Card >
-        <CardContent >
+      <Card>
+        <CardContent>
           <StyledContent>
-            <StyledTopIcon>
-            </StyledTopIcon>
+            <StyledTopIcon></StyledTopIcon>
             <div style={{ display: 'flex' }}>
-              <CardIcon><img src={launchpad.icon} alt="" height="60" /></CardIcon>
+              <CardIcon>
+                <img src={launchpad.icon} alt="" height="60" />
+              </CardIcon>
             </div>
-            <StyledTitle>{launchpad.name} {launchpad.access}</StyledTitle>
+            <StyledTitle>
+              {launchpad.name} {launchpad.access}
+            </StyledTitle>
             {/* <StyledDetails>
               <StyledDetail>{launchpad.description}</StyledDetail>
             </StyledDetails> */}
@@ -154,7 +167,10 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Ratio</span>
 
               <span>
-                <b>1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH' } = {launchpad.ratio} {launchpad.tokenSymbol}</b>
+                <b>
+                  1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH'} ={' '}
+                  {launchpad.ratio} {launchpad.tokenSymbol}
+                </b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -168,7 +184,11 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span>Network</span>
 
               <span style={{ color: '#ff3465' }}>
-                <b>{launchpad.network==="bsc"?"Binance Smart Chain":"Ethereum"}</b>
+                <b>
+                  {launchpad.network === 'bsc'
+                    ? 'Binance Smart Chain'
+                    : 'Ethereum'}
+                </b>
               </span>
             </StyledInsight>
             <StyledInsight>
@@ -181,31 +201,25 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             <StyledInsight>
               <span>Progress</span>
             </StyledInsight>
-            {progress &&
-              (<>
+            {progress && (
+              <>
                 <div style={{ width: `100%` }}>
                   <StyledProgress>
-                    <StyledProgressBar style={{ width: progress.toString() + `%` }} />
+                    <StyledProgressBar
+                      style={{ width: progress.toString() + `%` }}
+                    />
                   </StyledProgress>
-                  <StyledProgressText>{progress.toFixed(2).toString()}%</StyledProgressText>
+                  <StyledProgressText>
+                    {progress.toFixed(2).toString()}%
+                  </StyledProgressText>
                 </div>
                 <Spacer />
-              </>)
-            }
+              </>
+            )}
             <Button
-              // disabled={!poolActive || progress == new BigNumber("100")}
-              // text={poolActive ? 'View' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
-              text='View'
-              onClick = {() => handleLaunchpadClick(launchpad)}
-              // to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
-            >
-              {/* {!poolActive && (
-                <Countdown
-                  date={new Date(launchpad.startAt * 1000)}
-                  renderer={renderer}
-                />
-              )} */}
-            </Button>
+              text="View"
+              onClick={() => handleLaunchpadClick(launchpad)}
+            ></Button>
           </StyledContent>
         </CardContent>
       </Card>
@@ -214,7 +228,6 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 }
 
 const RainbowLight = keyframes`
-
 	0% {
 		background-position: 0% 50%;
 	}
@@ -257,11 +270,14 @@ const StyledHeading = styled.h2`
   text-transform: uppercase;
   text-align: center;
   margin-bottom: 0;
-  margin-top: 0;
+  margin-top: 25px;
+  font-size: 26px;
 `
 
+const Wrapper = styled.div`
+  max-width: 1000px;
+`
 const StyledCards = styled.div`
-  
   @media (max-width: 768px) {
     width: 100%;
   }
@@ -293,9 +309,9 @@ const StyledCardWrapper = styled.div`
   width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
   position: relative;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 24px;
+  border: 3px solid #212121;
 `
-
 const StyledTitle = styled.h4`
   color: ${(props) => props.theme.color.white};
   font-size: 20px;
@@ -312,7 +328,6 @@ const StyledContent = styled.div`
 const StyledTopIcon = styled.div`
   // position: relative;
 `
-
 const StyledHotIcon = styled.div`
   position: absolute;
   background-color: gray;
@@ -326,7 +341,6 @@ const StyledHotIcon = styled.div`
   color: #fff;
   font-size: 9px;
 `
-
 const StyledNewIcon = styled.div`
   position: absolute;
   padding: 8px 40px 8px;
@@ -345,24 +359,21 @@ const StyledSpacer = styled.div`
   height: ${(props) => props.theme.spacing[4]}px;
   width: ${(props) => props.theme.spacing[4]}px;
 `
-
 const StyledDetails = styled.div`
   margin-top: ${(props) => props.theme.spacing[2]}px;
   text-align: center;
 `
-
 const StyledDetail = styled.div`
   color: ${(props) => props.theme.color.grey[100]};
   font-size: 14px;
 `
-
 const StyledInsight = styled.div`
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;
   border-radius: 8px;
   background: transparent;
-  color: #9E9E9E;
+  color: #bdbdbd;
   width: 100%;
   line-height: 25px;
   font-size: 13px;
@@ -378,7 +389,6 @@ const StyledProgress = styled.a`
   background: #f2f0eb;
   border-radius: 5px;
 `
-
 const StyledProgressText = styled.p`
   margin-top: 4px;
   margin-bottom: 0;
@@ -396,5 +406,4 @@ const StyledProgressBar = styled.i`
   border-radius: 5px;
   font-size: 14px;
 `
-
 export default LaunchpadCards

@@ -150,16 +150,28 @@ const JoinLaunchpad: React.FC = () => {
         newPurchasedAmount,
         stakedData,
         stakedDataPolygon,
-        userInfo
+        userInfo,
       ] = await Promise.all([
-        getIsWhitelist(network === bscNetwork ? lpBscContract : lpContract, pid, account),
+        getIsWhitelist(
+          network === bscNetwork ? lpBscContract : lpContract,
+          pid,
+          account,
+        ),
         getETHBalance(ethereum, account),
         getHistory(account),
         getProgress(network === bscNetwork ? lpBscContract : lpContract, pid),
-        getPurchasesAmount(network === bscNetwork ? lpBscContract : lpContract, pid, account),
+        getPurchasesAmount(
+          network === bscNetwork ? lpBscContract : lpContract,
+          pid,
+          account,
+        ),
         getUserStakingData(lpContract, pid, account),
         getStaked(lpContract, pid, account),
-        getUserInfo(network === bscNetwork ? lpBscContract : lpContract, pid, account)
+        getUserInfo(
+          network === bscNetwork ? lpBscContract : lpContract,
+          pid,
+          account,
+        ),
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
@@ -175,7 +187,11 @@ const JoinLaunchpad: React.FC = () => {
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
-      const _totalStakedAmount = stakedData && stakedDataPolygon ? Number(fromWei(stakedData.amount)) + Number(fromWei(stakedDataPolygon.amount)) : 0;
+      const _totalStakedAmount =
+        stakedData && stakedDataPolygon
+          ? Number(fromWei(stakedData.amount)) +
+            Number(fromWei(stakedDataPolygon.amount))
+          : 0
       setStakedAmount(_totalStakedAmount)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
       setClaimed(userInfo ? userInfo[3] : false)
@@ -199,7 +215,7 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount,
     setStakedAmount,
     setTokenPurchased,
-    setClaimed
+    setClaimed,
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -253,7 +269,7 @@ const JoinLaunchpad: React.FC = () => {
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
   const networkSymbol = () => {
-    return network === bscNetwork ? 'BNB' : 'ETH';
+    return network === bscNetwork ? 'BNB' : 'ETH'
   }
 
   const getJoinButtonText = () => {
@@ -262,18 +278,18 @@ const JoinLaunchpad: React.FC = () => {
     return endAt * 1000 <= new Date().getTime()
       ? 'Ended'
       : pendingTx
-        ? 'Pending Confirmation'
-        : !isWhitelist
-          ? access === 'Public'
-            ? 'You are not whitelisted'
-            : 'You have not participated in the staking'
-          : startAt * 1000 <= new Date().getTime()
-            ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? 'Join pool'
-              : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
-            : progress == new BigNumber('100')
-              ? 'Ended'
-              : undefined
+      ? 'Pending Confirmation'
+      : !isWhitelist
+      ? access === 'Public'
+        ? 'You are not whitelisted'
+        : 'You have not participated in the staking'
+      : startAt * 1000 <= new Date().getTime()
+      ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
+        ? 'Join pool'
+        : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
+      : progress == new BigNumber('100')
+      ? 'Ended'
+      : undefined
   }
 
   const isButtonDisable = () => {
@@ -376,20 +392,20 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === "Private" ? (
+          {access === 'Private' ? (
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {stakedAmount + " PBR"}
+                  Your staked amount: {stakedAmount + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Your max purchase: {getMaxValue() + " " + networkSymbol()}
+                  Your max purchase: {getMaxValue() + ' ' + networkSymbol()}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
-          ) : ""}
-
-
+          ) : (
+            ''
+          )}
 
           <StyledInfoSolid>
             <StyledBox className="col-10">
@@ -411,7 +427,11 @@ const JoinLaunchpad: React.FC = () => {
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
                           <StyledTokenIcon
-                            src={network === ethereumNetwork ? "/img/tokens/eth.png" : "/img/tokens/bnb.png"}
+                            src={
+                              network === ethereumNetwork
+                                ? '/img/tokens/eth.png'
+                                : '/img/tokens/bnb.png'
+                            }
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
@@ -501,16 +521,19 @@ const JoinLaunchpad: React.FC = () => {
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
-
                 {claimAt * 1000 > new Date().getTime() ? (
                   <StyledTitle>
-                    Reward tokens will be available to harvest in approx -   <Countdown
+                    Reward tokens will be available to harvest in approx -{' '}
+                    <Countdown
                       date={new Date(claimAt * 1000)}
                       renderer={renderer}
                     />
                   </StyledTitle>
-
-                ) : <StyledTitle>Reward tokens are now available to harvest</StyledTitle>}
+                ) : (
+                  <StyledTitle>
+                    Reward tokens are now available to harvest
+                  </StyledTitle>
+                )}
 
                 <StyledInputContainer>
                   <StyledCenterRow>
@@ -521,20 +544,32 @@ const JoinLaunchpad: React.FC = () => {
                 </StyledInputContainer>
                 <Spacer size="md" />
                 <Button
-                  disabled={purchasedAmount <= 0 || claimAt * 1000 > new Date().getTime() || pendingHarvestTx || isClaimed}
-                  text={pendingHarvestTx ? 'Pending Confirmation' : (claimAt * 1000 <= new Date().getTime() ? (isClaimed ? 'Already claimed' : 'Harvest') : undefined)}
+                  disabled={
+                    purchasedAmount <= 0 ||
+                    claimAt * 1000 > new Date().getTime() ||
+                    pendingHarvestTx ||
+                    isClaimed
+                  }
+                  text={
+                    pendingHarvestTx
+                      ? 'Pending Confirmation'
+                      : claimAt * 1000 <= new Date().getTime()
+                      ? isClaimed
+                        ? 'Already claimed'
+                        : 'Harvest'
+                      : undefined
+                  }
                   onClick={async () => {
                     if (tokenPurchased > 0) {
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest()
                       setPendingHarvestTx(false)
                       if (tx) {
-                        console.log("harvest " + tx)
+                        console.log('harvest ' + tx)
                         setSuccessHarvestTx(true)
                         onPresentSuccessHarvest()
                         reset()
-                      }
-                      else {
+                      } else {
                         onPresentError()
                       }
                     }
