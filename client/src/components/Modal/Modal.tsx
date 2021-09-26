@@ -31,6 +31,8 @@ const StyledResponsiveWrapper = styled.div`
   width: 100%;
   max-width: 420px;
   max-height: 90vh;
+
+  border-radius: 20px;
   @media (max-width: ${(props) => props.theme.breakpoints.mobile}px) {
     flex: 1;
     position: absolute;
