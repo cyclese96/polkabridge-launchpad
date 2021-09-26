@@ -1,68 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
-import Container from '../../components/Container'
 import Page from '../../components/Page'
-// import PageHeader from '../../components/PageHeader'
-import Spacer from '../../components/Spacer'
-import Balances from './components/Balances'
-import CustomCountDown from './components/CustomCountDown'
 import { START_REWARD_AT_BLOCK } from '../../pbr/lib/constants'
-import PolkaBridgeLogo from '../../assets/img/logo-icon.svg'
 import LaunchpadCards from '../Launchpads/components/LaunchpadCards'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button } from '@material-ui/core'
-import LaunchpadRight from '../Launchpads/components/LaunchpadRight'
 
 const useStyles = makeStyles((theme) => ({
-  earn: {
-    textAlign: 'center',
-    color: '#f9f9f9',
-    fontSize: 12,
-  },
-  title: {
-    color: '#e5e5e5',
-    fontSize: 24,
-    fontWeight: 600,
-    textAlign: 'left',
-    [theme.breakpoints.down('sm')]: {
-      fontSize: 22,
-    },
-  },
-
-  desktop: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-evenly',
-    alignItems: 'space-around',
-    [theme.breakpoints.down('sm')]: {
-      flexDirection: 'column',
-    },
-  },
-  tokenAmount: {
-    fontWeight: 700,
-    padding: 0,
-    paddingLeft: 10,
-    fontSize: 18,
-    color: '#C80C81',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  tokenTitle: {
-    fontWeight: 500,
-    padding: 0,
-    paddingLeft: 10,
-    fontSize: 14,
-    paddingBottom: 3,
-    color: '#e5e5e5',
-  },
-  tokenSubtitle: {
-    fontWeight: 300,
-    padding: 0,
-    paddingLeft: 10,
-    fontSize: 12,
-    color: '#bdbdbd',
-  },
   card: {
     minHeight: 300,
     width: '100%',
@@ -91,27 +35,7 @@ const useStyles = makeStyles((theme) => ({
       marginBottom: 10,
     },
   },
-  buynow: {
-    background: `linear-gradient(to bottom,#D9047C, #BF1088)`,
-    color: 'white',
-    width: 300,
-    height: 45,
-    textDecoration: 'none',
-    textTransform: 'none',
-    fontSize: 20,
-    borderRadius: 40,
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 20,
-    '&:hover': {
-      background: 'rgba(224, 7, 125, 0.7)',
-    },
-    [theme.breakpoints.down('sm')]: {
-      width: 120,
-      fontSize: 15,
-    },
-  },
+
   background: {
     paddingTop: 50,
     paddingLeft: 50,
@@ -159,6 +83,20 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       justifyContent: 'space-between',
+    },
+  },
+  earn: {
+    textAlign: 'center',
+    color: '#f9f9f9',
+    fontSize: 12,
+  },
+  title: {
+    color: '#e5e5e5',
+    fontSize: 24,
+    fontWeight: 600,
+    textAlign: 'left',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 22,
     },
   },
 }))

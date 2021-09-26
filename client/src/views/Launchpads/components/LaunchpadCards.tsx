@@ -6,7 +6,6 @@ import Button from '../../../components/Button'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
-import Loader from '../../../components/Loader'
 import Spacer from '../../../components/Spacer'
 import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
@@ -218,19 +217,9 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               </>
             )}
             <Button
-              // disabled={!poolActive || progress == new BigNumber("100")}
-              // text={poolActive ? 'View' : (progress == new BigNumber("100") ? 'Ended' : undefined)}
               text="View"
               onClick={() => handleLaunchpadClick(launchpad)}
-              // to={`/launchpads/view/${launchpad.id}/${launchpad.pid}`}
-            >
-              {/* {!poolActive && (
-                <Countdown
-                  date={new Date(launchpad.startAt * 1000)}
-                  renderer={renderer}
-                />
-              )} */}
-            </Button>
+            ></Button>
           </StyledContent>
         </CardContent>
       </Card>
@@ -239,7 +228,6 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 }
 
 const RainbowLight = keyframes`
-
 	0% {
 		background-position: 0% 50%;
 	}
@@ -324,7 +312,6 @@ const StyledCardWrapper = styled.div`
   border-radius: 24px;
   border: 3px solid #212121;
 `
-
 const StyledTitle = styled.h4`
   color: ${(props) => props.theme.color.white};
   font-size: 20px;
@@ -341,7 +328,6 @@ const StyledContent = styled.div`
 const StyledTopIcon = styled.div`
   // position: relative;
 `
-
 const StyledHotIcon = styled.div`
   position: absolute;
   background-color: gray;
@@ -355,7 +341,6 @@ const StyledHotIcon = styled.div`
   color: #fff;
   font-size: 9px;
 `
-
 const StyledNewIcon = styled.div`
   position: absolute;
   padding: 8px 40px 8px;
@@ -374,17 +359,14 @@ const StyledSpacer = styled.div`
   height: ${(props) => props.theme.spacing[4]}px;
   width: ${(props) => props.theme.spacing[4]}px;
 `
-
 const StyledDetails = styled.div`
   margin-top: ${(props) => props.theme.spacing[2]}px;
   text-align: center;
 `
-
 const StyledDetail = styled.div`
   color: ${(props) => props.theme.color.grey[100]};
   font-size: 14px;
 `
-
 const StyledInsight = styled.div`
   display: flex;
   justify-content: space-between;
@@ -407,7 +389,6 @@ const StyledProgress = styled.a`
   background: #f2f0eb;
   border-radius: 5px;
 `
-
 const StyledProgressText = styled.p`
   margin-top: 4px;
   margin-bottom: 0;
@@ -425,5 +406,4 @@ const StyledProgressBar = styled.i`
   border-radius: 5px;
   font-size: 14px;
 `
-
 export default LaunchpadCards

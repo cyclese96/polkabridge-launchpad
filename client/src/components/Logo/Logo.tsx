@@ -8,7 +8,7 @@ const Logo: React.FC = () => {
   return (
     <StyledLogo to="/">
       <img
-        className="d-sm-none"
+        className="d-sm-non"
         src={PolkaBridge}
         height="38"
         style={{ marginTop: -4 }}

@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-
 import Container from '../Container'
 import Logo from '../Logo'
 import MenuIcon from '../../assets/img/menu.svg'
-
 import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
 import { useEffect } from 'react'
