@@ -5,6 +5,8 @@ import { START_REWARD_AT_BLOCK } from '../../pbr/lib/constants'
 import LaunchpadCards from '../Launchpads/components/LaunchpadCards'
 import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button } from '@material-ui/core'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
+import useNetwork from '../../hooks/useNetwork'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -37,8 +39,10 @@ const useStyles = makeStyles((theme) => ({
   },
 
   background: {
-    paddingTop: 50,
-    paddingLeft: 50,
+    paddingTop: 70,
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
     [theme.breakpoints.down('sm')]: {
       paddingLeft: 0,
       paddingRight: 0,
@@ -75,11 +79,13 @@ const useStyles = makeStyles((theme) => ({
   },
 
   headStyle: {
+    width: 950,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
     paddingTop: 10,
+    paddingBottom: 20,
     [theme.breakpoints.down('sm')]: {
       flexDirection: 'column',
       justifyContent: 'space-between',
@@ -95,6 +101,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: 600,
     textAlign: 'left',
+    paddingTop: 30,
     [theme.breakpoints.down('sm')]: {
       fontSize: 22,
     },
@@ -103,13 +110,24 @@ const useStyles = makeStyles((theme) => ({
 
 const Home: React.FC = () => {
   const classes = useStyles()
+
   var block = 99999999999
   const launchBlock = START_REWARD_AT_BLOCK
   const [atDate, setDate] = useState<any>()
 
+  const { account, connect, status } = useWallet()
+  useEffect(() => {
+    if (
+      localStorage.useWalletConnectStatus === 'connected' &&
+      localStorage.useWalletConnectType
+    ) {
+      connect(localStorage.useWalletConnectType)
+    }
+  }, [])
+
   return (
     <Page>
-      <div className="container">
+      <div className="container ">
         <div className={classes.background}>
           <div className={classes.headStyle}>
             <div>
@@ -118,7 +136,11 @@ const Home: React.FC = () => {
             </div>
             <div className="d-flex justify-content-end">
               <a
-                style={{ textDecoration: 'none', marginRight: 10 }}
+                style={{
+                  textDecoration: 'none',
+                  marginRight: 10,
+                  paddingTop: 30,
+                }}
                 target="_blank"
                 href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4"
               >
@@ -128,7 +150,7 @@ const Home: React.FC = () => {
                 <div></div>
               </a>
               <a
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: 'none', paddingTop: 30 }}
                 target="_blank"
                 href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
               >
@@ -144,63 +166,6 @@ const Home: React.FC = () => {
     </Page>
   )
 }
-
-const StyledInfo = styled.h3`
-  color: ${(props) => props.theme.color.white};
-  font-size: 16px;
-  font-weight: 400;
-  margin: 0;
-  padding: 0;
-  text-align: center;
-  display: flex;
-  align-items: start;
-  justify-content: center;
-  > img {
-    width: 20px;
-    margin-right: 3px;
-  }
-  b {
-    color: ${(props) => props.theme.color.primary.main};
-  }
-`
-const StyledHeading = styled.h2`
-  color: ${(props) => props.theme.color.white};
-  text-transform: uppercase;
-  text-align: center;
-  margin-bottom: 0;
-  margin-top: 0;
-`
-const StyledParagraph = styled.p`
-  color: ${(props) => props.theme.color.grey[100]};
-  text-align: center;
-  margin-top: 10px;
-`
-
-const ReadMore = styled.a`
-  text-decoration: none;
-  font-weight: bold;
-  color: #ffffff;
-  display: inline-block;
-  padding: 5px 20px;
-  border-radius: 5px;
-  border: 1px solid #e0077d70;
-  background: #ffec0b0d;
-  font-size: 14px;
-  margin-top: 10px;
-`
-
-const StyledLogo = styled.div`
-  .d-md-none {
-    @media (max-width: 1024px) {
-      display: none;
-    }
-  }
-  .d-lg-none {
-    @media (min-width: 1025px) {
-      display: none;
-    }
-  }
-`
 
 const Box = styled.div`
   &.mt-4 {
