@@ -6,7 +6,7 @@ import "@openzeppelin/contracts/ownership/Ownable.sol";
 import "./ReentrancyGuard.sol";
 
 contract PolkaBridgeLaunchPadBSC is Ownable, ReentrancyGuard {
-    string public name = "PolkaBridge: LaunchPad v3 BSC";
+    string public name = "PolkaBridge: LaunchPad";
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 
@@ -210,8 +210,8 @@ contract PolkaBridgeLaunchPadBSC is Ownable, ReentrancyGuard {
         //check amount
         uint256 ethAmount = msg.value;
         whitelist[pid][msg.sender].TotalETHPurchase = whitelist[pid][msg.sender]
-        .TotalETHPurchase
-        .add(ethAmount);
+            .TotalETHPurchase
+            .add(ethAmount);
         if (pools[poolIndex].Type == 2) {
             //private
             require(
@@ -241,9 +241,7 @@ contract PolkaBridgeLaunchPadBSC is Ownable, ReentrancyGuard {
 
         whitelist[pid][msg.sender].TotalTokenPurchase = whitelist[pid][
             msg.sender
-        ]
-        .TotalTokenPurchase
-        .add(tokenAmount);
+        ].TotalTokenPurchase.add(tokenAmount);
 
         pools[poolIndex].TotalSold = pools[poolIndex].TotalSold.add(
             tokenAmount
