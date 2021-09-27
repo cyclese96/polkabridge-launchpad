@@ -37,7 +37,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
           onClick={handleUnlockClick}
           size="sm"
           variant="secondary"
-          text="Unlock Wallet"
+          text="Connect Wallet"
         />
       ) : (
         <BoxWallet>

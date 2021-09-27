@@ -95,6 +95,7 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 24,
     fontWeight: 600,
     textAlign: 'left',
+    paddingTop: 30,
     [theme.breakpoints.down('sm')]: {
       fontSize: 22,
     },
@@ -118,7 +119,11 @@ const Home: React.FC = () => {
             </div>
             <div className="d-flex justify-content-end">
               <a
-                style={{ textDecoration: 'none', marginRight: 10 }}
+                style={{
+                  textDecoration: 'none',
+                  marginRight: 10,
+                  paddingTop: 30,
+                }}
                 target="_blank"
                 href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4"
               >
@@ -128,7 +133,7 @@ const Home: React.FC = () => {
                 <div></div>
               </a>
               <a
-                style={{ textDecoration: 'none' }}
+                style={{ textDecoration: 'none', paddingTop: 30 }}
                 target="_blank"
                 href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
               >
