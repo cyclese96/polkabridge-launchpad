@@ -15,10 +15,14 @@ interface WalletCardProps {
 const WalletCard: React.FC<WalletCardProps> = ({ icon, onConnect, title }) => (
   <Card>
     <CardContentWallet>
-      <Button variant="transparent" onClick={onConnect} margin="5px 0" justify="space-between">
+      <div
+        onClick={onConnect}
+        className="d-flex justify-content-between p-2"
+        style={{ marginLeft: 10 }}
+      >
         <CardTitle text={title} />
         {icon}
-      </Button>
+      </div>
     </CardContentWallet>
   </Card>
 )

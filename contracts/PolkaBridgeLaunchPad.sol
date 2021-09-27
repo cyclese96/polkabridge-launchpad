@@ -7,7 +7,7 @@ import "./ReentrancyGuard.sol";
 import "./PolkaBridgeStaking.sol";
 
 contract PolkaBridgeLaunchPad is Ownable, ReentrancyGuard {
-    string public name = "PolkaBridge: LaunchPad v3";
+    string public name = "PolkaBridge: LaunchPad";
     using SafeMath for uint256;
     using SafeERC20 for IERC20;
 

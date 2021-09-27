@@ -1,10 +1,8 @@
-import React, {useState} from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
-
 import Container from '../Container'
 import Logo from '../Logo'
 import MenuIcon from '../../assets/img/menu.svg'
-
 import AccountButton from './components/AccountButton'
 import Nav from './components/Nav'
 import { useEffect } from 'react'
@@ -16,27 +14,12 @@ interface TopBarProps {
 
 const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
   const [showMenu, setShowMenu] = useState(false)
-  const {chainId, status } = useNetwork() 
-
-
-  useEffect(() => {
-    console.log('TopBar:  network id', chainId)
-    console.log('TopBar: status', status)
-    if (status === 'network changing') {
-      var result =  window.confirm( "Do you want reload the page ?" );
-    if ( result ) {
-        window.location.reload()
-    } else {
-        console.log('closed')
-    }
-    }
-  },[chainId] )
 
   return (
     <StyledTopBar>
       <Container size="lg">
         <StyledTopBarInner>
-          <div style={{display: 'flex', alignItems: 'center'}}>
+          <div style={{ display: 'flex', alignItems: 'center' }}>
             <StyledLogoWrapper>
               <Logo />
             </StyledLogoWrapper>
@@ -45,9 +28,19 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             </WrapMenuDesktop>
           </div>
           <StyledAccountButtonWrapper>
-            <AccountButton />
+            {/* <AccountButton account="" status={true} /> */}
             <WrapIconMenu>
-              <img onClick={()=> setShowMenu(!showMenu)} className="d-md-none" src={MenuIcon} width="25" style={{ marginLeft: '10px', marginTop: '5px', cursor: 'pointer' }} />
+              <img
+                onClick={() => setShowMenu(!showMenu)}
+                className="d-md-none"
+                src={MenuIcon}
+                width="25"
+                style={{
+                  marginLeft: '10px',
+                  marginTop: '5px',
+                  cursor: 'pointer',
+                }}
+              />
             </WrapIconMenu>
           </StyledAccountButtonWrapper>
         </StyledTopBarInner>
@@ -113,7 +106,7 @@ const StyledAccountButtonWrapper = styled.div`
   align-items: center;
   display: flex;
   justify-content: flex-end;
-//   width: 156px;
+  //   width: 156px;
   @media (max-width: 767px) {
     justify-content: center;
     width: auto;

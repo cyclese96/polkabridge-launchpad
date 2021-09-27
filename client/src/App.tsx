@@ -16,7 +16,8 @@ import Home from './views/Home'
 import config from './config'
 import { getCurrentAccount, getCurrentNetworkId } from './pbr/utils'
 import useNetwork from './hooks/useNetwork'
-import {isMobile } from 'react-device-detect'
+import { isMobile } from 'react-device-detect'
+import Navbar from './components/TopBar/components/Navbar'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -32,17 +33,18 @@ const App: React.FC = () => {
   return (
     <Providers>
       {/* <Router> */}
-        <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
-        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} />
-       
-        <Switch>
-          <Route path="/" exact>
-            <Home />
-          </Route>
-          <Route path="/launchpads">
-            <Launchpads />
-          </Route>
-        </Switch>
+      {/* <TopBar onPresentMobileMenu={handlePresentMobileMenu} />
+        <MobileMenu onDismiss={handleDismissMobileMenu} visible={mobileMenu} /> */}
+      <Navbar />
+
+      <Switch>
+        <Route path="/" exact>
+          <Home />
+        </Route>
+        <Route path="/launchpads">
+          <Launchpads />
+        </Route>
+      </Switch>
       {/* </Router> */}
       <Disclaimer />
     </Providers>
@@ -50,30 +52,29 @@ const App: React.FC = () => {
 }
 
 const Providers: React.FC = ({ children }) => {
-  const {chainId ,changeNetwork, setConnected, status } = useNetwork()
-  
+  const { chainId, changeNetwork, setConnected, status } = useNetwork()
+
   useEffect(() => {
-    (async () => {
+    ;(async () => {
       if (isMobile) {
         //enable window.ethereum for mobile device
         const account = await getCurrentAccount()
       }
       console.log('prev  id', chainId)
-      const _id =  await getCurrentNetworkId()
+      const _id = await getCurrentNetworkId()
       console.log('network id ', _id)
       changeNetwork(_id)
       if (Number(_id) !== Number(chainId)) {
-        if(isMobile) {
+        if (isMobile) {
           window.location.reload()
         }
       }
       localStorage.chainId = _id
-  })();
-    
-  },[chainId,changeNetwork ] )
+    })()
+  }, [chainId, changeNetwork])
   return (
     <ThemeProvider theme={theme}>
-        <UseWalletProvider
+      <UseWalletProvider
         chainId={chainId}
         connectors={{
           walletconnect: { rpcUrl: config.rpc },
@@ -83,7 +84,7 @@ const Providers: React.FC = ({ children }) => {
           <TransactionProvider>
             <LaunchpadsProvider>
               <Router>
-              <ModalsProvider>{children}</ModalsProvider>
+                <ModalsProvider>{children}</ModalsProvider>
               </Router>
             </LaunchpadsProvider>
           </TransactionProvider>
