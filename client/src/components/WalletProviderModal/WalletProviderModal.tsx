@@ -22,6 +22,10 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, connect, status, error } = useWallet()
   const { chainId } = useNetwork()
 
+  const test = useWallet()
+  useEffect(() => {
+    console.log('useWallet', test)
+  }, [test])
   useEffect(() => {
     if (account) {
       onDismiss()
@@ -53,7 +57,10 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <ModalContent>
           <StyledWalletsWrapper>
             <StyledWalletCard>
-              <div onClick={() => tryConnect('injected')}>
+              <div
+                onClick={() => tryConnect('injected')}
+                style={{ cursor: 'pointer' }}
+              >
                 <WalletCard
                   icon={<img src={metamaskLogo} style={{ width: 32 }} />}
                   onConnect={() => tryConnect('injected')}
@@ -62,7 +69,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
               </div>
             </StyledWalletCard>
             <StyledWalletCard>
-              <div onClick={() => tryConnect('injected')}>
+              <div onClick={() => tryConnect('walletconnect')}>
                 <WalletCard
                   icon={<img src={walletConnectLogo} style={{ width: 32 }} />}
                   onConnect={() => tryConnect('walletconnect')}
@@ -72,7 +79,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
             </StyledWalletCard>
             {/* <Spacer size="sm" /> */}
             <StyledWalletCard>
-              <div>
+              <div onClick={() => tryConnect('injected')}>
                 <WalletCard
                   icon={<img src={trustWalletLogo} style={{ width: 32 }} />}
                   onConnect={() => tryConnect('injected')}

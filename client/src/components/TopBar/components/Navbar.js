@@ -27,6 +27,7 @@ import { EqualizerOutlined } from '@material-ui/icons'
 // import polygonIcon from '../../assets/polygon.png'
 import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 // import { bscNetwork, etheriumNetwork, maticNetwork } from '../../constants'
 
 const useStyles = makeStyles((theme) => ({
@@ -241,6 +242,9 @@ const Navbar = () => {
   const handleClose = () => {
     showAlert({ status: false, message: '' })
   }
+
+  const { account, connect, status } = useWallet()
+
   const list = (anchor) => (
     <div
       className={clsx(classes.list, {
@@ -296,7 +300,11 @@ const Navbar = () => {
         ))}
         <Divider />
         <ListItem button style={{ marginLeft: 20 }}>
-          <AccountButton onWalletClick={() => setAccountDialog(true)} />
+          <AccountButton
+            account={account}
+            status={status}
+            onWalletClick={() => setAccountDialog(true)}
+          />
         </ListItem>
       </List>
     </div>
@@ -378,7 +386,11 @@ const Navbar = () => {
 
           <div className={classes.grow} />
           <div style={{ paddingRight: 10 }}></div>
-          <AccountButton onWalletClick={() => setAccountDialog(true)} />
+          <AccountButton
+            account={account}
+            status={status}
+            onWalletClick={() => setAccountDialog(true)}
+          />
         </Toolbar>
 
         <Toolbar className={classes.sectionMobile}>

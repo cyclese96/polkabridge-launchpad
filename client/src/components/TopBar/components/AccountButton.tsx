@@ -6,7 +6,10 @@ import Button from '../../Button'
 import WalletProviderModal from '../../WalletProviderModal'
 import AccountModal from './AccountModal'
 
-interface AccountButtonProps {}
+interface AccountButtonProps {
+  account: string
+  status: boolean
+}
 
 const AccountButton: React.FC<AccountButtonProps> = (props) => {
   const [onPresentAccountModal] = useModal(<AccountModal />)
@@ -15,14 +18,18 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
     'provider',
   )
 
-  const { account, connect } = useWallet()
+  const { connect } = useWallet()
 
   useEffect(() => {
     if (
       localStorage.useWalletConnectStatus === 'connected' &&
       localStorage.useWalletConnectType
     ) {
-      connect(localStorage.useWalletConnectType)
+      // connect(localStorage.useWalletConnectType)
+      // console.log('connected', props.account)
+      console.log('connected status', props.status)
+    } else {
+      console.log('not connected ', props.account)
     }
   }, [])
 
@@ -32,7 +39,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 
   return (
     <StyledAccountButton>
-      {!account ? (
+      {!props.account ? (
         <Button
           onClick={handleUnlockClick}
           size="sm"
@@ -41,7 +48,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
         />
       ) : (
         <BoxWallet>
-          <div>{account.substr(0, 7)}...</div>
+          <div>{props.account && props.account.substr(0, 7)}...</div>
           <Button
             onClick={onPresentAccountModal}
             size="sm"
