@@ -10,15 +10,13 @@ const Page: React.FC = ({ children }) => (
 )
 
 const StyledPage = styled.div`
-  padding-left: 15px;
-  padding-right: 15px;
-  *,
-  *:before,
-  *:after {
-    -moz-box-sizing: border-box;
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-  }
+    padding-left: 15px;
+    padding-right: 15px;
+    *, *:before, *:after {
+        -moz-box-sizing: border-box; 
+        -webkit-box-sizing: border-box; 
+        box-sizing: border-box;
+    }
 `
 
 const StyledMain = styled.div`
