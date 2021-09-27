@@ -20,19 +20,6 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 
   const { connect } = useWallet()
 
-  useEffect(() => {
-    if (
-      localStorage.useWalletConnectStatus === 'connected' &&
-      localStorage.useWalletConnectType
-    ) {
-      // connect(localStorage.useWalletConnectType)
-      // console.log('connected', props.account)
-      console.log('connected status', props.status)
-    } else {
-      console.log('not connected ', props.account)
-    }
-  }, [])
-
   const handleUnlockClick = useCallback(() => {
     onPresentWalletProviderModal()
   }, [onPresentWalletProviderModal])
