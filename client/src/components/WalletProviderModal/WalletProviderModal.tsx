@@ -22,10 +22,6 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const { account, connect, status, error } = useWallet()
   const { chainId } = useNetwork()
 
-  const test = useWallet()
-  useEffect(() => {
-    console.log('useWallet', test)
-  }, [test])
   useEffect(() => {
     if (account) {
       onDismiss()
@@ -57,44 +53,34 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
         <ModalContent>
           <StyledWalletsWrapper>
             <StyledWalletCard>
-              <div
-                onClick={() => tryConnect('injected')}
-                style={{ cursor: 'pointer' }}
-              >
-                <WalletCard
-                  icon={<img src={metamaskLogo} style={{ width: 32 }} />}
-                  onConnect={() => tryConnect('injected')}
-                  title="Metamask"
-                />
-              </div>
+              <WalletCard
+                icon={<img src={metamaskLogo} style={{ width: 32 }} />}
+                onConnect={() => tryConnect('injected')}
+                title="Metamask"
+              />
             </StyledWalletCard>
             <StyledWalletCard>
-              <div onClick={() => tryConnect('walletconnect')}>
-                <WalletCard
-                  icon={<img src={walletConnectLogo} style={{ width: 32 }} />}
-                  onConnect={() => tryConnect('walletconnect')}
-                  title="WalletConnect"
-                />
-              </div>
+              <WalletCard
+                icon={<img src={walletConnectLogo} style={{ width: 32 }} />}
+                onConnect={() => tryConnect('walletconnect')}
+                title="WalletConnect"
+              />
             </StyledWalletCard>
+
             {/* <Spacer size="sm" /> */}
             <StyledWalletCard>
-              <div onClick={() => tryConnect('injected')}>
-                <WalletCard
-                  icon={<img src={trustWalletLogo} style={{ width: 32 }} />}
-                  onConnect={() => tryConnect('injected')}
-                  title="Trust Wallet"
-                />
-              </div>
+              <WalletCard
+                icon={<img src={trustWalletLogo} style={{ width: 32 }} />}
+                onConnect={() => tryConnect('injected')}
+                title="Trust Wallet"
+              />
             </StyledWalletCard>
             <StyledWalletCard>
-              <div onClick={() => tryConnect('injected')}>
-                <WalletCard
-                  icon={<img src={coin98Logo} style={{ width: 32 }} />}
-                  onConnect={() => tryConnect('injected')}
-                  title="Coin98 Wallet"
-                />
-              </div>
+              <WalletCard
+                icon={<img src={coin98Logo} style={{ width: 32 }} />}
+                onConnect={() => tryConnect('injected')}
+                title="Coin98 Wallet"
+              />
             </StyledWalletCard>
           </StyledWalletsWrapper>
         </ModalContent>
