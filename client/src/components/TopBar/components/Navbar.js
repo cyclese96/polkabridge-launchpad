@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -18,17 +18,10 @@ import TouchAppOutlined from '@material-ui/icons/TouchAppOutlined'
 import VpnLockOutlined from '@material-ui/icons/VpnLockOutlined'
 import CategoryIcon from '@material-ui/icons/Category'
 
-// import CustomSnackBar from './CustomSnackbar'
 import { EqualizerOutlined } from '@material-ui/icons'
-// import Wallet from './Wallet'
-// import AccountDialog from './AccountDialog'
-// import etherIcon from '../../assets/ether.png'
-// import binanceIcon from '../../assets/binance.png'
-// import polygonIcon from '../../assets/polygon.png'
 import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-// import { bscNetwork, etheriumNetwork, maticNetwork } from '../../constants'
+import useNetwork from '../../../hooks/useNetwork'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -243,7 +236,20 @@ const Navbar = () => {
     showAlert({ status: false, message: '' })
   }
 
-  const { account, connect, status } = useWallet()
+  const { chainId, status } = useNetwork()
+
+  useEffect(() => {
+    console.log('useNetwork:  network id', chainId)
+    console.log('useNetwork: status', status)
+    if (status === 'network changing') {
+      var result = window.confirm('Do you want reload the page ?')
+      if (result) {
+        window.location.reload()
+      } else {
+        console.log('closed')
+      }
+    }
+  }, [chainId])
 
   const list = (anchor) => (
     <div
@@ -300,11 +306,7 @@ const Navbar = () => {
         ))}
         <Divider />
         <ListItem button style={{ marginLeft: 20 }}>
-          <AccountButton
-            account={account}
-            status={status}
-            onWalletClick={() => setAccountDialog(true)}
-          />
+          <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </ListItem>
       </List>
     </div>
@@ -386,11 +388,7 @@ const Navbar = () => {
 
           <div className={classes.grow} />
           <div style={{ paddingRight: 10 }}></div>
-          <AccountButton
-            account={account}
-            status={status}
-            onWalletClick={() => setAccountDialog(true)}
-          />
+          <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </Toolbar>
 
         <Toolbar className={classes.sectionMobile}>

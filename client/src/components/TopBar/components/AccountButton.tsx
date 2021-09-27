@@ -18,7 +18,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
     'provider',
   )
 
-  const { connect } = useWallet()
+  const { account } = useWallet()
 
   const handleUnlockClick = useCallback(() => {
     onPresentWalletProviderModal()
@@ -26,7 +26,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
 
   return (
     <StyledAccountButton>
-      {!props.account ? (
+      {!account ? (
         <Button
           onClick={handleUnlockClick}
           size="sm"
@@ -35,7 +35,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
         />
       ) : (
         <BoxWallet>
-          <div>{props.account && props.account.substr(0, 7)}...</div>
+          <div>{account && account.substr(0, 7)}...</div>
           <Button
             onClick={onPresentAccountModal}
             size="sm"

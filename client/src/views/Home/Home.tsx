@@ -125,21 +125,6 @@ const Home: React.FC = () => {
     }
   }, [])
 
-  const { chainId, status: any } = useNetwork()
-
-  useEffect(() => {
-    console.log('TopBar:  network id', chainId)
-    console.log('TopBar: status', status)
-    if (status === 'network changing') {
-      var result = window.confirm('Do you want reload the page ?')
-      if (result) {
-        window.location.reload()
-      } else {
-        console.log('closed')
-      }
-    }
-  }, [chainId])
-
   return (
     <Page>
       <div className="container ">
