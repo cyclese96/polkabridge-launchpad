@@ -470,44 +470,44 @@ export const supportedPools = [
     claimAt: 0,
     startDate: 'TBA',
   },
-  // {
-  //   pid: 6,
-  //   lpAddresses: {
-  //     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-  //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-  //   },
-  //   tokenAddresses: {
-  //     1: '',
-  //     42: '',
-  //   },
-  //   lpExplorer: 'https://etherscan.io/address',
-  //   name: 'Shoefy',
-  //   symbol: 'SHOE-PBR',
-  //   description: `SHOE/ETH`,
-  //   introduce: `Shoefy - Contemporary way of repositioning the Non-Fungible Token (NFT) in an unprecedented method with the help of Fungible Tokens (FT`,
-  //   website: 'https://www.shoefy.io/',
-  //   twitter: 'https://twitter.com/ShoeFyio',
-  //   telegram: 'https://t.me/ShoeFy_Official',
-  //   whitepaper: 'https://docsend.com/view/s/3y24gmfcbcdnvmmg',
-  //   tokenSymbol: 'SHOE',
-  //   tokenExplorer: 'https://etherscan.io/token',
-  //   icon: '/img/tokens/shoefy.png',
-  //   totalSupply: '100,000,000 SHOE',
-  //   total: '33 ETH',//1ETH =3k$
-  //   ratio: 0,
-  //   min: 0.166,//500$
-  //   max: 0.233,//700$
-  //   maxTier1: 0.166,//500$
-  //   maxTier2: 0.2,//600$
-  //   maxTier3: 0.233,//700$
-  //   access: 'Private',
-  //   network: ethereumNetwork,
-  //   distribution: 'TBA',
-  //   startAt: 0,
-  //   endAt: 1734569200,
-  //   claimAt: 0,
-  //   startDate: "TBA"
-  // },
+  {
+    pid: 6,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'Shoefy',
+    symbol: 'SHOE-PBR',
+    description: `SHOE/ETH`,
+    introduce: `Shoefy - Contemporary way of repositioning the Non-Fungible Token (NFT) in an unprecedented method with the help of Fungible Tokens (FT`,
+    website: 'https://www.shoefy.io/',
+    twitter: 'https://twitter.com/ShoeFyio',
+    telegram: 'https://t.me/ShoeFy_Official',
+    whitepaper: 'https://docsend.com/view/s/3y24gmfcbcdnvmmg',
+    tokenSymbol: 'SHOE',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/shoefy.png',
+    totalSupply: '100,000,000 SHOE',
+    total: '33 ETH',//1ETH =3k$
+    ratio: 0,
+    min: 0.166,//500$
+    max: 0.233,//700$
+    maxTier1: 0.166,//500$
+    maxTier2: 0.2,//600$
+    maxTier3: 0.233,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 0,
+    endAt: 1635094800,
+    claimAt: 0,
+    startDate: "TBA"
+  },
 ]
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
