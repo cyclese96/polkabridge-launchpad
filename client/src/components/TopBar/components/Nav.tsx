@@ -91,6 +91,7 @@ const Nav: React.FC<NavProp> = ({ showMenu }) => {
       <StyledAbsoluteLink href="/" className={classes.navbarItemsDesktop}>
         Farm
         <DotCircle />
+        
       </StyledAbsoluteLink>
       <StyledAbsoluteLink
         href="https://launchpad.polkabridge.org"
