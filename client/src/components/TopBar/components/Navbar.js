@@ -334,7 +334,7 @@ const Navbar = () => {
 
           <div className="d-flex justify-content-end">
             <div>
-              <a href="/" className={classes.navbarItemsDesktop}>
+              <a href="https://stake.polkabridge.org" className={classes.navbarItemsDesktop}>
                 Stake <DotCircle active={true} />
               </a>
             </div>

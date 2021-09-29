@@ -465,7 +465,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 0,
+    startAt: 1634713200,
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
@@ -503,7 +503,45 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 0,
+    startAt: 1634713200,
+    endAt: 1635094800,
+    claimAt: 0,
+    startDate: "TBA"
+  },
+  {
+    pid: 7,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'SolClout',
+    symbol: 'SOLC-PBR',
+    description: `SOLC/ETH`,
+    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project`,
+    website: 'https://solclout.com/',
+    twitter: 'https://twitter.com/solclout',
+    telegram: 'https://t.me/solclout',
+    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
+    tokenSymbol: 'SOLC',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/solc.png',
+    totalSupply: '1,000,000,000 SOLC',
+    total: '33 ETH',//1ETH =3k$
+    ratio: 0,
+    min: 0.166,//500$
+    max: 0.233,//700$
+    maxTier1: 0.166,//500$
+    maxTier2: 0.2,//600$
+    maxTier3: 0.233,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 1635574214,
     endAt: 1635094800,
     claimAt: 0,
     startDate: "TBA"
