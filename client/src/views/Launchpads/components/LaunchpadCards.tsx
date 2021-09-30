@@ -19,8 +19,8 @@ import { isMobile } from 'react-device-detect'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
-  console.log('launchpads')
-  console.log(launchpads)
+  // console.log('launchpads')
+  // console.log(launchpads)
   const rows = launchpads
 
   return (

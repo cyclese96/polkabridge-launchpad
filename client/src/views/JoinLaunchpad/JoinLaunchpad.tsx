@@ -155,7 +155,8 @@ const JoinLaunchpad: React.FC = () => {
         getIsWhitelist(
           network === bscNetwork ? lpBscContract : lpContract,
           pid,
-          account,
+          stakedAmount,
+          account
         ),
         getETHBalance(ethereum, account),
         getHistory(account),

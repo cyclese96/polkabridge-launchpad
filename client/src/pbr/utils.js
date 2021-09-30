@@ -406,10 +406,10 @@ export const getProgress = async (lpContract, pid) => {
   }
 }
 
-export const getIsWhitelist = async (lpContract, pid, account) => {
+export const getIsWhitelist = async (lpContract, pid, stakeAmount, account) => {
   try {
     const isWhitelist = await lpContract.methods
-      .IsWhitelist(account, pid)
+      .IsWhitelist(account, pid, convertToWei(stakeAmount))
       .call()
     // console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
     return isWhitelist
@@ -459,6 +459,10 @@ const signedIdoString = async (stakeAmount, account) => {
 
 }
 
+const convertToWei = (amount) => {
+  const _amount = !amount ? '0' : amount;
+  return new BigNumber(_amount).times(new BigNumber(10).pow(18)).toString()
+}
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
 
@@ -468,16 +472,19 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
   const v = signedData.v;
   const r = signedData.r;
   const s = signedData.s;
+  const _stakeAmount = convertToWei(stakeAmount);
 
+
+  console.log({ _stakeAmount, pid, v, r, s, contractAddress: launchpadContract._address })
   return launchpadContract.methods
     .purchaseIDO(
-      new BigNumber(stakeAmount).times(new BigNumber(10).pow(18)).toString(),
+      _stakeAmount,
       pid,
       v,
       r,
       s
     )
-    .send({ from: account, value: new BigNumber(ethValue).times(new BigNumber(10).pow(18)).toString() })
+    .send({ from: account, value: convertToWei(ethValue) })
     .on('transactionHash', (tx) => {
       console.log(tx)
       return tx.transactionHash

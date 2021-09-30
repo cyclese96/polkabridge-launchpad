@@ -120,8 +120,10 @@ const Launchpad: React.FC = () => {
         network === bscNetwork ? lpBscContract : lpContract,
         pid,
       )
-      const stakeData = await getUserStakingData(pid, account)
-      const stakeDataPolygon = await getStaked(pid, account)
+      const [stakeData, stakeDataPolygon] = await Promise.all([
+        getUserStakingData(pid, account),
+        getStaked(pid, account)
+      ])
 
       // console.log('progress data ', newProgress)
       console.log('stake data polygon', stakeDataPolygon)

@@ -366,10 +366,10 @@ export const supportedPools = [
     startDate: 'Aug 05th 2021',
   },
   {
-    pid: 3,
+    pid: 1,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
