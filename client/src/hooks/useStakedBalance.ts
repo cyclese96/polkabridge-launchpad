@@ -15,7 +15,7 @@ const useStakedBalance = (pid: number) => {
   const block = useBlock()
 
   const fetchBalance = useCallback(async () => {
-    const balance = await getStaked(masterChefContract, pid, account)
+    const balance = await getStaked(pid, account)
     setBalance(new BigNumber(balance))
   }, [account, pid, pbr])
 

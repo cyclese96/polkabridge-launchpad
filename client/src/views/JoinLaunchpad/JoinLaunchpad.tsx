@@ -165,8 +165,8 @@ const JoinLaunchpad: React.FC = () => {
           pid,
           account,
         ),
-        getUserStakingData(lpContract, pid, account),
-        getStaked(lpContract, pid, account),
+        getUserStakingData(pid, account),
+        getStaked(pid, account),
         getUserInfo(
           network === bscNetwork ? lpBscContract : lpContract,
           pid,
@@ -178,7 +178,7 @@ const JoinLaunchpad: React.FC = () => {
       console.log('stakedData--->  ', stakedData)
       console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('userInfo--->  ', userInfo)
-      // console.log('newIsWhitelist--->  ', newIsWhitelist)
+      console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
@@ -190,7 +190,7 @@ const JoinLaunchpad: React.FC = () => {
       const _totalStakedAmount =
         stakedData && stakedDataPolygon
           ? Number(fromWei(stakedData.amount)) +
-            Number(fromWei(stakedDataPolygon.amount))
+          Number(fromWei(stakedDataPolygon.amount))
           : 0
       setStakedAmount(_totalStakedAmount)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
@@ -278,18 +278,18 @@ const JoinLaunchpad: React.FC = () => {
     return endAt * 1000 <= new Date().getTime()
       ? 'Ended'
       : pendingTx
-      ? 'Pending Confirmation'
-      : !isWhitelist
-      ? access === 'Public'
-        ? 'You are not whitelisted'
-        : 'You have not participated in the staking'
-      : startAt * 1000 <= new Date().getTime()
-      ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-        ? 'Join pool'
-        : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
-      : progress == new BigNumber('100')
-      ? 'Ended'
-      : undefined
+        ? 'Pending Confirmation'
+        : !isWhitelist
+          ? access === 'Public'
+            ? 'You are not whitelisted'
+            : 'You have not participated in the staking'
+          : startAt * 1000 <= new Date().getTime()
+            ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
+              ? 'Join pool'
+              : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
+            : progress == new BigNumber('100')
+              ? 'Ended'
+              : undefined
   }
 
   const isButtonDisable = () => {
@@ -413,7 +413,7 @@ const JoinLaunchpad: React.FC = () => {
                 <StyledInputContainer>
                   <StyledRow>
                     <StyledLabel>INPUT</StyledLabel>
-                    <StyledLabel>Your Wallet Balance: {ethBalance}</StyledLabel>
+                    <StyledLabel>Your Wallet Balance: {ethBalance.toFixed(4)}</StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
                     <StyledInput
@@ -489,12 +489,12 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={isButtonDisable()}
+                  disabled={false}
                   text={getJoinButtonText()}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
-                      var tx: any = await onJoinPool(ethValue)
+                      var tx: any = await onJoinPool(ethValue, stakedAmount)
                       setPendingTx(false)
                       if (tx) {
                         setSuccessTx(true)
@@ -554,10 +554,10 @@ const JoinLaunchpad: React.FC = () => {
                     pendingHarvestTx
                       ? 'Pending Confirmation'
                       : claimAt * 1000 <= new Date().getTime()
-                      ? isClaimed
-                        ? 'Already claimed'
-                        : 'Harvest'
-                      : undefined
+                        ? isClaimed
+                          ? 'Already claimed'
+                          : 'Harvest'
+                        : undefined
                   }
                   onClick={async () => {
                     if (tokenPurchased > 0) {
@@ -715,6 +715,9 @@ const StyledInfoLabel = styled.div`
   font-weight: 400;
   font-size: 13px;
   color: #ffffff;
+  @media (max-width: 767px) {
+    font-size: 10px;
+  }
 `
 
 const StyledInput = styled.input`

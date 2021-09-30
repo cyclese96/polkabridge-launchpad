@@ -49,6 +49,28 @@ export const contractAddresses = {
   },
 }
 
+export const currentConnection = true ? 'testnet' : 'mainnet';
+
+export const stakeContractAddresses = {
+  'ethereum': {
+    1: '0x1b46b72c5280f30Fbe8A958B4f3c348FD0fD2E55',
+    42: '0x7678f0AF7304e01554E2D49D96E55C8de4975c66'
+  },
+  'polygon': {
+    137: '0x6335aF028e77B574423733443678aD4cb9e15B3D',
+    80001: '0x55950cF279Ba5b43263f4Df54833b85F684B333F',
+  },
+  'harmony': {
+    //todo:
+  }
+}
+
+export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
+export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
+
+export const polygonMainnetInfuraRpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+export const polygonTestnetInfuraRpc = `https://polygon-mumbai.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+
 export const supportedPools = [
   {
     pid: -1,
@@ -376,9 +398,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1634565600,
+    startAt: 1632889124,
     endAt: 1634569200,
-    claimAt: 1634573700,
+    claimAt: 1632889124,
     startDate: 'Oct 18th 2021',
   },
   {

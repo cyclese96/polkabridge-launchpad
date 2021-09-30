@@ -2,11 +2,12 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
 import maticStakeAbi from '../contracts/MaticStakeContract.json'
+import stakingAbi from '../contracts/staking.json'
 
 import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
@@ -440,10 +441,41 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
   }
 }
 
-export const joinpool = async (launchpadContract, pid, ethValue, account) => {
+const signedIdoString = async (stakeAmount, account) => {
+  console.log(account, stakeAmount)
+  try {
+    var newstring = Web3.utils.soliditySha3(
+      { t: 'address', v: account },
+      { t: 'uint256', v: stakeAmount }
+    );
+    // console.log('signedIdoString', newstring)
+    const signedRes = await axios.post("http://localhost:5000/api/ido/sign/v1", { userString: newstring, apiKey: process.env.REACT_APP_IDO_API_KEY })
+
+    return signedRes.data;
+  } catch (error) {
+    console.log("signedIdoString", error)
+    return null
+  }
+
+}
+
+
+export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
+
+  const signedData = await signedIdoString(stakeAmount, account)
+  // console.log('signedIdoString', signedData)
+
+  const v = signedData.v;
+  const r = signedData.r;
+  const s = signedData.s;
+
   return launchpadContract.methods
     .purchaseIDO(
-      pid
+      new BigNumber(stakeAmount).times(new BigNumber(10).pow(18)).toString(),
+      pid,
+      v,
+      r,
+      s
     )
     .send({ from: account, value: new BigNumber(ethValue).times(new BigNumber(10).pow(18)).toString() })
     .on('transactionHash', (tx) => {
@@ -499,10 +531,13 @@ export const unstake = async (masterChefContract, pid, amount, account) => {
 //     })
 // }
 
-export const getStaked = async (masterChefContract, pid, account) => {
+export const getStaked = async (pid, account) => {
   try {
 
-    const maticStakeContract = getContractInstance(maticStakeAbi, stakeAddressMatic)
+    const abi = maticStakeAbi
+    const address = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
+    const maticStakeContract = getContractInstance(abi, address)
+
     const stakeDate = await maticStakeContract.methods
       .userInfo(0, account)
       .call()
@@ -574,17 +609,22 @@ export const leave = async (contract, amount, account) => {
       return tx.transactionHash
     })
 }
-
-export const getUserStakingData = async (lpContract, pid, account) => {
+// fetch user staking data
+export const getUserStakingData = async (pid, account) => {
 
   try {
-    const stakedData = await lpContract.methods
-      .getUserStakingData(account, 0)
+
+    const abi = stakingAbi;
+    const address = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42];
+    const stakeContract = getContractInstance(abi, address, 'ethereum')
+
+    const stakedData = await stakeContract.methods
+      .userInfo(0, account)
       .call()
 
     return stakedData
   } catch (e) {
-    // console.log(e)
+    console.log('getUserStakingData', e)
     return {}
   }
 }
@@ -669,8 +709,14 @@ export const getNetworkName = (networkId) => {
 }
 
 //matic connector
-const getContractInstance = (abi, contractAddress) => {
-  const rpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+const getContractInstance = (abi, contractAddress, network = 'polygon') => {
+
+  let rpc;
+  if (network === 'polygon') {
+    rpc = currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+  } else {
+    rpc = currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+  }
 
   const web3 = new Web3(rpc);
 
