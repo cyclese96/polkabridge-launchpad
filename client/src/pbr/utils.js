@@ -441,15 +441,9 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
   }
 }
 
-const signedIdoString = async (stakeAmount, account) => {
-  console.log(account, stakeAmount)
+const signedIdoString = async (account) => {
   try {
-    var newstring = Web3.utils.soliditySha3(
-      { t: 'address', v: account },
-      { t: 'uint256', v: stakeAmount }
-    );
-    // console.log('signedIdoString', newstring)
-    const signedRes = await axios.post("http://localhost:5000/api/ido/sign/v1", { userString: newstring, apiKey: process.env.REACT_APP_IDO_API_KEY })
+    const signedRes = await axios.post("http://localhost:5000/api/ido/sign/v1", { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
 
     return signedRes.data;
   } catch (error) {
@@ -466,8 +460,8 @@ const convertToWei = (amount) => {
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
 
-  const signedData = await signedIdoString(stakeAmount, account)
-  // console.log('signedIdoString', signedData)
+  const signedData = await signedIdoString(account)
+  console.log('signedIdoString', signedData)
 
   const v = signedData.v;
   const r = signedData.r;
