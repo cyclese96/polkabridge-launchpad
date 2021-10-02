@@ -389,7 +389,7 @@ export const supportedPools = [
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
     total: '20 ETH', //1ETH =3k$
-    ratio: 0,
+    ratio: 1000,
     min: 0.1, //300$
     max: 0.166, //500$
     maxTier1: 0.1, //300$
@@ -398,7 +398,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1632889124,
+    startAt: 1532889124,
     endAt: 1634569200,
     claimAt: 1632889124,
     startDate: 'Oct 18th 2021',

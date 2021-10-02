@@ -325,8 +325,8 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 poolIndex = pid.sub(1);
 
         if (pools[poolIndex].Type == 2) {
-            bytes32 hash = keccak256(abi.encodePacked(msg.sender, stakeAmount));
-            bytes32 messageHash = hash.toEthSignedMessageHash();
+            bytes32 _hash = keccak256(abi.encodePacked(msg.sender, stakeAmount));
+            bytes32 messageHash = _hash.toEthSignedMessageHash();
 
             require(
                 owner() == ecrecover(messageHash, v, r, s),
