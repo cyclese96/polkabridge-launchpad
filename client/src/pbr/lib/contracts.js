@@ -3,11 +3,13 @@ import ERC20Abi from './abi/erc20.json'
 import MasterChefAbi from './abi/masterchef.json'
 import PolkaBridgeAbi from './abi/pbr.json'
 import LaunchpadAbi from './abi/masterLaunchpad.json'
+import LaunchpadHarmonyAbi from './abi/launchpadHarmony.json'
 import LanchpadBscAbi from './abi/polkabridgeLaunchpadBsc.json'
 import WETHAbi from './abi/weth.json'
 import {
   bscNetwork,
   contractAddresses,
+  harmonyNetwork,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
 } from './constants.js'
@@ -34,6 +36,8 @@ export class Contracts {
   
     this.web3bsc = new Web3(window.ethereum)
     this.lanchpadBsc = new this.web3bsc.eth.Contract(LanchpadBscAbi)
+
+    this.masterLaunchpadHarmony = new this.web3.eth.Contract(LaunchpadHarmonyAbi)
     
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
@@ -47,7 +51,16 @@ export class Contracts {
           lpContract: new this.web3.eth.Contract(LaunchpadAbi),
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
         })
-      }else{
+      }else if(pool.network === harmonyNetwork){
+        return Object.assign(pool, {
+          lpAddress: pool.lpAddresses[networkId],
+          tokenAddress: pool.tokenAddresses[networkId],
+          lpHarmonyAddress: pool.lpBscAddresses[config.bscChain],//set network id for current bsc
+          lpHarmonyContract: new this.web3bsc.eth.Contract(LanchpadBscAbi),
+          lpContract: new this.web3.eth.Contract(LaunchpadAbi),
+          tokenContract: new this.web3.eth.Contract(ERC20Abi),
+        })
+      } else{
         return Object.assign(pool, {
           lpAddress: pool.lpAddresses[networkId],
           tokenAddress: pool.tokenAddresses[networkId],

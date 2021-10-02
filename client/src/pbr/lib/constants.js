@@ -28,6 +28,7 @@ export const INTEGERS = {
 
 export const ethereumNetwork = 'ethereum'
 export const bscNetwork = 'bsc'
+export const harmonyNetwork = 'harmony'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
@@ -529,6 +530,51 @@ export const supportedPools = [
     endAt: 1635094800,
     claimAt: 0,
     startDate: "TBA"
+  },
+  {
+    pid: 7,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpHarmonyAddresses: {
+      1666600001: 'one14692lysp8hy0073zlcq72cn3eyajgpv099vnwm', //mainnet
+      1666700001: 'one14692lysp8hy0073zlcq72cn3eyajgpv099vnwm', //testnet
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'DefiRating',
+    symbol: 'DRATE-PBR',
+    description: `DRATE/BNB`,
+    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
+    website: 'https://about.defirating.finance/',
+    twitter: 'https://twitter.com/QDefi',
+    telegram: 'https://t.me/qdr_ann',
+    whitepaper:
+      'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+    tokenSymbol: 'DRATE',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/defirate.png',
+    totalSupply: '200,000,000 DRATE',
+    total: '125 BNB',
+    ratio: 10554, //token price 0.0379, 1BNB = 400$
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
+    access: 'Private',
+    network: harmonyNetwork,
+    distribution: 'TBA',
+    startAt: 1634713200,
+    endAt: 1634716800,
+    claimAt: 1634721300,
+    startDate: 'TBA',
   },
 ]
 
