@@ -37,7 +37,7 @@ export const contractAddresses = {
   },
   masterLaunchpad: {
     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-    42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD', // launchpad contract
+    42: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F', // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -48,6 +48,28 @@ export const contractAddresses = {
     97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
   },
 }
+
+export const currentConnection = true ? 'testnet' : 'mainnet';
+
+export const stakeContractAddresses = {
+  'ethereum': {
+    1: '0x1b46b72c5280f30Fbe8A958B4f3c348FD0fD2E55',
+    42: '0x7678f0AF7304e01554E2D49D96E55C8de4975c66'
+  },
+  'polygon': {
+    137: '0x6335aF028e77B574423733443678aD4cb9e15B3D',
+    80001: '0x55950cF279Ba5b43263f4Df54833b85F684B333F',
+  },
+  'harmony': {
+    //todo:
+  }
+}
+
+export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
+export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
+
+export const polygonMainnetInfuraRpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
+export const polygonTestnetInfuraRpc = `https://polygon-mumbai.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`
 
 export const supportedPools = [
   {
@@ -344,10 +366,10 @@ export const supportedPools = [
     startDate: 'Aug 05th 2021',
   },
   {
-    pid: 3,
+    pid: 1,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
@@ -376,9 +398,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1634565600,
+    startAt: 1632889124,
     endAt: 1634569200,
-    claimAt: 1634573700,
+    claimAt: 1632889124,
     startDate: 'Oct 18th 2021',
   },
   {

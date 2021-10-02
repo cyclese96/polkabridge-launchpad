@@ -116,14 +116,6 @@ const Home: React.FC = () => {
   const [atDate, setDate] = useState<any>()
 
   const { account, connect, status } = useWallet()
-  useEffect(() => {
-    if (
-      localStorage.useWalletConnectStatus === 'connected' &&
-      localStorage.useWalletConnectType
-    ) {
-      connect(localStorage.useWalletConnectType)
-    }
-  }, [])
 
   return (
     <Page>

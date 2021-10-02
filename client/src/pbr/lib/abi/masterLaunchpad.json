@@ -5,16 +5,6 @@
                 "internalType": "address payable",
                 "name": "receiveTokenAdd",
                 "type": "address"
-            },
-            {
-                "internalType": "contract IERC20",
-                "name": "polkaBridge",
-                "type": "address"
-            },
-            {
-                "internalType": "contract PolkaBridgeStaking",
-                "name": "_polkaBridgeStaking",
-                "type": "address"
             }
         ],
         "stateMutability": "nonpayable",
@@ -50,6 +40,11 @@
                 "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "stackAmount",
+                "type": "uint256"
             }
         ],
         "name": "IsWhitelist",
@@ -67,11 +62,41 @@
         "inputs": [
             {
                 "internalType": "uint256",
+                "name": "percentClaim1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim3",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime3",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
             }
         ],
-        "name": "activePool",
+        "name": "addClaimInfo",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -148,12 +173,12 @@
             },
             {
                 "internalType": "uint256",
-                "name": "lockDuration",
+                "name": "minimumTokenSoldout",
                 "type": "uint256"
             },
             {
                 "internalType": "uint256",
-                "name": "minimumTokenSoldout",
+                "name": "minimumStakeAmount",
                 "type": "uint256"
             }
         ],
@@ -166,18 +191,63 @@
         "inputs": [
             {
                 "internalType": "address",
-                "name": "user",
+                "name": "_addr",
                 "type": "address"
-            },
+            }
+        ],
+        "name": "addressToString",
+        "outputs": [
+            {
+                "internalType": "string",
+                "name": "",
+                "type": "string"
+            }
+        ],
+        "stateMutability": "pure",
+        "type": "function"
+    },
+    {
+        "inputs": [
             {
                 "internalType": "uint256",
-                "name": "pid",
+                "name": "",
                 "type": "uint256"
             }
         ],
-        "name": "addWhitelist",
-        "outputs": [],
-        "stateMutability": "nonpayable",
+        "name": "claimInfos",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "ClaimTime1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PercentClaim1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ClaimTime2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PercentClaim2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ClaimTime3",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PercentClaim3",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
         "type": "function"
     },
     {
@@ -203,6 +273,50 @@
         ],
         "name": "getBalanceTokenByPoolId",
         "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "getClaimInfo",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            },
             {
                 "internalType": "uint256",
                 "name": "",
@@ -248,16 +362,6 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
-            },
-            {
                 "internalType": "contract IERC20",
                 "name": "",
                 "type": "address"
@@ -276,11 +380,6 @@
         ],
         "name": "getPoolSoldInfo",
         "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "",
-                "type": "uint256"
-            },
             {
                 "internalType": "uint256",
                 "name": "",
@@ -340,57 +439,8 @@
                 "type": "uint256"
             },
             {
-                "internalType": "bool",
+                "internalType": "uint256",
                 "name": "",
-                "type": "bool"
-            }
-        ],
-        "stateMutability": "view",
-        "type": "function"
-    },
-    {
-        "inputs": [
-            {
-                "internalType": "address",
-                "name": "user",
-                "type": "address"
-            },
-            {
-                "internalType": "uint256",
-                "name": "poolId",
-                "type": "uint256"
-            }
-        ],
-        "name": "getUserStakingData",
-        "outputs": [
-            {
-                "internalType": "uint256",
-                "name": "amount",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "rewardDebt",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "rewardClaimed",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "lastBlock",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "beginTime",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "endTime",
                 "type": "uint256"
             }
         ],
@@ -445,11 +495,6 @@
                 "internalType": "uint256",
                 "name": "",
                 "type": "uint256"
-            },
-            {
-                "internalType": "bool",
-                "name": "",
-                "type": "bool"
             }
         ],
         "stateMutability": "view",
@@ -498,8 +543,28 @@
         "inputs": [
             {
                 "internalType": "uint256",
+                "name": "stakeAmount",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
+            },
+            {
+                "internalType": "uint8",
+                "name": "v",
+                "type": "uint8"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "r",
+                "type": "bytes32"
+            },
+            {
+                "internalType": "bytes32",
+                "name": "s",
+                "type": "bytes32"
             }
         ],
         "name": "purchaseIDO",
@@ -517,12 +582,12 @@
     {
         "inputs": [
             {
-                "internalType": "uint256",
-                "name": "pid",
-                "type": "uint256"
+                "internalType": "address",
+                "name": "newOwner",
+                "type": "address"
             }
         ],
-        "name": "stopPool",
+        "name": "transferOwnership",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -530,12 +595,42 @@
     {
         "inputs": [
             {
-                "internalType": "address",
-                "name": "newOwner",
-                "type": "address"
+                "internalType": "uint256",
+                "name": "percentClaim1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime1",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime2",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim3",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime3",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
             }
         ],
-        "name": "transferOwnership",
+        "name": "updateClaimInfo",
         "outputs": [],
         "stateMutability": "nonpayable",
         "type": "function"
@@ -588,11 +683,6 @@
                 "type": "uint256"
             },
             {
-                "internalType": "uint256",
-                "name": "lockDuration",
-                "type": "uint256"
-            },
-            {
                 "internalType": "contract IERC20",
                 "name": "idoToken",
                 "type": "address"
@@ -600,6 +690,16 @@
             {
                 "internalType": "uint256",
                 "name": "minimumTokenSoldout",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "pooltype",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "minimumStakeAmount",
                 "type": "uint256"
             }
         ],
@@ -649,7 +749,7 @@
                 "type": "address"
             }
         ],
-        "name": "whitelist",
+        "name": "users",
         "outputs": [
             {
                 "internalType": "uint256",
@@ -682,13 +782,23 @@
                 "type": "uint256"
             },
             {
-                "internalType": "bool",
-                "name": "IsActived",
-                "type": "bool"
+                "internalType": "uint256",
+                "name": "LastClaimed",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "TotalPercentClaimed",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "NumberClaimed",
+                "type": "uint256"
             },
             {
                 "internalType": "bool",
-                "name": "IsClaimed",
+                "name": "IsActived",
                 "type": "bool"
             }
         ],

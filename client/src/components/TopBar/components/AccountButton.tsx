@@ -5,6 +5,7 @@ import useModal from '../../../hooks/useModal'
 import Button from '../../Button'
 import WalletProviderModal from '../../WalletProviderModal'
 import AccountModal from './AccountModal'
+import { isMobile } from 'react-device-detect'
 
 interface AccountButtonProps {
   account: string
@@ -18,7 +19,18 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
     'provider',
   )
 
-  const { account } = useWallet()
+  const { account, connect } = useWallet()
+
+  useEffect(() => {
+    setTimeout(() => {
+      if (
+        localStorage.useWalletConnectStatus === 'connected' &&
+        localStorage.useWalletConnectType
+      ) {
+        connect(localStorage.useWalletConnectType)
+      }
+    }, 500)
+  }, [])
 
   const handleUnlockClick = useCallback(() => {
     onPresentWalletProviderModal()
