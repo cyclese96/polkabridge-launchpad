@@ -29,6 +29,7 @@ export const INTEGERS = {
 export const ethereumNetwork = 'ethereum'
 export const bscNetwork = 'bsc'
 export const polygonNetwork = 'polygon'
+export const harmonyNetwork = 'harmony'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {

@@ -35,7 +35,8 @@ const stakeContractAddresses = {
         80001: '0x55950cF279Ba5b43263f4Df54833b85F684B333F',
     },
     'harmony': {
-        //todo:
+        1666600001:'one14692lysp8hy0073zlcq72cn3eyajgpv099vnwm',//mainnet
+        1666700001:'one14692lysp8hy0073zlcq72cn3eyajgpv099vnwm'//testnet
     }
 }
 
