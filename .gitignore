@@ -8,3 +8,5 @@
 /client-new/node_modules
 /client-new/.next
 /.vscode
+/server/node_modules
+/server/.env

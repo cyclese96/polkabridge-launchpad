@@ -120,8 +120,10 @@ const Launchpad: React.FC = () => {
         network === bscNetwork ? lpBscContract : lpContract,
         pid,
       )
-      const stakeData = await getUserStakingData(lpContract, pid, account)
-      const stakeDataPolygon = await getStaked(lpContract, pid, account)
+      const [stakeData, stakeDataPolygon] = await Promise.all([
+        getUserStakingData(pid, account),
+        getStaked(pid, account)
+      ])
 
       // console.log('progress data ', newProgress)
       console.log('stake data polygon', stakeDataPolygon)
@@ -130,7 +132,7 @@ const Launchpad: React.FC = () => {
       const _totalStakedAmount =
         stakeData && stakeDataPolygon
           ? Number(fromWei(stakeData.amount)) +
-            Number(fromWei(stakeDataPolygon.amount))
+          Number(fromWei(stakeDataPolygon.amount))
           : 0
       setStakedAmount(_totalStakedAmount)
     }
@@ -257,7 +259,7 @@ const Launchpad: React.FC = () => {
                     : undefined
                 }
                 onClick={handleJoinPool}
-                // to={`/launchpads/join/${launchpadId}/${poolId}`}
+              // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
