@@ -389,7 +389,7 @@ export const supportedPools = [
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
     total: '20 ETH', //1ETH =3k$
-    ratio: 0,
+    ratio: 1000,
     min: 0.1, //300$
     max: 0.166, //500$
     maxTier1: 0.1, //300$
@@ -398,7 +398,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1532889124,//1634565600
+    startAt: 1532889124,
     endAt: 1634569200,
     claimAt: 1632889124,//1634573700
     startDate: 'Oct 18th 2021',
@@ -487,7 +487,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 0,
+    startAt: 1634713200,
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
@@ -525,11 +525,93 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 0,
+    startAt: 1634713200,
     endAt: 1635094800,
     claimAt: 0,
     startDate: "TBA"
   },
+  {
+    pid: 7,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'SolClout',
+    symbol: 'SOLC-PBR',
+    description: `SOLC/ETH`,
+    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
+    website: 'https://solclout.com/',
+    twitter: 'https://twitter.com/solclout',
+    telegram: 'https://t.me/solclout',
+    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
+    tokenSymbol: 'SOLC',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/solc.png',
+    totalSupply: '1,000,000,000 SOLC',
+    total: '33 ETH',//1ETH =3k$
+    ratio: 0,
+    min: 0.166,//500$
+    max: 0.233,//700$
+    maxTier1: 0.166,//500$
+    maxTier2: 0.2,//600$
+    maxTier3: 0.233,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 1635574214,
+    endAt: 1635094800,
+    claimAt: 0,
+    startDate: "TBA"
+  },
+  {
+    pid: 8,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'PeopleZ',
+    symbol: 'LEZ-PBR',
+    description: `LEZ/BNB`,
+    introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
+    website: 'https://www.peoplez.io/',
+    twitter: 'https://twitter.com/Peoplez_io',
+    telegram: 'https://t.me/Peoplez_io',
+    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
+    tokenSymbol: 'LEZ',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/peoplez.svg',
+    totalSupply: '18,000,000 LEZ',
+    total: '125 BNB', //1BNB = 400$
+    ratio: 0,
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1636524814,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: 'TBA',
+  }
 ]
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'

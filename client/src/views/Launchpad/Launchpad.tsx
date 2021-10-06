@@ -224,7 +224,11 @@ const Launchpad: React.FC = () => {
                     Telegram
                   </StyledMediaLink>
                 )}
-                {/* {whitepaper && <StyledMediaLink href={whitepaper} target="_blank">Whitepaper</StyledMediaLink>} */}
+                {whitepaper && (
+                  <StyledMediaLink href={whitepaper} target="_blank">
+                    Whitepaper
+                  </StyledMediaLink>
+                )}
               </StyledSocialMedia>
             </StyledBox>
           </StyledInfo>
