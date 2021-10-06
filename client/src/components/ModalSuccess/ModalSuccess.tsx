@@ -50,6 +50,10 @@ const StyledModalSuccess = styled.div`
   padding: ${(props) => props.theme.spacing[4]}px;
   text-align: center;
   // display: none;
+  border-radius: 20px;
+  background-color: rgba(0, 0, 0, 0.8);
+  border: 2px solid #212121;
+  // filter: drop-shadow(0 0 0.5rem #212121);
 `
 const StyleMaxText = styled.div`
   color: #fff;

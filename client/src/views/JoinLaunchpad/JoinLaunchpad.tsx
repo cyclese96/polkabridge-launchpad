@@ -136,7 +136,7 @@ const JoinLaunchpad: React.FC = () => {
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState(0)
   const [tokenPurchased, setTokenPurchased] = useState(0)
-  const [isClaimed, setClaimed] = useState(false)
+  const [percentClaimed, setPercentClaimed] = useState(0);
   const { onJoinPool } = useJoinPool(pid, network)
   const { onHarvest } = useHarvest(pid, network)
 
@@ -176,10 +176,10 @@ const JoinLaunchpad: React.FC = () => {
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      console.log('stakedData--->  ', stakedData)
-      console.log('stakedDataPolygon--->  ', stakedDataPolygon)
+      // console.log('stakedData--->  ', stakedData)
+      // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('userInfo--->  ', userInfo)
-      console.log('newIsWhitelist--->  ', newIsWhitelist)
+      // console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
@@ -195,7 +195,7 @@ const JoinLaunchpad: React.FC = () => {
           : 0
       setStakedAmount(_totalStakedAmount)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
-      setClaimed(userInfo ? userInfo[3] : false)
+      setPercentClaimed(userInfo ? userInfo[3] : 0);
     }
     if (pid >= 0) {
       fetchData()
@@ -208,7 +208,7 @@ const JoinLaunchpad: React.FC = () => {
     pid,
     stakedAmount,
     tokenPurchased,
-    isClaimed,
+    percentClaimed,
     setIsWhitelist,
     setETHBalance,
     setHistory,
@@ -216,7 +216,7 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount,
     setStakedAmount,
     setTokenPurchased,
-    setClaimed,
+    setPercentClaimed
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -318,12 +318,19 @@ const JoinLaunchpad: React.FC = () => {
       pid,
       account,
     )
+    const userInfo = await getUserInfo(
+      network === bscNetwork ? lpBscContract : lpContract,
+      pid,
+      account,
+    )
     setETHBalance(newETHBalance)
     setHistory(newHistory)
     setProgress(newProgress)
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
     setTokenValue('')
+    setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
+    setPercentClaimed(userInfo ? userInfo[3] : 0);
   }, [
     ethereum,
     account,
@@ -335,6 +342,8 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount,
     setTokenValue,
     setETHValue,
+    setTokenPurchased,
+    setPercentClaimed
   ])
 
   const [onPresentSuccess] = useModal(
@@ -358,6 +367,24 @@ const JoinLaunchpad: React.FC = () => {
       text="harvest"
     />,
   )
+
+  const getRemainTokenPercentToClaim = (_percentClaimed: number) => {
+
+    if (new BigNumber(100).minus(_percentClaimed).eq(0) || new BigNumber(100).minus(_percentClaimed).gt(1)) {
+      return new BigNumber(100).minus(_percentClaimed).toFixed(0).toString()
+    }
+    return new BigNumber(100).minus(_percentClaimed).toFixed(3).toString();
+  }
+
+  const getRemainTokensToClaim = (_tokenPurchased: number, _percentClaimed: number) => {
+    if (!_tokenPurchased) {
+      return 0
+    }
+    if (new BigNumber(_percentClaimed).eq(0)) {
+      return _tokenPurchased;
+    }
+    return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(0).toString()
+  }
 
   return (
     <>
@@ -531,15 +558,19 @@ const JoinLaunchpad: React.FC = () => {
                     />
                   </StyledTitle>
                 ) : (
-                  <StyledTitle>
-                    Reward tokens are now available to harvest
-                  </StyledTitle>
+
+                  <StyledCenterRow>
+                    {new BigNumber(tokenPurchased).gt(0) ? <StyledInfoLabel1 className="mt-4">
+                      Reward tokens are now available to harvest
+                    </StyledInfoLabel1> : ""}
+
+                  </StyledCenterRow>
                 )}
 
                 <StyledInputContainer>
                   <StyledCenterRow>
                     <StyledHarvestAmount>
-                      {tokenPurchased} {tokenSymbol}
+                      {getRemainTokensToClaim(tokenPurchased, percentClaimed)} {tokenSymbol}
                     </StyledHarvestAmount>
                   </StyledCenterRow>
                 </StyledInputContainer>
@@ -549,13 +580,13 @@ const JoinLaunchpad: React.FC = () => {
                     purchasedAmount <= 0 ||
                     claimAt * 1000 > new Date().getTime() ||
                     pendingHarvestTx ||
-                    isClaimed
+                    new BigNumber(percentClaimed).gte(100)
                   }
                   text={
                     pendingHarvestTx
                       ? 'Pending Confirmation'
                       : claimAt * 1000 <= new Date().getTime()
-                        ? isClaimed
+                        ? new BigNumber(percentClaimed).gte(100)
                           ? 'Already claimed'
                           : 'Harvest'
                         : undefined
@@ -583,6 +614,14 @@ const JoinLaunchpad: React.FC = () => {
                     />
                   )}
                 </Button>
+                <StyledCenterRow>
+                  {claimAt * 1000 > new Date().getTime() || new BigNumber(tokenPurchased).lte(0) ? "" : (<StyledInfoLabel className="mt-4">
+
+                    Remain tokens to claim {getRemainTokenPercentToClaim(percentClaimed)}%
+                  </StyledInfoLabel>)}
+
+                </StyledCenterRow>
+
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
@@ -709,13 +748,25 @@ const StyledHarvestAmount = styled.div`
 
 const StyledLabel = styled.div``
 
-const StyledInfoLabel = styled.div`
+const StyledInfoLabel1 = styled.div`
   text-align: center;
   width: 100%;
   margin-bottom: 32px;
   font-weight: 400;
   font-size: 13px;
   color: #ffffff;
+  @media (max-width: 767px) {
+    font-size: 10px;
+  }
+`
+
+const StyledInfoLabel = styled.div`
+  text-align: center;
+  width: 100%;
+  margin-bottom: 32px;
+  font-weight: 400;
+  font-size: 13px;
+  color: #ffff4e;
   @media (max-width: 767px) {
     font-size: 10px;
   }
@@ -811,6 +862,20 @@ const StyledTokenSymbol = styled.span`
 `
 
 const StyledInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  // padding: ${(props) => props.theme.spacing[3]}px;
+  // border: 2px solid ${(props) => props.theme.color.grey[200]};
+  border-radius: 12px;
+  margin: ${(props) => props.theme.spacing[3]}px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
+`
+
+const StyledInfoTitle = styled.div`
   display: flex;
   justify-content: space-between;
   box-sizing: border-box;

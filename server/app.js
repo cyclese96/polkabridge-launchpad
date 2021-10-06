@@ -56,23 +56,31 @@ const getContractInstance = (abi, contractAddress, network = 'polygon') => {
 
 const fetchStakeAmount = async (account) => {
 
-    const maticStakeAbi = stakingAbi;
-    const maticStakeAddress = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001]
-    const maticStakeContract = getContractInstance(maticStakeAbi, maticStakeAddress, 'polygon');
+    try {
 
-    const ethereumStakeAbi = stakingAbi;
-    const ethereumStakeAddress = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42]
-    const ethereumStakeContract = getContractInstance(ethereumStakeAbi, ethereumStakeAddress, 'ethereum')
+        const maticStakeAbi = stakingAbi;
+        const maticStakeAddress = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001]
+        const maticStakeContract = getContractInstance(maticStakeAbi, maticStakeAddress, 'polygon');
+
+        const ethereumStakeAbi = stakingAbi;
+        const ethereumStakeAddress = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42]
+        const ethereumStakeContract = getContractInstance(ethereumStakeAbi, ethereumStakeAddress, 'ethereum')
 
 
-    const [etherStakeData, maticStakeData] = await Promise.all([
-        ethereumStakeContract.methods.userInfo(0, account).call(),
-        maticStakeContract.methods.userInfo(0, account).call()
-    ])
+        const [etherStakeData, maticStakeData] = await Promise.all([
+            ethereumStakeContract.methods.userInfo(0, account).call(),
+            maticStakeContract.methods.userInfo(0, account).call()
+        ])
 
-    const totalStakeAmount = new BigNumber(etherStakeData.amount).plus(maticStakeData.amount).toFixed(0).toString()
+        const totalStakeAmount = new BigNumber(etherStakeData.amount).plus(maticStakeData.amount).toFixed(0).toString()
 
-    return totalStakeAmount
+        return totalStakeAmount
+
+    } catch (error) {
+        console.log('fetchStakeAmount', error)
+        return new BigNumber(0).toFixed(0).toString();
+    }
+
 }
 
 app.post("/api/ido/sign/v1", async (req, res) => {
@@ -90,7 +98,6 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         }
 
         const _totalStakeAmount = await fetchStakeAmount(userAddress);
-
         const userSting = Web3.utils.soliditySha3(
             { t: 'address', v: userAddress },
             { t: 'uint256', v: _totalStakeAmount }
@@ -114,7 +121,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         return res.status(201).send({ v, r, s });
 
     } catch (error) {
-        console.log('error', error)
+        console.log('API error', error)
         return res.status(401).send({ success: false, data: null, message: "Something went wrong in sign function" })
     }
 });
