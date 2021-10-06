@@ -37,7 +37,7 @@ export const contractAddresses = {
   },
   masterLaunchpad: {
     1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-    42: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F', // launchpad contract
+    42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf', // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -77,7 +77,7 @@ export const supportedPools = [
     lpAddresses: {
       //launchpad ct
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '0x4bb3205bf648b7f59ef90dee0f1b62f6116bc7ca',
@@ -114,7 +114,7 @@ export const supportedPools = [
     pid: -2,
     lpAddresses: {
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
@@ -149,7 +149,7 @@ export const supportedPools = [
     pid: -3,
     lpAddresses: {
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
@@ -197,7 +197,7 @@ export const supportedPools = [
     pid: -4,
     lpAddresses: {
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
@@ -243,7 +243,7 @@ export const supportedPools = [
     pid: -5,
     lpAddresses: {
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
@@ -286,7 +286,7 @@ export const supportedPools = [
     pid: -6,
     lpAddresses: {
       1: '',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '0x4eed0fa8de12d5a86517f214c2f11586ba2ed88d',
@@ -329,7 +329,7 @@ export const supportedPools = [
     pid: -7,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '0xcd6adc6b8bd396e2d53ccd7d7257b4de55be4fbe',
@@ -369,7 +369,7 @@ export const supportedPools = [
     pid: 1,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
@@ -400,14 +400,14 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 1532889124,
     endAt: 1634569200,
-    claimAt: 1632889124,
+    claimAt: 1632889124,//1634573700
     startDate: 'Oct 18th 2021',
   },
   {
     pid: 4,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
@@ -452,7 +452,7 @@ export const supportedPools = [
     pid: 5,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
@@ -496,7 +496,7 @@ export const supportedPools = [
     pid: 6,
     lpAddresses: {
       1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
