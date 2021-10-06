@@ -460,29 +460,35 @@ const convertToWei = (amount) => {
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
 
-  const signedData = await signedIdoString(account)
-  console.log('signedIdoString', signedData)
+  try {
+    const signedData = await signedIdoString(account)
+    // console.log('signedIdoString', signedData)
 
-  const v = signedData.v;
-  const r = signedData.r;
-  const s = signedData.s;
-  const _stakeAmount = convertToWei(stakeAmount);
+    const v = signedData.v;
+    const r = signedData.r;
+    const s = signedData.s;
+    const _stakeAmount = convertToWei(stakeAmount);
 
 
-  console.log({ _stakeAmount, pid, v, r, s, contractAddress: launchpadContract._address })
-  return launchpadContract.methods
-    .purchaseIDO(
-      _stakeAmount,
-      pid,
-      v,
-      r,
-      s
-    )
-    .send({ from: account, value: convertToWei(ethValue) })
-    .on('transactionHash', (tx) => {
-      console.log(tx)
-      return tx.transactionHash
-    })
+    console.log({ _stakeAmount, pid, v, r, s, contractAddress: launchpadContract._address })
+    return launchpadContract.methods
+      .purchaseIDO(
+        _stakeAmount,
+        pid,
+        v,
+        r,
+        s
+      )
+      .send({ from: account, value: convertToWei(ethValue) })
+      .on('transactionHash', (tx) => {
+        console.log('joinpool', tx)
+        return tx.transactionHash
+      })
+  } catch (error) {
+    console.log('joinpool', error)
+    return null
+  }
+
 }
 
 export const harvest = async (launchpadContract, pid, account) => {
@@ -633,6 +639,7 @@ export const getUserStakingData = async (pid, account) => {
 export const getUserInfo = async (lpContract, pid, account) => {
 
   try {
+    // console.log('getting user info', { add: lpContract._address, pid, account })
     const userInfo = await lpContract.methods
       .getUserInfo(pid, account)
       .call()
@@ -670,7 +677,7 @@ export const getCurrentNetworkId = async () => {
       return id
     } else {
       try {
-        const web3 = new Web3(window.web3.currentProvider);
+        const web3 = getWeb3Provider('ethereum')
         return await web3.eth.getChainId()
       } catch (error) {
 
@@ -709,9 +716,7 @@ export const getNetworkName = (networkId) => {
   }
 }
 
-//matic connector
-const getContractInstance = (abi, contractAddress, network = 'polygon') => {
-
+const getWeb3Provider = (network) => {
   let rpc;
   if (network === 'polygon') {
     rpc = currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
@@ -720,6 +725,13 @@ const getContractInstance = (abi, contractAddress, network = 'polygon') => {
   }
 
   const web3 = new Web3(rpc);
+  return web3;
+}
+
+//matic connector
+const getContractInstance = (abi, contractAddress, network = 'polygon') => {
+
+  const web3 = getWeb3Provider(network)
 
   return new web3.eth.Contract(abi, contractAddress);
 };
