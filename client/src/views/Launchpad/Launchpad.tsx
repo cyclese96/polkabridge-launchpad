@@ -26,7 +26,7 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -155,12 +155,12 @@ const Launchpad: React.FC = () => {
   }
 
   const netWorkTokenSymbol = () => {
-    return network === bscNetwork ? 'BNB' : 'ETH'
+    return network === bscNetwork ? 'BNB' :  network === polygonNetwork ?"MATIC":'ETH'
   }
 
   const showNetworkAlert = () => {
     const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+      network === bscNetwork ? 'Binance Smart Chain' : network ===polygonNetwork?"Polygon": 'Ethereum'
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
@@ -169,7 +169,7 @@ const Launchpad: React.FC = () => {
   }
   const handleJoinPool = () => {
     const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+      network === bscNetwork ? 'Binance Smart Chain' :network ===polygonNetwork?"Polygon": 'Ethereum'
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
@@ -349,7 +349,7 @@ const Launchpad: React.FC = () => {
                         <StyledTableLabel>Network</StyledTableLabel>
                         <StyledTableValue>
                           {network === 'bsc'
-                            ? 'Binance Smart Chain'
+                            ? 'Binance Smart Chain':network === 'polygon'?"Polygon"
                             : 'Ethereum'}
                         </StyledTableValue>
                       </StyledTableText>

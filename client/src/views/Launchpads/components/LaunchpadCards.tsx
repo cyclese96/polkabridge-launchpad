@@ -12,7 +12,7 @@ import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
 import { getNetworkName, getProgress } from '../../../pbr/utils'
-import { bscNetwork, ethereumNetwork } from '../../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, polygonNetwork } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
@@ -121,7 +121,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const handleLaunchpadClick = (launchpad: any) => {
     const _networkName =
-      launchpad.network === bscNetwork ? 'Binance Smart Chain' : 'Ethereum'
+      launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network ===polygonNetwork?"Polygon": 'Ethereum'
     // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
     // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
     if (
@@ -168,7 +168,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {launchpad.network === bscNetwork ? 'BNB' : 'ETH'} ={' '}
+                  1 {launchpad.network === bscNetwork ? 'BNB' :launchpad.network===polygonNetwork?'MATIC': 'ETH'} ={' '}
                   {launchpad.ratio} {launchpad.tokenSymbol}
                 </b>
               </span>
@@ -186,7 +186,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span style={{ color: '#ff3465' }}>
                 <b>
                   {launchpad.network === 'bsc'
-                    ? 'Binance Smart Chain'
+                    ? 'Binance Smart Chain':launchpad.network ==="polygon"?"Polygon"
                     : 'Ethereum'}
                 </b>
               </span>

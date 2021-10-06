@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
@@ -711,6 +711,8 @@ export const isMetaMaskInstalled = () => {
 export const getNetworkName = (networkId) => {
   if ([56, 97].includes(parseInt(networkId))) {
     return bscNetwork
+  } else if ([137, 80001].includes(parseInt(networkId))) {
+    return polygonNetwork
   } else {
     return ethereumNetwork
   }

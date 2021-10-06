@@ -28,6 +28,7 @@ export const INTEGERS = {
 
 export const ethereumNetwork = 'ethereum'
 export const bscNetwork = 'bsc'
+export const polygonNetwork = 'polygon'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
@@ -608,6 +609,50 @@ export const supportedPools = [
     network: bscNetwork,
     distribution: 'TBA',
     startAt: 1636524814,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: 'TBA',
+  },
+  {
+    pid: 9,
+    lpAddresses: {
+      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'ArcadeNetwork',
+    symbol: 'ARC-PBR',
+    description: `ARC/MATIC`,
+    introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
+    website: 'https://arcadenet.io/',
+    twitter: 'https://twitter.com/ArcadeNetwork_',
+    telegram: 'https://t.me/ArcadeNetworkOfficial',
+    whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
+    tokenSymbol: 'ARC',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/arcade.png',
+    totalSupply: '222,500,000 ARC',
+    total: '23076 MATIC', //1Matic=1.3$
+    ratio: 0,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: 'TBA',
+    startAt: 1636096062,
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
