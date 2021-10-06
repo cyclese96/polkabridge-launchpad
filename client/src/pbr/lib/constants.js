@@ -400,7 +400,7 @@ export const supportedPools = [
     distribution: 'TBA',
     startAt: 1532889124,
     endAt: 1634569200,
-    claimAt: 1632889124,
+    claimAt: 1633236139,
     startDate: 'Oct 18th 2021',
   },
   {

@@ -426,7 +426,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                 msg.sender,
                 userBalance.mul(claimInfos[poolIndex].PercentClaim1).div(100)
             );
-            users[pid][msg.sender].TotalPercentClaimed.add(
+          users[pid][msg.sender].TotalPercentClaimed=  users[pid][msg.sender].TotalPercentClaimed.add(
                 claimInfos[poolIndex].PercentClaim1
             );
         } else if (users[pid][msg.sender].NumberClaimed == 1) {
@@ -438,7 +438,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                 msg.sender,
                 userBalance.mul(claimInfos[poolIndex].PercentClaim2).div(100)
             );
-            users[pid][msg.sender].TotalPercentClaimed.add(
+            users[pid][msg.sender].TotalPercentClaimed=users[pid][msg.sender].TotalPercentClaimed.add(
                 claimInfos[poolIndex].PercentClaim2
             );
         } else if (users[pid][msg.sender].NumberClaimed == 2) {
@@ -450,7 +450,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                 msg.sender,
                 userBalance.mul(claimInfos[poolIndex].PercentClaim3).div(100)
             );
-            users[pid][msg.sender].TotalPercentClaimed.add(
+           users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
                 claimInfos[poolIndex].PercentClaim3
             );
         }
