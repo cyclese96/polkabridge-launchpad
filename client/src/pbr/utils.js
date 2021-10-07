@@ -467,13 +467,12 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
     const v = signedData.v;
     const r = signedData.r;
     const s = signedData.s;
-    const _stakeAmount = convertToWei(stakeAmount);
 
 
-    console.log({ _stakeAmount, pid, v, r, s, contractAddress: launchpadContract._address })
+    // console.log({ stakeAmount })
     return launchpadContract.methods
       .purchaseIDO(
-        _stakeAmount,
+        stakeAmount,
         pid,
         v,
         r,
@@ -625,14 +624,24 @@ export const getUserStakingData = async (pid, account) => {
     const address = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42];
     const stakeContract = getContractInstance(abi, address, 'ethereum')
 
-    const stakedData = await stakeContract.methods
-      .userInfo(0, account)
-      .call()
+    const addressMatic = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
+    const maticStakeContract = getContractInstance(abi, addressMatic, 'polygon')
 
-    return stakedData
+    const [stakedDataEth, stakedDataPoly] = await Promise.all([
+      stakeContract.methods
+        .userInfo(0, account)
+        .call(),
+      maticStakeContract.methods
+        .userInfo(0, account)
+        .call()
+    ])
+
+    const _totalStakedAmount = new BigNumber(stakedDataEth.amount).plus(stakedDataPoly.amount).toFixed(0).toString()
+    console.log('fetch staked amount', _totalStakedAmount)
+    return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', e)
-    return {}
+    return '0'
   }
 }
 
@@ -737,3 +746,11 @@ const getContractInstance = (abi, contractAddress, network = 'polygon') => {
 
   return new web3.eth.Contract(abi, contractAddress);
 };
+
+
+export const formatFloatValue = (value, precision = 2) => {
+  const _value = !value ? '0' : value;
+
+  return new BigNumber(_value).toFixed(precision).toString();
+
+}

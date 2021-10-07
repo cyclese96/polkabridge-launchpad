@@ -98,6 +98,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         }
 
         const _totalStakeAmount = await fetchStakeAmount(userAddress);
+        // console.log('total stake amount ', _totalStakeAmount)
         const userSting = Web3.utils.soliditySha3(
             { t: 'address', v: userAddress },
             { t: 'uint256', v: _totalStakeAmount }

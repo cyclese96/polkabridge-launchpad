@@ -14,6 +14,7 @@ import usePolkaBridge from '../../hooks/usePolkaBridge'
 import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
 import {
+  formatFloatValue,
   fromWei,
   getMasterChefContract,
   getNetworkName,
@@ -108,7 +109,7 @@ const Launchpad: React.FC = () => {
 
   const pbr = usePolkaBridge()
   const [progress, setProgress] = useState<BigNumber>()
-  const [stakedAmount, setStakedAmount] = useState(0)
+  const [stakedAmount, setStakedAmount] = useState('0')
   const { ethereum, account } = useWallet()
 
   const history = useHistory()
@@ -120,21 +121,18 @@ const Launchpad: React.FC = () => {
         network === bscNetwork ? lpBscContract : lpContract,
         pid,
       )
-      const [stakeData, stakeDataPolygon] = await Promise.all([
-        getUserStakingData(pid, account),
-        getStaked(pid, account)
-      ])
+      // const [stakeData, stakeDataPolygon] = await Promise.all([
+      //   getUserStakingData(pid, account),
+      //   getStaked(pid, account)
+      // ])
+      const stakedTokens = await getUserStakingData(pid, account)
 
       // console.log('progress data ', newProgress)
-      console.log('stake data polygon', stakeDataPolygon)
-      console.log('stake data ', stakeData)
+      // console.log('stake data polygon', stakeDataPolygon)
+      console.log('stake data ', stakedTokens)
       setProgress(newProgress)
-      const _totalStakedAmount =
-        stakeData && stakeDataPolygon
-          ? Number(fromWei(stakeData.amount)) +
-          Number(fromWei(stakeDataPolygon.amount))
-          : 0
-      setStakedAmount(_totalStakedAmount)
+
+      setStakedAmount(stakedTokens)
     }
     if (pid >= 0) {
       fetchData()
@@ -155,12 +153,12 @@ const Launchpad: React.FC = () => {
   }
 
   const netWorkTokenSymbol = () => {
-    return network === bscNetwork ? 'BNB' :  network === polygonNetwork ?"MATIC":'ETH'
+    return network === bscNetwork ? 'BNB' : network === polygonNetwork ? "MATIC" : 'ETH'
   }
 
   const showNetworkAlert = () => {
     const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' : network ===polygonNetwork?"Polygon": 'Ethereum'
+      network === bscNetwork ? 'Binance Smart Chain' : network === polygonNetwork ? "Polygon" : 'Ethereum'
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
@@ -169,7 +167,7 @@ const Launchpad: React.FC = () => {
   }
   const handleJoinPool = () => {
     const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' :network ===polygonNetwork?"Polygon": 'Ethereum'
+      network === bscNetwork ? 'Binance Smart Chain' : network === polygonNetwork ? "Polygon" : 'Ethereum'
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
@@ -180,12 +178,13 @@ const Launchpad: React.FC = () => {
   }
 
   const getMaxValue = () => {
+    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
     let maxValue = 0
-    if (stakedAmount >= 500 && stakedAmount < 1500) {
+    if (_stakedAmountInBigNumWei.gte(500) && _stakedAmountInBigNumWei.lt(1500)) {
       maxValue = maxTier1
-    } else if (stakedAmount >= 1500 && stakedAmount < 3000) {
+    } else if (_stakedAmountInBigNumWei.gte(1500) && _stakedAmountInBigNumWei.lt(3000)) {
       maxValue = maxTier2
-    } else if (stakedAmount >= 3000) {
+    } else if (_stakedAmountInBigNumWei.gte(3000)) {
       maxValue = maxTier3
     }
     return maxValue
@@ -237,7 +236,7 @@ const Launchpad: React.FC = () => {
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {stakedAmount + ' PBR'}
+                  Your staked amount: {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase:{' '}
@@ -349,8 +348,8 @@ const Launchpad: React.FC = () => {
                         <StyledTableLabel>Network</StyledTableLabel>
                         <StyledTableValue>
                           {network === 'bsc'
-                            ? 'Binance Smart Chain':network === 'polygon'?"Polygon"
-                            : 'Ethereum'}
+                            ? 'Binance Smart Chain' : network === 'polygon' ? "Polygon"
+                              : 'Ethereum'}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

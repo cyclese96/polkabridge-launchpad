@@ -25,6 +25,7 @@ import {
   getUserInfo,
   fromWei,
   getStaked,
+  formatFloatValue,
 } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
@@ -124,7 +125,7 @@ const JoinLaunchpad: React.FC = () => {
   const [progress, setProgress] = useState<BigNumber>()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('')
-  const [tokenValue, setTokenValue] = useState('')
+  const [tokenValue, setTokenValue] = useState('')//max output purchase token based on the ratio
   const [pendingTx, setPendingTx] = useState(false)
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
   const [successTx, setSuccessTx] = useState(false)
@@ -134,9 +135,9 @@ const JoinLaunchpad: React.FC = () => {
   const [ethBalance, setETHBalance] = useState(0)
   const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
-  const [stakedAmount, setStakedAmount] = useState(0)
-  const [tokenPurchased, setTokenPurchased] = useState(0)
-  const [percentClaimed, setPercentClaimed] = useState(0);
+  const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
+  const [tokenPurchased, setTokenPurchased] = useState(0) // token purchase by the user so far
+  const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed by the user so far
   const { onJoinPool } = useJoinPool(pid, network)
   const { onHarvest } = useHarvest(pid, network)
 
@@ -148,8 +149,7 @@ const JoinLaunchpad: React.FC = () => {
         newHistory,
         newProgress,
         newPurchasedAmount,
-        stakedData,
-        stakedDataPolygon,
+        stakedTokens,
         userInfo,
       ] = await Promise.all([
         getIsWhitelist(
@@ -167,7 +167,6 @@ const JoinLaunchpad: React.FC = () => {
           account,
         ),
         getUserStakingData(pid, account),
-        getStaked(pid, account),
         getUserInfo(
           network === bscNetwork ? lpBscContract : lpContract,
           pid,
@@ -176,7 +175,7 @@ const JoinLaunchpad: React.FC = () => {
       ])
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('stakedData--->  ', stakedData)
+      // console.log('stakedData--->  ', stakedTokens)
       // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('userInfo--->  ', userInfo)
       // console.log('newIsWhitelist--->  ', newIsWhitelist)
@@ -188,12 +187,7 @@ const JoinLaunchpad: React.FC = () => {
       setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
-      const _totalStakedAmount =
-        stakedData && stakedDataPolygon
-          ? Number(fromWei(stakedData.amount)) +
-          Number(fromWei(stakedDataPolygon.amount))
-          : 0
-      setStakedAmount(_totalStakedAmount)
+      setStakedAmount(stakedTokens)
       setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
       setPercentClaimed(userInfo ? userInfo[3] : 0);
     }
@@ -251,12 +245,13 @@ const JoinLaunchpad: React.FC = () => {
   )
 
   const getMaxValue = () => {
+    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
     let maxValue = 0
-    if (stakedAmount >= 500 && stakedAmount < 1500) {
+    if (_stakedAmountInBigNumWei.gte(500) && _stakedAmountInBigNumWei.lt(1500)) {
       maxValue = maxTier1
-    } else if (stakedAmount >= 1500 && stakedAmount < 3000) {
+    } else if (_stakedAmountInBigNumWei.gte(1500) && _stakedAmountInBigNumWei.lt(3000)) {
       maxValue = maxTier2
-    } else if (stakedAmount >= 3000) {
+    } else if (_stakedAmountInBigNumWei.gte(3000)) {
       maxValue = maxTier3
     }
     return maxValue
@@ -286,7 +281,7 @@ const JoinLaunchpad: React.FC = () => {
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
             ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? 'Join pool'
+              ? new BigNumber(tokenValue).eq(tokenPurchased) ? "Already purchased" : 'Join pool'
               : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
             : progress == new BigNumber('100')
               ? 'Ended'
@@ -305,7 +300,8 @@ const JoinLaunchpad: React.FC = () => {
       !ethValue ||
       !tokenValue ||
       parseFloat(ethValue) < min ||
-      parseFloat(ethValue) > _max
+      parseFloat(ethValue) > _max ||
+      new BigNumber(tokenValue).eq(tokenPurchased)
     )
   }
 
@@ -424,7 +420,7 @@ const JoinLaunchpad: React.FC = () => {
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {stakedAmount + ' PBR'}
+                  Your staked amount: {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase: {getMaxValue() + ' ' + networkSymbol()}
@@ -517,7 +513,7 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
 
                 <Button
-                  disabled={false}
+                  disabled={isButtonDisable()}
                   text={getJoinButtonText()}
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
