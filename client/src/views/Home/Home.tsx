@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   background: {
-    paddingTop: 70,
+    paddingTop: 30,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -74,7 +74,7 @@ const useStyles = makeStyles((theme) => ({
     },
     [theme.breakpoints.down('sm')]: {
       width: 'fit-content',
-      fontSize: 13,
+      fontSize: 12,
     },
   },
 

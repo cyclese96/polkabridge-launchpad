@@ -22,16 +22,19 @@ import { EqualizerOutlined } from '@material-ui/icons'
 import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
 import useNetwork from '../../../hooks/useNetwork'
+import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
+
   },
   appBarBackground: {
     boxShadow: 'none',
     backgroundColor: '#100525',
     display: 'flex',
     alignItems: 'center',
+
   },
   menuButton: {
     textTransform: 'none',
@@ -313,7 +316,7 @@ const Navbar = () => {
   )
 
   return (
-    <div className={classes.grow}>
+    <div style={{ marginBottom: 50 }}>
       {/* <AccountDialog
         open={accountDialog}
         handleClose={() => setAccountDialog(false)}
@@ -324,11 +327,12 @@ const Navbar = () => {
         className={classes.appBarBackground}
       >
         <Toolbar className={classes.sectionDesktop}>
-          <Avatar
-            variant="square"
-            src="img/logo-white.png"
-            className={classes.logo}
-          />
+          <Link to='/'>
+            <Avatar
+              variant="square"
+              src="img/logo-white.png"
+              className={classes.logo}
+            /></Link>
 
           <div className={classes.leftMargin} />
 
@@ -393,11 +397,13 @@ const Navbar = () => {
 
         <Toolbar className={classes.sectionMobile}>
           <div className="d-flex justify-content-center align-items-center">
-            <Avatar
-              variant="square"
-              src="img/logo-white.png"
-              style={{ height: 38, width: 150 }}
-            />
+
+            <Link to='/'>
+              <Avatar
+                variant="square"
+                src="img/logo-white.png"
+                style={{ height: 38, width: 150 }}
+              /></Link>
           </div>
 
           <div>
