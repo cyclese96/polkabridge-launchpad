@@ -137,7 +137,7 @@ const Launchpad: React.FC = () => {
     if (pid >= 0) {
       fetchData()
     }
-  }, [pid, lpContract, setProgress, stakedAmount, setStakedAmount, progress, setProgress])
+  }, [ethereum, account, lpContract, pid, setStakedAmount, setProgress])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps

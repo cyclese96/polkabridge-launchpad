@@ -379,12 +379,14 @@ export const getHistory = async (account) => {
 export const getProgress = async (lpContract, pid) => {
   try {
     //if (pid == 1) return new BigNumber(100)
-    const remainToken = await lpContract.methods
-      .getRemainIDOToken(pid)
-      .call()
-    const totalToken = await lpContract.methods
-      .getBalanceTokenByPoolId(pid)
-      .call()
+    const [remainToken, totalToken] = await Promise.all([
+      lpContract.methods
+        .getRemainIDOToken(pid)
+        .call(),
+      lpContract.methods
+        .getBalanceTokenByPoolId(pid)
+        .call()
+    ])
 
     // console.log({remainToken, totalToken } )
     if (remainToken && totalToken) {
