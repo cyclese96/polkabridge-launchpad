@@ -38,6 +38,7 @@ import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 import Modal from '../../components/Modal'
 import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
+import ModalSuccessHarvest2 from '../../components/ModalSuccessHarvest/ModalSuccessHarvest'
 
 interface JoinHistory {
   amount: number
@@ -177,7 +178,7 @@ const JoinLaunchpad: React.FC = () => {
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('stakedData--->  ', stakedTokens)
       // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
-      // console.log('userInfo--->  ', userInfo)
+      console.log('progress--->  ', newProgress)
       // console.log('newIsWhitelist--->  ', newIsWhitelist)
       // console.log('getUserTotalPurchased  ', newPurchasedAmount)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
@@ -355,14 +356,17 @@ const JoinLaunchpad: React.FC = () => {
     <ModalError text="Transaction failed" txhash={txhash} />,
   )
 
-  const [onPresentSuccessHarvest] = useModal(
-    <ModalSuccessHarvest
-      amount={purchasedAmount ? purchasedAmount.toString() : ''}
-      symbol={name}
-      txhash={txhash}
-      text="harvest"
-    />,
-  )
+  // const [onPresentSuccessHarvest] = useModal(
+  //   <ModalSuccessHarvest
+  //     amount={tokenPurchased.toString()}
+  //     symbol={name}
+  //     txhash={txhash}
+  //     text="harvest"
+  //   />,
+  // )
+  const handleClose = () => {
+    setSuccessHarvestTx(false)
+  }
 
   const getRemainTokenPercentToClaim = (_percentClaimed: number) => {
 
@@ -395,6 +399,7 @@ const JoinLaunchpad: React.FC = () => {
       />
 
       <StyledLaunchpad>
+        <ModalSuccessHarvest onDismiss={handleClose} symbol={name} open={successHarvestTx} amount={tokenPurchased.toString()} percent={percentClaimed} text={"harvest"} txhash={txhash} />
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">
@@ -595,7 +600,7 @@ const JoinLaunchpad: React.FC = () => {
                       if (tx) {
                         console.log('harvest ' + tx)
                         setSuccessHarvestTx(true)
-                        onPresentSuccessHarvest()
+                        // onPresentSuccessHarvest()
                         reset()
                       } else {
                         onPresentError()

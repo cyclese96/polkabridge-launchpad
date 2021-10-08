@@ -207,9 +207,9 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               </span>
             </StyledInsight>
             <StyledInsight>
-              <span>Progress</span>
+              <span>{progress && 'Progress'} </span>
             </StyledInsight>
-            {progress && (
+            {!progress ? <Spacer /> : (
               <>
                 <div style={{ width: `100%` }}>
                   <StyledProgress>
