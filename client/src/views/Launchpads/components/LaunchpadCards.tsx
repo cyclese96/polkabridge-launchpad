@@ -11,42 +11,44 @@ import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { getNetworkName, getProgress } from '../../../pbr/utils'
-import { bscNetwork, ethereumNetwork, polygonNetwork } from '../../../pbr/lib/constants'
+import { getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
+import { bscNetwork, ethereumNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
+  const rows = launchpads;
+  const defaultLp = getDefaultLaunchpads()
   // console.log('launchpads')
   // console.log(launchpads)
-  const rows = launchpads
 
   return (
     <StyledCards>
-      <StyledHeading>UPCOMING POOLS</StyledHeading>
+      <StyledHeading>{console.log(defaultLp)} UPCOMING POOLS</StyledHeading>
       <Wrapper>
         <div className="container mt-4" style={{ marginBottom: 60 }}>
-          {rows.length > 0 && (
-            <div className="row d-flex justify-content-center">
-              {rows.map((singleLaunchpad, i) => {
-                {
-                  return (
-                    singleLaunchpad.endAt * 1000 > new Date().getTime() && (
-                      <div
-                        className="col-md-4 d-flex justify-content-center mt-4"
-                        key={i}
-                      >
-                        <LaunchpadCard launchpad={singleLaunchpad} />
-                        {<StyledSpacer />}
-                      </div>
-                    )
+          {/* {true && ( */}
+          <div className="row d-flex justify-content-center">
+            {(rows.length > 0 ? rows : defaultLp).map((singleLaunchpad, i) => {
+              {
+                return (
+                  singleLaunchpad.endAt * 1000 > new Date().getTime() && (
+                    <div
+                      className="col-md-4 d-flex justify-content-center mt-4"
+                      key={i}
+                    >
+                      <LaunchpadCard launchpad={singleLaunchpad} />
+                      {<StyledSpacer />}
+                    </div>
                   )
-                }
-              })}
-            </div>
-          )}
+                )
+              }
+            })}
+          </div>
+          {/* )} */}
         </div>
       </Wrapper>
       <Spacer size="lg" />
@@ -54,25 +56,23 @@ const LaunchpadCards: React.FC = () => {
       <StyledHeading>ENDED POOLS</StyledHeading>
       <Wrapper>
         <div className="container mt-4">
-          {rows.length > 0 && (
-            <div className="row d-flex justify-content-center">
-              {rows.map((singleLaunchpad, i) => {
-                {
-                  return (
-                    singleLaunchpad.endAt * 1000 < new Date().getTime() && (
-                      <div
-                        className="col-md-4 d-flex justify-content-center mt-4"
-                        key={i}
-                      >
-                        <LaunchpadCard launchpad={singleLaunchpad} />
-                        {<StyledSpacer />}
-                      </div>
-                    )
+          <div className="row d-flex justify-content-center">
+            {(rows.length > 0 ? rows : defaultLp).map((singleLaunchpad, i) => {
+              {
+                return (
+                  singleLaunchpad.endAt * 1000 < new Date().getTime() && (
+                    <div
+                      className="col-md-4 d-flex justify-content-center mt-4"
+                      key={i}
+                    >
+                      <LaunchpadCard launchpad={singleLaunchpad} />
+                      {<StyledSpacer />}
+                    </div>
                   )
-                }
-              })}
-            </div>
-          )}
+                )
+              }
+            })}
+          </div>
         </div>
       </Wrapper>
     </StyledCards>
@@ -88,6 +88,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const pbr = usePolkaBridge()
   const history = useHistory()
   const { chainId } = useNetwork()
+  const { account } = useWallet()
 
   const [progress, setProgress] = useState<BigNumber>()
 
@@ -121,9 +122,16 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const handleLaunchpadClick = (launchpad: any) => {
     const _networkName =
-      launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network ===polygonNetwork?"Polygon": 'Ethereum'
+      launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network === polygonNetwork ? "Polygon" : 'Ethereum'
     // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
     // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
+    if (!account) {
+      alert(
+        `Please connect your wallet to proceed`,
+      )
+      return
+    }
+
     if (
       getNetworkName(isMobile ? localStorage.chainId : chainId) !==
       launchpad.network
@@ -168,7 +176,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {launchpad.network === bscNetwork ? 'BNB' :launchpad.network===polygonNetwork?'MATIC': 'ETH'} ={' '}
+                  1 {launchpad.network === bscNetwork ? 'BNB' : launchpad.network === polygonNetwork ? 'MATIC' : 'ETH'} ={' '}
                   {launchpad.ratio} {launchpad.tokenSymbol}
                 </b>
               </span>
@@ -186,8 +194,8 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
               <span style={{ color: '#ff3465' }}>
                 <b>
                   {launchpad.network === 'bsc'
-                    ? 'Binance Smart Chain':launchpad.network ==="polygon"?"Polygon"
-                    : 'Ethereum'}
+                    ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
+                      : 'Ethereum'}
                 </b>
               </span>
             </StyledInsight>

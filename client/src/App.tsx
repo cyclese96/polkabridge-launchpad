@@ -55,14 +55,14 @@ const Providers: React.FC = ({ children }) => {
   const { chainId, changeNetwork, setConnected, status } = useNetwork()
 
   useEffect(() => {
-    ;(async () => {
+    ; (async () => {
       if (isMobile) {
         //enable window.ethereum for mobile device
         const account = await getCurrentAccount()
       }
-      console.log('prev  id', chainId)
+      // console.log('prev  id', chainId)
       const _id = await getCurrentNetworkId()
-      console.log('network id ', _id)
+      // console.log('network id ', _id)
       changeNetwork(_id)
       if (Number(_id) !== Number(chainId)) {
         if (isMobile) {

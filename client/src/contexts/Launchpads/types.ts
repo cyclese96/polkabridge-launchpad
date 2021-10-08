@@ -31,7 +31,7 @@ export interface Launchpad {
   maxTier2: number,
   maxTier3: number,
   access: string,
-  network:string,
+  network: string,
   distribution: string,
   startAt: number,
   endAt: number,
@@ -40,6 +40,6 @@ export interface Launchpad {
 }
 
 export interface LaunchpadsContext {
-  launchpads: Launchpad[]
+  launchpads: Launchpad[],
   unharvested: number
 }

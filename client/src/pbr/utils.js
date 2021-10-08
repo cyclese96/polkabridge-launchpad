@@ -8,6 +8,9 @@ import Web3 from 'web3'
 import { createAwait } from 'typescript'
 import maticStakeAbi from '../contracts/MaticStakeContract.json'
 import stakingAbi from '../contracts/staking.json'
+import LaunchpadAbi from './lib/abi/masterLaunchpad.json';
+import ERC20Abi from './lib/abi/erc20.json'
+
 
 import { getBalanceNumber } from '../utils/formatBalance';
 BigNumber.config({
@@ -147,6 +150,113 @@ export const getLaunchpads = (pbr) => {
     )
     : []
 }
+
+// default launchpads
+export const getDefaultLaunchpads = () => {
+
+  const bscChainId = currentConnection === 'mainnet' ? 56 : 97;
+  const chainId = currentConnection === 'mainnet' ? 1 : 42;
+
+  const pools = supportedPools.map((pool) => {
+
+    if (pool.network === bscNetwork) {
+      return Object.assign(pool, {
+        lpAddress: pool.lpAddresses[bscChainId],
+        tokenAddress: pool.tokenAddresses[bscChainId],
+        lpBscAddress: pool.lpBscAddresses[bscChainId],//set network id for current bsc
+        lpBscContract: null,
+        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+      })
+    } else {
+      return Object.assign(pool, {
+        lpAddress: pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+      })
+    }
+  })
+
+
+  return pools.map(
+    ({
+      pid,
+      name,
+      symbol,
+      icon,
+      description,
+      introduce,
+      website,
+      twitter,
+      telegram,
+      whitepaper,
+      lpAddress,
+      lpContract,
+      lpExplorer,
+      lpBscAddress,
+      lpBscContract,
+      lpBscExplorer,
+      tokenAddress,
+      tokenContract,
+      tokenExplorer,
+      tokenSymbol,
+      total,
+      totalSupply,
+      ratio,
+      min,
+      max,
+      maxTier1,
+      maxTier2,
+      maxTier3,
+      access,
+      network,
+      distribution,
+      startAt,
+      endAt,
+      claimAt,
+      startDate
+    }) => ({
+      pid,
+      name,
+      id: symbol,
+      symbol,
+      icon,
+      description,
+      introduce,
+      website,
+      twitter,
+      telegram,
+      whitepaper,
+      lpAddress,
+      lpContract,
+      lpExplorer,
+      lpBscAddress,
+      lpBscContract,
+      lpBscExplorer,
+      tokenAddress,
+      tokenContract,
+      tokenExplorer,
+      tokenSymbol,
+      total,
+      totalSupply,
+      ratio,
+      min,
+      max,
+      maxTier1,
+      maxTier2,
+      maxTier3,
+      access,
+      network,
+      distribution,
+      startAt,
+      endAt,
+      claimAt,
+      startDate
+    }),
+  )
+}
+
 
 export const getPoolWeight = async (masterChefContract, pid) => {
   const { allocPoint } = await masterChefContract.methods.poolInfo(pid).call()
