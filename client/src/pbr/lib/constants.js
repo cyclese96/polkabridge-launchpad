@@ -37,7 +37,7 @@ export const contractAddresses = {
     42: '0x0d6ae2a429df13e44a07cd2969e085e4833f64a0',
   },
   masterLaunchpad: {
-    1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+    1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
     42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf', // launchpad contract
   },
   weth: {
@@ -50,7 +50,9 @@ export const contractAddresses = {
   },
 }
 
-export const currentConnection = true ? 'testnet' : 'mainnet';
+const testing = false;
+
+export const currentConnection = testing ? 'testnet' : 'mainnet';
 
 export const stakeContractAddresses = {
   'ethereum': {
@@ -369,7 +371,7 @@ export const supportedPools = [
   {
     pid: 1,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
@@ -407,7 +409,7 @@ export const supportedPools = [
   {
     pid: 4,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
@@ -452,7 +454,7 @@ export const supportedPools = [
   {
     pid: 5,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
@@ -496,7 +498,7 @@ export const supportedPools = [
   {
     pid: 6,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
@@ -534,7 +536,7 @@ export const supportedPools = [
   {
     pid: 7,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -572,7 +574,7 @@ export const supportedPools = [
   {
     pid: 8,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
@@ -616,7 +618,7 @@ export const supportedPools = [
   {
     pid: 9,
     lpAddresses: {
-      1: '0xa7bd4E1C3D08DfFCBfA60b7619c76788D114b664',
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {

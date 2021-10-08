@@ -509,11 +509,11 @@ export const getProgress = async (lpContract, pid) => {
       }
     }
   } catch (e) {
-    console.log('getProgress: ', e)
+    console.log('getProgress: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
-      return
+      return null
     }
   }
 }
@@ -555,7 +555,9 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
 
 const signedIdoString = async (account) => {
   try {
-    const signedRes = await axios.post("http://localhost:5000/api/ido/sign/v1", { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
+    const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
+
+    const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
 
     return signedRes.data;
   } catch (error) {
