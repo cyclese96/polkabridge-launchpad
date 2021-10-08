@@ -389,20 +389,20 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
-    total: '20 ETH', //1ETH =3k$
-    ratio: 1000,
-    min: 0.1, //300$
-    max: 0.166, //500$
-    maxTier1: 0.1, //300$
-    maxTier2: 0.133, //400$
-    maxTier3: 0.166, //500$
+    total: '17.14 ETH', //1ETH =3k5$
+    ratio: 15909,
+    min: 0.085, //300$
+    max: 0.142, //500$
+    maxTier1: 0.085, //300$
+    maxTier2: 0.114, //400$
+    maxTier3: 0.142, //500$
     access: 'Private',
     network: ethereumNetwork,
-    distribution: 'TBA',
-    startAt: 1532889124,
+    distribution: '50% TGE after  Uniswap listing, 50% next month',
+    startAt: 1634565600,
     endAt: 1634569200,
-    claimAt: 1632889124,//1634573700
-    startDate: 'Oct 18th 2021',
+    claimAt: 1634570100,//1634573700
+    startDate: '2PM UTC Oct 18th 2021',
   },
   {
     pid: 4,
@@ -516,20 +516,20 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/shoefy.png',
     totalSupply: '100,000,000 SHOE',
-    total: '33 ETH',//1ETH =3k$
-    ratio: 0,
-    min: 0.166,//500$
-    max: 0.233,//700$
-    maxTier1: 0.166,//500$
-    maxTier2: 0.2,//600$
-    maxTier3: 0.233,//700$
+    total: '28.57 ETH',//1ETH =3k5$
+    ratio: 8750,//1 SHOE 0.04$
+    min: 0.142,//500$
+    max: 0.2,//700$
+    maxTier1: 0.142,//500$
+    maxTier2: 0.171,//600$
+    maxTier3: 0.2,//700$
     access: 'Private',
     network: ethereumNetwork,
-    distribution: 'TBA',
-    startAt: 1634713200,
-    endAt: 1635094800,
-    claimAt: 0,
-    startDate: "TBA"
+    distribution: '50% TGE after 1h Uniswap listing, 50% next month',
+    startAt: 1633960800,
+    endAt: 1633964400,
+    claimAt: 1634652000,
+    startDate: "2PM UTC 10th Oct"
   },
   {
     pid: 7,

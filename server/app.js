@@ -82,6 +82,9 @@ const fetchStakeAmount = async (account) => {
     }
 
 }
+app.get('/', function (req, res) {
+    res.send('PolkaBridge Launchpad API')
+});
 
 app.post("/api/ido/sign/v1", async (req, res) => {
 
