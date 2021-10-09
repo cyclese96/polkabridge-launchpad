@@ -38,7 +38,7 @@ export const contractAddresses = {
   },
   masterLaunchpad: {
     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-    42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf', // launchpad contract
+    42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d', // launchpad contract
   },
   weth: {
     1: '0xc02aaa39b223fe8d0a0e5c4f27ead9083c756cc2',
@@ -379,6 +379,44 @@ export const supportedPools = [
       42: '',
     },
     lpExplorer: 'https://etherscan.io/address',
+    name: 'Shoefy',
+    symbol: 'SHOE-PBR',
+    description: `SHOE/ETH`,
+    introduce: `Shoefy - Contemporary way of repositioning the Non-Fungible Token (NFT) in an unprecedented method with the help of Fungible Tokens (FT`,
+    website: 'https://www.shoefy.io/',
+    twitter: 'https://twitter.com/ShoeFyio',
+    telegram: 'https://t.me/ShoeFy_Official',
+    whitepaper: 'https://docsend.com/view/s/3y24gmfcbcdnvmmg',
+    tokenSymbol: 'SHOE',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/shoefy.png',
+    totalSupply: '100,000,000 SHOE',
+    total: '28.57 ETH',//1ETH =3k5$
+    ratio: 8750,//1 SHOE 0.04$
+    min: 0.142,//500$
+    max: 0.2,//700$
+    maxTier1: 0.142,//500$
+    maxTier2: 0.171,//600$
+    maxTier3: 0.2,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: '50% TGE after 1h Uniswap listing, 50% next month',
+    startAt: 1633960800,
+    endAt: 1633964400,
+    claimAt: 1634648400,
+    startDate: "2PM UTC 11th Oct"
+  },
+  {
+    pid: 3,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
     name: 'Cryptopunt',
     symbol: 'PUN-PBR',
     description: `PUN/ETH`,
@@ -401,7 +439,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after  Uniswap listing, 50% next month',
-    startAt: 1633753168,
+    startAt: 1534565600,
     endAt: 1634569200,
     claimAt: 1634570100,//1634573700
     startDate: '2PM UTC Oct 18th 2021',
@@ -410,7 +448,7 @@ export const supportedPools = [
     pid: 4,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
     },
     tokenAddresses: {
       1: '',
@@ -495,46 +533,9 @@ export const supportedPools = [
     claimAt: 0,
     startDate: 'TBA',
   },
+
   {
     pid: 6,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address',
-    name: 'Shoefy',
-    symbol: 'SHOE-PBR',
-    description: `SHOE/ETH`,
-    introduce: `Shoefy - Contemporary way of repositioning the Non-Fungible Token (NFT) in an unprecedented method with the help of Fungible Tokens (FT`,
-    website: 'https://www.shoefy.io/',
-    twitter: 'https://twitter.com/ShoeFyio',
-    telegram: 'https://t.me/ShoeFy_Official',
-    whitepaper: 'https://docsend.com/view/s/3y24gmfcbcdnvmmg',
-    tokenSymbol: 'SHOE',
-    tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/shoefy.png',
-    totalSupply: '100,000,000 SHOE',
-    total: '28.57 ETH',//1ETH =3k5$
-    ratio: 8750,//1 SHOE 0.04$
-    min: 0.142,//500$
-    max: 0.2,//700$
-    maxTier1: 0.142,//500$
-    maxTier2: 0.171,//600$
-    maxTier3: 0.2,//700$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: '50% TGE after 1h Uniswap listing, 50% next month',
-    startAt: 1633960800,
-    endAt: 1633964400,
-    claimAt: 1634652000,
-    startDate: "2PM UTC 10th Oct"
-  },
-  {
-    pid: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -572,7 +573,7 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 8,
+    pid: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -616,7 +617,7 @@ export const supportedPools = [
     startDate: 'TBA',
   },
   {
-    pid: 9,
+    pid: 8,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',

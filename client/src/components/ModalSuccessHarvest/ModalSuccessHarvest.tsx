@@ -12,7 +12,8 @@ interface SuccessProps extends ModalProps {
   symbol: string
   txhash: string,
   percent: number,
-  open: boolean
+  open: boolean,
+  loading: boolean
 }
 const ModalSuccessHarvest: React.FC<SuccessProps> = ({
   text,
@@ -21,7 +22,8 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
   txhash,
   onDismiss,
   percent,
-  open
+  open,
+  loading
 }) => {
 
   return (
@@ -40,7 +42,7 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
           </StyleInfo>
           <StyleInfo>
             <StyleLabel>Claimed Amount:</StyleLabel>
-            <StyleContent>{percent} %</StyleContent>
+            <StyleContent>{loading ? '...' : percent} %</StyleContent>
           </StyleInfo>
           {/* <Spacer size="md" />
         <StyleInfo>

@@ -141,9 +141,11 @@ const JoinLaunchpad: React.FC = () => {
   const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed by the user so far
   const { onJoinPool } = useJoinPool(pid, network)
   const { onHarvest } = useHarvest(pid, network)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function fetchData() {
+      setLoading(true)
       const [
         newIsWhitelist,
         newETHBalance,
@@ -174,6 +176,7 @@ const JoinLaunchpad: React.FC = () => {
           account,
         ),
       ])
+      setLoading(false)
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('stakedData--->  ', stakedTokens)
@@ -399,7 +402,7 @@ const JoinLaunchpad: React.FC = () => {
       />
 
       <StyledLaunchpad>
-        <ModalSuccessHarvest onDismiss={handleClose} symbol={name} open={successHarvestTx} amount={tokenPurchased.toString()} percent={percentClaimed} text={"harvest"} txhash={txhash} />
+        <ModalSuccessHarvest loading={loading} onDismiss={handleClose} symbol={name} open={successHarvestTx} amount={tokenPurchased.toString()} percent={percentClaimed} text={"harvest"} txhash={txhash} />
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">

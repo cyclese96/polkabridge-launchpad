@@ -557,6 +557,7 @@ const signedIdoString = async (account) => {
   try {
     const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
 
+    console.log('api', _api)
     const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
 
     return signedRes.data;
@@ -576,7 +577,7 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
 
   try {
     const signedData = await signedIdoString(account)
-    // console.log('signedIdoString', signedData)
+    console.log('signedIdoString', signedData)
 
     const v = signedData.v;
     const r = signedData.r;
