@@ -50,7 +50,7 @@ export const contractAddresses = {
   },
 }
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -392,7 +392,7 @@ export const supportedPools = [
     icon: '/img/tokens/shoefy.png',
     totalSupply: '100,000,000 SHOE',
     total: '28.57 ETH',//1ETH =3k5$
-    ratio: 8750,//1 SHOE 0.04$
+    ratio: 8750,//1 SHOE 0.4$
     min: 0.142,//500$
     max: 0.2,//700$
     maxTier1: 0.142,//500$
@@ -401,9 +401,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after 1h Uniswap listing, 50% next month',
-    startAt: 1633960800,
-    endAt: 1633964400,
-    claimAt: 1634648400,
+    startAt: 1633960800,//real 1633960800
+    endAt: 1633964400,//real 1633964400
+    claimAt: 1634648400,//real 1634648400
     startDate: "2PM UTC 11th Oct"
   },
   {
