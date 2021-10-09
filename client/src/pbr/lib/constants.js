@@ -401,9 +401,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after 1h Uniswap listing, 50% next month',
-    startAt: 1633960800,
-    endAt: 1633964400,
-    claimAt: 1634648400,
+    startAt: 1533960800,//real 1633960800
+    endAt: 1733964400,//real 1633964400
+    claimAt: 1633756393,//real 1634648400
     startDate: "2PM UTC 11th Oct"
   },
   {
