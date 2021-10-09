@@ -46186,12 +46186,13 @@
             }
           ],
           "name": "OwnershipTransferred",
-          "type": "event"
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
         }
       },
       "links": {},
-      "address": "0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf",
-      "transactionHash": "0x2faf68cc8b13bff16ad23662c6512bd882a4040c27e5492776e895f2b81fe152"
+      "address": "0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d",
+      "transactionHash": "0xc60704c4448e04d360f9a0454b9e84375080a5199a1440883f7f80dfc55dea30"
     },
     "97": {
       "events": {
@@ -46227,7 +46228,7 @@
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2021-10-08T09:09:21.638Z",
+  "updatedAt": "2021-10-09T04:47:49.549Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {
