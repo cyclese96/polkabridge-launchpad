@@ -134,7 +134,7 @@ const StyledButton = styled.button<StyledButtonProps>`
   border: solid 1px;
   border-radius: 30px;
   box-shadow: ${(props) => props.boxShadow};
-  color: ${(props) => (!props.disabled ? `white` : `${props.color}1`)};
+  color: ${(props) => (!props.disabled ? `white` : `grey`)};
   cursor: pointer;
   display: flex;
   font-size: ${(props) => props.fontSize}px;
