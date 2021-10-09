@@ -10,6 +10,9 @@ export interface Launchpad {
   lpBscAddress: string
   lpBscContract: Contract
   lpBscExplorer: string
+  lpHarmonyAddress: string
+  lpHarmonyContract: Contract
+  lpHarmonyExplorer: string
   tokenAddress: string
   tokenContract: Contract
   tokenExplorer: string

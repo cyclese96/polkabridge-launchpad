@@ -49,6 +49,10 @@ export const contractAddresses = {
     56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
     97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
   },
+  launchpadHarmony: {
+    1666700000: '',  //mainnet
+    1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//testnet
+  }
 }
 
 const testing = true;
@@ -660,9 +664,69 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 9,
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpHarmonyAddresses: { // used shard0
+      1666700000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f',  //testnet
+      1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//mainnet
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'ArcadeNetwork',
+    symbol: 'ARC-PBR',
+    description: `ARC/MATIC`,
+    introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
+    website: 'https://arcadenet.io/',
+    twitter: 'https://twitter.com/ArcadeNetwork_',
+    telegram: 'https://t.me/ArcadeNetworkOfficial',
+    whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
+    tokenSymbol: 'ARC',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/arcade.png',
+    totalSupply: '222,500,000 ARC',
+    total: '23076 MATIC', //1Matic=1.3$
+    ratio: 0,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: harmonyNetwork,
+    distribution: 'TBA',
+    startAt: 1636096062,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: 'TBA',
   }
 ]
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
+export const HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io';
+
+export const harmonyChainIds = {
+  'shard0': {
+    'testnet': 1666600000,
+    'mainnet': 1666700000
+  },
+  'shard1': {
+    'testnet': 1666600001,
+    'mainnet': 1666700001
+  },
+  'shard2': {
+    'testnet': 1666600002,
+    'mainnet': 1666700002
+  },
+  'shard3': {
+    'testnet': 1666600003,
+    'mainnet': 1666700003
+  },
+}
 
 export const bscChainIds = [56, 97]

@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork, harmonyNetwork, harmonyChainIds, HMY_TESTNET_RPC_URL } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
@@ -161,19 +161,36 @@ export const getDefaultLaunchpads = () => {
 
     if (pool.network === bscNetwork) {
       return Object.assign(pool, {
-        lpAddress: pool.lpAddresses[bscChainId],
-        tokenAddress: pool.tokenAddresses[bscChainId],
-        lpBscAddress: pool.lpBscAddresses[bscChainId],//set network id for current bsc
+        lpAddress: '',
+        tokenAddress: '',
+        lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[bscChainId],//set network id for current bsc
         lpBscContract: null,
-        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+      })
+    } else if (pool.network === harmonyNetwork) {
+      //
+      return Object.assign(pool, {
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+      })
+
+    } else if (pool.network === polygonNetwork) {
+      //
+      return Object.assign(pool, {
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
     } else {
       return Object.assign(pool, {
-        lpAddress: pool.lpAddresses[chainId],
-        tokenAddress: pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
     }
   })
@@ -197,6 +214,9 @@ export const getDefaultLaunchpads = () => {
       lpBscAddress,
       lpBscContract,
       lpBscExplorer,
+      lpHarmonyAddress,
+      lpHarmonyContract,
+      lpHarmonyExplorer,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -234,6 +254,9 @@ export const getDefaultLaunchpads = () => {
       lpBscAddress,
       lpBscContract,
       lpBscExplorer,
+      lpHarmonyAddress,
+      lpHarmonyContract,
+      lpHarmonyExplorer,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -832,11 +855,24 @@ export const isMetaMaskInstalled = () => {
   return typeof window.web3 !== "undefined";
 };
 
+const isHarmonyNetwork = (networkId) => {
+  let _flag = false;
+  Object.keys(harmonyChainIds).forEach((value, index) => {
+    if (harmonyChainIds[value].testnet.toString() === networkId.toString() || harmonyChainIds[value].mainnet.toString() === networkId.toString()) {
+      _flag = true;
+    }
+  })
+  return _flag;
+}
+
+
 export const getNetworkName = (networkId) => {
   if ([56, 97].includes(parseInt(networkId))) {
     return bscNetwork
   } else if ([137, 80001].includes(parseInt(networkId))) {
     return polygonNetwork
+  } else if (isHarmonyNetwork(networkId)) {
+    return harmonyNetwork
   } else {
     return ethereumNetwork
   }
@@ -846,6 +882,8 @@ const getWeb3Provider = (network) => {
   let rpc;
   if (network === 'polygon') {
     rpc = currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+  } else if (network === harmonyNetwork) {
+    rpc = HMY_TESTNET_RPC_URL;
   } else {
     rpc = currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
   }
@@ -855,7 +893,7 @@ const getWeb3Provider = (network) => {
 }
 
 //matic connector
-const getContractInstance = (abi, contractAddress, network = 'polygon') => {
+export const getContractInstance = (abi, contractAddress, network = 'polygon') => {
 
   const web3 = getWeb3Provider(network)
 
@@ -868,4 +906,18 @@ export const formatFloatValue = (value, precision = 2) => {
 
   return new BigNumber(_value).toFixed(precision).toString();
 
+}
+
+export const formattedNetworkName = (network) => {
+  const networks = {
+    'polygon': 'Polygon',
+    'ethereum': 'Ethereum',
+    'bsc': 'Binance Smart Chain',
+    'harmony': 'Harmony',
+    'polygon': 'Polygon'
+  }
+  if (Object.keys(networks).includes(network)) {
+    return networks[network]
+  }
+  return 'Unknown'
 }

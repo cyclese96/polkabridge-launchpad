@@ -11,7 +11,7 @@ import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
+import { formattedNetworkName, getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
 import { bscNetwork, ethereumNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
@@ -121,8 +121,8 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   }
 
   const handleLaunchpadClick = (launchpad: any) => {
-    const _networkName =
-      launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network === polygonNetwork ? "Polygon" : 'Ethereum'
+    const _networkName = formattedNetworkName(launchpad.network)
+    // launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network === polygonNetwork ? "Polygon" : 'Ethereum'
     // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
     // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
     if (!account) {
@@ -193,9 +193,10 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span style={{ color: '#ff3465' }}>
                 <b>
-                  {launchpad.network === 'bsc'
+                  {/* {launchpad.network === 'bsc'
                     ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
-                      : 'Ethereum'}
+                      : 'Ethereum'} */}
+                  {formattedNetworkName(launchpad.network)}
                 </b>
               </span>
             </StyledInsight>
