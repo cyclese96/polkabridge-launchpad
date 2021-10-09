@@ -122,7 +122,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         const v = data.v;
         const r = data.r;
         const s = data.s;
-        return res.status(201).send({ v, r, s });
+        return res.status(201).send({ v, r, s, totalStaked: _totalStakeAmount });
 
     } catch (error) {
         console.log('API error', error)
