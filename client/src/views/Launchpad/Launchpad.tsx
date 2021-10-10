@@ -27,7 +27,7 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, polygonNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -48,6 +48,9 @@ const Launchpad: React.FC = () => {
     lpContract,
     lpBscAddress,
     lpBscContract,
+    lpHarmonyAddress,
+    lpHarmonyContract,
+    lpHarmonyExplorer,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -82,6 +85,9 @@ const Launchpad: React.FC = () => {
     lpContract: null,
     lpBscAddress: '',
     lpBscContract: null,
+    lpHarmonyAddress: '',
+    lpHarmonyContract: null,
+    lpHarmonyExplorer: '',
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -115,10 +121,21 @@ const Launchpad: React.FC = () => {
   const history = useHistory()
   const { chainId } = useNetwork()
 
+  const currentLaunchpadContract = (_network: string) => {
+    console.log('lp network', network)
+    if (network === bscNetwork) {
+      return lpBscContract
+    } else if (network === harmonyNetwork) {
+      return lpHarmonyContract
+    } else {
+      return lpContract
+    }
+  }
   useEffect(() => {
     async function fetchData() {
+      console.log('launchpad contract ', lpHarmonyContract)
       const newProgress = await getProgress(
-        network === bscNetwork ? lpBscContract : lpContract,
+        currentLaunchpadContract(network),
         pid,
         endAt
       )

@@ -3,11 +3,15 @@ import ERC20Abi from './abi/erc20.json'
 import MasterChefAbi from './abi/masterchef.json'
 import PolkaBridgeAbi from './abi/pbr.json'
 import LaunchpadAbi from './abi/masterLaunchpad.json'
+import LaunchpadHarmonyAbi from './abi/launchpadHarmony.json'
 import LanchpadBscAbi from './abi/polkabridgeLaunchpadBsc.json'
 import WETHAbi from './abi/weth.json'
 import {
   bscNetwork,
   contractAddresses,
+  currentConnection,
+  harmonyNetwork,
+  HMY_TESTNET_RPC_URL,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
 } from './constants.js'
@@ -16,12 +20,13 @@ import * as Types from './types.js'
 import Web3 from 'web3'
 import { options } from 'numeral'
 import config from '../../config'
+import { getContractInstance } from '../../pbr/utils'
 
 export class Contracts {
   constructor(provider, networkId, web3, options) {
     this.web3 = web3
-    
 
+    console.log('current network id in setup', networkId)
     this.defaultConfirmations = options.defaultConfirmations
     this.autoGasMultiplier = options.autoGasMultiplier || 1.5
     this.confirmationType =
@@ -31,29 +36,49 @@ export class Contracts {
 
     this.pbr = new this.web3.eth.Contract(PolkaBridgeAbi)
     this.masterLaunchpad = new this.web3.eth.Contract(LaunchpadAbi)
-  
+
     this.web3bsc = new Web3(window.ethereum)
     this.lanchpadBsc = new this.web3bsc.eth.Contract(LanchpadBscAbi)
-    
+
+    this.web3Harmony = new Web3(HMY_TESTNET_RPC_URL)
+    this.masterLaunchpadHarmony = new this.web3Harmony.eth.Contract(LaunchpadHarmonyAbi)
+
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
     this.pools = supportedPools.map((pool) => {
-      if (pool.network === bscNetwork ) {
+      if (pool.network === bscNetwork) {
         return Object.assign(pool, {
-          lpAddress: pool.lpAddresses[networkId],
-          tokenAddress: pool.tokenAddresses[networkId],
-          lpBscAddress: pool.lpBscAddresses[config.bscChain],//set network id for current bsc
+          lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
+          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],
+          lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[config.bscChain],//set network id for current bsc
           lpBscContract: new this.web3bsc.eth.Contract(LanchpadBscAbi),
           lpContract: new this.web3.eth.Contract(LaunchpadAbi),
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
         })
-      }else{
+      } else if (pool.network === harmonyNetwork) {
+
+        const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainMainnet
+
+        const _hmyAddress = !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses[_harmonyChain]//set network id for current bsc
+        const _hmyContract = getContractInstance(LaunchpadAbi, _hmyAddress, harmonyNetwork)
+        // console.log('setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract })
+
         return Object.assign(pool, {
-          lpAddress: pool.lpAddresses[networkId],
-          tokenAddress: pool.tokenAddresses[networkId],
+          lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
+          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],
+          lpHarmonyAddress: _hmyAddress,
+          lpHarmonyContract: _hmyContract,
           lpContract: new this.web3.eth.Contract(LaunchpadAbi),
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
-        }) 
+        })
+
+      } else {
+        return Object.assign(pool, {
+          lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
+          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],
+          lpContract: new this.web3.eth.Contract(LaunchpadAbi),
+          tokenContract: new this.web3.eth.Contract(ERC20Abi),
+        })
       }
     }
       ,
@@ -73,14 +98,16 @@ export class Contracts {
     setProvider(this.pbr, contractAddresses.pbr[networkId])
     setProvider(this.masterLaunchpad, contractAddresses.masterLaunchpad[networkId])
     setProvider(this.lanchpadBsc, contractAddresses.launchpadBsc[config.bscChain])//set network id for current bsc
-  
+    setProvider(this.masterLaunchpadHarmony, contractAddresses.launchpadHarmony[1666700000])//set network id
+
     setProvider(this.weth, contractAddresses.weth[networkId])
 
     this.pools.forEach(
-      ({ lpContract, lpAddress, tokenContract, tokenAddress, lpBscContract, lpBscAddress }) => {
+      ({ lpContract, lpAddress, tokenContract, tokenAddress, lpBscContract, lpBscAddress, lpHarmonyContract, lpHarmonyAddress }) => {
         setProvider(lpContract, lpAddress)
         setProvider(tokenContract, tokenAddress)
         setProvider(lpBscContract, lpBscAddress)
+        setProvider(lpHarmonyContract, lpHarmonyAddress)
       },
     )
   }
@@ -89,5 +116,6 @@ export class Contracts {
     this.pbr.options.from = account
     this.masterLaunchpad.options.from = account
     this.lanchpadBsc.options.from = account
+    this.masterLaunchpadHarmony.options.from = account
   }
 }

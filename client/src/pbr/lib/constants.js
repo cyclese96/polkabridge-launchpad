@@ -29,6 +29,7 @@ export const INTEGERS = {
 export const ethereumNetwork = 'ethereum'
 export const bscNetwork = 'bsc'
 export const polygonNetwork = 'polygon'
+export const harmonyNetwork = 'harmony'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
@@ -48,6 +49,10 @@ export const contractAddresses = {
     56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
     97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
   },
+  launchpadHarmony: {
+    1666700000: '',  //mainnet
+    1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//testnet
+  }
 }
 
 const testing = false;
@@ -811,6 +816,10 @@ export const supportedPools = [
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
+    lpHarmonyAddresses: { // used shard0
+      1666700000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f',  //testnet
+      1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//mainnet
+    },
     lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
     name: 'IDO Token Harmony',
     symbol: 'IDO-PBR',
@@ -832,7 +841,7 @@ export const supportedPools = [
     maxTier2: 307.69, //400$
     maxTier3: 384.61, //500$
     access: 'Private',
-    network: polygonNetwork,
+    network: harmonyNetwork,
     distribution: 'TBA',
     startAt: 1636096062,
     endAt: 1734569200,
@@ -842,5 +851,28 @@ export const supportedPools = [
 ]
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
+
+export const HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io';
+export const HMY_MAINNET_RPC_URL = 'https://api.harmony.one';
+
+export const harmonyChainIds = {
+  'shard0': {
+    'mainnet': 1666600000,
+    'testnet': 1666700000
+  },
+  'shard1': {
+    'mainnet': 1666600001,
+    'testnet': 1666700001
+  },
+  'shard2': {
+    'mainnet': 1666600002,
+    'testnet': 1666700002
+  },
+  'shard3': {
+    'mainnet': 1666600003,
+    'testnet': 1666700003
+  },
+}
+
 
 export const bscChainIds = [56, 97]
