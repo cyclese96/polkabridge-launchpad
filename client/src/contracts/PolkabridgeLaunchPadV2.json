@@ -46220,15 +46220,63 @@
       "address": "0x6f33bb19B42787C1dA42b998D06a50E1dA955D1c",
       "transactionHash": "0x9ac7e4cc3645f516db1941f8731d0b278afb19d39337dcbc9a216154d6d4caea"
     },
-    "1666700000": {
-      "events": {},
+    "80001": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
       "links": {},
       "address": "0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F",
-      "transactionHash": "0x34cb846594dc5ae9f80e0c6497cd0cb247311e6d78a5992efd3bad6ab3ecb20f"
+      "transactionHash": "0xa73ab6777bb580fc505aeca34e33e20d24de3f7499228be47fdabbe500be36f6"
+    },
+    "1666700000": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
+      "links": {},
+      "address": "0x35254723b35e2d7Fe6C56B9692A35f4AD19f9419",
+      "transactionHash": "0x50cf470bf42b23eeba229bd3bb5f31ad0febf81156014a116159619af023f3c2"
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2021-10-09T04:47:49.549Z",
+  "updatedAt": "2021-10-10T05:26:04.727Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

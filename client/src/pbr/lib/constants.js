@@ -646,7 +646,7 @@ export const supportedPools = [
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
     total: '23076 MATIC', //1Matic=1.3$
-    ratio: 0,
+    ratio: 2.6,
     min: 230.76, //300$
     max: 384.61, //500$
     maxTier1: 230.71, //300$
