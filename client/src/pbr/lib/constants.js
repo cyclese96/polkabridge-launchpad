@@ -659,6 +659,50 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 9,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+    name: 'IDO Token Harmony',
+    symbol: 'IDO-PBR',
+    description: `ARC/ONE`,
+    introduce: `Harmony test token IDO`,
+    website: '',
+    twitter: '',
+    telegram: 'l',
+    whitepaper: '',
+    tokenSymbol: 'IDO',
+    tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+    icon: '/img/tokens/test.png',
+    totalSupply: '100,000,000 IDO',
+    total: '23076 ONE', //1Matic=1.3$
+    ratio: 2.6,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: 'TBA',
+    startAt: 1636096062,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: 'TBA',
   }
 ]
 
