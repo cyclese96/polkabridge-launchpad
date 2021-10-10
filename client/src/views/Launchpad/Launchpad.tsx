@@ -122,7 +122,7 @@ const Launchpad: React.FC = () => {
   const { chainId } = useNetwork()
 
   const currentLaunchpadContract = (_network: string) => {
-    console.log('lp network', network)
+    console.log('lp contract network', network)
     if (network === bscNetwork) {
       return lpBscContract
     } else if (network === harmonyNetwork) {
@@ -133,7 +133,6 @@ const Launchpad: React.FC = () => {
   }
   useEffect(() => {
     async function fetchData() {
-      console.log('launchpad contract ', lpHarmonyContract)
       const newProgress = await getProgress(
         currentLaunchpadContract(network),
         pid,
@@ -153,6 +152,8 @@ const Launchpad: React.FC = () => {
     }
     if (pid >= 0) {
       fetchData()
+      console.log('hmylaunchpad contract ', lpHarmonyContract)
+      console.log('launchpad contract ', lpContract)
     }
   }, [ethereum, account, lpContract, pid, setStakedAmount, setProgress])
 
