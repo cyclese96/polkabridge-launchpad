@@ -50,7 +50,8 @@ const Launchpad: React.FC = () => {
     lpBscContract,
     lpHarmonyAddress,
     lpHarmonyContract,
-    lpHarmonyExplorer,
+    lpPolygonAddress,
+    lpPolygonContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -87,7 +88,8 @@ const Launchpad: React.FC = () => {
     lpBscContract: null,
     lpHarmonyAddress: '',
     lpHarmonyContract: null,
-    lpHarmonyExplorer: '',
+    lpPolygonAddress: '',
+    lpPolygonContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -132,8 +134,10 @@ const Launchpad: React.FC = () => {
     }
   }
   useEffect(() => {
+    console.log('launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
+    console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
+    console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
     async function fetchData() {
-      console.log('launchpad contract ', lpHarmonyContract)
       const newProgress = await getProgress(
         currentLaunchpadContract(network),
         pid,

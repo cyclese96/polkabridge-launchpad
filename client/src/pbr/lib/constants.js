@@ -49,13 +49,13 @@ export const contractAddresses = {
     56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
     97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
   },
-  launchpadHarmony: {
-    1666700000: '',  //mainnet
-    1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//testnet
-  }
+  // launchpadHarmony: {
+  //   1666700000: '',  //mainnet
+  //   1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//testnet
+  // }
 }
 
-const testing = false;
+const testing = true;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -677,9 +677,9 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'ArcadeNetwork',
@@ -704,9 +704,9 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',
-    startAt: 1636096062,
+    startAt: 1633939514,
     endAt: 1734569200,
-    claimAt: 0,
+    claimAt: 1633939514,
     startDate: 'TBA',
   },
 
@@ -812,13 +812,9 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpHarmonyAddresses: { // used shard0
-      1666700000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f',  //testnet
-      1666600000: '0xae8aaf92013dc8f7fa22fe01e56271c93b24058f'//mainnet
+    lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
+      1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
+      1666600000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a'//mainnet
     },
     lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
     name: 'IDO Token Harmony',
@@ -843,9 +839,9 @@ export const supportedPools = [
     access: 'Private',
     network: harmonyNetwork,
     distribution: 'TBA',
-    startAt: 1636096062,
+    startAt: 1633939514,
     endAt: 1734569200,
-    claimAt: 0,
+    claimAt: 1633939514,
     startDate: 'TBA',
   }
 ]

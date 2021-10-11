@@ -9,9 +9,9 @@ import { ethereumNetwork } from '../pbr/lib/constants'
 const useJoinPool = (pid: number, network: String) => {
     const { account } = useWallet()
     const pbr = usePolkaBridge()
-    const launchpadContract = network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
+    // const launchpadContract = network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleJoinPool = useCallback(
-        async (tokenValue: string, stakeAmount: string) => {
+        async (tokenValue: string, stakeAmount: string, launchpadContract: any) => {
             try {
                 const txHash = await joinpool(
                     launchpadContract,

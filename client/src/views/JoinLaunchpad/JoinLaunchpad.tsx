@@ -37,7 +37,7 @@ import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 import Modal from '../../components/Modal'
-import { bscNetwork, ethereumNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import ModalSuccessHarvest2 from '../../components/ModalSuccessHarvest/ModalSuccessHarvest'
 
 interface JoinHistory {
@@ -64,6 +64,10 @@ const JoinLaunchpad: React.FC = () => {
     lpContract,
     lpBscAddress,
     lpBscContract,
+    lpHarmonyAddress,
+    lpHarmonyContract,
+    lpPolygonAddress,
+    lpPolygonContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -97,6 +101,10 @@ const JoinLaunchpad: React.FC = () => {
     lpContract: null,
     lpBscAddress: '',
     lpBscContract: null,
+    lpHarmonyAddress: '',
+    lpHarmonyContract: null,
+    lpPolygonAddress: '',
+    lpPolygonContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -143,6 +151,22 @@ const JoinLaunchpad: React.FC = () => {
   const { onHarvest } = useHarvest(pid, network)
   const [loading, setLoading] = useState(true)
 
+
+  const currentLaunchadContractInstance = (_network: string) => {
+    if (network === bscNetwork) {
+      return lpBscContract
+    } else if (network === polygonNetwork) {
+      return lpPolygonContract
+    } else if (network === harmonyNetwork) {
+      return lpHarmonyContract
+    } else if (network === ethereumNetwork) {
+      return lpContract
+    } else {
+      return null
+    }
+  }
+
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
@@ -156,22 +180,22 @@ const JoinLaunchpad: React.FC = () => {
         userInfo,
       ] = await Promise.all([
         getIsWhitelist(
-          network === bscNetwork ? lpBscContract : lpContract,
+          currentLaunchadContractInstance(network),
           pid,
           stakedAmount,
           account
         ),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(network === bscNetwork ? lpBscContract : lpContract, pid, endAt),
+        getProgress(currentLaunchadContractInstance(network), pid),
         getPurchasesAmount(
-          network === bscNetwork ? lpBscContract : lpContract,
+          currentLaunchadContractInstance(network),
           pid,
           account,
         ),
         getUserStakingData(pid, account),
         getUserInfo(
-          network === bscNetwork ? lpBscContract : lpContract,
+          currentLaunchadContractInstance(network),
           pid,
           account,
         ),
@@ -526,7 +550,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
-                      var tx: any = await onJoinPool(ethValue, stakedAmount)
+                      var tx: any = await onJoinPool(ethValue, stakedAmount, currentLaunchadContractInstance(network))
                       setPendingTx(false)
                       if (tx) {
                         setSuccessTx(true)
@@ -598,7 +622,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (tokenPurchased > 0) {
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest()
+                      var tx: any = await onHarvest(currentLaunchadContractInstance(network))
                       setPendingHarvestTx(false)
                       if (tx) {
                         console.log('harvest ' + tx)

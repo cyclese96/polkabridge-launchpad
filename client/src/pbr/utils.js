@@ -91,6 +91,10 @@ export const getLaunchpads = (pbr) => {
         lpBscAddress,
         lpBscContract,
         lpBscExplorer,
+        lpHarmonyAddress,
+        lpHarmonyContract,
+        lpPolygonAddress,
+        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -127,6 +131,10 @@ export const getLaunchpads = (pbr) => {
         lpBscAddress,
         lpBscContract,
         lpBscExplorer,
+        lpHarmonyAddress,
+        lpHarmonyContract,
+        lpPolygonAddress,
+        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -216,7 +224,8 @@ export const getDefaultLaunchpads = () => {
       lpBscExplorer,
       lpHarmonyAddress,
       lpHarmonyContract,
-      lpHarmonyExplorer,
+      lpPolygonAddress,
+      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -256,7 +265,8 @@ export const getDefaultLaunchpads = () => {
       lpBscExplorer,
       lpHarmonyAddress,
       lpHarmonyContract,
-      lpHarmonyExplorer,
+      lpPolygonAddress,
+      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -684,7 +694,7 @@ export const getStaked = async (pid, account) => {
 
     const abi = maticStakeAbi
     const address = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
-    const maticStakeContract = getContractInstance(abi, address)
+    const maticStakeContract = getContractInstance(abi, address, polygonNetwork)
 
     const stakeDate = await maticStakeContract.methods
       .userInfo(0, account)
@@ -882,14 +892,23 @@ export const getNetworkName = (networkId) => {
   }
 }
 
-const getWeb3Provider = (network) => {
+const getWeb3Provider = (network, nativeNetwork) => {
   let rpc;
-  if (network === 'polygon') {
-    rpc = currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+  if (network === polygonNetwork) {
+    // set polygon rpc native or infura
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+
   } else if (network === harmonyNetwork) {
-    rpc = HMY_TESTNET_RPC_URL;
+
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? config.hmy_rpc_mainnet : config.hmy_rpc_mainnet;
+
   } else {
-    rpc = currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+
   }
 
   const web3 = new Web3(rpc);
@@ -897,9 +916,9 @@ const getWeb3Provider = (network) => {
 }
 
 //matic connector
-export const getContractInstance = (abi, contractAddress, network = 'polygon') => {
+export const getContractInstance = (abi, contractAddress, network, nativeNetwork) => {
 
-  const web3 = getWeb3Provider(network)
+  const web3 = getWeb3Provider(network, nativeNetwork)
 
   return new web3.eth.Contract(abi, contractAddress);
 };

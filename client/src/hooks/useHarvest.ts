@@ -4,14 +4,14 @@ import usePolkaBridge from './usePolkaBridge'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 import { harvest, getLaunchpadContract, getBscLaunchpadContract } from '../pbr/utils'
-import { ethereumNetwork } from '../pbr/lib/constants'
+// import { ethereumNetwork } from '../pbr/lib/constants'
 
-const useHarvest = (pid: number, network:String) => {
+const useHarvest = (pid: number, network: String) => {
     const { account } = useWallet()
     const pbr = usePolkaBridge()
-    const launchpadContract =  network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
+    // const launchpadContract =  network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleHarvest = useCallback(
-        async () => {
+        async (launchpadContract: any) => {
             try {
                 const txHash = await harvest(
                     launchpadContract,
