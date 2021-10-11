@@ -99,6 +99,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
           ? launchpad.lpBscContract
           : launchpad.lpContract,
         launchpad.pid,
+        launchpad.endAt
       )
       setProgress(newProgress)
     }

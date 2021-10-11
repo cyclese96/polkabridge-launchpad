@@ -486,9 +486,13 @@ export const getHistory = async (account) => {
   return history
 }
 
-export const getProgress = async (lpContract, pid) => {
+export const getProgress = async (lpContract, pid, endAt) => {
   try {
     //if (pid == 1) return new BigNumber(100)
+
+    if (endAt * 1000 <= new Date().getTime()) {
+      return new BigNumber(100)
+    }
     const [remainToken, totalToken] = await Promise.all([
       lpContract.methods
         .getRemainIDOToken(pid)
