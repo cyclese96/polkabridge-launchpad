@@ -944,3 +944,38 @@ export const formattedNetworkName = (network) => {
   }
   return 'Unknown'
 }
+
+//input  { chainId, chainName, currency: {name, symbol, decimals }, rpcUrls, blockExplorer }
+export const setupNetwork = async (networkObject) => {
+  const provider = window.ethereum
+  if (provider) {
+    // const _chainId = parseInt(networkObject.chainId, 10)
+    try {
+      console.log('setupNetwork: trying network setup ')
+      await provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          // {
+          //   chainId: `0x${_chainId.toString(16)}`,
+          //   chainName: 'Binance Smart Chain Mainnet',
+          //   nativeCurrency: {
+          //     name: 'BNB',
+          //     symbol: 'bnb',
+          //     decimals: 18,
+          //   },
+          //   rpcUrls: networkObject.nodes,
+          //   blockExplorerUrls: [`${networkObject.blockExplorer}/`],
+          // },
+          networkObject
+        ],
+      })
+      return true
+    } catch (error) {
+      console.error('Failed to setup the network in Metamask:', error)
+      return false
+    }
+  } else {
+    console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
+    return false
+  }
+}

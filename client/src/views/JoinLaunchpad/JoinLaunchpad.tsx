@@ -484,9 +484,9 @@ const JoinLaunchpad: React.FC = () => {
                         <StyledTokenIconWrap>
                           <StyledTokenIcon
                             src={
-                              network === ethereumNetwork
-                                ? '/img/tokens/eth.png'
-                                : '/img/tokens/bnb.png'
+                              network === bscNetwork
+                                ? '/img/tokens/bnb.png'
+                                : '/img/tokens/eth.png'
                             }
                             alt="icon"
                           ></StyledTokenIcon>

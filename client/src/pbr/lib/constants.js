@@ -845,6 +845,13 @@ export const supportedPools = [
     startDate: 'TBA',
   }
 ]
+// given pid and network name -> launchpad pool id
+export const poolId = {
+  9: {
+    'ethereum': 1,
+    'harmony': 1
+  }
+}
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
 

@@ -23,6 +23,9 @@ import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
 import useNetwork from '../../../hooks/useNetwork'
 import { Link } from 'react-router-dom'
+import { setupNetwork } from '../../../pbr/utils'
+import { bscNetworkDetail, harmonyNetworkDetail } from '../../../pbr/networkConstants'
+import NetworkSelect from './NetworkSelect'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -391,6 +394,9 @@ const Navbar = () => {
           </div>
 
           <div className={classes.grow} />
+          <div >
+            <NetworkSelect />
+          </div>
           <div style={{ paddingRight: 10 }}></div>
           <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </Toolbar>
