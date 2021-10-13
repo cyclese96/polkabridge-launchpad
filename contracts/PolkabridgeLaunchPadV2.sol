@@ -95,6 +95,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 PercentClaim2;
         uint256 ClaimTime3;
         uint256 PercentClaim3;
+        uint256 ClaimTime4;
+        uint256 PercentClaim4;
+        uint256 ClaimTime5;
+        uint256 PercentClaim5;
     }
 
     struct User {
@@ -206,6 +210,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 claimTime2,
         uint256 percentClaim3,
         uint256 claimTime3,
+         uint256 percentClaim4,
+        uint256 claimTime4,
+         uint256 percentClaim5,
+        uint256 claimTime5,
         uint256 pid
     ) public onlyOwner {
         claimInfos[pid].ClaimTime1 = claimTime1;
@@ -214,6 +222,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         claimInfos[pid].PercentClaim2 = percentClaim2;
         claimInfos[pid].ClaimTime3 = claimTime3;
         claimInfos[pid].PercentClaim3 = percentClaim3;
+        claimInfos[pid].ClaimTime4 = claimTime4;
+        claimInfos[pid].PercentClaim4 = percentClaim4;
+        claimInfos[pid].ClaimTime5 = claimTime5;
+        claimInfos[pid].PercentClaim5 = percentClaim5;
     }
 
     function updateClaimInfo(
@@ -452,6 +464,33 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             );
            users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
                 claimInfos[poolIndex].PercentClaim3
+            );
+        }
+
+         else if (users[pid][msg.sender].NumberClaimed == 3) {
+            require(
+                block.timestamp >= claimInfos[poolIndex].ClaimTime4,
+                "invalid time"
+            );
+            pools[poolIndex].IDOToken.safeTransfer(
+                msg.sender,
+                userBalance.mul(claimInfos[poolIndex].PercentClaim4).div(100)
+            );
+           users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
+                claimInfos[poolIndex].PercentClaim4
+            );
+        }
+         else if (users[pid][msg.sender].NumberClaimed == 4) {
+            require(
+                block.timestamp >= claimInfos[poolIndex].ClaimTime5,
+                "invalid time"
+            );
+            pools[poolIndex].IDOToken.safeTransfer(
+                msg.sender,
+                userBalance.mul(claimInfos[poolIndex].PercentClaim5).div(100)
+            );
+           users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
+                claimInfos[poolIndex].PercentClaim5
             );
         }
 
