@@ -439,7 +439,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after  Uniswap listing, 50% next month',
-    startAt: 1534565600,
+    startAt: 1634565600,
     endAt: 1634569200,
     claimAt: 1634570100,//1634573700
     startDate: '2PM UTC Oct 18th 2021',
@@ -484,9 +484,9 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1634713200,
-    endAt: 1634716800,
-    claimAt: 1634721300,
+    startAt: 1636984800,
+    endAt: 1736984800,
+    claimAt: 1736984800,
     startDate: 'TBA',
   },
   {
@@ -660,8 +660,97 @@ export const supportedPools = [
     claimAt: 0,
     startDate: 'TBA',
   },
+
   {
     pid: 9,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'PlayerMon',
+    symbol: 'PYM-PBR',
+    description: `PYM/MATIC`,
+    introduce: `Playermon is a boundless NFT Game where anyone can explore and battle in the universe with their favorite space companions called Playermons!`,
+    website: 'https://playermon.com/',
+    twitter: 'https://twitter.com/playermons',
+    telegram: 'https://t.me/playermonofficial',
+    whitepaper: 'https://whitepaper.playermon.com/',
+    tokenSymbol: 'PYM',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/playmon.png',
+    totalSupply: '1,000,000,000 PYM',
+    total: '38461 MATIC', //1Matic=1.3$
+    ratio: 34.2,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: 'TBA',
+    startAt: 1635948000,
+    endAt: 1635951600,
+    claimAt: 1636034400,
+    startDate: '3rd Nov, 2021',
+  },
+  {
+    pid: 10,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'ReBaked',
+    symbol: 'BAKED-PBR',
+    description: `BAKED/MATIC`,
+    introduce: `reBaked is building a set of governance, management, and operations tools for DAOs and Web 3.0 ecosystems to better distribute and manage their treasuries- focusing on value creation`,
+    website: 'https://www.rebaked.com/',
+    twitter: 'https://twitter.com/rebakedinc',
+    telegram: 'https://t.me/rebakedann',
+    whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
+    tokenSymbol: 'BAKED',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/rebaked.svg',
+    totalSupply: '300,000,000 BAKED',
+    total: '38461 MATIC', //1Matic=1.3$
+    ratio: 43.3,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: '33% on TGE, then 33% monthly over 2 months',
+    startAt: 1634911200,
+    endAt: 1634914800,
+    claimAt: 1634918400,
+    startDate: '2PM UTC 22nd Oct, 2021',
+  },
+  {
+    pid: 11,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
