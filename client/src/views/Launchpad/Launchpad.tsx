@@ -27,7 +27,7 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -123,8 +123,12 @@ const Launchpad: React.FC = () => {
   const history = useHistory()
   const { chainId } = useNetwork()
 
+  const currentPoolId = (pid: number, network: string) => {
+    return getPoolId(pid, network)
+  }
+
   const currentLaunchpadContract = (_network: string) => {
-    console.log('lp network', network)
+    console.log('harmonyTest: lp network', network)
     if (network === bscNetwork) {
       return lpBscContract
     } else if (network === harmonyNetwork) {
@@ -134,20 +138,20 @@ const Launchpad: React.FC = () => {
     }
   }
   useEffect(() => {
-    console.log('launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
+    console.log('harmonyTest: launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
     console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
     console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
     async function fetchData() {
       const newProgress = await getProgress(
         currentLaunchpadContract(network),
-        pid,
+        currentPoolId(pid, network),
         endAt
       )
       // const [stakeData, stakeDataPolygon] = await Promise.all([
       //   getUserStakingData(pid, account),
       //   getStaked(pid, account)
       // ])
-      const stakedTokens = await getUserStakingData(pid, account)
+      const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account)
 
       // console.log('progress data ', newProgress)
       // console.log('stake data polygon', stakeDataPolygon)

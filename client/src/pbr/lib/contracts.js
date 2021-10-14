@@ -62,10 +62,10 @@ export class Contracts {
         })
       } else if (pool.network === harmonyNetwork) {
 
-        const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainMainnet
+        const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainTestnet
         const _hmyAddress = !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses[_harmonyChain]//set network id for current bsc
         const _hmyContract = getContractInstance(LaunchpadAbi, _hmyAddress, harmonyNetwork, this.currentNetworkName)
-        console.log('setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract, currentNetwork: this.currentNetworkName })
+        console.log('harmonyTest: setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract, currentNetwork: this.currentNetworkName })
 
         return Object.assign(pool, {
           // lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],

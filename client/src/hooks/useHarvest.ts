@@ -6,12 +6,12 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { harvest, getLaunchpadContract, getBscLaunchpadContract } from '../pbr/utils'
 // import { ethereumNetwork } from '../pbr/lib/constants'
 
-const useHarvest = (pid: number, network: String) => {
+const useHarvest = () => {
     const { account } = useWallet()
     const pbr = usePolkaBridge()
     // const launchpadContract =  network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleHarvest = useCallback(
-        async (launchpadContract: any) => {
+        async (pid: number, launchpadContract: any) => {
             try {
                 const txHash = await harvest(
                     launchpadContract,
@@ -27,7 +27,7 @@ const useHarvest = (pid: number, network: String) => {
                 return ''
             }
         },
-        [account, pid, pbr],
+        [account, pbr],
     )
 
     return { onHarvest: handleHarvest }

@@ -528,10 +528,10 @@ export const getProgress = async (lpContract, pid, endAt) => {
     }
     const [remainToken, totalToken] = await Promise.all([
       lpContract.methods
-        .getRemainIDOToken(pid)
+        .getRemainIDOToken(1)
         .call(),
       lpContract.methods
-        .getBalanceTokenByPoolId(pid)
+        .getBalanceTokenByPoolId(1)
         .call()
     ])
 
@@ -546,7 +546,7 @@ export const getProgress = async (lpContract, pid, endAt) => {
       }
     }
   } catch (e) {
-    console.log('getProgress: ', { e, pid })
+    console.log('harmonyTest: getProgress: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
@@ -611,10 +611,10 @@ const convertToWei = (amount) => {
 }
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
-
+  console.log({ launchpadContract })
   try {
     const signedData = await signedIdoString(account)
-    console.log('signedIdoString', signedData)
+    console.log('harmonyTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
 
     const v = signedData.v;
     const r = signedData.r;
@@ -625,7 +625,7 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
     return launchpadContract.methods
       .purchaseIDO(
         stakeAmount,
-        pid,
+        1,
         v,
         r,
         s

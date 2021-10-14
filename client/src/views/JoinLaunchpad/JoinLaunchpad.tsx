@@ -37,7 +37,7 @@ import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 import Modal from '../../components/Modal'
-import { bscNetwork, ethereumNetwork, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import ModalSuccessHarvest2 from '../../components/ModalSuccessHarvest/ModalSuccessHarvest'
 
 interface JoinHistory {
@@ -147,10 +147,16 @@ const JoinLaunchpad: React.FC = () => {
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
   const [tokenPurchased, setTokenPurchased] = useState(0) // token purchase by the user so far
   const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed by the user so far
-  const { onJoinPool } = useJoinPool(pid, network)
-  const { onHarvest } = useHarvest(pid, network)
+  const { onJoinPool } = useJoinPool()
+  const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
 
+
+  const currentPoolId = (pid: number, network: string) => {
+    const _pid = getPoolId(pid, network)
+    console.log('harmonyTest: currentPoolId', _pid)
+    return _pid;
+  }
 
   const currentLaunchadContractInstance = (_network: string) => {
     if (network === bscNetwork) {
@@ -181,22 +187,22 @@ const JoinLaunchpad: React.FC = () => {
       ] = await Promise.all([
         getIsWhitelist(
           currentLaunchadContractInstance(network),
-          pid,
+          currentPoolId(pid, network),
           stakedAmount,
           account
         ),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(currentLaunchadContractInstance(network), pid),
+        getProgress(currentLaunchadContractInstance(network), currentPoolId(pid, network)),
         getPurchasesAmount(
           currentLaunchadContractInstance(network),
-          pid,
+          currentPoolId(pid, network),
           account,
         ),
-        getUserStakingData(pid, account),
+        getUserStakingData(currentPoolId(pid, network), account),
         getUserInfo(
           currentLaunchadContractInstance(network),
-          pid,
+          currentPoolId(pid, network),
           account,
         ),
       ])
@@ -293,7 +299,29 @@ const JoinLaunchpad: React.FC = () => {
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
   const networkSymbol = () => {
-    return network === bscNetwork ? 'BNB' : 'ETH'
+    if (network === bscNetwork) {
+      return 'BNB'
+    } else if (network === polygonNetwork) {
+      return 'MATIC'
+    } else if (network === harmonyNetwork) {
+      return 'ONE'
+    } else {
+      return 'ETH';
+    }
+  }
+
+  const networkIcon = () => {
+
+
+    if (network === bscNetwork) {
+      return '/img/tokens/bnb.png'
+    } else if (network === polygonNetwork) {
+      return '/img/tokens/polygon.png'
+    } else if (network === harmonyNetwork) {
+      return '/img/tokens/one.png'
+    } else {
+      return '/img/tokens/eth.png';
+    }
   }
 
   const getJoinButtonText = () => {
@@ -336,15 +364,15 @@ const JoinLaunchpad: React.FC = () => {
   const reset = useCallback(async () => {
     const newETHBalance = await getETHBalance(ethereum, account)
     const newHistory = await getHistory(account)
-    const newProgress = await getProgress(lpContract, pid)
+    const newProgress = await getProgress(lpContract, currentPoolId(pid, network))
     const newPurchasedAmount = await getPurchasesAmount(
       lpContract,
-      pid,
+      currentPoolId(pid, network),
       account,
     )
     const userInfo = await getUserInfo(
       network === bscNetwork ? lpBscContract : lpContract,
-      pid,
+      currentPoolId(pid, network),
       account,
     )
     setETHBalance(newETHBalance)
@@ -483,11 +511,7 @@ const JoinLaunchpad: React.FC = () => {
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
                           <StyledTokenIcon
-                            src={
-                              network === bscNetwork
-                                ? '/img/tokens/bnb.png'
-                                : '/img/tokens/eth.png'
-                            }
+                            src={networkIcon()}
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
@@ -550,7 +574,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
-                      var tx: any = await onJoinPool(ethValue, stakedAmount, currentLaunchadContractInstance(network))
+                      var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, currentLaunchadContractInstance(network))
                       setPendingTx(false)
                       if (tx) {
                         setSuccessTx(true)
@@ -622,7 +646,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (tokenPurchased > 0) {
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest(currentLaunchadContractInstance(network))
+                      var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadContractInstance(network))
                       setPendingHarvestTx(false)
                       if (tx) {
                         console.log('harvest ' + tx)

@@ -667,6 +667,7 @@ export const supportedPools = [
   },
   {
     pid: 12,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -802,6 +803,7 @@ export const supportedPools = [
   },
   {
     pid: 15,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -831,11 +833,11 @@ export const supportedPools = [
     totalSupply: '100,000,000 IDO',
     total: '23076 ONE', //1Matic=1.3$
     ratio: 2.6,
-    min: 230.76, //300$
-    max: 384.61, //500$
-    maxTier1: 230.71, //300$
-    maxTier2: 307.69, //400$
-    maxTier3: 384.61, //500$
+    min: 23.076, //300$
+    max: 38.461, //500$
+    maxTier1: 23.071, //300$
+    maxTier2: 30.769, //400$
+    maxTier3: 38.461, //500$
     access: 'Private',
     network: harmonyNetwork,
     distribution: 'TBA',
@@ -846,11 +848,12 @@ export const supportedPools = [
   }
 ]
 // given pid and network name -> launchpad pool id
-export const poolId = {
-  9: {
-    'ethereum': 1,
-    'harmony': 1
+export const getPoolId = (pid, network) => {
+  const _pidIndex = supportedPools.findIndex(item => item.pid === pid && item.network === network);
+  if (_pidIndex === -1) {
+    return 0
   }
+  return supportedPools[_pidIndex].poolId ? supportedPools[_pidIndex].poolId : supportedPools[_pidIndex].pid;
 }
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
