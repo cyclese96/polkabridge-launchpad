@@ -395,7 +395,7 @@ const Navbar = () => {
 
           <div className={classes.grow} />
           <div >
-            <NetworkSelect />
+            <NetworkSelect selectedNetwork={chainId} />
           </div>
           <div style={{ paddingRight: 10 }}></div>
           <AccountButton onWalletClick={() => setAccountDialog(true)} />

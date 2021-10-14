@@ -40,37 +40,40 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
   },
 }))
-export default function NetworkSelect() {
+export default function NetworkSelect({ selectedNetwork }) {
   const classes = useStyles()
   const [network, setNetwork] = React.useState(
     parseInt(localStorage.getItem('currentNetwork') || config.chainId),
   )
   useEffect(() => {
-    console.log()
+    console.log('selected chain id', selectedNetwork)
     if (!localStorage.getItem('currentNetwork')) {
-      setupNetwork(ethereumNetworkDetail.mainnet)
-      localStorage.currentNetwork = 1
+      // setupNetwork(ethereumNetworkDetail.mainnet)
+      localStorage.currentNetwork = selectedNetwork
     }
-  }, [])
+    handleChange(selectedNetwork)
+  }, [selectedNetwork])
+
   const handleChange = (_selected) => {
+    console.log('selected network', selectedNetwork)
     if (network === _selected) {
       return
     }
     localStorage.setItem('currentNetwork', _selected)
     setNetwork(_selected)
-    if (_selected === 56) {
+    if ([config.bscChain, config.bscChainTestent].includes(_selected)) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? bscNetworkDetail.mainnet
           : bscNetworkDetail.testnet,
       )
-    } else if (_selected === 137) {
+    } else if ([config.polygon_chain_mainnet, config.polygon_chain_testnet].includes(_selected)) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? polygonNetworkDetail.mainnet
           : polygonNetworkDetail.testnet,
       )
-    } else if (_selected === 1666600000) {
+    } else if ([config.hmyChainMainnet, config.hmyChainTestnet].includes(_selected)) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? harmonyNetworkDetail.mainnet
@@ -93,21 +96,21 @@ export default function NetworkSelect() {
           onChange={({ target: { value } }) => handleChange(value)}
         >
           <MenuItem
-            value={1}
+            value={currentConnection === 'testnet' ? config.chainIdTestnet : config.chainId}
             className={classes.buttonDrop}
           >
             <span>Ethereum</span>
             <img className={classes.imgIcon} src="/img/tokens/eth.png" />
           </MenuItem>
-          <MenuItem value={56} className={classes.buttonDrop}>
+          <MenuItem value={currentConnection === 'testnet' ? config.bscChainTestent : config.bscChain} className={classes.buttonDrop}>
             <span>Binance Smart Chain</span>
             <img className={classes.imgIcon} src="/img/tokens/bnb.png" />
           </MenuItem>
-          <MenuItem value={137} className={classes.buttonDrop}>
+          <MenuItem value={currentConnection === 'testnet' ? config.polygon_chain_testnet : config.polygon_chain_mainnet} className={classes.buttonDrop}>
             <span>Polygon</span>
             <img className={classes.imgIcon} src="/img/tokens/polygon.png" />
           </MenuItem>
-          <MenuItem value={1666600000} className={classes.buttonDrop}>
+          <MenuItem value={currentConnection === 'testnet' ? config.hmyChainTestnet : config.hmyChainMainnet} className={classes.buttonDrop}>
             <span>Harmony</span>
             <img className={classes.imgIcon} src="/img/tokens/one.png" />
           </MenuItem>

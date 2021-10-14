@@ -951,23 +951,17 @@ export const setupNetwork = async (networkObject) => {
   if (provider) {
     // const _chainId = parseInt(networkObject.chainId, 10)
     try {
-      console.log('setupNetwork: trying network setup ')
+      if (networkObject.chainId === `0x${config.chainId.toString(16)}` || networkObject.chainId === `0x${config.chainIdTestnet.toString(16)}`) {
+        await provider.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: networkObject.chainId }],
+        })
+      }
       await provider.request({
         method: 'wallet_addEthereumChain',
         params: [
-          // {
-          //   chainId: `0x${_chainId.toString(16)}`,
-          //   chainName: 'Binance Smart Chain Mainnet',
-          //   nativeCurrency: {
-          //     name: 'BNB',
-          //     symbol: 'bnb',
-          //     decimals: 18,
-          //   },
-          //   rpcUrls: networkObject.nodes,
-          //   blockExplorerUrls: [`${networkObject.blockExplorer}/`],
-          // },
           networkObject
-        ],
+        ]
       })
       return true
     } catch (error) {

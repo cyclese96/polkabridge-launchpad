@@ -80,23 +80,11 @@ export const ethereumNetworkDetail = {
     'mainnet': {
         chainId: `0x${config.chainId.toString(16)}`,
         chainName: 'Ethereum Mainnet',
-        nativeCurrency: {
-            name: 'ETH',
-            symbol: 'eth',
-            decimals: 18,
-        },
-        rpcUrls: ['https://mainnet.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
-        blockExplorerUrls: [`https://etherscan.io/`],
+        chainRaw: config.chainId
     },
     'testnet': {
         chainId: `0x${config.chainIdTestnet.toString(16)}`,
         chainName: 'Koven Testnet',
-        nativeCurrency: {
-            name: 'ETH',
-            symbol: 'eth',
-            decimals: 18,
-        },
-        rpcUrls: ['https://kovan.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161'],
-        blockExplorerUrls: [`https://kovan.etherscan.io`],
+        chainRaw: config.chainId
     }
 }
