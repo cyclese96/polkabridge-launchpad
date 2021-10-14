@@ -546,7 +546,7 @@ export const getProgress = async (lpContract, pid, endAt) => {
       }
     }
   } catch (e) {
-    console.log('harmonyTest: getProgress: ', { e, pid })
+    // console.log('harmonyTest: getProgress: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
@@ -611,10 +611,10 @@ const convertToWei = (amount) => {
 }
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
-  console.log({ launchpadContract })
+  console.log('maticTest:  ', { launchpadContract })
   try {
     const signedData = await signedIdoString(account)
-    console.log('harmonyTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
+    // console.log('maticTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
 
     const v = signedData.v;
     const r = signedData.r;

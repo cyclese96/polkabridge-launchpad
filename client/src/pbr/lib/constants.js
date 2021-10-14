@@ -667,7 +667,7 @@ export const supportedPools = [
   },
   {
     pid: 12,
-    poolId: 1,
+    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -697,11 +697,11 @@ export const supportedPools = [
     totalSupply: '222,500,000 ARC',
     total: '23076 MATIC', //1Matic=1.3$
     ratio: 2.6,
-    min: 230.76, //300$
-    max: 384.61, //500$
-    maxTier1: 230.71, //300$
-    maxTier2: 307.69, //400$
-    maxTier3: 384.61, //500$
+    min: 0.23076, //300$
+    max: 0.38461, //500$
+    maxTier1: 0.23071, //300$
+    maxTier2: 0.30769, //400$
+    maxTier3: 0.38461, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',

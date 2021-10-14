@@ -65,7 +65,7 @@ export class Contracts {
         const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainTestnet
         const _hmyAddress = !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses[_harmonyChain]//set network id for current bsc
         const _hmyContract = getContractInstance(LaunchpadAbi, _hmyAddress, harmonyNetwork, this.currentNetworkName)
-        console.log('harmonyTest: setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract, currentNetwork: this.currentNetworkName })
+        // console.log('harmonyTest: setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract, currentNetwork: this.currentNetworkName })
 
         return Object.assign(pool, {
           // lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
@@ -80,8 +80,8 @@ export class Contracts {
 
         const _polygonChain = currentConnection === 'mainnet' ? config.polygon_chain_mainnet : config.polygon_chain_testnet
         const _polygonAddress = !pool.lpPolygonAddresses ? '' : pool.lpPolygonAddresses[_polygonChain]//set network id
-        const _polygonContract = getContractInstance(LaunchpadAbi, _polygonAddress, polygonNetwork)
-        console.log('setting polygon contract', { _polygonChain, _polygonAddress, _polygonContract, currNet: this.currentNetworkName })
+        const _polygonContract = getContractInstance(LaunchpadAbi, _polygonAddress, polygonNetwork, this.currentNetworkName)
+        // console.log('maticTest: setting polygon contract', { _polygonChain, _polygonAddress, _polygonContract, currNet: this.currentNetworkName })
 
         return Object.assign(pool, {
           // lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
