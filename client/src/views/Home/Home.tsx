@@ -7,6 +7,7 @@ import { makeStyles } from '@material-ui/core/styles'
 import { Avatar, Button } from '@material-ui/core'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useNetwork from '../../hooks/useNetwork'
+import NetworkSelect from '../../components/TopBar/components/NetworkSelect'
 
 const useStyles = makeStyles((theme) => ({
   card: {
