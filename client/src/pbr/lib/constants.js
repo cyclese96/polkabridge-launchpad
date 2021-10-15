@@ -732,7 +732,7 @@ export const supportedPools = [
     whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
     tokenSymbol: 'BAKED',
     tokenExplorer: 'https://polygonscan.com/address',
-    icon: '/img/tokens/rebaked.svg',
+    icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
     total: '38461 MATIC', //1Matic=1.3$
     ratio: 43.3,
@@ -751,6 +751,51 @@ export const supportedPools = [
   },
   {
     pid: 11,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'PixelVerse',
+    symbol: 'PIXEL-PBR',
+    description: `PIXEL/BNB`,
+    introduce: `Pixelverse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
+    website: 'https://pixelverse.ai/',
+    twitter: 'https://twitter.com/pixelverse1',
+    telegram: 'https://t.me/pixelverseofficial',
+    whitepaper:
+      'https://pixelverse.ai/assets/pdf/deck.pdf',
+    tokenSymbol: 'PIXEL',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/pixelverse.png',
+    totalSupply: '1,000,000,000 PIXEL',
+    total: '111 BNB',
+    ratio: 0, // 1BNB = 450$
+    min: 0.66, //300$
+    max: 1.11, //500$
+    maxTier1: 0.66, //300$
+    maxTier2: 0.88, //400$
+    maxTier3: 1.11, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1636034400,
+    endAt: 1636038000,
+    claimAt: 0,
+    startDate: '4th November, 2021',
+  },
+  {
+    pid: 12,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
