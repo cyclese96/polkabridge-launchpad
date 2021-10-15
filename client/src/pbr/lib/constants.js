@@ -445,7 +445,51 @@ export const supportedPools = [
     startDate: '2PM UTC Oct 18th 2021',
   },
   {
-    pid: 4,
+    pid: 5,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'ReBaked',
+    symbol: 'BAKED-PBR',
+    description: `BAKED/MATIC`,
+    introduce: `reBaked is building a set of governance, management, and operations tools for DAOs and Web 3.0 ecosystems to better distribute and manage their treasuries- focusing on value creation`,
+    website: 'https://www.rebaked.com/',
+    twitter: 'https://twitter.com/rebakedinc',
+    telegram: 'https://t.me/rebakedann',
+    whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
+    tokenSymbol: 'BAKED',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/rebaked.png',
+    totalSupply: '300,000,000 BAKED',
+    total: '38461 MATIC', //1Matic=1.3$
+    ratio: 43.3,
+    min: 230.76, //300$
+    max: 384.61, //500$
+    maxTier1: 230.71, //300$
+    maxTier2: 307.69, //400$
+    maxTier3: 384.61, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: '33% on TGE, then 33% monthly over 2 months',
+    startAt: 1634911200,
+    endAt: 1634914800,
+    claimAt: 1634918400,
+    startDate: '2PM UTC 22nd Oct, 2021',
+  },
+  {
+    pid: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -490,7 +534,7 @@ export const supportedPools = [
     startDate: 'TBA',
   },
   {
-    pid: 5,
+    pid: 9,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -535,7 +579,7 @@ export const supportedPools = [
   },
 
   {
-    pid: 6,
+    pid: 10,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -573,7 +617,7 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 7,
+    pid: 11,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -617,7 +661,7 @@ export const supportedPools = [
     startDate: 'TBA',
   },
   {
-    pid: 8,
+    pid: 12,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -662,7 +706,7 @@ export const supportedPools = [
   },
 
   {
-    pid: 9,
+    pid: 13,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -705,52 +749,9 @@ export const supportedPools = [
     claimAt: 1636034400,
     startDate: '3rd Nov, 2021',
   },
+
   {
-    pid: 10,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://polygonscan.com/address',
-    name: 'ReBaked',
-    symbol: 'BAKED-PBR',
-    description: `BAKED/MATIC`,
-    introduce: `reBaked is building a set of governance, management, and operations tools for DAOs and Web 3.0 ecosystems to better distribute and manage their treasuries- focusing on value creation`,
-    website: 'https://www.rebaked.com/',
-    twitter: 'https://twitter.com/rebakedinc',
-    telegram: 'https://t.me/rebakedann',
-    whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
-    tokenSymbol: 'BAKED',
-    tokenExplorer: 'https://polygonscan.com/address',
-    icon: '/img/tokens/rebaked.png',
-    totalSupply: '300,000,000 BAKED',
-    total: '38461 MATIC', //1Matic=1.3$
-    ratio: 43.3,
-    min: 230.76, //300$
-    max: 384.61, //500$
-    maxTier1: 230.71, //300$
-    maxTier2: 307.69, //400$
-    maxTier3: 384.61, //500$
-    access: 'Private',
-    network: polygonNetwork,
-    distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1634911200,
-    endAt: 1634914800,
-    claimAt: 1634918400,
-    startDate: '2PM UTC 22nd Oct, 2021',
-  },
-  {
-    pid: 11,
+    pid: 14,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -792,10 +793,10 @@ export const supportedPools = [
     startAt: 1636034400,
     endAt: 1636038000,
     claimAt: 0,
-    startDate: '4th November, 2021',
+    startDate: '4th Nov, 2021',
   },
   {
-    pid: 12,
+    pid: 15,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
