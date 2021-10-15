@@ -89,11 +89,12 @@ export default function NetworkSelect({ selectedNetwork }) {
   }
   return (
     <div>
-      <FormControl className={classes.root} >
+      <FormControl variant='standard' className={classes.root} >
         <Select
           className={classes.main}
           value={network}
           onChange={({ target: { value } }) => handleChange(value)}
+          disableUnderline
         >
           <MenuItem
             value={currentConnection === 'testnet' ? config.chainIdTestnet : config.chainId}

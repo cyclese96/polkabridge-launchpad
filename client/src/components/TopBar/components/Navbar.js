@@ -314,6 +314,11 @@ const Navbar = () => {
         <ListItem button style={{ marginLeft: 20 }}>
           <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </ListItem>
+        {/* <ListItem>
+          <div >
+            <NetworkSelect selectedNetwork={chainId} />
+          </div>
+        </ListItem> */}
       </List>
     </div>
   )
@@ -410,6 +415,9 @@ const Navbar = () => {
                 src="img/logo-white.png"
                 style={{ height: 38, width: 150 }}
               /></Link>
+            {/* <div >
+              <NetworkSelect selectedNetwork={chainId} />
+            </div> */}
           </div>
 
           <div>

@@ -1,5 +1,3 @@
-import sample from 'lodash/sample'
-
 // Array of available nodes to connect to
 export const bscNodes = [
     'https://bsc-dataseed.binance.org/',
