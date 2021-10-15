@@ -212,9 +212,9 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('stakedData--->  ', stakedTokens)
       // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('progress--->  ', newProgress)
-      // console.log('newIsWhitelist--->  ', newIsWhitelist)
+      // console.log('ethTest: newIsWhitelist--->  ', newIsWhitelist)
       // console.log('ethTest: tokenPurchased   ', tokenPurchased)
-      // // console.log('newIsWhitelist--->  ',newIsWhitelist)
+      // console.log('ethTest: userInfo--->  ', userInfo)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -346,7 +346,6 @@ const JoinLaunchpad: React.FC = () => {
 
   const isButtonDisable = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
-
     return (
       startAt * 1000 > new Date().getTime() ||
       endAt * 1000 <= new Date().getTime() ||

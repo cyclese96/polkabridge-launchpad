@@ -561,11 +561,11 @@ export const getIsWhitelist = async (lpContract, pid, stakeAmount, account) => {
     const isWhitelist = await lpContract.methods
       .IsWhitelist(account, pid, stakeAmount)
       .call()
-    // console.log('ethTest: getIsWhitelist fetched ', { isWhitelist, pid })
+    // console.log('ethTest: getIsWhitelistInfo ', { isWhitelist, pid })
 
     return isWhitelist
   } catch (e) {
-    console.log('ethTest:  getIsWhitelist error', { pid, e, stakeAmount: stakeAmount })
+    // console.log('ethTest:  getIsWhitelist error', { pid, e, stakeAmount: stakeAmount })
     return
   }
 }
@@ -585,9 +585,10 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
+    // console.log('ethTest: purchasesAmount ', purchasesAmount)
     return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
-    console.log('getPurchasesAmount', e)
+    console.log('ethTest: getPurchasesAmount', e)
     return
   }
 }
@@ -616,18 +617,16 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
   // console.log('maticTest:  ', { launchpadContract })
   try {
     const signedData = await signedIdoString(account)
-    // console.log('maticTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
+    // console.log('ethTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
 
     const v = signedData.v;
     const r = signedData.r;
     const s = signedData.s;
 
-
-    // console.log({ stakeAmount })
     return launchpadContract.methods
       .purchaseIDO(
         stakeAmount,
-        1,
+        pid,
         v,
         r,
         s
@@ -806,7 +805,7 @@ export const getUserInfo = async (lpContract, pid, account) => {
     const userInfo = await lpContract.methods
       .getUserInfo(pid, account)
       .call()
-
+    console.log('ethTest: userInfo ', userInfo)
     return userInfo
   } catch (e) {
     console.log('getUserInfo ', e)
@@ -900,6 +899,7 @@ const getWeb3Provider = (network, nativeNetwork, pid) => {
     // set polygon rpc native or infura
     rpc = nativeNetwork === network ? window.ethereum :
       currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+    // rpc = new Web3.providers.HttpProvider('https://matic-mumbai.chainstacklabs.com')
 
   } else if (network === harmonyNetwork) {
 

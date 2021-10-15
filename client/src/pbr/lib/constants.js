@@ -413,7 +413,6 @@ export const supportedPools = [
   },
   {
     pid: 3,
-    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
@@ -836,7 +835,7 @@ export const supportedPools = [
     ratio: 2.6,
     min: 23.076, //300$
     max: 38.461, //500$
-    maxTier1: 23.071, //300$
+    maxTier1: 24.071, //300$
     maxTier2: 30.769, //400$
     maxTier3: 38.461, //500$
     access: 'Private',
