@@ -546,7 +546,7 @@ export const getProgress = async (lpContract, pid, endAt) => {
       }
     }
   } catch (e) {
-    // console.log('harmonyTest: getProgress: ', { e, pid })
+    console.log('ethTest: getProgress error: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
@@ -556,14 +556,16 @@ export const getProgress = async (lpContract, pid, endAt) => {
 }
 
 export const getIsWhitelist = async (lpContract, pid, stakeAmount, account) => {
+  // console.log('ethTest: getIsWhitelist fetched from lpContract ', { lpContract, pid, stakeAmount })
   try {
     const isWhitelist = await lpContract.methods
-      .IsWhitelist(account, pid, convertToWei(stakeAmount))
+      .IsWhitelist(account, pid, stakeAmount)
       .call()
-    // console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
+    // console.log('ethTest: getIsWhitelist fetched ', { isWhitelist, pid })
+
     return isWhitelist
   } catch (e) {
-    console.log('getIsWhitelist', e)
+    console.log('ethTest:  getIsWhitelist error', { pid, e, stakeAmount: stakeAmount })
     return
   }
 }
@@ -594,7 +596,7 @@ const signedIdoString = async (account) => {
   try {
     const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
 
-    console.log('api', _api)
+    // console.log('api', _api)
     const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
 
     return signedRes.data;
@@ -611,7 +613,7 @@ const convertToWei = (amount) => {
 }
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
-  console.log('maticTest:  ', { launchpadContract })
+  // console.log('maticTest:  ', { launchpadContract })
   try {
     const signedData = await signedIdoString(account)
     // console.log('maticTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
@@ -789,7 +791,7 @@ export const getUserStakingData = async (pid, account) => {
     ])
 
     const _totalStakedAmount = new BigNumber(stakedDataEth.amount).plus(stakedDataPoly.amount).toFixed(0).toString()
-    console.log('fetch staked amount', _totalStakedAmount)
+    // console.log('fetch staked amount', _totalStakedAmount)
     return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', e)
@@ -892,7 +894,7 @@ export const getNetworkName = (networkId) => {
   }
 }
 
-const getWeb3Provider = (network, nativeNetwork) => {
+const getWeb3Provider = (network, nativeNetwork, pid) => {
   let rpc;
   if (network === polygonNetwork) {
     // set polygon rpc native or infura
@@ -902,10 +904,10 @@ const getWeb3Provider = (network, nativeNetwork) => {
   } else if (network === harmonyNetwork) {
 
     rpc = nativeNetwork === network ? window.ethereum :
-      currentConnection === 'mainnet' ? config.hmy_rpc_mainnet : config.hmy_rpc_mainnet;
+      currentConnection === 'mainnet' ? config.hmy_rpc_mainnet : config.hmy_rpc_testnet;
 
   } else {
-
+    // console.log('ethTest:  setting eth rpc', { nativeNetwork, network, pid })
     rpc = nativeNetwork === network ? window.ethereum :
       currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
 
@@ -916,11 +918,12 @@ const getWeb3Provider = (network, nativeNetwork) => {
 }
 
 //matic connector
-export const getContractInstance = (abi, contractAddress, network, nativeNetwork) => {
+export const getContractInstance = (abi, contractAddress, network, nativeNetwork, pid) => {
 
-  const web3 = getWeb3Provider(network, nativeNetwork)
-
-  return new web3.eth.Contract(abi, contractAddress);
+  const web3 = getWeb3Provider(network, nativeNetwork, pid)
+  const _instance = new web3.eth.Contract(abi, contractAddress);
+  _instance.isNative = network === nativeNetwork
+  return _instance
 };
 
 

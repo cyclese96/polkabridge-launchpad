@@ -413,6 +413,7 @@ export const supportedPools = [
   },
   {
     pid: 3,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
@@ -446,7 +447,7 @@ export const supportedPools = [
     distribution: '50% TGE after  Uniswap listing, 50% next month',
     startAt: 1634565600,
     endAt: 1634569200,
-    claimAt: 1634570100,//1634573700
+    claimAt: 1634287709,//real 1634570100,
     startDate: '2PM UTC Oct 18th 2021',
   },
   {

@@ -47,6 +47,7 @@ export class Contracts {
 
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
+    console.log('ethTest:  current network id', networkId)
     this.currentNetworkName = getNetworkName(networkId);
 
     this.pools = supportedPools.map((pool) => {
@@ -95,7 +96,8 @@ export class Contracts {
       } else {
         const _ethChain = currentConnection === 'mainnet' ? config.chainId : config.chainIdTestnet;
         const _lpAddress = !pool.lpAddresses ? "" : pool.lpAddresses[_ethChain]
-        const _lpContract = getContractInstance(LaunchpadAbi, _lpAddress, ethereumNetwork, this.currentNetworkName);
+        const _lpContract = getContractInstance(LaunchpadAbi, _lpAddress, ethereumNetwork, getNetworkName(networkId), pool.pid);
+        console.log('ethTest: setting ethereum contract', { _ethChain, _lpAddress, _lpContract, currNet: getNetworkName(networkId) })
 
         return Object.assign(pool, {
           tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],

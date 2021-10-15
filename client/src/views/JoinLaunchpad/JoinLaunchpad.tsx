@@ -154,7 +154,7 @@ const JoinLaunchpad: React.FC = () => {
 
   const currentPoolId = (pid: number, network: string) => {
     const _pid = getPoolId(pid, network)
-    console.log('harmonyTest: currentPoolId', _pid)
+    // console.log('ethTest: currentPoolId', _pid)
     return _pid;
   }
 
@@ -211,9 +211,9 @@ const JoinLaunchpad: React.FC = () => {
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('stakedData--->  ', stakedTokens)
       // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
-      console.log('progress--->  ', newProgress)
+      // console.log('progress--->  ', newProgress)
       // console.log('newIsWhitelist--->  ', newIsWhitelist)
-      // console.log('getUserTotalPurchased  ', newPurchasedAmount)
+      // console.log('ethTest: tokenPurchased   ', tokenPurchased)
       // // console.log('newIsWhitelist--->  ',newIsWhitelist)
 
       setIsWhitelist(newIsWhitelist)

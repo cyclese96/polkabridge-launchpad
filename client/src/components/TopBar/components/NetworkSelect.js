@@ -46,7 +46,7 @@ export default function NetworkSelect({ selectedNetwork }) {
     parseInt(localStorage.getItem('currentNetwork') || config.chainId),
   )
   useEffect(() => {
-    console.log('selected chain id', selectedNetwork)
+    // console.log('selected chain id', selectedNetwork)
     if (!localStorage.getItem('currentNetwork')) {
       // setupNetwork(ethereumNetworkDetail.mainnet)
       localStorage.currentNetwork = selectedNetwork

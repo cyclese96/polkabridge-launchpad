@@ -88,7 +88,7 @@ app.get('/', function (req, res) {
 
 app.post("/api/ido/sign/v1", async (req, res) => {
 
-    console.log({ body: req.body })
+    // console.log({ body: req.body })
     try {
         const api_key = req.body.apiKey;
         if (api_key !== process.env.API_KEY) {
