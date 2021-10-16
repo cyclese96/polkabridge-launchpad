@@ -770,7 +770,7 @@ export const supportedPools = [
     name: 'PixelVerse',
     symbol: 'PIXEL-PBR',
     description: `PIXEL/BNB`,
-    introduce: `Pixelverse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
+    introduce: `PixielVerse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
     website: 'https://pixelverse.ai/',
     twitter: 'https://twitter.com/pixelverse1',
     telegram: 'https://t.me/pixelverseofficial',
@@ -793,7 +793,7 @@ export const supportedPools = [
     startAt: 1636034400,
     endAt: 1636038000,
     claimAt: 0,
-    startDate: '4th Nov, 2021',
+    startDate: '2nd Nov, 2021',
   },
   {
     pid: 15,
