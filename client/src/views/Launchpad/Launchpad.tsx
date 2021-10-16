@@ -27,7 +27,7 @@ import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, polygonNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -48,6 +48,10 @@ const Launchpad: React.FC = () => {
     lpContract,
     lpBscAddress,
     lpBscContract,
+    lpHarmonyAddress,
+    lpHarmonyContract,
+    lpPolygonAddress,
+    lpPolygonContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -82,6 +86,10 @@ const Launchpad: React.FC = () => {
     lpContract: null,
     lpBscAddress: '',
     lpBscContract: null,
+    lpHarmonyAddress: '',
+    lpHarmonyContract: null,
+    lpPolygonAddress: '',
+    lpPolygonContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -115,18 +123,35 @@ const Launchpad: React.FC = () => {
   const history = useHistory()
   const { chainId } = useNetwork()
 
+  const currentPoolId = (pid: number, network: string) => {
+    return getPoolId(pid, network)
+  }
+
+  const currentLaunchpadContract = (_network: string) => {
+    console.log('harmonyTest: lp network', network)
+    if (network === bscNetwork) {
+      return lpBscContract
+    } else if (network === harmonyNetwork) {
+      return lpHarmonyContract
+    } else {
+      return lpContract
+    }
+  }
   useEffect(() => {
+    console.log('harmonyTest: launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
+    console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
+    console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
     async function fetchData() {
       const newProgress = await getProgress(
-        network === bscNetwork ? lpBscContract : lpContract,
-        pid,
+        currentLaunchpadContract(network),
+        currentPoolId(pid, network),
         endAt
       )
       // const [stakeData, stakeDataPolygon] = await Promise.all([
       //   getUserStakingData(pid, account),
       //   getStaked(pid, account)
       // ])
-      const stakedTokens = await getUserStakingData(pid, account)
+      const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account)
 
       // console.log('progress data ', newProgress)
       // console.log('stake data polygon', stakeDataPolygon)

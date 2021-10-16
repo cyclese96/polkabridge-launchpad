@@ -2,7 +2,7 @@ import BigNumber from 'bignumber.js'
 // import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeAddressMatic, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork, harmonyNetwork, harmonyChainIds, HMY_TESTNET_RPC_URL } from './lib/constants'
 import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 import { createAwait } from 'typescript'
@@ -91,6 +91,10 @@ export const getLaunchpads = (pbr) => {
         lpBscAddress,
         lpBscContract,
         lpBscExplorer,
+        lpHarmonyAddress,
+        lpHarmonyContract,
+        lpPolygonAddress,
+        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -127,6 +131,10 @@ export const getLaunchpads = (pbr) => {
         lpBscAddress,
         lpBscContract,
         lpBscExplorer,
+        lpHarmonyAddress,
+        lpHarmonyContract,
+        lpPolygonAddress,
+        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -161,19 +169,36 @@ export const getDefaultLaunchpads = () => {
 
     if (pool.network === bscNetwork) {
       return Object.assign(pool, {
-        lpAddress: pool.lpAddresses[bscChainId],
-        tokenAddress: pool.tokenAddresses[bscChainId],
-        lpBscAddress: pool.lpBscAddresses[bscChainId],//set network id for current bsc
+        lpAddress: '',
+        tokenAddress: '',
+        lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[bscChainId],//set network id for current bsc
         lpBscContract: null,
-        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+      })
+    } else if (pool.network === harmonyNetwork) {
+      //
+      return Object.assign(pool, {
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+      })
+
+    } else if (pool.network === polygonNetwork) {
+      //
+      return Object.assign(pool, {
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
     } else {
       return Object.assign(pool, {
-        lpAddress: pool.lpAddresses[chainId],
-        tokenAddress: pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, pool.tokenAddresses[chainId], 'ethereum'),
+        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
+        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
     }
   })
@@ -197,6 +222,10 @@ export const getDefaultLaunchpads = () => {
       lpBscAddress,
       lpBscContract,
       lpBscExplorer,
+      lpHarmonyAddress,
+      lpHarmonyContract,
+      lpPolygonAddress,
+      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -234,6 +263,10 @@ export const getDefaultLaunchpads = () => {
       lpBscAddress,
       lpBscContract,
       lpBscExplorer,
+      lpHarmonyAddress,
+      lpHarmonyContract,
+      lpPolygonAddress,
+      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -495,10 +528,10 @@ export const getProgress = async (lpContract, pid, endAt) => {
     }
     const [remainToken, totalToken] = await Promise.all([
       lpContract.methods
-        .getRemainIDOToken(pid)
+        .getRemainIDOToken(1)
         .call(),
       lpContract.methods
-        .getBalanceTokenByPoolId(pid)
+        .getBalanceTokenByPoolId(1)
         .call()
     ])
 
@@ -513,7 +546,7 @@ export const getProgress = async (lpContract, pid, endAt) => {
       }
     }
   } catch (e) {
-    console.log('getProgress: ', { e, pid })
+    console.log('ethTest: getProgress error: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
@@ -523,14 +556,16 @@ export const getProgress = async (lpContract, pid, endAt) => {
 }
 
 export const getIsWhitelist = async (lpContract, pid, stakeAmount, account) => {
+  // console.log('ethTest: getIsWhitelist fetched from lpContract ', { lpContract, pid, stakeAmount })
   try {
     const isWhitelist = await lpContract.methods
-      .IsWhitelist(account, pid, convertToWei(stakeAmount))
+      .IsWhitelist(account, pid, stakeAmount)
       .call()
-    // console.log('getIsWhitelist fetched from lpContract ', isWhitelist)
+    // console.log('ethTest: getIsWhitelistInfo ', { isWhitelist, pid })
+
     return isWhitelist
   } catch (e) {
-    console.log('getIsWhitelist', e)
+    // console.log('ethTest:  getIsWhitelist error', { pid, e, stakeAmount: stakeAmount })
     return
   }
 }
@@ -550,9 +585,10 @@ export const getPurchasesAmount = async (lpContract, pid, account) => {
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
+    // console.log('ethTest: purchasesAmount ', purchasesAmount)
     return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
-    console.log('getPurchasesAmount', e)
+    console.log('ethTest: getPurchasesAmount', e)
     return
   }
 }
@@ -561,7 +597,7 @@ const signedIdoString = async (account) => {
   try {
     const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
 
-    console.log('api', _api)
+    // console.log('api', _api)
     const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
 
     return signedRes.data;
@@ -578,17 +614,15 @@ const convertToWei = (amount) => {
 }
 
 export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
-
+  // console.log('maticTest:  ', { launchpadContract })
   try {
     const signedData = await signedIdoString(account)
-    console.log('signedIdoString', signedData)
+    // console.log('ethTest: signedIdoString', { signedData, pid, stakeAmount, ethValue })
 
     const v = signedData.v;
     const r = signedData.r;
     const s = signedData.s;
 
-
-    // console.log({ stakeAmount })
     return launchpadContract.methods
       .purchaseIDO(
         stakeAmount,
@@ -661,7 +695,7 @@ export const getStaked = async (pid, account) => {
 
     const abi = maticStakeAbi
     const address = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
-    const maticStakeContract = getContractInstance(abi, address)
+    const maticStakeContract = getContractInstance(abi, address, polygonNetwork)
 
     const stakeDate = await maticStakeContract.methods
       .userInfo(0, account)
@@ -756,7 +790,7 @@ export const getUserStakingData = async (pid, account) => {
     ])
 
     const _totalStakedAmount = new BigNumber(stakedDataEth.amount).plus(stakedDataPoly.amount).toFixed(0).toString()
-    console.log('fetch staked amount', _totalStakedAmount)
+    // console.log('fetch staked amount', _totalStakedAmount)
     return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', e)
@@ -771,7 +805,7 @@ export const getUserInfo = async (lpContract, pid, account) => {
     const userInfo = await lpContract.methods
       .getUserInfo(pid, account)
       .call()
-
+    console.log('ethTest: userInfo ', userInfo)
     return userInfo
   } catch (e) {
     console.log('getUserInfo ', e)
@@ -836,22 +870,47 @@ export const isMetaMaskInstalled = () => {
   return typeof window.web3 !== "undefined";
 };
 
+const isHarmonyNetwork = (networkId) => {
+  let _flag = false;
+  Object.keys(harmonyChainIds).forEach((value, index) => {
+    if (harmonyChainIds[value].testnet.toString() === networkId.toString() || harmonyChainIds[value].mainnet.toString() === networkId.toString()) {
+      _flag = true;
+    }
+  })
+  return _flag;
+}
+
+
 export const getNetworkName = (networkId) => {
   if ([56, 97].includes(parseInt(networkId))) {
     return bscNetwork
   } else if ([137, 80001].includes(parseInt(networkId))) {
     return polygonNetwork
+  } else if (isHarmonyNetwork(networkId)) {
+    return harmonyNetwork
   } else {
     return ethereumNetwork
   }
 }
 
-const getWeb3Provider = (network) => {
+const getWeb3Provider = (network, nativeNetwork, pid) => {
   let rpc;
-  if (network === 'polygon') {
-    rpc = currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+  if (network === polygonNetwork) {
+    // set polygon rpc native or infura
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
+    // rpc = new Web3.providers.HttpProvider('https://matic-mumbai.chainstacklabs.com')
+
+  } else if (network === harmonyNetwork) {
+
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? config.hmy_rpc_mainnet : config.hmy_rpc_testnet;
+
   } else {
-    rpc = currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+    // console.log('ethTest:  setting eth rpc', { nativeNetwork, network, pid })
+    rpc = nativeNetwork === network ? window.ethereum :
+      currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+
   }
 
   const web3 = new Web3(rpc);
@@ -859,11 +918,12 @@ const getWeb3Provider = (network) => {
 }
 
 //matic connector
-const getContractInstance = (abi, contractAddress, network = 'polygon') => {
+export const getContractInstance = (abi, contractAddress, network, nativeNetwork, pid) => {
 
-  const web3 = getWeb3Provider(network)
-
-  return new web3.eth.Contract(abi, contractAddress);
+  const web3 = getWeb3Provider(network, nativeNetwork, pid)
+  const _instance = new web3.eth.Contract(abi, contractAddress);
+  _instance.isNative = network === nativeNetwork
+  return _instance
 };
 
 
@@ -872,4 +932,47 @@ export const formatFloatValue = (value, precision = 2) => {
 
   return new BigNumber(_value).toFixed(precision).toString();
 
+}
+
+export const formattedNetworkName = (network) => {
+  const networks = {
+    'polygon': 'Polygon',
+    'ethereum': 'Ethereum',
+    'bsc': 'Binance Smart Chain',
+    'harmony': 'Harmony',
+    'polygon': 'Polygon'
+  }
+  if (Object.keys(networks).includes(network)) {
+    return networks[network]
+  }
+  return 'Unknown'
+}
+
+//input  { chainId, chainName, currency: {name, symbol, decimals }, rpcUrls, blockExplorer }
+export const setupNetwork = async (networkObject) => {
+  const provider = window.ethereum
+  if (provider) {
+    // const _chainId = parseInt(networkObject.chainId, 10)
+    try {
+      if (networkObject.chainId === `0x${config.chainId.toString(16)}` || networkObject.chainId === `0x${config.chainIdTestnet.toString(16)}`) {
+        await provider.request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: networkObject.chainId }],
+        })
+      }
+      await provider.request({
+        method: 'wallet_addEthereumChain',
+        params: [
+          networkObject
+        ]
+      })
+      return true
+    } catch (error) {
+      console.error('Failed to setup the network in Metamask:', error)
+      return false
+    }
+  } else {
+    console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
+    return false
+  }
 }

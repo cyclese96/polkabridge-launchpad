@@ -6,12 +6,12 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { joinpool, getLaunchpadContract, getBscLaunchpadContract } from '../pbr/utils'
 import { ethereumNetwork } from '../pbr/lib/constants'
 
-const useJoinPool = (pid: number, network: String) => {
+const useJoinPool = () => {
     const { account } = useWallet()
     const pbr = usePolkaBridge()
-    const launchpadContract = network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
+    // const launchpadContract = network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleJoinPool = useCallback(
-        async (tokenValue: string, stakeAmount: string) => {
+        async (pid: number, tokenValue: string, stakeAmount: string, launchpadContract: any) => {
             try {
                 const txHash = await joinpool(
                     launchpadContract,
@@ -29,7 +29,7 @@ const useJoinPool = (pid: number, network: String) => {
                 return ''
             }
         },
-        [account, pid, pbr],
+        [account, pbr],
     )
 
     return { onJoinPool: handleJoinPool }
