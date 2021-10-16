@@ -519,13 +519,21 @@ export const getHistory = async (account) => {
   return history
 }
 
-export const getProgress = async (lpContract, pid, endAt) => {
+export const getProgress = async (lpContract, pid, startAt, endAt) => {
   try {
     //if (pid == 1) return new BigNumber(100)
+    //if pool not started yet show no progress
+    if (startAt * 1000 >= new Date().getTime()) {
+      return null
+    }
 
+    // if pool ended show 100% progress
     if (endAt * 1000 <= new Date().getTime()) {
       return new BigNumber(100)
     }
+
+    // if pool is currently active calculate and show progress
+
     const [remainToken, totalToken] = await Promise.all([
       lpContract.methods
         .getRemainIDOToken(1)
@@ -832,8 +840,11 @@ export const fromWei = (tokens) => {
 
 export const getCurrentNetworkId = async () => {
 
+
+
   if (window.ethereum) {
-    const id = await window.ethereum.networkVersion;
+    const web3 = new Web3(window.ethereum)
+    const id = await web3.eth.getChainId()
 
     if (id) {
       return id

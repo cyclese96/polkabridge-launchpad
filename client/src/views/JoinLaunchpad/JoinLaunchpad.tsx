@@ -193,7 +193,7 @@ const JoinLaunchpad: React.FC = () => {
         ),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(currentLaunchadContractInstance(network), currentPoolId(pid, network)),
+        getProgress(currentLaunchadContractInstance(network), currentPoolId(pid, network), startAt, endAt),
         getPurchasesAmount(
           currentLaunchadContractInstance(network),
           currentPoolId(pid, network),

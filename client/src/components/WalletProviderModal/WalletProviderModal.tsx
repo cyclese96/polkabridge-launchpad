@@ -39,7 +39,7 @@ const WalletProviderModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }, [account, onDismiss])
 
   function tryConnect(type: any) {
-    console.log('chain id', chainId)
+    console.log('testConnect: chain id', chainId)
     console.log('account ', account)
     console.log('status ', { status, error })
     if (type == 'injected') {

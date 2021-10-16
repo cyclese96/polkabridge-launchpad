@@ -451,6 +451,7 @@ export const supportedPools = [
   },
   {
     pid: 5,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -495,6 +496,7 @@ export const supportedPools = [
   },
   {
     pid: 7,
+    poolId: 3,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -540,6 +542,7 @@ export const supportedPools = [
   },
   {
     pid: 9,
+    poolId: 4,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -623,6 +626,7 @@ export const supportedPools = [
   },
   {
     pid: 11,
+    poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -713,6 +717,7 @@ export const supportedPools = [
 
   {
     pid: 13,
+    poolId: 2,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -758,6 +763,7 @@ export const supportedPools = [
 
   {
     pid: 14,
+    poolId: 6,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',

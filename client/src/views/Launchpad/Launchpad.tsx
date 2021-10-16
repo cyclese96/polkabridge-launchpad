@@ -145,6 +145,7 @@ const Launchpad: React.FC = () => {
       const newProgress = await getProgress(
         currentLaunchpadContract(network),
         currentPoolId(pid, network),
+        startAt,
         endAt
       )
       // const [stakeData, stakeDataPolygon] = await Promise.all([

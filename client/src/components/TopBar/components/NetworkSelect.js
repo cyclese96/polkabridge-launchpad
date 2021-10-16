@@ -13,6 +13,8 @@ import {
 import { setupNetwork } from '../../../pbr/utils'
 import config from '../../../config'
 import { currentConnection } from '../../../pbr/lib/constants'
+import useNetwork from '../../../hooks/useNetwork'
+import { useWallet } from '@binance-chain/bsc-use-wallet'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -40,27 +42,25 @@ const useStyles = makeStyles((theme) => ({
     paddingLeft: 10,
   },
 }))
-export default function NetworkSelect({ selectedNetwork }) {
+export default function NetworkSelect({ }) {
   const classes = useStyles()
-  const [network, setNetwork] = React.useState(
-    parseInt(localStorage.getItem('currentNetwork') || config.chainId),
-  )
+
+  const { chainId, status, } = useNetwork()
+  const { account } = useWallet()
+
   useEffect(() => {
     // console.log('selected chain id', selectedNetwork)
-    if (!localStorage.getItem('currentNetwork')) {
-      // setupNetwork(ethereumNetworkDetail.mainnet)
-      localStorage.currentNetwork = selectedNetwork
-    }
-    handleChange(selectedNetwork)
-  }, [selectedNetwork])
-
-  const handleChange = (_selected) => {
-    console.log('selected network', selectedNetwork)
-    if (network === _selected) {
+    if (!account) {
       return
     }
-    localStorage.setItem('currentNetwork', _selected)
-    setNetwork(_selected)
+    if (status === 'connected') {
+
+      handleChange(chainId)
+    }
+  }, [chainId, status])
+
+  const handleChange = (_selected) => {
+
     if ([config.bscChain, config.bscChainTestent].includes(_selected)) {
       setupNetwork(
         currentConnection === 'mainnet'
@@ -90,9 +90,10 @@ export default function NetworkSelect({ selectedNetwork }) {
   return (
     <div>
       <FormControl variant='standard' className={classes.root} >
+        {console.log('testConnect: ', chainId)}
         <Select
           className={classes.main}
-          value={network}
+          value={chainId}
           onChange={({ target: { value } }) => handleChange(value)}
           disableUnderline
         >
