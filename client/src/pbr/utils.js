@@ -536,10 +536,10 @@ export const getProgress = async (lpContract, pid, startAt, endAt) => {
 
     const [remainToken, totalToken] = await Promise.all([
       lpContract.methods
-        .getRemainIDOToken(1)
+        .getRemainIDOToken(pid)
         .call(),
       lpContract.methods
-        .getBalanceTokenByPoolId(1)
+        .getBalanceTokenByPoolId(pid)
         .call()
     ])
 

@@ -138,9 +138,9 @@ const Launchpad: React.FC = () => {
     }
   }
   useEffect(() => {
-    console.log('harmonyTest: launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
-    console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
-    console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
+    // console.log('harmonyTest: launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
+    // console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
+    // console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
     async function fetchData() {
       const newProgress = await getProgress(
         currentLaunchpadContract(network),
@@ -156,7 +156,7 @@ const Launchpad: React.FC = () => {
 
       // console.log('progress data ', newProgress)
       // console.log('stake data polygon', stakeDataPolygon)
-      console.log('stake data ', stakedTokens)
+      // console.log('stake data ', stakedTokens)
       setProgress(newProgress)
 
       setStakedAmount(stakedTokens)
