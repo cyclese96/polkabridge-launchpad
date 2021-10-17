@@ -51140,6 +51140,33 @@
       "address": "0x6f33bb19B42787C1dA42b998D06a50E1dA955D1c",
       "transactionHash": "0x9ac7e4cc3645f516db1941f8731d0b278afb19d39337dcbc9a216154d6d4caea"
     },
+    "137": {
+      "events": {
+        "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
+          "anonymous": false,
+          "inputs": [
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "previousOwner",
+              "type": "address"
+            },
+            {
+              "indexed": true,
+              "internalType": "address",
+              "name": "newOwner",
+              "type": "address"
+            }
+          ],
+          "name": "OwnershipTransferred",
+          "type": "event",
+          "signature": "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0"
+        }
+      },
+      "links": {},
+      "address": "0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C",
+      "transactionHash": "0xeb32a5531d0810556e8c67d58617b470c11e4b8b2645d5935dc5519bf5ae966d"
+    },
     "80001": {
       "events": {
         "0x8be0079c531659141344cd1fd0a4f28419497f9722a3daafe3b4186f6b6457e0": {
@@ -51223,7 +51250,7 @@
     }
   },
   "schemaVersion": "3.0.20",
-  "updatedAt": "2021-10-16T15:21:01.877Z",
+  "updatedAt": "2021-10-17T08:58:05.804Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {

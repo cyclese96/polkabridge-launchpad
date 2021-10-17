@@ -434,19 +434,19 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
-    total: '17.14 ETH', //1ETH =3k5$
-    ratio: 15909,
-    min: 0.085, //300$
-    max: 0.142, //500$
-    maxTier1: 0.085, //300$
-    maxTier2: 0.114, //400$
-    maxTier3: 0.142, //500$
+    total: '16.2 ETH', //1ETH =3k7$
+    ratio: 16818,//1PUN =0.22$
+    min: 0.081, //300$
+    max: 0.135, //500$
+    maxTier1: 0.081, //300$
+    maxTier2: 0.108, //400$
+    maxTier3: 0.135, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after  Uniswap listing, 50% next month',
-    startAt: 1534565600,
+    startAt: 1634565600,
     endAt: 1634569200,
-    claimAt: 1634287709,//real 1634570100,
+    claimAt: 1634573400,
     startDate: '2PM UTC Oct 18th 2021',
   },
   {
@@ -465,6 +465,10 @@ export const supportedPools = [
     lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'ReBaked',
@@ -683,7 +687,7 @@ export const supportedPools = [
       97: '',
     },
     lpPolygonAddresses: { // lp address for polygon network
-      137: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
       80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
@@ -709,9 +713,9 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',
-    startAt: 1633939514,
-    endAt: 1734569200,
-    claimAt: 1633939514,
+    startAt: 1636120800,
+    endAt: 1636124400,
+    claimAt: 1636128000,
     startDate: 'TBA',
   },
 
@@ -807,51 +811,51 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2nd Nov, 2021',
   },
-  {
-    pid: 15,
-    poolId: 1,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
-      1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
-      1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
-    },
-    lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-    name: 'IDO Token Harmony',
-    symbol: 'IDO-PBR',
-    description: `ARC/ONE`,
-    introduce: `Harmony test token IDO`,
-    website: '',
-    twitter: '',
-    telegram: 'l',
-    whitepaper: '',
-    tokenSymbol: 'IDO',
-    tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-    icon: '/img/tokens/test.png',
-    totalSupply: '100,000,000 IDO',
-    total: '23076 ONE', //1Matic=1.3$
-    ratio: 2.6,
-    min: 23.076, //300$
-    max: 38.461, //500$
-    maxTier1: 24.071, //300$
-    maxTier2: 30.769, //400$
-    maxTier3: 38.461, //500$
-    access: 'Private',
-    network: harmonyNetwork,
-    distribution: 'TBA',
-    startAt: 1633939514,
-    endAt: 1734569200,
-    claimAt: 1633939514,
-    startDate: 'TBA',
-  }
+  // {
+  //   pid: 15,
+  //   poolId: 1,
+  //   lpAddresses: {
+  //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+  //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+  //   },
+  //   tokenAddresses: {
+  //     1: '',
+  //     42: '',
+  //     56: '',
+  //     97: '',
+  //   },
+  //   lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
+  //     1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
+  //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
+  //   },
+  //   lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+  //   name: 'IDO Token Harmony',
+  //   symbol: 'IDO-PBR',
+  //   description: `ARC/ONE`,
+  //   introduce: `Harmony test token IDO`,
+  //   website: '',
+  //   twitter: '',
+  //   telegram: 'l',
+  //   whitepaper: '',
+  //   tokenSymbol: 'IDO',
+  //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+  //   icon: '/img/tokens/test.png',
+  //   totalSupply: '100,000,000 IDO',
+  //   total: '23076 ONE', //1Matic=1.3$
+  //   ratio: 2.6,
+  //   min: 23.076, //300$
+  //   max: 38.461, //500$
+  //   maxTier1: 24.071, //300$
+  //   maxTier2: 30.769, //400$
+  //   maxTier3: 38.461, //500$
+  //   access: 'Private',
+  //   network: harmonyNetwork,
+  //   distribution: 'TBA',
+  //   startAt: 1633939514,
+  //   endAt: 1734569200,
+  //   claimAt: 1633939514,
+  //   startDate: 'TBA',
+  // }
 ]
 // given pid and network name -> launchpad pool id
 export const getPoolId = (pid, network) => {
