@@ -909,8 +909,8 @@ const getWeb3Provider = (network, nativeNetwork, pid) => {
   if (network === polygonNetwork) {
     // set polygon rpc native or infura
     rpc = nativeNetwork === network ? window.ethereum :
-      currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : polygonTestnetInfuraRpc;
-    // rpc = new Web3.providers.HttpProvider('https://matic-mumbai.chainstacklabs.com')
+      currentConnection === 'mainnet' ? polygonMainnetInfuraRpc : process.env.REACT_APP_POLYGON_TESTNET_NODE;
+    // rpc = new Web3.providers.HttpProvider(process.env.REACT_APP_POLYGON_TESTNET_NODE)
 
   } else if (network === harmonyNetwork) {
 
