@@ -55,7 +55,7 @@ export const contractAddresses = {
   // }
 }
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -444,7 +444,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after  Uniswap listing, 50% next month',
-    startAt: 1634565600,
+    startAt: 1534565600,
     endAt: 1634569200,
     claimAt: 1634287709,//real 1634570100,
     startDate: '2PM UTC Oct 18th 2021',
