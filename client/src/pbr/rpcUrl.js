@@ -18,10 +18,7 @@ export const polygonNodes = [
     'https://rpc-mainnet.matic.quiknode.pro'
 ]
 export const polygonNodesTestnet = [
-    'https://rpc-mumbai.matic.today',
-    'https://matic-mumbai.chainstacklabs.com',
-    'https://rpc-mumbai.maticvigil.com',
-    'https://matic-testnet-archive-rpc.bwarelabs.com'
+    `${process.env.REACT_APP_POLYGON_TESTNET_NODE}`,
 ]
 
 

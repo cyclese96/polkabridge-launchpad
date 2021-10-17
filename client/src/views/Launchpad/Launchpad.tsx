@@ -180,7 +180,15 @@ const Launchpad: React.FC = () => {
   }
 
   const netWorkTokenSymbol = () => {
-    return network === bscNetwork ? 'BNB' : network === polygonNetwork ? "MATIC" : 'ETH'
+    if (network === bscNetwork) {
+      return 'BNB'
+    } else if (network === polygonNetwork) {
+      return 'MATIC'
+    } else if (network === harmonyNetwork) {
+      return 'ONE'
+    } else {
+      return 'ETH';
+    }
   }
 
   const showNetworkAlert = () => {

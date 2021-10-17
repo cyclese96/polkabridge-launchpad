@@ -822,7 +822,7 @@ export const supportedPools = [
     },
     lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
       1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
-      1666600000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a'//mainnet
+      1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
     },
     lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
     name: 'IDO Token Harmony',

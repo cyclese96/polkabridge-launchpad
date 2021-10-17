@@ -437,6 +437,9 @@ const JoinLaunchpad: React.FC = () => {
     if (new BigNumber(_percentClaimed).eq(0)) {
       return _tokenPurchased;
     }
+    if (new BigNumber(_tokenPurchased).lt(1)) {
+      return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(4).toString()
+    }
     return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(0).toString()
   }
 
