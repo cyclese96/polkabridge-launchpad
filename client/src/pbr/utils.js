@@ -523,12 +523,12 @@ export const getProgress = async (lpContract, pid, startAt, endAt) => {
   try {
     //if (pid == 1) return new BigNumber(100)
     //if pool not started yet show no progress
-    if (startAt * 1000 >= new Date().getTime()) {
+    if (startAt && startAt * 1000 >= new Date().getTime()) {
       return null
     }
 
     // if pool ended show 100% progress
-    if (endAt * 1000 <= new Date().getTime()) {
+    if (endAt && endAt * 1000 <= new Date().getTime()) {
       return new BigNumber(100)
     }
 

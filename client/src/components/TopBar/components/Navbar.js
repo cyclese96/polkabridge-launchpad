@@ -314,11 +314,11 @@ const Navbar = () => {
         <ListItem button style={{ marginLeft: 20 }}>
           <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </ListItem>
-        {/* <ListItem>
+        <ListItem button style={{ marginLeft: 20 }}>
           <div >
             <NetworkSelect selectedNetwork={chainId} />
           </div>
-        </ListItem> */}
+        </ListItem>
       </List>
     </div>
   )
