@@ -418,10 +418,10 @@ export const supportedPools = [
       42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
+      1: '0x31903e333809897ee57af57567f4377a1a78756c',
+      42: '0x31903e333809897ee57af57567f4377a1a78756c',
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpExplorer: 'https://etherscan.io/address/0x31903e333809897ee57af57567f4377a1a78756c',
     name: 'Cryptopunt',
     symbol: 'PUN-PBR',
     description: `PUN/ETH`,
@@ -431,7 +431,7 @@ export const supportedPools = [
     telegram: 'https://t.me/CryptoPunt',
     whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
     tokenSymbol: 'PUN',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://etherscan.io/token/0x31903e333809897ee57af57567f4377a1a78756c',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
     total: '16.2 ETH', //1ETH =3k7$
@@ -444,9 +444,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after  Uniswap listing, 50% next month',
-    startAt: 1634565600,
-    endAt: 1634569200,
-    claimAt: 1634573400,
+    startAt: 1634554800,
+    endAt: 1634558400,
+    claimAt: 1634563800,
     startDate: '2PM UTC Oct 18th 2021',
   },
   {
@@ -811,8 +811,46 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2nd Nov, 2021',
   },
+  {
+    pid: 15,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address/',
+    name: 'DeFactor',
+    symbol: 'FACTR-PBR',
+    description: `FACTR/ETH`,
+    introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
+    website: 'https://defactor.com/',
+    twitter: 'https://twitter.com/defactor_',
+    telegram: ' https://t.me/defactor_official',
+    whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
+    tokenSymbol: 'FACTR',
+    tokenExplorer: 'https://etherscan.io/token/',
+    icon: '/img/tokens/defactor.svg',
+    totalSupply: '300,000,000 FACTR',
+    total: '14.28 ETH', //1ETH =3k5$
+    ratio: 0,
+    min: 0.142,//500$
+    max: 0.2,//700$
+    maxTier1: 0.142,//500$
+    maxTier2: 0.171,//600$
+    maxTier3: 0.2,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: '100% unlock after listing',
+    startAt: 1636380000,
+    endAt: 1636383600,
+    claimAt: 1636387200,
+    startDate: '2PM UTC 8th Nov, 2021',
+  },
   // {
-  //   pid: 15,
+  //   pid: 16,
   //   poolId: 1,
   //   lpAddresses: {
   //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
