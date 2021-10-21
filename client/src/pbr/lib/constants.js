@@ -483,20 +483,20 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
-    total: '38461 MATIC', //1Matic=1.3$
-    ratio: 43.3,
-    min: 230.76, //300$
-    max: 384.61, //500$
-    maxTier1: 230.71, //300$
-    maxTier2: 307.69, //400$
-    maxTier3: 384.61, //500$
+    total: '35714 MATIC', //1Matic=1.4$
+    ratio: 46.6,//1 BAKED=0.03$
+    min: 214.28, //300$
+    max: 357.14, //500$
+    maxTier1: 214.28, //300$
+    maxTier2: 285.71, //400$
+    maxTier3: 357.1, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1634911200,
-    endAt: 1634914800,
-    claimAt: 1634918400,
-    startDate: '2PM UTC 22nd Oct, 2021',
+    startAt: 1634904000,
+    endAt: 1634907600,
+    claimAt: 1634921995,
+    startDate: '12PM UTC 22nd Oct, 2021',
   },
   {
     pid: 7,
@@ -539,7 +539,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1636984800,
+    startAt: 1637341200,
     endAt: 1736984800,
     claimAt: 1736984800,
     startDate: 'TBA',
@@ -584,7 +584,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1634713200,
+    startAt: 1636045200,
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
@@ -623,8 +623,8 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1635574214,
-    endAt: 1635094800,
+    startAt: 1636045200,
+    endAt: 1736045200,
     claimAt: 0,
     startDate: "TBA"
   },
@@ -848,6 +848,55 @@ export const supportedPools = [
     endAt: 1636383600,
     claimAt: 1636387200,
     startDate: '2PM UTC 8th Nov, 2021',
+  },
+  {
+    pid: 16,
+    poolId: 1,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'TryHards',
+    symbol: 'TRY-PBR',
+    description: `TRY/MATIC`,
+    introduce: `Tryhards is an NFT Based Blockchain Shooter game. Play Win Earn. Gain more power, Fight for honour and conquer Planet X.`,
+    website: 'https://tryhards.io/',
+    twitter: 'https://twitter.com/Tryhardsio',
+    telegram: 'https://t.me/Tryhards_io_official',
+    whitepaper: 'https://tryhards.io/assets/Tryhards_Alpha_Battle_Log.pdf',
+    tokenSymbol: 'TRY',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/tryhards.png',
+    totalSupply: '200,000,000 BAKED',
+    total: '21428 MATIC', //1Matic=1.4$
+    ratio: 15.5,//1 TRYE=0.09$
+    min: 214.28, //300$
+    max: 357.14, //500$
+    maxTier1: 214.28, //300$
+    maxTier2: 285.71, //400$
+    maxTier3: 357.1, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: '33% on TGE, then 33% monthly over 2 months',
+    startAt: 1637330400,
+    endAt: 1737330400,
+    claimAt: 1737330400,
+    startDate: '2PM UTC 19th Nov, 2021',
   },
   // {
   //   pid: 16,
