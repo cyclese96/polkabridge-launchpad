@@ -472,13 +472,13 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.com/address/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
-    total: '12.1 ETH', //1ETH=4k1
-    ratio: 136666,//1 BAKED=0.03$
-    min: 0.073, //300$
-    max: 0.121, //500$
-    maxTier1: 0.073, //300$
-    maxTier2: 0.097, //400$
-    maxTier3: 0.121, //500$
+    total: '7.5 ETH', //1ETH=4k
+    ratio: 133333,//1 BAKED=0.03$
+    min: 0.075, //300$
+    max: 0.125, //500$
+    maxTier1: 0.075, //300$
+    maxTier2: 0.1, //400$
+    maxTier3: 0.125, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
