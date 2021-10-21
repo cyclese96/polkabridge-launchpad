@@ -473,7 +473,7 @@ export const supportedPools = [
     icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
     total: '7.5 ETH', //1ETH=4k
-    ratio: 133333,//1 BAKED=0.03$
+    ratio: 133333.33,//1 BAKED=0.03$
     min: 0.075, //300$
     max: 0.125, //500$
     maxTier1: 0.075, //300$
