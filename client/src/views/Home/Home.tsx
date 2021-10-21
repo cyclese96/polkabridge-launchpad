@@ -135,7 +135,7 @@ const Home: React.FC = () => {
                   paddingTop: 30,
                 }}
                 target="_blank"
-                href="https://polkabridge.medium.com/polkabridge-launchpad-tutorial-50e8e80905d4"
+                href="https://polkabridge.medium.com/polkabridge-launches-launchpad-v2-the-multichain-universe-misson-8377161bfdba"
               >
                 <Button className={classes.actionButton} variant="contained">
                   How to join Launchpad

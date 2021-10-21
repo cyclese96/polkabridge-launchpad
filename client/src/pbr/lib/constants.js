@@ -451,51 +451,40 @@ export const supportedPools = [
   },
   {
     pid: 5,
-    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
+      1: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
+      42: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce'
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
-    },
-    lpExplorer: 'https://polygonscan.com/address',
+    lpExplorer: 'https://etherscan.io/token/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     name: 'ReBaked',
     symbol: 'BAKED-PBR',
     description: `BAKED/MATIC`,
-    introduce: `reBaked is building a set of governance, management, and operations tools for DAOs and Web 3.0 ecosystems to better distribute and manage their treasuries- focusing on value creation`,
+    introduce: `ReBaked is building a set of governance, management, and operations tools for DAOs and Web 3.0 ecosystems to better distribute and manage their treasuries- focusing on value creation`,
     website: 'https://www.rebaked.com/',
     twitter: 'https://twitter.com/rebakedinc',
     telegram: 'https://t.me/rebakedann',
     whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
     tokenSymbol: 'BAKED',
-    tokenExplorer: 'https://polygonscan.com/address',
+    tokenExplorer: 'https://etherscan.com/address/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
-    total: '35714 MATIC', //1Matic=1.4$
-    ratio: 46.6,//1 BAKED=0.03$
-    min: 214.28, //300$
-    max: 357.14, //500$
-    maxTier1: 214.28, //300$
-    maxTier2: 285.71, //400$
-    maxTier3: 357.1, //500$
+    total: '12.1 ETH', //1ETH=4k1
+    ratio: 136666,//1 BAKED=0.03$
+    min: 0.073, //300$
+    max: 0.121, //500$
+    maxTier1: 0.073, //300$
+    maxTier2: 0.097, //400$
+    maxTier3: 0.121, //500$
     access: 'Private',
-    network: polygonNetwork,
+    network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
     startAt: 1634904000,
     endAt: 1634907600,
-    claimAt: 1634921995,
+    claimAt: 1634976000,
     startDate: '12PM UTC 22nd Oct, 2021',
   },
   {
