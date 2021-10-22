@@ -453,7 +453,7 @@ export const supportedPools = [
     pid: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
     },
     tokenAddresses: {
       1: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
@@ -486,6 +486,8 @@ export const supportedPools = [
     endAt: 1634907600,
     claimAt: 1635181199,
     startDate: '12PM UTC 22nd Oct, 2021',
+    
+
   },
   {
     pid: 7,
