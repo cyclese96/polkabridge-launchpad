@@ -97,10 +97,11 @@ export class Contracts {
         const _ethChain = currentConnection === 'mainnet' ? config.chainId : config.chainIdTestnet;
         const _lpAddress = !pool.lpAddresses ? "" : pool.lpAddresses[_ethChain]
         const _lpContract = getContractInstance(LaunchpadAbi, _lpAddress, ethereumNetwork, getNetworkName(networkId), pool.pid);
-        console.log('ethTest: setting ethereum contract', { _ethChain, _lpAddress, _lpContract, currNet: getNetworkName(networkId) })
+        const tokenAddress = pool.tokenAddresses[_ethChain]
+        console.log(`ethTest${pool.pid}: setting ethereum contract`, { poolId: pool.pid, tokenAddress, _ethChain, _lpAddress, _lpContract, currNet: getNetworkName(networkId) })
 
         return Object.assign(pool, {
-          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],
+          tokenAddress: tokenAddress,
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
           lpAddress: _lpAddress,
           lpContract: _lpContract,

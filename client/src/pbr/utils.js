@@ -189,14 +189,14 @@ export const getDefaultLaunchpads = () => {
       //
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
-        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
         lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
         tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
     } else {
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
-        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
+        tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
         lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
         tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
