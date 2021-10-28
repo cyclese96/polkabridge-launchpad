@@ -490,8 +490,8 @@ export const supportedPools = [
 
   },
   {
-    pid: 7,
-    poolId: 3,
+    pid: 6,
+    poolId: 0,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -507,37 +507,37 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'DefiRating',
-    symbol: 'DRATE-PBR',
-    description: `DRATE/BNB`,
-    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
-    website: 'https://about.defirating.finance/',
-    twitter: 'https://twitter.com/QDefi',
-    telegram: 'https://t.me/qdr_ann',
+    name: 'PixelVerse',
+    symbol: 'PIXEL-PBR',
+    description: `PIXEL/BNB`,
+    introduce: `PixielVerse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
+    website: 'https://pixelverse.ai/',
+    twitter: 'https://twitter.com/pixelverse1',
+    telegram: 'https://t.me/pixelverseofficial',
     whitepaper:
-      'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
-    tokenSymbol: 'DRATE',
+      'https://pixelverse.ai/assets/pdf/deck.pdf',
+    tokenSymbol: 'PIXEL',
     tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/defirate.png',
-    totalSupply: '200,000,000 DRATE',
-    total: '125 BNB',
-    ratio: 10554, //token price 0.0379, 1BNB = 400$
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
+    icon: '/img/tokens/pixelverse.png',
+    totalSupply: '1,000,000,000 PIXEL',
+    total: '111 BNB',
+    ratio: 1000, // 1BNB = 450$,  $0.015
+    min: 0.2, //300$
+    max: 0.4, //500$
+    maxTier1: 0.2, //300$
+    maxTier2: 0.3, //400$
+    maxTier3: 0.4, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1637341200,
-    endAt: 1736984800,
-    claimAt: 1736984800,
-    startDate: 'TBA',
+    distribution: '100% on TGE',
+    startAt: 1636034400,
+    endAt: 1636038000,
+    claimAt: 1635415510,
+    startDate: '2nd Nov, 2021',
   },
   {
-    pid: 9,
-    poolId: 4,
+    pid: 8,
+    poolId: 2,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -579,6 +579,44 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 9,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address/',
+    name: 'Defactor',
+    symbol: 'FACTR-PBR',
+    description: `FACTR/ETH`,
+    introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
+    website: 'https://defactor.com/',
+    twitter: 'https://twitter.com/defactor_',
+    telegram: ' https://t.me/defactor_official',
+    whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
+    tokenSymbol: 'FACTR',
+    tokenExplorer: 'https://etherscan.io/token/',
+    icon: '/img/tokens/defactor.svg',
+    totalSupply: '300,000,000 FACTR',
+    total: '14.28 ETH', //1ETH =3k5$
+    ratio: 0,
+    min: 0.142,//500$
+    max: 0.2,//700$
+    maxTier1: 0.142,//500$
+    maxTier2: 0.171,//600$
+    maxTier3: 0.2,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: '100% unlock after listing',
+    startAt: 1636380000,
+    endAt: 1636383600,
+    claimAt: 1636387200,
+    startDate: '2PM UTC 8th Nov, 2021',
   },
 
   {
@@ -756,90 +794,8 @@ export const supportedPools = [
     startDate: 'TBA',
   },
 
-  {
-    pid: 14,
-    poolId: 0,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'PixelVerse',
-    symbol: 'PIXEL-PBR',
-    description: `PIXEL/BNB`,
-    introduce: `PixielVerse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
-    website: 'https://pixelverse.ai/',
-    twitter: 'https://twitter.com/pixelverse1',
-    telegram: 'https://t.me/pixelverseofficial',
-    whitepaper:
-      'https://pixelverse.ai/assets/pdf/deck.pdf',
-    tokenSymbol: 'PIXEL',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/pixelverse.png',
-    totalSupply: '1,000,000,000 PIXEL',
-    total: '111 BNB',
-    ratio: 1000, // 1BNB = 450$
-    min: 0.2, //300$
-    max: 0.4, //500$
-    maxTier1: 0.2, //300$
-    maxTier2: 0.3, //400$
-    maxTier3: 0.4, //500$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1636034400,
-    endAt: 1636038000,
-    claimAt: 1635415510,
-    startDate: '2nd Nov, 2021',
-  },
-  {
-    pid: 15,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address/',
-    name: 'Defactor',
-    symbol: 'FACTR-PBR',
-    description: `FACTR/ETH`,
-    introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
-    website: 'https://defactor.com/',
-    twitter: 'https://twitter.com/defactor_',
-    telegram: ' https://t.me/defactor_official',
-    whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
-    tokenSymbol: 'FACTR',
-    tokenExplorer: 'https://etherscan.io/token/',
-    icon: '/img/tokens/defactor.svg',
-    totalSupply: '300,000,000 FACTR',
-    total: '14.28 ETH', //1ETH =3k5$
-    ratio: 0,
-    min: 0.142,//500$
-    max: 0.2,//700$
-    maxTier1: 0.142,//500$
-    maxTier2: 0.171,//600$
-    maxTier3: 0.2,//700$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: '100% unlock after listing',
-    startAt: 1636380000,
-    endAt: 1636383600,
-    claimAt: 1636387200,
-    startDate: '2PM UTC 8th Nov, 2021',
-  },
+
+
   {
     pid: 16,
     poolId: 1,
@@ -889,6 +845,54 @@ export const supportedPools = [
     claimAt: 1737330400,
     startDate: '2PM UTC 19th Nov, 2021',
   },
+  {
+    pid: 16,
+    poolId: 3,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'DefiRating',
+    symbol: 'DRATE-PBR',
+    description: `DRATE/BNB`,
+    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
+    website: 'https://about.defirating.finance/',
+    twitter: 'https://twitter.com/QDefi',
+    telegram: 'https://t.me/qdr_ann',
+    whitepaper:
+      'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+    tokenSymbol: 'DRATE',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/defirate.png',
+    totalSupply: '200,000,000 DRATE',
+    total: '125 BNB',
+    ratio: 10554, //token price 0.0379, 1BNB = 400$
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1637341200,
+    endAt: 1736984800,
+    claimAt: 1736984800,
+    startDate: 'TBA',
+  },
+
+
   // {
   //   pid: 16,
   //   poolId: 1,
