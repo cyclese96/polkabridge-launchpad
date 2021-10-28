@@ -917,11 +917,15 @@ const getWeb3Provider = (network, nativeNetwork, pid) => {
     rpc = nativeNetwork === network ? window.ethereum :
       currentConnection === 'mainnet' ? config.hmy_rpc_mainnet : config.hmy_rpc_testnet;
 
+  } else if (network === bscNetwork) {
+
+    rpc = window.ethereum;
+
   } else {
     // console.log('ethTest:  setting eth rpc', { nativeNetwork, network, pid })
-    // rpc = nativeNetwork === network ? window.ethereum :
-    //   currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
-    rpc = window.ethereum;
+    rpc = nativeNetwork === network ? window.ethereum
+      : currentConnection === 'mainnet' ? ethereumInfuraRpc : ethereumInfuraTestnetRpc;
+    // rpc = window.ethereum;
 
   }
 
