@@ -82,10 +82,7 @@ const useStyles = makeStyles((theme) => ({
 
   headStyle: {
     width: 950,
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+
     paddingTop: 10,
     paddingBottom: 20,
     [theme.breakpoints.down('sm')]: {
@@ -108,16 +105,14 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 22,
     },
   },
+  listing: {
+    color: '#e5e5e5',
+    lineHeight: 3,
+  },
 }))
 
-const Home: React.FC = () => {
+const Rules = () => {
   const classes = useStyles()
-
-  var block = 99999999999
-  const launchBlock = START_REWARD_AT_BLOCK
-  const [atDate, setDate] = useState<any>()
-
-  const { account, connect, status } = useWallet()
 
   return (
     <Page>
@@ -125,53 +120,45 @@ const Home: React.FC = () => {
         <div className={classes.background}>
           <div className={classes.headStyle}>
             <div>
-              <h1 className={classes.title}>Launchpad</h1>
+              <h1 className={classes.title}>FAQs</h1>
               <div className={classes.divider} />
             </div>
-            <div className="d-flex justify-content-end">
-              <a
-                style={{
-                  textDecoration: 'none',
-                  marginRight: 10,
-                  paddingTop: 30,
-                }}
-                target="_blank"
-                href="https://polkabridge.medium.com/polkabridge-launches-launchpad-v2-the-multichain-universe-misson-8377161bfdba"
-              >
-                <Button className={classes.actionButton} variant="contained">
-                  How to join
-                </Button>
-                <div></div>
-              </a>
-              <a
-                style={{ textDecoration: 'none', paddingTop: 30 }}
-                target="_blank"
-                href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
-              >
-                <div className={classes.actionButton}>Apply for IDO</div>
-              </a>
-              <Link
-                to={'/rules'}
-                style={{
-                  textDecoration: 'none',
-                  marginRight: 10,
-                  paddingTop: 30,
-                }}
-                target="_blank"
-                href="https://polkabridge.medium.com/polkabridge-launches-launchpad-v2-the-multichain-universe-misson-8377161bfdba"
-              >
-                <Button className={classes.actionButton} variant="contained">
-                  FAQs
-                </Button>
-                <div></div>
-              </Link>
+            <div className="mt-3">
+              <h6 style={{ color: '#DF097C', fontWeight: 700 }}>
+                - Staking amount
+              </h6>
+              <ul className={classes.listing}>
+                <li>
+                  You need to stake minimum 500 PBR tokens to staking pool
+                  either on Polygon network or Ethereum network.
+                </li>
+                <li>
+                  You should stake 3000 PBR to get maximum purchase allocation.
+                </li>
+              </ul>
+            </div>
+            <div className="mt-3">
+              <h6 style={{ color: '#DF097C', fontWeight: 700 }}>
+                - Participation type
+              </h6>
+              <ul className={classes.listing}>
+                <li>
+                  You can only join IDO pools by First come First Serve (FCFS).
+                </li>
+                <li>
+                  For more details and latest updates you can join our{' '}
+                  <a
+                    style={{ color: '#DF097C' }}
+                    href="https://t.me/polkabridgegroup"
+                  >
+                    official telegram group.
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
         </div>
       </div>
-      <Box className="mt-3">
-        <LaunchpadCards />
-      </Box>
     </Page>
   )
 }
@@ -196,4 +183,4 @@ const SpacerRes = styled.div`
     }
   }
 `
-export default Home
+export default Rules

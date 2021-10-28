@@ -18,6 +18,7 @@ import { getCurrentAccount, getCurrentNetworkId } from './pbr/utils'
 import useNetwork from './hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
 import Navbar from './components/TopBar/components/Navbar'
+import Rules from './views/Rules/Rules'
 
 const App: React.FC = () => {
   const [mobileMenu, setMobileMenu] = useState(false)
@@ -41,6 +42,9 @@ const App: React.FC = () => {
         <Route path="/" exact>
           <Home />
         </Route>
+        <Route exact path="/rules">
+          <Rules />
+        </Route>
         <Route path="/launchpads">
           <Launchpads />
         </Route>
@@ -55,7 +59,7 @@ const Providers: React.FC = ({ children }) => {
   const { chainId, changeNetwork, setConnected, status } = useNetwork()
 
   useEffect(() => {
-    ; (async () => {
+    ;(async () => {
       if (isMobile) {
         //enable window.ethereum for mobile device
         const account = await getCurrentAccount()
