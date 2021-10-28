@@ -484,9 +484,9 @@ export const supportedPools = [
     distribution: '33% on TGE, then 33% monthly over 2 months',
     startAt: 1634904000,
     endAt: 1634907600,
-    claimAt: 1635181199,
+    claimAt: 1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-    
+
 
   },
   {
@@ -750,10 +750,10 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',
-    startAt: 1635948000,
-    endAt: 1635951600,
-    claimAt: 1636034400,
-    startDate: '3rd Nov, 2021',
+    startAt: 1638236241,
+    endAt: 1738236241,
+    claimAt: 0,
+    startDate: 'TBA',
   },
 
   {
@@ -788,12 +788,12 @@ export const supportedPools = [
     icon: '/img/tokens/pixelverse.png',
     totalSupply: '1,000,000,000 PIXEL',
     total: '111 BNB',
-    ratio: 0, // 1BNB = 450$
-    min: 0.66, //300$
-    max: 1.11, //500$
-    maxTier1: 0.66, //300$
-    maxTier2: 0.88, //400$
-    maxTier3: 1.11, //500$
+    ratio: 1000, // 1BNB = 450$
+    min: 0.2, //300$
+    max: 0.4, //500$
+    maxTier1: 0.2, //300$
+    maxTier2: 0.3, //400$
+    maxTier3: 0.4, //500$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
@@ -813,7 +813,7 @@ export const supportedPools = [
       42: '',
     },
     lpExplorer: 'https://etherscan.io/address/',
-    name: 'DeFactor',
+    name: 'Defactor',
     symbol: 'FACTR-PBR',
     description: `FACTR/ETH`,
     introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,

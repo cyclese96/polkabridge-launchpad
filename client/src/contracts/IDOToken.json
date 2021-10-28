@@ -1152,8 +1152,7 @@
             }
           ],
           "name": "Approval",
-          "type": "event",
-          "signature": "0x8c5be1e5ebec7d5bd14f71427d1e84f3dd0314c0f7b2291e5b200ac8c7c3b925"
+          "type": "event"
         },
         "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef": {
           "anonymous": false,
@@ -1178,8 +1177,7 @@
             }
           ],
           "name": "Transfer",
-          "type": "event",
-          "signature": "0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef"
+          "type": "event"
         }
       },
       "links": {},
@@ -1244,8 +1242,8 @@
       "transactionHash": "0xadfb20a13218f5ecb6f035a1cb8921cf77a3c9fd3d1cc605d53b09625410f538"
     }
   },
-  "schemaVersion": "3.0.20",
-  "updatedAt": "2021-10-17T08:58:05.793Z",
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-10-28T10:01:29.212Z",
   "networkType": "ethereum",
   "devdoc": {
     "methods": {}
