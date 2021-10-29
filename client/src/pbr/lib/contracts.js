@@ -53,12 +53,16 @@ export class Contracts {
     this.pools = supportedPools.map((pool) => {
       if (pool.network === bscNetwork) {
 
+        const _bscChain = currentConnection === 'mainnet' ? config.bscChain : config.bscChainTestent
+        const _bscAddress = !pool.lpBscAddresses ? '' : pool.lpBscAddresses[_bscChain]//set network id for current bsc
+        const _bscContract = getContractInstance(LaunchpadAbi, _bscAddress, bscNetwork, this.currentNetworkName)
+        console.log('bscTest: setting bsc contract', { _bscChain, _bscAddress, _bscContract, currentNetwork: this.currentNetworkName })
+
+
         return Object.assign(pool, {
-          // lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[networkId],
           tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[networkId],
-          lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[config.bscChain],//set network id for current bsc
-          lpBscContract: new this.web3bsc.eth.Contract(LanchpadBscAbi),
-          // lpContract: new this.web3.eth.Contract(LaunchpadAbi),
+          lpBscAddress: _bscAddress,//set network id for current bsc
+          lpBscContract: _bscContract,
           tokenContract: new this.web3.eth.Contract(ERC20Abi),
         })
       } else if (pool.network === harmonyNetwork) {

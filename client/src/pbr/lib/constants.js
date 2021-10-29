@@ -55,7 +55,7 @@ export const contractAddresses = {
   // }
 }
 
-const testing = false;
+const testing = true;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -491,7 +491,7 @@ export const supportedPools = [
   },
   {
     pid: 6,
-    poolId: 0,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -503,8 +503,8 @@ export const supportedPools = [
       97: '',
     },
     lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+      56: '0xe8153761bbbF9d65CC97B9a3778F32d724cD9Fb6',
+      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'PixelVerse',
