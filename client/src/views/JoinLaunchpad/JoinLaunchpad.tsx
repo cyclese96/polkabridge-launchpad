@@ -209,10 +209,10 @@ const JoinLaunchpad: React.FC = () => {
       setLoading(false)
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('stakedData--->  ', stakedTokens)
+      console.log('bscTest stakedData--->  ', stakedTokens)
       // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
-      // console.log('progress--->  ', newProgress)
-      // console.log('ethTest: newIsWhitelist--->  ', newIsWhitelist)
+      console.log('bscTest progress--->  ', newProgress && newProgress.toString())
+      console.log('bscTest: newIsWhitelist--->  ', newIsWhitelist)
       // console.log('ethTest: tokenPurchased   ', tokenPurchased)
       // console.log('ethTest: userInfo--->  ', userInfo)
 

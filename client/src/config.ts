@@ -6,11 +6,13 @@ export default {
   chainIdTestnet: 42,
   bscChain: 56,
   bscChainTestent: 97,
+  bscRpcTestnet: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
+  bscRpcMainnet: 'https://bsc-dataseed.binance.org/',
   hmy_rpc_mainnet: 'https://api.harmony.one',
   hmy_rpc_testnet: 'https://api.s0.b.hmny.io',
   hmyChainTestnet: 1666700000,
   hmyChainMainnet: 1666600000,
-  polygon_rpc_mainnet: `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`, // matic mainnet rpc infura
+  polygon_rpc_mainnet: 'https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}',  // matic mainnet rpc infura
   polygon_rpc_testnet: "https://mumbai-explorer.matic.today", // matic testnet rpc
   polygon_chain_mainnet: 137,
   polygon_chain_testnet: 80001,

@@ -168,11 +168,16 @@ export const getDefaultLaunchpads = () => {
   const pools = supportedPools.map((pool) => {
 
     if (pool.network === bscNetwork) {
+
+      const _bscChain = currentConnection === 'mainnet' ? config.bscChain : config.bscChainTestent
+      const _bscAddress = !pool.lpBscAddresses ? '' : pool.lpBscAddresses[_bscChain]//set network id for current bsc
+      const _bscContract = getContractInstance(LaunchpadAbi, _bscAddress, bscNetwork, pool.network)
+      console.log('bscTest: setting bsc contract', { _bscChain, _bscAddress, _bscContract, currentNetwork: pool.network })
       return Object.assign(pool, {
         lpAddress: '',
         tokenAddress: '',
-        lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[bscChainId],//set network id for current bsc
-        lpBscContract: null,
+        lpBscAddress: _bscAddress,//set network id for current bsc
+        lpBscContract: _bscContract,
         lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
         tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
       })
@@ -554,7 +559,7 @@ export const getProgress = async (lpContract, pid, startAt, endAt) => {
       }
     }
   } catch (e) {
-    console.log('ethTest: getProgress error: ', { e, pid })
+    console.log('bscTest: getProgress error: ', { e, pid })
     if (pid < 0) {
       return new BigNumber(100)
     } else {
