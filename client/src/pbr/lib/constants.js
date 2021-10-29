@@ -894,7 +894,7 @@ export const supportedPools = [
 
 
   // {
-  //   pid: 16,
+  //   pid: 17,
   //   poolId: 1,
   //   lpAddresses: {
   //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
