@@ -55,7 +55,7 @@ export const contractAddresses = {
   // }
 }
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -409,7 +409,8 @@ export const supportedPools = [
     startAt: 1633960800,//real 1633960800
     endAt: 1633964400,//real 1633964400
     claimAt: 1634648400,//real 1634648400
-    startDate: "2PM UTC 11th Oct"
+    startDate: "2PM UTC 11th Oct",
+    claimTimeArr: [1634648400, 1637254800]
   },
   {
     pid: 3,
@@ -448,6 +449,7 @@ export const supportedPools = [
     endAt: 1634558400,
     claimAt: 1634563800,
     startDate: '2PM UTC Oct 18th 2021',
+    claimTimeArr: [1634563800, 1637168400]
   },
   {
     pid: 5,
@@ -486,30 +488,24 @@ export const supportedPools = [
     endAt: 1634907600,
     claimAt: 1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-
+    claimTimeArr: [1635249600, 1637859600, 1640451600]
 
   },
   {
-    pid: 6,
-    poolId: 1,
+    pid: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
     },
     tokenAddresses: {
       1: '',
-      42: '',
-      56: '',
-      97: '',
+      42: ''
     },
-    lpBscAddresses: {
-      56: '0xe8153761bbbF9d65CC97B9a3778F32d724cD9Fb6',
-      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
-    },
-    lpExplorer: 'https://bscscan.com/address',
+
+    lpExplorer: 'https://etherscan.com/address',
     name: 'PixelVerse',
     symbol: 'PIXEL-PBR',
-    description: `PIXEL/BNB`,
+    description: `PIXEL/ETH`,
     introduce: `PixielVerse is a virtual world platform and toolset that lets creators and communities create their own NFTs in a next generation metaverse.`,
     website: 'https://pixelverse.ai/',
     twitter: 'https://twitter.com/pixelverse1',
@@ -517,23 +513,24 @@ export const supportedPools = [
     whitepaper:
       'https://pixelverse.ai/assets/pdf/deck.pdf',
     tokenSymbol: 'PIXEL',
-    tokenExplorer: 'https://bscscan.com/token',
+    tokenExplorer: 'https://etherscan.com/token',
     icon: '/img/tokens/pixelverse.png',
     totalSupply: '1,000,000,000 PIXEL',
-    total: '111 BNB',
-    ratio: 1000, // 1BNB = 450$,  $0.015
-    min: 0.2, //300$
-    max: 0.4, //500$
-    maxTier1: 0.2, //300$
-    maxTier2: 0.3, //400$
-    maxTier3: 0.4, //500$
+    total: '12.5 ETH',
+    ratio: 266666.66, // 1ETH=4000,  $0.015
+    min: 0.075, //300$
+    max: 0.125, //500$
+    maxTier1: 0.075, //300$
+    maxTier2: 0.1, //400$
+    maxTier3: 0.125, //500$
     access: 'Private',
-    network: bscNetwork,
+    network: ethereumNetwork,
     distribution: '100% on TGE',
-    startAt: 1636034400,
-    endAt: 1636038000,
-    claimAt: 1635415510,
-    startDate: '2nd Nov, 2021',
+    startAt: 1635861600,
+    endAt: 1635865200,
+    claimAt: 1636214400,
+    startDate: '2PM UTC, 2nd Nov 2021',
+    claimTimeArr: [1636214400]
   },
   {
     pid: 8,
@@ -565,13 +562,13 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/adaswap.PNG',
     totalSupply: '16,500,000,000 ASW',
-    total: '125 BNB', //1BNB = 400$
-    ratio: 0,
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
+    total: '100 BNB',
+    ratio: 0, // 1BNB = 500$
+    min: 0.6, //300$
+    max: 1, //500$
+    maxTier1: 0.6, //300$
+    maxTier2: 0.8, //400$
+    maxTier3: 1, //500$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
@@ -603,7 +600,7 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token/',
     icon: '/img/tokens/defactor.svg',
     totalSupply: '300,000,000 FACTR',
-    total: '14.28 ETH', //1ETH =3k5$
+    total: '14.28 ETH', //1ETH =4k2$
     ratio: 0,
     min: 0.142,//500$
     max: 0.2,//700$
@@ -732,19 +729,19 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
-    total: '23076 MATIC', //1Matic=1.3$
+    total: '16666 MATIC', //1Matic=1.8$
     ratio: 2.6,
-    min: 0.23076, //300$
-    max: 0.38461, //500$
-    maxTier1: 0.23071, //300$
-    maxTier2: 0.30769, //400$
-    maxTier3: 0.38461, //500$
+    min: 166.6, //300$
+    max: 277.7, //500$
+    maxTier1: 166.6, //300$
+    maxTier2: 222.2, //400$
+    maxTier3: 277.7, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',
-    startAt: 1636120800,
-    endAt: 1636124400,
-    claimAt: 1636128000,
+    startAt: 1636940091,
+    endAt: 1736940091,
+    claimAt: 0,
     startDate: 'TBA',
   },
 
