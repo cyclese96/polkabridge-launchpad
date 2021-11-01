@@ -528,9 +528,9 @@ export const supportedPools = [
     distribution: '100% on TGE',
     startAt: 1635861600,
     endAt: 1635865200,
-    claimAt: 1636214400,
+    claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
-    claimTimeArr: [1636214400]
+    claimTimeArr: [1636171200]
   },
   {
     pid: 8,
@@ -575,7 +575,7 @@ export const supportedPools = [
     startAt: 1636045200,
     endAt: 1734569200,
     claimAt: 0,
-    startDate: 'TBA',
+    startDate: '8th Nov, 2021',
   },
   {
     pid: 9,
@@ -655,7 +655,52 @@ export const supportedPools = [
     startDate: "TBA"
   },
   {
-    pid: 11,
+    pid: 12,
+    poolId: 5,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Asva Finance',
+    symbol: 'ASVA-PBR',
+    description: `ASVA/BNB`,
+    introduce: `Asva Finance is a premier multi-chain DeFi aggregation engine that routes the best yields on money market services by integrating top DeFi protocols`,
+    website: 'https://asva.finance/',
+    twitter: 'https://twitter.com/asvafinance',
+    telegram: 'https://t.me/asvafinance',
+    whitepaper: 'https://asvalabs.gitbook.io/asva-labs/',
+    tokenSymbol: 'ASVA',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/asva.png',
+    totalSupply: '90,000,000 ASVA',
+    total: '100 BNB', //1BNB = 500$
+    ratio: 2702.7,//0.185 $
+    min: 0.6, //300$
+    max: 1, //500$
+    maxTier1: 0.6, //300$
+    maxTier2: 0.8, //400$
+    maxTier3: 1, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '50% TGE. 25% per month for next 2 months',
+    startAt: 1636639200,
+    endAt: 1636642800,
+    claimAt: 0,
+    startDate: '2PM UTC 11st Nov, 2021',
+  },
+  {
+    pid: 13,
     poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -700,7 +745,7 @@ export const supportedPools = [
     startDate: 'TBA',
   },
   {
-    pid: 12,
+    pid: 14,
     poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -746,7 +791,7 @@ export const supportedPools = [
   },
 
   {
-    pid: 13,
+    pid: 15,
     poolId: 2,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -843,7 +888,7 @@ export const supportedPools = [
     startDate: '2PM UTC 19th Nov, 2021',
   },
   {
-    pid: 16,
+    pid: 17,
     poolId: 3,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
