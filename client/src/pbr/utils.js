@@ -815,11 +815,16 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
   try {
     // console.log('getting user info', { add: lpContract._address, pid, account })
-    const userInfo = await lpContract.methods
-      .getUserInfo(pid, account)
-      .call()
+    const [userInfo, harvestInfo] = await Promise.all([
+      lpContract.methods
+        .getUserInfo(pid, account)
+        .call(),
+      lpContract.methods
+        .users(pid, account)
+        .call()
+    ])
     console.log('ethTest: userInfo ', userInfo)
-    return userInfo
+    return { userInfo, harvestInfo }
   } catch (e) {
     console.log('getUserInfo ', e)
     return {}
@@ -996,4 +1001,19 @@ export const setupNetwork = async (networkObject) => {
     console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
     return false
   }
+}
+
+export const getPoolClaimTimeArr = (poolId, network) => {
+  const lp = supportedPools.find(_lp => parseInt(_lp.pid) === parseInt(poolId) && _lp.network === network);
+  if (!lp) {
+    console.log('ethTest: lp not found ', { poolId, network })
+    return []
+  }
+
+  if (lp.claimTimeArr && lp.claimTimeArr.length > 0) {
+    return lp.claimTimeArr;
+  } else {
+    return [lp.claimAt]
+  }
+
 }

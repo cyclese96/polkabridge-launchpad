@@ -26,6 +26,7 @@ import {
   fromWei,
   getStaked,
   formatFloatValue,
+  getPoolClaimTimeArr,
 } from '../../pbr/utils'
 import { getContract } from '../../utils/erc20'
 import { getBalanceNumber } from '../../utils/formatBalance'
@@ -146,7 +147,10 @@ const JoinLaunchpad: React.FC = () => {
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
   const [tokenPurchased, setTokenPurchased] = useState(0) // token purchase by the user so far
-  const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed by the user so far
+  const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed/harvested by the user so far
+  const [numberClaimed, setNumberClaimed] = useState(0);// number of times users has claimed/harvested so far
+  const [recentClaimTime, setRecentClaimTime] = useState(claimAt)
+  const [totalRewardClaims, setTotalRewardClaims] = useState(1)
   const { onJoinPool } = useJoinPool()
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
@@ -176,6 +180,7 @@ const JoinLaunchpad: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
+      const claimTimeArr = getPoolClaimTimeArr(poolId, network);
       const [
         newIsWhitelist,
         newETHBalance,
@@ -183,7 +188,7 @@ const JoinLaunchpad: React.FC = () => {
         newProgress,
         newPurchasedAmount,
         stakedTokens,
-        userInfo,
+        userInfoData,
       ] = await Promise.all([
         getIsWhitelist(
           currentLaunchadContractInstance(network),
@@ -209,12 +214,13 @@ const JoinLaunchpad: React.FC = () => {
       setLoading(false)
 
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      console.log('bscTest stakedData--->  ', stakedTokens)
-      // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
-      console.log('bscTest progress--->  ', newProgress && newProgress.toString())
-      console.log('bscTest: newIsWhitelist--->  ', newIsWhitelist)
+      // console.log('bscTest stakedData--->  ', stakedTokens)
+      // // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
+      // console.log('bscTest progress--->  ', newProgress && newProgress.toString())
+      // console.log('bscTest: newIsWhitelist--->  ', newIsWhitelist)
       // console.log('ethTest: tokenPurchased   ', tokenPurchased)
-      // console.log('ethTest: userInfo--->  ', userInfo)
+      console.log('ethTest: userInfo--->  ', userInfoData)
+      console.log('ethTest: claimTimes  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -222,8 +228,12 @@ const JoinLaunchpad: React.FC = () => {
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
-      setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
-      setPercentClaimed(userInfo ? userInfo[3] : 0);
+      setTokenPurchased(userInfoData.userInfo ? Number(fromWei(userInfoData.userInfo[1])) : 0)
+      setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
+      setNumberClaimed(userInfoData.harvestInfo ? userInfoData.harvestInfo.NumberClaimed : null)
+      setRecentClaimTime(claimTimeArr.length > 1 ? claimTimeArr[Number(userInfoData.harvestInfo && userInfoData.harvestInfo.NumberClaimed)] : claimAt)
+      setTotalRewardClaims(claimTimeArr.length > 0 ? claimTimeArr.length : 1);
+      //set current claimAt time
     }
     if (pid >= 0) {
       fetchData()
@@ -237,6 +247,9 @@ const JoinLaunchpad: React.FC = () => {
     stakedAmount,
     tokenPurchased,
     percentClaimed,
+    numberClaimed,
+    recentClaimTime,
+    totalRewardClaims,
     setIsWhitelist,
     setETHBalance,
     setHistory,
@@ -244,7 +257,10 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount,
     setStakedAmount,
     setTokenPurchased,
-    setPercentClaimed
+    setPercentClaimed,
+    setNumberClaimed,
+    setRecentClaimTime,
+    setTotalRewardClaims
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -369,19 +385,20 @@ const JoinLaunchpad: React.FC = () => {
       currentPoolId(pid, network),
       account,
     )
-    const userInfo = await getUserInfo(
-      network === bscNetwork ? lpBscContract : lpContract,
+    const userInfoData = await getUserInfo(
+      currentLaunchadContractInstance(network),
       currentPoolId(pid, network),
       account,
     )
+
     setETHBalance(newETHBalance)
     setHistory(newHistory)
     setProgress(newProgress)
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
     setTokenValue('')
-    setTokenPurchased(userInfo ? Number(fromWei(userInfo[1])) : 0)
-    setPercentClaimed(userInfo ? userInfo[3] : 0);
+    setTokenPurchased(userInfoData.userInfo ? Number(fromWei(userInfoData.userInfo[1])) : 0)
+    setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
   }, [
     ethereum,
     account,
@@ -441,6 +458,59 @@ const JoinLaunchpad: React.FC = () => {
       return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(4).toString()
     }
     return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(0).toString()
+  }
+
+  const getPercent = (value: number, total: number) => {
+    return new BigNumber((value / total) * 100).toFixed(2).toString();
+  }
+  const claimStatusText = (_recentClaimTime: number, _numberClaimed: number, _totalRewardClaims: number) => {
+
+
+    if (_totalRewardClaims > 1) {
+
+      if (_recentClaimTime * 1000 > new Date().getTime()) {
+
+        return <StyledTitle>
+          {getPercent(1, _totalRewardClaims)}% Reward tokens will be available to harvest in approx -{' '}
+          <Countdown
+            date={new Date(_recentClaimTime * 1000)}
+            renderer={renderer}
+          />
+        </StyledTitle>
+      } else {
+
+        return <StyledCenterRow>
+          {new BigNumber(tokenPurchased).gt(0) ? <StyledInfoLabel1 className="mt-4">
+            Reward tokens are now available to harvest
+          </StyledInfoLabel1> : ""}
+
+        </StyledCenterRow>
+      }
+
+
+    } else {
+
+      if (_recentClaimTime * 1000 > new Date().getTime()) {
+
+        return <StyledTitle>
+          Reward tokens will be available to harvest in approx -{' '}
+          <Countdown
+            date={new Date(_recentClaimTime * 1000)}
+            renderer={renderer}
+          />
+        </StyledTitle>
+      } else {
+
+        return <StyledCenterRow>
+          {new BigNumber(tokenPurchased).gt(0) ? <StyledInfoLabel1 className="mt-4">
+            Reward tokens are now available to harvest
+          </StyledInfoLabel1> : ""}
+
+        </StyledCenterRow>
+      }
+    }
+
+
   }
 
   return (
@@ -603,7 +673,7 @@ const JoinLaunchpad: React.FC = () => {
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
-                {claimAt * 1000 > new Date().getTime() ? (
+                {/* {claimAt * 1000 > new Date().getTime() ? (
                   <StyledTitle>
                     Reward tokens will be available to harvest in approx -{' '}
                     <Countdown
@@ -619,7 +689,9 @@ const JoinLaunchpad: React.FC = () => {
                     </StyledInfoLabel1> : ""}
 
                   </StyledCenterRow>
-                )}
+                )} */}
+
+                {claimStatusText(recentClaimTime, numberClaimed, totalRewardClaims)}
 
                 <StyledInputContainer>
                   <StyledCenterRow>
@@ -632,14 +704,14 @@ const JoinLaunchpad: React.FC = () => {
                 <Button
                   disabled={
                     purchasedAmount <= 0 ||
-                    claimAt * 1000 > new Date().getTime() ||
+                    recentClaimTime * 1000 > new Date().getTime() ||
                     pendingHarvestTx ||
                     new BigNumber(percentClaimed).gte(100)
                   }
                   text={
                     pendingHarvestTx
                       ? 'Pending Confirmation'
-                      : claimAt * 1000 <= new Date().getTime()
+                      : recentClaimTime * 1000 <= new Date().getTime()
                         ? new BigNumber(percentClaimed).gte(100)
                           ? 'Already claimed'
                           : 'Harvest'
@@ -661,9 +733,9 @@ const JoinLaunchpad: React.FC = () => {
                     }
                   }}
                 >
-                  {claimAt * 1000 > new Date().getTime() && (
+                  {recentClaimTime * 1000 > new Date().getTime() && (
                     <Countdown
-                      date={new Date(claimAt * 1000)}
+                      date={new Date(recentClaimTime * 1000)}
                       renderer={renderer}
                     />
                   )}
