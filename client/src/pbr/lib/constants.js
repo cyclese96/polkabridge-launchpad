@@ -55,7 +55,7 @@ export const contractAddresses = {
   // }
 }
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -516,13 +516,13 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.com/token',
     icon: '/img/tokens/pixelverse.png',
     totalSupply: '1,000,000,000 PIXEL',
-    total: '12.5 ETH',
-    ratio: 266666.66, // 1ETH=4000,  $0.015
-    min: 0.075, //300$
-    max: 0.125, //500$
-    maxTier1: 0.075, //300$
-    maxTier2: 0.1, //400$
-    maxTier3: 0.125, //500$
+    total: '11.9 ETH',
+    ratio: 280000, // 1ETH=4200,  $0.015
+    min: 0.071, //300$
+    max: 0.119, //500$
+    maxTier1: 0.071, //300$
+    maxTier2: 0.095, //400$
+    maxTier3: 0.119, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '100% on TGE',
@@ -532,8 +532,92 @@ export const supportedPools = [
     startDate: '2PM UTC, 2nd Nov 2021',
     claimTimeArr: [1636171200]
   },
+
   {
-    pid: 8,
+    pid: 9,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address/',
+    name: 'Defactor',
+    symbol: 'FACTR-PBR',
+    description: `FACTR/ETH`,
+    introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
+    website: 'https://defactor.com/',
+    twitter: 'https://twitter.com/defactor_',
+    telegram: ' https://t.me/defactor_official',
+    whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
+    tokenSymbol: 'FACTR',
+    tokenExplorer: 'https://etherscan.io/token/',
+    icon: '/img/tokens/defactor.svg',
+    totalSupply: '300,000,000 FACTR',
+    total: '14.28 ETH', //1ETH =4k2$
+    ratio: 0,
+    min: 0.142,//500$
+    max: 0.2,//700$
+    maxTier1: 0.142,//500$
+    maxTier2: 0.171,//600$
+    maxTier3: 0.2,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: '25% TGE. 25% per month, for next 3 months',
+    startAt: 1636380000,
+    endAt: 1636383600,
+    claimAt: 1636387200,
+    startDate: '2PM UTC 8th Nov, 2021',
+  },
+  {
+    pid: 10,
+    poolId: 0,// add pool id in this symbol if pool ID of the ido is not same as pid
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'FabWelt',
+    symbol: 'WELT-PBR',
+    description: `WELT/MATIC`,
+    introduce: `FABWELT creates a gaming platform that brings blockchain technology into the core of high quality games of all types or genres. We achieve this by utilizing the finest tech of both worlds, beautiful high-quality games and the latest blockchain technology.`,
+    website: 'https://www.fabwelt.com/',
+    twitter: 'https://twitter.com/fabwelttoken',
+    telegram: 'https://t.me/FabweltToken',
+    whitepaper: 'https://www.fabwelt.com/public/Fabwelt-whitepaper.pdf',
+    tokenSymbol: 'WELT',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/fbwelt.jpg',
+    totalSupply: '500,000,000 WELT',
+    total: '26315 MATIC', //1Matic=1.9$
+    ratio: 135.7,//0.014
+    min: 157.89, //300$
+    max: 263.15, //500$
+    maxTier1: 157.89, //300$
+    maxTier2: 210.52, //400$
+    maxTier3: 263.15, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
+    startAt: 1636725808,
+    endAt: 1636729408,
+    claimAt: 0,
+    startDate: '2PM UTC 12th Nov',
+  },
+  {
+    pid: 11,
     poolId: 2,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -572,52 +656,13 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1636045200,
+    startAt: 1636988106,
     endAt: 1734569200,
     claimAt: 0,
-    startDate: '8th Nov, 2021',
+    startDate: 'TBA',
   },
   {
-    pid: 9,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address/',
-    name: 'Defactor',
-    symbol: 'FACTR-PBR',
-    description: `FACTR/ETH`,
-    introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
-    website: 'https://defactor.com/',
-    twitter: 'https://twitter.com/defactor_',
-    telegram: ' https://t.me/defactor_official',
-    whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
-    tokenSymbol: 'FACTR',
-    tokenExplorer: 'https://etherscan.io/token/',
-    icon: '/img/tokens/defactor.svg',
-    totalSupply: '300,000,000 FACTR',
-    total: '14.28 ETH', //1ETH =4k2$
-    ratio: 0,
-    min: 0.142,//500$
-    max: 0.2,//700$
-    maxTier1: 0.142,//500$
-    maxTier2: 0.171,//600$
-    maxTier3: 0.2,//700$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: '100% unlock after listing',
-    startAt: 1636380000,
-    endAt: 1636383600,
-    claimAt: 1636387200,
-    startDate: '2PM UTC 8th Nov, 2021',
-  },
-
-  {
-    pid: 10,
+    pid: 12,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -654,51 +699,7 @@ export const supportedPools = [
     claimAt: 0,
     startDate: "TBA"
   },
-  {
-    pid: 12,
-    poolId: 5,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'Asva Finance',
-    symbol: 'ASVA-PBR',
-    description: `ASVA/BNB`,
-    introduce: `Asva Finance is a premier multi-chain DeFi aggregation engine that routes the best yields on money market services by integrating top DeFi protocols`,
-    website: 'https://asva.finance/',
-    twitter: 'https://twitter.com/asvafinance',
-    telegram: 'https://t.me/asvafinance',
-    whitepaper: 'https://asvalabs.gitbook.io/asva-labs/',
-    tokenSymbol: 'ASVA',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/asva.png',
-    totalSupply: '90,000,000 ASVA',
-    total: '100 BNB', //1BNB = 500$
-    ratio: 2702.7,//0.185 $
-    min: 0.6, //300$
-    max: 1, //500$
-    maxTier1: 0.6, //300$
-    maxTier2: 0.8, //400$
-    maxTier3: 1, //500$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: '50% TGE. 25% per month for next 2 months',
-    startAt: 1636639200,
-    endAt: 1636642800,
-    claimAt: 0,
-    startDate: '2PM UTC 11st Nov, 2021',
-  },
+
   {
     pid: 13,
     poolId: 5,
@@ -905,15 +906,15 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'DefiRating',
+    name: 'Cheesus DeFi and NFT Rating Tool',
     symbol: 'DRATE-PBR',
     description: `DRATE/BNB`,
     introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
-    website: 'https://about.defirating.finance/',
-    twitter: 'https://twitter.com/QDefi',
-    telegram: 'https://t.me/qdr_ann',
+    website: 'https://defirating.finance/',
+    twitter: 'https://twitter.com/CheesusDeFi',
+    telegram: 'https://t.me/cheesus_MAIN_eng',
     whitepaper:
-      'https://www.notion.so/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+      'https://168aggregator.notion.site/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
     tokenSymbol: 'DRATE',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defirate.png',
@@ -928,10 +929,10 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1637341200,
-    endAt: 1736984800,
-    claimAt: 1736984800,
-    startDate: 'TBA',
+    startAt: 1637848800,
+    endAt: 1637852400,
+    claimAt: 0,
+    startDate: '2PM UTC 25th Nov',
   },
 
 

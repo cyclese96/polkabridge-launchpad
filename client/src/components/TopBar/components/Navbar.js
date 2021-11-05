@@ -286,7 +286,7 @@ const Navbar = () => {
             id: 'characters',
             icon: <PeopleAltOutlined />,
           },
-          { name: 'Swap', link: '#', id: 'items', icon: <VpnLockOutlined /> },
+          { name: 'Swap', link: 'https://swap.polkabridge.org', id: 'items', icon: <VpnLockOutlined /> },
           {
             name: 'Lending',
             link: '#',
@@ -372,7 +372,7 @@ const Navbar = () => {
             </a>
           </div>
           <div>
-            <a href="#" className={classes.navbarItemsDesktop}>
+            <a href="https://swap.polkabridge.org" className={classes.navbarItemsDesktop}>
               Swap <DotCircle />
             </a>
           </div>

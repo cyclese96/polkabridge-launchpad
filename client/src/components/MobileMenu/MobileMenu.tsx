@@ -18,7 +18,7 @@ const MobileMenu: React.FC<MobileMenuProps> = ({ onDismiss, visible }) => {
             Home
           </StyledLink>
 
-          <StyledAbsoluteLink href="https://swap.polkabridge.org/#/swap">
+          <StyledAbsoluteLink href="https://swap.polkabridge.org">
             Swap
           </StyledAbsoluteLink>
           {/* <StyledLink2
