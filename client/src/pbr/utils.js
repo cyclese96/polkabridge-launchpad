@@ -611,7 +611,7 @@ const signedIdoString = async (account) => {
     const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
 
     // console.log('api', _api)
-    const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY })
+    const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY.split('').reverse().join('') })
 
     return signedRes.data;
   } catch (error) {

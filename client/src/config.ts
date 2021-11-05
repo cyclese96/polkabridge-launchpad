@@ -1,7 +1,7 @@
 export default {
-  rpcTestnet: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,
+  rpcTestnet: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`,
   // chainId: 42,
-  rpc: `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`,//ethereum mainnet rpc infura
+  rpc: `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`,//ethereum mainnet rpc infura
   chainId: 1,
   chainIdTestnet: 42,
   bscChain: 56,
