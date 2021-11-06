@@ -498,11 +498,11 @@ export const supportedPools = [
       42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
     },
     tokenAddresses: {
-      1: '',
-      42: ''
+      1: '0x65e6b60ea01668634d68d0513fe814679f925bad',
+      42: '0x65e6b60ea01668634d68d0513fe814679f925bad'
     },
 
-    lpExplorer: 'https://etherscan.com/address',
+    lpExplorer: 'https://etherscan.com/address/0x65e6b60ea01668634d68d0513fe814679f925bad',
     name: 'PixelVerse',
     symbol: 'PIXEL-PBR',
     description: `PIXEL/ETH`,
@@ -513,7 +513,7 @@ export const supportedPools = [
     whitepaper:
       'https://pixelverse.ai/assets/pdf/deck.pdf',
     tokenSymbol: 'PIXEL',
-    tokenExplorer: 'https://etherscan.com/token',
+    tokenExplorer: 'https://etherscan.com/token/0x65e6b60ea01668634d68d0513fe814679f925bad',
     icon: '/img/tokens/pixelverse.png',
     totalSupply: '1,000,000,000 PIXEL',
     total: '11.9 ETH',
@@ -557,18 +557,18 @@ export const supportedPools = [
     icon: '/img/tokens/defactor.svg',
     totalSupply: '300,000,000 FACTR',
     total: '14.28 ETH', //1ETH =4k2$
-    ratio: 0,
-    min: 0.142,//500$
-    max: 0.2,//700$
-    maxTier1: 0.142,//500$
-    maxTier2: 0.171,//600$
-    maxTier3: 0.2,//700$
+    ratio: 60000,//0.07$
+    min: 0.071, //300$
+    max: 0.119, //500$
+    maxTier1: 0.071, //300$
+    maxTier2: 0.095, //400$
+    maxTier3: 0.119, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '25% TGE. 25% per month, for next 3 months',
     startAt: 1636380000,
     endAt: 1636383600,
-    claimAt: 1636387200,
+    claimAt: 1636812000,
     startDate: '2PM UTC 8th Nov, 2021',
   },
   {
@@ -613,7 +613,7 @@ export const supportedPools = [
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
     startAt: 1636725808,
     endAt: 1636729408,
-    claimAt: 0,
+    claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
   },
   {
