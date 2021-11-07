@@ -178,16 +178,16 @@ export const getDefaultLaunchpads = () => {
         tokenAddress: '',
         lpBscAddress: _bscAddress,//set network id for current bsc
         lpBscContract: _bscContract,
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, bscNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, bscNetwork),
       })
     } else if (pool.network === harmonyNetwork) {
       //
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, harmonyNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, harmonyNetwork),
       })
 
     } else if (pool.network === polygonNetwork) {
@@ -195,8 +195,8 @@ export const getDefaultLaunchpads = () => {
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, polygonNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, polygonNetwork),
       })
     } else {
       return Object.assign(pool, {
@@ -815,11 +815,16 @@ export const getUserInfo = async (lpContract, pid, account) => {
 
   try {
     // console.log('getting user info', { add: lpContract._address, pid, account })
-    const userInfo = await lpContract.methods
-      .getUserInfo(pid, account)
-      .call()
+    const [userInfo, harvestInfo] = await Promise.all([
+      lpContract.methods
+        .getUserInfo(pid, account)
+        .call(),
+      lpContract.methods
+        .users(pid, account)
+        .call()
+    ])
     console.log('ethTest: userInfo ', userInfo)
-    return userInfo
+    return { userInfo, harvestInfo }
   } catch (e) {
     console.log('getUserInfo ', e)
     return {}
@@ -996,4 +1001,19 @@ export const setupNetwork = async (networkObject) => {
     console.error("Can't setup the BSC network on metamask because window.ethereum is undefined")
     return false
   }
+}
+
+export const getPoolClaimTimeArr = (poolId, network) => {
+  const lp = supportedPools.find(_lp => parseInt(_lp.pid) === parseInt(poolId) && _lp.network === network);
+  if (!lp) {
+    console.log('ethTest: lp not found ', { poolId, network })
+    return []
+  }
+
+  if (lp.claimTimeArr && lp.claimTimeArr.length > 0) {
+    return lp.claimTimeArr;
+  } else {
+    return [lp.claimAt]
+  }
+
 }
