@@ -178,16 +178,16 @@ export const getDefaultLaunchpads = () => {
         tokenAddress: '',
         lpBscAddress: _bscAddress,//set network id for current bsc
         lpBscContract: _bscContract,
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, bscNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, bscNetwork),
       })
     } else if (pool.network === harmonyNetwork) {
       //
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, harmonyNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, harmonyNetwork),
       })
 
     } else if (pool.network === polygonNetwork) {
@@ -195,8 +195,8 @@ export const getDefaultLaunchpads = () => {
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], 'ethereum'),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], 'ethereum'),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, polygonNetwork),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, polygonNetwork),
       })
     } else {
       return Object.assign(pool, {

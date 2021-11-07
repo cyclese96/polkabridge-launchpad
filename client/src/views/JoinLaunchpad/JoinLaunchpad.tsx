@@ -146,7 +146,7 @@ const JoinLaunchpad: React.FC = () => {
   const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
-  const [tokenPurchased, setTokenPurchased] = useState(0) // token purchase by the user so far
+  const [tokenPurchased, setTokenPurchased] = useState('') // token purchase by the user so far
   const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed/harvested by the user so far
   const [numberClaimed, setNumberClaimed] = useState(0);// number of times users has claimed/harvested so far
   const [recentClaimTime, setRecentClaimTime] = useState(claimAt)
@@ -176,6 +176,22 @@ const JoinLaunchpad: React.FC = () => {
     }
   }
 
+  const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
+
+    if (!_userInfoData) {
+      return 0;
+    }
+
+    if (_claimTimeArr.length > 1 && parseInt(_userInfoData.harvestInfo.NumberClaimed) < _claimTimeArr.length) {
+
+      return _claimTimeArr[parseInt(_userInfoData.harvestInfo.NumberClaimed)]
+
+    } else {
+      return claimAt;
+    }
+
+
+  }
 
   useEffect(() => {
     async function fetchData() {
@@ -217,10 +233,11 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('bscTest stakedData--->  ', stakedTokens)
       // // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('bscTest progress--->  ', newProgress && newProgress.toString())
-      // console.log('bscTest: newIsWhitelist--->  ', newIsWhitelist)
+      // console.log('ethTest: tokenValue--->  ', tokenValue)
       // console.log('ethTest: tokenPurchased   ', tokenPurchased)
-      console.log('ethTest: userInfo--->  ', userInfoData)
-      console.log('ethTest: claimTimes  ', claimTimeArr)
+      // console.log('ethTest: userInfo--->  ', userInfoData)
+      // console.log('ethTest: claimTimes  ', claimTimeArr)
+      console.log('ethTest: isWhiteList  ', newIsWhitelist)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -228,10 +245,10 @@ const JoinLaunchpad: React.FC = () => {
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
-      setTokenPurchased(userInfoData.userInfo ? Number(fromWei(userInfoData.userInfo[1])) : 0)
+      setTokenPurchased(userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0')
       setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
       setNumberClaimed(userInfoData.harvestInfo ? userInfoData.harvestInfo.NumberClaimed : null)
-      setRecentClaimTime(claimTimeArr.length > 1 ? claimTimeArr[Number(userInfoData.harvestInfo && userInfoData.harvestInfo.NumberClaimed)] : claimAt)
+      setRecentClaimTime(getCurrentClaimTime(userInfoData, claimTimeArr))
       setTotalRewardClaims(claimTimeArr.length > 0 ? claimTimeArr.length : 1);
       //set current claimAt time
     }
@@ -312,6 +329,8 @@ const JoinLaunchpad: React.FC = () => {
     let newTokenValue = _max * ratio
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
+    // console.log(newTokenValue, tokenPurchased)
+    // console.log({ value1: new BigNumber(newTokenValue).toFixed(3).toString(), value2: new BigNumber(tokenPurchased).toFixed(3).toString() })
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
   const networkSymbol = () => {
@@ -340,6 +359,13 @@ const JoinLaunchpad: React.FC = () => {
     }
   }
 
+  const isEqual = (value1: string, value2: string) => {
+    const _value1 = new BigNumber(value1 ? value1 : 0)
+    const _value2 = new BigNumber(value2 ? value2 : 0)
+
+    console.log('equal flag  ', new BigNumber(_value1.toFixed(4)).eq(_value2.toFixed(4)))
+    return new BigNumber(_value1.toFixed(3).toString()).eq(_value2.toFixed(3).toString())
+  }
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -353,7 +379,7 @@ const JoinLaunchpad: React.FC = () => {
             : 'You have not participated in the staking'
           : startAt * 1000 <= new Date().getTime()
             ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? new BigNumber(tokenValue).eq(tokenPurchased) ? "Already purchased" : 'Join pool'
+              ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
               : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
             : progress == new BigNumber('100')
               ? 'Ended'
@@ -372,7 +398,7 @@ const JoinLaunchpad: React.FC = () => {
       !tokenValue ||
       parseFloat(ethValue) < min ||
       parseFloat(ethValue) > _max ||
-      new BigNumber(tokenValue).eq(tokenPurchased)
+      isEqual(tokenValue, tokenPurchased)
     )
   }
 
@@ -397,7 +423,7 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
     setTokenValue('')
-    setTokenPurchased(userInfoData.userInfo ? Number(fromWei(userInfoData.userInfo[1])) : 0)
+    setTokenPurchased(userInfoData.userInfo ? (fromWei(userInfoData.userInfo[1])) : '0')
     setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
   }, [
     ethereum,
@@ -447,7 +473,7 @@ const JoinLaunchpad: React.FC = () => {
     return new BigNumber(100).minus(_percentClaimed).toFixed(3).toString();
   }
 
-  const getRemainTokensToClaim = (_tokenPurchased: number, _percentClaimed: number) => {
+  const getRemainTokensToClaim = (_tokenPurchased: string, _percentClaimed: number) => {
     if (!_tokenPurchased) {
       return 0
     }
@@ -455,13 +481,13 @@ const JoinLaunchpad: React.FC = () => {
       return _tokenPurchased;
     }
     if (new BigNumber(_tokenPurchased).lt(1)) {
-      return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(4).toString()
+      return new BigNumber((parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed)).toFixed(4).toString()
     }
-    return new BigNumber(_tokenPurchased).multipliedBy(100 - _percentClaimed).div(100).toFixed(0).toString()
+    return new BigNumber((parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed)).toFixed(2).toString()
   }
 
   const getPercent = (value: number, total: number) => {
-    return new BigNumber((value / total) * 100).toFixed(2).toString();
+    return parseFloat(new BigNumber((value / total) * 100).toFixed(2).toString());
   }
   const claimStatusText = (_recentClaimTime: number, _numberClaimed: number, _totalRewardClaims: number) => {
 
@@ -718,7 +744,7 @@ const JoinLaunchpad: React.FC = () => {
                         : undefined
                   }
                   onClick={async () => {
-                    if (tokenPurchased > 0) {
+                    if (new BigNumber(tokenPurchased).gt(0)) {
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadContractInstance(network))
                       setPendingHarvestTx(false)
