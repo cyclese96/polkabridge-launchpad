@@ -40,7 +40,7 @@ export interface Launchpad {
   startAt: number,
   endAt: number,
   claimAt: number,
-  startDate: string
+  startDate: string,
 }
 
 export interface LaunchpadsContext {

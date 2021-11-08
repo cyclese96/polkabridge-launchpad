@@ -484,9 +484,9 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1634904000,
+    startAt: 1636253020,
     endAt: 1634907600,
-    claimAt: 1635249600,
+    claimAt: 1636253020,//1635831420,//1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
     claimTimeArr: [1635249600, 1637859600, 1640451600]
 
@@ -526,7 +526,7 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '100% on TGE',
-    startAt: 1635861600,
+    startAt: 1635781661,
     endAt: 1635865200,
     claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
