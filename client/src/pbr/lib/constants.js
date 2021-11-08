@@ -556,13 +556,13 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token/',
     icon: '/img/tokens/defactor.svg',
     totalSupply: '300,000,000 FACTR',
-    total: '14.28 ETH', //1ETH =4k2$
-    ratio: 60000,//0.07$
-    min: 0.071, //300$
-    max: 0.119, //500$
-    maxTier1: 0.071, //300$
-    maxTier2: 0.095, //400$
-    maxTier3: 0.119, //500$
+    total: '10.86 ETH', //1ETH =4k6$
+    ratio: 65714.28,//0.07$
+    min: 0.065, //300$
+    max: 0.108, //500$
+    maxTier1: 0.065, //300$
+    maxTier2: 0.086, //400$
+    maxTier3: 0.108, //500$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '25% TGE. 25% per month, for next 3 months',
