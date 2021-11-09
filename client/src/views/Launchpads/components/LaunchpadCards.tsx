@@ -322,6 +322,9 @@ const StyledCardWrapper = styled.div`
   overflow: hidden;
   border-radius: 24px;
   border: 3px solid #212121;
+  @media (max-width: 768px) {
+    width: 100%;
+  }
 `
 const StyledTitle = styled.h4`
   color: ${(props) => props.theme.color.white};
