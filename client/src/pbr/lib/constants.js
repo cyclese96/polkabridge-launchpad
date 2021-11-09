@@ -55,6 +55,7 @@ export const contractAddresses = {
   // }
 }
 
+
 const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
@@ -580,11 +581,14 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
+      1: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      42: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      56: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      97: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      137: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      80001: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
     },
+
     lpPolygonAddresses: { // lp address for polygon network
       137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
       80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
@@ -969,7 +973,7 @@ export const supportedPools = [
   //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
   //   icon: '/img/tokens/harmonylauncher.jpg',
   //   totalSupply: '100,000,000 IDO',
-  //   total: '100000 ONE',
+  //   total: '1000000 ONE',
   //   ratio: 100,
   //   min: 5, //300$
   //   max: 10, //500$
@@ -983,6 +987,7 @@ export const supportedPools = [
   //   endAt: 1734569200,
   //   claimAt: 1533939514,
   //   startDate: '11th November',
+  // claimTimeArr: [1533939514, 1639029546]
   // }
 
 ]
