@@ -570,10 +570,11 @@ export const supportedPools = [
     endAt: 1636383600,
     claimAt: 1636812000,
     startDate: '2PM UTC 8th Nov, 2021',
+    claimTimeArr: [1636812000, 1639328400, 1642006800]
   },
   {
     pid: 10,
-    poolId: 0,// add pool id in this symbol if pool ID of the ido is not same as pid
+    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -616,183 +617,9 @@ export const supportedPools = [
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
   },
+
   {
     pid: 11,
-    poolId: 2,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'ADASwap',
-    symbol: 'ASW-PBR',
-    description: `ASW/BNB`,
-    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
-    website: 'https://adaswap.app/',
-    twitter: 'https://twitter.com/adaswapapp',
-    telegram: 'https://t.me/adaswapcommunity',
-    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
-    tokenSymbol: 'ASW',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/adaswap.PNG',
-    totalSupply: '16,500,000,000 ASW',
-    total: '100 BNB',
-    ratio: 0, // 1BNB = 500$
-    min: 0.6, //300$
-    max: 1, //500$
-    maxTier1: 0.6, //300$
-    maxTier2: 0.8, //400$
-    maxTier3: 1, //500$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1636988106,
-    endAt: 1734569200,
-    claimAt: 0,
-    startDate: 'TBA',
-  },
-  {
-    pid: 12,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address',
-    name: 'SolClout',
-    symbol: 'SOLC-PBR',
-    description: `SOLC/ETH`,
-    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
-    website: 'https://solclout.com/',
-    twitter: 'https://twitter.com/solclout',
-    telegram: 'https://t.me/solclout',
-    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
-    tokenSymbol: 'SOLC',
-    tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/solc.png',
-    totalSupply: '1,000,000,000 SOLC',
-    total: '33 ETH',//1ETH =3k$
-    ratio: 0,
-    min: 0.166,//500$
-    max: 0.233,//700$
-    maxTier1: 0.166,//500$
-    maxTier2: 0.2,//600$
-    maxTier3: 0.233,//700$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: 'TBA',
-    startAt: 1636045200,
-    endAt: 1736045200,
-    claimAt: 0,
-    startDate: "TBA"
-  },
-
-  {
-    pid: 13,
-    poolId: 5,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'PeopleZ',
-    symbol: 'LEZ-PBR',
-    description: `LEZ/BNB`,
-    introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
-    website: 'https://www.peoplez.io/',
-    twitter: 'https://twitter.com/Peoplez_io',
-    telegram: 'https://t.me/Peoplez_io',
-    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
-    tokenSymbol: 'LEZ',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/peoplez.svg',
-    totalSupply: '18,000,000 LEZ',
-    total: '125 BNB', //1BNB = 400$
-    ratio: 0,
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1636524814,
-    endAt: 1734569200,
-    claimAt: 0,
-    startDate: 'TBA',
-  },
-  {
-    pid: 14,
-    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
-    },
-    lpExplorer: 'https://polygonscan.com/address',
-    name: 'ArcadeNetwork',
-    symbol: 'ARC-PBR',
-    description: `ARC/MATIC`,
-    introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
-    website: 'https://arcadenet.io/',
-    twitter: 'https://twitter.com/ArcadeNetwork_',
-    telegram: 'https://t.me/ArcadeNetworkOfficial',
-    whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
-    tokenSymbol: 'ARC',
-    tokenExplorer: 'https://polygonscan.com/address',
-    icon: '/img/tokens/arcade.png',
-    totalSupply: '222,500,000 ARC',
-    total: '16666 MATIC', //1Matic=1.8$
-    ratio: 2.6,
-    min: 166.6, //300$
-    max: 277.7, //500$
-    maxTier1: 166.6, //300$
-    maxTier2: 222.2, //400$
-    maxTier3: 277.7, //500$
-    access: 'Private',
-    network: polygonNetwork,
-    distribution: 'TBA',
-    startAt: 1636940091,
-    endAt: 1736940091,
-    claimAt: 0,
-    startDate: 'TBA',
-  },
-
-  {
-    pid: 15,
     poolId: 2,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -822,7 +649,7 @@ export const supportedPools = [
     icon: '/img/tokens/playmon.png',
     totalSupply: '1,000,000,000 PYM',
     total: '38461 MATIC', //1Matic=1.3$
-    ratio: 34.2,
+    ratio: 34.2,//0.038$
     min: 230.76, //300$
     max: 384.61, //500$
     maxTier1: 230.71, //300$
@@ -834,13 +661,13 @@ export const supportedPools = [
     startAt: 1638236241,
     endAt: 1738236241,
     claimAt: 0,
-    startDate: 'TBA',
+    startDate: '2PM UTC 18th Nov',
   },
 
 
 
   {
-    pid: 16,
+    pid: 12,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -889,7 +716,93 @@ export const supportedPools = [
     startDate: '2PM UTC 19th Nov, 2021',
   },
   {
-    pid: 17,
+    pid: 13,
+    poolId: 1,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'ADASwap',
+    symbol: 'ASW-PBR',
+    description: `ASW/BNB`,
+    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
+    website: 'https://adaswap.app/',
+    twitter: 'https://twitter.com/adaswapapp',
+    telegram: 'https://t.me/adaswapcommunity',
+    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
+    tokenSymbol: 'ASW',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/adaswap.PNG',
+    totalSupply: '16,500,000,000 ASW',
+    total: '100 BNB',
+    ratio: 0, // 1BNB = 500$
+    min: 0.6, //300$
+    max: 1, //500$
+    maxTier1: 0.6, //300$
+    maxTier2: 0.8, //400$
+    maxTier3: 1, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1636988106,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: 'TBA',
+  },
+  {
+    pid: 14,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'SolClout',
+    symbol: 'SOLC-PBR',
+    description: `SOLC/ETH`,
+    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
+    website: 'https://solclout.com/',
+    twitter: 'https://twitter.com/solclout',
+    telegram: 'https://t.me/solclout',
+    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
+    tokenSymbol: 'SOLC',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/solc.png',
+    totalSupply: '1,000,000,000 SOLC',
+    total: '33 ETH',//1ETH =3k$
+    ratio: 0,
+    min: 0.166,//500$
+    max: 0.233,//700$
+    maxTier1: 0.166,//500$
+    maxTier2: 0.2,//600$
+    maxTier3: 0.233,//700$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: 'TBA',
+    startAt: 1636045200,
+    endAt: 1736045200,
+    claimAt: 0,
+    startDate: "TBA"
+  },
+
+
+
+  {
+    pid: 15,
     poolId: 3,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -935,7 +848,97 @@ export const supportedPools = [
     startDate: '2PM UTC 25th Nov',
   },
 
+  {
+    pid: 16,
+    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'ArcadeNetwork',
+    symbol: 'ARC-PBR',
+    description: `ARC/MATIC`,
+    introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
+    website: 'https://arcadenet.io/',
+    twitter: 'https://twitter.com/ArcadeNetwork_',
+    telegram: 'https://t.me/ArcadeNetworkOfficial',
+    whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
+    tokenSymbol: 'ARC',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/arcade.png',
+    totalSupply: '222,500,000 ARC',
+    total: '16666 MATIC', //1Matic=1.8$
+    ratio: 2.6,
+    min: 166.6, //300$
+    max: 277.7, //500$
+    maxTier1: 166.6, //300$
+    maxTier2: 222.2, //400$
+    maxTier3: 277.7, //500$
+    access: 'Private',
+    network: polygonNetwork,
+    distribution: 'TBA',
+    startAt: 1636940091,
+    endAt: 1736940091,
+    claimAt: 0,
+    startDate: 'TBA',
+  },
 
+  {
+    pid: 17,
+    poolId: 5,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'PeopleZ',
+    symbol: 'LEZ-PBR',
+    description: `LEZ/BNB`,
+    introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
+    website: 'https://www.peoplez.io/',
+    twitter: 'https://twitter.com/Peoplez_io',
+    telegram: 'https://t.me/Peoplez_io',
+    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
+    tokenSymbol: 'LEZ',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/peoplez.svg',
+    totalSupply: '18,000,000 LEZ',
+    total: '125 BNB', //1BNB = 400$
+    ratio: 0,
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1636524814,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: '2PM UTC 29th Nov',
+  },
   // {
   //   pid: 17,
   //   poolId: 1,
