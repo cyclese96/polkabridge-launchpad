@@ -941,7 +941,7 @@ export const supportedPools = [
   },
   // {
   //   pid: 17,
-  //   poolId: 1,
+  //   poolId: 2,
   //   lpAddresses: {
   //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
   //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -957,33 +957,34 @@ export const supportedPools = [
   //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
   //   },
   //   lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   name: 'IDO Token Harmony',
+  //   name: 'HarmonyLauncher Private Pool',
   //   symbol: 'IDO-PBR',
-  //   description: `ARC/ONE`,
-  //   introduce: `Harmony test token IDO`,
-  //   website: '',
-  //   twitter: '',
-  //   telegram: 'l',
+  //   description: `IDO/ONE`,
+  //   introduce: `Harmony Launcher is the first Decentralized IGO + IDO Incubation Launchpad on Harmony Blockchain`,
+  //   website: 'https://harmonylauncher.io/',
+  //   twitter: 'https://twitter.com/Harmonylauncher',
+  //   telegram: 'https://t.me/Harmonylauncher',
   //   whitepaper: '',
   //   tokenSymbol: 'IDO',
   //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   icon: '/img/tokens/test.png',
+  //   icon: '/img/tokens/harmonylauncher.jpg',
   //   totalSupply: '100,000,000 IDO',
-  //   total: '23076 ONE', //1Matic=1.3$
-  //   ratio: 2.6,
-  //   min: 23.076, //300$
-  //   max: 38.461, //500$
-  //   maxTier1: 24.071, //300$
-  //   maxTier2: 30.769, //400$
-  //   maxTier3: 38.461, //500$
-  //   access: 'Private',
+  //   total: '100000 ONE',
+  //   ratio: 100,
+  //   min: 5, //300$
+  //   max: 10, //500$
+  //   maxTier1: 5, //300$
+  //   maxTier2: 7, //400$
+  //   maxTier3: 10, //500$
+  //   access: 'Public',
   //   network: harmonyNetwork,
   //   distribution: 'TBA',
-  //   startAt: 1633939514,
+  //   startAt: 1533939514,
   //   endAt: 1734569200,
-  //   claimAt: 1633939514,
-  //   startDate: 'TBA',
+  //   claimAt: 1533939514,
+  //   startDate: '11th November',
   // }
+
 ]
 // given pid and network name -> launchpad pool id
 export const getPoolId = (pid, network) => {
