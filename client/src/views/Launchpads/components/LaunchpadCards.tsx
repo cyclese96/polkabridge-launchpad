@@ -317,7 +317,7 @@ const StyledRow = styled.div`
 
 const StyledCardWrapper = styled.div`
   display: flex;
-  width: calc((900px - ${(props) => props.theme.spacing[4]}px * 2) / 3);
+  width: 840px;
   position: relative;
   overflow: hidden;
   border-radius: 24px;
