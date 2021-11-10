@@ -581,12 +581,12 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-      42: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-      56: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-      97: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-      137: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-      80001: '0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+      137: '',
+      80001: '',
     },
 
     lpPolygonAddresses: { // lp address for polygon network
@@ -938,7 +938,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1636524814,
+    startAt: 1638194400,
     endAt: 1734569200,
     claimAt: 0,
     startDate: '2PM UTC 29th Nov',
