@@ -971,7 +971,7 @@ export const supportedPools = [
   //   whitepaper: '',
   //   tokenSymbol: 'IDO',
   //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   icon: '/img/tokens/harmonylauncher.jpg',
+  //   icon: '/img/tokens/harmonylauncher.png',
   //   totalSupply: '100,000,000 IDO',
   //   total: '1000000 ONE',
   //   ratio: 100,
