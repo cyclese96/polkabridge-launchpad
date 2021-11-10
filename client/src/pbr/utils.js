@@ -172,38 +172,45 @@ export const getDefaultLaunchpads = () => {
       const _bscChain = currentConnection === 'mainnet' ? config.bscChain : config.bscChainTestent
       const _bscAddress = !pool.lpBscAddresses ? '' : pool.lpBscAddresses[_bscChain]//set network id for current bsc
       const _bscContract = getContractInstance(LaunchpadAbi, _bscAddress, bscNetwork, pool.network)
-      console.log('bscTest: setting bsc contract', { _bscChain, _bscAddress, _bscContract, currentNetwork: pool.network })
+      // console.log('bscTest: setting bsc contract', { _bscChain, _bscAddress, _bscContract, currentNetwork: pool.network })
       return Object.assign(pool, {
         lpAddress: '',
         tokenAddress: '',
         lpBscAddress: _bscAddress,//set network id for current bsc
         lpBscContract: _bscContract,
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, bscNetwork),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, bscNetwork),
+        // lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, bscNetwork),
+        // tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, bscNetwork),
       })
     } else if (pool.network === harmonyNetwork) {
-      //
+
+      const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainTestnet
+      const _hmyAddress = !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses[_harmonyChain]//set network id for current bsc
+      const _hmyContract = getContractInstance(LaunchpadAbi, _hmyAddress, harmonyNetwork, pool.network)
+      // console.log('harmonyTest: setting harmony contract', { _harmonyChain, _hmyAddress, _hmyContract, currentNetwork: this.currentNetworkName })
       return Object.assign(pool, {
-        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, harmonyNetwork),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, harmonyNetwork),
+        lpHarmonyAddress: _hmyAddress,
+        lpHarmonyContract: _hmyContract
       })
 
     } else if (pool.network === polygonNetwork) {
       //
+      const _polygonChain = currentConnection === 'mainnet' ? config.polygon_chain_mainnet : config.polygon_chain_testnet
+      const _polygonAddress = !pool.lpPolygonAddresses ? '' : pool.lpPolygonAddresses[_polygonChain]//set network id
+      const _polygonContract = getContractInstance(LaunchpadAbi, _polygonAddress, polygonNetwork, pool.network)
+      // console.log('maticTest: setting polygon contract', { _polygonChain, _polygonAddress, _polygonContract, currNet: this.currentNetworkName })
+
       return Object.assign(pool, {
-        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, polygonNetwork),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, polygonNetwork),
+        lpPolygonAddress: _polygonAddress,
+        lpPolygonContract: _polygonContract,
       })
     } else {
       return Object.assign(pool, {
         lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses[chainId],
         tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId],
-        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], pool.network, ethereumNetwork),
-        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], pool.network, ethereumNetwork),
+        lpContract: getContractInstance(LaunchpadAbi, !pool.lpAddresses ? '' : pool.lpAddresses[chainId], ethereumNetwork, pool.network),
+        tokenContract: getContractInstance(ERC20Abi, !pool.tokenAddresses ? '' : pool.tokenAddresses[chainId], ethereumNetwork, pool.network),
       })
     }
   })

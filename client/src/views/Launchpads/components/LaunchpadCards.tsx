@@ -12,7 +12,7 @@ import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
 import { formattedNetworkName, getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
-import { bscNetwork, ethereumNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
@@ -92,16 +92,29 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const [progress, setProgress] = useState<BigNumber>()
 
+  const currentLaunchadContractInstance = (_network: string) => {
+    if (_network === bscNetwork) {
+      return launchpad.lpBscContract
+    } else if (_network === polygonNetwork) {
+      return launchpad.lpPolygonContract
+    } else if (_network === harmonyNetwork) {
+      return launchpad.lpHarmonyContract
+    } else if (_network === ethereumNetwork) {
+      return launchpad.lpContract
+    } else {
+      return null
+    }
+  }
+
   useEffect(() => {
     async function fetchData() {
       const newProgress = await getProgress(
-        launchpad.network === bscNetwork
-          ? launchpad.lpBscContract
-          : launchpad.lpContract,
-        launchpad.pid,
+        currentLaunchadContractInstance(launchpad.network),
+        getPoolId(launchpad.pid, launchpad.network),
         launchpad.startAt,
         launchpad.endAt
       )
+      console.log('getProgress fetched profress ', { prog: newProgress?.toString(), pid: getPoolId(launchpad.pid, launchpad.network), net: launchpad.network, lp: launchpad.lpHarmonyContract, lps: launchpad })
       setProgress(newProgress)
     }
     if (launchpad) {
