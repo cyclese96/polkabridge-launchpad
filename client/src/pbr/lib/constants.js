@@ -606,20 +606,21 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/fbwelt.jpg',
     totalSupply: '500,000,000 WELT',
-    total: '26315 MATIC', //1Matic=1.9$
-    ratio: 135.7,//0.014
-    min: 157.89, //300$
-    max: 263.15, //500$
-    maxTier1: 157.89, //300$
-    maxTier2: 210.52, //400$
-    maxTier3: 263.15, //500$
+    total: '29411 MATIC', //1Matic=1.7$
+    ratio: 121.42,//0.014
+    min: 176.4, //300$
+    max: 294.1, //500$
+    maxTier1: 176.4, //300$
+    maxTier2: 235.2, //400$
+    maxTier3: 294.1, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
-    startAt: 1636725808,
-    endAt: 1636729408,
+    startAt: 1636725600,//1636725540
+    endAt: 1636729200,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
+    claimTimeArr: [1637069400, 1639587600]
   },
 
   {
