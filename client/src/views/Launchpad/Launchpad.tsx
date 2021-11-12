@@ -129,10 +129,12 @@ const Launchpad: React.FC = () => {
 
   const currentLaunchpadContract = (_network: string) => {
     console.log('harmonyTest: lp network', network)
-    if (network === bscNetwork) {
+    if (_network === bscNetwork) {
       return lpBscContract
-    } else if (network === harmonyNetwork) {
+    } else if (_network === harmonyNetwork) {
       return lpHarmonyContract
+    } else if (_network === polygonNetwork) {
+      return lpPolygonContract
     } else {
       return lpContract
     }
