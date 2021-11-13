@@ -57,7 +57,7 @@ const LaunchpadCards: React.FC = () => {
       <Wrapper>
         <div className="container mt-4">
           <div className="row d-flex justify-content-center">
-            {(rows.length > 0 ? rows : defaultLp).map((singleLaunchpad, i) => {
+            {(rows.length > 0 ? rows : defaultLp).sort((a, b) => b.endAt - a.endAt).map((singleLaunchpad, i) => {
               {
                 return (
                   singleLaunchpad.endAt * 1000 < new Date().getTime() && (
