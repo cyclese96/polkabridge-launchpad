@@ -541,10 +541,10 @@ export const supportedPools = [
       42: '0x221AcD0Cc5f31Aea65FacEC2343C804ce43CbD6d',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
+      1: '0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
+      42: '0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     },
-    lpExplorer: 'https://etherscan.io/address/',
+    lpExplorer: 'https://etherscan.io/address/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     name: 'Defactor',
     symbol: 'FACTR-PBR',
     description: `FACTR/ETH`,
@@ -554,7 +554,7 @@ export const supportedPools = [
     telegram: ' https://t.me/defactor_official',
     whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
     tokenSymbol: 'FACTR',
-    tokenExplorer: 'https://etherscan.io/token/',
+    tokenExplorer: 'https://etherscan.io/token/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     icon: '/img/tokens/defactor.svg',
     totalSupply: '300,000,000 FACTR',
     total: '10.86 ETH', //1ETH =4k6$
@@ -581,19 +581,19 @@ export const supportedPools = [
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
     },
     tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-      137: '',
-      80001: '',
+      1: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+      42: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+      56: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+      97: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+      137: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+      80001: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     },
 
     lpPolygonAddresses: { // lp address for polygon network
       137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
       80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
-    lpExplorer: 'https://polygonscan.com/address',
+    lpExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     name: 'FabWelt',
     symbol: 'WELT-PBR',
     description: `WELT/MATIC`,
@@ -603,16 +603,16 @@ export const supportedPools = [
     telegram: 'https://t.me/FabweltToken',
     whitepaper: 'https://www.fabwelt.com/public/Fabwelt-whitepaper.pdf',
     tokenSymbol: 'WELT',
-    tokenExplorer: 'https://polygonscan.com/address',
+    tokenExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     icon: '/img/tokens/fbwelt.jpg',
     totalSupply: '500,000,000 WELT',
     total: '29411 MATIC', //1Matic=1.7$
     ratio: 121.42,//0.014
-    min: 176.4, //300$
-    max: 294.1, //500$
-    maxTier1: 176.4, //300$
-    maxTier2: 235.2, //400$
-    maxTier3: 294.1, //500$
+    min: 176.47, //300$
+    max: 294.11, //500$
+    maxTier1: 176.47, //300$
+    maxTier2: 235.29, //400$
+    maxTier3: 294.11, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
@@ -625,7 +625,7 @@ export const supportedPools = [
 
   {
     pid: 11,
-    poolId: 2,
+    poolId: 3,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -633,12 +633,12 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
+      137: '',
+      80001: '',
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    lpPolygonAddresses: { // lp address for polygon network
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'PlayerMon',
@@ -653,19 +653,19 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/playmon.png',
     totalSupply: '1,000,000,000 PYM',
-    total: '38461 MATIC', //1Matic=1.3$
-    ratio: 34.2,//0.038$
-    min: 230.76, //300$
-    max: 384.61, //500$
-    maxTier1: 230.71, //300$
-    maxTier2: 307.69, //400$
-    maxTier3: 384.61, //500$
+    total: '29411 MATIC', //1Matic=1.7$,1 PYM = 0.038 USD
+    ratio: 44.7,//0.038$
+    min: 176.47, //300$
+    max: 294.11, //500$
+    maxTier1: 176.47, //300$
+    maxTier2: 235.29, //400$
+    maxTier3: 294.11, //500$
     access: 'Private',
     network: polygonNetwork,
-    distribution: 'TBA',
-    startAt: 1638236241,
-    endAt: 1738236241,
-    claimAt: 0,
+    distribution: '50% during TGE, 50% 1 month after TGE',
+    startAt: 1637244000,
+    endAt: 1637247600,
+    claimAt: 1637589600,
     startDate: '2PM UTC 18th Nov',
   },
 
@@ -673,7 +673,7 @@ export const supportedPools = [
 
   {
     pid: 12,
-    poolId: 1,
+    poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -681,12 +681,8 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+      137: '',
+      80001: '',
     },
     lpPolygonAddresses: { // lp address for polygon network
       137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
@@ -704,24 +700,119 @@ export const supportedPools = [
     tokenSymbol: 'TRY',
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/tryhards.png',
-    totalSupply: '200,000,000 BAKED',
-    total: '21428 MATIC', //1Matic=1.4$
-    ratio: 15.5,//1 TRYE=0.09$
-    min: 214.28, //300$
-    max: 357.14, //500$
-    maxTier1: 214.28, //300$
-    maxTier2: 285.71, //400$
-    maxTier3: 357.1, //500$
+    totalSupply: '200,000,000 TRY',
+    total: '17647 MATIC', //1Matic=1.7$
+    ratio: 18.8,//1 TRY=0.09$
+    min: 176.47, //300$
+    max: 294.11, //500$
+    maxTier1: 176.47, //300$
+    maxTier2: 235.29, //400$
+    maxTier3: 294.11, //500$
     access: 'Private',
     network: polygonNetwork,
-    distribution: '33% on TGE, then 33% monthly over 2 months',
+    distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637330400,
-    endAt: 1737330400,
-    claimAt: 1737330400,
+    endAt: 1637334000,
+    claimAt: 1637769600,
     startDate: '2PM UTC 19th Nov, 2021',
   },
+
+
   {
     pid: 13,
+    poolId: 3,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Torekko',
+    symbol: 'TRK-PBR',
+    description: `TRK/BNB`,
+    introduce: `Torekko is an ecosystem that allows users to acquire NFT collectibles representing characters, places or entities from the world of Japanese animation with real licences. The project is based on the Bsc and Eth blockchain (BEP-20 / ERC-721).`,
+    website: 'https://torekko.com/',
+    twitter: 'https://twitter.com/torekkocom',
+    telegram: 'https://t.me/torekko',
+    whitepaper:
+      'https://docsend.com/view/s3nnspuswq6w9yyq/d/h5v7983cv274w9u6',
+    tokenSymbol: 'TRK',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/torekko.png',
+    totalSupply: '100,000,000 TRK',
+    total: '76.9 BNB',// 1BNB = 650$
+    ratio: 5000, //token price 0.13, 1BNB = 400$
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '34% on TGE, then 33% monthly over 2 months',
+    startAt: 1637762400,
+    endAt: 1637766000,
+    claimAt: 0,
+    startDate: '2PM UTC 24th Nov',
+  },
+
+  {
+    pid: 14,
+    poolId: 3,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Cheesus DeFi',
+    symbol: 'DRATE-PBR',
+    description: `DRATE/BNB`,
+    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
+    website: 'https://defirating.finance/',
+    twitter: 'https://twitter.com/CheesusDeFi',
+    telegram: 'https://t.me/cheesus_MAIN_eng',
+    whitepaper:
+      'https://168aggregator.notion.site/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
+    tokenSymbol: 'DRATE',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/chessus.png',
+    totalSupply: '200,000,000 DRATE',
+    total: '76.9 BNB',// 1BNB = 650$
+    ratio: 17150, //token price 0.0379$, 
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1637848800,
+    endAt: 1637852400,
+    claimAt: 0,
+    startDate: '2PM UTC 25th Nov',
+  },
+  {
+    pid: 15,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -750,23 +841,23 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/adaswap.PNG',
     totalSupply: '16,500,000,000 ASW',
-    total: '100 BNB',
-    ratio: 0, // 1BNB = 500$
-    min: 0.6, //300$
-    max: 1, //500$
-    maxTier1: 0.6, //300$
-    maxTier2: 0.8, //400$
-    maxTier3: 1, //500$
+    total: '76.9 BNB',// 1BNB = 650$
+    ratio: 0, //
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TBA',
-    startAt: 1636988106,
+    startAt: 1640883600,
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
   },
   {
-    pid: 14,
+    pid: 16,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -798,63 +889,13 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: 'TBA',
-    startAt: 1636045200,
+    startAt: 1640883600,
     endAt: 1736045200,
     claimAt: 0,
     startDate: "TBA"
   },
-
-
-
   {
-    pid: 15,
-    poolId: 3,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'Cheesus DeFi and NFT Rating Tool',
-    symbol: 'DRATE-PBR',
-    description: `DRATE/BNB`,
-    introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
-    website: 'https://defirating.finance/',
-    twitter: 'https://twitter.com/CheesusDeFi',
-    telegram: 'https://t.me/cheesus_MAIN_eng',
-    whitepaper:
-      'https://168aggregator.notion.site/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
-    tokenSymbol: 'DRATE',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/defirate.png',
-    totalSupply: '200,000,000 DRATE',
-    total: '125 BNB',
-    ratio: 10554, //token price 0.0379, 1BNB = 400$
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1637848800,
-    endAt: 1637852400,
-    claimAt: 0,
-    startDate: '2PM UTC 25th Nov',
-  },
-
-  {
-    pid: 16,
+    pid: 17,
     poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -893,14 +934,14 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: 'TBA',
-    startAt: 1636940091,
+    startAt: 1640883600,
     endAt: 1736940091,
     claimAt: 0,
     startDate: 'TBA',
   },
 
   {
-    pid: 17,
+    pid: 18,
     poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -943,6 +984,53 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: '2PM UTC 29th Nov',
+  },
+
+  {
+    pid: 19,
+    poolId: 3,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'WidiLand',
+    symbol: 'WIDI-PBR',
+    description: `WIDI/BNB`,
+    introduce: `WidiLand is an NFT Game started in June 2021, aiming to become a globally well-known social networking game.`,
+    website: 'https://widiland.com/',
+    twitter: 'https://twitter.com/WidiLand/',
+    telegram: 'https://t.me/widilandglobal',
+    whitepaper:
+      'https://docs.widiland.com/widiland-1/',
+    tokenSymbol: 'WIDI',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/widiland.png',
+    totalSupply: '400,000,000 WIDI',
+    total: '61.5 BNB',// 1BNB = 650$
+    ratio: 0, //token price , 1BNB = 400$
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '34% on TGE, then 33% monthly over 2 months',
+    startAt: 1638280800,
+    endAt: 1638284400,
+    claimAt: 0,
+    startDate: '2PM UTC 30th Nov',
   },
   // {
   //   pid: 17,
