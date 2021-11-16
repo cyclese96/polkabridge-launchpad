@@ -720,7 +720,7 @@ export const supportedPools = [
 
   {
     pid: 13,
-    poolId: 3,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -797,7 +797,7 @@ export const supportedPools = [
     icon: '/img/tokens/chessus.png',
     totalSupply: '200,000,000 DRATE',
     total: '76.9 BNB',// 1BNB = 650$
-    ratio: 17150, //token price 0.0379$, 
+    ratio: 17150, //token price 0.038$, 
     min: 0.46, //300$
     max: 0.76, //500$
     maxTier1: 0.46, //300$
@@ -805,10 +805,10 @@ export const supportedPools = [
     maxTier3: 0.76, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: 'TBA',
+    distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
     startAt: 1637848800,
     endAt: 1637852400,
-    claimAt: 0,
+    claimAt: 1638540000,
     startDate: '2PM UTC 25th Nov',
   },
   {
@@ -888,7 +888,7 @@ export const supportedPools = [
     maxTier3: 0.233,//700$
     access: 'Private',
     network: ethereumNetwork,
-    distribution: 'TBA',
+    distribution: '50% TGE, 25% per month in next 2 months',
     startAt: 1640883600,
     endAt: 1736045200,
     claimAt: 0,
@@ -896,7 +896,7 @@ export const supportedPools = [
   },
   {
     pid: 17,
-    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
+    poolId: 7,// add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -988,7 +988,7 @@ export const supportedPools = [
 
   {
     pid: 19,
-    poolId: 3,
+    poolId: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -1018,7 +1018,7 @@ export const supportedPools = [
     icon: '/img/tokens/widiland.png',
     totalSupply: '400,000,000 WIDI',
     total: '61.5 BNB',// 1BNB = 650$
-    ratio: 0, //token price , 1BNB = 400$
+    ratio: 16250, //token price 0.04, 1BNB = 650$
     min: 0.46, //300$
     max: 0.76, //500$
     maxTier1: 0.46, //300$
