@@ -653,13 +653,13 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/playmon.png',
     totalSupply: '1,000,000,000 PYM',
-    total: '29411 MATIC', //1Matic=1.7$,1 PYM = 0.038 USD
-    ratio: 44.7,//0.038$
-    min: 176.47, //300$
-    max: 294.11, //500$
-    maxTier1: 176.47, //300$
-    maxTier2: 235.29, //400$
-    maxTier3: 294.11, //500$
+    total: '31250 MATIC', //1Matic=1.6$,1 PYM = 0.038 USD
+    ratio: 42.1,//0.038$
+    min: 187.5, //300$
+    max: 312.5, //500$
+    maxTier1: 187.5, //300$
+    maxTier2: 250, //400$
+    maxTier3: 312.5, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% during TGE, 50% 1 month after TGE',
@@ -667,6 +667,7 @@ export const supportedPools = [
     endAt: 1637247600,
     claimAt: 1637589600,
     startDate: '2PM UTC 18th Nov',
+    claimTimeArr: [1637589600, 1640106000]
   },
 
 
@@ -715,6 +716,7 @@ export const supportedPools = [
     endAt: 1637334000,
     claimAt: 1637769600,
     startDate: '2PM UTC 19th Nov, 2021',
+    claimTimeArr: [1637589600, 1640278800]
   },
 
 
