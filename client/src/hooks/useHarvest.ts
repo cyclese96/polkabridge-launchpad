@@ -11,12 +11,13 @@ const useHarvest = () => {
     const pbr = usePolkaBridge()
     // const launchpadContract =  network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleHarvest = useCallback(
-        async (pid: number, launchpadContract: any) => {
+        async (pid: number, launchpadContract: any, network: string) => {
             try {
                 const txHash = await harvest(
                     launchpadContract,
                     pid,
                     account,
+                    network
                 )
                 console.log(txHash)
                 return txHash
