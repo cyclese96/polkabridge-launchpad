@@ -672,7 +672,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (ethValue && parseFloat(ethValue) > 0) {
                       setPendingTx(true)
-                      var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, currentLaunchadContractInstance(network))
+                      var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, currentLaunchadContractInstance(network), network)
                       setPendingTx(false)
                       if (tx) {
                         setSuccessTx(true)
@@ -746,7 +746,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadContractInstance(network))
+                      var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadContractInstance(network), network)
                       setPendingHarvestTx(false)
                       if (tx) {
                         console.log('harvest ' + tx)

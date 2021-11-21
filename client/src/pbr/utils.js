@@ -633,7 +633,7 @@ const convertToWei = (amount) => {
   return new BigNumber(_amount).times(new BigNumber(10).pow(18)).toString()
 }
 
-export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account) => {
+export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, account, network) => {
   // console.log('maticTest:  ', { launchpadContract })
   try {
     const signedData = await signedIdoString(account)
@@ -643,6 +643,21 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
     const r = signedData.r;
     const s = signedData.s;
 
+    if (network === polygonNetwork) {
+      return launchpadContract.methods
+        .purchaseIDO(
+          stakeAmount,
+          pid,
+          v,
+          r,
+          s
+        )
+        .send({ from: account, value: convertToWei(ethValue), gasPrice: 100000000000 })
+        .on('transactionHash', (tx) => {
+          console.log('joinpool', tx)
+          return tx.transactionHash
+        })
+    }
     return launchpadContract.methods
       .purchaseIDO(
         stakeAmount,
@@ -663,7 +678,20 @@ export const joinpool = async (launchpadContract, pid, stakeAmount, ethValue, ac
 
 }
 
-export const harvest = async (launchpadContract, pid, account) => {
+export const harvest = async (launchpadContract, pid, account, network) => {
+
+  if (network === polygonNetwork) {
+    return launchpadContract.methods
+      .claimToken(
+        pid
+      )
+      .send({ from: account, gasPrice: 100000000000 })
+      .on('transactionHash', (tx) => {
+        console.log(tx)
+        return tx.transactionHash
+      })
+  }
+
   return launchpadContract.methods
     .claimToken(
       pid
