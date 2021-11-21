@@ -411,7 +411,7 @@ export const supportedPools = [
     endAt: 1633964400,//real 1633964400
     claimAt: 1634648400,//real 1634648400
     startDate: "2PM UTC 11th Oct",
-    claimTimeArr: [1634648400, 1637254800]
+    claimTimeArr: [1634648400, 1637280000]
   },
   {
     pid: 3,
@@ -653,13 +653,13 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/playmon.png',
     totalSupply: '1,000,000,000 PYM',
-    total: '31250 MATIC', //1Matic=1.6$,1 PYM = 0.038 USD
-    ratio: 42.1,//0.038$
-    min: 187.5, //300$
-    max: 312.5, //500$
-    maxTier1: 187.5, //300$
-    maxTier2: 250, //400$
-    maxTier3: 312.5, //500$
+    total: '32258 MATIC', //1Matic=1.55$,1 PYM = 0.038 USD
+    ratio: 40.78,//0.038$
+    min: 193.5, //300$
+    max: 322.5, //500$
+    maxTier1: 193.5, //300$
+    maxTier2: 258, //400$
+    maxTier3: 322.5, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% during TGE, 50% 1 month after TGE',
@@ -702,13 +702,13 @@ export const supportedPools = [
     tokenExplorer: 'https://polygonscan.com/address',
     icon: '/img/tokens/tryhards.png',
     totalSupply: '200,000,000 TRY',
-    total: '17647 MATIC', //1Matic=1.7$
-    ratio: 18.8,//1 TRY=0.09$
-    min: 176.47, //300$
-    max: 294.11, //500$
-    maxTier1: 176.47, //300$
-    maxTier2: 235.29, //400$
-    maxTier3: 294.11, //500$
+    total: '19480 MATIC', //1Matic=1.54$
+    ratio: 17.1,//1 TRY=0.09$
+    min: 194.8, //300$
+    max: 324.6, //500$
+    maxTier1: 194.8, //300$
+    maxTier2: 259.7, //400$
+    maxTier3: 324.6, //500$
     access: 'Private',
     network: polygonNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
@@ -716,7 +716,7 @@ export const supportedPools = [
     endAt: 1637334000,
     claimAt: 1637769600,
     startDate: '2PM UTC 19th Nov, 2021',
-    claimTimeArr: [1637589600, 1640278800]
+    claimTimeArr: [1637769600, 1640304000, 1642982400]
   },
 
 
@@ -753,11 +753,11 @@ export const supportedPools = [
     totalSupply: '100,000,000 TRK',
     total: '76.9 BNB',// 1BNB = 650$
     ratio: 5000, //token price 0.13, 1BNB = 400$
-    min: 0.46, //300$
-    max: 0.76, //500$
-    maxTier1: 0.46, //300$
-    maxTier2: 0.61, //400$
-    maxTier3: 0.76, //500$
+    min: 0.46, //100$
+    max: 0.76, //300$
+    maxTier1: 0.46, //100$
+    maxTier2: 0.61, //200$
+    maxTier3: 0.76, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
@@ -813,9 +813,58 @@ export const supportedPools = [
     claimAt: 1638540000,
     startDate: '2PM UTC 25th Nov',
   },
+
+
+
   {
     pid: 15,
-    poolId: 1,
+    poolId: 5,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpBscAddresses: {
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'PeopleZ',
+    symbol: 'LEZ-PBR',
+    description: `LEZ/BNB`,
+    introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
+    website: 'https://www.peoplez.io/',
+    twitter: 'https://twitter.com/Peoplez_io',
+    telegram: 'https://t.me/Peoplez_io',
+    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
+    tokenSymbol: 'LEZ',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/peoplez.svg',
+    totalSupply: '18,000,000 LEZ',
+    total: '125 BNB', //1BNB = 400$
+    ratio: 0,
+    min: 0.75, //300$
+    max: 1.25, //500$
+    maxTier1: 0.75, //300$
+    maxTier2: 1, //400$
+    maxTier3: 1.25, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: 'TBA',
+    startAt: 1638194400,
+    endAt: 1734569200,
+    claimAt: 0,
+    startDate: '2PM UTC 29th Nov',
+  },
+
+  {
+    pid: 16,
+    poolId: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -831,20 +880,21 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'ADASwap',
-    symbol: 'ASW-PBR',
-    description: `ASW/BNB`,
-    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
-    website: 'https://adaswap.app/',
-    twitter: 'https://twitter.com/adaswapapp',
-    telegram: 'https://t.me/adaswapcommunity',
-    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
-    tokenSymbol: 'ASW',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/adaswap.PNG',
-    totalSupply: '16,500,000,000 ASW',
-    total: '76.9 BNB',// 1BNB = 650$
-    ratio: 0, //
+    name: 'WidiLand',
+    symbol: 'WIDI-PBR',
+    description: `WIDI/BNB`,
+    introduce: `WidiLand is an NFT Game started in June 2021, aiming to become a globally well-known social networking game.`,
+    website: 'https://widiland.com/',
+    twitter: 'https://twitter.com/WidiLand/',
+    telegram: 'https://t.me/widilandglobal',
+    whitepaper:
+      'https://docs.widiland.com/widiland-1/',
+    tokenSymbol: 'WIDI',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/widiland.png',
+    totalSupply: '400,000,000 WIDI',
+    total: '61.5 BNB',// 1BNB = 650$
+    ratio: 16250, //token price 0.04, 1BNB = 650$
     min: 0.46, //300$
     max: 0.76, //500$
     maxTier1: 0.46, //300$
@@ -852,49 +902,11 @@ export const supportedPools = [
     maxTier3: 0.76, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1640883600,
-    endAt: 1734569200,
+    distribution: '34% on TGE, then 33% monthly over 2 months',
+    startAt: 1638280800,
+    endAt: 1638284400,
     claimAt: 0,
-    startDate: 'TBA',
-  },
-  {
-    pid: 16,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-    },
-    lpExplorer: 'https://etherscan.io/address',
-    name: 'SolClout',
-    symbol: 'SOLC-PBR',
-    description: `SOLC/ETH`,
-    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
-    website: 'https://solclout.com/',
-    twitter: 'https://twitter.com/solclout',
-    telegram: 'https://t.me/solclout',
-    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
-    tokenSymbol: 'SOLC',
-    tokenExplorer: 'https://etherscan.io/token',
-    icon: '/img/tokens/solc.png',
-    totalSupply: '1,000,000,000 SOLC',
-    total: '33 ETH',//1ETH =3k$
-    ratio: 0,
-    min: 0.166,//500$
-    max: 0.233,//700$
-    maxTier1: 0.166,//500$
-    maxTier2: 0.2,//600$
-    maxTier3: 0.233,//700$
-    access: 'Private',
-    network: ethereumNetwork,
-    distribution: '50% TGE, 25% per month in next 2 months',
-    startAt: 1640883600,
-    endAt: 1736045200,
-    claimAt: 0,
-    startDate: "TBA"
+    startDate: '2PM UTC 30th Nov',
   },
   {
     pid: 17,
@@ -944,7 +956,6 @@ export const supportedPools = [
 
   {
     pid: 18,
-    poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -952,45 +963,38 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'PeopleZ',
-    symbol: 'LEZ-PBR',
-    description: `LEZ/BNB`,
-    introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
-    website: 'https://www.peoplez.io/',
-    twitter: 'https://twitter.com/Peoplez_io',
-    telegram: 'https://t.me/Peoplez_io',
-    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
-    tokenSymbol: 'LEZ',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/peoplez.svg',
-    totalSupply: '18,000,000 LEZ',
-    total: '125 BNB', //1BNB = 400$
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'SolClout',
+    symbol: 'SOLC-PBR',
+    description: `SOLC/ETH`,
+    introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
+    website: 'https://solclout.com/',
+    twitter: 'https://twitter.com/solclout',
+    telegram: 'https://t.me/solclout',
+    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
+    tokenSymbol: 'SOLC',
+    tokenExplorer: 'https://etherscan.io/token',
+    icon: '/img/tokens/solc.png',
+    totalSupply: '1,000,000,000 SOLC',
+    total: '33 ETH',//1ETH =3k$
     ratio: 0,
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
+    min: 0.166,//500$
+    max: 0.233,//700$
+    maxTier1: 0.166,//500$
+    maxTier2: 0.2,//600$
+    maxTier3: 0.233,//700$
     access: 'Private',
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1638194400,
-    endAt: 1734569200,
+    network: ethereumNetwork,
+    distribution: '50% TGE, 25% per month in next 2 months',
+    startAt: 1640883600,
+    endAt: 1736045200,
     claimAt: 0,
-    startDate: '2PM UTC 29th Nov',
+    startDate: "TBA"
   },
-
   {
     pid: 19,
-    poolId: 7,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -1006,21 +1010,20 @@ export const supportedPools = [
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'WidiLand',
-    symbol: 'WIDI-PBR',
-    description: `WIDI/BNB`,
-    introduce: `WidiLand is an NFT Game started in June 2021, aiming to become a globally well-known social networking game.`,
-    website: 'https://widiland.com/',
-    twitter: 'https://twitter.com/WidiLand/',
-    telegram: 'https://t.me/widilandglobal',
-    whitepaper:
-      'https://docs.widiland.com/widiland-1/',
-    tokenSymbol: 'WIDI',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/widiland.png',
-    totalSupply: '400,000,000 WIDI',
-    total: '61.5 BNB',// 1BNB = 650$
-    ratio: 16250, //token price 0.04, 1BNB = 650$
+    name: 'ADASwap',
+    symbol: 'ASW-PBR',
+    description: `ASW/BNB`,
+    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
+    website: 'https://adaswap.app/',
+    twitter: 'https://twitter.com/adaswapapp',
+    telegram: 'https://t.me/adaswapcommunity',
+    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
+    tokenSymbol: 'ASW',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/adaswap.PNG',
+    totalSupply: '16,500,000,000 ASW',
+    total: '76.9 BNB',// 1BNB = 650$
+    ratio: 0, //
     min: 0.46, //300$
     max: 0.76, //500$
     maxTier1: 0.46, //300$
@@ -1028,11 +1031,11 @@ export const supportedPools = [
     maxTier3: 0.76, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: '34% on TGE, then 33% monthly over 2 months',
-    startAt: 1638280800,
-    endAt: 1638284400,
+    distribution: 'TBA',
+    startAt: 1640883600,
+    endAt: 1734569200,
     claimAt: 0,
-    startDate: '2PM UTC 30th Nov',
+    startDate: 'TBA',
   },
   // {
   //   pid: 17,
