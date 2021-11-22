@@ -30,14 +30,12 @@ import NetworkSelect from './NetworkSelect'
 const useStyles = makeStyles((theme) => ({
   grow: {
     flexGrow: 1,
-
   },
   appBarBackground: {
     boxShadow: 'none',
     backgroundColor: '#100525',
     display: 'flex',
     alignItems: 'center',
-
   },
   menuButton: {
     textTransform: 'none',
@@ -122,6 +120,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2vw',
     color: '#e5e5e5',
     textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   navbarItemsDesktopActive: {
     paddingRight: 10,
@@ -135,6 +136,9 @@ const useStyles = makeStyles((theme) => ({
     fontSize: '1.2vw',
     color: '#e0077d',
     textDecoration: 'none',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   navbarButton: {
     backgroundColor: '#f9f9f9',
