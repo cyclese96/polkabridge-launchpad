@@ -273,7 +273,8 @@ const Launchpad: React.FC = () => {
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                  Your staked amount:{' '}
+                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase:{' '}
@@ -295,7 +296,7 @@ const Launchpad: React.FC = () => {
                     : undefined
                 }
                 onClick={handleJoinPool}
-              // to={`/launchpads/join/${launchpadId}/${poolId}`}
+                // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -385,8 +386,12 @@ const Launchpad: React.FC = () => {
                         <StyledTableLabel>Network</StyledTableLabel>
                         <StyledTableValue>
                           {network === 'bsc'
-                            ? 'Binance Smart Chain' : network === 'polygon' ? "Polygon"
-                              : 'Ethereum'}
+                            ? 'Binance Smart Chain'
+                            : network === 'polygon'
+                            ? 'Polygon'
+                            : network === 'harmony'
+                            ? 'Harmony'
+                            : 'Ethereum'}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
