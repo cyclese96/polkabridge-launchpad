@@ -2,20 +2,15 @@ import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { provider } from 'web3-core'
 import Button from '../../components/Button'
-import Container from '../../components/Container'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-import WalletProviderModal from '../../components/WalletProviderModal'
 import useLaunchpad from '../../hooks/useLaunchpad'
 import useModal from '../../hooks/useModal'
-import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
-import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
+import ReCAPTCHA from "react-google-recaptcha";
 import {
-  getMasterChefContract,
   getProgress,
   getHistory,
   getETHBalance,
@@ -24,22 +19,18 @@ import {
   getUserStakingData,
   getUserInfo,
   fromWei,
-  getStaked,
   formatFloatValue,
   getPoolClaimTimeArr,
 } from '../../pbr/utils'
-import { getContract } from '../../utils/erc20'
-import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-import { Contract } from 'web3-eth-contract'
 import useJoinPool from '../../hooks/useJoinPool'
 import useHarvest from '../../hooks/useHarvest'
 import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
-import Modal from '../../components/Modal'
+
 import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
-import ModalSuccessHarvest2 from '../../components/ModalSuccessHarvest/ModalSuccessHarvest'
+import axios from 'axios'
 
 interface JoinHistory {
   amount: number
@@ -155,26 +146,29 @@ const JoinLaunchpad: React.FC = () => {
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
 
+  const [captchaVerified, setCaptchaVerified] = useState(true);
 
+  const recaptchaRef = React.useRef();
   const currentPoolId = (pid: number, network: string) => {
     const _pid = getPoolId(pid, network)
-    // console.log('ethTest: currentPoolId', _pid)
+
     return _pid;
   }
 
-  const currentLaunchadContractInstance = (_network: string) => {
-    if (network === bscNetwork) {
-      return lpBscContract
-    } else if (network === polygonNetwork) {
-      return lpPolygonContract
-    } else if (network === harmonyNetwork) {
-      return lpHarmonyContract
-    } else if (network === ethereumNetwork) {
-      return lpContract
+  const currentLaunchadAddress = (_network: string) => {
+    if (_network === bscNetwork) {
+      return lpBscAddress
+    } else if (_network === polygonNetwork) {
+      return lpPolygonAddress
+    } else if (_network === harmonyNetwork) {
+      return lpHarmonyAddress
+    } else if (_network === ethereumNetwork) {
+      return lpAddress
     } else {
-      return null
+      return lpAddress;
     }
   }
+
 
   const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
 
@@ -182,7 +176,7 @@ const JoinLaunchpad: React.FC = () => {
       return 0;
     }
 
-    if (_claimTimeArr.length > 1 && parseInt(_userInfoData.harvestInfo.NumberClaimed) < _claimTimeArr.length) {
+    if (_claimTimeArr.length > 1 && parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length) {
 
       return _claimTimeArr[parseInt(_userInfoData.harvestInfo.NumberClaimed)]
 
@@ -207,24 +201,27 @@ const JoinLaunchpad: React.FC = () => {
         userInfoData,
       ] = await Promise.all([
         getIsWhitelist(
-          currentLaunchadContractInstance(network),
+          currentLaunchadAddress(network),
           currentPoolId(pid, network),
           stakedAmount,
-          account
+          account,
+          network
         ),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(currentLaunchadContractInstance(network), currentPoolId(pid, network), startAt, endAt),
+        getProgress(currentLaunchadAddress(network), currentPoolId(pid, network), startAt, endAt, network),
         getPurchasesAmount(
-          currentLaunchadContractInstance(network),
+          currentLaunchadAddress(network),
           currentPoolId(pid, network),
           account,
+          network
         ),
         getUserStakingData(currentPoolId(pid, network), account),
         getUserInfo(
-          currentLaunchadContractInstance(network),
+          currentLaunchadAddress(network),
           currentPoolId(pid, network),
           account,
+          network
         ),
       ])
       setLoading(false)
@@ -237,7 +234,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('ethTest: tokenPurchased   ', tokenPurchased)
       // console.log('ethTest: userInfo--->  ', userInfoData)
       // console.log('ethTest: claimTimes  ', claimTimeArr)
-      console.log('ethTest: isWhiteList  ', newIsWhitelist)
+      // console.log('ethTest: isWhiteList  ', newIsWhitelist)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -405,16 +402,18 @@ const JoinLaunchpad: React.FC = () => {
   const reset = useCallback(async () => {
     const newETHBalance = await getETHBalance(ethereum, account)
     const newHistory = await getHistory(account)
-    const newProgress = await getProgress(lpContract, currentPoolId(pid, network))
+    const newProgress = await getProgress(currentLaunchadAddress(network), currentPoolId(pid, network), network)
     const newPurchasedAmount = await getPurchasesAmount(
-      lpContract,
+      currentLaunchadAddress(network),
       currentPoolId(pid, network),
       account,
+      network
     )
     const userInfoData = await getUserInfo(
-      currentLaunchadContractInstance(network),
+      currentLaunchadAddress(network),
       currentPoolId(pid, network),
       account,
+      network
     )
 
     setETHBalance(newETHBalance)
@@ -536,6 +535,30 @@ const JoinLaunchpad: React.FC = () => {
       }
     }
 
+
+  }
+
+  const handleCaptchaVerification = async (value: string) => {
+
+    try {
+      const verificationStatus = await axios.post(`https://www.google.com/recaptcha/api/siteverify`,
+        { secret: process.env.REACR_APP_CAPTCHA_API?.split('')?.join(''), response: value },
+        {
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
+          }
+        }
+      )
+
+      if (verificationStatus?.data?.['success']) {
+
+        setCaptchaVerified(true)
+      }
+      console.log('captcha verified ', verificationStatus)
+    } catch (error) {
+      console.log('handleCaptchaVerification', error)
+    }
 
   }
 
@@ -666,31 +689,48 @@ const JoinLaunchpad: React.FC = () => {
                 </StyledInputContainer>
                 <Spacer size="md" />
 
-                <Button
-                  disabled={isButtonDisable()}
-                  text={getJoinButtonText()}
-                  onClick={async () => {
-                    if (ethValue && parseFloat(ethValue) > 0) {
-                      setPendingTx(true)
-                      var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, currentLaunchadContractInstance(network), network)
-                      setPendingTx(false)
-                      if (tx) {
-                        setSuccessTx(true)
-                        onPresentSuccess()
-                        reset()
-                      } else {
-                        onPresentError()
-                      }
-                    }
-                  }}
-                >
-                  {startAt * 1000 > new Date().getTime() && (
-                    <Countdown
-                      date={new Date(startAt * 1000)}
-                      renderer={renderer}
+                {!captchaVerified ? (
+                  <StyledCenterRow>
+                    <ReCAPTCHA
+                      ref={recaptchaRef}
+                      size="normal"
+                      type='image'
+                      sitekey={process.env.REACR_APP_CAPTCHA_API?.split('')?.join('')}
+                      onChange={handleCaptchaVerification}
                     />
-                  )}
-                </Button>
+                  </StyledCenterRow>
+                ) : (
+                  <Button
+                    disabled={isButtonDisable()}
+                    text={getJoinButtonText()}
+                    onClick={async () => {
+                      if (ethValue && parseFloat(ethValue) > 0) {
+                        setPendingTx(true)
+                        // const token = recaptchaRef?.current.executeAsync();
+                        // console.log('captcha test ', token)
+                        var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, currentLaunchadAddress(network), network)
+                        setPendingTx(false)
+                        if (tx) {
+                          setSuccessTx(true)
+                          onPresentSuccess()
+                          reset()
+                        } else {
+                          onPresentError()
+                        }
+                      }
+                    }}
+                  >
+                    {startAt * 1000 > new Date().getTime() && (
+                      <Countdown
+                        date={new Date(startAt * 1000)}
+                        renderer={renderer}
+                      />
+                    )}
+                  </Button>
+                )}
+
+
+
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
@@ -746,7 +786,7 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadContractInstance(network), network)
+                      var tx: any = await onHarvest(currentPoolId(pid, network), currentLaunchadAddress(network), network)
                       setPendingHarvestTx(false)
                       if (tx) {
                         console.log('harvest ' + tx)

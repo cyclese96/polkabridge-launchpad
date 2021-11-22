@@ -1,31 +1,30 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { provider } from 'web3-core'
+// import { provider } from 'web3-core'
 import Button from '../../components/Button'
-import Container from '../../components/Container'
+// import Container from '../../components/Container'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-import WalletProviderModal from '../../components/WalletProviderModal'
+// import WalletProviderModal from '../../components/WalletProviderModal'
 import useLaunchpad from '../../hooks/useLaunchpad'
-import useModal from '../../hooks/useModal'
-import useRedeem from '../../hooks/useRedeem'
+// import useModal from '../../hooks/useModal'
+// import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
-import useBulkPairData from '../../hooks/useBulkPairData'
+// import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
 import {
   formatFloatValue,
+  formattedNetworkName,
   fromWei,
-  getMasterChefContract,
   getNetworkName,
   getProgress,
-  getStaked,
   getUserStakingData,
 } from '../../pbr/utils'
-import { getContract } from '../../utils/erc20'
-import { getBalanceNumber } from '../../utils/formatBalance'
+// import { getContract } from '../../utils/erc20'
+// import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-import { Contract } from 'web3-eth-contract'
+// import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
 import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
@@ -127,38 +126,34 @@ const Launchpad: React.FC = () => {
     return getPoolId(pid, network)
   }
 
-  const currentLaunchpadContract = (_network: string) => {
-    console.log('harmonyTest: lp network', network)
+  const currentLaunchadAddress = (_network: string) => {
     if (_network === bscNetwork) {
-      return lpBscContract
-    } else if (_network === harmonyNetwork) {
-      return lpHarmonyContract
+      return lpBscAddress
     } else if (_network === polygonNetwork) {
-      return lpPolygonContract
+      return lpPolygonAddress
+    } else if (_network === harmonyNetwork) {
+      return lpHarmonyAddress
+    } else if (_network === ethereumNetwork) {
+      return lpAddress
     } else {
-      return lpContract
+      return lpAddress;
     }
   }
+
   useEffect(() => {
-    // console.log('harmonyTest: launchpad contract ', { lpHarmonyAddress, lpHarmonyContract, lpExplorer })
-    // console.log('launchpad contract ', { lpPolygonAddress, lpPolygonContract, lpExplorer })
-    // console.log('launchpad contract ', { lpAddress, lpContract, lpExplorer })
+
     async function fetchData() {
       const newProgress = await getProgress(
-        currentLaunchpadContract(network),
+        currentLaunchadAddress(network),
         currentPoolId(pid, network),
         startAt,
-        endAt
+        endAt,
+        network
       )
-      // const [stakeData, stakeDataPolygon] = await Promise.all([
-      //   getUserStakingData(pid, account),
-      //   getStaked(pid, account)
-      // ])
+
       const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account)
 
-      // console.log('progress data ', newProgress)
-      // console.log('stake data polygon', stakeDataPolygon)
-      // console.log('stake data ', stakedTokens)
+
       setProgress(newProgress)
 
       setStakedAmount(stakedTokens)
@@ -203,13 +198,14 @@ const Launchpad: React.FC = () => {
     }
   }
   const handleJoinPool = () => {
-    const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' : network === polygonNetwork ? "Polygon" : 'Ethereum'
+
+    const _networkName = formattedNetworkName(network);
+
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
       )
-      // return
+      return
     }
     history.push(`/launchpads/join/${launchpadId}/${poolId}`)
   }

@@ -22,8 +22,6 @@ const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
   const rows = launchpads;
   const defaultLp = getDefaultLaunchpads()
-  // console.log('launchpads')
-  // console.log(launchpads)
 
   return (
     <StyledCards>
@@ -92,30 +90,31 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const [progress, setProgress] = useState<BigNumber>()
 
-  const currentLaunchadContractInstance = (_network: string) => {
+  const currentLaunchadAddress = (_network: string) => {
     if (_network === bscNetwork) {
-      return launchpad.lpBscContract
+      return launchpad.lpBscAddress
     } else if (_network === polygonNetwork) {
-      return launchpad.lpPolygonContract
+      return launchpad.lpPolygonAddress
     } else if (_network === harmonyNetwork) {
-      return launchpad.lpHarmonyContract
+      return launchpad.lpHarmonyAddress
     } else if (_network === ethereumNetwork) {
-      return launchpad.lpContract
+      return launchpad.lpAddress
     } else {
-      return null
+      return launchpad.lpAddress;
     }
   }
 
   useEffect(() => {
     async function fetchData() {
+
       const newProgress = await getProgress(
-        currentLaunchadContractInstance(launchpad.network),
+        currentLaunchadAddress(launchpad.network),
         getPoolId(launchpad.pid, launchpad.network),
         launchpad.startAt,
-        launchpad.endAt
-      )
-      console.log('getProgress fetched profress ', { prog: newProgress?.toString(), pid: getPoolId(launchpad.pid, launchpad.network), net: launchpad.network, lp: launchpad.lpHarmonyContract, lps: launchpad })
-      setProgress(newProgress)
+        launchpad.endAt,
+        launchpad.network
+      );
+      setProgress(newProgress);
     }
     if (launchpad) {
       fetchData()
@@ -137,9 +136,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const handleLaunchpadClick = (launchpad: any) => {
     const _networkName = formattedNetworkName(launchpad.network)
-    // launchpad.network === bscNetwork ? 'Binance Smart Chain' : launchpad.network === polygonNetwork ? "Polygon" : 'Ethereum'
-    // const _yourNetwork = getNetworkName(chainId) === bscNetwork ? 'Binance Smart Chain' : 'Ethereum';
-    // alert(`your network: ${getNetworkName(chainId)}  ${launchpad.network}  localstoreage:  ${localStorage.chainId}`)
+
     if (!account) {
       alert(
         `Please connect your wallet to proceed`,

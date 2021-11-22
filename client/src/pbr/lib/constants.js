@@ -56,7 +56,7 @@ export const contractAddresses = {
 }
 
 
-const testing = false;
+const testing = true;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -485,11 +485,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1636253020,
-    endAt: 1634907600,
+    startAt: 1637388370,
+    endAt: 1677388370,
     claimAt: 1636253020,//1635831420,//1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-    claimTimeArr: [1635249600, 1637859600, 1640451600]
+    claimTimeArr: [1637388370, 1637859600, 1640451600]
 
   },
   {
@@ -527,11 +527,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '100% on TGE',
-    startAt: 1635781661,
-    endAt: 1635865200,
+    startAt: 1637388370,
+    endAt: 1667388370,
     claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
-    claimTimeArr: [1636171200]
+    claimTimeArr: [1637388370]
   },
 
   {
@@ -616,11 +616,11 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
-    startAt: 1636725600,//1636725540
-    endAt: 1636729200,
+    startAt: 1637567528,//1636725540
+    endAt: 1667567528,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
-    claimTimeArr: [1637069400, 1639587600]
+    claimTimeArr: [1637567528, 1639587600]
   },
 
   {
@@ -1037,52 +1037,50 @@ export const supportedPools = [
     claimAt: 0,
     startDate: 'TBA',
   },
-  // {
-  //   pid: 17,
-  //   poolId: 2,
-  //   lpAddresses: {
-  //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-  //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-  //   },
-  //   tokenAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
-  //     1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
-  //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
-  //   },
-  //   lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   name: 'HarmonyLauncher Private Pool',
-  //   symbol: 'IDO-PBR',
-  //   description: `IDO/ONE`,
-  //   introduce: `Harmony Launcher is the first Decentralized IGO + IDO Incubation Launchpad on Harmony Blockchain`,
-  //   website: 'https://harmonylauncher.io/',
-  //   twitter: 'https://twitter.com/Harmonylauncher',
-  //   telegram: 'https://t.me/Harmonylauncher',
-  //   whitepaper: '',
-  //   tokenSymbol: 'IDO',
-  //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   icon: '/img/tokens/harmonylauncher.png',
-  //   totalSupply: '100,000,000 IDO',
-  //   total: '1000000 ONE',
-  //   ratio: 100,
-  //   min: 5, //300$
-  //   max: 10, //500$
-  //   maxTier1: 5, //300$
-  //   maxTier2: 7, //400$
-  //   maxTier3: 10, //500$
-  //   access: 'Public',
-  //   network: harmonyNetwork,
-  //   distribution: 'TBA',
-  //   startAt: 1533939514,
-  //   endAt: 1734569200,
-  //   claimAt: 1533939514,
-  //   startDate: '11th November',
-  // claimTimeArr: [1533939514, 1639029546]
-  // }
+  {
+    pid: 17,
+    poolId: 2,
+    // lpAddresses: {
+    //   1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+    //   42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+    // },
+    tokenAddresses: {
+      1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
+      1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
+    },
+    lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
+      1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
+      1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
+    },
+    lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+    name: 'HarmonyLauncher Private Pool',
+    symbol: 'IDO-PBR',
+    description: `IDO/ONE`,
+    introduce: `Harmony Launcher is the first Decentralized IGO + IDO Incubation Launchpad on Harmony Blockchain`,
+    website: 'https://harmonylauncher.io/',
+    twitter: 'https://twitter.com/Harmonylauncher',
+    telegram: 'https://t.me/Harmonylauncher',
+    whitepaper: '',
+    tokenSymbol: 'IDO',
+    tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
+    icon: '/img/tokens/harmonylauncher.png',
+    totalSupply: '100,000,000 IDO',
+    total: '1000000 ONE',
+    ratio: 100,
+    min: 5, //300$
+    max: 10, //500$
+    maxTier1: 5, //300$
+    maxTier2: 7, //400$
+    maxTier3: 10, //500$
+    access: 'Public',
+    network: harmonyNetwork,
+    distribution: 'TBA',
+    startAt: 1637388370,
+    endAt: 1734569200,
+    claimAt: 1637561023,
+    startDate: '11th November',
+    claimTimeArr: [1637561023, 1639029546]
+  }
 
 ]
 // given pid and network name -> launchpad pool id
