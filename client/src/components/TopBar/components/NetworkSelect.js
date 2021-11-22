@@ -31,7 +31,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: 'white',
     '&:hover': {
       backgroundColor: 'grey',
-      color: '#100525'
+      color: '#100525',
     },
   },
   main: {
@@ -40,12 +40,16 @@ const useStyles = makeStyles((theme) => ({
     border: '1px solid white',
     borderRadius: 60,
     paddingLeft: 10,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingTop: 2,
   },
 }))
-export default function NetworkSelect({ }) {
+export default function NetworkSelect({}) {
   const classes = useStyles()
 
-  const { chainId, status, } = useNetwork()
+  const { chainId, status } = useNetwork()
   const { account } = useWallet()
 
   useEffect(() => {
@@ -54,26 +58,30 @@ export default function NetworkSelect({ }) {
       return
     }
     if (status === 'connected') {
-
       handleChange(chainId)
     }
   }, [chainId, status])
 
   const handleChange = (_selected) => {
-
     if ([config.bscChain, config.bscChainTestent].includes(_selected)) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? bscNetworkDetail.mainnet
           : bscNetworkDetail.testnet,
       )
-    } else if ([config.polygon_chain_mainnet, config.polygon_chain_testnet].includes(_selected)) {
+    } else if (
+      [config.polygon_chain_mainnet, config.polygon_chain_testnet].includes(
+        _selected,
+      )
+    ) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? polygonNetworkDetail.mainnet
           : polygonNetworkDetail.testnet,
       )
-    } else if ([config.hmyChainMainnet, config.hmyChainTestnet].includes(_selected)) {
+    } else if (
+      [config.hmyChainMainnet, config.hmyChainTestnet].includes(_selected)
+    ) {
       setupNetwork(
         currentConnection === 'mainnet'
           ? harmonyNetworkDetail.mainnet
@@ -89,7 +97,7 @@ export default function NetworkSelect({ }) {
   }
   return (
     <div>
-      <FormControl variant='standard' className={classes.root} >
+      <FormControl variant="standard" className={classes.root}>
         {console.log('testConnect: ', chainId)}
         <Select
           className={classes.main}
@@ -98,22 +106,47 @@ export default function NetworkSelect({ }) {
           disableUnderline
         >
           <MenuItem
-            value={currentConnection === 'testnet' ? config.chainIdTestnet : config.chainId}
+            value={
+              currentConnection === 'testnet'
+                ? config.chainIdTestnet
+                : config.chainId
+            }
             className={classes.buttonDrop}
           >
-            <span>Ethereum</span>
+            <span style={{ paddingLeft: 7 }}>Ethereum</span>
             <img className={classes.imgIcon} src="/img/tokens/eth.png" />
           </MenuItem>
-          <MenuItem value={currentConnection === 'testnet' ? config.bscChainTestent : config.bscChain} className={classes.buttonDrop}>
-            <span>Binance Smart Chain</span>
+          <MenuItem
+            value={
+              currentConnection === 'testnet'
+                ? config.bscChainTestent
+                : config.bscChain
+            }
+            className={classes.buttonDrop}
+          >
+            <span style={{ paddingLeft: 7 }}>Binance Smart Chain</span>
             <img className={classes.imgIcon} src="/img/tokens/bnb.png" />
           </MenuItem>
-          <MenuItem value={currentConnection === 'testnet' ? config.polygon_chain_testnet : config.polygon_chain_mainnet} className={classes.buttonDrop}>
-            <span>Polygon</span>
+          <MenuItem
+            value={
+              currentConnection === 'testnet'
+                ? config.polygon_chain_testnet
+                : config.polygon_chain_mainnet
+            }
+            className={classes.buttonDrop}
+          >
+            <span style={{ paddingLeft: 7 }}>Polygon</span>
             <img className={classes.imgIcon} src="/img/tokens/polygon.png" />
           </MenuItem>
-          <MenuItem value={currentConnection === 'testnet' ? config.hmyChainTestnet : config.hmyChainMainnet} className={classes.buttonDrop}>
-            <span>Harmony</span>
+          <MenuItem
+            value={
+              currentConnection === 'testnet'
+                ? config.hmyChainTestnet
+                : config.hmyChainMainnet
+            }
+            className={classes.buttonDrop}
+          >
+            <span style={{ paddingLeft: 7 }}>Harmony</span>
             <img className={classes.imgIcon} src="/img/tokens/one.png" />
           </MenuItem>
         </Select>
