@@ -665,9 +665,9 @@ export const supportedPools = [
     distribution: '50% during TGE, 50% 1 month after TGE',
     startAt: 1637244000,
     endAt: 1637247600,
-    claimAt: 1637589600,
+    claimAt: 1637551800,
     startDate: '2PM UTC 18th Nov',
-    claimTimeArr: [1637589600, 1640106000]
+    claimTimeArr: [1637551800, 1640131200]
   },
 
 
@@ -734,8 +734,8 @@ export const supportedPools = [
       97: '',
     },
     lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+      56: '',
+      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Torekko',
@@ -751,20 +751,21 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/torekko.png',
     totalSupply: '100,000,000 TRK',
-    total: '76.9 BNB',// 1BNB = 650$
-    ratio: 5000, //token price 0.13, 1BNB = 400$
-    min: 0.46, //100$
-    max: 0.76, //300$
-    maxTier1: 0.46, //100$
-    maxTier2: 0.61, //200$
-    maxTier3: 0.76, //300$
+    total: '89.2 BNB',// 1BNB = 560$
+    ratio: 4307.69, //token price 0.13, 1BNB = 560$
+    min: 0.17, //100$
+    max: 0.53, //300$
+    maxTier1: 0.17, //100$
+    maxTier2: 0.35, //200$
+    maxTier3: 0.53, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637762400,
     endAt: 1637766000,
-    claimAt: 0,
+    claimAt: 1638280800,
     startDate: '2PM UTC 24th Nov',
+    claimTimeArr: [1638280800, 1640872800, 1643551200]
   },
 
   {
@@ -847,7 +848,7 @@ export const supportedPools = [
     icon: '/img/tokens/peoplez.svg',
     totalSupply: '18,000,000 LEZ',
     total: '125 BNB', //1BNB = 400$
-    ratio: 0,
+    ratio: 0,//0.7$
     min: 0.75, //300$
     max: 1.25, //500$
     maxTier1: 0.75, //300$
@@ -855,7 +856,7 @@ export const supportedPools = [
     maxTier3: 1.25, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: 'TBA',
+    distribution: '50% TGE, 50% next month',
     startAt: 1638194400,
     endAt: 1734569200,
     claimAt: 0,
@@ -902,7 +903,7 @@ export const supportedPools = [
     maxTier3: 0.76, //500$
     access: 'Private',
     network: bscNetwork,
-    distribution: '34% on TGE, then 33% monthly over 2 months',
+    distribution: '25% at TGE, 25% per month in next 3 months',
     startAt: 1638280800,
     endAt: 1638284400,
     claimAt: 0,
@@ -910,7 +911,7 @@ export const supportedPools = [
   },
   {
     pid: 17,
-    poolId: 7,// add pool id in this symbol if pool ID of the ido is not same as pid
+    poolId: 7,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -947,11 +948,11 @@ export const supportedPools = [
     maxTier3: 277.7, //500$
     access: 'Private',
     network: polygonNetwork,
-    distribution: 'TBA',
-    startAt: 1640883600,
-    endAt: 1736940091,
+    distribution: '25% TGE, 25% per month in next 3 months',
+    startAt: 1638453600,
+    endAt: 1638457200,
     claimAt: 0,
-    startDate: 'TBA',
+    startDate: '2PM UTC 2nd Dec',
   },
 
   {
@@ -977,20 +978,20 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/solc.png',
     totalSupply: '1,000,000,000 SOLC',
-    total: '33 ETH',//1ETH =3k$
-    ratio: 0,
-    min: 0.166,//500$
-    max: 0.233,//700$
-    maxTier1: 0.166,//500$
-    maxTier2: 0.2,//600$
-    maxTier3: 0.233,//700$
+    total: '181.8 BNB',//1BNB = 550$
+    ratio: 36666.6,//1 SOLC = 0.015
+    min: 0.54,//400$
+    max: 0.9,//500$
+    maxTier1: 0.54,//300$
+    maxTier2: 0.72,//400$
+    maxTier3: 0.9,//500$
     access: 'Private',
-    network: ethereumNetwork,
+    network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
-    startAt: 1640883600,
-    endAt: 1736045200,
+    startAt: 1638972000,
+    endAt: 1638975600,
     claimAt: 0,
-    startDate: "TBA"
+    startDate: "2PM UTC 8th Nov"
   },
   {
     pid: 19,
@@ -1076,7 +1077,7 @@ export const supportedPools = [
   //   maxTier3: 10, //500$
   //   access: 'Public',
   //   network: harmonyNetwork,
-  //   distribution: 'TBA',
+  //   distribution: '50% at TGE, 50% after 1 month',
   //   startAt: 1533939514,
   //   endAt: 1734569200,
   //   claimAt: 1533939514,
