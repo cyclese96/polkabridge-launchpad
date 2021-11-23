@@ -723,7 +723,7 @@ export const supportedPools = [
       97: '',
     },
     lpBscAddresses: {
-      56: '',
+      56: '0xc112465bcffc96a5f78190aa503fac9810b5f52b',
       97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
@@ -798,8 +798,9 @@ export const supportedPools = [
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
     startAt: 1637848800,
     endAt: 1637852400,
-    claimAt: 1638540000,
+    claimAt: 1638367200,
     startDate: '2PM UTC 25th Nov',
+    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200]
   },
 
 
