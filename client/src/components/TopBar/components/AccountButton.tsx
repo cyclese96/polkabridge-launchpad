@@ -60,7 +60,9 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
   )
 }
 
-const StyledAccountButton = styled.div``
+const StyledAccountButton = styled.div`
+  margin-top: 8px;
+`
 
 const BoxWallet = styled.div`
   display: flex;
@@ -70,6 +72,7 @@ const BoxWallet = styled.div`
     background: rgba(41, 42, 66, 1);
     padding: 0 16px;
     display: flex;
+    justify-content: center;
     align-items: center;
     border-radius: 8px;
     color: #fff;

@@ -44,6 +44,7 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
     alignItems: 'center',
     paddingTop: 2,
+    marginTop: 8,
   },
 }))
 export default function NetworkSelect({}) {
