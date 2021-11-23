@@ -19,8 +19,8 @@ import qrCode from '../../../assets/img/qr-code.png'
 import IconView from '../../../assets/img/icon-view.svg'
 import { Link, useHistory } from 'react-router-dom'
 
-import useLockBalance from '../../../hooks/useLockBalance'
-import useUnlock from '../../../hooks/useUnlock'
+// import useLockBalance from '../../../hooks/useLockBalance'
+// import useUnlock from '../../../hooks/useUnlock'
 import useNetwork from '../../../hooks/useNetwork'
 import { bscNetwork } from '../../../pbr/lib/constants'
 import BigNumber from 'bignumber.js'
@@ -40,10 +40,10 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   const pbr = usePolkaBridge()
   const { pbrBalance, ether } = useTokenBalance(getPolkaBridgeAddress(pbr))
 
-  const history = useHistory()
+  // const history = useHistory()
 
   const [pendingTx, setPendingTx] = useState(false)
-  const { onUnlock } = useUnlock()
+  // const { onUnlock } = useUnlock()
 
   const getTokenSymbol = () => {
     return getNetworkName(chainId) === bscNetwork ? 'BNB' : 'PBR'
@@ -86,11 +86,11 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
                             <strong>
                               {getNetworkName(chainId) === bscNetwork
                                 ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
+                                  'en-US',
+                                )
                                 : parseFloat(
-                                    getBalanceNumber(pbrBalance).toFixed(4),
-                                  ).toLocaleString('en-US')}
+                                  getBalanceNumber(pbrBalance).toFixed(4),
+                                ).toLocaleString('en-US')}
                             </strong>
                             <span>{getTokenSymbol()}</span>
                           </TextMedium>
