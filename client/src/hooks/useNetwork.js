@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from 'react'
-import config from '../config'
+
 import { getCurrentNetworkId, isMetaMaskInstalled } from '../pbr/utils'
 
 

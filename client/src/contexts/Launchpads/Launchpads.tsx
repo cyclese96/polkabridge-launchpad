@@ -4,7 +4,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 
 import { bnToDec } from '../../utils'
-import { getMasterChefContract, getEarned } from '../../pbr/utils'
+// import { getMasterChefContract, getEarned } from '../../pbr/utils'
 import { getLaunchpads } from '../../pbr/utils'
 
 import Context from './context'

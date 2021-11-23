@@ -56,7 +56,7 @@ export const contractAddresses = {
 }
 
 
-const testing = false;
+const testing = true;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -159,8 +159,6 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
@@ -207,8 +205,6 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
@@ -485,11 +481,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1636253020,
-    endAt: 1634907600,
+    startAt: 1637388370,
+    endAt: 1677388370,
     claimAt: 1636253020,//1635831420,//1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-    claimTimeArr: [1635249600, 1637859600, 1640451600]
+    claimTimeArr: [1637388370, 1637859600, 1640451600]
 
   },
   {
@@ -527,11 +523,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '100% on TGE',
-    startAt: 1635781661,
-    endAt: 1635865200,
+    startAt: 1637388370,
+    endAt: 1667388370,
     claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
-    claimTimeArr: [1636171200]
+    claimTimeArr: [1637388370]
   },
 
   {
@@ -588,11 +584,6 @@ export const supportedPools = [
       137: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       80001: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     },
-
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
-    },
     lpExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     name: 'FabWelt',
     symbol: 'WELT-PBR',
@@ -616,11 +607,11 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
-    startAt: 1636725600,//1636725540
-    endAt: 1636729200,
+    startAt: 1637567528,//1636725540
+    endAt: 1667567528,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
-    claimTimeArr: [1637069400, 1639587600]
+    claimTimeArr: [1637567528, 1639587600]
   },
 
   {
@@ -629,16 +620,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       137: '',
       80001: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'PlayerMon',
@@ -678,16 +667,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       137: '',
       80001: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'TryHards',
@@ -726,6 +713,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     tokenAddresses: {
       1: '',
@@ -761,7 +750,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
-    startAt: 1637762400,
+    startAt: 1637643864,
     endAt: 1637766000,
     claimAt: 1638280800,
     startDate: '2PM UTC 24th Nov',
@@ -774,16 +763,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Cheesus DeFi',
@@ -822,17 +809,15 @@ export const supportedPools = [
     poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'PeopleZ',
@@ -915,16 +900,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'ArcadeNetwork',
@@ -960,6 +943,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
@@ -999,16 +984,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'ADASwap',
@@ -1121,3 +1104,17 @@ export const harmonyChainIds = {
 
 
 export const bscChainIds = [56, 97]
+
+export const tierConditions = {
+  maxTier1: {
+    min: 500,
+    max: 1500
+  },
+  maxTier2: {
+    min: 1500,
+    max: 3000
+  },
+  maxTier3: {
+    min: 3000
+  }
+}
