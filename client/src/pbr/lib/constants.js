@@ -159,8 +159,6 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
@@ -207,8 +205,6 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-    },
-    lpBscAddresses: {
       56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
@@ -588,11 +584,6 @@ export const supportedPools = [
       137: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       80001: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     },
-
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
-    },
     lpExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     name: 'FabWelt',
     symbol: 'WELT-PBR',
@@ -629,16 +620,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       137: '',
       80001: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'PlayerMon',
@@ -678,16 +667,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       137: '',
       80001: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'TryHards',
@@ -726,16 +713,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Torekko',
@@ -753,17 +738,17 @@ export const supportedPools = [
     totalSupply: '100,000,000 TRK',
     total: '76.9 BNB',// 1BNB = 650$
     ratio: 5000, //token price 0.13, 1BNB = 400$
-    min: 0.46, //100$
-    max: 0.76, //300$
-    maxTier1: 0.46, //100$
-    maxTier2: 0.61, //200$
-    maxTier3: 0.76, //300$
+    min: 0.17, //100$
+    max: 0.53, //300$
+    maxTier1: 0.17, //100$
+    maxTier2: 0.35, //200$
+    maxTier3: 0.53, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
-    startAt: 1637762400,
+    startAt: 1637643864,
     endAt: 1637766000,
-    claimAt: 0,
+    claimAt: 1638643864,
     startDate: '2PM UTC 24th Nov',
   },
 
@@ -773,16 +758,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Cheesus DeFi',
@@ -821,17 +804,15 @@ export const supportedPools = [
     poolId: 5,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'PeopleZ',
@@ -914,16 +895,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpPolygonAddresses: { // lp address for polygon network
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'ArcadeNetwork',
@@ -959,6 +938,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
@@ -998,16 +979,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'ADASwap',
@@ -1040,15 +1019,13 @@ export const supportedPools = [
   {
     pid: 17,
     poolId: 2,
-    // lpAddresses: {
-    //   1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-    //   42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-    // },
-    tokenAddresses: {
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
       1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
       1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
     },
-    lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
+    tokenAddresses: {
       1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
       1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
     },
@@ -1118,3 +1095,17 @@ export const harmonyChainIds = {
 
 
 export const bscChainIds = [56, 97]
+
+export const tierConditions = {
+  maxTier1: {
+    min: 500,
+    max: 1500
+  },
+  maxTier2: {
+    min: 1500,
+    max: 3000
+  },
+  maxTier3: {
+    min: 3000
+  }
+}

@@ -8,6 +8,7 @@ import Web3 from 'web3'
 
 import stakingAbi from '../contracts/staking.json'
 import LaunchpadAbi from './lib/abi/masterLaunchpad.json';
+import LaunchpadBscAbi from './lib/abi/launchpadBsc.json';
 import ERC20Abi from './lib/abi/erc20.json'
 
 
@@ -87,13 +88,6 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
-        lpBscAddress,
-        lpBscContract,
-        lpBscExplorer,
-        lpHarmonyAddress,
-        lpHarmonyContract,
-        lpPolygonAddress,
-        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -127,13 +121,6 @@ export const getLaunchpads = (pbr) => {
         lpAddress,
         lpContract,
         lpExplorer,
-        lpBscAddress,
-        lpBscContract,
-        lpBscExplorer,
-        lpHarmonyAddress,
-        lpHarmonyContract,
-        lpPolygonAddress,
-        lpPolygonContract,
         tokenAddress,
         tokenContract,
         tokenExplorer,
@@ -161,6 +148,7 @@ export const getLaunchpads = (pbr) => {
 // default launchpads
 export const getDefaultLaunchpads = () => {
 
+  // set default thereum connection with infura if metamask is not available.
   const chainId = currentConnection === 'mainnet' ? 1 : 42;
 
   const pools = supportedPools.map((pool) => {
@@ -169,16 +157,16 @@ export const getDefaultLaunchpads = () => {
 
       const _bscChain = currentConnection === 'mainnet' ? config.bscChain : config.bscChainTestent
       return Object.assign(pool, {
-        tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses?.[_bscChain],
-        lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses[_bscChain],
+        tokenAddress: pool.tokenAddresses?.[_bscChain],
+        lpAddress: pool.lpAddresses?.[_bscChain],
       })
 
     } else if (pool.network === harmonyNetwork) {
 
       const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainTestnet
       return Object.assign(pool, {
-        tokenAddress: pool.tokenAddresses ? '' : pool.tokenAddresses?.[_harmonyChain],
-        lpHarmonyAddress: !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses[_harmonyChain],
+        tokenAddress: pool.tokenAddresses?.[_harmonyChain],
+        lpAddress: pool.lpAddresses?.[_harmonyChain],
       })
 
     } else if (pool.network === polygonNetwork) {
@@ -186,14 +174,14 @@ export const getDefaultLaunchpads = () => {
       const _polygonChain = currentConnection === 'mainnet' ? config.polygon_chain_mainnet : config.polygon_chain_testnet
 
       return Object.assign(pool, {
-        tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses?.[_polygonChain],
-        lpPolygonAddress: !pool.lpPolygonAddresses ? '' : pool.lpPolygonAddresses[_polygonChain],
+        tokenAddress: pool.tokenAddresses?.[_polygonChain],
+        lpAddress: pool.lpAddresses?.[_polygonChain],
       })
 
     } else {
       return Object.assign(pool, {
-        lpAddress: !pool.lpAddresses ? '' : pool.lpAddresses?.[chainId],
-        tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses?.[chainId],
+        tokenAddress: pool.tokenAddresses?.[chainId],
+        lpAddress: pool.lpAddresses?.[chainId],
       })
     }
   })
@@ -214,13 +202,6 @@ export const getDefaultLaunchpads = () => {
       lpAddress,
       lpContract,
       lpExplorer,
-      lpBscAddress,
-      lpBscContract,
-      lpBscExplorer,
-      lpHarmonyAddress,
-      lpHarmonyContract,
-      lpPolygonAddress,
-      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -255,13 +236,6 @@ export const getDefaultLaunchpads = () => {
       lpAddress,
       lpContract,
       lpExplorer,
-      lpBscAddress,
-      lpBscContract,
-      lpBscExplorer,
-      lpHarmonyAddress,
-      lpHarmonyContract,
-      lpPolygonAddress,
-      lpPolygonContract,
       tokenAddress,
       tokenContract,
       tokenExplorer,
@@ -605,10 +579,10 @@ export const getPurchasesAmount = async (lpAddress, pid, account, lpNetwork) => 
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
-    // console.log('ethTest: purchasesAmount ', purchasesAmount)
+    console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
     return getBalanceNumber(new BigNumber(purchasesAmount));
   } catch (e) {
-    console.log('ethTest: getPurchasesAmount', e)
+    console.log('ethTest: getPurchasesAmount', { e, lpAddress })
     return null;
   }
 }
@@ -981,9 +955,9 @@ const getTokenContract = (tokenAddress, account, lpNetwork, currentNetwork) => {
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, lpNetwork, currentNetwork) => {
 
+  console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork })
   if (currentNetwork === bscNetwork) {
-
-    const _bscContract = getContractInstance(LaunchpadAbi, lpAddress, lpNetwork, currentNetwork);
+    const _bscContract = getContractInstance(LaunchpadBscAbi, lpAddress, lpNetwork, currentNetwork);
 
     return _bscContract;
 

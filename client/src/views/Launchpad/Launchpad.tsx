@@ -26,7 +26,7 @@ import {
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 // import { Contract } from 'web3-eth-contract'
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, tierConditions } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 
@@ -45,12 +45,6 @@ const Launchpad: React.FC = () => {
     whitepaper,
     lpAddress,
     lpContract,
-    lpBscAddress,
-    lpBscContract,
-    lpHarmonyAddress,
-    lpHarmonyContract,
-    lpPolygonAddress,
-    lpPolygonContract,
     lpExplorer,
     tokenAddress,
     tokenExplorer,
@@ -83,12 +77,6 @@ const Launchpad: React.FC = () => {
     whitepaper: '',
     lpAddress: '',
     lpContract: null,
-    lpBscAddress: '',
-    lpBscContract: null,
-    lpHarmonyAddress: '',
-    lpHarmonyContract: null,
-    lpPolygonAddress: '',
-    lpPolygonContract: null,
     lpExplorer: '',
     tokenAddress: '',
     tokenExplorer: '',
@@ -126,25 +114,11 @@ const Launchpad: React.FC = () => {
     return getPoolId(pid, network)
   }
 
-  const currentLaunchadAddress = (_network: string) => {
-    if (_network === bscNetwork) {
-      return lpBscAddress
-    } else if (_network === polygonNetwork) {
-      return lpPolygonAddress
-    } else if (_network === harmonyNetwork) {
-      return lpHarmonyAddress
-    } else if (_network === ethereumNetwork) {
-      return lpAddress
-    } else {
-      return lpAddress;
-    }
-  }
-
   useEffect(() => {
 
     async function fetchData() {
       const newProgress = await getProgress(
-        currentLaunchadAddress(network),
+        lpAddress,
         currentPoolId(pid, network),
         startAt,
         endAt,
@@ -152,7 +126,6 @@ const Launchpad: React.FC = () => {
       )
 
       const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account)
-
 
       setProgress(newProgress)
 
@@ -213,11 +186,11 @@ const Launchpad: React.FC = () => {
   const getMaxValue = () => {
     const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
     let maxValue = 0
-    if (_stakedAmountInBigNumWei.gte(500) && _stakedAmountInBigNumWei.lt(1500)) {
+    if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier1.max)) {
       maxValue = maxTier1
-    } else if (_stakedAmountInBigNumWei.gte(1500) && _stakedAmountInBigNumWei.lt(3000)) {
+    } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier2.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier2.max)) {
       maxValue = maxTier2
-    } else if (_stakedAmountInBigNumWei.gte(3000)) {
+    } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier3.min)) {
       maxValue = maxTier3
     }
     return maxValue
@@ -292,7 +265,7 @@ const Launchpad: React.FC = () => {
                     : undefined
                 }
                 onClick={handleJoinPool}
-                // to={`/launchpads/join/${launchpadId}/${poolId}`}
+              // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -384,10 +357,10 @@ const Launchpad: React.FC = () => {
                           {network === 'bsc'
                             ? 'Binance Smart Chain'
                             : network === 'polygon'
-                            ? 'Polygon'
-                            : network === 'harmony'
-                            ? 'Harmony'
-                            : 'Ethereum'}
+                              ? 'Polygon'
+                              : network === 'harmony'
+                                ? 'Harmony'
+                                : 'Ethereum'}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

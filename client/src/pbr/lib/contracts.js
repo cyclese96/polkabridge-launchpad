@@ -8,11 +8,8 @@ import LaunchpadAbi from './abi/masterLaunchpad.json'
 import WETHAbi from './abi/weth.json'
 import {
   bscNetwork,
-  contractAddresses,
   currentConnection,
-  ethereumNetwork,
   harmonyNetwork,
-  // HMY_TESTNET_RPC_URL,
   polygonNetwork,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
@@ -39,39 +36,37 @@ export class Contracts {
 
     this.web3bsc = new Web3(window.ethereum)
 
-
     this.weth = new this.web3.eth.Contract(WETHAbi)
 
-    // this.currentNetworkName = getNetworkName(networkId);
 
     this.pools = supportedPools.map((pool) => {
       if (pool.network === bscNetwork) {
 
         const _bscChain = currentConnection === 'mainnet' ? config.bscChain : config.bscChainTestent;
         return Object.assign(pool, {
-          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses?.[_bscChain],
-          lpBscAddress: !pool.lpBscAddresses ? '' : pool.lpBscAddresses?.[_bscChain],
+          tokenAddress: pool.tokenAddresses?.[_bscChain],
+          lpAddress: pool.lpAddresses?.[_bscChain],
         })
 
       } else if (pool.network === harmonyNetwork) {
 
         const _harmonyChain = currentConnection === 'mainnet' ? config.hmyChainMainnet : config.hmyChainTestnet
         return Object.assign(pool, {
-          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses?.[_harmonyChain],
-          lpHarmonyAddress: !pool.lpHarmonyAddresses ? '' : pool.lpHarmonyAddresses?.[_harmonyChain],
+          tokenAddress: pool.tokenAddresses?.[_harmonyChain],
+          lpAddress: pool.lpAddresses?.[_harmonyChain],
         })
 
       } else if (pool.network === polygonNetwork) {
 
         const _polygonChain = currentConnection === 'mainnet' ? config.polygon_chain_mainnet : config.polygon_chain_testnet;
         return Object.assign(pool, {
-          tokenAddress: !pool.tokenAddresses ? '' : pool.tokenAddresses[_polygonChain],
-          lpPolygonAddress: !pool.lpPolygonAddresses ? '' : pool.lpPolygonAddresses[_polygonChain],
+          tokenAddress: pool.tokenAddresses[_polygonChain],
+          lpAddress: pool.lpAddresses[_polygonChain],
         });
 
       } else {
-        const _ethChain = currentConnection === 'mainnet' ? config.chainId : config.chainIdTestnet;
 
+        const _ethChain = currentConnection === 'mainnet' ? config.chainId : config.chainIdTestnet;
         return Object.assign(pool, {
           tokenAddress: pool.tokenAddresses?.[_ethChain],
           lpAddress: pool.lpAddresses?.[_ethChain],

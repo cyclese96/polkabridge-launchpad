@@ -90,25 +90,12 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
   const [progress, setProgress] = useState<BigNumber>()
 
-  const currentLaunchadAddress = (_network: string) => {
-    if (_network === bscNetwork) {
-      return launchpad.lpBscAddress
-    } else if (_network === polygonNetwork) {
-      return launchpad.lpPolygonAddress
-    } else if (_network === harmonyNetwork) {
-      return launchpad.lpHarmonyAddress
-    } else if (_network === ethereumNetwork) {
-      return launchpad.lpAddress
-    } else {
-      return launchpad.lpAddress;
-    }
-  }
 
   useEffect(() => {
     async function fetchData() {
-
+      console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
       const newProgress = await getProgress(
-        currentLaunchadAddress(launchpad.network),
+        launchpad.lpAddress,
         getPoolId(launchpad.pid, launchpad.network),
         launchpad.startAt,
         launchpad.endAt,
