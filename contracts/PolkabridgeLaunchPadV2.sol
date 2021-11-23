@@ -235,6 +235,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 claimTime2,
         uint256 percentClaim3,
         uint256 claimTime3,
+          uint256 percentClaim4,
+        uint256 claimTime4,
+          uint256 percentClaim5,
+        uint256 claimTime5,
         uint256 pid
     ) public onlyOwner {
         if (claimTime1 > 0) {
@@ -258,6 +262,22 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
 
         if (percentClaim3 > 0) {
             claimInfos[pid].PercentClaim3 = percentClaim3;
+        }
+
+          if (claimTime4 > 0) {
+            claimInfos[pid].ClaimTime4 = claimTime4;
+        }
+
+        if (percentClaim4 > 0) {
+            claimInfos[pid].PercentClaim4 = percentClaim4;
+        }
+
+           if (claimTime5 > 0) {
+            claimInfos[pid].ClaimTime5 = claimTime5;
+        }
+
+        if (percentClaim5 > 0) {
+            claimInfos[pid].PercentClaim5 = percentClaim5;
         }
     }
 

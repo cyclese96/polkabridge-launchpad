@@ -799,13 +799,13 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/chessus.png',
     totalSupply: '200,000,000 DRATE',
-    total: '76.9 BNB',// 1BNB = 650$
-    ratio: 17150, //token price 0.038$, 
-    min: 0.46, //300$
-    max: 0.76, //500$
-    maxTier1: 0.46, //300$
-    maxTier2: 0.61, //400$
-    maxTier3: 0.76, //500$
+    total: '89.2 BNB',// 1BNB = 560$
+    ratio: 14736.8, //token price 0.038, 1BNB = 560$
+    min: 0.17, //100$
+    max: 0.53, //300$
+    maxTier1: 0.17, //100$
+    maxTier2: 0.35, //200$
+    maxTier3: 0.53, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
