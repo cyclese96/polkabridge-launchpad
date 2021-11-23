@@ -70,7 +70,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
     using ECDSA for bytes32;
 
     address payable private ReceiveToken;
-
+    uint256 MinimumStakeAmount;
     struct IDOPool {
         uint256 Id;
         uint256 Begin;
@@ -80,12 +80,13 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 MaxPurchaseTier1;
         uint256 MaxPurchaseTier2; //==comminity tier
         uint256 MaxPurchaseTier3;
+        uint256 MaxSpecialPurchase;
         uint256 TotalCap;
         uint256 MinimumTokenSoldout;
         uint256 TotalToken; //total sale token for this pool
         uint256 RatePerETH;
         uint256 TotalSold; //total number of token sold
-        uint256 MinimumStakeAmount;
+        
     }
 
     struct ClaimInfo {
@@ -122,6 +123,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
 
     constructor(address payable receiveTokenAdd) public {
         ReceiveToken = receiveTokenAdd;
+        MinimumStakeAmount=500*1e18;
     }
 
     function addMulWhitelist(address[] memory user, uint256 pid)
@@ -157,9 +159,9 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             return true;
         } else if (pools[poolIndex].Type == 2) // stakers round
         {
-            if (stackAmount >= pools[poolIndex].MinimumStakeAmount) return true;
+            if (stackAmount >= MinimumStakeAmount) return true;
             return false;
-        } else if (pools[poolIndex].Type == 3) //internal
+        } else if (pools[poolIndex].Type == 3) //special round
         {
             if (users[poolIndex][user].IsWhitelist) return true;
             return false;
@@ -176,11 +178,12 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 maxPurchaseTier1,
         uint256 maxPurchaseTier2,
         uint256 maxPurchaseTier3,
+        uint256 maxSpecialPurchase,
         uint256 totalCap,
         uint256 totalToken,
         uint256 ratePerETH,
-        uint256 minimumTokenSoldout,
-        uint256 minimumStakeAmount
+        uint256 minimumTokenSoldout
+       
     ) public onlyOwner {
         uint256 id = pools.length.add(1);
         pools.push(
@@ -193,12 +196,13 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                 MaxPurchaseTier1: maxPurchaseTier1,
                 MaxPurchaseTier2: maxPurchaseTier2,
                 MaxPurchaseTier3: maxPurchaseTier3,
+                MaxSpecialPurchase:maxSpecialPurchase,
                 TotalCap: totalCap,
                 TotalToken: totalToken,
                 RatePerETH: ratePerETH,
                 TotalSold: 0,
-                MinimumTokenSoldout: minimumTokenSoldout,
-                MinimumStakeAmount: minimumStakeAmount
+                MinimumTokenSoldout: minimumTokenSoldout
+               
             })
         );
     }
@@ -288,13 +292,14 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 maxPurchaseTier1,
         uint256 maxPurchaseTier2,
         uint256 maxPurchaseTier3,
+         uint256 maxSpecialPurchase,
         uint256 totalCap,
         uint256 totalToken,
         uint256 ratePerETH,
         IERC20 idoToken,
-        uint256 minimumTokenSoldout,
-        uint256 pooltype,
-        uint256 minimumStakeAmount
+       
+        uint256 pooltype
+      
     ) public onlyOwner {
         uint256 poolIndex = pid.sub(1);
         if (begin > 0) {
@@ -313,6 +318,9 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         if (maxPurchaseTier3 > 0) {
             pools[poolIndex].MaxPurchaseTier3 = maxPurchaseTier3;
         }
+          if (maxSpecialPurchase > 0) {
+            pools[poolIndex].MaxSpecialPurchase = maxSpecialPurchase;
+        }
         if (totalCap > 0) {
             pools[poolIndex].TotalCap = totalCap;
         }
@@ -323,13 +331,8 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             pools[poolIndex].RatePerETH = ratePerETH;
         }
 
-        if (minimumStakeAmount > 0) {
-            pools[poolIndex].MinimumStakeAmount = minimumStakeAmount;
-        }
-
-        if (minimumTokenSoldout > 0) {
-            pools[poolIndex].MinimumTokenSoldout = minimumTokenSoldout;
-        }
+       
+      
         if (pooltype > 0) {
             pools[poolIndex].Type = pooltype;
         }
@@ -415,7 +418,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             //=3
             require(
                 users[pid][msg.sender].TotalETHPurchase <=
-                    pools[poolIndex].MaxPurchaseTier3,
+                    pools[poolIndex].MaxSpecialPurchase,
                 "invalid maximum contribute"
             );
         }

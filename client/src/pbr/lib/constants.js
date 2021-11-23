@@ -723,7 +723,7 @@ export const supportedPools = [
       97: '',
     },
     lpBscAddresses: {
-      56: '0xc112465bcffc96a5f78190aa503fac9810b5f52b',
+      56: '0xe5d0aba2e6429a469b4a1aa427ed85fcc38526aa',
       97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
@@ -771,6 +771,10 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
+    },
+    lpBscAddresses: {
+      56: '0xc112465bcffc96a5f78190aa503fac9810b5f52b',
+      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Cheesus DeFi',
