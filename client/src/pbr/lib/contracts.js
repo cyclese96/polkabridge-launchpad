@@ -1,10 +1,5 @@
-// import BigNumber from 'bignumber.js/bignumber'
-import ERC20Abi from './abi/erc20.json'
-// import MasterChefAbi from './abi/masterchef.json'
 import PolkaBridgeAbi from './abi/pbr.json'
-import LaunchpadAbi from './abi/masterLaunchpad.json'
-// import LaunchpadHarmonyAbi from './abi/launchpadHarmony.json'
-// import LanchpadBscAbi from './abi/polkabridgeLaunchpadBsc.json'
+
 import WETHAbi from './abi/weth.json'
 import {
   bscNetwork,

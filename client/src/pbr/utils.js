@@ -6,7 +6,7 @@ import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeCo
 // import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 
-import stakingAbi from '../contracts/staking.json'
+import stakingAbi from '../contracts/PolkaBridgeStaking.json'
 import LaunchpadAbi from './lib/abi/masterLaunchpad.json';
 import LaunchpadBscAbi from './lib/abi/launchpadBsc.json';
 import ERC20Abi from './lib/abi/erc20.json'
