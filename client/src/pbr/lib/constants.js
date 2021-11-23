@@ -713,7 +713,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
       97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     tokenAddresses: {
@@ -763,7 +763,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
@@ -815,7 +815,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
@@ -859,6 +859,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
@@ -866,10 +868,10 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpBscAddresses: {
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
+    // lpBscAddresses: {
+    //   56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+    //   97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    // },
     lpExplorer: 'https://bscscan.com/address',
     name: 'WidiLand',
     symbol: 'WIDI-PBR',
@@ -948,7 +950,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
@@ -989,7 +991,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0x95B4cC2217706b22D7dfe918FA1049aA34e19D1D',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
