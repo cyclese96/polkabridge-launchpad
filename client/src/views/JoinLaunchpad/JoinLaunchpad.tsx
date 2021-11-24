@@ -21,6 +21,7 @@ import {
   fromWei,
   formatFloatValue,
   getPoolClaimTimeArr,
+  verifyCaptcha
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -517,20 +518,15 @@ const JoinLaunchpad: React.FC = () => {
   const handleCaptchaVerification = async (value: string) => {
 
     try {
-      const verificationStatus = await axios.post(`https://www.google.com/recaptcha/api/siteverify`,
-        { secret: process.env.REACR_APP_CAPTCHA_API?.split('')?.join(''), response: value },
-        {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS',
-          }
-        }
-      )
 
-      if (verificationStatus?.data?.['success']) {
+      const verificationStatus = await verifyCaptcha(value);
 
+      console.log(verificationStatus?.['success'])
+
+      if (verificationStatus?.['success'] === true) {
         setCaptchaVerified(true)
       }
+
       console.log('captcha verified ', verificationStatus)
     } catch (error) {
       console.log('handleCaptchaVerification', error)

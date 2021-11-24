@@ -5,6 +5,7 @@ const app = express();
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const stakingAbi = require('./abi/staking.json');
+const request = require('request')
 
 require('dotenv').config();
 
@@ -82,13 +83,10 @@ const fetchStakeAmount = async (account) => {
     }
 
 }
-app.get('/', function (req, res) {
-    res.send('PolkaBridge Launchpad API')
-});
+
 
 app.post("/api/ido/sign/v1", async (req, res) => {
 
-    // console.log({ body: req.body })
     try {
         const api_key = req.body.apiKey;
         if (api_key !== process.env.API_KEY) {
@@ -101,7 +99,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         }
 
         const _totalStakeAmount = await fetchStakeAmount(userAddress);
-        // console.log('total stake amount ', _totalStakeAmount)
+        console.log('total stake amount ', { _totalStakeAmount, userAddress })
         const userSting = Web3.utils.soliditySha3(
             { t: 'address', v: userAddress },
             { t: 'uint256', v: _totalStakeAmount }
@@ -131,5 +129,40 @@ app.post("/api/ido/sign/v1", async (req, res) => {
 });
 
 
+app.post("/api/recaptcha/verify/v1", async (req, res) => {
+
+    try {
+        const api_key = req.body.apiKey;
+        if (api_key !== process.env.API_KEY) {
+            return res.status(404).send({ message: "Access denied, Unauthorized user" });
+        }
+        const verificationValue = req.body.verificationValue;
+
+        const postData = { secret: process.env.GOOGLE_CAPTCHA_KEY, response: verificationValue };
+        console.log(postData)
+
+        var clientServerOptions = {
+            uri: 'https://www.google.com/recaptcha/api/siteverify',
+            body: `secret=${postData.secret}&response=${verificationValue}`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        }
+        request(clientServerOptions, function (error, response) {
+
+            if (error) {
+                return res.status(401).send(error)
+            }
+
+            return res.status(200).send(response.body);
+        });
+
+
+    } catch (error) {
+        console.log('API error', error)
+        return res.status(401).send({ success: false, data: null, message: "Something went wrong in sign function" })
+    }
+});
 
 module.exports = app;

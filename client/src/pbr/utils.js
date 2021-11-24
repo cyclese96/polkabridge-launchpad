@@ -602,6 +602,23 @@ const signedIdoString = async (account) => {
 
 }
 
+export const verifyCaptcha = async (value) => {
+  try {
+    const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
+
+    const res = await axios.post(`${_api}/api/recaptcha/verify/v1`, { verificationValue: value, apiKey: process.env.REACT_APP_IDO_API_KEY.split('').reverse().join('') })
+
+    return res.data;
+
+  } catch (error) {
+    console.log("verifyCaptcha exception", error)
+    return error
+  }
+
+}
+
+
+
 const convertToWei = (amount) => {
   const _amount = !amount ? '0' : amount;
   return new BigNumber(_amount).times(new BigNumber(10).pow(18)).toString()
