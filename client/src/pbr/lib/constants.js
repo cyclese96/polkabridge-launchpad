@@ -747,8 +747,8 @@ export const supportedPools = [
     maxTier1: 0.17, //100$
     maxTier2: 0.35, //200$
     maxTier3: 0.53, //300$
-    maxWhitelistPurchase: 0.89,//500$
-    access: 'Private',//Whitelist
+    maxWhitelistPurchase: 0.15,
+    access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637762400,

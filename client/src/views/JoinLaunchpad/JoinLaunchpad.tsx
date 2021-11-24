@@ -67,6 +67,7 @@ const JoinLaunchpad: React.FC = () => {
     maxTier1,
     maxTier2,
     maxTier3,
+    maxWhitelistPurchase,
     access,
     network,
     distribution,
@@ -98,6 +99,7 @@ const JoinLaunchpad: React.FC = () => {
     maxTier1: 0,
     maxTier2: 0,
     maxTier3: 0,
+    maxWhitelistPurchase: 0,
     access: '',
     network: '',
     distribution: '',
@@ -299,7 +301,14 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onMax = useCallback(() => {
-    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+
+    let _max = 0;
+    if (access === 'Whitelist') {
+      _max = maxWhitelistPurchase;
+    } else {
+      _max = access === 'Public' ? maxTier2 : getMaxValue()
+    }
+
     let newTokenValue = new BigNumber(_max).multipliedBy(ratio).toFixed(0).toString()
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())

@@ -57,6 +57,7 @@ const Launchpad: React.FC = () => {
     maxTier1,
     maxTier2,
     maxTier3,
+    maxWhitelistPurchase,
     access,
     network,
     distribution,
@@ -89,6 +90,7 @@ const Launchpad: React.FC = () => {
     maxTier1: 0,
     maxTier2: 0,
     maxTier3: 0,
+    maxWhitelistPurchase: 0,
     access: '',
     network: '',
     distribution: '',
@@ -184,6 +186,11 @@ const Launchpad: React.FC = () => {
   }
 
   const getMaxValue = () => {
+
+    if (access === 'Whitelist') {
+      return maxWhitelistPurchase;
+    }
+
     const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
     let maxValue = 0
     if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier1.max)) {
@@ -326,14 +333,14 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {access === 'Public'
+                          {access === 'Public' || access === 'Whitelist'
                             ? 'Allocation'
                             : 'Min - Max Allocation'}
                         </StyledTableLabel>
                         <StyledTableValue>
                           {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
-                          {access === 'Public'
-                            ? `${maxTier2}  ${netWorkTokenSymbol()}`
+                          {access === 'Public' || access === 'Whitelist'
+                            ? access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${maxWhitelistPurchase}  ${netWorkTokenSymbol()}`
                             : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
                         </StyledTableValue>
                       </StyledTableText>
