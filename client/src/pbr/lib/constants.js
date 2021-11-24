@@ -753,9 +753,9 @@ export const supportedPools = [
     distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637762400,
     endAt: 1637766000,
-    claimAt: 1638280800,
+    claimAt: 1638277200,
     startDate: '2PM UTC 24th Nov',
-    claimTimeArr: [1638280800, 1640872800, 1643551200]
+    claimTimeArr: [1638277200, 1640869200, 1643547600]
   },
 
   {
