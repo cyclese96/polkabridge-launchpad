@@ -178,6 +178,11 @@
             },
             {
                 "internalType": "uint256",
+                "name": "maxSpecialPurchase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "totalCap",
                 "type": "uint256"
             },
@@ -194,11 +199,6 @@
             {
                 "internalType": "uint256",
                 "name": "minimumTokenSoldout",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "minimumStakeAmount",
                 "type": "uint256"
             }
         ],
@@ -647,6 +647,26 @@
             },
             {
                 "internalType": "uint256",
+                "name": "percentClaim4",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime4",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim5",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime5",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
             }
@@ -690,6 +710,11 @@
             },
             {
                 "internalType": "uint256",
+                "name": "maxSpecialPurchase",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "totalCap",
                 "type": "uint256"
             },
@@ -710,17 +735,7 @@
             },
             {
                 "internalType": "uint256",
-                "name": "minimumTokenSoldout",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
                 "name": "pooltype",
-                "type": "uint256"
-            },
-            {
-                "internalType": "uint256",
-                "name": "minimumStakeAmount",
                 "type": "uint256"
             }
         ],
