@@ -56,7 +56,7 @@ export const contractAddresses = {
 }
 
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -481,11 +481,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '33% on TGE, then 33% monthly over 2 months',
-    startAt: 1637388370,
-    endAt: 1677388370,
+    startAt: 1636253020,
+    endAt: 1634907600,
     claimAt: 1636253020,//1635831420,//1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-    claimTimeArr: [1637388370, 1637859600, 1640451600]
+    claimTimeArr: [1635249600, 1637859600, 1640451600]
 
   },
   {
@@ -523,11 +523,11 @@ export const supportedPools = [
     access: 'Private',
     network: ethereumNetwork,
     distribution: '100% on TGE',
-    startAt: 1637388370,
-    endAt: 1667388370,
+    startAt: 1635781661,
+    endAt: 1635865200,
     claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
-    claimTimeArr: [1637388370]
+    claimTimeArr: [1636171200]
   },
 
   {
@@ -607,11 +607,11 @@ export const supportedPools = [
     access: 'Private',
     network: polygonNetwork,
     distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
-    startAt: 1637567528,//1636725540
-    endAt: 1667567528,
+    startAt: 1636725600,//1636725540
+    endAt: 1636729200,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov',
-    claimTimeArr: [1637567528, 1639587600]
+    claimTimeArr: [1637069400, 1639587600]
   },
 
   {
@@ -751,7 +751,7 @@ export const supportedPools = [
     access: 'Private',//Whitelist
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
-    startAt: 1637643864,
+    startAt: 1637762400,
     endAt: 1637766000,
     claimAt: 1638280800,
     startDate: '2PM UTC 24th Nov',
