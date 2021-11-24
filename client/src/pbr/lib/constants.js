@@ -56,7 +56,7 @@ export const contractAddresses = {
 }
 
 
-const testing = false;
+const testing = true;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -747,6 +747,7 @@ export const supportedPools = [
     maxTier1: 0.17, //100$
     maxTier2: 0.35, //200$
     maxTier3: 0.53, //300$
+    maxWhitelistPurchase: 0.15,
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',

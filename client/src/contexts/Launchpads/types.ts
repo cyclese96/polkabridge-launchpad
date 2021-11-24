@@ -27,6 +27,7 @@ export interface Launchpad {
   maxTier1: number,
   maxTier2: number,
   maxTier3: number,
+  maxWhitelistPurchase: number,
   access: string,
   network: string,
   distribution: string,
