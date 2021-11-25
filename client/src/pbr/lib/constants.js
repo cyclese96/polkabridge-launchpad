@@ -579,8 +579,6 @@ export const supportedPools = [
     tokenAddresses: {
       1: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       42: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
-      56: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
-      97: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       137: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       80001: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     },
@@ -658,9 +656,6 @@ export const supportedPools = [
     startDate: '2PM UTC 18th Nov',
     claimTimeArr: [1637551800, 1640131200]
   },
-
-
-
   {
     pid: 12,
     poolId: 5,
@@ -705,8 +700,6 @@ export const supportedPools = [
     startDate: '2PM UTC 19th Nov, 2021',
     claimTimeArr: [1637773200, 1640304000, 1642982400]
   },
-
-
   {
     pid: 13,
     poolId: 1,
@@ -721,10 +714,6 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0xe5d0aba2e6429a469b4a1aa427ed85fcc38526aa',
-      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Torekko',
@@ -757,7 +746,6 @@ export const supportedPools = [
     startDate: '2PM UTC 24th Nov',
     claimTimeArr: [1638277200, 1640869200, 1643547600]
   },
-
   {
     pid: 14,
     poolId: 1,
@@ -772,10 +760,6 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-    },
-    lpBscAddresses: {
-      56: '0xc112465bcffc96a5f78190aa503fac9810b5f52b',
-      97: '0x7f35Cc76091f477fdB4B06D54463699d1bBe6EF3',
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Cheesus DeFi',
@@ -808,9 +792,6 @@ export const supportedPools = [
     startDate: '2PM UTC 25th Nov',
     claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200]
   },
-
-
-
   {
     pid: 15,
     poolId: 5,
@@ -854,7 +835,6 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 29th Nov',
   },
-
   {
     pid: 16,
     poolId: 7,
@@ -870,10 +850,6 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    // lpBscAddresses: {
-    //   56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
-    //   97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    // },
     lpExplorer: 'https://bscscan.com/address',
     name: 'WidiLand',
     symbol: 'WIDI-PBR',
@@ -946,7 +922,6 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 2nd Dec',
   },
-
   {
     pid: 18,
     lpAddresses: {
@@ -1036,16 +1011,14 @@ export const supportedPools = [
   //   lpAddresses: {
   //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
   //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+  //     1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
+  //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
   //   },
   //   tokenAddresses: {
   //     1: '',
   //     42: '',
   //     56: '',
   //     97: '',
-  //   },
-  //   lpHarmonyAddresses: { // used shard0  lp addresses for harmony network
-  //     1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
-  //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
   //   },
   //   lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
   //   name: 'HarmonyLauncher Private Pool',
