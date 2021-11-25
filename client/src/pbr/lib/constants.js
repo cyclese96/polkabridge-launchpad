@@ -701,9 +701,9 @@ export const supportedPools = [
     distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637330400,
     endAt: 1637334000,
-    claimAt: 1637769600,
+    claimAt: 1637773200,
     startDate: '2PM UTC 19th Nov, 2021',
-    claimTimeArr: [1637769600, 1640304000, 1642982400]
+    claimTimeArr: [1637773200, 1640304000, 1642982400]
   },
 
 
@@ -747,12 +747,12 @@ export const supportedPools = [
     maxTier1: 0.17, //100$
     maxTier2: 0.35, //200$
     maxTier3: 0.53, //300$
-    maxWhitelistPurchase: 0.15,
+    maxWhitelistPurchase: 0.89,
     access: 'Private',
     network: bscNetwork,
     distribution: '34% on TGE, then 33% monthly over 2 months',
-    startAt: 1637762400,
-    endAt: 1637766000,
+    startAt: 1637766000,
+    endAt: 1637769600,
     claimAt: 1638277200,
     startDate: '2PM UTC 24th Nov',
     claimTimeArr: [1638277200, 1640869200, 1643547600]
@@ -760,7 +760,7 @@ export const supportedPools = [
 
   {
     pid: 14,
-    poolId: 3,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
@@ -791,13 +791,14 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/chessus.png',
     totalSupply: '200,000,000 DRATE',
-    total: '89.2 BNB',// 1BNB = 560$
-    ratio: 14736.8, //token price 0.038, 1BNB = 560$
-    min: 0.17, //100$
-    max: 0.53, //300$
-    maxTier1: 0.17, //100$
-    maxTier2: 0.35, //200$
-    maxTier3: 0.53, //300$
+    total: '84.7 BNB',// 1BNB = 590$
+    ratio: 15526.3, //token price 0.038, 1BNB = 560$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    maxWhitelistPurchase: 0.84,
     access: 'Private',
     network: bscNetwork,
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
