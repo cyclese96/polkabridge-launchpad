@@ -138,6 +138,7 @@ const JoinLaunchpad: React.FC = () => {
   const [loading, setLoading] = useState(true)
 
   const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [harvestDistribution, setHarestDistribution] = useState([]);
 
   const recaptchaRef = React.useRef();
   const currentPoolId = (pid: number, network: string) => {
@@ -153,7 +154,7 @@ const JoinLaunchpad: React.FC = () => {
       return 0;
     }
 
-    if (_claimTimeArr.length > 1 && parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length) {
+    if (_claimTimeArr && _claimTimeArr.length > 1 && parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length) {
 
       return _claimTimeArr[parseInt(_userInfoData.harvestInfo.NumberClaimed)]
 
@@ -167,7 +168,8 @@ const JoinLaunchpad: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
-      const claimTimeArr = getPoolClaimTimeArr(poolId, network);
+      const [claimTimeArr, claimDistribution] = getPoolClaimTimeArr(poolId, network);
+      setHarestDistribution(!claimDistribution ? [] : claimDistribution);
       const [
         newIsWhitelist,
         newETHBalance,
@@ -210,7 +212,7 @@ const JoinLaunchpad: React.FC = () => {
       // // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
       // console.log('bscTest progress--->  ', newProgress && newProgress.toString())
       // console.log('ethTest: tokenValue--->  ', tokenValue)
-      console.log('ethTest: tokenPurchased   ', tokenPurchased)
+      // console.log('ethTest: tokenPurchased   ', tokenPurchased)
       // console.log('ethTest: userInfo--->  ', userInfoData)
       // console.log('ethTest: claimTimes  ', claimTimeArr)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
@@ -225,7 +227,7 @@ const JoinLaunchpad: React.FC = () => {
       setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
       setNumberClaimed(userInfoData.harvestInfo ? userInfoData.harvestInfo.NumberClaimed : null)
       setRecentClaimTime(getCurrentClaimTime(userInfoData, claimTimeArr))
-      setTotalRewardClaims(claimTimeArr.length > 0 ? claimTimeArr.length : 1);
+      setTotalRewardClaims(claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1);
       //set current claimAt time
     }
     if (pid >= 0) {
@@ -482,7 +484,7 @@ const JoinLaunchpad: React.FC = () => {
       if (_recentClaimTime * 1000 > new Date().getTime()) {
 
         return <StyledTitle>
-          {getPercent(1, _totalRewardClaims)}% Reward tokens will be available to harvest in approx -{' '}
+          {harvestDistribution.length > 0 ? harvestDistribution[_numberClaimed] : getPercent(1, _totalRewardClaims)}% Reward tokens will be available to harvest in approx -{' '}
           <Countdown
             date={new Date(_recentClaimTime * 1000)}
             renderer={renderer}
