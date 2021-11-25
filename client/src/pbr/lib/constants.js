@@ -753,7 +753,7 @@ export const supportedPools = [
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
       56: '0xFee058c0a75f096e7d16a4f2d3b9b6C6419f2187',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+      97: '0x15AD83591E091cE24dAE664a195bDB60F5CBF877',
     },
     tokenAddresses: {
       1: '',
@@ -790,7 +790,8 @@ export const supportedPools = [
     endAt: 1637852400,
     claimAt: 1638367200,
     startDate: '2PM UTC 25th Nov',
-    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200]
+    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200],
+    harvestDistribution: [30, 30, 30, 10]
   },
   {
     pid: 15,

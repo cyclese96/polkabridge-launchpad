@@ -1101,10 +1101,11 @@ export const getPoolClaimTimeArr = (poolId, network) => {
     return []
   }
 
+  const distribution = lp.harvestDistribution ? lp.harvestDistribution : [];
   if (lp.claimTimeArr && lp.claimTimeArr.length > 0) {
-    return lp.claimTimeArr;
+    return [lp.claimTimeArr, distribution];
   } else {
-    return [lp.claimAt]
+    return [[lp.claimAt], distribution];
   }
 
 }
