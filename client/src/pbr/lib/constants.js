@@ -744,7 +744,8 @@ export const supportedPools = [
     endAt: 1637769600,
     claimAt: 1638277200,
     startDate: '2PM UTC 24th Nov',
-    claimTimeArr: [1638277200, 1640869200, 1643547600]
+    claimTimeArr: [1638277200, 1640869200, 1643547600],
+    harvestDistribution: [34, 33, 33]
   },
   {
     pid: 14,
@@ -776,7 +777,7 @@ export const supportedPools = [
     icon: '/img/tokens/chessus.png',
     totalSupply: '200,000,000 DRATE',
     total: '84.7 BNB',// 1BNB = 590$
-    ratio: 15526.3, //token price 0.038, 1BNB = 560$
+    ratio: 15526.3, //token price 0.038, 1BNB = 590$
     min: 0.16, //100$
     max: 0.5, //300$
     maxTier1: 0.16, //100$
@@ -786,7 +787,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
-    startAt: 1637848800,
+    startAt: 1637848860,
     endAt: 1637852400,
     claimAt: 1638367200,
     startDate: '2PM UTC 25th Nov',
@@ -895,28 +896,28 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer: 'https://polygonscan.com/address',
+    lpExplorer: 'https://bscscan.com/address',
     name: 'ArcadeNetwork',
     symbol: 'ARC-PBR',
-    description: `ARC/MATIC`,
+    description: `ARC/BNB`,
     introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
     website: 'https://arcadenet.io/',
     twitter: 'https://twitter.com/ArcadeNetwork_',
     telegram: 'https://t.me/ArcadeNetworkOfficial',
     whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
     tokenSymbol: 'ARC',
-    tokenExplorer: 'https://polygonscan.com/address',
+    tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
-    total: '16666 MATIC', //1Matic=1.8$
-    ratio: 2.6,
-    min: 166.6, //300$
-    max: 277.7, //500$
-    maxTier1: 166.6, //300$
-    maxTier2: 222.2, //400$
-    maxTier3: 277.7, //500$
+    total: '50 BNB', //1BNB=600$
+    ratio: 10000,//0.06$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
     access: 'Private',
-    network: polygonNetwork,
+    network: bscNetwork,
     distribution: '25% TGE, 25% per month in next 3 months',
     startAt: 1638453600,
     endAt: 1638457200,
@@ -961,7 +962,7 @@ export const supportedPools = [
     startAt: 1638972000,
     endAt: 1638975600,
     claimAt: 0,
-    startDate: "2PM UTC 8th Nov"
+    startDate: "2PM UTC 8th Dec"
   },
   {
     pid: 19,
@@ -1005,6 +1006,50 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 20,
+    poolId: 7,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'DeflyBall',
+    symbol: 'DEFLY-PBR',
+    description: `DEFLY/BNB`,
+    introduce: `DeflyBall - THE FIRST-EVER FLYBALL DOGS METAVERSE RACING GAME ON BSC`,
+    website: 'https://www.deflyball.com/',
+    twitter: 'https://twitter.com/WidiLand/',
+    telegram: 'https://twitter.com/DeflyBall',
+    whitepaper:
+      'https://drive.google.com/file/d/1ydxIjgCGM5ly_305ibra-i3eFLqw9ibw/view',
+    tokenSymbol: 'DEFLY',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/defly.svg',
+    totalSupply: '100,000,000 DEFLY',
+    total: '83.3 BNB',// 1BNB = 650$
+    ratio: 6000, //token price 0.1, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '34% at TGE, 33% per month in next 2 months',
+    startAt: 1639144800,
+    endAt: 1639148400,
+    claimAt: 0,
+    startDate: '2PM UTC 10th Dec',
   },
   // {
   //   pid: 17,
