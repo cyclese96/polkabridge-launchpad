@@ -10,6 +10,7 @@ const request = require('request')
 require('dotenv').config();
 
 var Web3 = require("web3");
+const getPoolObject = require("./utils");
 var web3 = new Web3();
 
 //Init Middleware
@@ -90,16 +91,31 @@ app.post("/api/ido/sign/v1", async (req, res) => {
     try {
         const api_key = req.body.apiKey;
         if (api_key !== process.env.API_KEY) {
-            return res.status(404).send({ message: "Access denied, Unauthorized user" });
+            return res.status(401).send({ message: "Access denied, Unauthorized user" });
         }
+
+        const network = req.body.network;
+        const symbol = req.body.symbol;
+
         const userAddress = req.body.userAddress;
 
+        const currPoolObj = getPoolObject(network, symbol);
+
+        if (!currPoolObj) {
+            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet" });
+        }
+
+        if (currPoolObj.startAt * 1000 > new Date().getTime()) {
+            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet" });
+        }
+
+
         if (!userAddress || userAddress === '0x0000000000000000000000000000000000000000') {
-            return res.status(404).send({ message: "Access denied, Invalid user address" });
+            return res.status(401).send({ message: "Access denied, Invalid user address" });
         }
 
         const _totalStakeAmount = await fetchStakeAmount(userAddress);
-        console.log('total stake amount ', { _totalStakeAmount, userAddress })
+        // console.log('total stake amount ', { _totalStakeAmount, userAddress })
         const userSting = Web3.utils.soliditySha3(
             { t: 'address', v: userAddress },
             { t: 'uint256', v: _totalStakeAmount }
@@ -139,7 +155,6 @@ app.post("/api/recaptcha/verify/v1", async (req, res) => {
         const verificationValue = req.body.verificationValue;
 
         const postData = { secret: process.env.GOOGLE_CAPTCHA_KEY, response: verificationValue };
-        console.log(postData)
 
         var clientServerOptions = {
             uri: 'https://www.google.com/recaptcha/api/siteverify',

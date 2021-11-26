@@ -591,12 +591,11 @@ export const getPurchasesAmount = async (lpAddress, pid, account, lpNetwork) => 
   }
 }
 
-const signedIdoString = async (account) => {
+const signedIdoString = async (account, network, symbol) => {
   try {
     const _api = process.env.NODE_ENV === 'production' ? process.env.REACT_APP_IDO_API_PRODUCTION : process.env.REACT_APP_IDO_API_DEVELOPMENT;
 
-    // console.log('api', _api)
-    const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY.split('').reverse().join('') })
+    const signedRes = await axios.post(`${_api}/api/ido/sign/v1`, { network, symbol, userAddress: account, apiKey: process.env.REACT_APP_IDO_API_KEY.split('').reverse().join('') })
 
     return signedRes.data;
   } catch (error) {
@@ -628,18 +627,18 @@ const convertToWei = (amount) => {
   return new BigNumber(_amount).times(new BigNumber(10).pow(18)).toString()
 }
 
-export const joinpool = async (lpAddress, pid, stakeAmount, ethValue, account, network) => {
+export const joinpool = async (lpAddress, pid, stakeAmount, ethValue, account, network, symbol) => {
 
   try {
     const chainId = await getCurrentNetworkId();
     const currentNetwork = getNetworkName(chainId);
 
-    const _launchpadContract = getCurrentLaunchpadContract(lpAddress, pid, network, currentNetwork)
-    const signedData = await signedIdoString(account)
+    const _launchpadContract = getCurrentLaunchpadContract(lpAddress, pid, network, currentNetwork);
+    const signedData = await signedIdoString(account, network, symbol);
 
-    const v = signedData.v;
-    const r = signedData.r;
-    const s = signedData.s;
+    const v = signedData && signedData.v;
+    const r = signedData && signedData.r;
+    const s = signedData && signedData.s;
 
     if (network === polygonNetwork) {
       return _launchpadContract.methods
@@ -713,120 +712,6 @@ export const harvest = async (lpAddress, pid, account, network) => {
   }
 
 }
-
-// export const stake = async (masterChefContract, pid, amount, account) => {
-//   return masterChefContract.methods
-//     .deposit(
-//       pid,
-//       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
-//     )
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
-
-// export const unstake = async (masterChefContract, pid, amount, account) => {
-//   return masterChefContract.methods
-//     .withdraw(
-//       pid,
-//       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
-//     )
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
-// export const harvest = async (masterChefContract, pid, account) => {
-//   return masterChefContract.methods
-//     .claimReward(pid)
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
-
-// export const getStaked = async (pid, account) => {
-//   try {
-
-//     const abi = maticStakeAbi
-//     const address = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
-//     const maticStakeContract = getContractInstance(abi, address, polygonNetwork)
-
-//     const stakeDate = await maticStakeContract.methods
-//       .userInfo(0, account)
-//       .call()
-//     return stakeDate
-//   } catch (e) {
-//     console.log('getStaked', e)
-//     return {}
-//   }
-// }
-
-// // export const redeem = async (masterChefContract, account) => {
-// //   let now = new Date().getTime() / 1000
-// //   if (now >= 1597172400) {
-// //     return masterChefContract.methods
-// //       .exit()
-// //       .send({ from: account })
-// //       .on('transactionHash', (tx) => {
-// //         console.log(tx)
-// //         return tx.transactionHash
-// //       })
-// //   } else {
-// //     alert('pool not active')
-// //   }
-// // }
-
-
-// export const getXPolkaBridgeSupply = async (pbr) => {
-//   return new BigNumber(await pbr.contracts.xPolkaBridgeStaking.methods.totalSupply().call())
-// }
-
-// export const getLockOf = async (pbr, account) => {
-//   var pbr = getPolkaBridgeContract(pbr)
-
-//   return new BigNumber(await pbr.methods.lockOf(account).call())
-// }
-
-// export const unlock = async (pbr, account) => {
-//   var pbr = getPolkaBridgeContract(pbr)
-//   return pbr.methods
-//     .unlock()
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
-// export const enter = async (contract, amount, account) => {
-//   return contract.methods
-//     .enter(
-//       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
-//     )
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
-
-
-
-// export const leave = async (contract, amount, account) => {
-//   return contract.methods
-//     .leave(
-//       new BigNumber(amount).times(new BigNumber(10).pow(18)).toString(),
-//     )
-//     .send({ from: account })
-//     .on('transactionHash', (tx) => {
-//       console.log(tx)
-//       return tx.transactionHash
-//     })
-// }
 
 
 // fetch user staking data

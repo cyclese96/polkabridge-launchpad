@@ -691,7 +691,7 @@ const JoinLaunchpad: React.FC = () => {
                         setPendingTx(true)
                         // const token = recaptchaRef?.current.executeAsync();
                         // console.log('captcha test ', token)
-                        var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, lpAddress, network)
+                        var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, lpAddress, network, id)
                         setPendingTx(false)
                         if (tx) {
                           setSuccessTx(true)
