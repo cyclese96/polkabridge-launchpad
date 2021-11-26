@@ -787,7 +787,7 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
-    startAt: 1638280800,
+    startAt: 1637848860,
     endAt: 1637852400,
     claimAt: 1638367200,
     startDate: '2PM UTC 25th Nov',
