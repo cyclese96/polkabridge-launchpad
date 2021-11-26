@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const currentConnection = false ? 'mainnet' : 'testnet'
+const currentConnection = true ? 'mainnet' : 'testnet'
 
 const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
 const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
