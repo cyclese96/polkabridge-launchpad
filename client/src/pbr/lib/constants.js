@@ -798,11 +798,11 @@ export const supportedPools = [
   },
   {
     pid: 15,
-    poolId: 5,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+      56: '0x1ced64bc451ae89b435f4a6b0c089ce308b593ca',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
@@ -824,28 +824,30 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/peoplez.svg',
     totalSupply: '18,000,000 LEZ',
-    total: '125 BNB', //1BNB = 400$
-    ratio: 0,//0.7$
-    min: 0.75, //300$
-    max: 1.25, //500$
-    maxTier1: 0.75, //300$
-    maxTier2: 1, //400$
-    maxTier3: 1.25, //500$
+    total: '83.3 BNB', //1BNB = 600$
+    ratio: 857.1,//0.7$
+    min: 0.75, //100$
+    max: 1.25, //300$
+    maxTier1: 0.75, //100$
+    maxTier2: 1, //200$
+    maxTier3: 1.25, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: '50% TGE, 50% next month',
-    startAt: 1638194400,
-    endAt: 1734569200,
-    claimAt: 0,
+    startAt: 1638194430,
+    endAt: 1638198000,
+    claimAt: 1638277200,
     startDate: '2PM UTC 29th Nov',
+    claimTimeArr: [1638277200, 1640869200],
+    harvestDistribution: [50, 50]
   },
   {
     pid: 16,
-    poolId: 7,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+      56: '',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
@@ -885,11 +887,11 @@ export const supportedPools = [
   },
   {
     pid: 17,
-    poolId: 7,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      137: '0xdcAD5608a4ec6b5146B1873c2C9AEA19B329769C',
+      137: '',
       80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
