@@ -1,12 +1,10 @@
 import BigNumber from 'bignumber.js'
-// import { ethers } from 'ethers'
 import axios from 'axios'
 import config from '../config'
 import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork, harmonyNetwork, harmonyChainIds, HMY_TESTNET_RPC_URL } from './lib/constants'
-// import { pbr, pbrAddress, pbrAddressMainnet } from '../constants/tokenAddresses'
 import Web3 from 'web3'
 
-import stakingAbi from '../contracts/PolkaBridgeStaking.json'
+import stakingAbi from '../pbr/lib/abi/staking.json'
 import LaunchpadAbi from './lib/abi/masterLaunchpad.json';
 import LaunchpadBscAbi from './lib/abi/launchpadBsc.json';
 import ERC20Abi from './lib/abi/erc20.json'

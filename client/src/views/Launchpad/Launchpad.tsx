@@ -11,7 +11,6 @@ import useLaunchpad from '../../hooks/useLaunchpad'
 // import useModal from '../../hooks/useModal'
 // import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
-// import useBulkPairData from '../../hooks/useBulkPairData'
 import { BigNumber } from '../../pbr'
 import {
   formatFloatValue,
@@ -21,10 +20,8 @@ import {
   getProgress,
   getUserStakingData,
 } from '../../pbr/utils'
-// import { getContract } from '../../utils/erc20'
-// import { getBalanceNumber } from '../../utils/formatBalance'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-// import { Contract } from 'web3-eth-contract'
+
 import { white } from '../../theme/colors'
 import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, tierConditions } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
