@@ -715,10 +715,10 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address',
+    lpExplorer: 'https://bscscan.com/address/0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
     name: 'Torekko',
     symbol: 'TRK-PBR',
     description: `TRK/BNB`,
@@ -729,7 +729,7 @@ export const supportedPools = [
     whitepaper:
       'https://docsend.com/view/s3nnspuswq6w9yyq/d/h5v7983cv274w9u6',
     tokenSymbol: 'TRK',
-    tokenExplorer: 'https://bscscan.com/token',
+    tokenExplorer: 'https://bscscan.com/token/0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
     icon: '/img/tokens/torekko.png',
     totalSupply: '100,000,000 TRK',
     total: '89.2 BNB',// 1BNB = 560$
@@ -745,9 +745,9 @@ export const supportedPools = [
     distribution: '34% on TGE, then 33% monthly over 2 months',
     startAt: 1637766000,
     endAt: 1637769600,
-    claimAt: 1638277200,
+    claimAt: 1638279000,
     startDate: '2PM UTC 24th Nov',
-    claimTimeArr: [1638277200, 1640869200, 1643547600],
+    claimTimeArr: [1638279000, 1640869200, 1643547600],
     harvestDistribution: [34, 33, 33]
   },
   {
@@ -812,7 +812,7 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'PeopleZ',
     symbol: 'LEZ-PBR',
     description: `LEZ/BNB`,
@@ -822,7 +822,7 @@ export const supportedPools = [
     telegram: 'https://t.me/Peoplez_io',
     whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
     tokenSymbol: 'LEZ',
-    tokenExplorer: 'https://bscscan.com/address',
+    tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/peoplez.svg',
     totalSupply: '18,000,000 LEZ',
     total: '83.3 BNB', //1BNB = 600$
@@ -836,11 +836,11 @@ export const supportedPools = [
     access: 'Private',
     network: bscNetwork,
     distribution: '50% TGE, 50% next month',
-    startAt: 1638194430,
-    endAt: 1638198000,
-    claimAt: 1638277200,
+    startAt: 1638196230,
+    endAt: 1638199800,
+    claimAt: 1638278100,
     startDate: '2PM UTC 29th Nov',
-    claimTimeArr: [1638277200, 1640869200],
+    claimTimeArr: [1638278100, 1640869200],
     harvestDistribution: [50, 50]
   },
   {
@@ -938,14 +938,14 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
+      56: '',
       97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
     },
     tokenAddresses: {
       1: '',
       42: '',
     },
-    lpExplorer: 'https://etherscan.io/address',
+    lpExplorer: 'https://bscscan.com/address',
     name: 'SolClout',
     symbol: 'SOLC-PBR',
     description: `SOLC/ETH`,
@@ -955,7 +955,7 @@ export const supportedPools = [
     telegram: 'https://t.me/solclout',
     whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
     tokenSymbol: 'SOLC',
-    tokenExplorer: 'https://etherscan.io/token',
+    tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/solc.png',
     totalSupply: '1,000,000,000 SOLC',
     total: '181.8 BNB',//1BNB = 550$
@@ -974,7 +974,97 @@ export const supportedPools = [
     startDate: "2PM UTC 8th Dec"
   },
   {
-    pid: 19,
+    pid: 20,
+    poolId: 1,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
+      56: '',
+      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'DeflyBall',
+    symbol: 'DEFLY-PBR',
+    description: `DEFLY/BNB`,
+    introduce: `DeflyBall - THE FIRST-EVER FLYBALL DOGS METAVERSE RACING GAME ON BSC`,
+    website: 'https://www.deflyball.com/',
+    twitter: 'https://twitter.com/DeflyBall',
+    telegram: 'https://t.me/deflyball_official',
+    whitepaper:
+      'https://drive.google.com/file/d/1ydxIjgCGM5ly_305ibra-i3eFLqw9ibw/view',
+    tokenSymbol: 'DEFLY',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/defly.svg',
+    totalSupply: '100,000,000 DEFLY',
+    total: '83.3 BNB',// 1BNB = 650$
+    ratio: 6000, //token price 0.1, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '34% at TGE, 33% per month in next 2 months',
+    startAt: 1639144800,
+    endAt: 1639148400,
+    claimAt: 0,
+    startDate: '2PM UTC 10th Dec',
+  },
+  {
+    pid: 21,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
+      1285: ''//mainnet
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      1287: '',
+      1285: '',
+    },
+    lpExplorer: 'https://moonriver.moonscan.io/address/',
+    name: 'AlphaDex',
+    symbol: 'ROAR-PBR',
+    description: `ROAR/MORV`,
+    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
+    website: 'https://alphadex.io/',
+    twitter: 'https://twitter.com/thealphadex',
+    telegram: 'https://t.me/alphadexio',
+    whitepaper: 'https://docsend.com/view/s/i97dbf746he9wmd3',
+    tokenSymbol: 'ROAR',
+    tokenExplorer: 'https://moonriver.moonscan.io/address/',
+    icon: '/img/tokens/alphadex.jpg',
+    totalSupply: '120,000,000 ROAR',
+    total: '266.6 MORV',//300$
+    ratio: 100,//0.22$
+    min: 1, //100$
+    max: 5, //300$
+    maxTier1: 1, //100$
+    maxTier2: 3, //200$
+    maxTier3: 5, //300$
+    access: 'Private',
+    network: moonriverNetwork,
+    distribution: '20% at TGE, 40% per month in next 2 months',
+    startAt: 1533939514,
+    endAt: 1734569200,
+    claimAt: 1533939514,
+    startDate: '11th November',
+    claimTimeArr: [1533939514, 1639029546]
+  },
+
+
+  {
+    pid: 22,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -1015,95 +1105,7 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
-  },
-  {
-    pid: 20,
-    poolId: 1,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'DeflyBall',
-    symbol: 'DEFLY-PBR',
-    description: `DEFLY/BNB`,
-    introduce: `DeflyBall - THE FIRST-EVER FLYBALL DOGS METAVERSE RACING GAME ON BSC`,
-    website: 'https://www.deflyball.com/',
-    twitter: 'https://twitter.com/DeflyBall',
-    telegram: 'https://t.me/deflyball_official',
-    whitepaper:
-      'https://drive.google.com/file/d/1ydxIjgCGM5ly_305ibra-i3eFLqw9ibw/view',
-    tokenSymbol: 'DEFLY',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/defly.svg',
-    totalSupply: '100,000,000 DEFLY',
-    total: '83.3 BNB',// 1BNB = 650$
-    ratio: 6000, //token price 0.1, 1BNB = 600$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: '34% at TGE, 33% per month in next 2 months',
-    startAt: 1639144800,
-    endAt: 1639148400,
-    claimAt: 0,
-    startDate: '2PM UTC 10th Dec',
-  },
-  {
-    pid: 100,
-    poolId: 1,
-    lpAddresses: {
-      1: '',
-      42: '',
-      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
-      1285: ''//mainnet
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      1287: '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
-      1285: '',
-    },
-    lpExplorer: 'https://moonbase.moonscan.io/address/0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
-    name: 'AlphaDex Private Pool',
-    symbol: 'IDO-PBR',
-    description: `IDO/MORV`,
-    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
-    website: 'https://alphadex.io/',
-    twitter: '',
-    telegram: '',
-    whitepaper: '',
-    tokenSymbol: 'IDO',
-    tokenExplorer: 'https://moonbase.moonscan.io//address/0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
-    icon: '/img/tokens/alphadex.jpg',
-    totalSupply: '100,000,000 IDO',
-    total: '10000 MORV',
-    ratio: 100,
-    min: 1, //300$
-    max: 5, //500$
-    maxTier1: 1, //300$
-    maxTier2: 3, //400$
-    maxTier3: 5, //500$
-    access: 'Public',
-    network: moonriverNetwork,
-    distribution: '50% at TGE, 50% after 1 month',
-    startAt: 1533939514,
-    endAt: 1734569200,
-    claimAt: 1533939514,
-    startDate: '11th November',
-    claimTimeArr: [1533939514, 1639029546]
-  },
+  }
   // {
   //   pid: 50,
   //   poolId: 2,
