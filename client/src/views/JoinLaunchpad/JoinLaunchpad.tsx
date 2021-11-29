@@ -30,7 +30,15 @@ import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
 
-import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, tierConditions } from '../../pbr/lib/constants'
+import {
+  bscNetwork,
+  ethereumNetwork,
+  getPoolId,
+  harmonyNetwork,
+  moonriverNetwork,
+  polygonNetwork,
+  tierConditions,
+} from '../../pbr/lib/constants'
 
 interface JoinHistory {
   amount: number
@@ -128,47 +136,48 @@ const JoinLaunchpad: React.FC = () => {
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
   const [tokenPurchased, setTokenPurchased] = useState('') // token purchase by the user so far
-  const [percentClaimed, setPercentClaimed] = useState(0);// percent token claimed/harvested by the user so far
-  const [numberClaimed, setNumberClaimed] = useState(0);// number of times users has claimed/harvested so far
+  const [percentClaimed, setPercentClaimed] = useState(0) // percent token claimed/harvested by the user so far
+  const [numberClaimed, setNumberClaimed] = useState(0) // number of times users has claimed/harvested so far
   const [recentClaimTime, setRecentClaimTime] = useState(claimAt)
   const [totalRewardClaims, setTotalRewardClaims] = useState(1)
   const { onJoinPool } = useJoinPool()
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
 
-  const [captchaVerified, setCaptchaVerified] = useState(false);
-  const [harvestDistribution, setHarestDistribution] = useState([]);
+  const [captchaVerified, setCaptchaVerified] = useState(false)
+  const [harvestDistribution, setHarestDistribution] = useState([])
 
-  const recaptchaRef = React.useRef();
+  const recaptchaRef = React.useRef()
   const currentPoolId = (pid: number, network: string) => {
     const _pid = getPoolId(pid, network)
 
-    return _pid;
+    return _pid
   }
 
-
   const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
-
     if (!_userInfoData) {
-      return 0;
+      return 0
     }
 
-    if (_claimTimeArr && _claimTimeArr.length > 1 && parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length) {
-
+    if (
+      _claimTimeArr &&
+      _claimTimeArr.length > 1 &&
+      parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length
+    ) {
       return _claimTimeArr[parseInt(_userInfoData.harvestInfo.NumberClaimed)]
-
     } else {
-      return claimAt;
+      return claimAt
     }
-
-
   }
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
-      const [claimTimeArr, claimDistribution] = getPoolClaimTimeArr(poolId, network);
-      setHarestDistribution(!claimDistribution ? [] : claimDistribution);
+      const [claimTimeArr, claimDistribution] = getPoolClaimTimeArr(
+        poolId,
+        network,
+      )
+      setHarestDistribution(!claimDistribution ? [] : claimDistribution)
       const [
         newIsWhitelist,
         newETHBalance,
@@ -183,24 +192,25 @@ const JoinLaunchpad: React.FC = () => {
           currentPoolId(pid, network),
           stakedAmount,
           account,
-          network
+          network,
         ),
         getETHBalance(ethereum, account),
         getHistory(account),
-        getProgress(lpAddress, currentPoolId(pid, network), startAt, endAt, network),
+        getProgress(
+          lpAddress,
+          currentPoolId(pid, network),
+          startAt,
+          endAt,
+          network,
+        ),
         getPurchasesAmount(
           lpAddress,
           currentPoolId(pid, network),
           account,
-          network
+          network,
         ),
         getUserStakingData(currentPoolId(pid, network), account, network),
-        getUserInfo(
-          lpAddress,
-          currentPoolId(pid, network),
-          account,
-          network
-        ),
+        getUserInfo(lpAddress, currentPoolId(pid, network), account, network),
       ])
       setLoading(false)
 
@@ -222,11 +232,19 @@ const JoinLaunchpad: React.FC = () => {
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
-      setTokenPurchased(userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0')
-      setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
-      setNumberClaimed(userInfoData.harvestInfo ? userInfoData.harvestInfo.NumberClaimed : null)
+      setTokenPurchased(
+        userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0',
+      )
+      setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0)
+      setNumberClaimed(
+        userInfoData.harvestInfo
+          ? userInfoData.harvestInfo.NumberClaimed
+          : null,
+      )
       setRecentClaimTime(getCurrentClaimTime(userInfoData, claimTimeArr))
-      setTotalRewardClaims(claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1);
+      setTotalRewardClaims(
+        claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1,
+      )
       //set current claimAt time
     }
     if (pid >= 0) {
@@ -254,7 +272,7 @@ const JoinLaunchpad: React.FC = () => {
     setPercentClaimed,
     setNumberClaimed,
     setRecentClaimTime,
-    setTotalRewardClaims
+    setTotalRewardClaims,
   ])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
@@ -289,11 +307,19 @@ const JoinLaunchpad: React.FC = () => {
   )
 
   const getMaxValue = () => {
-    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
+    const _stakedAmountInBigNumWei = new BigNumber(
+      fromWei(stakedAmount.toString()),
+    )
     let maxValue = 0
-    if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) && _stakedAmountInBigNumWei.lt(tierConditions.maxTier1.max)) {
+    if (
+      _stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) &&
+      _stakedAmountInBigNumWei.lt(tierConditions.maxTier1.max)
+    ) {
       maxValue = maxTier1
-    } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier2.min) && _stakedAmountInBigNumWei.lt(tierConditions.maxTier2.max)) {
+    } else if (
+      _stakedAmountInBigNumWei.gte(tierConditions.maxTier2.min) &&
+      _stakedAmountInBigNumWei.lt(tierConditions.maxTier2.max)
+    ) {
       maxValue = maxTier2
     } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier3.min)) {
       maxValue = maxTier3
@@ -302,15 +328,17 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onMax = useCallback(() => {
-
-    let _max = 0;
+    let _max = 0
     if (access === 'Whitelist') {
-      _max = maxWhitelistPurchase;
+      _max = maxWhitelistPurchase
     } else {
       _max = access === 'Public' ? maxTier2 : getMaxValue()
     }
 
-    let newTokenValue = new BigNumber(_max).multipliedBy(ratio).toFixed(0).toString()
+    let newTokenValue = new BigNumber(_max)
+      .multipliedBy(ratio)
+      .toFixed(0)
+      .toString()
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
     // console.log({ newTokenValue, tokenPurchased, ratio, _max })
@@ -324,22 +352,24 @@ const JoinLaunchpad: React.FC = () => {
       return 'MATIC'
     } else if (network === harmonyNetwork) {
       return 'ONE'
+    } else if (network === moonriverNetwork) {
+      return 'MOVR'
     } else {
-      return 'ETH';
+      return 'ETH'
     }
   }
 
   const networkIcon = () => {
-
-
     if (network === bscNetwork) {
       return '/img/tokens/bnb.png'
     } else if (network === polygonNetwork) {
       return '/img/tokens/polygon.png'
     } else if (network === harmonyNetwork) {
       return '/img/tokens/one.png'
+    } else if (network === moonriverNetwork) {
+      return '/img/moon.png'
     } else {
-      return '/img/tokens/eth.png';
+      return '/img/tokens/eth.png'
     }
   }
 
@@ -347,8 +377,13 @@ const JoinLaunchpad: React.FC = () => {
     const _value1 = new BigNumber(value1 ? value1 : 0)
     const _value2 = new BigNumber(value2 ? value2 : 0)
 
-    console.log('equal flag  ', new BigNumber(_value1.toFixed(4)).eq(_value2.toFixed(4)))
-    return new BigNumber(_value1.toFixed(3).toString()).eq(_value2.toFixed(3).toString())
+    console.log(
+      'equal flag  ',
+      new BigNumber(_value1.toFixed(4)).eq(_value2.toFixed(4)),
+    )
+    return new BigNumber(_value1.toFixed(3).toString()).eq(
+      _value2.toFixed(3).toString(),
+    )
   }
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
@@ -437,18 +472,22 @@ const JoinLaunchpad: React.FC = () => {
   const reset = useCallback(async () => {
     const newETHBalance = await getETHBalance(ethereum, account)
     const newHistory = await getHistory(account)
-    const newProgress = await getProgress(lpAddress, currentPoolId(pid, network), network)
+    const newProgress = await getProgress(
+      lpAddress,
+      currentPoolId(pid, network),
+      network,
+    )
     const newPurchasedAmount = await getPurchasesAmount(
       lpAddress,
       currentPoolId(pid, network),
       account,
-      network
+      network,
     )
     const userInfoData = await getUserInfo(
       lpAddress,
       currentPoolId(pid, network),
       account,
-      network
+      network,
     )
 
     setETHBalance(newETHBalance)
@@ -457,8 +496,10 @@ const JoinLaunchpad: React.FC = () => {
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
     setTokenValue('')
-    setTokenPurchased(userInfoData.userInfo ? (fromWei(userInfoData.userInfo[1])) : '0')
-    setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0);
+    setTokenPurchased(
+      userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0',
+    )
+    setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0)
   }, [
     ethereum,
     account,
@@ -471,7 +512,7 @@ const JoinLaunchpad: React.FC = () => {
     setTokenValue,
     setETHValue,
     setTokenPurchased,
-    setPercentClaimed
+    setPercentClaimed,
   ])
 
   const [onPresentSuccess] = useModal(
@@ -500,84 +541,106 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const getRemainTokenPercentToClaim = (_percentClaimed: number) => {
-
-    if (new BigNumber(100).minus(_percentClaimed).eq(0) || new BigNumber(100).minus(_percentClaimed).gt(1)) {
+    if (
+      new BigNumber(100).minus(_percentClaimed).eq(0) ||
+      new BigNumber(100).minus(_percentClaimed).gt(1)
+    ) {
       return new BigNumber(100).minus(_percentClaimed).toFixed(0).toString()
     }
-    return new BigNumber(100).minus(_percentClaimed).toFixed(3).toString();
+    return new BigNumber(100).minus(_percentClaimed).toFixed(3).toString()
   }
 
-  const getRemainTokensToClaim = (_tokenPurchased: string, _percentClaimed: number) => {
+  const getRemainTokensToClaim = (
+    _tokenPurchased: string,
+    _percentClaimed: number,
+  ) => {
     if (!_tokenPurchased) {
       return 0
     }
     if (new BigNumber(_percentClaimed).eq(0)) {
-      return _tokenPurchased;
+      return _tokenPurchased
     }
     if (new BigNumber(_tokenPurchased).lt(1)) {
-      return new BigNumber((parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed)).toFixed(4).toString()
+      return new BigNumber(
+        (parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed),
+      )
+        .toFixed(4)
+        .toString()
     }
-    return new BigNumber((parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed)).toFixed(2).toString()
+    return new BigNumber(
+      (parseFloat(_tokenPurchased) / 100) * (100 - _percentClaimed),
+    )
+      .toFixed(2)
+      .toString()
   }
 
   const getPercent = (value: number, total: number) => {
-    return parseFloat(new BigNumber((value / total) * 100).toFixed(2).toString());
+    return parseFloat(
+      new BigNumber((value / total) * 100).toFixed(2).toString(),
+    )
   }
-  const claimStatusText = (_recentClaimTime: number, _numberClaimed: number, _totalRewardClaims: number) => {
-
-
+  const claimStatusText = (
+    _recentClaimTime: number,
+    _numberClaimed: number,
+    _totalRewardClaims: number,
+  ) => {
     if (_totalRewardClaims > 1) {
-
       if (_recentClaimTime * 1000 > new Date().getTime()) {
-
-        return <StyledTitle>
-          {harvestDistribution.length > 0 ? harvestDistribution[_numberClaimed] : getPercent(1, _totalRewardClaims)}% Reward tokens will be available to harvest in approx -{' '}
-          <Countdown
-            date={new Date(_recentClaimTime * 1000)}
-            renderer={renderer}
-          />
-        </StyledTitle>
+        return (
+          <StyledTitle>
+            {harvestDistribution.length > 0
+              ? harvestDistribution[_numberClaimed]
+              : getPercent(1, _totalRewardClaims)}
+            % Reward tokens will be available to harvest in approx -{' '}
+            <Countdown
+              date={new Date(_recentClaimTime * 1000)}
+              renderer={renderer}
+            />
+          </StyledTitle>
+        )
       } else {
-
-        return <StyledCenterRow>
-          {new BigNumber(tokenPurchased).gt(0) ? <StyledInfoLabel1 className="mt-4">
-            Reward tokens are now available to harvest
-          </StyledInfoLabel1> : ""}
-
-        </StyledCenterRow>
+        return (
+          <StyledCenterRow>
+            {new BigNumber(tokenPurchased).gt(0) ? (
+              <StyledInfoLabel1 className="mt-4">
+                Reward tokens are now available to harvest
+              </StyledInfoLabel1>
+            ) : (
+              ''
+            )}
+          </StyledCenterRow>
+        )
       }
-
-
     } else {
-
       if (_recentClaimTime * 1000 > new Date().getTime()) {
-
-        return <StyledTitle>
-          Reward tokens will be available to harvest in approx -{' '}
-          <Countdown
-            date={new Date(_recentClaimTime * 1000)}
-            renderer={renderer}
-          />
-        </StyledTitle>
+        return (
+          <StyledTitle>
+            Reward tokens will be available to harvest in approx -{' '}
+            <Countdown
+              date={new Date(_recentClaimTime * 1000)}
+              renderer={renderer}
+            />
+          </StyledTitle>
+        )
       } else {
-
-        return <StyledCenterRow>
-          {new BigNumber(tokenPurchased).gt(0) ? <StyledInfoLabel1 className="mt-4">
-            Reward tokens are now available to harvest
-          </StyledInfoLabel1> : ""}
-
-        </StyledCenterRow>
+        return (
+          <StyledCenterRow>
+            {new BigNumber(tokenPurchased).gt(0) ? (
+              <StyledInfoLabel1 className="mt-4">
+                Reward tokens are now available to harvest
+              </StyledInfoLabel1>
+            ) : (
+              ''
+            )}
+          </StyledCenterRow>
+        )
       }
     }
-
-
   }
 
   const handleCaptchaVerification = async (value: string) => {
-
     try {
-
-      const verificationStatus = await verifyCaptcha(value);
+      const verificationStatus = await verifyCaptcha(value)
 
       console.log(verificationStatus?.['success'])
 
@@ -589,7 +652,6 @@ const JoinLaunchpad: React.FC = () => {
     } catch (error) {
       console.log('handleCaptchaVerification', error)
     }
-
   }
 
   return (
@@ -605,7 +667,16 @@ const JoinLaunchpad: React.FC = () => {
       />
 
       <StyledLaunchpad>
-        <ModalSuccessHarvest loading={loading} onDismiss={handleClose} symbol={name} open={successHarvestTx} amount={tokenPurchased.toString()} percent={percentClaimed} text={"harvest"} txhash={txhash} />
+        <ModalSuccessHarvest
+          loading={loading}
+          onDismiss={handleClose}
+          symbol={name}
+          open={successHarvestTx}
+          amount={tokenPurchased.toString()}
+          percent={percentClaimed}
+          text={'harvest'}
+          txhash={txhash}
+        />
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">
@@ -631,7 +702,8 @@ const JoinLaunchpad: React.FC = () => {
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
-                  Your staked amount: {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                  Your staked amount:{' '}
+                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase: {getMaxValue() + ' ' + networkSymbol()}
@@ -648,7 +720,9 @@ const JoinLaunchpad: React.FC = () => {
                 <StyledInputContainer>
                   <StyledRow>
                     <StyledLabel>INPUT</StyledLabel>
-                    <StyledLabel>Your Wallet Balance: {ethBalance.toFixed(4)}</StyledLabel>
+                    <StyledLabel>
+                      Your Wallet Balance: {ethBalance.toFixed(4)}
+                    </StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
                     <StyledInput
@@ -724,8 +798,12 @@ const JoinLaunchpad: React.FC = () => {
                     <ReCAPTCHA
                       ref={recaptchaRef}
                       size="normal"
-                      type='image'
-                      sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA_KEY?.split('')?.reverse()?.join('')}
+                      type="image"
+                      sitekey={process.env.REACT_APP_GOOGLE_CAPTCHA_KEY?.split(
+                        '',
+                      )
+                        ?.reverse()
+                        ?.join('')}
                       onChange={handleCaptchaVerification}
                     />
                   </StyledCenterRow>
@@ -738,7 +816,14 @@ const JoinLaunchpad: React.FC = () => {
                         setPendingTx(true)
                         // const token = recaptchaRef?.current.executeAsync();
                         // console.log('captcha test ', token)
-                        var tx: any = await onJoinPool(currentPoolId(pid, network), ethValue, stakedAmount, lpAddress, network, id)
+                        var tx: any = await onJoinPool(
+                          currentPoolId(pid, network),
+                          ethValue,
+                          stakedAmount,
+                          lpAddress,
+                          network,
+                          id,
+                        )
                         setPendingTx(false)
                         if (tx) {
                           setSuccessTx(true)
@@ -764,9 +849,6 @@ const JoinLaunchpad: React.FC = () => {
 
                   </Button>
                 )}
-
-
-
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
@@ -793,12 +875,18 @@ const JoinLaunchpad: React.FC = () => {
                   </StyledCenterRow>
                 )} */}
 
-                {new BigNumber(tokenPurchased).gt(0) && claimStatusText(recentClaimTime, numberClaimed, totalRewardClaims)}
+                {new BigNumber(tokenPurchased).gt(0) &&
+                  claimStatusText(
+                    recentClaimTime,
+                    numberClaimed,
+                    totalRewardClaims,
+                  )}
 
                 <StyledInputContainer>
                   <StyledCenterRow>
                     <StyledHarvestAmount>
-                      {getRemainTokensToClaim(tokenPurchased, percentClaimed)} {tokenSymbol}
+                      {getRemainTokensToClaim(tokenPurchased, percentClaimed)}{' '}
+                      {tokenSymbol}
                     </StyledHarvestAmount>
                   </StyledCenterRow>
                 </StyledInputContainer>
@@ -822,7 +910,11 @@ const JoinLaunchpad: React.FC = () => {
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest(currentPoolId(pid, network), lpAddress, network)
+                      var tx: any = await onHarvest(
+                        currentPoolId(pid, network),
+                        lpAddress,
+                        network,
+                      )
                       setPendingHarvestTx(false)
                       if (tx) {
                         console.log('harvest ' + tx)
@@ -835,21 +927,25 @@ const JoinLaunchpad: React.FC = () => {
                     }
                   }}
                 >
-                  {new BigNumber(tokenPurchased).gt(0) && recentClaimTime * 1000 > new Date().getTime() && (
-                    <Countdown
-                      date={new Date(recentClaimTime * 1000)}
-                      renderer={renderer}
-                    />
-                  )}
+                  {new BigNumber(tokenPurchased).gt(0) &&
+                    recentClaimTime * 1000 > new Date().getTime() && (
+                      <Countdown
+                        date={new Date(recentClaimTime * 1000)}
+                        renderer={renderer}
+                      />
+                    )}
                 </Button>
                 <StyledCenterRow>
-                  {claimAt * 1000 > new Date().getTime() || new BigNumber(tokenPurchased).lte(0) ? "" : (<StyledInfoLabel className="mt-4">
-
-                    Remain tokens to claim {getRemainTokenPercentToClaim(percentClaimed)}%
-                  </StyledInfoLabel>)}
-
+                  {claimAt * 1000 > new Date().getTime() ||
+                    new BigNumber(tokenPurchased).lte(0) ? (
+                    ''
+                  ) : (
+                    <StyledInfoLabel className="mt-4">
+                      Remain tokens to claim{' '}
+                      {getRemainTokenPercentToClaim(percentClaimed)}%
+                    </StyledInfoLabel>
+                  )}
                 </StyledCenterRow>
-
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
