@@ -791,9 +791,9 @@ export const supportedPools = [
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
     startAt: 1637848860,
     endAt: 1637852400,
-    claimAt: 1638367200,
+    claimAt: 1640008800,
     startDate: '2PM UTC 25th Nov',
-    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200],
+    claimTimeArr: [1640008800, 1641045600, 1643724000, 1646143200],
     harvestDistribution: [30, 30, 30, 10]
   },
   {
@@ -826,11 +826,12 @@ export const supportedPools = [
     totalSupply: '18,000,000 LEZ',
     total: '83.3 BNB', //1BNB = 600$
     ratio: 857.1,//0.7$
-    min: 0.75, //100$
-    max: 1.25, //300$
-    maxTier1: 0.75, //100$
-    maxTier2: 1, //200$
-    maxTier3: 1.25, //300$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    maxWhitelistPurchase: 1.66,//1k
     access: 'Private',
     network: bscNetwork,
     distribution: '50% TGE, 50% next month',
@@ -870,20 +871,23 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/widiland.png',
     totalSupply: '400,000,000 WIDI',
-    total: '61.5 BNB',// 1BNB = 650$
-    ratio: 16250, //token price 0.04, 1BNB = 650$
-    min: 0.46, //300$
-    max: 0.76, //500$
-    maxTier1: 0.46, //300$
-    maxTier2: 0.61, //400$
-    maxTier3: 0.76, //500$
-    access: 'Private',
+    total: '66.6 BNB', //1BNB = 600$
+    ratio: 15000, //token price 0.04, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    maxWhitelistPurchase: 0.08,//special 1k, public whitelist 50$
+    access: 'Whitelist',
     network: bscNetwork,
     distribution: '25% at TGE, 25% per month in next 3 months',
-    startAt: 1637907996,
-    endAt: 1638284400,
-    claimAt: 0,
+    startAt: 1638280830,//whitelist round 1638280830, private round 1638284430
+    endAt: 1638283500,//whitelist round 1638283500, private round 1638287100
+    claimAt: 1638367200,
     startDate: '2PM UTC 30th Nov',
+    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200],
+    harvestDistribution: [25, 25, 25, 25]
   },
   {
     pid: 17,
@@ -891,8 +895,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      137: '',
-      80001: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
+      56: '',
+      97: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
       1: '',
@@ -1032,8 +1036,8 @@ export const supportedPools = [
     description: `DEFLY/BNB`,
     introduce: `DeflyBall - THE FIRST-EVER FLYBALL DOGS METAVERSE RACING GAME ON BSC`,
     website: 'https://www.deflyball.com/',
-    twitter: 'https://twitter.com/WidiLand/',
-    telegram: 'https://twitter.com/DeflyBall',
+    twitter: 'https://twitter.com/DeflyBall',
+    telegram: 'https://t.me/deflyball_official',
     whitepaper:
       'https://drive.google.com/file/d/1ydxIjgCGM5ly_305ibra-i3eFLqw9ibw/view',
     tokenSymbol: 'DEFLY',
@@ -1055,8 +1059,52 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 10th Dec',
   },
+  {
+    pid: 100,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
+      1285: ''//mainnet
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      1287: '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
+      1285: '',
+    },
+    lpExplorer: 'https://moonbase-blockscout.testnet.moonbeam.network/address/0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
+    name: 'AlphaDex Private Pool',
+    symbol: 'IDO-PBR',
+    description: `IDO/MORV`,
+    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
+    website: 'https://alphadex.io/',
+    twitter: '',
+    telegram: '',
+    whitepaper: '',
+    tokenSymbol: 'IDO',
+    tokenExplorer: 'https://moonbase-blockscout.testnet.moonbeam.network/address/0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
+    icon: '/img/tokens/alphadex.jpg',
+    totalSupply: '100,000,000 IDO',
+    total: '1000000 MORV',
+    ratio: 100,
+    min: 1, //300$
+    max: 5, //500$
+    maxTier1: 1, //300$
+    maxTier2: 3, //400$
+    maxTier3: 5, //500$
+    access: 'Public',
+    network: moonriverNetwork,
+    distribution: '50% at TGE, 50% after 1 month',
+    startAt: 1533939514,
+    endAt: 1734569200,
+    claimAt: 1533939514,
+    startDate: '11th November',
+    claimTimeArr: [1533939514, 1639029546]
+  },
   // {
-  //   pid: 17,
+  //   pid: 50,
   //   poolId: 2,
   //   lpAddresses: {
   //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
