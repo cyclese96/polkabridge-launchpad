@@ -195,7 +195,7 @@ const JoinLaunchpad: React.FC = () => {
           account,
           network
         ),
-        getUserStakingData(currentPoolId(pid, network), account),
+        getUserStakingData(currentPoolId(pid, network), account, network),
         getUserInfo(
           lpAddress,
           currentPoolId(pid, network),

@@ -127,7 +127,7 @@ const Launchpad: React.FC = () => {
         network
       )
 
-      const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account)
+      const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account, network)
 
       setProgress(newProgress)
 

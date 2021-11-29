@@ -715,16 +715,16 @@ export const harvest = async (lpAddress, pid, account, network) => {
 
 
 // fetch user staking data
-export const getUserStakingData = async (pid, account) => {
+export const getUserStakingData = async (pid, account, network) => {
 
   try {
 
     const abi = stakingAbi;
     const address = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42];
-    const stakeContract = getContractInstance(abi, address, 'ethereum');
+    const stakeContract = getContractInstance(abi, address, 'ethereum', network);
 
     const addressMatic = currentConnection === 'mainnet' ? stakeContractAddresses.polygon[137] : stakeContractAddresses.polygon[80001];
-    const maticStakeContract = getContractInstance(abi, addressMatic, 'polygon');
+    const maticStakeContract = getContractInstance(abi, addressMatic, 'polygon', network);
 
     const [stakedDataEth, stakedDataPoly] = await Promise.all([
       stakeContract.methods
@@ -734,6 +734,8 @@ export const getUserStakingData = async (pid, account) => {
         .userInfo(0, account)
         .call()
     ]);
+
+    // console.log('stakeAmount', { stakedDataEth, stakedDataPoly })
 
     const _totalStakedAmount = new BigNumber(stakedDataEth.amount).plus(stakedDataPoly.amount).toFixed(0).toString();
 
