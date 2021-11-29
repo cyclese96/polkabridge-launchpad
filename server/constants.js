@@ -15,7 +15,7 @@ const pools = [
         pid: 1,
         network: bscNetwork,
         symbol: 'LEZ-PBR',
-        startAt: 1638194400,
+        startAt: 1638194430,
     },
     {
         pid: 1,
@@ -46,13 +46,7 @@ const pools = [
         network: bscNetwork,
         symbol: 'DEFLY-PBR',
         startAt: 1639144800,
-    },
-    {
-        pid: 1,
-        network: bscNetwork,
-        symbol: 'LEZ-BNB',
-        startAt: 1638194430,
-    },
+    }
 
 ];
 
