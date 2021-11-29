@@ -1087,7 +1087,7 @@ export const supportedPools = [
     tokenExplorer: 'https://moonbase-blockscout.testnet.moonbeam.network/address/0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
     icon: '/img/tokens/alphadex.jpg',
     totalSupply: '100,000,000 IDO',
-    total: '1000000 MORV',
+    total: '10000 MORV',
     ratio: 100,
     min: 1, //300$
     max: 5, //500$
