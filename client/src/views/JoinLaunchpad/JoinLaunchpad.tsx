@@ -216,7 +216,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('ethTest: claimTimes  ', claimTimeArr)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
 
-      setIsWhitelist(true)
+      setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
       setHistory(newHistory)
       setProgress(newProgress)
