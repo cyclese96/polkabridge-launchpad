@@ -115,7 +115,7 @@ const JoinLaunchpad: React.FC = () => {
   const { ethereum, account } = useWallet()
   const [progress, setProgress] = useState<BigNumber>()
   const [isWhitelist, setIsWhitelist] = useState(false)
-  const [ethValue, setETHValue] = useState('')
+  const [ethValue, setETHValue] = useState('0')
   const [tokenValue, setTokenValue] = useState('')//max output purchase token based on the ratio
   const [pendingTx, setPendingTx] = useState(false)
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
@@ -136,7 +136,7 @@ const JoinLaunchpad: React.FC = () => {
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
 
-  const [captchaVerified, setCaptchaVerified] = useState(false);
+  const [captchaVerified, setCaptchaVerified] = useState(true);
   const [harvestDistribution, setHarestDistribution] = useState([]);
 
   const recaptchaRef = React.useRef();
@@ -216,7 +216,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('ethTest: claimTimes  ', claimTimeArr)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
 
-      setIsWhitelist(newIsWhitelist)
+      setIsWhitelist(true)
       setETHBalance(newETHBalance)
       setHistory(newHistory)
       setProgress(newProgress)
@@ -353,37 +353,85 @@ const JoinLaunchpad: React.FC = () => {
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
-    return endAt * 1000 <= new Date().getTime()
-      ? 'Ended'
-      : pendingTx
-        ? 'Pending Confirmation'
-        : !isWhitelist
-          ? access === 'Public'
-            ? 'You are not whitelisted'
-            : 'You have not participated in the staking'
-          : startAt * 1000 <= new Date().getTime()
-            ? parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-              ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-              : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
-            : progress == new BigNumber('100')
-              ? 'Ended'
-              : undefined
+    // console.log('getJoinButtonText ', { ethValue: parseFloat(ethValue), maxWhitelistPurchase, _max, min, stakedAmount, flag: startAt * 1000 <= new Date().getTime() })
+
+    //time check
+    if (endAt * 1000 <= new Date().getTime()) {
+      return "Ended";
+    }
+
+    if (pendingTx) {
+      return 'Pending Confirmation';
+    }
+
+
+    if (access === 'Private' && new BigNumber(stakedAmount).lt(tierConditions.maxTier1.min)) {
+      return 'You have not participated in the staking';
+    }
+
+    if (!isWhitelist) {
+
+      return startAt * 1000 <= new Date().getTime()
+        ? 'You are not whitelisted'
+        : 'Pool not started yet';
+
+    }
+
+
+    if (startAt * 1000 <= new Date().getTime()) {
+
+      if (access === 'Whitelist') {
+
+        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= maxWhitelistPurchase
+          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
+          : `Max:  ${maxWhitelistPurchase}  ${networkSymbol()}`
+
+      } else if (access === 'Public') {
+
+        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
+          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
+          : `Max:  ${_max}  ${networkSymbol()}`
+
+      } else {
+
+        return parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
+          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
+          : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
+
+      }
+
+    } else {
+      return progress == new BigNumber('100')
+        ? 'Ended'
+        : undefined
+    }
   }
 
   const isButtonDisable = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
-    return (
-      startAt * 1000 > new Date().getTime() ||
+
+    const flag1 = startAt * 1000 > new Date().getTime() ||
       endAt * 1000 <= new Date().getTime() ||
       !isWhitelist ||
       progress == new BigNumber('100') ||
       pendingTx ||
       !ethValue ||
-      !tokenValue ||
-      parseFloat(ethValue) < min ||
-      parseFloat(ethValue) > _max ||
-      isEqual(tokenValue, tokenPurchased)
-    )
+      !tokenValue;
+
+    if (access === 'Whitelist') {
+
+      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > maxWhitelistPurchase);
+
+    } else if (access === 'Public') {
+
+      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max);
+
+    } else {
+
+      return flag1 || (parseFloat(ethValue) < min || parseFloat(ethValue) > _max);
+
+    }
+
   }
 
   const reset = useCallback(async () => {
@@ -684,7 +732,7 @@ const JoinLaunchpad: React.FC = () => {
                 ) : (
                   <Button
                     disabled={isButtonDisable()}
-                    text={getJoinButtonText()}
+
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
                         setPendingTx(true)
@@ -702,12 +750,18 @@ const JoinLaunchpad: React.FC = () => {
                       }
                     }}
                   >
-                    {startAt * 1000 > new Date().getTime() && (
-                      <Countdown
-                        date={new Date(startAt * 1000)}
-                        renderer={renderer}
-                      />
-                    )}
+                    <div className='d-flex flex-column justify-content-around'>
+                      <div style={{ paddingRight: 10 }}>
+                        {getJoinButtonText()}</div>
+                      <div style={{ color: '#ffee58' }}>
+                        {startAt * 1000 > new Date().getTime() && (
+                          <Countdown
+                            date={new Date(startAt * 1000)}
+                            renderer={renderer}
+                          />
+                        )}</div>
+                    </div>
+
                   </Button>
                 )}
 
