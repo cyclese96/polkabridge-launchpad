@@ -22,7 +22,13 @@ import { Link, useHistory } from 'react-router-dom'
 // import useLockBalance from '../../../hooks/useLockBalance'
 // import useUnlock from '../../../hooks/useUnlock'
 import useNetwork from '../../../hooks/useNetwork'
-import { bscNetwork } from '../../../pbr/lib/constants'
+import {
+  bscNetwork,
+  ethereumNetwork,
+  harmonyNetwork,
+  moonriverNetwork,
+  polygonNetwork,
+} from '../../../pbr/lib/constants'
 import BigNumber from 'bignumber.js'
 
 const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
@@ -46,7 +52,17 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   // const { onUnlock } = useUnlock()
 
   const getTokenSymbol = () => {
-    return getNetworkName(chainId) === bscNetwork ? 'BNB' : 'PBR'
+    if (getNetworkName(chainId) === bscNetwork) {
+      return 'BNB'
+    } else if (getNetworkName(chainId) === polygonNetwork) {
+      return 'MATIC'
+    } else if (getNetworkName(chainId) === harmonyNetwork) {
+      return 'ONE'
+    } else if (getNetworkName(chainId) === moonriverNetwork) {
+      return 'MOVR'
+    } else {
+      return 'ETH'
+    }
   }
 
   return (
@@ -84,13 +100,32 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
                           </TextMin>
                           <TextMedium>
                             <strong>
+                              {/* {getNetworkName(chainId) === ethereumNetwork
+                                ? parseFloat(ether.toString()).toLocaleString(
+                                    'en-US',
+                                  )
+                                : parseFloat(
+                                    getBalanceNumber(pbrBalance).toFixed(4),
+                                  ).toLocaleString('en-US')} */}
                               {getNetworkName(chainId) === bscNetwork
                                 ? parseFloat(ether.toString()).toLocaleString(
-                                  'en-US',
-                                )
-                                : parseFloat(
-                                  getBalanceNumber(pbrBalance).toFixed(4),
-                                ).toLocaleString('en-US')}
+                                    'en-US',
+                                  )
+                                : getNetworkName(chainId) === polygonNetwork
+                                ? parseFloat(ether.toString()).toLocaleString(
+                                    'en-US',
+                                  )
+                                : getNetworkName(chainId) === moonriverNetwork
+                                ? parseFloat(ether.toString()).toLocaleString(
+                                    'en-US',
+                                  )
+                                : getNetworkName(chainId) === harmonyNetwork
+                                ? parseFloat(ether.toString()).toLocaleString(
+                                    'en-US',
+                                  )
+                                : parseFloat(ether.toString()).toLocaleString(
+                                    'en-US',
+                                  )}
                             </strong>
                             <span>{getTokenSymbol()}</span>
                           </TextMedium>
