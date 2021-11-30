@@ -136,7 +136,7 @@ const JoinLaunchpad: React.FC = () => {
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
 
-  const [captchaVerified, setCaptchaVerified] = useState(true);
+  const [captchaVerified, setCaptchaVerified] = useState(false);
   const [harvestDistribution, setHarestDistribution] = useState([]);
 
   const recaptchaRef = React.useRef();
