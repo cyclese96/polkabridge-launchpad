@@ -21,7 +21,7 @@ const pools = [
         pid: 1,
         network: bscNetwork,
         symbol: 'WIDI-PBR',
-        startAt: 1638280800,
+        startAt: 1638280830,
     },
     {
         pid: 1,
