@@ -872,22 +872,22 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/widiland.png',
     totalSupply: '400,000,000 WIDI',
-    total: '66.6 BNB', //1BNB = 600$
+    total: '116.6 BNB', //1BNB = 600$
     ratio: 15000, //token price 0.04, 1BNB = 600$
     min: 0.16, //100$
     max: 0.5, //300$
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    maxWhitelistPurchase: 0.08,//special 1k, public whitelist 50$
-    access: 'Whitelist',
+    maxWhitelistPurchase: 0.08,//special 1k, public whitelist 50$,1.66
+    access: 'Whitelist',//Private
     network: bscNetwork,
     distribution: '25% at TGE, 25% per month in next 3 months',
     startAt: 1638280830,//whitelist round 1638280830, private round 1638284430
     endAt: 1638283500,//whitelist round 1638283500, private round 1638287100
-    claimAt: 1638367200,
+    claimAt: 1638352800,
     startDate: '2PM UTC 30th Nov',
-    claimTimeArr: [1638367200, 1641045600, 1643724000, 1646143200],
+    claimTimeArr: [1638352800, 1641031200, 1643709600, 1646128800],
     harvestDistribution: [25, 25, 25, 25]
   },
   {
