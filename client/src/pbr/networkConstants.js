@@ -1,5 +1,5 @@
 import config from "../config";
-import { bscNodes, bscNodesTestnet, harmonyNodes, harmonyNodesTestnet, polygonNodes, polygonNodesTestnet } from "./rpcUrl";
+import { bscNodes, bscNodesTestnet, harmonyNodes, harmonyNodesTestnet, moonbaseAlphaTestnet, moonriverNodes, polygonNodes, polygonNodesTestnet } from "./rpcUrl";
 
 export const bscNetworkDetail = {
     'mainnet': {
@@ -86,5 +86,30 @@ export const ethereumNetworkDetail = {
         chainId: `0x${config.chainIdTestnet.toString(16)}`,
         chainName: 'Koven Testnet',
         chainRaw: config.chainId
+    }
+}
+
+export const moonriverNetworkDetail = {
+    'mainnet': {
+        chainId: `0x${config.moonriverChain.toString(16)}`,
+        chainName: 'Moonriver',
+        nativeCurrency: {
+            name: 'MOVR',
+            symbol: 'movr',
+            decimals: 18,
+        },
+        rpcUrls: moonriverNodes,
+        blockExplorerUrls: [`https://blockscout.moonriver.moonbeam.network/`],
+    },
+    'testnet': {
+        chainId: `0x${config.moonriverChainTestent.toString(16)}`,
+        chainName: 'Moonbase Alpha',
+        nativeCurrency: {
+            name: 'DEV',
+            symbol: 'dev',
+            decimals: 18,
+        },
+        rpcUrls: moonbaseAlphaTestnet,
+        blockExplorerUrls: [`https://moonbase-blockscout.testnet.moonbeam.network/`],
     }
 }

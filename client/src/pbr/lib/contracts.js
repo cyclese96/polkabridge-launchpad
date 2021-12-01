@@ -5,6 +5,7 @@ import {
   bscNetwork,
   currentConnection,
   harmonyNetwork,
+  moonriverNetwork,
   polygonNetwork,
   SUBTRACT_GAS_LIMIT,
   supportedPools,
@@ -57,6 +58,14 @@ export class Contracts {
         return Object.assign(pool, {
           tokenAddress: pool.tokenAddresses[_polygonChain],
           lpAddress: pool.lpAddresses[_polygonChain],
+        });
+
+      } else if (pool.network === moonriverNetwork) {
+
+        const _chain = currentConnection === 'mainnet' ? config.moonriverChain : config.moonriverChainTestent;
+        return Object.assign(pool, {
+          tokenAddress: pool.tokenAddresses[_chain],
+          lpAddress: pool.lpAddresses[_chain],
         });
 
       } else {

@@ -8,6 +8,7 @@ import {
   bscNetworkDetail,
   ethereumNetworkDetail,
   harmonyNetworkDetail,
+  moonriverNetworkDetail,
   polygonNetworkDetail,
 } from '../../../pbr/networkConstants'
 import { setupNetwork } from '../../../pbr/utils'
@@ -47,7 +48,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 8,
   },
 }))
-export default function NetworkSelect({}) {
+export default function NetworkSelect({ }) {
   const classes = useStyles()
 
   const { chainId, status } = useNetwork()
@@ -88,6 +89,14 @@ export default function NetworkSelect({}) {
           ? harmonyNetworkDetail.mainnet
           : harmonyNetworkDetail.testnet,
       )
+    } else if (
+      [config.moonriverChain, config.moonriverChainTestent].includes(_selected)
+    ) {
+      setupNetwork(
+        currentConnection === "mainnet"
+          ? moonriverNetworkDetail.mainnet
+          : moonriverNetworkDetail.testnet
+      );
     } else {
       setupNetwork(
         currentConnection === 'mainnet'
@@ -149,6 +158,17 @@ export default function NetworkSelect({}) {
           >
             <span style={{ paddingLeft: 7 }}>Harmony</span>
             <img className={classes.imgIcon} src="/img/tokens/one.png" />
+          </MenuItem>
+          <MenuItem
+            value={
+              currentConnection === 'testnet'
+                ? config.moonriverChainTestent
+                : config.moonriverChain
+            }
+            className={classes.buttonDrop}
+          >
+            <span style={{ paddingLeft: 7 }}>Moonriver</span>
+            <img className={classes.imgIcon} src="/img/moon.png" />
           </MenuItem>
         </Select>
       </FormControl>
