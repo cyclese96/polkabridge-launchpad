@@ -39,6 +39,7 @@ import {
   polygonNetwork,
   tierConditions,
 } from '../../pbr/lib/constants'
+import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
 
 interface JoinHistory {
   amount: number
@@ -345,46 +346,7 @@ const JoinLaunchpad: React.FC = () => {
     // console.log({ value1: new BigNumber(newTokenValue).toFixed(3).toString(), value2: new BigNumber(tokenPurchased).toFixed(3).toString() })
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
-  const networkSymbol = () => {
-    if (network === bscNetwork) {
-      return 'BNB'
-    } else if (network === polygonNetwork) {
-      return 'MATIC'
-    } else if (network === harmonyNetwork) {
-      return 'ONE'
-    } else if (network === moonriverNetwork) {
-      return 'MOVR'
-    } else {
-      return 'ETH'
-    }
-  }
 
-  const networkIcon = () => {
-    if (network === bscNetwork) {
-      return '/img/tokens/bnb.png'
-    } else if (network === polygonNetwork) {
-      return '/img/tokens/polygon.png'
-    } else if (network === harmonyNetwork) {
-      return '/img/tokens/one.png'
-    } else if (network === moonriverNetwork) {
-      return '/img/moon.png'
-    } else {
-      return '/img/tokens/eth.png'
-    }
-  }
-
-  const isEqual = (value1: string, value2: string) => {
-    const _value1 = new BigNumber(value1 ? value1 : 0)
-    const _value2 = new BigNumber(value2 ? value2 : 0)
-
-    console.log(
-      'equal flag  ',
-      new BigNumber(_value1.toFixed(4)).eq(_value2.toFixed(4)),
-    )
-    return new BigNumber(_value1.toFixed(3).toString()).eq(
-      _value2.toFixed(3).toString(),
-    )
-  }
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -419,19 +381,19 @@ const JoinLaunchpad: React.FC = () => {
 
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= maxWhitelistPurchase
           ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-          : `Max:  ${maxWhitelistPurchase}  ${networkSymbol()}`
+          : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
 
       } else if (access === 'Public') {
 
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
           ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-          : `Max:  ${_max}  ${networkSymbol()}`
+          : `Max:  ${_max}  ${networkSymbol(network)}`
 
       } else {
 
         return parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
           ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-          : `Min: ${min}   ${networkSymbol()}   - Max:  ${_max}  ${networkSymbol()}`
+          : `Min: ${min}   ${networkSymbol(network)}   - Max:  ${_max}  ${networkSymbol(network)}`
 
       }
 
@@ -451,7 +413,8 @@ const JoinLaunchpad: React.FC = () => {
       progress == new BigNumber('100') ||
       pendingTx ||
       !ethValue ||
-      !tokenValue;
+      !tokenValue ||
+      isEqual(tokenPurchased, tokenValue);
 
     if (access === 'Whitelist') {
 
@@ -706,7 +669,7 @@ const JoinLaunchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Your max purchase: {getMaxValue() + ' ' + networkSymbol()}
+                  Your max purchase: {getMaxValue() + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -736,11 +699,11 @@ const JoinLaunchpad: React.FC = () => {
                       <StyledTokenGroup>
                         <StyledTokenIconWrap>
                           <StyledTokenIcon
-                            src={networkIcon()}
+                            src={networkIcon(network)}
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
-                        <StyledTokenSymbol>{networkSymbol()}</StyledTokenSymbol>
+                        <StyledTokenSymbol>{networkSymbol(network)}</StyledTokenSymbol>
                       </StyledTokenGroup>
                     </StyledRow>
                   </StyledInputRow>

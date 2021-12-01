@@ -1,15 +1,10 @@
 import React, { useEffect, useMemo, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-// import { provider } from 'web3-core'
 import Button from '../../components/Button'
-// import Container from '../../components/Container'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
-// import WalletProviderModal from '../../components/WalletProviderModal'
 import useLaunchpad from '../../hooks/useLaunchpad'
-// import useModal from '../../hooks/useModal'
-// import useRedeem from '../../hooks/useRedeem'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import { BigNumber } from '../../pbr'
 import {
@@ -26,6 +21,7 @@ import { white } from '../../theme/colors'
 import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, tierConditions } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { networkSymbol } from '../../pbr/helpers'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = useParams() as any
@@ -148,17 +144,6 @@ const Launchpad: React.FC = () => {
     )
   }
 
-  const netWorkTokenSymbol = () => {
-    if (network === bscNetwork) {
-      return 'BNB'
-    } else if (network === polygonNetwork) {
-      return 'MATIC'
-    } else if (network === harmonyNetwork) {
-      return 'ONE'
-    } else {
-      return 'ETH';
-    }
-  }
 
   const showNetworkAlert = () => {
     const _networkName =
@@ -251,7 +236,7 @@ const Launchpad: React.FC = () => {
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase:{' '}
-                  {getMaxValue() + ' ' + netWorkTokenSymbol()}
+                  {getMaxValue() + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -337,8 +322,8 @@ const Launchpad: React.FC = () => {
                         <StyledTableValue>
                           {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
                           {access === 'Public' || access === 'Whitelist'
-                            ? access === 'Public' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${maxWhitelistPurchase}  ${netWorkTokenSymbol()}`
-                            : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`}
+                            ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
+                            : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

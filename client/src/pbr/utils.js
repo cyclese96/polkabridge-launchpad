@@ -661,6 +661,21 @@ export const joinpool = async (lpAddress, pid, stakeAmount, ethValue, account, n
           console.log('joinpool', tx)
           return tx.transactionHash
         })
+    } else if (network === moonriverNetwork) {
+      // console.log('running trx', { network, stakeAmount, pid, account, eth: convertToWei(ethValue) })
+      return _launchpadContract.methods
+        .purchaseIDO(
+          stakeAmount,
+          pid,
+          v,
+          r,
+          s
+        )
+        .send({ from: account, value: convertToWei(ethValue), gasLimit: 12950000 })
+        .on('transactionHash', (tx) => {
+          console.log('joinpool', tx)
+          return tx.transactionHash
+        })
     }
     return _launchpadContract.methods
       .purchaseIDO(
@@ -697,6 +712,16 @@ export const harvest = async (lpAddress, pid, account, network) => {
           pid
         )
         .send({ from: account, gasPrice: 100000000000 })
+        .on('transactionHash', (tx) => {
+          console.log(tx)
+          return tx.transactionHash
+        })
+    } else if (network === moonriverNetwork) {
+      return _launchpadContract.methods
+        .claimToken(
+          pid
+        )
+        .send({ from: account, gasLimit: 12950000 })
         .on('transactionHash', (tx) => {
           console.log(tx)
           return tx.transactionHash
