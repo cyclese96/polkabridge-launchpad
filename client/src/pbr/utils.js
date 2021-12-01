@@ -676,7 +676,7 @@ export const joinpool = async (lpAddress, pid, stakeAmount, ethValue, account, n
         return tx.transactionHash
       })
   } catch (error) {
-    console.log('joinpool', error)
+    console.log('joinpool', { error, ethValue, pid, stakeAmount })
     return null
   }
 
@@ -917,6 +917,10 @@ const getWeb3Provider = (network, nativeNetwork) => {
   } else if (network === bscNetwork) {
 
     rpc = window.ethereum;
+
+  } else if (network === moonriverNetwork) {
+
+    rpc = window.ethereum; //'https://rpc.testnet.moonbeam.network' //new Web3.providers.HttpProvider('https://rpc.testnet.moonbeam.network')
 
   } else {
     // console.log('ethTest:  setting eth rpc', { nativeNetwork, network, pid })

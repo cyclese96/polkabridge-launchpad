@@ -57,7 +57,7 @@ export const contractAddresses = {
 }
 
 
-const testing = true;
+const testing = false;
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -1058,7 +1058,7 @@ export const supportedPools = [
     startAt: 1533939514,
     endAt: 1734569200,
     claimAt: 1533939514,
-    startDate: '11th November',
+    startDate: '11th December',
     claimTimeArr: [1533939514, 1639029546]
   },
 

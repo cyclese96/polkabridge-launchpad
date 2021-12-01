@@ -358,13 +358,7 @@ const Launchpad: React.FC = () => {
                       <StyledTableText>
                         <StyledTableLabel>Network</StyledTableLabel>
                         <StyledTableValue>
-                          {network === 'bsc'
-                            ? 'Binance Smart Chain'
-                            : network === 'polygon'
-                              ? 'Polygon'
-                              : network === 'harmony'
-                                ? 'Harmony'
-                                : 'Ethereum'}
+                          {formattedNetworkName(network)}
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
