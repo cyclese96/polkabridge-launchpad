@@ -3,6 +3,7 @@ const ethereumNetwork = 'ethereum'
 const bscNetwork = 'bsc'
 const polygonNetwork = 'polygon'
 const harmonyNetwork = 'harmony'
+const moonriverNetwork = 'moonriver'
 
 const pools = [
     {
@@ -46,6 +47,12 @@ const pools = [
         network: bscNetwork,
         symbol: 'DEFLY-PBR',
         startAt: 1639144800,
+    },
+    {
+        pid: 1,
+        network: moonriverNetwork,
+        symbol: 'ROAR-PBR',
+        startAt: 1533939514,
     }
 
 ];

@@ -18,5 +18,7 @@ export default {
   polygon_chain_testnet: 80001,
   // bscChain: 97,
   api: 'http://localhost:8020',
-  coingecko: "https://api.coingecko.com/api"
+  coingecko: "https://api.coingecko.com/api",
+  moonriverChain: 1285,
+  moonriverChainTestent: 1287,
 }

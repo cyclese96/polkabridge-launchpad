@@ -1,7 +1,7 @@
 import BigNumber from 'bignumber.js'
 import axios from 'axios'
 import config from '../config'
-import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork, harmonyNetwork, harmonyChainIds, HMY_TESTNET_RPC_URL } from './lib/constants'
+import { supportedPools, START_NEW_POOL_AT, bscNetwork, ethereumNetwork, stakeContractAddresses, currentConnection, infuraMainnetApi, infuraKovenApi, ethereumInfuraRpc, ethereumInfuraTestnetRpc, polygonMainnetInfuraRpc, polygonTestnetInfuraRpc, polygonNetwork, harmonyNetwork, harmonyChainIds, HMY_TESTNET_RPC_URL, moonriverNetwork } from './lib/constants'
 import Web3 from 'web3'
 
 import stakingAbi from '../pbr/lib/abi/staking.json'
@@ -176,6 +176,15 @@ export const getDefaultLaunchpads = () => {
       return Object.assign(pool, {
         tokenAddress: pool.tokenAddresses?.[_polygonChain],
         lpAddress: pool.lpAddresses?.[_polygonChain],
+      })
+
+    } else if (pool.network === moonriverNetwork) {
+
+      const _chain = currentConnection === 'mainnet' ? config.moonriverChain : config.moonriverChainTestent
+
+      return Object.assign(pool, {
+        tokenAddress: pool.tokenAddresses?.[_chain],
+        lpAddress: pool.lpAddresses?.[_chain],
       })
 
     } else {
@@ -667,7 +676,7 @@ export const joinpool = async (lpAddress, pid, stakeAmount, ethValue, account, n
         return tx.transactionHash
       })
   } catch (error) {
-    console.log('joinpool', error)
+    console.log('joinpool', { error, ethValue, pid, stakeAmount })
     return null
   }
 
@@ -846,6 +855,8 @@ export const getNetworkName = (networkId) => {
     return polygonNetwork
   } else if (isHarmonyNetwork(networkId)) {
     return harmonyNetwork
+  } else if ([config.moonriverChain, config.moonriverChainTestent].includes(parseInt(networkId))) {
+    return moonriverNetwork
   } else {
     return ethereumNetwork
   }
@@ -907,6 +918,10 @@ const getWeb3Provider = (network, nativeNetwork) => {
 
     rpc = window.ethereum;
 
+  } else if (network === moonriverNetwork) {
+
+    rpc = window.ethereum; //'https://rpc.testnet.moonbeam.network' //new Web3.providers.HttpProvider('https://rpc.testnet.moonbeam.network')
+
   } else {
     // console.log('ethTest:  setting eth rpc', { nativeNetwork, network, pid })
     rpc = nativeNetwork === network ? window.ethereum
@@ -942,7 +957,8 @@ export const formattedNetworkName = (network) => {
     'ethereum': 'Ethereum',
     'bsc': 'Binance Smart Chain',
     'harmony': 'Harmony',
-    'polygon': 'Polygon'
+    'polygon': 'Polygon',
+    'moonriver': "Moonriver"
   }
   if (Object.keys(networks).includes(network)) {
     return networks[network]

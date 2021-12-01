@@ -30,5 +30,12 @@ export const harmonyNodesTestnet = [
     'https://api.s0.b.hmny.io'
 ]
 
+export const moonriverNodes = [
+    'https://rpc.moonriver.moonbeam.network'
+]
+
+export const moonbaseAlphaTestnet = [
+    'https://rpc.testnet.moonbeam.network'
+]
 
 // export default { getBscNodeUrl };
