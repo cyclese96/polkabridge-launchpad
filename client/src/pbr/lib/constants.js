@@ -611,7 +611,7 @@ export const supportedPools = [
     startAt: 1636725600,//1636725540
     endAt: 1636729200,
     claimAt: 1637069400,
-    startDate: '2PM UTC 12th Nov',
+    startDate: '2PM UTC 12th Nov, 2021',
     claimTimeArr: [1637069400, 1639587600]
   },
 
@@ -656,7 +656,7 @@ export const supportedPools = [
     startAt: 1637244000,
     endAt: 1637247600,
     claimAt: 1637551800,
-    startDate: '2PM UTC 18th Nov',
+    startDate: '2PM UTC 18th Nov, 2021',
     claimTimeArr: [1637551800, 1640131200]
   },
   {
@@ -746,7 +746,7 @@ export const supportedPools = [
     startAt: 1637766000,
     endAt: 1637769600,
     claimAt: 1638279000,
-    startDate: '2PM UTC 24th Nov',
+    startDate: '2PM UTC 24th Nov, 2021',
     claimTimeArr: [1638279000, 1640869200, 1643547600],
     harvestDistribution: [34, 33, 33]
   },
@@ -793,7 +793,7 @@ export const supportedPools = [
     startAt: 1637848860,
     endAt: 1637852400,
     claimAt: 1640008800,
-    startDate: '2PM UTC 25th Nov',
+    startDate: '2PM UTC 25th Nov, 2021',
     claimTimeArr: [1640008800, 1641045600, 1643724000, 1646143200],
     harvestDistribution: [30, 30, 30, 10]
   },
@@ -839,7 +839,7 @@ export const supportedPools = [
     startAt: 1638196230,
     endAt: 1638199800,
     claimAt: 1638278100,
-    startDate: '2PM UTC 29th Nov',
+    startDate: '2PM UTC 29th Nov, 2021',
     claimTimeArr: [1638278100, 1640869200],
     harvestDistribution: [50, 50]
   },
@@ -886,7 +886,7 @@ export const supportedPools = [
     startAt: 1638284430,//whitelist round 1638280830, private round 1638284430
     endAt: 1638287100,//whitelist round 1638283500, private round 1638287100
     claimAt: 1638352800,
-    startDate: '2PM UTC 30th Nov',
+    startDate: '2PM UTC 30th Nov, 2021',
     claimTimeArr: [1638352800, 1641031200, 1643709600, 1646128800],
     harvestDistribution: [25, 25, 25, 25]
   },
@@ -896,7 +896,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      56: '',
+      56: '0x2e19653139e70c600aab7cb541674a456b1fbe23',
       97: '0xaE8aAf92013dc8F7fa22Fe01e56271c93B24058F',
     },
     tokenAddresses: {
@@ -918,20 +918,23 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
-    total: '50 BNB', //1BNB=600$
-    ratio: 10000,//0.06$
+    total: '81.9 BNB', //1BNB=610$
+    ratio: 10166.6,//0.06$
     min: 0.16, //100$
-    max: 0.5, //300$
+    max: 0.49, //300$
     maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
+    maxTier2: 0.32, //200$
+    maxTier3: 0.49, //300$
+    maxWhitelistPurchase: 1.63,
     access: 'Private',
     network: bscNetwork,
     distribution: '25% TGE, 25% per month in next 3 months',
-    startAt: 1638453600,
+    startAt: 1638453630,
     endAt: 1638457200,
-    claimAt: 0,
-    startDate: '2PM UTC 2nd Dec',
+    claimAt: 1638802800,
+    startDate: '2PM UTC 2nd Dec, 2021',
+    claimTimeArr: [1638802800, 1641477630, 1644156030, 1646575230],
+    harvestDistribution: [25, 25, 25, 25]
   },
   {
     pid: 18,
@@ -971,7 +974,7 @@ export const supportedPools = [
     startAt: 1638972000,
     endAt: 1638975600,
     claimAt: 0,
-    startDate: "2PM UTC 8th Dec"
+    startDate: "2PM UTC 8th Dec, 2021"
   },
   {
     pid: 20,
@@ -1015,7 +1018,7 @@ export const supportedPools = [
     startAt: 1639144800,
     endAt: 1639148400,
     claimAt: 0,
-    startDate: '2PM UTC 10th Dec',
+    startDate: '2PM UTC 10th Dec, 2021',
   },
   {
     pid: 21,
@@ -1046,25 +1049,153 @@ export const supportedPools = [
     icon: '/img/tokens/alphadex.jpg',
     totalSupply: '120,000,000 ROAR',
     total: '266.6 MORV',//300$
-    ratio: 100,//0.22$
-    min: 1, //100$
-    max: 5, //300$
-    maxTier1: 1, //100$
-    maxTier2: 3, //200$
-    maxTier3: 5, //300$
+    ratio: 1363.6,//0.22$
+    min: 0.33, //100$
+    max: 1, //300$
+    maxTier1: 0.33, //100$
+    maxTier2: 0.66, //200$
+    maxTier3: 1, //300$
     access: 'Private',
     network: moonriverNetwork,
     distribution: '20% at TGE, 40% per month in next 2 months',
-    startAt: 1533939514,
+    startAt: 1639231230,
     endAt: 1734569200,
-    claimAt: 1533939514,
-    startDate: '11th December',
-    claimTimeArr: [1533939514, 1639029546]
+    claimAt: 1639231230,
+    startDate: '2PM UTC 11th Dec, 2021',
+    claimTimeArr: [1639231230, 1639029546]
+  },
+  {
+    pid: 22,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Gofungibles',
+    symbol: 'GFTS-PBR',
+    description: `GFTS/BNB`,
+    introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
+    website: 'https://gofungibles.com//',
+    twitter: 'https://twitter.com/gofungibles',
+    telegram: 'https://t.me/gofungibles',
+    whitepaper:
+      'https://gofungibles.com/whitepaper.pdf',
+    tokenSymbol: 'GFTS',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/fungibles.png',
+    totalSupply: '1 Billion GFTS',
+    total: '83.3 BNB',// 1BNB = 600$
+    ratio: 15000, //token price 0.04, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '50% unlocked at TGE and 50% unlocks after 2 months',
+    startAt: 1639836000,
+    endAt: 1639839600,
+    claimAt: 0,
+    startDate: '2PM UTC 15th-18th Dec, 2021',
+  },
+  {
+    pid: 23,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Calo',
+    symbol: 'CALO-PBR',
+    description: `CALO/BNB`,
+    introduce: `Calo App is a healthy application based on blockchain technology. Workout everyday, burn your calories, participate in challenges and earn money`,
+    website: 'https://calo.run/',
+    twitter: 'https://twitter.com/AppCalo',
+    telegram: 'https://t.me/caloapp',
+    whitepaper:
+      'https://docs.calo.run/',
+    tokenSymbol: 'CALO',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/calo.png',
+    totalSupply: '500,000,000 CALO',
+    total: '83.3 BNB',// 1BNB = 600$
+    ratio: 17142.8, //token price 0.035, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '25% TGE, 25% monthly vesting',
+    startAt: 1640008800,
+    endAt: 1640012400,
+    claimAt: 0,
+    startDate: '2PM UTC 20th Dec, 2021',
+  },
+  {
+    pid: 24,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+    },
+    lpExplorer: 'https://etherscan.io/address/',
+    name: 'VoiceStreet',
+    symbol: 'VST-PBR',
+    description: `VST/ETH`,
+    introduce: `VoiceStreet is an music-based NFT platform with the goal of building Web3.0 on-chain infrastructure for intellectual properties mainly including Music all rights, Artists related IPs, Music derivatives NFTs, and NFT Gamification.`,
+    website: 'https://voicestreet.org/',
+    twitter: 'https://twitter.com/voicestreetnft',
+    telegram: 'https://t.me/VoiceStreet',
+    whitepaper: ' https://voicestreet.org/whitepaper/VoiceStreetwhitepaper.pdf',
+    tokenSymbol: 'VST',
+    tokenExplorer: 'https://etherscan.io/token/',
+    icon: '/img/tokens/vst.png',
+    totalSupply: '2B VST',
+    total: '11.1 ETH', //1ETH =4k5$
+    ratio: 112500,//0.04$
+    min: 0.022, //100$
+    max: 0.066, //200$
+    maxTier1: 0.022, //100$
+    maxTier2: 0.044, //200$
+    maxTier3: 0.066, //300$
+    access: 'Private',
+    network: ethereumNetwork,
+    distribution: '100% at TGE',
+    startAt: 1640786400,
+    endAt: 1640790000,
+    claimAt: 0,
+    startDate: '2PM UTC 29th Dec, 2021',
+    claimTimeArr: []
   },
 
 
   {
-    pid: 22,
+    pid: 25,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -1105,6 +1236,49 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 26,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'MeMusic',
+    symbol: 'MUSIC-PBR',
+    description: `MUSIC/BNB`,
+    introduce: `Memusic is a blockchain-based platform to provide an inclusive ecosystem through a multitude of services.`,
+    website: 'https://memusic.io/',
+    twitter: 'https://twitter.com/MeMusicNews',
+    telegram: 'https://t.me/memusic_official',
+    whitepaper: 'https://memusic.io/#',
+    tokenSymbol: 'MUSIC',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/memusic.png',
+    totalSupply: '100,000,000 MUSIC',
+    total: '166.6 BNB',// 1BNB = 600$, 100k$
+    ratio: 10909, //0.055$
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '20% TGE, 20% per month in next 4 months',
+    startAt: 1641996000,
+    endAt: 1641999600,
+    claimAt: 0,
+    startDate: '2PM UTC 12th Jan, 2022',
   }
   // {
   //   pid: 50,
