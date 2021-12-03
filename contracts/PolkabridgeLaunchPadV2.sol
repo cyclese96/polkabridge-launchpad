@@ -135,6 +135,23 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             users[pid][user[i]].UserAddress = user[i];
             users[pid][user[i]].IsWhitelist = true;
             users[pid][user[i]].IsActived = true;
+
+            
+        }
+    }
+
+    function sign(address[] memory user, uint256 pid)///need pid in constantfile
+        public
+        onlyOwner
+    {
+        uint256 poolIndex = pid.sub(1);
+        uint256 maxSpeical= pools[poolIndex].MaxSpecialPurchase;
+        uint256 tokenAmount = maxSpeical.mul(pools[poolIndex].RatePerETH).div(1e18);
+
+        for (uint256 i = 0; i < user.length; i++) {
+          
+            users[pid][user[i]].TotalTokenPurchase = tokenAmount;
+            
         }
     }
 

@@ -902,10 +902,10 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address',
+    lpExplorer: 'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
     name: 'ArcadeNetwork',
     symbol: 'ARC-PBR',
     description: `ARC/BNB`,
@@ -915,7 +915,7 @@ export const supportedPools = [
     telegram: 'https://t.me/ArcadeNetworkOfficial',
     whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
     tokenSymbol: 'ARC',
-    tokenExplorer: 'https://bscscan.com/address',
+    tokenExplorer: 'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
     total: '81.9 BNB', //1BNB=610$
@@ -931,9 +931,9 @@ export const supportedPools = [
     distribution: '25% TGE, 25% per month in next 3 months',
     startAt: 1638453630,
     endAt: 1638457200,
-    claimAt: 1638802800,
+    claimAt: 1638808200,
     startDate: '2PM UTC 2nd Dec, 2021',
-    claimTimeArr: [1638802800, 1641477630, 1644156030, 1646575230],
+    claimTimeArr: [1638808200, 1641477630, 1644156030, 1646575230],
     harvestDistribution: [25, 25, 25, 25]
   },
   {
@@ -1038,7 +1038,7 @@ export const supportedPools = [
     lpExplorer: 'https://moonriver.moonscan.io/address/',
     name: 'AlphaDex',
     symbol: 'ROAR-PBR',
-    description: `ROAR/MORV`,
+    description: `ROAR/MOVR`,
     introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
     website: 'https://alphadex.io/',
     twitter: 'https://twitter.com/thealphadex',
@@ -1048,7 +1048,7 @@ export const supportedPools = [
     tokenExplorer: 'https://moonriver.moonscan.io/address/',
     icon: '/img/tokens/alphadex.jpg',
     totalSupply: '120,000,000 ROAR',
-    total: '266.6 MORV',//300$
+    total: '266.6 MOVR',//300$
     ratio: 1363.6,//0.22$
     min: 0.33, //100$
     max: 1, //300$
@@ -1064,52 +1064,9 @@ export const supportedPools = [
     startDate: '2PM UTC 11th Dec, 2021',
     claimTimeArr: [1639231230, 1639029546]
   },
+
   {
     pid: 22,
-    poolId: 1,
-    lpAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'Gofungibles',
-    symbol: 'GFTS-PBR',
-    description: `GFTS/BNB`,
-    introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
-    website: 'https://gofungibles.com//',
-    twitter: 'https://twitter.com/gofungibles',
-    telegram: 'https://t.me/gofungibles',
-    whitepaper:
-      'https://gofungibles.com/whitepaper.pdf',
-    tokenSymbol: 'GFTS',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/fungibles.png',
-    totalSupply: '1 Billion GFTS',
-    total: '83.3 BNB',// 1BNB = 600$
-    ratio: 15000, //token price 0.04, 1BNB = 600$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
-    access: 'Private',
-    network: bscNetwork,
-    distribution: '50% unlocked at TGE and 50% unlocks after 2 months',
-    startAt: 1639836000,
-    endAt: 1639839600,
-    claimAt: 0,
-    startDate: '2PM UTC 15th-18th Dec, 2021',
-  },
-  {
-    pid: 23,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1153,38 +1110,42 @@ export const supportedPools = [
     startDate: '2PM UTC 20th Dec, 2021',
   },
   {
-    pid: 24,
+    pid: 23,
     poolId: 1,
     lpAddresses: {
       1: '',
       42: '',
+      56: '',
+      97: ''
     },
     tokenAddresses: {
       1: '',
       42: '',
+      56: '',
+      97: ''
     },
-    lpExplorer: 'https://etherscan.io/address/',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'VoiceStreet',
     symbol: 'VST-PBR',
-    description: `VST/ETH`,
+    description: `VST/BNB`,
     introduce: `VoiceStreet is an music-based NFT platform with the goal of building Web3.0 on-chain infrastructure for intellectual properties mainly including Music all rights, Artists related IPs, Music derivatives NFTs, and NFT Gamification.`,
     website: 'https://voicestreet.org/',
     twitter: 'https://twitter.com/voicestreetnft',
     telegram: 'https://t.me/VoiceStreet',
     whitepaper: ' https://voicestreet.org/whitepaper/VoiceStreetwhitepaper.pdf',
     tokenSymbol: 'VST',
-    tokenExplorer: 'https://etherscan.io/token/',
+    tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/vst.png',
     totalSupply: '2B VST',
-    total: '11.1 ETH', //1ETH =4k5$
-    ratio: 112500,//0.04$
-    min: 0.022, //100$
-    max: 0.066, //200$
-    maxTier1: 0.022, //100$
-    maxTier2: 0.044, //200$
-    maxTier3: 0.066, //300$
+    total: '83.3 BNB', //1BNB=600
+    ratio: 15000,//0.04$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
     access: 'Private',
-    network: ethereumNetwork,
+    network: bscNetwork,
     distribution: '100% at TGE',
     startAt: 1640786400,
     endAt: 1640790000,
@@ -1195,7 +1156,7 @@ export const supportedPools = [
 
 
   {
-    pid: 25,
+    pid: 24,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -1236,6 +1197,50 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 0,
     startDate: 'TBA',
+  },
+  {
+    pid: 25,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'Gofungibles',
+    symbol: 'GFTS-PBR',
+    description: `GFTS/BNB`,
+    introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
+    website: 'https://gofungibles.com//',
+    twitter: 'https://twitter.com/gofungibles',
+    telegram: 'https://t.me/gofungibles',
+    whitepaper:
+      'https://gofungibles.com/whitepaper.pdf',
+    tokenSymbol: 'GFTS',
+    tokenExplorer: 'https://bscscan.com/token',
+    icon: '/img/tokens/fungibles.png',
+    totalSupply: '1 Billion GFTS',
+    total: '83.3 BNB',// 1BNB = 600$
+    ratio: 20000, //token price 0.03, 1BNB = 600$
+    min: 0.16, //100$
+    max: 0.5, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.33, //200$
+    maxTier3: 0.5, //300$
+    access: 'Private',
+    network: bscNetwork,
+    distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
+    startAt: 1639836000,
+    endAt: 1639839600,
+    claimAt: 0,
+    startDate: 'January, 2022',
   },
   {
     pid: 26,
