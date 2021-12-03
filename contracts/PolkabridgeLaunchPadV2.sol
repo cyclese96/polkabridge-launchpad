@@ -75,7 +75,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 Id;
         uint256 Begin;
         uint256 End;
-        uint256 Type; //1: comminity round, 2 stackers round
+        uint256 Type; //1: comminity round, 2 stackers round, 3 whitelist, 4 guaranteed
         IERC20 IDOToken;
         uint256 MaxPurchaseTier1;
         uint256 MaxPurchaseTier2; //==comminity tier
@@ -100,11 +100,15 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 PercentClaim4;
         uint256 ClaimTime5;
         uint256 PercentClaim5;
+         uint256 ClaimTime6;
+        uint256 PercentClaim6;
+         uint256 ClaimTime7;
+        uint256 PercentClaim7;
     }
 
     struct User {
         uint256 Id;
-        address UserAddress;
+        
         bool IsWhitelist;
         uint256 TotalTokenPurchase;
         uint256 TotalETHPurchase;
@@ -112,7 +116,8 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 LastClaimed;
         uint256 TotalPercentClaimed;
         uint256 NumberClaimed;
-        bool IsActived;
+        
+        uint256 PurchaseAllocation;
     }
 
     mapping(uint256 => mapping(address => User)) public users; //poolid - listuser
@@ -123,20 +128,18 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
 
     constructor(address payable receiveTokenAdd) public {
         ReceiveToken = receiveTokenAdd;
-        MinimumStakeAmount=500*1e18;
+        MinimumStakeAmount=10000*1e18;
     }
 
-    function addMulWhitelist(address[] memory user, uint256 pid)
+    function addMulWhitelist(address[] memory user,uint256[] memory allocation, uint256 pid)///need pid in constantfile
         public
         onlyOwner
     {
         for (uint256 i = 0; i < user.length; i++) {
             users[pid][user[i]].Id = pid;
-            users[pid][user[i]].UserAddress = user[i];
+             users[pid][user[i]].PurchaseAllocation = allocation[i];
             users[pid][user[i]].IsWhitelist = true;
-            users[pid][user[i]].IsActived = true;
-
-            
+           
         }
     }
 
@@ -158,11 +161,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
     function updateWhitelist(
         address user,
         uint256 pid,
-        bool isWhitelist,
-        bool isActived
+        bool isWhitelist
     ) public onlyOwner {
         users[pid][user].IsWhitelist = isWhitelist;
-        users[pid][user].IsActived = isActived;
+       
     }
 
     function IsWhitelist(
@@ -178,9 +180,14 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         {
             if (stackAmount >= MinimumStakeAmount) return true;
             return false;
-        } else if (pools[poolIndex].Type == 3) //special round
+        } else if (pools[poolIndex].Type == 3 ) //special round  
         {
-            if (users[poolIndex][user].IsWhitelist) return true;
+            if (users[pid][user].IsWhitelist) return true;
+            return false;
+        }
+        else if (pools[poolIndex].Type ==4) //guaranteed round  
+        {
+            if (users[pid][user].IsWhitelist && stackAmount >= MinimumStakeAmount) return true;
             return false;
         } else {
             return false;
@@ -235,6 +242,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 claimTime4,
          uint256 percentClaim5,
         uint256 claimTime5,
+         uint256 percentClaim6,
+        uint256 claimTime6,
+         uint256 percentClaim7,
+        uint256 claimTime7,
         uint256 pid
     ) public onlyOwner {
         claimInfos[pid].ClaimTime1 = claimTime1;
@@ -247,6 +258,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         claimInfos[pid].PercentClaim4 = percentClaim4;
         claimInfos[pid].ClaimTime5 = claimTime5;
         claimInfos[pid].PercentClaim5 = percentClaim5;
+         claimInfos[pid].ClaimTime6 = claimTime6;
+        claimInfos[pid].PercentClaim6 = percentClaim6;
+         claimInfos[pid].ClaimTime7 = claimTime7;
+        claimInfos[pid].PercentClaim7 = percentClaim7;
     }
 
     function updateClaimInfo(
@@ -260,6 +275,10 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         uint256 claimTime4,
           uint256 percentClaim5,
         uint256 claimTime5,
+         uint256 percentClaim6,
+        uint256 claimTime6,
+         uint256 percentClaim7,
+        uint256 claimTime7,
         uint256 pid
     ) public onlyOwner {
         if (claimTime1 > 0) {
@@ -299,6 +318,22 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
 
         if (percentClaim5 > 0) {
             claimInfos[pid].PercentClaim5 = percentClaim5;
+        }
+
+           if (claimTime6 > 0) {
+            claimInfos[pid].ClaimTime6 = claimTime6;
+        }
+
+        if (percentClaim6 > 0) {
+            claimInfos[pid].PercentClaim6 = percentClaim6;
+        }
+
+           if (claimTime7 > 0) {
+            claimInfos[pid].ClaimTime7 = claimTime7;
+        }
+
+        if (percentClaim7 > 0) {
+            claimInfos[pid].PercentClaim7 = percentClaim7;
         }
     }
 
@@ -376,7 +411,7 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
     ) public payable nonReentrant {
         uint256 poolIndex = pid.sub(1);
 
-        if (pools[poolIndex].Type == 2) {
+        if (pools[poolIndex].Type == 2 || pools[poolIndex].Type == 4) {
             bytes32 _hash = keccak256(abi.encodePacked(msg.sender, stakeAmount));
             bytes32 messageHash = _hash.toEthSignedMessageHash();
 
@@ -431,12 +466,19 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                     pools[poolIndex].MaxPurchaseTier2,
                 "invalid maximum contribute"
             );
-        } else {
-            //=3
+        } else  if (pools[poolIndex].Type == 3){//special
+            
             require(
                 users[pid][msg.sender].TotalETHPurchase <=
                     pools[poolIndex].MaxSpecialPurchase,
-                "invalid maximum contribute"
+                "invalid contribute"
+            );
+        }else{//4 guaranteed
+            
+            require(
+                users[pid][msg.sender].TotalETHPurchase <=
+                     users[pid][msg.sender].PurchaseAllocation,
+                "invalid contribute"
             );
         }
 
@@ -533,6 +575,32 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
                 claimInfos[poolIndex].PercentClaim5
             );
         }
+        else if (users[pid][msg.sender].NumberClaimed == 5) {
+            require(
+                block.timestamp >= claimInfos[poolIndex].ClaimTime6,
+                "invalid time"
+            );
+            pools[poolIndex].IDOToken.safeTransfer(
+                msg.sender,
+                userBalance.mul(claimInfos[poolIndex].PercentClaim6).div(100)
+            );
+           users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
+                claimInfos[poolIndex].PercentClaim6
+            );
+        }
+        else if (users[pid][msg.sender].NumberClaimed == 6) {
+            require(
+                block.timestamp >= claimInfos[poolIndex].ClaimTime7,
+                "invalid time"
+            );
+            pools[poolIndex].IDOToken.safeTransfer(
+                msg.sender,
+                userBalance.mul(claimInfos[poolIndex].PercentClaim7).div(100)
+            );
+           users[pid][msg.sender].TotalPercentClaimed= users[pid][msg.sender].TotalPercentClaimed.add(
+                claimInfos[poolIndex].PercentClaim7
+            );
+        }
 
         users[pid][msg.sender].LastClaimed = block.timestamp;
         users[pid][msg.sender].NumberClaimed=users[pid][msg.sender].NumberClaimed.add(1);
@@ -617,14 +685,14 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         public
         view
         returns (
-            address,
+          
             bool,
             uint256,
             uint256
         )
     {
         return (
-            users[pid][msg.sender].UserAddress,
+           
             users[pid][msg.sender].IsWhitelist,
             users[pid][msg.sender].TotalTokenPurchase,
             users[pid][msg.sender].TotalETHPurchase
@@ -649,5 +717,15 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
         );
     }
 
-    
+    function getUserPurchaseAllocation(uint256 pid, address user)
+        public
+        view
+        returns (
+            uint256
+        )
+    {
+        return (
+            users[pid][user].PurchaseAllocation
+        );
+    }
 }

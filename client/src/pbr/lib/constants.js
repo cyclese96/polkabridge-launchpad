@@ -963,11 +963,11 @@ export const supportedPools = [
     totalSupply: '1,000,000,000 SOLC',
     total: '181.8 BNB',//1BNB = 550$
     ratio: 36666.6,//1 SOLC = 0.015
-    min: 0.54,//400$
-    max: 0.9,//500$
-    maxTier1: 0.54,//300$
-    maxTier2: 0.72,//400$
-    maxTier3: 0.9,//500$
+    min: 0.16, //100$
+    max: 0.49, //300$
+    maxTier1: 0.16, //100$
+    maxTier2: 0.32, //200$
+    maxTier3: 0.49, //300$
     access: 'Private',
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
