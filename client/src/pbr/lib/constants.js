@@ -982,7 +982,7 @@ export const supportedPools = [
     endAt: 1638975600,
     claimAt: 0,
     startDate: "2PM UTC 8th Dec, 2021",
-    registerForm: 'https://docs.google.com/forms'
+    registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
   },
   {
     pid: 19,
@@ -1013,20 +1013,21 @@ export const supportedPools = [
     icon: '/img/tokens/aqar.jpg',
     totalSupply: '100,000,000 AQR',
     total: '58823.5 MATIC', //1Matic=1.7$
-    ratio: 4.85,//1 TRY=0.35$
+    ratio: 4.85,//1 AQR=0.35$
     min: 0,
     max: 0,
     maxTier1: 0,
     maxTier2: 0,
     maxTier3: 0,
-    access: 'Guaranteed',
+    access: GUARANTEED,
     network: polygonNetwork,
     distribution: '50% at TGE, 50% vesting in 6 months',
     startAt: 1638979200,
     endAt: 1638982800,
     claimAt: 0,
     startDate: '4PM UTC 08th Dec, 2021',
-    claimTimeArr: []
+    claimTimeArr: [],
+    registerForm: 'https://forms.gle/ZDZXTGUntBDvfBny7'
   },
   {
     pid: 20,
@@ -1064,13 +1065,14 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '34% at TGE, 33% per month in next 2 months',
     startAt: 1639144800,
     endAt: 1639148400,
     claimAt: 0,
-    startDate: '2PM UTC 10th Dec, 2021',
+    startDate: '2PM UTC 10th Dec, 2021'
+
   },
   {
     pid: 21,
@@ -1107,7 +1109,7 @@ export const supportedPools = [
     maxTier1: 0.33, //100$
     maxTier2: 0.66, //200$
     maxTier3: 1, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: moonriverNetwork,
     distribution: '20% at TGE, 40% per month in next 2 months',
     startAt: 1639231230,
@@ -1153,7 +1155,7 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '25% TGE, 25% monthly vesting',
     startAt: 1640008800,
@@ -1196,7 +1198,7 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '100% at TGE',
     startAt: 1640786400,
@@ -1242,7 +1244,7 @@ export const supportedPools = [
     maxTier1: 0.46, //300$
     maxTier2: 0.61, //400$
     maxTier3: 0.76, //500$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: 'TBA',
     startAt: 1640883600,
@@ -1286,7 +1288,7 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
     startAt: 1639836000,
@@ -1329,7 +1331,7 @@ export const supportedPools = [
     maxTier1: 0.46, //300$
     maxTier2: 0.61, //400$
     maxTier3: 0.76, //500$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '20% TGE, 20% per month in next 4 months',
     startAt: 1641996000,
