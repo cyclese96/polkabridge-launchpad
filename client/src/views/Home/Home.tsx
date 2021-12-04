@@ -144,6 +144,20 @@ const Home: React.FC = () => {
                 <div></div>
               </a>
               <a
+                style={{
+                  textDecoration: 'none',
+                  marginRight: 10,
+                  paddingTop: 30,
+                }}
+                target="_blank"
+                href="https://polkabridge.medium.com/polkabridge-announces-new-tier-system-for-launchpad-ido-guaranteed-allocation-93c3b3036ac1"
+              >
+                <Button className={classes.actionButton} variant="contained">
+                  Tier System
+                </Button>
+                <div></div>
+              </a>
+              <a
                 style={{ textDecoration: 'none', paddingTop: 30 }}
                 target="_blank"
                 href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
