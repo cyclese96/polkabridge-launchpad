@@ -75,6 +75,12 @@ export const stakeContractAddresses = {
   }
 }
 
+// access types
+export const PUBLIC = 'Public';
+export const PRIVATE = 'Private';
+export const WHITELIST = 'Whitelist';
+export const GUARANTEED = 'Guaranteed';
+
 export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`;
 export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`;
 
@@ -938,11 +944,12 @@ export const supportedPools = [
   },
   {
     pid: 18,
+    poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
       56: '',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
+      97: '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439',
     },
     tokenAddresses: {
       1: '',
@@ -968,13 +975,14 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.32, //200$
     maxTier3: 0.49, //300$
-    access: 'Private',
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
     startAt: 1638972000,
     endAt: 1638975600,
     claimAt: 0,
-    startDate: "2PM UTC 8th Dec, 2021"
+    startDate: "2PM UTC 8th Dec, 2021",
+    registerForm: 'https://docs.google.com/forms'
   },
   {
     pid: 20,

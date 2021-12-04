@@ -745,6 +745,26 @@ export const harvest = async (lpAddress, pid, account, network) => {
 
 }
 
+export const getMaxAllocation = async (lpAddress, pid, account, network) => {
+
+  try {
+
+    const chainId = await getCurrentNetworkId();
+    const currentNetwork = getNetworkName(chainId);
+    const _launchpadContract = getCurrentLaunchpadContract(lpAddress, pid, network, currentNetwork);
+
+
+    const maxAllocation = await _launchpadContract.methods.getUserPurchaseAllocation(pid, account).call();
+
+    return maxAllocation;
+
+  } catch (error) {
+    console.log('getMaxAllocation exception  ', { error, lpAddress, pid })
+    return '0';
+  }
+
+}
+
 
 // fetch user staking data
 export const getUserStakingData = async (pid, account, network) => {

@@ -11,7 +11,7 @@ interface ButtonProps {
   size?: 'sm' | 'md' | 'lg'
   text?: string
   to?: string
-  variant?: 'default' | 'secondary' | 'tertiary' | 'transparent'
+  variant?: 'default' | 'secondary' | 'tertiary' | 'transparent' | 'light'
   margin?: string
   justify?: string
 }
@@ -46,6 +46,10 @@ const Button: React.FC<ButtonProps> = ({
       buttonColor = color.white
       bgColor = 'transparent'
       bdColor = color.grey[400]
+      break
+    case 'light':
+      buttonColor = color.grey[100]
+      bgColor = color.primary.main
       break
     case 'default':
     default:
