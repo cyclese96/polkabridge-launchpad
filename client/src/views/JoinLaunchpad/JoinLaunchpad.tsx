@@ -21,7 +21,8 @@ import {
   fromWei,
   formatFloatValue,
   getPoolClaimTimeArr,
-  verifyCaptcha
+  verifyCaptcha,
+  getMaxAllocation
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -34,10 +35,12 @@ import {
   bscNetwork,
   ethereumNetwork,
   getPoolId,
+  GUARANTEED,
   harmonyNetwork,
   moonriverNetwork,
   polygonNetwork,
   tierConditions,
+  WHITELIST,
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
 
@@ -144,6 +147,8 @@ const JoinLaunchpad: React.FC = () => {
   const { onJoinPool } = useJoinPool()
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
+  const [maxGuaranteed, setMaxGuaranteed] = useState('0');
+  // const [dataLoading, setDataLoading] = useState({ state: false, message: '' });
 
   const [captchaVerified, setCaptchaVerified] = useState(false)
   const [harvestDistribution, setHarestDistribution] = useState([])
@@ -174,11 +179,20 @@ const JoinLaunchpad: React.FC = () => {
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
+      // setDataLoading({ state: true, message: "Loading pool..." })
       const [claimTimeArr, claimDistribution] = getPoolClaimTimeArr(
         poolId,
         network,
       )
       setHarestDistribution(!claimDistribution ? [] : claimDistribution)
+
+      if (access === GUARANTEED) {
+        // fetch max allocation for guaranteed pools
+        const _max = await getGuaranteedMaxValue()
+        setMaxGuaranteed(fromWei(_max))
+
+      }
+
       const [
         newIsWhitelist,
         newETHBalance,
@@ -213,7 +227,8 @@ const JoinLaunchpad: React.FC = () => {
         getUserStakingData(currentPoolId(pid, network), account, network),
         getUserInfo(lpAddress, currentPoolId(pid, network), account, network),
       ])
-      setLoading(false)
+      setLoading(false);
+      // setDataLoading({ state: false, message: "" });
 
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
       // console.log('process REACT_APP_POLYGON_TESTNET_NODE', process.env.REACT_APP_POLYGON_TESTNET_NODE)
@@ -328,10 +343,20 @@ const JoinLaunchpad: React.FC = () => {
     return maxValue
   }
 
-  const onMax = useCallback(() => {
+  const getGuaranteedMaxValue = async () => {
+    // setDataLoading({ state: true, message: 'Loading allocation...' })
+    const max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), account, network);
+    // setDataLoading({ state: false, message: '' })
+
+    return max;
+  }
+
+  const onMax = useCallback(async () => {
     let _max = 0
-    if (access === 'Whitelist') {
+    if (access === WHITELIST) {
       _max = maxWhitelistPurchase
+    } else if (access === GUARANTEED) {
+      _max = Number(maxGuaranteed);
     } else {
       _max = access === 'Public' ? maxTier2 : getMaxValue()
     }
@@ -380,13 +405,13 @@ const JoinLaunchpad: React.FC = () => {
       if (access === 'Whitelist') {
 
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= maxWhitelistPurchase
-          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
+          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
           : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
 
       } else if (access === 'Public') {
 
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
-          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
+          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
           : `Max:  ${_max}  ${networkSymbol(network)}`
 
       } else {
@@ -605,13 +630,13 @@ const JoinLaunchpad: React.FC = () => {
     try {
       const verificationStatus = await verifyCaptcha(value)
 
-      console.log(verificationStatus?.['success'])
+      // console.log(verificationStatus?.['success'])
 
       if (verificationStatus?.['success'] === true) {
         setCaptchaVerified(true)
       }
 
-      console.log('captcha verified ', verificationStatus)
+      // console.log('captcha verified ', verificationStatus)
     } catch (error) {
       console.log('handleCaptchaVerification', error)
     }
@@ -661,7 +686,7 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === 'Private' ? (
+          {access === 'Private' && (
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
@@ -673,8 +698,20 @@ const JoinLaunchpad: React.FC = () => {
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
-          ) : (
-            ''
+          )}
+
+          {access === GUARANTEED && (
+            <StyledBox className="col-10">
+              <StyledCenterRow>
+                {/* <StyledInfoLabel>
+                  Your staked amount:{' '}
+                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                </StyledInfoLabel> */}
+                <StyledInfoLabel>
+                  Your Allocation: {maxGuaranteed + ' ' + networkSymbol(network)}
+                </StyledInfoLabel>
+              </StyledCenterRow>
+            </StyledBox>
           )}
 
           <StyledInfoSolid>

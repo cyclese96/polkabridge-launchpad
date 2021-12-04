@@ -11,6 +11,7 @@ import {
   formatFloatValue,
   formattedNetworkName,
   fromWei,
+  getMaxAllocation,
   getNetworkName,
   getProgress,
   getUserStakingData,
@@ -18,7 +19,7 @@ import {
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, tierConditions } from '../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, GUARANTEED, harmonyNetwork, polygonNetwork, PRIVATE, PUBLIC, tierConditions, WHITELIST } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { networkSymbol } from '../../pbr/helpers'
@@ -101,6 +102,8 @@ const Launchpad: React.FC = () => {
   const [progress, setProgress] = useState<BigNumber>()
   const [stakedAmount, setStakedAmount] = useState('0')
   const { ethereum, account } = useWallet()
+  const [maxGuaranteed, setMaxGuaranteed] = useState('0');
+
 
   const history = useHistory()
   const { chainId } = useNetwork()
@@ -119,6 +122,9 @@ const Launchpad: React.FC = () => {
         endAt,
         network
       )
+
+      const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), account, network);
+      setMaxGuaranteed(fromWei(_max))
 
       const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account, network)
 
@@ -171,6 +177,8 @@ const Launchpad: React.FC = () => {
 
     if (access === 'Whitelist') {
       return maxWhitelistPurchase;
+    } else if (access === GUARANTEED) {
+      return maxGuaranteed;
     }
 
     const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
@@ -227,7 +235,7 @@ const Launchpad: React.FC = () => {
             </StyledBox>
           </StyledInfo>
 
-          {access === 'Private' ? ( //disabled
+          {access === 'Private' && ( //disabled
             <StyledBox className="col-10">
               <StyledCenterRow>
                 <StyledInfoLabel>
@@ -240,8 +248,20 @@ const Launchpad: React.FC = () => {
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
-          ) : (
-            ''
+          )}
+
+          {access === GUARANTEED && (
+            <StyledBox className="col-10">
+              <StyledCenterRow>
+                {/* <StyledInfoLabel>
+                  Your staked amount:{' '}
+                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                </StyledInfoLabel> */}
+                <StyledInfoLabel>
+                  Your Allocation: {maxGuaranteed + ' ' + networkSymbol(network)}
+                </StyledInfoLabel>
+              </StyledCenterRow>
+            </StyledBox>
           )}
 
           <StyledInfo>
@@ -250,7 +270,7 @@ const Launchpad: React.FC = () => {
                 disabled={startAt * 1000 > new Date().getTime()}
                 text={
                   startAt * 1000 <= new Date().getTime()
-                    ? 'Join pool'
+                    ? 'Join Pool'
                     : undefined
                 }
                 onClick={handleJoinPool}
@@ -315,15 +335,25 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {access === 'Public' || access === 'Whitelist'
-                            ? 'Allocation'
-                            : 'Min - Max Allocation'}
+                          {(access === PUBLIC || access === WHITELIST) && 'Allocation'}
+                          {access === PRIVATE && 'Min - Max Allocation'}
+                          {access === GUARANTEED && 'Your Allocation'}
                         </StyledTableLabel>
                         <StyledTableValue>
-                          {/* {access === 'Public' || 'Private' ? `${maxTier2}  ${netWorkTokenSymbol()}` : `${min} ${netWorkTokenSymbol()} - ${max} ${netWorkTokenSymbol()}`} */}
-                          {access === 'Public' || access === 'Whitelist'
+                          {access === PUBLIC && `${maxTier2}  ${networkSymbol(network)}`}
+                          {access === WHITELIST && `${maxWhitelistPurchase}  ${networkSymbol(network)}`}
+                          {access === PRIVATE && `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
+                          {access === GUARANTEED && `${maxGuaranteed}  ${networkSymbol(network)}`}
+                          {/* {access === 'Public' || access === 'Whitelist'
                             ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
                             : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
+                                     {access === 'Public' || access === 'Whitelist'
+                            ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
+                            : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
+                                        {access === 'Public' || access === 'Whitelist'
+                            ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
+                            : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}    */}
+
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>

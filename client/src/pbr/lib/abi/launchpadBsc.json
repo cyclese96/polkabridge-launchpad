@@ -112,6 +112,26 @@
             },
             {
                 "internalType": "uint256",
+                "name": "percentClaim6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim7",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime7",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
             }
@@ -127,6 +147,11 @@
                 "internalType": "address[]",
                 "name": "user",
                 "type": "address[]"
+            },
+            {
+                "internalType": "uint256[]",
+                "name": "allocation",
+                "type": "uint256[]"
             },
             {
                 "internalType": "uint256",
@@ -265,6 +290,26 @@
             {
                 "internalType": "uint256",
                 "name": "PercentClaim5",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ClaimTime6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PercentClaim6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "ClaimTime7",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "PercentClaim7",
                 "type": "uint256"
             }
         ],
@@ -474,6 +519,30 @@
                 "internalType": "uint256",
                 "name": "pid",
                 "type": "uint256"
+            },
+            {
+                "internalType": "address",
+                "name": "user",
+                "type": "address"
+            }
+        ],
+        "name": "getUserPurchaseAllocation",
+        "outputs": [
+            {
+                "internalType": "uint256",
+                "name": "",
+                "type": "uint256"
+            }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
             }
         ],
         "name": "getUserTotalPurchase",
@@ -497,11 +566,6 @@
         ],
         "name": "getWhitelistfo",
         "outputs": [
-            {
-                "internalType": "address",
-                "name": "",
-                "type": "address"
-            },
             {
                 "internalType": "bool",
                 "name": "",
@@ -603,6 +667,24 @@
     {
         "inputs": [
             {
+                "internalType": "address[]",
+                "name": "user",
+                "type": "address[]"
+            },
+            {
+                "internalType": "uint256",
+                "name": "pid",
+                "type": "uint256"
+            }
+        ],
+        "name": "sign",
+        "outputs": [],
+        "stateMutability": "nonpayable",
+        "type": "function"
+    },
+    {
+        "inputs": [
+            {
                 "internalType": "address",
                 "name": "newOwner",
                 "type": "address"
@@ -663,6 +745,26 @@
             {
                 "internalType": "uint256",
                 "name": "claimTime5",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime6",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "percentClaim7",
+                "type": "uint256"
+            },
+            {
+                "internalType": "uint256",
+                "name": "claimTime7",
                 "type": "uint256"
             },
             {
@@ -760,11 +862,6 @@
                 "internalType": "bool",
                 "name": "isWhitelist",
                 "type": "bool"
-            },
-            {
-                "internalType": "bool",
-                "name": "isActived",
-                "type": "bool"
             }
         ],
         "name": "updateWhitelist",
@@ -791,11 +888,6 @@
                 "internalType": "uint256",
                 "name": "Id",
                 "type": "uint256"
-            },
-            {
-                "internalType": "address",
-                "name": "UserAddress",
-                "type": "address"
             },
             {
                 "internalType": "bool",
@@ -833,9 +925,9 @@
                 "type": "uint256"
             },
             {
-                "internalType": "bool",
-                "name": "IsActived",
-                "type": "bool"
+                "internalType": "uint256",
+                "name": "PurchaseAllocation",
+                "type": "uint256"
             }
         ],
         "stateMutability": "view",

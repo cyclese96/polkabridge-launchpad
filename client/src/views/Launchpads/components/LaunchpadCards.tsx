@@ -17,6 +17,7 @@ import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
+import { getPoolReigsterLink } from '../../../pbr/helpers'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
@@ -25,7 +26,7 @@ const LaunchpadCards: React.FC = () => {
 
   return (
     <StyledCards>
-      <StyledHeading>{console.log(defaultLp)} UPCOMING POOLS</StyledHeading>
+      <StyledHeading> UPCOMING POOLS</StyledHeading>
       <Wrapper>
         <div className="container mt-4" style={{ marginBottom: 60 }}>
           {/* {true && ( */}
@@ -55,7 +56,7 @@ const LaunchpadCards: React.FC = () => {
       <Wrapper>
         <div className="container mt-4">
           <div className="row d-flex justify-content-center">
-            {(rows.length > 0 ? rows : defaultLp).sort((a, b) => b.endAt - a.endAt).map((singleLaunchpad, i) => {
+            {(rows.length > 0 ? rows : defaultLp).filter(lp => lp.endAt * 1000 < new Date().getTime()).sort((a, b) => b.endAt - a.endAt).map((singleLaunchpad, i) => {
               {
                 return (
                   singleLaunchpad.endAt * 1000 < new Date().getTime() && (
@@ -89,11 +90,14 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const { account } = useWallet()
 
   const [progress, setProgress] = useState<BigNumber>()
+  const [registerForm, setRegisterForm] = useState(null);
 
 
   useEffect(() => {
     async function fetchData() {
-      console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
+      // console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
+      const link = getPoolReigsterLink(launchpad.pid, launchpad.network)
+      setRegisterForm(link)
       const newProgress = await getProgress(
         launchpad.lpAddress,
         getPoolId(launchpad.pid, launchpad.network),
@@ -224,16 +228,74 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
                 <Spacer />
               </>
             )}
-            <Button
-              text="View"
-              onClick={() => handleLaunchpadClick(launchpad)}
-            ></Button>
+
+            {!registerForm && (
+              <Button
+                text="View"
+
+                onClick={() => handleLaunchpadClick(launchpad)}
+              ></Button>
+            )}
+            {registerForm && (
+              <StyledInfo>
+                <StyledBox className="col-5">
+                  <Button
+                    text="View"
+                    onClick={() => handleLaunchpadClick(launchpad)}
+                  ></Button>
+                </StyledBox>
+                <StyledBox className="col-1"></StyledBox>
+                <StyledBox className="col-5">
+                  <Button
+                    text="Register"
+                    href={registerForm}
+                    variant='transparent'
+
+                  ></Button>
+                </StyledBox>
+              </StyledInfo>
+            )}
+
           </StyledContent>
         </CardContent>
       </Card>
     </StyledCardWrapper>
   )
 }
+
+
+const StyledInfo = styled.div`
+  display: flex;
+  justify-content: space-between;
+  box-sizing: border-box;
+  // padding: ${(props) => props.theme.spacing[3]}px;
+  // border: 2px solid ${(props) => props.theme.color.grey[200]};
+  border-radius: 12px;
+  margin: ${(props) => props.theme.spacing[3]}px auto;
+  @media (max-width: 767px) {
+    width: 100%;
+    text-align: center;
+  }
+`
+
+const StyledBox = styled.div`
+  &.col-2 {
+    width: 20%;
+  }
+  &.col-4 {
+    width: 40%;
+  }
+  &.col-5 {
+    width: 50%;
+  }
+  &.col-8 {
+    width: 80%;
+  }
+  &.col-10 {
+    width: 100%;
+  }
+`
+
 
 const RainbowLight = keyframes`
 	0% {

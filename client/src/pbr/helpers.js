@@ -1,5 +1,5 @@
 import BigNumber from "bignumber.js"
-import { bscNetwork, harmonyNetwork, moonriverNetwork, polygonNetwork } from "./lib/constants"
+import { bscNetwork, harmonyNetwork, moonriverNetwork, polygonNetwork, supportedPools } from "./lib/constants"
 
 export const networkSymbol = (network) => {
     if (network === bscNetwork) {
@@ -40,4 +40,13 @@ export const isEqual = (value1, value2) => {
     return new BigNumber(_value1.toFixed(3).toString()).eq(
         _value2.toFixed(3).toString(),
     )
+}
+
+export const getPoolReigsterLink = (pid, network) => {
+    const poolObject = supportedPools.find(item => item.pid === pid && item.network === network);
+    if (!poolObject) {
+        return null
+    }
+
+    return !poolObject.registerForm ? null : poolObject.registerForm;
 }

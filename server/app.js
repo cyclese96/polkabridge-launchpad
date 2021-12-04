@@ -19,7 +19,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 
-const currentConnection = true ? 'mainnet' : 'testnet'
+const testing = false;
+const currentConnection = testing ? 'testnet' : 'mainnet'
 
 const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
 const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY}`;
@@ -102,19 +103,23 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         const currPoolObj = getPoolObject(network, symbol);
 
         if (!currPoolObj) {
-            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet" });
+            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet!" });
         }
 
         if (currPoolObj.startAt * 1000 > new Date().getTime()) {
-            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet" });
+            return res.status(403).send({ message: "Access denied, pool is not allowed to purchase yet!" });
         }
 
 
         if (!userAddress || userAddress === '0x0000000000000000000000000000000000000000') {
-            return res.status(401).send({ message: "Access denied, Invalid user address" });
+            return res.status(401).send({ message: "Access denied, Invalid user address!" });
         }
 
         const _totalStakeAmount = await fetchStakeAmount(userAddress);
+
+        if (currPoolObj.access && currPoolObj.access === 'Guaranteed' && new BigNumber(_totalStakeAmount).lt(10000000000000000000000)) {
+            return res.status(403).send({ message: "Access denied, Not enough staked tokens!" });
+        }
         // console.log('total stake amount ', { _totalStakeAmount, userAddress })
         const userSting = Web3.utils.soliditySha3(
             { t: 'address', v: userAddress },
