@@ -767,18 +767,18 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'Cheesus DeFi',
-    symbol: 'DRATE-PBR',
-    description: `DRATE/BNB`,
+    symbol: 'CHEESUS-PBR',
+    description: `CHEESUS/BNB`,
     introduce: `Multichain analytical platform & aggregator for all DeFi Industry. Real-time precise & reliable data about all Yield Farming, Liquidity pools, Upcoming tokensales & Indexes throughout Ethereum, BSC, HECO Chain and Polkadot.`,
     website: 'https://defirating.finance/',
     twitter: 'https://twitter.com/CheesusDeFi',
     telegram: 'https://t.me/cheesus_MAIN_eng',
     whitepaper:
       'https://168aggregator.notion.site/DeFi-Rating-Multichain-DeFi-Dashboard-Analytical-Platform-c23701169e35493f801dff7dc0b42ac1',
-    tokenSymbol: 'DRATE',
+    tokenSymbol: 'CHEESUS',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/chessus.png',
-    totalSupply: '200,000,000 DRATE',
+    totalSupply: '200,000,000 CHEESUS',
     total: '84.7 BNB',// 1BNB = 590$
     ratio: 15526.3, //token price 0.038, 1BNB = 590$
     min: 0.16, //100$
@@ -931,9 +931,9 @@ export const supportedPools = [
     distribution: '25% TGE, 25% per month in next 3 months',
     startAt: 1638453630,
     endAt: 1638457200,
-    claimAt: 1638808200,
+    claimAt: 1638799800,
     startDate: '2PM UTC 2nd Dec, 2021',
-    claimTimeArr: [1638808200, 1641477630, 1644156030, 1646575230],
+    claimTimeArr: [1638799800, 1641477630, 1644156030, 1646575230],
     harvestDistribution: [25, 25, 25, 25]
   },
   {
@@ -975,6 +975,50 @@ export const supportedPools = [
     endAt: 1638975600,
     claimAt: 0,
     startDate: "2PM UTC 8th Dec, 2021"
+  },
+  {
+    pid: 19,
+    poolId: 1,
+    lpAddresses: {
+      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
+      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
+      137: '',
+      80001: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      137: '',
+      80001: '',
+    },
+    lpExplorer: 'https://polygonscan.com/address',
+    name: 'Aqarchain',
+    symbol: 'AQR-PBR',
+    description: `AQR/MATIC`,
+    introduce: `Aqarchain is a blockchain powered real estate asset tokenization platform whose aim is to create a decentralized ecosystem where investment in real estate is as easy as investing in shares on the stock market. This aim is achieved by minting real estate NFT and  fractionalizing it. Aqarchain has created a Metaverse AqarLand mapped to the real world properties.`,
+    website: 'https://aqarchain.io/',
+    twitter: 'https://twitter.com/aqarchain_io',
+    telegram: 'https://t.me/aqarchainglobal',
+    whitepaper: 'https://aqarchain.oss-me-east-1.aliyuncs.com/white-paper/White-Paper-English.pdf',
+    tokenSymbol: 'AQR',
+    tokenExplorer: 'https://polygonscan.com/address',
+    icon: '/img/tokens/aqar.jpg',
+    totalSupply: '100,000,000 AQR',
+    total: '58823.5 MATIC', //1Matic=1.7$
+    ratio: 4.85,//1 TRY=0.35$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: 'Guaranteed',
+    network: polygonNetwork,
+    distribution: '50% at TGE, 50% vesting in 6 months',
+    startAt: 1638979200,
+    endAt: 1638982800,
+    claimAt: 0,
+    startDate: '4PM UTC 08th Dec, 2021',
+    claimTimeArr: []
   },
   {
     pid: 20,
