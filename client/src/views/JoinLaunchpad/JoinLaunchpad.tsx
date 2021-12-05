@@ -205,6 +205,7 @@ const JoinLaunchpad: React.FC = () => {
         getIsWhitelist(
           lpAddress,
           currentPoolId(pid, network),
+          access,
           stakedAmount,
           account,
           network,
@@ -214,6 +215,7 @@ const JoinLaunchpad: React.FC = () => {
         getProgress(
           lpAddress,
           currentPoolId(pid, network),
+          access,
           startAt,
           endAt,
           network,
@@ -221,11 +223,12 @@ const JoinLaunchpad: React.FC = () => {
         getPurchasesAmount(
           lpAddress,
           currentPoolId(pid, network),
+          access,
           account,
           network,
         ),
         getUserStakingData(currentPoolId(pid, network), account, network),
-        getUserInfo(lpAddress, currentPoolId(pid, network), account, network),
+        getUserInfo(lpAddress, currentPoolId(pid, network), access, account, network),
       ])
       setLoading(false);
       // setDataLoading({ state: false, message: "" });
@@ -463,17 +466,20 @@ const JoinLaunchpad: React.FC = () => {
     const newProgress = await getProgress(
       lpAddress,
       currentPoolId(pid, network),
+      access,
       network,
     )
     const newPurchasedAmount = await getPurchasesAmount(
       lpAddress,
       currentPoolId(pid, network),
+      access,
       account,
       network,
     )
     const userInfoData = await getUserInfo(
       lpAddress,
       currentPoolId(pid, network),
+      access,
       account,
       network,
     )
@@ -818,6 +824,7 @@ const JoinLaunchpad: React.FC = () => {
                         // console.log('captcha test ', token)
                         var tx: any = await onJoinPool(
                           currentPoolId(pid, network),
+                          access,
                           ethValue,
                           stakedAmount,
                           lpAddress,
@@ -912,6 +919,7 @@ const JoinLaunchpad: React.FC = () => {
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest(
                         currentPoolId(pid, network),
+                        access,
                         lpAddress,
                         network,
                       )

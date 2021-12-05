@@ -57,7 +57,7 @@ export const contractAddresses = {
 }
 
 
-const testing = false;
+const testing = false
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
