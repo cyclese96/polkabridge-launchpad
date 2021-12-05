@@ -10,11 +10,12 @@ const useHarvest = () => {
     const pbr = usePolkaBridge()
 
     const handleHarvest = useCallback(
-        async (pid: number, lpAddress: string, network: string) => {
+        async (pid: number, access: string, lpAddress: string, network: string) => {
             try {
                 const txHash = await harvest(
                     lpAddress,
                     pid,
+                    access,
                     account,
                     network
                 )

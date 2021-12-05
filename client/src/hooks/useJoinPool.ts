@@ -11,11 +11,12 @@ const useJoinPool = () => {
     const pbr = usePolkaBridge()
     // const launchpadContract = network === ethereumNetwork ? getLaunchpadContract(pbr) : getBscLaunchpadContract(pbr)
     const handleJoinPool = useCallback(
-        async (pid: number, tokenValue: string, stakeAmount: string, lpAddress: string, network: string, symbol: string) => {
+        async (pid: number, access: string, tokenValue: string, stakeAmount: string, lpAddress: string, network: string, symbol: string) => {
             try {
                 const txHash = await joinpool(
                     lpAddress,
                     pid,
+                    access,
                     stakeAmount,
                     tokenValue,
                     account,

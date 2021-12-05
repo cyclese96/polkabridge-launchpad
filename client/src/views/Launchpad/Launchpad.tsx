@@ -118,13 +118,16 @@ const Launchpad: React.FC = () => {
       const newProgress = await getProgress(
         lpAddress,
         currentPoolId(pid, network),
+        access,
         startAt,
         endAt,
         network
       )
 
-      const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), account, network);
-      setMaxGuaranteed(fromWei(_max))
+      if (access === GUARANTEED) {
+        const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
+        setMaxGuaranteed(fromWei(_max))
+      }
 
       const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account, network)
 

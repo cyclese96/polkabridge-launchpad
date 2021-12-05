@@ -101,6 +101,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
       const newProgress = await getProgress(
         launchpad.lpAddress,
         getPoolId(launchpad.pid, launchpad.network),
+        launchpad.access,
         launchpad.startAt,
         launchpad.endAt,
         launchpad.network

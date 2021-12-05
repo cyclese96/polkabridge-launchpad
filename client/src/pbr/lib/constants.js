@@ -57,7 +57,7 @@ export const contractAddresses = {
 }
 
 
-const testing = true
+const testing = false
 
 export const currentConnection = testing ? 'testnet' : 'mainnet';
 
@@ -890,7 +890,7 @@ export const supportedPools = [
     network: bscNetwork,
     distribution: '25% at TGE, 25% per month in next 3 months',
     startAt: 1638284430,//whitelist round 1638280830, private round 1638284430
-    endAt: 1638287100,//whitelist round 1638283500, private round 1638287100
+    endAt: 1668635994,//whitelist round 1638283500, private round 1638287100
     claimAt: 1638352800,
     startDate: '2PM UTC 30th Nov, 2021',
     claimTimeArr: [1638352800, 1641031200, 1643709600, 1646128800],
@@ -978,7 +978,7 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
-    startAt: 1638972000,
+    startAt: 1638284430,//1638972000,
     endAt: 1638975600,
     claimAt: 0,
     startDate: "2PM UTC 8th Dec, 2021",
