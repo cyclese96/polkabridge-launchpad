@@ -75,8 +75,9 @@ const useStyles = makeStyles((theme) => ({
       background: 'rgba(224, 7, 125, 0.7)',
     },
     [theme.breakpoints.down('sm')]: {
-      width: 'fit-content',
-      fontSize: 12,
+      width: '100%',
+      fontSize: 10,
+      fontWeight: 600,
     },
   },
 
@@ -134,6 +135,7 @@ const Home: React.FC = () => {
                   textDecoration: 'none',
                   marginRight: 10,
                   paddingTop: 30,
+                  marginLeft: 5,
                 }}
                 target="_blank"
                 href="https://polkabridge.medium.com/polkabridge-launches-launchpad-v2-the-multichain-universe-misson-8377161bfdba"
@@ -158,7 +160,11 @@ const Home: React.FC = () => {
                 <div></div>
               </a>
               <a
-                style={{ textDecoration: 'none', paddingTop: 30 }}
+                style={{
+                  textDecoration: 'none',
+                  paddingTop: 30,
+                  marginRight: 10,
+                }}
                 target="_blank"
                 href="https://docs.google.com/forms/d/1ceBZIL8xDNBJWYzZ4j11lhU9MMke8usrNgnPEoSIMf0/edit"
               >
