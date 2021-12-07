@@ -984,51 +984,7 @@ export const supportedPools = [
     startDate: "2PM UTC 8th Dec, 2021",
     registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
   },
-  {
-    pid: 19,
-    poolId: 1,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      137: '',
-      80001: '',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      137: '',
-      80001: '',
-    },
-    lpExplorer: 'https://polygonscan.com/address',
-    name: 'Aqarchain',
-    symbol: 'AQR-PBR',
-    description: `AQR/MATIC`,
-    introduce: `Aqarchain is a blockchain powered real estate asset tokenization platform whose aim is to create a decentralized ecosystem where investment in real estate is as easy as investing in shares on the stock market. This aim is achieved by minting real estate NFT and  fractionalizing it. Aqarchain has created a Metaverse AqarLand mapped to the real world properties.`,
-    website: 'https://aqarchain.io/',
-    twitter: 'https://twitter.com/aqarchain_io',
-    telegram: 'https://t.me/aqarchainglobal',
-    whitepaper: 'https://aqarchain.oss-me-east-1.aliyuncs.com/white-paper/White-Paper-English.pdf',
-    tokenSymbol: 'AQR',
-    tokenExplorer: 'https://polygonscan.com/address',
-    icon: '/img/tokens/aqar.jpg',
-    totalSupply: '100,000,000 AQR',
-    total: '58823.5 MATIC', //1Matic=1.7$
-    ratio: 4.85,//1 AQR=0.35$
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
-    network: polygonNetwork,
-    distribution: '50% at TGE, 50% vesting in 6 months',
-    startAt: 1638979200,
-    endAt: 1638982800,
-    claimAt: 0,
-    startDate: '4PM UTC 08th Dec, 2021',
-    claimTimeArr: [],
-    registerForm: 'https://forms.gle/ZDZXTGUntBDvfBny7'
-  },
+
   {
     pid: 20,
     poolId: 1,
@@ -1071,7 +1027,8 @@ export const supportedPools = [
     startAt: 1639144800,
     endAt: 1639148400,
     claimAt: 0,
-    startDate: '2PM UTC 10th Dec, 2021'
+    startDate: '2PM UTC 10th Dec, 2021',
+    registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9'
 
   },
   {
@@ -1116,7 +1073,8 @@ export const supportedPools = [
     endAt: 1734569200,
     claimAt: 1639231230,
     startDate: '2PM UTC 11th Dec, 2021',
-    claimTimeArr: [1639231230, 1639029546]
+    claimTimeArr: [1639231230, 1639029546],
+    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
   },
 
   {
