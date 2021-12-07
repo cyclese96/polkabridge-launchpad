@@ -129,12 +129,10 @@ const Rules = () => {
               </h6>
               <ul className={classes.listing}>
                 <li>
-                  You need to stake minimum 500 PBR tokens to staking pool
+                  You need to stake minimum 10,000 PBR tokens to staking pool
                   either on Polygon network or Ethereum network.
                 </li>
-                <li>
-                  You should stake 3000 PBR to get maximum purchase allocation.
-                </li>
+
               </ul>
             </div>
             <div className="mt-3">
@@ -143,7 +141,7 @@ const Rules = () => {
               </h6>
               <ul className={classes.listing}>
                 <li>
-                  You can only join IDO pools by First come First Serve (FCFS).
+                  Guaranteed Allocation (Read more at <a style={{ color: "#DF097C" }} target="_blank" href="https://polkabridge.medium.com/polkabridge-announces-new-tier-system-for-launchpad-ido-guaranteed-allocation-93c3b3036ac1">here</a>)
                 </li>
                 <li>
                   For more details and latest updates you can join our{' '}
