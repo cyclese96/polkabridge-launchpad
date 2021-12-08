@@ -348,7 +348,7 @@ const JoinLaunchpad: React.FC = () => {
 
   const getGuaranteedMaxValue = async () => {
     // setDataLoading({ state: true, message: 'Loading allocation...' })
-    const max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), account, network);
+    const max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
     // setDataLoading({ state: false, message: '' })
 
     return max;
