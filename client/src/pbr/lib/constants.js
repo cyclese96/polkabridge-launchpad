@@ -1,3 +1,4 @@
+import { Public } from '@material-ui/icons'
 import BigNumber from 'bignumber.js/bignumber'
 
 export const SUBTRACT_GAS_LIMIT = 100000
@@ -970,16 +971,16 @@ export const supportedPools = [
     totalSupply: '1,000,000,000 SOLC',
     total: '175.4 BNB',//1BNB = 570$
     ratio: 38000,//1 SOLC = 0.015
-    min: 0, //100$
-    max: 0, //300$
-    maxTier1: 0, //100$
-    maxTier2: 0, //200$
-    maxTier3: 0, //300$
-    access: GUARANTEED,
+    min: 0.17, //100$
+    max: 0.17, //300$
+    maxTier1: 0.17, //100$
+    maxTier2: 0.17, //200$
+    maxTier3: 0.17, //300$
+    access: PUBLIC,
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
-    startAt: 1638972000,
-    endAt: 1638975600,
+    startAt: 1638986400,
+    endAt: 1638990000,
     claimAt: 1639144800,
     startDate: "2PM UTC 8th Dec, 2021",
     claimTimeArr: [1639144800, 1641823200, 1644501600],

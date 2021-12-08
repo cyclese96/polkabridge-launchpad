@@ -167,6 +167,13 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
        
     }
 
+    function updateMinimumStake(
+       uint256 _minimum
+    ) public onlyOwner {
+        MinimumStakeAmount=_minimum;
+       
+    }
+
     function IsWhitelist(
         address user,
         uint256 pid,
@@ -639,6 +646,8 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             uint256,
             uint256,
             uint256,
+            uint256,
+             uint256,
             IERC20
         )
     {
@@ -649,6 +658,8 @@ contract PolkabridgeLaunchPadV2 is Ownable, ReentrancyGuard {
             pools[poolIndex].Type,
             pools[poolIndex].RatePerETH,
             pools[poolIndex].TotalSold,
+            pools[poolIndex].TotalToken,
+            pools[poolIndex].TotalCap,
             pools[poolIndex].IDOToken
         );
     }
