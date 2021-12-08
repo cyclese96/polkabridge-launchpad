@@ -948,7 +948,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-      56: '',
+      56: '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8',
       97: '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439',
     },
     tokenAddresses: {
@@ -968,21 +968,21 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/solc.png',
     totalSupply: '1,000,000,000 SOLC',
-    total: '181.8 BNB',//1BNB = 550$
-    ratio: 36666.6,//1 SOLC = 0.015
-    min: 0.16, //100$
-    max: 0.49, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.32, //200$
-    maxTier3: 0.49, //300$
+    total: '175.4 BNB',//1BNB = 570$
+    ratio: 38000,//1 SOLC = 0.015
+    min: 0, //100$
+    max: 0, //300$
+    maxTier1: 0, //100$
+    maxTier2: 0, //200$
+    maxTier3: 0, //300$
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
     startAt: 1638972000,
     endAt: 1638975600,
-    claimAt: 0,
+    claimAt: 1639144800,
     startDate: "2PM UTC 8th Dec, 2021",
-    claimTimeArr: [],
+    claimTimeArr: [1639144800, 1641823200, 1644501600],
     harvestDistribution: [50, 25, 25],
     registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
   },
@@ -1079,6 +1079,7 @@ export const supportedPools = [
     startDate: '4PM UTC 10th Dec, 2021',
     claimTimeArr: [],
     harvestDistribution: [5, 19, 19, 19, 19, 19],
+    registerForm: "https://forms.gle/UdGDPxk5HYux4wD2A"
   },
   {
     pid: 22,
