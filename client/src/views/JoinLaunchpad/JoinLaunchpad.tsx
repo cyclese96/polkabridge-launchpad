@@ -417,6 +417,12 @@ const JoinLaunchpad: React.FC = () => {
           ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
           : `Max:  ${_max}  ${networkSymbol(network)}`
 
+      } else if (access === GUARANTEED) {
+
+        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= Number(maxGuaranteed)
+          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+          : `Max:  ${maxGuaranteed}  ${networkSymbol(network)}`
+
       } else {
 
         return parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
@@ -451,6 +457,10 @@ const JoinLaunchpad: React.FC = () => {
     } else if (access === 'Public') {
 
       return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max);
+
+    } else if (access === GUARANTEED) {
+
+      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > Number(maxGuaranteed));
 
     } else {
 
