@@ -711,7 +711,8 @@ const abiMapping = {
   'Private': launchpadBscAbi,
   'Public': LaunchpadAbi,
   'Whitelist': launchpadBscAbi,
-  'Guaranteed': launchpadBscAbi2
+  'Guaranteed': launchpadBscAbi2,
+  '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
@@ -719,8 +720,8 @@ const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, curre
   // console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork })
   if (currentNetwork === bscNetwork) {
 
-    // console.log('ethTest: abi is present', { check: Object.keys(abiMapping).includes(access), access })
-    const abi = Object.keys(abiMapping).includes(access) ? abiMapping[access] : abiMapping['Private']
+    // console.log('ethTest: abi is present', { check: Object.keys(abiMapping).includes(lpAddress?.toLowerCase()), lpAddress })
+    const abi = Object.keys(abiMapping).includes(lpAddress?.toLowerCase()) ? abiMapping[lpAddress] : abiMapping['Private']
     const _bscContract = getContractInstance(abi, lpAddress, lpNetwork, currentNetwork);
 
     return _bscContract;

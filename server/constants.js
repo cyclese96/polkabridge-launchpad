@@ -35,7 +35,6 @@ const pools = [
         network: bscNetwork,
         symbol: 'SOLC-PBR',
         startAt: 1638972000,
-        access: 'Guaranteed'
     },
     {
         pid: 1,
