@@ -237,7 +237,14 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
                 onClick={() => handleLaunchpadClick(launchpad)}
               ></Button>
             )}
-            {registerForm && (
+            {registerForm && (launchpad.endAt * 1000 < new Date().getTime()) && (
+              <Button
+                text="View"
+
+                onClick={() => handleLaunchpadClick(launchpad)}
+              ></Button>
+            )}
+            {(registerForm && (launchpad.endAt * 1000 > new Date().getTime())) && (
               <StyledInfo>
                 <StyledBox className="col-5">
                   <Button
