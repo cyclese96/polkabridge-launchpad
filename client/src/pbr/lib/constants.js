@@ -1125,11 +1125,57 @@ export const supportedPools = [
     claimAt: 1639231230,
     startDate: '2PM UTC 11th Dec, 2021',
     claimTimeArr: [1639231230, 1639029546],
+    harvestDistribution: [20, 40, 40],
     registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
   },
-
   {
     pid: 23,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      1287: '',  //testnet
+      1285: ''//mainnet
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      1287: '',
+      1285: '',
+    },
+    lpExplorer: 'https://bscscan.com/address/',
+    name: 'SnapEx',
+    symbol: 'SNAP-PBR',
+    description: `SNAP/BNB`,
+    introduce: `THE SNAP TOKEN IS THE NATIVE BLOCKCHAIN PROTOCOL OF SNAPEX, BRINGING TOGETHER BOTH DEFI AND CEX MODELS, ALLOWING BOTH RETAIL AND INSTITUTIONAL-LEVEL CUSTOMERS TO PARTICIPATE IN CRYPTO CFD TRADING (CONTRACT FOR DIFFERENCES). WE ARE MAKING THE MASS-ADOPTION OF DIGITAL ASSETS HAPPEN BY ACTING AS THE FINAL BRIDGE BETWEEN TRADITIONAL AND DIGITAL FINANCE.`,
+    website: 'https://token.snapex.com/',
+    twitter: 'https://twitter.com/snapexofficial',
+    telegram: 'https://t.me/snapex_en',
+    whitepaper: 'https://token.snapex.com/wp-content/uploads/2021/11/Whitepaper-November-2021.pdf',
+    tokenSymbol: 'SNAP',
+    tokenExplorer: 'https://bscscan.com/address/',
+    icon: '/img/tokens/snapex.jpg',
+    totalSupply: '2,000,000,000 SNAP',
+    total: '169.49 BNB',//590$
+    ratio: 19666.6,//0.03$
+    min: 0, //100$
+    max: 0, //300$
+    maxTier1: 0, //100$
+    maxTier2: 0, //200$
+    maxTier3: 0, //300$
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: 'Unlock 25% on day 1, and 15% monthly for following 5 months',
+    startAt: 1639490400,
+    endAt: 1639494000,
+    claimAt: 1639747800,
+    startDate: '2PM UTC 14th Dec, 2021',
+    claimTimeArr: [1639747800, 1642428000, 1645106400, 1647525600, 1650204000, 1652796000],
+    harvestDistribution: [25, 15, 15, 15, 15, 15],
+    registerForm: "https://forms.gle/jZQDxSvVNymV7WAV9"
+  },
+  {
+    pid: 24,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1173,7 +1219,7 @@ export const supportedPools = [
     startDate: '2PM UTC 20th Dec, 2021',
   },
   {
-    pid: 24,
+    pid: 25,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1217,7 +1263,7 @@ export const supportedPools = [
     claimTimeArr: []
   },
   {
-    pid: 25,
+    pid: 26,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1263,7 +1309,7 @@ export const supportedPools = [
 
 
   {
-    pid: 26,
+    pid: 27,
     poolId: 1,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
@@ -1306,7 +1352,7 @@ export const supportedPools = [
     startDate: 'TBA',
   },
   {
-    pid: 27,
+    pid: 28,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1350,7 +1396,7 @@ export const supportedPools = [
     startDate: 'January, 2022',
   },
   {
-    pid: 28,
+    pid: 29,
     poolId: 1,
     lpAddresses: {
       1: '',
