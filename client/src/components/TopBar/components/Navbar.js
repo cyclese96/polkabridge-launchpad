@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-// import Button from "@material-ui/core/Button";
 import Avatar from '@material-ui/core/Avatar'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
@@ -23,8 +22,6 @@ import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
 import useNetwork from '../../../hooks/useNetwork'
 import { Link } from 'react-router-dom'
-import { setupNetwork } from '../../../pbr/utils'
-import { bscNetworkDetail, harmonyNetworkDetail } from '../../../pbr/networkConstants'
 import NetworkSelect from './NetworkSelect'
 
 const useStyles = makeStyles((theme) => ({
@@ -249,8 +246,8 @@ const Navbar = () => {
   const { chainId, status } = useNetwork()
 
   useEffect(() => {
-    console.log('useNetwork:  network id', chainId)
-    console.log('useNetwork: status', status)
+    // console.log('useNetwork:  network id', chainId)
+    // console.log('useNetwork: status', status)
     if (status === 'network changing') {
       var result = window.confirm('Do you want reload the page ?')
       if (result) {

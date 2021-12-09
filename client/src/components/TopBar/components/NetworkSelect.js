@@ -108,7 +108,6 @@ export default function NetworkSelect({ }) {
   return (
     <div>
       <FormControl variant="standard" className={classes.root}>
-        {console.log('testConnect: ', chainId)}
         <Select
           className={classes.main}
           value={chainId}

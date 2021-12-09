@@ -294,6 +294,10 @@ export const getHistory = async (account) => {
 export const getProgress = async (lpAddress, pid, access, startAt, endAt, lpNetwork) => {
   try {
 
+    if (!lpAddress) {
+      return
+    }
+
     const chainId = await getCurrentNetworkId();
     const currentNetwork = getNetworkName(chainId);
 
@@ -363,6 +367,10 @@ export const getIsWhitelist = async (lpAddress, pid, access, stakeAmount, accoun
 export const getPurchasesAmount = async (lpAddress, pid, access, account, lpNetwork) => {
   try {
 
+    if (!lpAddress) {
+      return null;
+    }
+
     const chainId = await getCurrentNetworkId();
     const currentNetwork = getNetworkName(chainId);
 
@@ -382,7 +390,7 @@ export const getPurchasesAmount = async (lpAddress, pid, access, account, lpNetw
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
-    console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
+    // console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
     return getBalanceNumber(new BigNumber(purchasesAmount));
   } catch (e) {
     console.log('ethTest: getPurchasesAmount', { e, lpAddress })
@@ -541,6 +549,10 @@ export const getMaxAllocation = async (lpAddress, pid, access, account, network)
 
   try {
 
+    if (!lpAddress) {
+      return null;
+    }
+
     const chainId = await getCurrentNetworkId();
     const currentNetwork = getNetworkName(chainId);
     const _launchpadContract = getCurrentLaunchpadContract(lpAddress, pid, access, network, currentNetwork);
@@ -559,9 +571,13 @@ export const getMaxAllocation = async (lpAddress, pid, access, account, network)
 
 
 // fetch user staking data
-export const getUserStakingData = async (pid, account, network) => {
+export const getUserStakingData = async (account, network) => {
 
   try {
+
+    if (!account) {
+      return null;
+    }
 
     const abi = stakingAbi;
     const address = currentConnection === 'mainnet' ? stakeContractAddresses.ethereum[1] : stakeContractAddresses.ethereum[42];
@@ -585,7 +601,7 @@ export const getUserStakingData = async (pid, account, network) => {
 
     return _totalStakedAmount;
   } catch (e) {
-    console.log('getUserStakingData', e)
+    console.log('getUserStakingData', { e })
     return '0';
   }
 }
@@ -593,6 +609,10 @@ export const getUserStakingData = async (pid, account, network) => {
 export const getUserInfo = async (lpAddress, pid, access, account, network) => {
 
   try {
+
+    if (!lpAddress) {
+      return null;
+    }
 
     const chainId = await getCurrentNetworkId();
     const currentNetwork = getNetworkName(chainId);
@@ -712,7 +732,9 @@ const abiMapping = {
   'Public': LaunchpadAbi,
   'Whitelist': launchpadBscAbi,
   'Guaranteed': launchpadBscAbi2,
-  '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2
+  '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2,//solclout mainnet
+  '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439': launchpadBscAbi2, // solclout testnet
+
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
@@ -720,8 +742,7 @@ const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, curre
   // console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork })
   if (currentNetwork === bscNetwork) {
 
-    // console.log('ethTest: abi is present', { check: Object.keys(abiMapping).includes(lpAddress?.toLowerCase()), lpAddress })
-    const abi = Object.keys(abiMapping).includes(lpAddress?.toLowerCase()) ? abiMapping[lpAddress] : abiMapping['Private']
+    const abi = Object.keys(abiMapping).includes(lpAddress) ? abiMapping[lpAddress] : abiMapping[access]
     const _bscContract = getContractInstance(abi, lpAddress, lpNetwork, currentNetwork);
 
     return _bscContract;
@@ -846,7 +867,7 @@ export const setupNetwork = async (networkObject) => {
 export const getPoolClaimTimeArr = (poolId, network) => {
   const lp = supportedPools.find(_lp => parseInt(_lp.pid) === parseInt(poolId) && _lp.network === network);
   if (!lp) {
-    console.log('ethTest: lp not found ', { poolId, network })
+    // console.log('ethTest: lp not found ', { poolId, network })
     return []
   }
 

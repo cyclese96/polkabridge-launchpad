@@ -36,7 +36,7 @@ export class PolkaBridge {
       this.web3.eth.defaultAccount = options.defaultAccount
     }
     this.contracts = new Contracts(realProvider, networkId, this.web3, options)
-    console.log('contracts added ', this.contracts)
+    // console.log('contracts added ', this.contracts)
     this.pbrAddress = contractAddresses.pbr[networkId]
     // this.masterChefAddress = contractAddresses.masterChef[networkId]
     this.wethAddress = contractAddresses.weth[networkId]

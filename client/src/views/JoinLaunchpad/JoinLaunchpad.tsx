@@ -176,6 +176,29 @@ const JoinLaunchpad: React.FC = () => {
     }
   }
 
+  const parseTokenPurchased = (_userInfoObject: any) => {
+    if (!_userInfoObject) {
+      return '0';
+    }
+    return fromWei(_userInfoObject?.userInfo?.[1]);
+
+  }
+
+  const parseNumberClaimed = (_userInfoObject: any) => {
+    if (!_userInfoObject) {
+      return '0';
+    }
+    return _userInfoObject?.harvestInfo?.NumberClaimed
+  }
+
+  const parsePercentClaimed = (_userInfoObject: any) => {
+    if (!_userInfoObject) {
+      return '0';
+    }
+
+    return _userInfoObject.userInfo ? _userInfoObject.userInfo[3] : 0
+  }
+
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
@@ -188,7 +211,7 @@ const JoinLaunchpad: React.FC = () => {
 
       if (access === GUARANTEED) {
         // fetch max allocation for guaranteed pools
-        const _max = await getGuaranteedMaxValue()
+        const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
         setMaxGuaranteed(fromWei(_max))
 
       }
@@ -227,7 +250,7 @@ const JoinLaunchpad: React.FC = () => {
           account,
           network,
         ),
-        getUserStakingData(currentPoolId(pid, network), account, network),
+        getUserStakingData(account, network),
         getUserInfo(lpAddress, currentPoolId(pid, network), access, account, network),
       ])
       setLoading(false);
@@ -236,14 +259,15 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
       // console.log('process REACT_APP_POLYGON_TESTNET_NODE', process.env.REACT_APP_POLYGON_TESTNET_NODE)
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('bscTest stakedData--->  ', stakedTokens)
-      // // console.log('stakedDataPolygon--->  ', stakedDataPolygon)
-      // console.log('bscTest progress--->  ', newProgress && newProgress.toString())
-      // console.log('ethTest: tokenValue--->  ', tokenValue)
-      // console.log('ethTest: tokenPurchased   ', tokenPurchased)
-      // console.log('ethTest: userInfo--->  ', userInfoData)
-      // console.log('ethTest: claimTimes  ', claimTimeArr)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
+      // console.log('ethTest: newETHBalance  ', newETHBalance)
+      // console.log('ethTest newHistory--->  ', newHistory)
+
+      // console.log('ethTest newProgress--->  ', newProgress?.toString())
+      // console.log('ethTest: setPurchasedAmount--->  ', newPurchasedAmount)
+      // console.log('ethTest: setStakedAmount   ', stakedTokens)
+      // console.log('ethTest: userInfoData--->  ', userInfoData)
+      // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
@@ -251,15 +275,9 @@ const JoinLaunchpad: React.FC = () => {
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
-      setTokenPurchased(
-        userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0',
-      )
-      setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0)
-      setNumberClaimed(
-        userInfoData.harvestInfo
-          ? userInfoData.harvestInfo.NumberClaimed
-          : null,
-      )
+      setTokenPurchased(parseTokenPurchased(userInfoData))
+      setPercentClaimed(parsePercentClaimed(userInfoData))
+      setNumberClaimed(parseNumberClaimed(userInfoData))
       setRecentClaimTime(getCurrentClaimTime(userInfoData, claimTimeArr))
       setTotalRewardClaims(
         claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1,
@@ -327,7 +345,7 @@ const JoinLaunchpad: React.FC = () => {
 
   const getMaxValue = () => {
     const _stakedAmountInBigNumWei = new BigNumber(
-      fromWei(stakedAmount.toString()),
+      fromWei(stakedAmount?.toString()),
     )
     let maxValue = 0
     if (
@@ -346,13 +364,6 @@ const JoinLaunchpad: React.FC = () => {
     return maxValue
   }
 
-  const getGuaranteedMaxValue = async () => {
-    // setDataLoading({ state: true, message: 'Loading allocation...' })
-    const max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
-    // setDataLoading({ state: false, message: '' })
-
-    return max;
-  }
 
   const onMax = useCallback(async () => {
     let _max = 0
@@ -707,7 +718,7 @@ const JoinLaunchpad: React.FC = () => {
               <StyledCenterRow>
                 <StyledInfoLabel>
                   Your staked amount:{' '}
-                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                  {formatFloatValue(fromWei(stakedAmount?.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase: {getMaxValue() + ' ' + networkSymbol(network)}

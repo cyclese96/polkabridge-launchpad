@@ -129,7 +129,7 @@ const Launchpad: React.FC = () => {
         setMaxGuaranteed(fromWei(_max))
       }
 
-      const stakedTokens = await getUserStakingData(currentPoolId(pid, network), account, network)
+      const stakedTokens = await getUserStakingData(account, network)
 
       setProgress(newProgress)
 
@@ -184,7 +184,7 @@ const Launchpad: React.FC = () => {
       return maxGuaranteed;
     }
 
-    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount.toString()));
+    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount?.toString()));
     let maxValue = 0
     if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier1.max)) {
       maxValue = maxTier1
@@ -243,7 +243,7 @@ const Launchpad: React.FC = () => {
               <StyledCenterRow>
                 <StyledInfoLabel>
                   Your staked amount:{' '}
-                  {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
+                  {formatFloatValue(fromWei(stakedAmount?.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
                   Your max purchase:{' '}
