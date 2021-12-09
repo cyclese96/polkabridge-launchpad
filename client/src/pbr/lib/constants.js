@@ -958,17 +958,17 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'SolClout',
-    symbol: 'SOLC-PBR',
-    description: `SOLC/ETH`,
+    symbol: 'SCT-PBR',
+    description: `SCT/ETH`,
     introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
     website: 'https://solclout.com/',
     twitter: 'https://twitter.com/solclout',
     telegram: 'https://t.me/solclout',
     whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
-    tokenSymbol: 'SOLC',
+    tokenSymbol: 'SCT',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/solc.png',
-    totalSupply: '1,000,000,000 SOLC',
+    totalSupply: '1,000,000,000 SCT',
     total: '175.4 BNB',//1BNB = 570$
     ratio: 38000,//1 SOLC = 0.015
     min: 0.17, //100$
@@ -976,16 +976,16 @@ export const supportedPools = [
     maxTier1: 0.17, //100$
     maxTier2: 0.17, //200$
     maxTier3: 0.17, //300$
-    access: PUBLIC,
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '50% TGE, 25% per month in next 2 months',
     startAt: 1638986400,
     endAt: 1638990000,
-    claimAt: 1639144800,
+    claimAt: 1639141200,
     startDate: "2PM UTC 8th Dec, 2021",
-    claimTimeArr: [1639144800, 1641823200, 1644501600],
+    claimTimeArr: [1639141200, 1641823200, 1644501600],
     harvestDistribution: [50, 25, 25],
-    registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
+    registerForm: ''
   },
 
   {
@@ -1017,21 +1017,21 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defly.svg',
     totalSupply: '100,000,000 DEFLY',
-    total: '83.3 BNB',// 1BNB = 650$
-    ratio: 6000, //token price 0.1, 1BNB = 600$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
+    total: '84.7 BNB',// 1BNB = 590$
+    ratio: 5900, //token price 0.1, 1BNB = 590$
+    min: 0, //100$
+    max: 0, //300$
+    maxTier1: 0, //100$
+    maxTier2: 0, //200$
+    maxTier3: 0, //300$
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '34% at TGE, 33% per month in next 2 months',
     startAt: 1639144800,
     endAt: 1639148400,
-    claimAt: 0,
+    claimAt: 1639321200,
     startDate: '2PM UTC 10th Dec, 2021',
-    claimTimeArr: [],
+    claimTimeArr: [1639321200, 1641999600, 1644678000],
     harvestDistribution: [34, 33, 33],
     registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9'
 
@@ -1064,8 +1064,8 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/cspd.png',
     totalSupply: '500,000,000 CSPD',
-    total: '166.6 BNB', //1BNB=600
-    ratio: 75000,//0.008$
+    total: '169.49 BNB', //1BNB=590
+    ratio: 73750,//0.008$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1078,7 +1078,7 @@ export const supportedPools = [
     endAt: 1639155600,
     claimAt: 1639163400,
     startDate: '4PM UTC 10th Dec, 2021',
-    claimTimeArr: [],
+    claimTimeArr: [1639163400, 1641841200, 1644519600, 1646938800, 1649617200, 1652209200],
     harvestDistribution: [5, 19, 19, 19, 19, 19],
     registerForm: "https://forms.gle/UdGDPxk5HYux4wD2A"
   },
