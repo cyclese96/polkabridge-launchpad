@@ -12,7 +12,7 @@ import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
 import { formattedNetworkName, getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
-import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
+import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, moonriverNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
@@ -180,7 +180,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {launchpad.network === bscNetwork ? 'BNB' : launchpad.network === polygonNetwork ? 'MATIC' : 'ETH'} ={' '}
+                  1 {launchpad.network === bscNetwork ? 'BNB' : launchpad.network === polygonNetwork ? 'MATIC' : launchpad.network=== moonriverNetwork ? "MOVR" : 'ETH'} ={' '}
                   {launchpad.ratio} {launchpad.tokenSymbol}
                 </b>
               </span>
