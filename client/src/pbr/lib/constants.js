@@ -985,7 +985,7 @@ export const supportedPools = [
     startDate: "2PM UTC 8th Dec, 2021",
     claimTimeArr: [1639144800, 1641823200, 1644501600],
     harvestDistribution: [50, 25, 25],
-    registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
+    // registerForm: 'https://forms.gle/eg3Yb3FuDzk6sc4Z8'
   },
 
   {
