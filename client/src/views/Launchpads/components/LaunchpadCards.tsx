@@ -17,7 +17,7 @@ import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { getPoolReigsterLink } from '../../../pbr/helpers'
+import { getPoolReigsterLink, networkSymbol } from '../../../pbr/helpers'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
@@ -180,7 +180,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {launchpad.network === bscNetwork ? 'BNB' : launchpad.network === polygonNetwork ? 'MATIC' : launchpad.network=== moonriverNetwork ? "MOVR" : 'ETH'} ={' '}
+                  1 {networkSymbol(launchpad.network)}{" "}
                   {launchpad.ratio} {launchpad.tokenSymbol}
                 </b>
               </span>
