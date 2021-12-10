@@ -1154,7 +1154,7 @@ export const supportedPools = [
     whitepaper: 'https://token.snapex.com/wp-content/uploads/2021/11/Whitepaper-November-2021.pdf',
     tokenSymbol: 'SNAP',
     tokenExplorer: 'https://bscscan.com/address/',
-    icon: '/img/tokens/snapex.jpg',
+    icon: '/img/tokens/snapex.png',
     totalSupply: '2,000,000,000 SNAP',
     total: '169.49 BNB',//590$
     ratio: 19666.6,//0.03$
