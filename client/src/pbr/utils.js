@@ -8,6 +8,7 @@ import stakingAbi from '../pbr/lib/abi/staking.json'
 import LaunchpadAbi from './lib/abi/masterLaunchpad.json';
 import launchpadBscAbi from './lib/abi/ido/launchpad.json';
 import launchpadBscAbi2 from './lib/abi/ido/launchpad2.json';
+import launchpadBscAbi3 from './lib/abi/ido/launchpad3.json';
 
 import ERC20Abi from './lib/abi/erc20.json'
 
@@ -734,12 +735,13 @@ const abiMapping = {
   'Guaranteed': launchpadBscAbi2,
   '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2,//solclout mainnet
   '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439': launchpadBscAbi2, // solclout testnet
-
+  '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA': launchpadBscAbi3, // deflyBall testnet
+  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': launchpadBscAbi3 // deflyBall testnet : todo update before ido
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
 
-  // console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork })
+  // console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork, check: Object.keys(abiMapping).includes(lpAddress) })
   if (currentNetwork === bscNetwork) {
 
     const abi = Object.keys(abiMapping).includes(lpAddress) ? abiMapping[lpAddress] : abiMapping[access]

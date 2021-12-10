@@ -41,6 +41,14 @@ const pools = [
         network: bscNetwork,
         symbol: 'DEFLY-PBR',
         startAt: 1639144800,
+        access: 'Guaranteed'
+    },
+    {
+        pid: 2,
+        network: bscNetwork,
+        symbol: 'CSPD-PBR',
+        startAt: 1639152000,
+        access: 'Guaranteed'
     },
     {
         pid: 1,
