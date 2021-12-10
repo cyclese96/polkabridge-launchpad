@@ -994,7 +994,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '',
+      56: '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69',
       97: '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA',
     },
     tokenAddresses: {
@@ -1042,7 +1042,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69',
       97: '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA'
     },
     tokenAddresses: {
