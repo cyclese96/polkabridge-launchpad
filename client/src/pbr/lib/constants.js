@@ -945,7 +945,7 @@ export const supportedPools = [
   },
   {
     pid: 18,
-    poolId: 1,
+    poolId: 3,
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -981,10 +981,10 @@ export const supportedPools = [
     distribution: '50% TGE, 25% per month in next 2 months',
     startAt: 1638986400,
     endAt: 1638990000,
-    claimAt: 1639141200,
+    claimAt: 0,
     startDate: "2PM UTC 8th Dec, 2021",
-    claimTimeArr: [1639141200, 1641823200, 1644501600],
-    harvestDistribution: [50, 25, 25],
+    claimTimeArr: [],
+    harvestDistribution: [],
     registerForm: ''
   },
 
@@ -1017,8 +1017,8 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defly.svg',
     totalSupply: '100,000,000 DEFLY',
-    total: '84.7 BNB',// 1BNB = 590$
-    ratio: 5900, //token price 0.1, 1BNB = 590$
+    total: '87.7 BNB',// 1BNB = 570$
+    ratio: 5700, //token price 0.1, 1BNB = 590$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1029,16 +1029,16 @@ export const supportedPools = [
     distribution: '34% at TGE, 33% per month in next 2 months',
     startAt: 1639144800,
     endAt: 1639148400,
-    claimAt: 1639321200,
+    claimAt: 1639584000,
     startDate: '2PM UTC 10th Dec, 2021',
-    claimTimeArr: [1639321200, 1641999600, 1644678000],
+    claimTimeArr: [1639584000, 1642262400, 1644940800],
     harvestDistribution: [34, 33, 33],
     registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9'
 
   },
   {
     pid: 21,
-    poolId: 2,
+    poolId: 3,
     lpAddresses: {
       1: '',
       42: '',
@@ -1064,8 +1064,8 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/cspd.png',
     totalSupply: '500,000,000 CSPD',
-    total: '169.49 BNB', //1BNB=590
-    ratio: 73750,//0.008$
+    total: '175.4 BNB', //1BNB=570
+    ratio: 71250,//0.008$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1076,72 +1076,27 @@ export const supportedPools = [
     distribution: 'TGE 5% and then each month for 5 months 19%',
     startAt: 1639152000,
     endAt: 1639155600,
-    claimAt: 1639163400,
+    claimAt: 1639166400,
     startDate: '4PM UTC 10th Dec, 2021',
-    claimTimeArr: [1639163400, 1641841200, 1644519600, 1646938800, 1649617200, 1652209200],
+    claimTimeArr: [1639166400, 1641841200, 1644519600, 1646938800, 1649617200, 1652209200],
     harvestDistribution: [5, 19, 19, 19, 19, 19],
     registerForm: "https://forms.gle/UdGDPxk5HYux4wD2A"
   },
+
   {
     pid: 22,
     poolId: 1,
     lpAddresses: {
       1: '',
       42: '',
-      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
-      1285: ''//mainnet
+      56: '0xc95d0846dd8342c112844c6c3d04199897acf903',
+      97: ''
     },
     tokenAddresses: {
       1: '',
       42: '',
-      1287: '',
-      1285: '',
-    },
-    lpExplorer: 'https://moonriver.moonscan.io/address/',
-    name: 'AlphaDex',
-    symbol: 'ROAR-PBR',
-    description: `ROAR/MOVR`,
-    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
-    website: 'https://alphadex.io/',
-    twitter: 'https://twitter.com/thealphadex',
-    telegram: 'https://t.me/alphadexio',
-    whitepaper: 'https://docsend.com/view/s/i97dbf746he9wmd3',
-    tokenSymbol: 'ROAR',
-    tokenExplorer: 'https://moonriver.moonscan.io/address/',
-    icon: '/img/tokens/alphadex.jpg',
-    totalSupply: '120,000,000 ROAR',
-    total: '266.6 MOVR',//300$
-    ratio: 1363.6,//0.22$
-    min: 0.33, //100$
-    max: 1, //300$
-    maxTier1: 0.33, //100$
-    maxTier2: 0.66, //200$
-    maxTier3: 1, //300$
-    access: GUARANTEED,
-    network: moonriverNetwork,
-    distribution: '20% at TGE, 40% per month in next 2 months',
-    startAt: 1639231230,
-    endAt: 1734569200,
-    claimAt: 1639231230,
-    startDate: '2PM UTC 11th Dec, 2021',
-    claimTimeArr: [1639231230, 1639029546],
-    harvestDistribution: [20, 40, 40],
-    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
-  },
-  {
-    pid: 23,
-    poolId: 1,
-    lpAddresses: {
-      1: '',
-      42: '',
-      1287: '',  //testnet
-      1285: ''//mainnet
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      1287: '',
-      1285: '',
+      56: '',
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'SnapEx',
@@ -1175,7 +1130,7 @@ export const supportedPools = [
     registerForm: "https://forms.gle/jZQDxSvVNymV7WAV9"
   },
   {
-    pid: 24,
+    pid: 23,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1219,7 +1174,7 @@ export const supportedPools = [
     startDate: '2PM UTC 20th Dec, 2021',
   },
   {
-    pid: 25,
+    pid: 24,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1261,6 +1216,52 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 21th Dec, 2021',
     claimTimeArr: []
+  },
+  {
+    pid: 25,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
+      1285: ''//mainnet
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      1287: '',
+      1285: '',
+    },
+    lpExplorer: 'https://moonriver.moonscan.io/address/',
+    name: 'AlphaDex',
+    symbol: 'ROAR-PBR',
+    description: `ROAR/MOVR`,
+    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
+    website: 'https://alphadex.io/',
+    twitter: 'https://twitter.com/thealphadex',
+    telegram: 'https://t.me/alphadexio',
+    whitepaper: 'https://docsend.com/view/s/i97dbf746he9wmd3',
+    tokenSymbol: 'ROAR',
+    tokenExplorer: 'https://moonriver.moonscan.io/address/',
+    icon: '/img/tokens/alphadex.jpg',
+    totalSupply: '120,000,000 ROAR',
+    total: '266.6 MOVR',//300$
+    ratio: 1363.6,//0.22$
+    min: 0.33, //100$
+    max: 1, //300$
+    maxTier1: 0.33, //100$
+    maxTier2: 0.66, //200$
+    maxTier3: 1, //300$
+    access: GUARANTEED,
+    network: moonriverNetwork,
+    distribution: '20% at TGE, 40% per month in next 2 months',
+    startAt: 1640188800,
+    endAt: 1640192400,
+    claimAt: 0,
+    startDate: '4PM UTC 22th Dec, 2021',
+    claimTimeArr: [0, 0],
+    harvestDistribution: [20, 40, 40],
+    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
   },
   {
     pid: 26,
