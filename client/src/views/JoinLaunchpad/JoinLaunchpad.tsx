@@ -921,10 +921,11 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
                 <Button
                   disabled={
-                    purchasedAmount <= 0 ||
-                    recentClaimTime * 1000 > new Date().getTime() ||
-                    pendingHarvestTx ||
-                    new BigNumber(percentClaimed).gte(100)
+                    purchasedAmount <= 0 
+                    || recentClaimTime * 1000 > new Date().getTime() 
+                    || pendingHarvestTx 
+                    || new BigNumber(percentClaimed).gte(100) 
+                    || claimAt === 0
                   }
                   text={
                     pendingHarvestTx

@@ -736,7 +736,8 @@ const abiMapping = {
   '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2,//solclout mainnet
   '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439': launchpadBscAbi2, // solclout testnet
   '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA': launchpadBscAbi3, // deflyBall testnet
-  '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69': launchpadBscAbi3 // deflyBall testnet : todo update before ido
+  '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69': launchpadBscAbi3, // deflyBall testnet
+  '0xc95d0846dd8342c112844c6c3d04199897acf903': launchpadBscAbi3 // snapEx mainnet
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {

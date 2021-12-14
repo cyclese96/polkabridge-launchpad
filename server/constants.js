@@ -52,6 +52,13 @@ const pools = [
     },
     {
         pid: 1,
+        network: bscNetwork,
+        symbol: 'SNAP-PBR',
+        startAt: 1639490400,
+        access: 'Guaranteed'
+    },
+    {
+        pid: 1,
         network: moonriverNetwork,
         symbol: 'ROAR-PBR',
         startAt: 1639231230,
