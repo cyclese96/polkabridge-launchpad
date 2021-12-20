@@ -619,7 +619,7 @@ export const supportedPools = [
     endAt: 1636729200,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov, 2021',
-    claimTimeArr: [1637069400, 1639587600]
+    claimTimeArr: [1637069400, 1639661400]
   },
 
   {
@@ -799,9 +799,9 @@ export const supportedPools = [
     distribution: 'TGE: 30%, 1st month 30%, 2nd month 30%, 3rd month 10%',
     startAt: 1637848860,
     endAt: 1637852400,
-    claimAt: 1640008800,
+    claimAt: 0,
     startDate: '2PM UTC 25th Nov, 2021',
-    claimTimeArr: [1640008800, 1641045600, 1643724000, 1646143200],
+    claimTimeArr: [0, 0, 0, 0],
     harvestDistribution: [30, 30, 30, 10]
   },
   {
@@ -1029,9 +1029,9 @@ export const supportedPools = [
     distribution: '34% at TGE, 33% per month in next 2 months',
     startAt: 1639144800,
     endAt: 1639148400,
-    claimAt: 1639584000,
+    claimAt: 1639573800,
     startDate: '2PM UTC 10th Dec, 2021',
-    claimTimeArr: [1639584000, 1642262400, 1644940800],
+    claimTimeArr: [1639573800, 1642179600, 1644858000],
     harvestDistribution: [34, 33, 33],
     registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9'
 
@@ -1111,8 +1111,8 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/snapex.png',
     totalSupply: '2,000,000,000 SNAP',
-    total: '169.49 BNB',//590$
-    ratio: 19666.6,//0.03$
+    total: '190.47 BNB',//525$
+    ratio: 17500,//0.03$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1123,9 +1123,9 @@ export const supportedPools = [
     distribution: 'Unlock 25% on day 1, and 15% monthly for following 5 months',
     startAt: 1639490400,
     endAt: 1639494000,
-    claimAt: 1639747800,
+    claimAt: 1639746000,
     startDate: '2PM UTC 14th Dec, 2021',
-    claimTimeArr: [1639747800, 1642428000, 1645106400, 1647525600, 1650204000, 1652796000],
+    claimTimeArr: [1639746000, 1642428000, 1645106400, 1647525600, 1650204000, 1652796000],
     harvestDistribution: [25, 15, 15, 15, 15, 15],
     registerForm: "https://forms.gle/jZQDxSvVNymV7WAV9"
   },
@@ -1170,8 +1170,11 @@ export const supportedPools = [
     distribution: '25% TGE, 25% monthly vesting',
     startAt: 1640008800,
     endAt: 1640012400,
-    claimAt: 0,
+    claimAt: 1640018700,
     startDate: '2PM UTC 20th Dec, 2021',
+    claimTimeArr: [1640018700, 1642697100, 1645375500, 1647794700],
+    harvestDistribution: [25, 25, 25, 25],
+    registerForm: "https://forms.gle/NzFyrFrL5bBzZRyZA"
   },
   {
     pid: 24,
@@ -1215,7 +1218,8 @@ export const supportedPools = [
     endAt: 1640098800,
     claimAt: 0,
     startDate: '2PM UTC 21th Dec, 2021',
-    claimTimeArr: []
+    claimTimeArr: [],
+    registerForm: "https://forms.gle/ii2DzcWYkQa18eh6A"
   },
   {
     pid: 25,
@@ -1223,48 +1227,94 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
-      1285: ''//mainnet
+      56: '',
+      97: ''
     },
     tokenAddresses: {
       1: '',
       42: '',
-      1287: '',
-      1285: '',
+      56: '',
+      97: ''
     },
-    lpExplorer: 'https://moonriver.moonscan.io/address/',
-    name: 'AlphaDex',
-    symbol: 'ROAR-PBR',
-    description: `ROAR/MOVR`,
-    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
-    website: 'https://alphadex.io/',
-    twitter: 'https://twitter.com/thealphadex',
-    telegram: 'https://t.me/alphadexio',
-    whitepaper: 'https://docsend.com/view/s/i97dbf746he9wmd3',
-    tokenSymbol: 'ROAR',
-    tokenExplorer: 'https://moonriver.moonscan.io/address/',
-    icon: '/img/tokens/alphadex.jpg',
-    totalSupply: '120,000,000 ROAR',
-    total: '266.6 MOVR',//300$
-    ratio: 1363.6,//0.22$
-    min: 0.33, //100$
-    max: 1, //300$
-    maxTier1: 0.33, //100$
-    maxTier2: 0.66, //200$
-    maxTier3: 1, //300$
+    lpExplorer: 'https://bscscan.com/address/',
+    name: 'Battle Saga',
+    symbol: 'BTL-PBR',
+    description: `BTL/BNB`,
+    introduce: `Battle Saga is a decentralized and innovative DAO gaming platform. Players can build their base camps, train troops and crush their opponents.`,
+    website: 'https://www.battlesaga.io/',
+    twitter: 'https://twitter.com/BattleSagaio',
+    telegram: 'https://t.me/BattleSaga_Official',
+    whitepaper: 'https://docsend.com/view/s/xyywe48d3aarig5b',
+    tokenSymbol: 'BTL',
+    tokenExplorer: 'https://bscscan.com/token/',
+    icon: '/img/tokens/battlesaga.png',
+    totalSupply: '300,000,000 BTL',
+    total: '192.3 BNB', //1BNB=5250
+    ratio: 4333.3,//0.12$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: GUARANTEED,
-    network: moonriverNetwork,
-    distribution: '20% at TGE, 40% per month in next 2 months',
-    startAt: 1640188800,
-    endAt: 1640192400,
+    network: bscNetwork,
+    distribution: '10% at TGE, 30% per month in next 3 months',
+    startAt: 1640181600,
+    endAt: 1640185200,
     claimAt: 0,
-    startDate: '4PM UTC 22th Dec, 2021',
-    claimTimeArr: [0, 0],
-    harvestDistribution: [20, 40, 40],
-    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
+    startDate: '2PM UTC 22th Dec, 2021',
+    claimTimeArr: [],
+    harvestDistribution: [10, 30, 30, 30],
+    registerForm: "https://forms.gle/fDQFDMeETr89PpPb8"
   },
   {
     pid: 26,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: ''
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: ''
+    },
+    lpExplorer: 'https://bscscan.com/address/',
+    name: 'Age Of Gods',
+    symbol: 'AOG-PBR',
+    description: `AOG/BNB`,
+    introduce: `AOG is an AFKArena inspired game that uses the fundamentals of the 6.6 million! player count success story and combining it with a Blockchain Token economy and Play-to-Earn, Idle Game mechanics. Developed by a Premier Game Studio`,
+    website: 'https://ageofgods.net/',
+    twitter: 'https://twitter.com/ageofgodsnet',
+    telegram: 'https://t.me/ageofgodsnet',
+    whitepaper: 'https://docsend.com/view/rrpekisnfmcyyvf4',
+    tokenSymbol: 'AOG',
+    tokenExplorer: 'https://bscscan.com/token/',
+    icon: '/img/tokens/aog.png',
+    totalSupply: '270,000,000 AOG',
+    total: '90.9 BNB', //1BNB=550$
+    ratio: 4583.3,//0.12$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '10% at TGE, 30% per month in next 3 months',
+    startAt: 1640613600,
+    endAt: 1640617200,
+    claimAt: 0,
+    startDate: '2PM UTC 27th Dec, 2021',
+    claimTimeArr: [],
+    harvestDistribution: [10, 30, 30, 30],
+    registerForm: "https://forms.gle/aX3kfJxyDCsAwEsY7"
+  },
+  {
+    pid: 27,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1308,50 +1358,6 @@ export const supportedPools = [
     claimTimeArr: []
   },
 
-
-  {
-    pid: 27,
-    poolId: 1,
-    lpAddresses: {
-      1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-      42: '0xd49Ab54b85cF7DE4964888bD3002bEE9Da1fdBDf',
-      56: '0xE5d0AbA2e6429A469b4a1AA427ED85Fcc38526aa',
-      97: '0xADa1BC883B2681f476C0C7dF32d94E3c8f5bb930',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'ADASwap',
-    symbol: 'ASW-PBR',
-    description: `ASW/BNB`,
-    introduce: `ADASwap - The next-gen DEX based on Cardano Ecosystem. The  main goal is to develop tools for creators and users, as well as bringing high-yield staking pools and NFT content through our launchpads and marketplaces.`,
-    website: 'https://adaswap.app/',
-    twitter: 'https://twitter.com/adaswapapp',
-    telegram: 'https://t.me/adaswapcommunity',
-    whitepaper: 'https://adaswap.app/AdaSwap-Whitepaper.pdf',
-    tokenSymbol: 'ASW',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/adaswap.PNG',
-    totalSupply: '16,500,000,000 ASW',
-    total: '76.9 BNB',// 1BNB = 650$
-    ratio: 0, //
-    min: 0.46, //300$
-    max: 0.76, //500$
-    maxTier1: 0.46, //300$
-    maxTier2: 0.61, //400$
-    maxTier3: 0.76, //500$
-    access: GUARANTEED,
-    network: bscNetwork,
-    distribution: 'TBA',
-    startAt: 1640883600,
-    endAt: 1734569200,
-    claimAt: 0,
-    startDate: 'TBA',
-  },
   {
     pid: 28,
     poolId: 1,
@@ -1437,8 +1443,98 @@ export const supportedPools = [
     startAt: 1641996000,
     endAt: 1641999600,
     claimAt: 0,
-    startDate: '2PM UTC 12th Jan, 2022',
-  }
+    startDate: 'January, 2022',
+  },
+  {
+    pid: 30,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
+      1285: ''//mainnet
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      1287: '',
+      1285: '',
+    },
+    lpExplorer: 'https://moonriver.moonscan.io/address/',
+    name: 'AlphaDex',
+    symbol: 'ROAR-PBR',
+    description: `ROAR/MOVR`,
+    introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
+    website: 'https://alphadex.io/',
+    twitter: 'https://twitter.com/thealphadex',
+    telegram: 'https://t.me/alphadexio',
+    whitepaper: 'https://docsend.com/view/s/i97dbf746he9wmd3',
+    tokenSymbol: 'ROAR',
+    tokenExplorer: 'https://moonriver.moonscan.io/address/',
+    icon: '/img/tokens/alphadex.jpg',
+    totalSupply: '120,000,000 ROAR',
+    total: '266.6 MOVR',//300$
+    ratio: 1363.6,//0.22$
+    min: 0.33, //100$
+    max: 1, //300$
+    maxTier1: 0.33, //100$
+    maxTier2: 0.66, //200$
+    maxTier3: 1, //300$
+    access: GUARANTEED,
+    network: moonriverNetwork,
+    distribution: '20% at TGE, 40% per month in next 2 months',
+    startAt: 1642687200,
+    endAt: 1642690800,
+    claimAt: 0,
+    startDate: 'January, 2022',
+    claimTimeArr: [0, 0],
+    harvestDistribution: [20, 40, 40],
+    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
+  },
+  {
+    pid: 31,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://etherscan.io/address',
+    name: 'AnimalConcerts',
+    symbol: 'ANML-PBR',
+    description: `ANML/ETH`,
+    introduce: `Animal Concerts is creating the next generation entertainment experience. We provide intimate and truly unique venues for top artists to perform and leverage cutting edge VR technology to stream to audiences globally in the metaverse. Our cryptocurrency, marketplace and NFT platform will change the shape of the music industry enabling new revenues and markets, rewarding artists and fans.`,
+    website: 'https://animalconcerts.com/',
+    twitter: 'https://twitter.com/animalconcerts',
+    telegram: 'https://t.me/animalconcertsofficial',
+    whitepaper: 'https://animalconcerts.com/wp-content/uploads/2021/12/Animal-White-Paper-V1.1.pdf',
+    tokenSymbol: 'ANML',
+    tokenExplorer: 'https://etherscan.io/address',
+    icon: '/img/tokens/animal.png',
+    totalSupply: '12.5B ANML',
+    total: '25 ETH',// 1eth = 4k$, 100k$
+    ratio: 888888.8, //$0.0045
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: ethereumNetwork,
+    distribution: '25% TGE, 75% vested over 6 months',
+    startAt: 1643634000,
+    endAt: 1743634000,
+    claimAt: 0,
+    startDate: 'January, 2022',
+  },
+
   // {
   //   pid: 50,
   //   poolId: 2,
