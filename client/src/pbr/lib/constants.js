@@ -1135,7 +1135,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3',
       97: '',
     },
     tokenAddresses: {
@@ -1158,21 +1158,21 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/calo.png',
     totalSupply: '500,000,000 CALO',
-    total: '83.3 BNB',// 1BNB = 600$
-    ratio: 17142.8, //token price 0.035, 1BNB = 600$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
+    total: '100 BNB',// 1BNB = 500$
+    ratio: 14285.7, //token price 0.035, 1BNB = 600$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '25% TGE, 25% monthly vesting',
     startAt: 1640008800,
     endAt: 1640012400,
-    claimAt: 1640018700,
+    claimAt: 1640104200,
     startDate: '2PM UTC 20th Dec, 2021',
-    claimTimeArr: [1640018700, 1642697100, 1645375500, 1647794700],
+    claimTimeArr: [1640104200, 1642782600, 1645461000, 1647880200],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: "https://forms.gle/NzFyrFrL5bBzZRyZA"
   },
