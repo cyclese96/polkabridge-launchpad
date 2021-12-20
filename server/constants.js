@@ -74,6 +74,7 @@ const pools = [
         network: bscNetwork,
         symbol: 'CALO-PBR',
         startAt: 1640008800,
+        access: 'Guaranteed'
     },
     {
         pid: 1,
