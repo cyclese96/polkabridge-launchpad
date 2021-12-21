@@ -1182,7 +1182,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0x302b7f2351f7f064f7c2be48386e0762c0cf5348',
       97: ''
     },
     tokenAddresses: {
@@ -1213,12 +1213,13 @@ export const supportedPools = [
     maxTier3: 0, //300$
     access: GUARANTEED,
     network: bscNetwork,
-    distribution: '100% at TGE',
+    distribution: '10% at TGE, 30% per month in next 3 months',
     startAt: 1640095200,
     endAt: 1640098800,
-    claimAt: 0,
+    claimAt: 1640109600,
     startDate: '2PM UTC 21th Dec, 2021',
-    claimTimeArr: [],
+    claimTimeArr: [1640109600, 1642788000, 1645466400, 1647885600],
+    harvestDistribution: [10, 30, 30, 30],
     registerForm: "https://forms.gle/ii2DzcWYkQa18eh6A"
   },
   {
@@ -1397,8 +1398,8 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
-    startAt: 1639836000,
-    endAt: 1639839600,
+    startAt: 1739836000,
+    endAt: 1839839600,
     claimAt: 0,
     startDate: 'January, 2022',
   },
