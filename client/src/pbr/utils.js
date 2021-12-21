@@ -738,7 +738,8 @@ const abiMapping = {
   '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA': launchpadBscAbi3, // deflyBall testnet
   '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69': launchpadBscAbi3, // deflyBall testnet
   '0xc95d0846dd8342c112844c6c3d04199897acf903': launchpadBscAbi3, // snapEx mainnet
-  '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3': launchpadBscAbi3  // Calo mainnet
+  '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3': launchpadBscAbi3,  // Calo mainnet
+  '0x302b7F2351F7f064F7c2BE48386e0762c0cF5348': launchpadBscAbi3  // Gravitation zero mainnet
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
