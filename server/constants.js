@@ -86,6 +86,13 @@ const pools = [
     {
         pid: 1,
         network: bscNetwork,
+        symbol: 'BTL-PBR',
+        startAt: 1640181600,
+        access: 'Guaranteed'
+    },
+    {
+        pid: 1,
+        network: bscNetwork,
         symbol: 'VST-PBR',
         startAt: 1640786400,
     },
