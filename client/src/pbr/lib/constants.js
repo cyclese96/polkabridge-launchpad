@@ -1170,9 +1170,9 @@ export const supportedPools = [
     distribution: '25% TGE, 25% monthly vesting',
     startAt: 1640008800,
     endAt: 1640012400,
-    claimAt: 1640104200,
+    claimAt: 1640105100,
     startDate: '2PM UTC 20th Dec, 2021',
-    claimTimeArr: [1640104200, 1642782600, 1645461000, 1647880200],
+    claimTimeArr: [1640105100, 1642782600, 1645461000, 1647880200],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: "https://forms.gle/NzFyrFrL5bBzZRyZA"
   },
@@ -1204,13 +1204,13 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/grv.png',
     totalSupply: '300,000,000 GRAV',
-    total: '83.3 BNB', //1BNB=600
-    ratio: 6000,//0.1$
-    min: 0, //100$
-    max: 0, //300$
-    maxTier1: 0, //100$
-    maxTier2: 0, //200$
-    maxTier3: 0, //300$
+    total: '97 BNB', //1BNB=515
+    ratio: 5150,//0.1$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '10% at TGE, 30% per month in next 3 months',
@@ -1228,7 +1228,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0x56d750197ec332fceb574ca22cd4e40965712c86',
       97: ''
     },
     tokenAddresses: {
@@ -1250,7 +1250,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/battlesaga.png',
     totalSupply: '300,000,000 BTL',
-    total: '192.3 BNB', //1BNB=5250
+    total: '192.3 BNB', //1BNB=520
     ratio: 4333.3,//0.12$
     min: 0,
     max: 0,
@@ -1262,9 +1262,9 @@ export const supportedPools = [
     distribution: '10% at TGE, 30% per month in next 3 months',
     startAt: 1640181600,
     endAt: 1640185200,
-    claimAt: 0,
+    claimAt: 1640277000,
     startDate: '2PM UTC 22th Dec, 2021',
-    claimTimeArr: [],
+    claimTimeArr: [1640277000, 1642955400, 1645633800, 1648053000],
     harvestDistribution: [10, 30, 30, 30],
     registerForm: "https://forms.gle/fDQFDMeETr89PpPb8"
   },

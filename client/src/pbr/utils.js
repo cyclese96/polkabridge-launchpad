@@ -740,7 +740,7 @@ const abiMapping = {
   '0xc95d0846dd8342c112844c6c3d04199897acf903': launchpadBscAbi3, // snapEx mainnet
   '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3': launchpadBscAbi3,  // Calo mainnet
   '0x302b7F2351F7f064F7c2BE48386e0762c0cF5348': launchpadBscAbi3,  // Gravitation zero mainnet
-  'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx': launchpadBscAbi3  // put battle saga  mainnet address if ABi same
+  '0x56d750197ec332fceb574ca22cd4e40965712c86': launchpadBscAbi3  // put battle saga  mainnet address if ABi same
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
