@@ -353,7 +353,7 @@ const StyledHeading = styled.h2`
 `
 
 const Wrapper = styled.div`
-  max-width: 1000px;
+  max-width: 1070px;
 `
 const StyledCards = styled.div`
   @media (max-width: 768px) {
