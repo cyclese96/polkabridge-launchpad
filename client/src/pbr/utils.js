@@ -91,76 +91,76 @@ export const getBscLaunchpadContract = (pbr) => {
 export const getLaunchpads = (pbr) => {
   return pbr
     ? pbr.contracts.pools.map(
-        ({
-          pid,
-          name,
-          symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }) => ({
-          pid,
-          name,
-          id: symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }),
-      )
+      ({
+        pid,
+        name,
+        symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }) => ({
+        pid,
+        name,
+        id: symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }),
+    )
     : []
 }
 
@@ -819,6 +819,7 @@ const abiMapping = {
   '0x9ce703762878c69874e8951f92e8ba2142dc9dce': launchpadBscAbi3,
   '0xf5658d4a37975489541f8dc03fedada605c78c8b': launchpadBscAbi3,
   '0xc479b7909dd33fb036fda62f66bc3ebbe480c766': launchpadBscAbi3,
+  '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483': launchpadBscAbi3
 }
 
 const getCurrentLaunchpadContract = (
@@ -886,16 +887,16 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? polygonMainnetInfuraRpc
-        : process.env.REACT_APP_POLYGON_TESTNET_NODE
+          ? polygonMainnetInfuraRpc
+          : process.env.REACT_APP_POLYGON_TESTNET_NODE
     // rpc = new Web3.providers.HttpProvider(process.env.REACT_APP_POLYGON_TESTNET_NODE)
   } else if (network === harmonyNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? config.hmy_rpc_mainnet
-        : config.hmy_rpc_testnet
+          ? config.hmy_rpc_mainnet
+          : config.hmy_rpc_testnet
   } else if (network === bscNetwork) {
     rpc = window.ethereum
   } else if (network === moonriverNetwork) {
@@ -906,8 +907,8 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? ethereumInfuraRpc
-        : ethereumInfuraTestnetRpc
+          ? ethereumInfuraRpc
+          : ethereumInfuraTestnetRpc
     // rpc = window.ethereum;
   }
 

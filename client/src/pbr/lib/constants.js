@@ -1455,7 +1455,7 @@ export const supportedPools = [
       1: '',
       42: '',
       1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
-      1285: ''//mainnet
+      1285: '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483'//mainnet
     },
     tokenAddresses: {
       1: '',
