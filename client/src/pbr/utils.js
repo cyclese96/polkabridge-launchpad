@@ -742,7 +742,8 @@ const abiMapping = {
   '0x302b7F2351F7f064F7c2BE48386e0762c0cF5348': launchpadBscAbi3,  // Gravitation zero mainnet
   '0x56d750197ec332fceb574ca22cd4e40965712c86': launchpadBscAbi3,  // put battle saga  mainnet address if ABi same
   '0x9ce703762878c69874e8951f92e8ba2142dc9dce': launchpadBscAbi3,
-  '0xf5658d4a37975489541f8dc03fedada605c78c8b': launchpadBscAbi3
+  '0xf5658d4a37975489541f8dc03fedada605c78c8b': launchpadBscAbi3,
+  '0xc479b7909dd33fb036fda62f66bc3ebbe480c766': launchpadBscAbi3
 }
 
 const getCurrentLaunchpadContract = (lpAddress, poolId, access, lpNetwork, currentNetwork) => {
