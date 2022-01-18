@@ -722,10 +722,10 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
+      56: '0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
+    lpExplorer: 'https://bscscan.com/address/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
     name: 'Torekko',
     symbol: 'TRK-PBR',
     description: `TRK/BNB`,
@@ -736,7 +736,7 @@ export const supportedPools = [
     whitepaper:
       'https://docsend.com/view/s3nnspuswq6w9yyq/d/h5v7983cv274w9u6',
     tokenSymbol: 'TRK',
-    tokenExplorer: 'https://bscscan.com/token/0xC61713cD43CCb88EF0AAE42281cc51F9ED974B78',
+    tokenExplorer: 'https://bscscan.com/token/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
     icon: '/img/tokens/torekko.png',
     totalSupply: '100,000,000 TRK',
     total: '89.2 BNB',// 1BNB = 560$
@@ -754,7 +754,7 @@ export const supportedPools = [
     endAt: 1637769600,
     claimAt: 1638279000,
     startDate: '2PM UTC 24th Nov, 2021',
-    claimTimeArr: [1638279000, 1640869200, 1643547600],
+    claimTimeArr: [1638279000, 1641043800, 1643549400],
     harvestDistribution: [34, 33, 33]
   },
   {
@@ -1262,10 +1262,10 @@ export const supportedPools = [
     distribution: '10% at TGE, 30% per month in next 3 months',
     startAt: 1640181600,
     endAt: 1640185200,
-    claimAt: 1640277000,
+    claimAt: 0,
     startDate: '2PM UTC 22th Dec, 2021',
-    claimTimeArr: [1640277000, 1642955400, 1645633800, 1648053000],
-    harvestDistribution: [10, 30, 30, 30],
+    claimTimeArr: [],
+    harvestDistribution: [],
     registerForm: "https://forms.gle/fDQFDMeETr89PpPb8"
   },
   {
@@ -1274,7 +1274,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0x9ce703762878c69874e8951f92e8ba2142dc9dce',
       97: ''
     },
     tokenAddresses: {
@@ -1296,22 +1296,22 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/aog.png',
     totalSupply: '270,000,000 AOG',
-    total: '90.9 BNB', //1BNB=550$
-    ratio: 4583.3,//0.12$
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    total: '94.3 BNB', //1BNB=530$
+    ratio: 4416.6,//0.12$
+    min: 0.37,
+    max: 0.37,
+    maxTier1: 0.37,
+    maxTier2: 0.37,
+    maxTier3: 0.37,
+    access: PUBLIC,
     network: bscNetwork,
     distribution: '10% at TGE, 30% per month in next 3 months',
-    startAt: 1640613600,
-    endAt: 1640617200,
+    startAt: 1640621700,
+    endAt: 1640624340,
     claimAt: 0,
     startDate: '2PM UTC 27th Dec, 2021',
     claimTimeArr: [],
-    harvestDistribution: [10, 30, 30, 30],
+    harvestDistribution: [],
     registerForm: "https://forms.gle/aX3kfJxyDCsAwEsY7"
   },
   {
@@ -1320,7 +1320,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xf5658d4a37975489541f8dc03fedada605c78c8b',
       97: ''
     },
     tokenAddresses: {
@@ -1342,67 +1342,69 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token/',
     icon: '/img/tokens/vst.png',
     totalSupply: '2B VST',
-    total: '83.3 BNB', //1BNB=600
-    ratio: 15000,//0.04$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
+    total: '96.1 BNB', //1BNB=520
+    ratio: 13000,//0.04$
+    min: 0, //100$
+    max: 0, //300$
+    maxTier1: 0, //100$
+    maxTier2: 0, //200$
+    maxTier3: 0, //300$
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '100% at TGE',
     startAt: 1640786400,
     endAt: 1640790000,
-    claimAt: 0,
+    claimAt: 1642687200,
     startDate: '2PM UTC 29th Dec, 2021',
-    claimTimeArr: []
+    claimTimeArr: [1642687200],
+    harvestDistribution: [100],
+    registerForm: "https://forms.gle/jZi9LynDxgdeJZ9TA"
   },
 
-  {
-    pid: 28,
-    poolId: 1,
-    lpAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    tokenAddresses: {
-      1: '',
-      42: '',
-      56: '',
-      97: '',
-    },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'Gofungibles',
-    symbol: 'GFTS-PBR',
-    description: `GFTS/BNB`,
-    introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
-    website: 'https://gofungibles.com//',
-    twitter: 'https://twitter.com/gofungibles',
-    telegram: 'https://t.me/gofungibles',
-    whitepaper:
-      'https://gofungibles.com/whitepaper.pdf',
-    tokenSymbol: 'GFTS',
-    tokenExplorer: 'https://bscscan.com/token',
-    icon: '/img/tokens/fungibles.png',
-    totalSupply: '1 Billion GFTS',
-    total: '83.3 BNB',// 1BNB = 600$
-    ratio: 20000, //token price 0.03, 1BNB = 600$
-    min: 0.16, //100$
-    max: 0.5, //300$
-    maxTier1: 0.16, //100$
-    maxTier2: 0.33, //200$
-    maxTier3: 0.5, //300$
-    access: GUARANTEED,
-    network: bscNetwork,
-    distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
-    startAt: 1739836000,
-    endAt: 1839839600,
-    claimAt: 0,
-    startDate: 'January, 2022',
-  },
+  // {
+  //   pid: 28,
+  //   poolId: 1,
+  //   lpAddresses: {
+  //     1: '',
+  //     42: '',
+  //     56: '',
+  //     97: '',
+  //   },
+  //   tokenAddresses: {
+  //     1: '',
+  //     42: '',
+  //     56: '',
+  //     97: '',
+  //   },
+  //   lpExplorer: 'https://bscscan.com/address',
+  //   name: 'Gofungibles',
+  //   symbol: 'GFTS-PBR',
+  //   description: `GFTS/BNB`,
+  //   introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
+  //   website: 'https://gofungibles.com//',
+  //   twitter: 'https://twitter.com/gofungibles',
+  //   telegram: 'https://t.me/gofungibles',
+  //   whitepaper:
+  //     'https://gofungibles.com/whitepaper.pdf',
+  //   tokenSymbol: 'GFTS',
+  //   tokenExplorer: 'https://bscscan.com/token',
+  //   icon: '/img/tokens/fungibles.png',
+  //   totalSupply: '1 Billion GFTS',
+  //   total: '83.3 BNB',// 1BNB = 600$
+  //   ratio: 20000, //token price 0.03, 1BNB = 600$
+  //   min: 0.16, //100$
+  //   max: 0.5, //300$
+  //   maxTier1: 0.16, //100$
+  //   maxTier2: 0.33, //200$
+  //   maxTier3: 0.5, //300$
+  //   access: GUARANTEED,
+  //   network: bscNetwork,
+  //   distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
+  //   startAt: 1612026000,
+  //   endAt: 1839839600,
+  //   claimAt: 0,
+  //   startDate: 'January, 2022',
+  // },
   {
     pid: 29,
     poolId: 1,
@@ -1441,8 +1443,8 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '20% TGE, 20% per month in next 4 months',
-    startAt: 1641996000,
-    endAt: 1641999600,
+    startAt: 1644914411,
+    endAt: 1844914411,
     claimAt: 0,
     startDate: 'January, 2022',
   },
@@ -1484,10 +1486,10 @@ export const supportedPools = [
     access: GUARANTEED,
     network: moonriverNetwork,
     distribution: '20% at TGE, 40% per month in next 2 months',
-    startAt: 1642687200,
-    endAt: 1642690800,
-    claimAt: 0,
-    startDate: 'January, 2022',
+    startAt: 1642600800,
+    endAt: 1642604400,
+    claimAt: 1643385600,
+    startDate: '2PM UTC 19th Jan, 2022',
     claimTimeArr: [0, 0],
     harvestDistribution: [20, 40, 40],
     registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
@@ -1496,8 +1498,8 @@ export const supportedPools = [
     pid: 31,
     poolId: 1,
     lpAddresses: {
-      1: '',
-      42: '',
+      1: '0xc479b7909dd33fb036fda62f66bc3ebbe480c766',
+      42: '0xc479b7909dd33fb036fda62f66bc3ebbe480c766',
       56: '',
       97: '',
     },
@@ -1520,8 +1522,8 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/address',
     icon: '/img/tokens/animal.png',
     totalSupply: '12.5B ANML',
-    total: '25 ETH',// 1eth = 4k$, 100k$
-    ratio: 888888.8, //$0.0045
+    total: '33.3 ETH',// 1eth = 3k$, 100k$
+    ratio: 666666.6, //$0.0045
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -1529,13 +1531,59 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: ethereumNetwork,
-    distribution: '25% TGE, 75% vested over 6 months',
-    startAt: 1643634000,
-    endAt: 1743634000,
-    claimAt: 0,
-    startDate: 'January, 2022',
+    distribution: '25% TGE, 25% per month in next 3 months',
+    startAt: 1642514400,
+    endAt: 1642518000,
+    claimAt: 1643637600,
+    startDate: '2PM UTC 18th Jan, 2022',
+    claimTimeArr: [1643637600, 0, 0, 0],
+    harvestDistribution: [25, 25, 25, 25],
+    registerForm: "https://forms.gle/6VvBTPWzv8g5g1so8"
   },
-
+  {
+    pid: 32,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'TheGems',
+    symbol: 'GEMS-PBR',
+    description: `GEMS/BNB`,
+    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. `,
+    website: 'https://thegems.gg/',
+    twitter: 'https://twitter.com/gemsgg_official',
+    telegram: 'https://t.me/thegemsgg',
+    whitepaper: 'https://official-gems.gitbook.io/gemsofficial/',
+    tokenSymbol: 'GEMS',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/gems.png',
+    totalSupply: '10B GEMS',
+    total: '62.5 ETH',// 1eth = 3k2$, 200k$
+    ratio: 640000, //$0.005
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
+    startAt: 1645346411,
+    endAt: 1745346411,
+    claimAt: 0,
+    startDate: 'February, 2022',
+    registerForm: ""
+  },
   // {
   //   pid: 50,
   //   poolId: 2,
