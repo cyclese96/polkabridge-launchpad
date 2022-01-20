@@ -19,10 +19,21 @@ import {
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { white } from '../../theme/colors'
-import { bscNetwork, ethereumNetwork, getPoolId, GUARANTEED, harmonyNetwork, polygonNetwork, PRIVATE, PUBLIC, tierConditions, WHITELIST } from '../../pbr/lib/constants'
+import {
+  bscNetwork,
+  ethereumNetwork,
+  getPoolId,
+  GUARANTEED,
+  harmonyNetwork,
+  polygonNetwork,
+  PRIVATE,
+  PUBLIC,
+  tierConditions,
+  WHITELIST,
+} from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { networkSymbol } from '../../pbr/helpers'
+import { getTokenPrice, networkSymbol } from '../../pbr/helpers'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = useParams() as any
@@ -102,8 +113,7 @@ const Launchpad: React.FC = () => {
   const [progress, setProgress] = useState<BigNumber>()
   const [stakedAmount, setStakedAmount] = useState('0')
   const { ethereum, account } = useWallet()
-  const [maxGuaranteed, setMaxGuaranteed] = useState('0');
-
+  const [maxGuaranteed, setMaxGuaranteed] = useState('0')
 
   const history = useHistory()
   const { chainId } = useNetwork()
@@ -113,7 +123,6 @@ const Launchpad: React.FC = () => {
   }
 
   useEffect(() => {
-
     async function fetchData() {
       const newProgress = await getProgress(
         lpAddress,
@@ -121,11 +130,17 @@ const Launchpad: React.FC = () => {
         access,
         startAt,
         endAt,
-        network
+        network,
       )
 
       if (access === GUARANTEED) {
-        const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
+        const _max = await getMaxAllocation(
+          lpAddress,
+          currentPoolId(pid, network),
+          access,
+          account,
+          network,
+        )
         setMaxGuaranteed(fromWei(_max))
       }
 
@@ -153,10 +168,13 @@ const Launchpad: React.FC = () => {
     )
   }
 
-
   const showNetworkAlert = () => {
     const _networkName =
-      network === bscNetwork ? 'Binance Smart Chain' : network === polygonNetwork ? "Polygon" : 'Ethereum'
+      network === bscNetwork
+        ? 'Binance Smart Chain'
+        : network === polygonNetwork
+        ? 'Polygon'
+        : 'Ethereum'
     if (getNetworkName(chainId) !== network) {
       alert(
         `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
@@ -164,8 +182,7 @@ const Launchpad: React.FC = () => {
     }
   }
   const handleJoinPool = () => {
-
-    const _networkName = formattedNetworkName(network);
+    const _networkName = formattedNetworkName(network)
 
     if (getNetworkName(chainId) !== network) {
       alert(
@@ -177,24 +194,33 @@ const Launchpad: React.FC = () => {
   }
 
   const getMaxValue = () => {
-
     if (access === 'Whitelist') {
-      return maxWhitelistPurchase;
+      return maxWhitelistPurchase
     } else if (access === GUARANTEED) {
-      return maxGuaranteed;
+      return maxGuaranteed
     }
 
-    const _stakedAmountInBigNumWei = new BigNumber(fromWei(stakedAmount?.toString()));
+    const _stakedAmountInBigNumWei = new BigNumber(
+      fromWei(stakedAmount?.toString()),
+    )
     let maxValue = 0
-    if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier1.max)) {
+    if (
+      _stakedAmountInBigNumWei.gte(tierConditions.maxTier1.min) &&
+      _stakedAmountInBigNumWei.lte(tierConditions.maxTier1.max)
+    ) {
       maxValue = maxTier1
-    } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier2.min) && _stakedAmountInBigNumWei.lte(tierConditions.maxTier2.max)) {
+    } else if (
+      _stakedAmountInBigNumWei.gte(tierConditions.maxTier2.min) &&
+      _stakedAmountInBigNumWei.lte(tierConditions.maxTier2.max)
+    ) {
       maxValue = maxTier2
     } else if (_stakedAmountInBigNumWei.gte(tierConditions.maxTier3.min)) {
       maxValue = maxTier3
     }
     return maxValue
   }
+
+  const tokenPrice = useMemo(() => getTokenPrice(pid, network), [pid, network])
 
   return (
     <>
@@ -261,7 +287,8 @@ const Launchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel> */}
                 <StyledInfoLabel>
-                  Your Allocation: {maxGuaranteed + ' ' + networkSymbol(network)}
+                  Your Allocation:{' '}
+                  {maxGuaranteed + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -277,7 +304,7 @@ const Launchpad: React.FC = () => {
                     : undefined
                 }
                 onClick={handleJoinPool}
-              // to={`/launchpads/join/${launchpadId}/${poolId}`}
+                // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
@@ -338,15 +365,24 @@ const Launchpad: React.FC = () => {
                     <StyledTableBodyCell>
                       <StyledTableText>
                         <StyledTableLabel>
-                          {(access === PUBLIC || access === WHITELIST) && 'Allocation'}
+                          {(access === PUBLIC || access === WHITELIST) &&
+                            'Allocation'}
                           {access === PRIVATE && 'Min - Max Allocation'}
                           {access === GUARANTEED && 'Your Allocation'}
                         </StyledTableLabel>
                         <StyledTableValue>
-                          {access === PUBLIC && `${maxTier2}  ${networkSymbol(network)}`}
-                          {access === WHITELIST && `${maxWhitelistPurchase}  ${networkSymbol(network)}`}
-                          {access === PRIVATE && `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
-                          {access === GUARANTEED && `${maxGuaranteed}  ${networkSymbol(network)}`}
+                          {access === PUBLIC &&
+                            `${maxTier2}  ${networkSymbol(network)}`}
+                          {access === WHITELIST &&
+                            `${maxWhitelistPurchase}  ${networkSymbol(
+                              network,
+                            )}`}
+                          {access === PRIVATE &&
+                            `${min} ${networkSymbol(
+                              network,
+                            )} - ${max} ${networkSymbol(network)}`}
+                          {access === GUARANTEED &&
+                            `${maxGuaranteed}  ${networkSymbol(network)}`}
                           {/* {access === 'Public' || access === 'Whitelist'
                             ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
                             : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}
@@ -356,7 +392,6 @@ const Launchpad: React.FC = () => {
                                         {access === 'Public' || access === 'Whitelist'
                             ? access === 'Public' ? `${maxTier2}  ${networkSymbol(network)}` : `${maxWhitelistPurchase}  ${networkSymbol(network)}`
                             : `${min} ${networkSymbol(network)} - ${max} ${networkSymbol(network)}`}    */}
-
                         </StyledTableValue>
                       </StyledTableText>
                     </StyledTableBodyCell>
@@ -414,6 +449,17 @@ const Launchpad: React.FC = () => {
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
+
+                  {tokenPrice && (
+                    <StyledTableRow>
+                      <StyledTableBodyCell>
+                        <StyledTableText>
+                          <StyledTableLabel>Price</StyledTableLabel>
+                          <StyledTableValue>{tokenPrice}$</StyledTableValue>
+                        </StyledTableText>
+                      </StyledTableBodyCell>
+                    </StyledTableRow>
+                  )}
 
                   <StyledTableRow>
                     <StyledTableBodyCell>
