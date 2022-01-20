@@ -1601,7 +1601,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/gems.png',
     totalSupply: '10B GEMS',
-    price: 0,
+    price: 0.00000001,
     total: '62.5 ETH', // 1eth = 3k2$, 200k$
     ratio: 640000, //$0.005
     min: 0,

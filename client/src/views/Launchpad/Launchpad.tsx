@@ -33,7 +33,7 @@ import {
 } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { getTokenPrice, networkSymbol } from '../../pbr/helpers'
+import { networkSymbol } from '../../pbr/helpers'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = useParams() as any
@@ -219,8 +219,6 @@ const Launchpad: React.FC = () => {
     }
     return maxValue
   }
-
-  const tokenPrice = useMemo(() => getTokenPrice(pid, network), [pid, network])
 
   return (
     <>
@@ -449,17 +447,6 @@ const Launchpad: React.FC = () => {
                       </StyledTableText>
                     </StyledTableBodyCell>
                   </StyledTableRow>
-
-                  {tokenPrice && (
-                    <StyledTableRow>
-                      <StyledTableBodyCell>
-                        <StyledTableText>
-                          <StyledTableLabel>Price</StyledTableLabel>
-                          <StyledTableValue>{tokenPrice}$</StyledTableValue>
-                        </StyledTableText>
-                      </StyledTableBodyCell>
-                    </StyledTableRow>
-                  )}
 
                   <StyledTableRow>
                     <StyledTableBodyCell>
