@@ -1303,7 +1303,7 @@ export const supportedPools = [
     maxTier1: 0.37,
     maxTier2: 0.37,
     maxTier3: 0.37,
-    access: PUBLIC,
+    access: GUARANTEED,
     network: bscNetwork,
     distribution: '10% at TGE, 30% per month in next 3 months',
     startAt: 1640621700,
@@ -1326,10 +1326,10 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
       97: ''
     },
-    lpExplorer: 'https://bscscan.com/address/',
+    lpExplorer: 'https://bscscan.com/address/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
     name: 'VoiceStreet',
     symbol: 'VST-PBR',
     description: `VST/BNB`,
@@ -1339,7 +1339,7 @@ export const supportedPools = [
     telegram: 'https://t.me/VoiceStreet',
     whitepaper: ' https://voicestreet.org/whitepaper/VoiceStreetwhitepaper.pdf',
     tokenSymbol: 'VST',
-    tokenExplorer: 'https://bscscan.com/token/',
+    tokenExplorer: 'https://bscscan.com/token/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
     icon: '/img/tokens/vst.png',
     totalSupply: '2B VST',
     total: '96.1 BNB', //1BNB=520
@@ -1354,9 +1354,9 @@ export const supportedPools = [
     distribution: '100% at TGE',
     startAt: 1640786400,
     endAt: 1640790000,
-    claimAt: 1642687200,
+    claimAt: 1643112000,
     startDate: '2PM UTC 29th Dec, 2021',
-    claimTimeArr: [1642687200],
+    claimTimeArr: [1643112000],
     harvestDistribution: [100],
     registerForm: "https://forms.gle/jZi9LynDxgdeJZ9TA"
   },
@@ -1476,21 +1476,21 @@ export const supportedPools = [
     tokenExplorer: 'https://moonriver.moonscan.io/address/',
     icon: '/img/tokens/alphadex.jpg',
     totalSupply: '120,000,000 ROAR',
-    total: '266.6 MOVR',//300$
-    ratio: 1363.6,//0.22$
-    min: 0.33, //100$
-    max: 1, //300$
-    maxTier1: 0.33, //100$
-    maxTier2: 0.66, //200$
-    maxTier3: 1, //300$
-    access: GUARANTEED,
+    total: '727.2 MOVR',//110$
+    ratio: 500,//0.22$
+    min: 1.26,
+    max: 4.98,
+    maxTier1: 4.98,
+    maxTier2: 4.98,
+    maxTier3: 4.98,
+    access: PUBLIC,
     network: moonriverNetwork,
     distribution: '20% at TGE, 40% per month in next 2 months',
-    startAt: 1642600800,
-    endAt: 1642604400,
-    claimAt: 1643385600,
+    startAt: 1642605300,
+    endAt: 1642608000,
+    claimAt: 1643277600,
     startDate: '2PM UTC 19th Jan, 2022',
-    claimTimeArr: [0, 0],
+    claimTimeArr: [1643277600, 1645956000, 1648375200],
     harvestDistribution: [20, 40, 40],
     registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
   },
@@ -1524,19 +1524,19 @@ export const supportedPools = [
     totalSupply: '12.5B ANML',
     total: '33.3 ETH',// 1eth = 3k$, 100k$
     ratio: 666666.6, //$0.0045
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
+    min: 0.1,
+    max: 0.25,
+    maxTier1: 0.25,
+    maxTier2: 0.25,
+    maxTier3: 0.25,
     access: GUARANTEED,
     network: ethereumNetwork,
-    distribution: '25% TGE, 25% per month in next 3 months',
-    startAt: 1642514400,
-    endAt: 1642518000,
-    claimAt: 1643637600,
+    distribution: '25% TGE, 25% every 2 months in next 6 months',
+    startAt: 1642522500,
+    endAt: 1642525140,
+    claimAt: 1643205600,
     startDate: '2PM UTC 18th Jan, 2022',
-    claimTimeArr: [1643637600, 0, 0, 0],
+    claimTimeArr: [1643205600, 1645884000, 1648303200, 1650981600],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: "https://forms.gle/6VvBTPWzv8g5g1so8"
   },
@@ -1556,10 +1556,10 @@ export const supportedPools = [
       97: '',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'TheGems',
+    name: 'GEMS',
     symbol: 'GEMS-PBR',
     description: `GEMS/BNB`,
-    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. `,
+    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. It propels Esports into 3.0 by integrating Gamefi, Metaverse and Socialfi elements, and leverages on its founding partners' chain of Esports hotels. GEMS core business pillars include a portal, a NFT rental library, a Fanfi studio and a competitive pools arena. GEMS is an one stop destination for gamers that integrates the young population into the new sharing economy.`,
     website: 'https://thegems.gg/',
     twitter: 'https://twitter.com/gemsgg_official',
     telegram: 'https://t.me/thegemsgg',
@@ -1567,9 +1567,9 @@ export const supportedPools = [
     tokenSymbol: 'GEMS',
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/gems.png',
-    totalSupply: '10B GEMS',
-    total: '62.5 ETH',// 1eth = 3k2$, 200k$
-    ratio: 640000, //$0.005
+    totalSupply: '10,000,000,000 GEMS',
+    total: '500 BNB',// 1BNB = 400$, 200k$ 
+    ratio: 80000, //$0.005
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -1581,8 +1581,8 @@ export const supportedPools = [
     startAt: 1645346411,
     endAt: 1745346411,
     claimAt: 0,
-    startDate: 'February, 2022',
-    registerForm: ""
+    startDate: 'March, 2022',
+    registerForm: "https://forms.gle/jqadUuQmKhzSrf678"
   },
   // {
   //   pid: 50,
