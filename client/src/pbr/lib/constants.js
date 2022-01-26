@@ -31,7 +31,7 @@ export const ethereumNetwork = 'ethereum'
 export const bscNetwork = 'bsc'
 export const polygonNetwork = 'polygon'
 export const harmonyNetwork = 'harmony'
-export const moonriverNetwork = 'moonriver';
+export const moonriverNetwork = 'moonriver'
 
 // TODO: change the address & set LP pool
 export const contractAddresses = {
@@ -57,36 +57,51 @@ export const contractAddresses = {
   // }
 }
 
-
 const testing = false
 
-export const currentConnection = testing ? 'testnet' : 'mainnet';
+export const currentConnection = testing ? 'testnet' : 'mainnet'
 
 export const stakeContractAddresses = {
-  'ethereum': {
+  ethereum: {
     1: '0x1b46b72c5280f30Fbe8A958B4f3c348FD0fD2E55',
-    42: '0x7678f0AF7304e01554E2D49D96E55C8de4975c66'
+    42: '0x7678f0AF7304e01554E2D49D96E55C8de4975c66',
   },
-  'polygon': {
+  polygon: {
     137: '0x6335aF028e77B574423733443678aD4cb9e15B3D',
     80001: '0x55950cF279Ba5b43263f4Df54833b85F684B333F',
   },
-  'harmony': {
+  harmony: {
     //todo:
-  }
+  },
 }
 
 // access types
-export const PUBLIC = 'Public';
-export const PRIVATE = 'Private';
-export const WHITELIST = 'Whitelist';
-export const GUARANTEED = 'Guaranteed';
+export const PUBLIC = 'Public'
+export const PRIVATE = 'Private'
+export const WHITELIST = 'Whitelist'
+export const GUARANTEED = 'Guaranteed'
 
-export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`;
-export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`;
+export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
+  '',
+)
+  .reverse()
+  .join('')}`
+export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
+  '',
+)
+  .reverse()
+  .join('')}`
 
-export const polygonMainnetInfuraRpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`
-export const polygonTestnetInfuraRpc = `https://polygon-mumbai.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split('').reverse().join('')}`
+export const polygonMainnetInfuraRpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
+  '',
+)
+  .reverse()
+  .join('')}`
+export const polygonTestnetInfuraRpc = `https://polygon-mumbai.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
+  '',
+)
+  .reverse()
+  .join('')}`
 
 export const supportedPools = [
   {
@@ -401,21 +416,21 @@ export const supportedPools = [
     tokenExplorer: 'https://etherscan.io/token',
     icon: '/img/tokens/shoefy.png',
     totalSupply: '100,000,000 SHOE',
-    total: '28.57 ETH',//1ETH =3k5$
-    ratio: 8750,//1 SHOE 0.4$
-    min: 0.142,//500$
-    max: 0.2,//700$
-    maxTier1: 0.142,//500$
-    maxTier2: 0.171,//600$
-    maxTier3: 0.2,//700$
+    total: '28.57 ETH', //1ETH =3k5$
+    ratio: 8750, //1 SHOE 0.4$
+    min: 0.142, //500$
+    max: 0.2, //700$
+    maxTier1: 0.142, //500$
+    maxTier2: 0.171, //600$
+    maxTier3: 0.2, //700$
     access: 'Private',
     network: ethereumNetwork,
     distribution: '50% TGE after 1h Uniswap listing, 50% next month',
-    startAt: 1633960800,//real 1633960800
-    endAt: 1633964400,//real 1633964400
-    claimAt: 1634648400,//real 1634648400
-    startDate: "2PM UTC 11th Oct",
-    claimTimeArr: [1634648400, 1637280000]
+    startAt: 1633960800, //real 1633960800
+    endAt: 1633964400, //real 1633964400
+    claimAt: 1634648400, //real 1634648400
+    startDate: '2PM UTC 11th Oct',
+    claimTimeArr: [1634648400, 1637280000],
   },
   {
     pid: 3,
@@ -427,7 +442,8 @@ export const supportedPools = [
       1: '0x31903e333809897ee57af57567f4377a1a78756c',
       42: '0x31903e333809897ee57af57567f4377a1a78756c',
     },
-    lpExplorer: 'https://etherscan.io/address/0x31903e333809897ee57af57567f4377a1a78756c',
+    lpExplorer:
+      'https://etherscan.io/address/0x31903e333809897ee57af57567f4377a1a78756c',
     name: 'Cryptopunt',
     symbol: 'PUN-PBR',
     description: `PUN/ETH`,
@@ -437,11 +453,12 @@ export const supportedPools = [
     telegram: 'https://t.me/CryptoPunt',
     whitepaper: 'https://www.cryptopunt.com/download_file/74/1',
     tokenSymbol: 'PUN',
-    tokenExplorer: 'https://etherscan.io/token/0x31903e333809897ee57af57567f4377a1a78756c',
+    tokenExplorer:
+      'https://etherscan.io/token/0x31903e333809897ee57af57567f4377a1a78756c',
     icon: '/img/tokens/punt.jpg',
     totalSupply: '160,000,000 PUN',
     total: '16.2 ETH', //1ETH =3k7$
-    ratio: 16818,//1PUN =0.22$
+    ratio: 16818, //1PUN =0.22$
     min: 0.081, //300$
     max: 0.135, //500$
     maxTier1: 0.081, //300$
@@ -454,7 +471,7 @@ export const supportedPools = [
     endAt: 1634558400,
     claimAt: 1634563800,
     startDate: '2PM UTC Oct 18th 2021',
-    claimTimeArr: [1634563800, 1637168400]
+    claimTimeArr: [1634563800, 1637168400],
   },
   {
     pid: 5,
@@ -464,9 +481,10 @@ export const supportedPools = [
     },
     tokenAddresses: {
       1: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
-      42: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce'
+      42: '0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     },
-    lpExplorer: 'https://etherscan.io/token/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
+    lpExplorer:
+      'https://etherscan.io/token/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     name: 'ReBaked',
     symbol: 'BAKED-PBR',
     description: `BAKED/MATIC`,
@@ -476,11 +494,12 @@ export const supportedPools = [
     telegram: 'https://t.me/rebakedann',
     whitepaper: 'https://docsend.com/view/axuv2dhmiqpbk7vu',
     tokenSymbol: 'BAKED',
-    tokenExplorer: 'https://etherscan.com/address/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
+    tokenExplorer:
+      'https://etherscan.com/address/0xa4cb0dce4849bdcad2d553e9e68644cf40e26cce',
     icon: '/img/tokens/rebaked.png',
     totalSupply: '300,000,000 BAKED',
     total: '7.5 ETH', //1ETH=4k
-    ratio: 133333.33,//1 BAKED=0.03$
+    ratio: 133333.33, //1 BAKED=0.03$
     min: 0.075, //300$
     max: 0.125, //500$
     maxTier1: 0.075, //300$
@@ -491,10 +510,9 @@ export const supportedPools = [
     distribution: '33% on TGE, then 33% monthly over 2 months',
     startAt: 1636253020,
     endAt: 1634907600,
-    claimAt: 1636253020,//1635831420,//1635249600,
+    claimAt: 1636253020, //1635831420,//1635249600,
     startDate: '12PM UTC 22nd Oct, 2021',
-    claimTimeArr: [1635249600, 1637859600, 1640451600]
-
+    claimTimeArr: [1635249600, 1637859600, 1640451600],
   },
   {
     pid: 7,
@@ -504,10 +522,11 @@ export const supportedPools = [
     },
     tokenAddresses: {
       1: '0x65e6b60ea01668634d68d0513fe814679f925bad',
-      42: '0x65e6b60ea01668634d68d0513fe814679f925bad'
+      42: '0x65e6b60ea01668634d68d0513fe814679f925bad',
     },
 
-    lpExplorer: 'https://etherscan.com/address/0x65e6b60ea01668634d68d0513fe814679f925bad',
+    lpExplorer:
+      'https://etherscan.com/address/0x65e6b60ea01668634d68d0513fe814679f925bad',
     name: 'PixelVerse',
     symbol: 'PIXEL-PBR',
     description: `PIXEL/ETH`,
@@ -515,10 +534,10 @@ export const supportedPools = [
     website: 'https://pixelverse.ai/',
     twitter: 'https://twitter.com/pixelverse1',
     telegram: 'https://t.me/pixelverseofficial',
-    whitepaper:
-      'https://pixelverse.ai/assets/pdf/deck.pdf',
+    whitepaper: 'https://pixelverse.ai/assets/pdf/deck.pdf',
     tokenSymbol: 'PIXEL',
-    tokenExplorer: 'https://etherscan.com/token/0x65e6b60ea01668634d68d0513fe814679f925bad',
+    tokenExplorer:
+      'https://etherscan.com/token/0x65e6b60ea01668634d68d0513fe814679f925bad',
     icon: '/img/tokens/pixelverse.png',
     totalSupply: '1,000,000,000 PIXEL',
     total: '11.9 ETH',
@@ -535,7 +554,7 @@ export const supportedPools = [
     endAt: 1635865200,
     claimAt: 1636171200,
     startDate: '2PM UTC, 2nd Nov 2021',
-    claimTimeArr: [1636171200]
+    claimTimeArr: [1636171200],
   },
 
   {
@@ -548,7 +567,8 @@ export const supportedPools = [
       1: '0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
       42: '0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     },
-    lpExplorer: 'https://etherscan.io/address/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
+    lpExplorer:
+      'https://etherscan.io/address/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     name: 'Defactor',
     symbol: 'FACTR-PBR',
     description: `FACTR/ETH`,
@@ -558,11 +578,12 @@ export const supportedPools = [
     telegram: ' https://t.me/defactor_official',
     whitepaper: ' https://defactor.docsend.com/view/ndqzghfjjat5a5ik',
     tokenSymbol: 'FACTR',
-    tokenExplorer: 'https://etherscan.io/token/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
+    tokenExplorer:
+      'https://etherscan.io/token/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     icon: '/img/tokens/defactor.svg',
     totalSupply: '300,000,000 FACTR',
     total: '10.86 ETH', //1ETH =4k6$
-    ratio: 65714.28,//0.07$
+    ratio: 65714.28, //0.07$
     min: 0.065, //300$
     max: 0.108, //500$
     maxTier1: 0.065, //300$
@@ -575,11 +596,11 @@ export const supportedPools = [
     endAt: 1636383600,
     claimAt: 1636812000,
     startDate: '2PM UTC 8th Nov, 2021',
-    claimTimeArr: [1636812000, 1639328400, 1642006800]
+    claimTimeArr: [1636812000, 1639328400, 1642006800],
   },
   {
     pid: 10,
-    poolId: 1,// add pool id in this symbol if pool ID of the ido is not same as pid
+    poolId: 1, // add pool id in this symbol if pool ID of the ido is not same as pid
     lpAddresses: {
       1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
       42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
@@ -592,7 +613,8 @@ export const supportedPools = [
       137: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
       80001: '0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     },
-    lpExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+    lpExplorer:
+      'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     name: 'FabWelt',
     symbol: 'WELT-PBR',
     description: `WELT/MATIC`,
@@ -602,11 +624,12 @@ export const supportedPools = [
     telegram: 'https://t.me/FabweltToken',
     whitepaper: 'https://www.fabwelt.com/public/Fabwelt-whitepaper.pdf',
     tokenSymbol: 'WELT',
-    tokenExplorer: 'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
+    tokenExplorer:
+      'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     icon: '/img/tokens/fbwelt.jpg',
     totalSupply: '500,000,000 WELT',
     total: '29411 MATIC', //1Matic=1.7$
-    ratio: 121.42,//0.014
+    ratio: 121.42, //0.014
     min: 176.47, //300$
     max: 294.11, //500$
     maxTier1: 176.47, //300$
@@ -614,12 +637,13 @@ export const supportedPools = [
     maxTier3: 294.11, //500$
     access: 'Private',
     network: polygonNetwork,
-    distribution: '50% at TGE after 30 minutes. 50% after one month of DEX listing',
-    startAt: 1636725600,//1636725540
+    distribution:
+      '50% at TGE after 30 minutes. 50% after one month of DEX listing',
+    startAt: 1636725600, //1636725540
     endAt: 1636729200,
     claimAt: 1637069400,
     startDate: '2PM UTC 12th Nov, 2021',
-    claimTimeArr: [1637069400, 1639661400]
+    claimTimeArr: [1637069400, 1639661400],
   },
 
   {
@@ -651,7 +675,7 @@ export const supportedPools = [
     icon: '/img/tokens/playmon.png',
     totalSupply: '1,000,000,000 PYM',
     total: '32258 MATIC', //1Matic=1.55$,1 PYM = 0.038 USD
-    ratio: 40.78,//0.038$
+    ratio: 40.78, //0.038$
     min: 193.5, //300$
     max: 322.5, //500$
     maxTier1: 193.5, //300$
@@ -664,7 +688,7 @@ export const supportedPools = [
     endAt: 1637247600,
     claimAt: 1637551800,
     startDate: '2PM UTC 18th Nov, 2021',
-    claimTimeArr: [1637551800, 1640131200]
+    claimTimeArr: [1637551800, 1640131200],
   },
   {
     pid: 12,
@@ -695,7 +719,7 @@ export const supportedPools = [
     icon: '/img/tokens/tryhards.png',
     totalSupply: '200,000,000 TRY',
     total: '19480 MATIC', //1Matic=1.54$
-    ratio: 17.1,//1 TRY=0.09$
+    ratio: 17.1, //1 TRY=0.09$
     min: 194.8, //300$
     max: 324.6, //500$
     maxTier1: 194.8, //300$
@@ -708,7 +732,7 @@ export const supportedPools = [
     endAt: 1637334000,
     claimAt: 1637773200,
     startDate: '2PM UTC 19th Nov, 2021',
-    claimTimeArr: [1637773200, 1640304000, 1642982400]
+    claimTimeArr: [1637773200, 1640304000, 1642982400],
   },
   {
     pid: 13,
@@ -725,7 +749,8 @@ export const supportedPools = [
       56: '0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
+    lpExplorer:
+      'https://bscscan.com/address/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
     name: 'Torekko',
     symbol: 'TRK-PBR',
     description: `TRK/BNB`,
@@ -733,13 +758,13 @@ export const supportedPools = [
     website: 'https://torekko.com/',
     twitter: 'https://twitter.com/torekkocom',
     telegram: 'https://t.me/torekko',
-    whitepaper:
-      'https://docsend.com/view/s3nnspuswq6w9yyq/d/h5v7983cv274w9u6',
+    whitepaper: 'https://docsend.com/view/s3nnspuswq6w9yyq/d/h5v7983cv274w9u6',
     tokenSymbol: 'TRK',
-    tokenExplorer: 'https://bscscan.com/token/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
+    tokenExplorer:
+      'https://bscscan.com/token/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
     icon: '/img/tokens/torekko.png',
     totalSupply: '100,000,000 TRK',
-    total: '89.2 BNB',// 1BNB = 560$
+    total: '89.2 BNB', // 1BNB = 560$
     ratio: 4307.69, //token price 0.13, 1BNB = 560$
     min: 0.17, //100$
     max: 0.53, //300$
@@ -755,7 +780,7 @@ export const supportedPools = [
     claimAt: 1638279000,
     startDate: '2PM UTC 24th Nov, 2021',
     claimTimeArr: [1638279000, 1641043800, 1643549400],
-    harvestDistribution: [34, 33, 33]
+    harvestDistribution: [34, 33, 33],
   },
   {
     pid: 14,
@@ -786,7 +811,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/chessus.png',
     totalSupply: '200,000,000 CHEESUS',
-    total: '84.7 BNB',// 1BNB = 590$
+    total: '84.7 BNB', // 1BNB = 590$
     ratio: 15526.3, //token price 0.038, 1BNB = 590$
     min: 0.16, //100$
     max: 0.5, //300$
@@ -802,7 +827,7 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 25th Nov, 2021',
     claimTimeArr: [0, 0, 0, 0],
-    harvestDistribution: [30, 30, 30, 10]
+    harvestDistribution: [30, 30, 30, 10],
   },
   {
     pid: 15,
@@ -827,19 +852,20 @@ export const supportedPools = [
     website: 'https://www.peoplez.io/',
     twitter: 'https://twitter.com/Peoplez_io',
     telegram: 'https://t.me/Peoplez_io',
-    whitepaper: 'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
+    whitepaper:
+      'https://ce251279-e551-4984-841a-5796bf3cd4ff.filesusr.com/ugd/491357_c78348f1d22e44d1925af7e39b3e2326.pdf',
     tokenSymbol: 'LEZ',
     tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/peoplez.svg',
     totalSupply: '18,000,000 LEZ',
     total: '83.3 BNB', //1BNB = 600$
-    ratio: 857.1,//0.7$
+    ratio: 857.1, //0.7$
     min: 0.16, //100$
     max: 0.5, //300$
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    maxWhitelistPurchase: 1.66,//1k
+    maxWhitelistPurchase: 1.66, //1k
     access: 'Private',
     network: bscNetwork,
     distribution: '50% TGE, 50% next month',
@@ -848,7 +874,7 @@ export const supportedPools = [
     claimAt: 1638278100,
     startDate: '2PM UTC 29th Nov, 2021',
     claimTimeArr: [1638278100, 1640869200],
-    harvestDistribution: [50, 50]
+    harvestDistribution: [50, 50],
   },
   {
     pid: 16,
@@ -873,8 +899,7 @@ export const supportedPools = [
     website: 'https://widiland.com/',
     twitter: 'https://twitter.com/WidiLand/',
     telegram: 'https://t.me/widilandglobal',
-    whitepaper:
-      'https://docs.widiland.com/widiland-1/',
+    whitepaper: 'https://docs.widiland.com/widiland-1/',
     tokenSymbol: 'WIDI',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/widiland.png',
@@ -886,16 +911,16 @@ export const supportedPools = [
     maxTier1: 0.16, //100$
     maxTier2: 0.33, //200$
     maxTier3: 0.5, //300$
-    maxWhitelistPurchase: 0.08,//special 1k, public whitelist 50$,1.66
-    access: 'Private',//Private
+    maxWhitelistPurchase: 0.08, //special 1k, public whitelist 50$,1.66
+    access: 'Private', //Private
     network: bscNetwork,
     distribution: '25% at TGE, 25% per month in next 3 months',
-    startAt: 1638284430,//whitelist round 1638280830, private round 1638284430
-    endAt: 1638287100,//whitelist round 1638283500, private round 1638287100
+    startAt: 1638284430, //whitelist round 1638280830, private round 1638284430
+    endAt: 1638287100, //whitelist round 1638283500, private round 1638287100
     claimAt: 1638352800,
     startDate: '2PM UTC 30th Nov, 2021',
     claimTimeArr: [1638352800, 1641031200, 1643709600, 1646128800],
-    harvestDistribution: [25, 25, 25, 25]
+    harvestDistribution: [25, 25, 25, 25],
   },
   {
     pid: 17,
@@ -912,7 +937,8 @@ export const supportedPools = [
       56: '0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
+    lpExplorer:
+      'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
     name: 'ArcadeNetwork',
     symbol: 'ARC-PBR',
     description: `ARC/BNB`,
@@ -922,11 +948,12 @@ export const supportedPools = [
     telegram: 'https://t.me/ArcadeNetworkOfficial',
     whitepaper: 'https://arcadenet.io/Arcadenet_white_paper-.pdf',
     tokenSymbol: 'ARC',
-    tokenExplorer: 'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
+    tokenExplorer:
+      'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
     icon: '/img/tokens/arcade.png',
     totalSupply: '222,500,000 ARC',
     total: '81.9 BNB', //1BNB=610$
-    ratio: 10166.6,//0.06$
+    ratio: 10166.6, //0.06$
     min: 0.16, //100$
     max: 0.49, //300$
     maxTier1: 0.16, //100$
@@ -941,7 +968,7 @@ export const supportedPools = [
     claimAt: 1638799800,
     startDate: '2PM UTC 2nd Dec, 2021',
     claimTimeArr: [1638799800, 1641477630, 1644156030, 1646575230],
-    harvestDistribution: [25, 25, 25, 25]
+    harvestDistribution: [25, 25, 25, 25],
   },
   {
     pid: 18,
@@ -964,13 +991,14 @@ export const supportedPools = [
     website: 'https://solclout.com/',
     twitter: 'https://twitter.com/solclout',
     telegram: 'https://t.me/solclout',
-    whitepaper: 'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
+    whitepaper:
+      'https://drive.google.com/file/d/1bM_b8CsMD8AQkd5F8hCt-lTKBRNvWiCs/view?usp=sharing',
     tokenSymbol: 'SCT',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/solc.png',
     totalSupply: '1,000,000,000 SCT',
-    total: '175.4 BNB',//1BNB = 570$
-    ratio: 38000,//1 SOLC = 0.015
+    total: '175.4 BNB', //1BNB = 570$
+    ratio: 38000, //1 SOLC = 0.015
     min: 0.17, //100$
     max: 0.17, //300$
     maxTier1: 0.17, //100$
@@ -982,10 +1010,10 @@ export const supportedPools = [
     startAt: 1638986400,
     endAt: 1638990000,
     claimAt: 0,
-    startDate: "2PM UTC 8th Dec, 2021",
+    startDate: '2PM UTC 8th Dec, 2021',
     claimTimeArr: [],
     harvestDistribution: [],
-    registerForm: ''
+    registerForm: '',
   },
 
   {
@@ -1017,7 +1045,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/defly.svg',
     totalSupply: '100,000,000 DEFLY',
-    total: '87.7 BNB',// 1BNB = 570$
+    total: '87.7 BNB', // 1BNB = 570$
     ratio: 5700, //token price 0.1, 1BNB = 590$
     min: 0, //100$
     max: 0, //300$
@@ -1033,8 +1061,7 @@ export const supportedPools = [
     startDate: '2PM UTC 10th Dec, 2021',
     claimTimeArr: [1639573800, 1642179600, 1644858000],
     harvestDistribution: [34, 33, 33],
-    registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9'
-
+    registerForm: 'https://forms.gle/nPvKNvUwmNv2DpUL9',
   },
   {
     pid: 21,
@@ -1043,13 +1070,13 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69',
-      97: '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA'
+      97: '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
-      97: ''
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'CasperPad',
@@ -1065,7 +1092,7 @@ export const supportedPools = [
     icon: '/img/tokens/cspd.png',
     totalSupply: '500,000,000 CSPD',
     total: '175.4 BNB', //1BNB=570
-    ratio: 71250,//0.008$
+    ratio: 71250, //0.008$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1078,9 +1105,11 @@ export const supportedPools = [
     endAt: 1639155600,
     claimAt: 1639166400,
     startDate: '4PM UTC 10th Dec, 2021',
-    claimTimeArr: [1639166400, 1641841200, 1644519600, 1646938800, 1649617200, 1652209200],
+    claimTimeArr: [
+      1639166400, 1641841200, 1644519600, 1646938800, 1649617200, 1652209200,
+    ],
     harvestDistribution: [5, 19, 19, 19, 19, 19],
-    registerForm: "https://forms.gle/UdGDPxk5HYux4wD2A"
+    registerForm: 'https://forms.gle/UdGDPxk5HYux4wD2A',
   },
 
   {
@@ -1090,7 +1119,7 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0xc95d0846dd8342c112844c6c3d04199897acf903',
-      97: ''
+      97: '',
     },
     tokenAddresses: {
       1: '',
@@ -1106,13 +1135,14 @@ export const supportedPools = [
     website: 'https://token.snapex.com/',
     twitter: 'https://twitter.com/snapexofficial',
     telegram: 'https://t.me/snapex_en',
-    whitepaper: 'https://token.snapex.com/wp-content/uploads/2021/11/Whitepaper-November-2021.pdf',
+    whitepaper:
+      'https://token.snapex.com/wp-content/uploads/2021/11/Whitepaper-November-2021.pdf',
     tokenSymbol: 'SNAP',
     tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/snapex.png',
     totalSupply: '2,000,000,000 SNAP',
-    total: '190.47 BNB',//525$
-    ratio: 17500,//0.03$
+    total: '190.47 BNB', //525$
+    ratio: 17500, //0.03$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1125,9 +1155,11 @@ export const supportedPools = [
     endAt: 1639494000,
     claimAt: 1639746000,
     startDate: '2PM UTC 14th Dec, 2021',
-    claimTimeArr: [1639746000, 1642428000, 1645106400, 1647525600, 1650204000, 1652796000],
+    claimTimeArr: [
+      1639746000, 1642428000, 1645106400, 1647525600, 1650204000, 1652796000,
+    ],
     harvestDistribution: [25, 15, 15, 15, 15, 15],
-    registerForm: "https://forms.gle/jZQDxSvVNymV7WAV9"
+    registerForm: 'https://forms.gle/jZQDxSvVNymV7WAV9',
   },
   {
     pid: 23,
@@ -1152,13 +1184,12 @@ export const supportedPools = [
     website: 'https://calo.run/',
     twitter: 'https://twitter.com/AppCalo',
     telegram: 'https://t.me/caloapp',
-    whitepaper:
-      'https://docs.calo.run/',
+    whitepaper: 'https://docs.calo.run/',
     tokenSymbol: 'CALO',
     tokenExplorer: 'https://bscscan.com/token',
     icon: '/img/tokens/calo.png',
     totalSupply: '500,000,000 CALO',
-    total: '100 BNB',// 1BNB = 500$
+    total: '100 BNB', // 1BNB = 500$
     ratio: 14285.7, //token price 0.035, 1BNB = 600$
     min: 0,
     max: 0,
@@ -1174,7 +1205,7 @@ export const supportedPools = [
     startDate: '2PM UTC 20th Dec, 2021',
     claimTimeArr: [1640105100, 1642782600, 1645461000, 1647880200],
     harvestDistribution: [25, 25, 25, 25],
-    registerForm: "https://forms.gle/NzFyrFrL5bBzZRyZA"
+    registerForm: 'https://forms.gle/NzFyrFrL5bBzZRyZA',
   },
   {
     pid: 24,
@@ -1183,13 +1214,13 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0x302b7f2351f7f064f7c2be48386e0762c0cf5348',
-      97: ''
+      97: '',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
-      97: ''
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'Graviton Zero',
@@ -1205,7 +1236,7 @@ export const supportedPools = [
     icon: '/img/tokens/grv.png',
     totalSupply: '300,000,000 GRAV',
     total: '97 BNB', //1BNB=515
-    ratio: 5150,//0.1$
+    ratio: 5150, //0.1$
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -1220,7 +1251,7 @@ export const supportedPools = [
     startDate: '2PM UTC 21th Dec, 2021',
     claimTimeArr: [1640109600, 1642788000, 1645466400, 1647885600],
     harvestDistribution: [10, 30, 30, 30],
-    registerForm: "https://forms.gle/ii2DzcWYkQa18eh6A"
+    registerForm: 'https://forms.gle/ii2DzcWYkQa18eh6A',
   },
   {
     pid: 25,
@@ -1229,13 +1260,13 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0x56d750197ec332fceb574ca22cd4e40965712c86',
-      97: ''
+      97: '',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
-      97: ''
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'Battle Saga',
@@ -1251,7 +1282,7 @@ export const supportedPools = [
     icon: '/img/tokens/battlesaga.png',
     totalSupply: '300,000,000 BTL',
     total: '192.3 BNB', //1BNB=520
-    ratio: 4333.3,//0.12$
+    ratio: 4333.3, //0.12$
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -1266,7 +1297,7 @@ export const supportedPools = [
     startDate: '2PM UTC 22th Dec, 2021',
     claimTimeArr: [],
     harvestDistribution: [],
-    registerForm: "https://forms.gle/fDQFDMeETr89PpPb8"
+    registerForm: 'https://forms.gle/fDQFDMeETr89PpPb8',
   },
   {
     pid: 26,
@@ -1275,13 +1306,13 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0x9ce703762878c69874e8951f92e8ba2142dc9dce',
-      97: ''
+      97: '',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
-      97: ''
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'Age Of Gods',
@@ -1297,7 +1328,7 @@ export const supportedPools = [
     icon: '/img/tokens/aog.png',
     totalSupply: '270,000,000 AOG',
     total: '94.3 BNB', //1BNB=530$
-    ratio: 4416.6,//0.12$
+    ratio: 4416.6, //0.12$
     min: 0.37,
     max: 0.37,
     maxTier1: 0.37,
@@ -1312,7 +1343,7 @@ export const supportedPools = [
     startDate: '2PM UTC 27th Dec, 2021',
     claimTimeArr: [],
     harvestDistribution: [],
-    registerForm: "https://forms.gle/aX3kfJxyDCsAwEsY7"
+    registerForm: 'https://forms.gle/aX3kfJxyDCsAwEsY7',
   },
   {
     pid: 27,
@@ -1321,13 +1352,13 @@ export const supportedPools = [
       1: '',
       42: '',
       56: '0xf5658d4a37975489541f8dc03fedada605c78c8b',
-      97: ''
+      97: '',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
-      97: ''
+      97: '',
     },
     lpExplorer: 'https://bscscan.com/address/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
     name: 'VoiceStreet',
@@ -1343,7 +1374,7 @@ export const supportedPools = [
     icon: '/img/tokens/vst.png',
     totalSupply: '2B VST',
     total: '96.1 BNB', //1BNB=520
-    ratio: 13000,//0.04$
+    ratio: 13000, //0.04$
     min: 0, //100$
     max: 0, //300$
     maxTier1: 0, //100$
@@ -1358,7 +1389,7 @@ export const supportedPools = [
     startDate: '2PM UTC 29th Dec, 2021',
     claimTimeArr: [1643112000],
     harvestDistribution: [100],
-    registerForm: "https://forms.gle/jZi9LynDxgdeJZ9TA"
+    registerForm: 'https://forms.gle/jZi9LynDxgdeJZ9TA',
   },
 
   // {
@@ -1433,7 +1464,8 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/memusic.png',
     totalSupply: '100,000,000 MUSIC',
-    total: '166.6 BNB',// 1BNB = 600$, 100k$
+    price: 0.1,
+    total: '166.6 BNB', // 1BNB = 600$, 100k$
     ratio: 10909, //0.055$
     min: 0.46, //300$
     max: 0.76, //500$
@@ -1454,8 +1486,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f',  //testnet
-      1285: '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483'//mainnet
+      1287: '0x7A2d1a8Ee512De3810b153883257Bf865CA0ec3f', //testnet
+      1285: '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483', //mainnet
     },
     tokenAddresses: {
       1: '',
@@ -1492,7 +1524,7 @@ export const supportedPools = [
     startDate: '2PM UTC 19th Jan, 2022',
     claimTimeArr: [1643277600, 1645956000, 1648375200],
     harvestDistribution: [20, 40, 40],
-    registerForm: "https://forms.gle/fjuprj9yqSrWbwhk9"
+    registerForm: 'https://forms.gle/fjuprj9yqSrWbwhk9',
   },
   {
     pid: 31,
@@ -1517,12 +1549,13 @@ export const supportedPools = [
     website: 'https://animalconcerts.com/',
     twitter: 'https://twitter.com/animalconcerts',
     telegram: 'https://t.me/animalconcertsofficial',
-    whitepaper: 'https://animalconcerts.com/wp-content/uploads/2021/12/Animal-White-Paper-V1.1.pdf',
+    whitepaper:
+      'https://animalconcerts.com/wp-content/uploads/2021/12/Animal-White-Paper-V1.1.pdf',
     tokenSymbol: 'ANML',
     tokenExplorer: 'https://etherscan.io/address',
     icon: '/img/tokens/animal.png',
     totalSupply: '12.5B ANML',
-    total: '33.3 ETH',// 1eth = 3k$, 100k$
+    total: '33.3 ETH', // 1eth = 3k$, 100k$
     ratio: 666666.6, //$0.0045
     min: 0.1,
     max: 0.25,
@@ -1538,7 +1571,7 @@ export const supportedPools = [
     startDate: '2PM UTC 18th Jan, 2022',
     claimTimeArr: [1643205600, 1645884000, 1648303200, 1650981600],
     harvestDistribution: [25, 25, 25, 25],
-    registerForm: "https://forms.gle/6VvBTPWzv8g5g1so8"
+    registerForm: 'https://forms.gle/6VvBTPWzv8g5g1so8',
   },
   {
     pid: 32,
@@ -1577,7 +1610,8 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution: '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
+    distribution:
+      '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
     startAt: 1645346411,
     endAt: 1745346411,
     claimAt: 0,
@@ -1628,54 +1662,56 @@ export const supportedPools = [
   //   startDate: '11th November',
   // claimTimeArr: [1533939514, 1639029546]
   // }
-
 ]
 // given pid and network name -> launchpad pool id
 export const getPoolId = (pid, network) => {
-  const _pidIndex = supportedPools.findIndex(item => item.pid === pid && item.network === network);
+  const _pidIndex = supportedPools.findIndex(
+    (item) => item.pid === pid && item.network === network,
+  )
   if (_pidIndex === -1) {
     return 0
   }
-  return supportedPools[_pidIndex].poolId ? supportedPools[_pidIndex].poolId : supportedPools[_pidIndex].pid;
+  return supportedPools[_pidIndex].poolId
+    ? supportedPools[_pidIndex].poolId
+    : supportedPools[_pidIndex].pid
 }
 
 export const stakeAddressMatic = '0x6335aF028e77B574423733443678aD4cb9e15B3D'
 
-export const HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io';
-export const HMY_MAINNET_RPC_URL = 'https://api.harmony.one';
+export const HMY_TESTNET_RPC_URL = 'https://api.s0.b.hmny.io'
+export const HMY_MAINNET_RPC_URL = 'https://api.harmony.one'
 
 export const harmonyChainIds = {
-  'shard0': {
-    'mainnet': 1666600000,
-    'testnet': 1666700000
+  shard0: {
+    mainnet: 1666600000,
+    testnet: 1666700000,
   },
-  'shard1': {
-    'mainnet': 1666600001,
-    'testnet': 1666700001
+  shard1: {
+    mainnet: 1666600001,
+    testnet: 1666700001,
   },
-  'shard2': {
-    'mainnet': 1666600002,
-    'testnet': 1666700002
+  shard2: {
+    mainnet: 1666600002,
+    testnet: 1666700002,
   },
-  'shard3': {
-    'mainnet': 1666600003,
-    'testnet': 1666700003
+  shard3: {
+    mainnet: 1666600003,
+    testnet: 1666700003,
   },
 }
-
 
 export const bscChainIds = [56, 97]
 
 export const tierConditions = {
   maxTier1: {
     min: 500,
-    max: 1500
+    max: 1500,
   },
   maxTier2: {
     min: 1500,
-    max: 3000
+    max: 3000,
   },
   maxTier3: {
-    min: 3000
-  }
+    min: 3000,
+  },
 }

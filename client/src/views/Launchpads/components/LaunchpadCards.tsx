@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import styled, { keyframes } from 'styled-components'
 import Button from '../../../components/Button'
@@ -11,17 +11,34 @@ import { Launchpad } from '../../../contexts/Launchpads'
 import useLaunchpads from '../../../hooks/useLaunchpads'
 import usePoolActive from '../../../hooks/usePoolActive'
 import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { formattedNetworkName, getDefaultLaunchpads, getNetworkName, getProgress } from '../../../pbr/utils'
-import { bscNetwork, ethereumNetwork, getPoolId, harmonyNetwork, moonriverNetwork, polygonNetwork, supportedPools } from '../../../pbr/lib/constants'
+import {
+  formattedNetworkName,
+  getDefaultLaunchpads,
+  getNetworkName,
+  getProgress,
+} from '../../../pbr/utils'
+import {
+  bscNetwork,
+  ethereumNetwork,
+  getPoolId,
+  harmonyNetwork,
+  moonriverNetwork,
+  polygonNetwork,
+  supportedPools,
+} from '../../../pbr/lib/constants'
 import { useHistory } from 'react-router-dom'
 import useNetwork from '../../../hooks/useNetwork'
 import { isMobile } from 'react-device-detect'
 import { useWallet } from '@binance-chain/bsc-use-wallet'
-import { getPoolReigsterLink, networkSymbol } from '../../../pbr/helpers'
+import {
+  getPoolReigsterLink,
+  getTokenPrice,
+  networkSymbol,
+} from '../../../pbr/helpers'
 
 const LaunchpadCards: React.FC = () => {
   const [launchpads] = useLaunchpads()
-  const rows = launchpads;
+  const rows = launchpads
   const defaultLp = getDefaultLaunchpads()
 
   return (
@@ -56,21 +73,24 @@ const LaunchpadCards: React.FC = () => {
       <Wrapper>
         <div className="container mt-4">
           <div className="row d-flex justify-content-center">
-            {(rows.length > 0 ? rows : defaultLp).filter(lp => lp.endAt * 1000 < new Date().getTime()).sort((a, b) => b.endAt - a.endAt).map((singleLaunchpad, i) => {
-              {
-                return (
-                  singleLaunchpad.endAt * 1000 < new Date().getTime() && (
-                    <div
-                      className="col-md-4 d-flex justify-content-center mt-4"
-                      key={i}
-                    >
-                      <LaunchpadCard launchpad={singleLaunchpad} />
-                      {<StyledSpacer />}
-                    </div>
+            {(rows.length > 0 ? rows : defaultLp)
+              .filter((lp) => lp.endAt * 1000 < new Date().getTime())
+              .sort((a, b) => b.endAt - a.endAt)
+              .map((singleLaunchpad, i) => {
+                {
+                  return (
+                    singleLaunchpad.endAt * 1000 < new Date().getTime() && (
+                      <div
+                        className="col-md-4 d-flex justify-content-center mt-4"
+                        key={i}
+                      >
+                        <LaunchpadCard launchpad={singleLaunchpad} />
+                        {<StyledSpacer />}
+                      </div>
+                    )
                   )
-                )
-              }
-            })}
+                }
+              })}
           </div>
         </div>
       </Wrapper>
@@ -90,8 +110,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   const { account } = useWallet()
 
   const [progress, setProgress] = useState<BigNumber>()
-  const [registerForm, setRegisterForm] = useState(null);
-
+  const [registerForm, setRegisterForm] = useState(null)
 
   useEffect(() => {
     async function fetchData() {
@@ -104,14 +123,19 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
         launchpad.access,
         launchpad.startAt,
         launchpad.endAt,
-        launchpad.network
-      );
-      setProgress(newProgress);
+        launchpad.network,
+      )
+      setProgress(newProgress)
     }
     if (launchpad) {
       fetchData()
     }
   }, [launchpad.pid, setProgress, poolActive])
+
+  const tokenPrice = useMemo(
+    () => getTokenPrice(launchpad.pid, launchpad.network),
+    [launchpad.pid, launchpad.network],
+  )
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -130,9 +154,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
     const _networkName = formattedNetworkName(launchpad.network)
 
     if (!account) {
-      alert(
-        `Please connect your wallet to proceed`,
-      )
+      alert(`Please connect your wallet to proceed`)
       return
     }
 
@@ -180,11 +202,21 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {networkSymbol(launchpad.network)}{" "}
-                  {launchpad.ratio} {launchpad.tokenSymbol}
+                  1 {networkSymbol(launchpad.network)} {launchpad.ratio}{' '}
+                  {launchpad.tokenSymbol}
                 </b>
               </span>
             </StyledInsight>
+
+            {tokenPrice && (
+              <StyledInsight>
+                <span>Price</span>
+                <span>
+                  <b>{new BigNumber(tokenPrice).toString()}$</b>
+                </span>
+              </StyledInsight>
+            )}
+
             <StyledInsight>
               <span>Access</span>
 
@@ -214,7 +246,9 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             <StyledInsight>
               <span>{progress && 'Progress'} </span>
             </StyledInsight>
-            {!progress ? <Spacer /> : (
+            {!progress ? (
+              <Spacer />
+            ) : (
               <>
                 <div style={{ width: `100%` }}>
                   <StyledProgress>
@@ -233,18 +267,16 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
             {!registerForm && (
               <Button
                 text="View"
-
                 onClick={() => handleLaunchpadClick(launchpad)}
               ></Button>
             )}
-            {registerForm && (launchpad.endAt * 1000 < new Date().getTime()) && (
+            {registerForm && launchpad.endAt * 1000 < new Date().getTime() && (
               <Button
                 text="View"
-
                 onClick={() => handleLaunchpadClick(launchpad)}
               ></Button>
             )}
-            {(registerForm && (launchpad.endAt * 1000 > new Date().getTime())) && (
+            {registerForm && launchpad.endAt * 1000 > new Date().getTime() && (
               <StyledInfo>
                 <StyledBox className="col-5">
                   <Button
@@ -257,20 +289,17 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
                   <Button
                     text="Register"
                     href={registerForm}
-                    variant='transparent'
-
+                    variant="transparent"
                   ></Button>
                 </StyledBox>
               </StyledInfo>
             )}
-
           </StyledContent>
         </CardContent>
       </Card>
     </StyledCardWrapper>
   )
 }
-
 
 const StyledInfo = styled.div`
   display: flex;
@@ -303,7 +332,6 @@ const StyledBox = styled.div`
     width: 100%;
   }
 `
-
 
 const RainbowLight = keyframes`
 	0% {
