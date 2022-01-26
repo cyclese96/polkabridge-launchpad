@@ -318,6 +318,7 @@ const Launchpad: React.FC = () => {
                 variant="tertiary"
                 text="View Explorer"
                 href={lpExplorer}
+                disabled={!tokenAddress}
               ></Button>
             </StyledBox>
           </StyledInfo>
@@ -603,13 +604,12 @@ const StyledTableLabel = styled.span`
   text-align: right;
   color: #bdbdbd;
   font-weight: 400;
-  word-break: break-all;
+  white-space: nowrap;
 `
 const StyledTableValue = styled.span`
   text-align: right;
   color: #ffffff;
   font-weight: 500;
-  word-break: break-all;
 `
 const StyledCenterRow = styled.div`
   // display: -webkit-box;
