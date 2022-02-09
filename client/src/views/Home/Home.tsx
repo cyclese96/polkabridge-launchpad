@@ -109,6 +109,18 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 22,
     },
   },
+  rpcLabel: {
+    textAlign: 'center',
+    color: '#f9f9f9',
+    fontSize: 12,
+    paddingTop: 3,
+    // marginBottom: 4,
+  },
+  icon: {
+    width: 20,
+    height: '100%',
+    marginRight: 10,
+  },
 }))
 
 const Home: React.FC = () => {
@@ -190,6 +202,13 @@ const Home: React.FC = () => {
         </div>
       </div>
       <Box className="mt-3">
+        <div className={classes.rpcLabel}>
+          <img
+            src="https://assets.coingecko.com/coins/images/4324/small/U85xTl2.png?1608111978"
+            className={classes.icon}
+          />
+          RPC powered by ANKR protocol
+        </div>
         <LaunchpadCards />
       </Box>
     </Page>

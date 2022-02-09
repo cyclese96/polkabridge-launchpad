@@ -3,21 +3,13 @@ import axios from 'axios'
 import config from '../config'
 import {
   supportedPools,
-  START_NEW_POOL_AT,
   bscNetwork,
   ethereumNetwork,
   stakeContractAddresses,
   currentConnection,
-  infuraMainnetApi,
-  infuraKovenApi,
-  ethereumInfuraRpc,
-  ethereumInfuraTestnetRpc,
-  polygonMainnetInfuraRpc,
-  polygonTestnetInfuraRpc,
   polygonNetwork,
   harmonyNetwork,
   harmonyChainIds,
-  HMY_TESTNET_RPC_URL,
   moonriverNetwork,
 } from './lib/constants'
 import Web3 from 'web3'
