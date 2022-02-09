@@ -1478,7 +1478,7 @@ export const supportedPools = [
     startAt: 1644914411,
     endAt: 1844914411,
     claimAt: 0,
-    startDate: 'January, 2022',
+    startDate: 'Feb, 2022',
   },
   {
     pid: 30,
@@ -1567,9 +1567,9 @@ export const supportedPools = [
     distribution: '25% TGE, 25% every 2 months in next 6 months',
     startAt: 1642522500,
     endAt: 1642525140,
-    claimAt: 1643205600,
+    claimAt: 1646030920,
     startDate: '2PM UTC 18th Jan, 2022',
-    claimTimeArr: [1643205600, 1645884000, 1648303200, 1650981600],
+    claimTimeArr: [1646030920, 1646030920, 1646030920, 1646030920],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: 'https://forms.gle/6VvBTPWzv8g5g1so8',
   },
@@ -1603,6 +1603,7 @@ export const supportedPools = [
     totalSupply: '10,000,000,000 GEMS',
     total: '500 BNB',// 1BNB = 400$, 200k$ 
     ratio: 80000, //$0.005
+    price: 0.005,
     min: 0,
     max: 0,
     maxTier1: 0,
