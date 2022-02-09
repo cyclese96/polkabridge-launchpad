@@ -1,15 +1,4 @@
 export default {
-  rpcTestnet: `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-    '',
-  )
-    .reverse()
-    .join('')}`,
-  // chainId: 42,
-  rpc: `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-    '',
-  )
-    .reverse()
-    .join('')}`, //ethereum mainnet rpc infura
   chainId: 1,
   chainIdTestnet: 42,
   bscChain: 56,
@@ -29,7 +18,9 @@ export default {
   api: 'http://localhost:8020',
   coingecko: 'https://api.coingecko.com/api',
   moonriverChain: 1285,
+  moonriverRpc: 'https://rpc.api.moonriver.moonbeam.network',
   moonriverChainTestent: 1287,
+  moonriverRpcTestnet: 'https://rpc.api.moonbase.moonbeam.network',
   ankrEthereumRpc: 'https://rpc.ankr.com/eth',
   ankrBscRpc: 'https://rpc.ankr.com/bsc',
   ankrPolygonRpc: 'https://rpc.ankr.com/polygon',

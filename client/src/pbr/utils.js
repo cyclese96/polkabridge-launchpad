@@ -3,21 +3,13 @@ import axios from 'axios'
 import config from '../config'
 import {
   supportedPools,
-  START_NEW_POOL_AT,
   bscNetwork,
   ethereumNetwork,
   stakeContractAddresses,
   currentConnection,
-  infuraMainnetApi,
-  infuraKovenApi,
-  ethereumInfuraRpc,
-  ethereumInfuraTestnetRpc,
-  polygonMainnetInfuraRpc,
-  polygonTestnetInfuraRpc,
   polygonNetwork,
   harmonyNetwork,
   harmonyChainIds,
-  HMY_TESTNET_RPC_URL,
   moonriverNetwork,
 } from './lib/constants'
 import Web3 from 'web3'
@@ -893,18 +885,22 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? config.hmy_rpc_mainnet
-        : config.hmy_rpc_testnet
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
-        : new Web3.providers.HttpProvider(config.ankrBscRpc)
+        : currentConnection === 'mainnet'
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
-        : new Web3.providers.HttpProvider('')
+        : currentConnection === 'mainnet'
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else {
     rpc =
       nativeNetwork === network

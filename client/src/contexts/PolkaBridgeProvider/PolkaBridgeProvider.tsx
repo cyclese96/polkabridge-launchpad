@@ -30,18 +30,23 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
       if (bscChainIds.includes(chainId)) {
         // console.log('using bsc configurations')
         const ethChainId = config.chainId
-        const pbrLib = new PolkaBridge(config.rpc, ethChainId, false, {
-          defaultAccount: ethereum.selectedAddress,
-          defaultConfirmations: 1,
-          autoGasMultiplier: 1.5,
-          testing: false,
-          isBsc: true,
-          infuraProvider: config.rpc,
-          defaultGas: '200',
-          defaultGasPrice: '250000',
-          accounts: [],
-          ethereumNodeTimeout: 10000,
-        })
+        const pbrLib = new PolkaBridge(
+          config.bscRpcMainnet,
+          ethChainId,
+          false,
+          {
+            defaultAccount: ethereum.selectedAddress,
+            defaultConfirmations: 1,
+            autoGasMultiplier: 1.5,
+            testing: false,
+            isBsc: true,
+            infuraProvider: config.bscRpcMainnet,
+            defaultGas: '200',
+            defaultGasPrice: '250000',
+            accounts: [],
+            ethereumNodeTimeout: 10000,
+          },
+        )
         setPolkaBridge(pbrLib)
         window.pbrsauce = pbrLib
       } else {
@@ -52,7 +57,7 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
           autoGasMultiplier: 1.5,
           testing: false,
           isBsc: false,
-          infuraProvider: config.rpc,
+          infuraProvider: config.ankrEthereumRpc,
           defaultGas: '200',
           defaultGasPrice: '250000',
           accounts: [],
@@ -62,17 +67,16 @@ const PolkaBridgeProvider: React.FC = ({ children }) => {
         window.pbrsauce = pbrLib
         // console.log('using polkabridge lib ', pbrLib)
       }
-    }
-    else {
+    } else {
       // console.log('using non ethereum provider ')
       const chainId = config.chainId
-      const pbrLib = new PolkaBridge(config.rpc, chainId, false, {
+      const pbrLib = new PolkaBridge(config.ankrEthereumRpc, chainId, false, {
         defaultAccount: '0x0000000000000000000000000000000000000000',
         defaultConfirmations: 1,
         autoGasMultiplier: 1.5,
         testing: false,
         isBsc: false,
-        infuraProvider: config.rpc,
+        infuraProvider: config.ankrEthereumRpc,
         defaultGas: '200',
         defaultGasPrice: '250000',
         accounts: [],

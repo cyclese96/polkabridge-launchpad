@@ -1,4 +1,3 @@
-import { Public } from '@material-ui/icons'
 import BigNumber from 'bignumber.js/bignumber'
 
 export const SUBTRACT_GAS_LIMIT = 100000
@@ -80,28 +79,6 @@ export const PUBLIC = 'Public'
 export const PRIVATE = 'Private'
 export const WHITELIST = 'Whitelist'
 export const GUARANTEED = 'Guaranteed'
-
-export const ethereumInfuraTestnetRpc = `https://kovan.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-  '',
-)
-  .reverse()
-  .join('')}`
-export const ethereumInfuraRpc = `https://mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-  '',
-)
-  .reverse()
-  .join('')}`
-
-export const polygonMainnetInfuraRpc = `https://polygon-mainnet.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-  '',
-)
-  .reverse()
-  .join('')}`
-export const polygonTestnetInfuraRpc = `https://polygon-mumbai.infura.io/v3/${process.env.REACT_APP_INFURA_KEY.split(
-  '',
-)
-  .reverse()
-  .join('')}`
 
 export const supportedPools = [
   {
@@ -1360,7 +1337,8 @@ export const supportedPools = [
       56: '0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
+    lpExplorer:
+      'https://bscscan.com/address/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
     name: 'VoiceStreet',
     symbol: 'VST-PBR',
     description: `VST/BNB`,
@@ -1370,7 +1348,8 @@ export const supportedPools = [
     telegram: 'https://t.me/VoiceStreet',
     whitepaper: ' https://voicestreet.org/whitepaper/VoiceStreetwhitepaper.pdf',
     tokenSymbol: 'VST',
-    tokenExplorer: 'https://bscscan.com/token/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
+    tokenExplorer:
+      'https://bscscan.com/token/0xACf34Edcc424128CccC730Bf85CDaceEbCb3eEce',
     icon: '/img/tokens/vst.png',
     totalSupply: '2B VST',
     total: '96.1 BNB', //1BNB=520
@@ -1508,8 +1487,8 @@ export const supportedPools = [
     tokenExplorer: 'https://moonriver.moonscan.io/address/',
     icon: '/img/tokens/alphadex.jpg',
     totalSupply: '120,000,000 ROAR',
-    total: '727.2 MOVR',//110$
-    ratio: 500,//0.22$
+    total: '727.2 MOVR', //110$
+    ratio: 500, //0.22$
     min: 1.26,
     max: 4.98,
     maxTier1: 4.98,
@@ -1601,7 +1580,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/gems.png',
     totalSupply: '10,000,000,000 GEMS',
-    total: '500 BNB',// 1BNB = 400$, 200k$ 
+    total: '500 BNB', // 1BNB = 400$, 200k$
     ratio: 80000, //$0.005
     price: 0.005,
     min: 0,
@@ -1617,7 +1596,7 @@ export const supportedPools = [
     endAt: 1745346411,
     claimAt: 0,
     startDate: 'March, 2022',
-    registerForm: "https://forms.gle/jqadUuQmKhzSrf678"
+    registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
   },
   // {
   //   pid: 50,

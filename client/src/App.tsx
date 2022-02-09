@@ -81,7 +81,7 @@ const Providers: React.FC = ({ children }) => {
       <UseWalletProvider
         chainId={chainId}
         connectors={{
-          walletconnect: { rpcUrl: config.rpc },
+          walletconnect: { rpcUrl: config.ankrEthereumRpc },
         }}
       >
         <PolkaBridgeProvider>
