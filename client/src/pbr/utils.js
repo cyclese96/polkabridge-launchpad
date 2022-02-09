@@ -893,18 +893,22 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? config.hmy_rpc_mainnet
-        : config.hmy_rpc_testnet
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
-        : new Web3.providers.HttpProvider(config.ankrBscRpc)
+        : currentConnection === 'mainnet'
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
-        : new Web3.providers.HttpProvider('')
+        : currentConnection === 'mainnet'
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else {
     rpc =
       nativeNetwork === network

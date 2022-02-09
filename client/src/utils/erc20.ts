@@ -7,9 +7,9 @@ import ERC20ABI from '../constants/abi/ERC20.json'
 import config from '../config'
 
 export const getContract = (provider: any, address: string) => {
-  const web3 = new Web3(provider as any || config.rpc)
+  const web3 = new Web3((provider as any) || config.ankrEthereumRpc)
   const contract = new web3.eth.Contract(
-    (ERC20ABI.abi as unknown) as AbiItem,
+    ERC20ABI.abi as unknown as AbiItem,
     address,
   )
   return contract
@@ -63,13 +63,11 @@ export const getBalance = async (
 
 export const getTotalSupply = async (
   provider: provider,
-  tokenAddress: string
+  tokenAddress: string,
 ): Promise<string> => {
   const lpContract = getContract(provider, tokenAddress)
   try {
-    const totalSupply: string = await lpContract.methods
-      .totalSupply()
-      .call()
+    const totalSupply: string = await lpContract.methods.totalSupply().call()
     return totalSupply
   } catch (e) {
     return '0'
