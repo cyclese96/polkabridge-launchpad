@@ -1323,7 +1323,7 @@ export const supportedPools = [
     registerForm: 'https://forms.gle/aX3kfJxyDCsAwEsY7',
   },
   {
-    pid: 27,
+    pid: 26,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1370,51 +1370,98 @@ export const supportedPools = [
     harvestDistribution: [100],
     registerForm: 'https://forms.gle/jZi9LynDxgdeJZ9TA',
   },
-
-  // {
-  //   pid: 28,
-  //   poolId: 1,
-  //   lpAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   tokenAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   lpExplorer: 'https://bscscan.com/address',
-  //   name: 'Gofungibles',
-  //   symbol: 'GFTS-PBR',
-  //   description: `GFTS/BNB`,
-  //   introduce: `GoFungibles is a gamer’s focused platform. It’s a prodigious blend of a play-to-earn multiplayer mobile runner game Metarun with NFT assets, amazing graphics, and conventional gameplay mechanisms that promote actual user interaction and an NFT marketplace with conventional and gamer-focused features.`,
-  //   website: 'https://gofungibles.com//',
-  //   twitter: 'https://twitter.com/gofungibles',
-  //   telegram: 'https://t.me/gofungibles',
-  //   whitepaper:
-  //     'https://gofungibles.com/whitepaper.pdf',
-  //   tokenSymbol: 'GFTS',
-  //   tokenExplorer: 'https://bscscan.com/token',
-  //   icon: '/img/tokens/fungibles.png',
-  //   totalSupply: '1 Billion GFTS',
-  //   total: '83.3 BNB',// 1BNB = 600$
-  //   ratio: 20000, //token price 0.03, 1BNB = 600$
-  //   min: 0.16, //100$
-  //   max: 0.5, //300$
-  //   maxTier1: 0.16, //100$
-  //   maxTier2: 0.33, //200$
-  //   maxTier3: 0.5, //300$
-  //   access: GUARANTEED,
-  //   network: bscNetwork,
-  //   distribution: '10% unlocked at TGE and 30% monthly linear unlocks. ',
-  //   startAt: 1612026000,
-  //   endAt: 1839839600,
-  //   claimAt: 0,
-  //   startDate: 'January, 2022',
-  // },
+  {
+    pid: 27,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: '',
+    name: 'DefiYield Private Sale - ',
+    symbol: 'DEFI-PBR',
+    description: `DEFI/BNB`,
+    introduce: `The DEFIYIELD ecosystem is the best place for anyone to participate in DeFi because it has been built by yield farming experts who want as many people as possible to stay safe and succeed in the Finance 3.0 revolution. Read more at https://blog.defiyield.app/introducing-defiyield-the-safest-and-most-accessible-defi-yield-farming-ecosystem-1c1248c8982a`,
+    website: 'https://defiyield.app/',
+    twitter: 'https://twitter.com/defiyield_app',
+    telegram: 'https://t.me/defiyield_app',
+    whitepaper: 'https://defiyield.app/',
+    tokenSymbol: 'DEFI',
+    tokenExplorer: '',
+    icon: '/img/tokens/defiyield.png',
+    totalSupply: '1,000,000,000 DEFI',
+    price: 0.024,
+    total: '275 BNB', // 1BNB = 400$, 110k$
+    ratio: 1666.6, //0.24$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: 'Vested over 9 months with daily linear unlock at DefiYield portal (will be shared in another announcement)',
+    startAt: 1645106400,
+    endAt: 1645110000,
+    claimAt: 0,
+    startDate: '2PM UTC 17th Feb, 2022',
+    harvestDistribution: [0],
+    registerForm: "https://forms.gle/7FTfZH5XWhifJwBa9"
+  },
+  {
+    pid: 28,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'CloudName',
+    symbol: 'CNAME-PBR',
+    description: `CNAME/BNB`,
+    introduce: `Cloudname is a simple yet powerful tool through which you can discover new domains and find meaningful data of almost every registered domain. Everything comes with a brand new design wrapper by a top-in-class platform.`,
+    website: 'https://cloudname.com/',
+    twitter: 'https://twitter.com/cloudnamecom',
+    telegram: 'https://t.me/cloudnameofficial',
+    whitepaper: 'https://cloudname.com',
+    tokenSymbol: 'CNAME',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/cname.png',
+    totalSupply: '380,000,000 CNAME',
+    price: 0.06,
+    total: '125 BNB', // 1BNB = 400$, 50k$
+    ratio: 6666.6, //0.06$
+    min: 0, //300$
+    max: 0, //500$
+    maxTier1: 0, //300$
+    maxTier2: 0, //400$
+    maxTier3: 0, //500$
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '100% at TGE',
+    startAt: 1645365600,
+    endAt: 1645369200,
+    claimAt: 1645538400,
+    startDate: '2PM UTC 20th Feb, 2022',
+    harvestDistribution: [100],
+    registerForm: "https://forms.gle/S7r2SRpVizgoH4X49"
+  },
   {
     pid: 29,
     poolId: 1,
