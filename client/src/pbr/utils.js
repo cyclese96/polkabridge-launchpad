@@ -81,6 +81,9 @@ export const getBscLaunchpadContract = (pbr) => {
 }
 
 export const getLaunchpads = (pbr) => {
+  if (!pbr) {
+    return getDefaultLaunchpads()
+  }
   return pbr
     ? pbr.contracts.pools.map(
         ({
