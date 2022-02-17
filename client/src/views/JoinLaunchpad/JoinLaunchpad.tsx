@@ -9,7 +9,7 @@ import useLaunchpad from '../../hooks/useLaunchpad'
 import useModal from '../../hooks/useModal'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import { BigNumber } from '../../pbr'
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha'
 import {
   getProgress,
   getHistory,
@@ -22,7 +22,7 @@ import {
   formatFloatValue,
   getPoolClaimTimeArr,
   verifyCaptcha,
-  getMaxAllocation
+  getMaxAllocation,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -128,7 +128,7 @@ const JoinLaunchpad: React.FC = () => {
   const [progress, setProgress] = useState<BigNumber>()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('0')
-  const [tokenValue, setTokenValue] = useState('')//max output purchase token based on the ratio
+  const [tokenValue, setTokenValue] = useState('') //max output purchase token based on the ratio
   const [pendingTx, setPendingTx] = useState(false)
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
   const [successTx, setSuccessTx] = useState(false)
@@ -147,7 +147,7 @@ const JoinLaunchpad: React.FC = () => {
   const { onJoinPool } = useJoinPool()
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
-  const [maxGuaranteed, setMaxGuaranteed] = useState('0');
+  const [maxGuaranteed, setMaxGuaranteed] = useState('0')
   // const [dataLoading, setDataLoading] = useState({ state: false, message: '' });
 
   const [captchaVerified, setCaptchaVerified] = useState(false)
@@ -178,22 +178,21 @@ const JoinLaunchpad: React.FC = () => {
 
   const parseTokenPurchased = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
-    return fromWei(_userInfoObject?.userInfo?.[1]);
-
+    return fromWei(_userInfoObject?.userInfo?.[1])
   }
 
   const parseNumberClaimed = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
     return _userInfoObject?.harvestInfo?.NumberClaimed
   }
 
   const parsePercentClaimed = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
 
     return _userInfoObject.userInfo ? _userInfoObject.userInfo[3] : 0
@@ -211,9 +210,14 @@ const JoinLaunchpad: React.FC = () => {
 
       if (access === GUARANTEED) {
         // fetch max allocation for guaranteed pools
-        const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
+        const _max = await getMaxAllocation(
+          lpAddress,
+          currentPoolId(pid, network),
+          access,
+          account,
+          network,
+        )
         setMaxGuaranteed(fromWei(_max))
-
       }
 
       const [
@@ -251,9 +255,15 @@ const JoinLaunchpad: React.FC = () => {
           network,
         ),
         getUserStakingData(account, network),
-        getUserInfo(lpAddress, currentPoolId(pid, network), access, account, network),
+        getUserInfo(
+          lpAddress,
+          currentPoolId(pid, network),
+          access,
+          account,
+          network,
+        ),
       ])
-      setLoading(false);
+      setLoading(false)
       // setDataLoading({ state: false, message: "" });
 
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
@@ -364,13 +374,12 @@ const JoinLaunchpad: React.FC = () => {
     return maxValue
   }
 
-
   const onMax = useCallback(async () => {
     let _max = 0
     if (access === WHITELIST) {
       _max = maxWhitelistPurchase
     } else if (access === GUARANTEED) {
-      _max = Number(maxGuaranteed);
+      _max = Number(maxGuaranteed)
     } else {
       _max = access === 'Public' ? maxTier2 : getMaxValue()
     }
@@ -385,7 +394,6 @@ const JoinLaunchpad: React.FC = () => {
     // console.log({ value1: new BigNumber(newTokenValue).toFixed(3).toString(), value2: new BigNumber(tokenPurchased).toFixed(3).toString() })
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
-
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -393,92 +401,91 @@ const JoinLaunchpad: React.FC = () => {
 
     //time check
     if (endAt * 1000 <= new Date().getTime()) {
-      return "Ended";
+      return 'Ended'
     }
 
     if (pendingTx) {
-      return 'Pending Confirmation';
+      return 'Pending Confirmation'
     }
 
-
-    if (access === 'Private' && new BigNumber(stakedAmount).lt(tierConditions.maxTier1.min)) {
-      return 'You have not participated in the staking';
+    if (
+      access === 'Private' &&
+      new BigNumber(stakedAmount).lt(tierConditions.maxTier1.min)
+    ) {
+      return 'You have not participated in the staking'
     }
 
     if (!isWhitelist) {
-
       return startAt * 1000 <= new Date().getTime()
         ? 'You are not whitelisted'
-        : 'Pool not started yet';
-
+        : 'Pool not started yet'
     }
 
-
     if (startAt * 1000 <= new Date().getTime()) {
-
       if (access === 'Whitelist') {
-
-        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= maxWhitelistPurchase
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+        return parseFloat(ethValue) > 0 &&
+          parseFloat(ethValue) <= maxWhitelistPurchase
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
-
       } else if (access === 'Public') {
-
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${_max}  ${networkSymbol(network)}`
-
       } else if (access === GUARANTEED) {
-
-        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= Number(maxGuaranteed)
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+        return parseFloat(ethValue) > 0 &&
+          parseFloat(ethValue) <= Number(maxGuaranteed)
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${maxGuaranteed}  ${networkSymbol(network)}`
-
       } else {
-
         return parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-          : `Min: ${min}   ${networkSymbol(network)}   - Max:  ${_max}  ${networkSymbol(network)}`
-
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already purchased'
+            : 'Join pool'
+          : `Min: ${min}   ${networkSymbol(
+              network,
+            )}   - Max:  ${_max}  ${networkSymbol(network)}`
       }
-
     } else {
-      return progress == new BigNumber('100')
-        ? 'Ended'
-        : undefined
+      return progress == new BigNumber('100') ? 'Ended' : undefined
     }
   }
 
   const isButtonDisable = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
-    const flag1 = startAt * 1000 > new Date().getTime() ||
+    const flag1 =
+      startAt * 1000 > new Date().getTime() ||
       endAt * 1000 <= new Date().getTime() ||
       !isWhitelist ||
       progress == new BigNumber('100') ||
       pendingTx ||
       !ethValue ||
       !tokenValue ||
-      isEqual(tokenPurchased, tokenValue);
+      isEqual(tokenPurchased, tokenValue)
 
     if (access === 'Whitelist') {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > maxWhitelistPurchase);
-
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > maxWhitelistPurchase
+      )
     } else if (access === 'Public') {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max);
-
+      return flag1 || parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max
     } else if (access === GUARANTEED) {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > Number(maxGuaranteed));
-
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > Number(maxGuaranteed)
+      )
     } else {
-
-      return flag1 || (parseFloat(ethValue) < min || parseFloat(ethValue) > _max);
-
+      return flag1 || parseFloat(ethValue) < min || parseFloat(ethValue) > _max
     }
-
   }
 
   const reset = useCallback(async () => {
@@ -681,6 +688,33 @@ const JoinLaunchpad: React.FC = () => {
         subtitle={tokenAddress}
       />
 
+      <div className="d-flex justify-content-center w-100 mb-3">
+        <div
+          className="text-center d-flex justify-content-center"
+          style={{
+            width: 'fit-content',
+            border: '1px solid #757575',
+            borderRadius: 5,
+            paddingTop: 10,
+            paddingBottom: 10,
+          }}
+        >
+          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+            <p style={{ color: '#bdbdbd' }}>Tokens Purchased</p>
+            <h6 style={{ color: 'yellow', marginTop: 4 }}>3232</h6>
+          </div>
+          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+            {' '}
+            <p style={{ color: '#bdbdbd' }}>Amount (USDT)</p>
+            <h6 style={{ color: 'yellow', marginTop: 4 }}>400$</h6>
+          </div>
+          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+            {' '}
+            <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
+            <h6 style={{ color: 'yellow', marginTop: 4 }}>12%</h6>
+          </div>
+        </div>
+      </div>
       <StyledLaunchpad>
         <ModalSuccessHarvest
           loading={loading}
@@ -712,7 +746,6 @@ const JoinLaunchpad: React.FC = () => {
               )}
             </StyledBox>
           </StyledInfo>
-
           {access === 'Private' && (
             <StyledBox className="col-10">
               <StyledCenterRow>
@@ -721,7 +754,8 @@ const JoinLaunchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount?.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Your max purchase: {getMaxValue() + ' ' + networkSymbol(network)}
+                  Your max purchase:{' '}
+                  {getMaxValue() + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -735,12 +769,12 @@ const JoinLaunchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel> */}
                 <StyledInfoLabel>
-                  Your Allocation: {maxGuaranteed + ' ' + networkSymbol(network)}
+                  Your Allocation:{' '}
+                  {maxGuaranteed + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
           )}
-
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
@@ -767,7 +801,9 @@ const JoinLaunchpad: React.FC = () => {
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
-                        <StyledTokenSymbol>{networkSymbol(network)}</StyledTokenSymbol>
+                        <StyledTokenSymbol>
+                          {networkSymbol(network)}
+                        </StyledTokenSymbol>
                       </StyledTokenGroup>
                     </StyledRow>
                   </StyledInputRow>
@@ -837,7 +873,6 @@ const JoinLaunchpad: React.FC = () => {
                 ) : (
                   <Button
                     disabled={isButtonDisable()}
-
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
                         setPendingTx(true)
@@ -863,25 +898,25 @@ const JoinLaunchpad: React.FC = () => {
                       }
                     }}
                   >
-                    <div className='d-flex flex-column justify-content-around'>
+                    <div className="d-flex flex-column justify-content-around">
                       <div style={{ paddingRight: 10 }}>
-                        {getJoinButtonText()}</div>
+                        {getJoinButtonText()}
+                      </div>
                       <div style={{ color: '#ffee58' }}>
                         {startAt * 1000 > new Date().getTime() && (
                           <Countdown
                             date={new Date(startAt * 1000)}
                             renderer={renderer}
                           />
-                        )}</div>
+                        )}
+                      </div>
                     </div>
-
                   </Button>
                 )}
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
-
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
@@ -921,20 +956,20 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
                 <Button
                   disabled={
-                    purchasedAmount <= 0 
-                    || recentClaimTime * 1000 > new Date().getTime() 
-                    || pendingHarvestTx 
-                    || new BigNumber(percentClaimed).gte(100) 
-                    || claimAt === 0
+                    purchasedAmount <= 0 ||
+                    recentClaimTime * 1000 > new Date().getTime() ||
+                    pendingHarvestTx ||
+                    new BigNumber(percentClaimed).gte(100) ||
+                    claimAt === 0
                   }
                   text={
                     pendingHarvestTx
                       ? 'Pending Confirmation'
                       : recentClaimTime * 1000 <= new Date().getTime()
-                        ? new BigNumber(percentClaimed).gte(100)
-                          ? 'Already claimed'
-                          : 'Harvest'
-                        : undefined
+                      ? new BigNumber(percentClaimed).gte(100)
+                        ? 'Already claimed'
+                        : 'Harvest'
+                      : undefined
                   }
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
@@ -967,7 +1002,7 @@ const JoinLaunchpad: React.FC = () => {
                 </Button>
                 <StyledCenterRow>
                   {claimAt * 1000 > new Date().getTime() ||
-                    new BigNumber(tokenPurchased).lte(0) ? (
+                  new BigNumber(tokenPurchased).lte(0) ? (
                     ''
                   ) : (
                     <StyledInfoLabel className="mt-4">
@@ -980,7 +1015,6 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
-
           {!!history.length && (
             <>
               <StyledInfoSolid>
