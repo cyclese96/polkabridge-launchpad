@@ -688,33 +688,6 @@ const JoinLaunchpad: React.FC = () => {
         subtitle={tokenAddress}
       />
 
-      <div className="d-flex justify-content-center w-100 mb-3">
-        <div
-          className="text-center d-flex justify-content-center"
-          style={{
-            width: 'fit-content',
-            border: '1px solid #757575',
-            borderRadius: 5,
-            paddingTop: 10,
-            paddingBottom: 10,
-          }}
-        >
-          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-            <p style={{ color: '#bdbdbd' }}>Tokens Purchased</p>
-            <h6 style={{ color: 'yellow', marginTop: 4 }}>3232</h6>
-          </div>
-          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-            {' '}
-            <p style={{ color: '#bdbdbd' }}>Amount (USDT)</p>
-            <h6 style={{ color: 'yellow', marginTop: 4 }}>400$</h6>
-          </div>
-          <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-            {' '}
-            <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
-            <h6 style={{ color: 'yellow', marginTop: 4 }}>12%</h6>
-          </div>
-        </div>
-      </div>
       <StyledLaunchpad>
         <ModalSuccessHarvest
           loading={loading}
@@ -1048,6 +1021,44 @@ const JoinLaunchpad: React.FC = () => {
             </>
           )}
         </StyledInfoWrap>
+        <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+          <h6 style={{ color: 'white', textAlign: 'center', fontWeight: 600 }}>
+            Purchase History
+          </h6>
+          <div className="d-flex justify-content-center w-100 mb-3">
+            <div
+              className="text-center d-flex justify-content-center"
+              style={{
+                width: 'fit-content',
+                border: '1px solid #454545',
+                borderRadius: 5,
+                paddingTop: 10,
+                paddingBottom: 10,
+              }}
+            >
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                <p style={{ color: '#bdbdbd' }}>Tokens Purchased</p>
+                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
+                  3232
+                </h6>
+              </div>
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                {' '}
+                <p style={{ color: '#bdbdbd' }}>Amount (USDT)</p>
+                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
+                  400$
+                </h6>
+              </div>
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                {' '}
+                <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
+                <h6 style={{ color: '#90EE90', fontWeight: 600, marginTop: 4 }}>
+                  +12%
+                </h6>
+              </div>
+            </div>
+          </div>
+        </div>
       </StyledLaunchpad>
     </>
   )
