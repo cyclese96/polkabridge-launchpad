@@ -114,20 +114,8 @@ const Nav: React.FC<NavProp> = ({ showMenu }) => {
         Lending
         <DotCircle />
       </StyledAbsoluteLink>
-      <StyledAbsoluteLink
-        href="https://prediction.polkabridge.org"
-        className={classes.navbarItemsDesktop}
-      >
-        Prediction
-        <DotCircle />
-      </StyledAbsoluteLink>
-      <StyledAbsoluteLink
-        href="https://corgib.polkabridge.org/bet"
-        className={classes.navbarItemsDesktop}
-      >
-        Betting
-        <DotCircle />
-      </StyledAbsoluteLink>
+     
+     
     </StyledNav>
   )
 }
