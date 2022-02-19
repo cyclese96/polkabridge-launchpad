@@ -1475,37 +1475,39 @@ export const supportedPools = [
     tokenAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xA41eE9a01fd417c372B318746d8891c0C240A73c',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address',
-    name: 'MeMusic',
-    symbol: 'MUSIC-PBR',
-    description: `MUSIC/BNB`,
-    introduce: `Memusic is a blockchain-based platform to provide an inclusive ecosystem through a multitude of services.`,
-    website: 'https://memusic.io/',
-    twitter: 'https://twitter.com/MeMusicNews',
-    telegram: 'https://t.me/memusic_official',
-    whitepaper: 'https://memusic.io/#',
-    tokenSymbol: 'MUSIC',
-    tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/memusic.png',
-    totalSupply: '100,000,000 MUSIC',
-    price: 0.1,
-    total: '166.6 BNB', // 1BNB = 600$, 100k$
-    ratio: 10909, //0.055$
-    min: 0.46, //300$
-    max: 0.76, //500$
-    maxTier1: 0.46, //300$
-    maxTier2: 0.61, //400$
-    maxTier3: 0.76, //500$
+    lpExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    name: 'Endless Battlefield',
+    symbol: 'EB-PBR',
+    description: `EB/BNB`,
+    introduce: `Endless Battlefield, abbreviated as EB, is a military strategy and exploration sandbox metaverse built on Unreal Engine. Using planets as the map, it provides multiple modes to fulfill the needs of different players such as collection module, hunting and fishing module, face-squeezing module, building module. The game supports intensive FPS/TPS modes which allows competitive players to enjoy the experience of galloping over the battlefield and conquering the military points. The Metaverse also creates immersive environments for casual players, allowing them to harvest, mine, lumber, fish, hunt and craft tools.It also includes various FPS competitive game play methods to satisfy competitive players.Aiming to build a rich and entertaining metaverse, EB also introduces unique Alliance System, Construction System, Homeland System and Trading System`,
+    website: 'https://ebgame.io/',
+    twitter: 'https://twitter.com/EBMetaverse',
+    telegram: 'https://t.me/ebgame_global',
+    whitepaper: 'https://ebgame.io/files/EndlessBattlefield_Introduction.V2.7.en.pdf?v=1',
+    tokenSymbol: 'EB',
+    tokenExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    icon: '/img/tokens/eb.JPG',
+    totalSupply: '1,000,000,000 EB',
+    price: 0.2,
+    total: '125 BNB', // 1BNB = 400$, 50k$
+    ratio: 2000, //0.2$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution: '20% TGE, 20% per month in next 4 months',
-    startAt: 1648806287,
-    endAt: 1648806287,
-    claimAt: 0,
-    startDate: 'March, 2022',
+    distribution: '25% at TGE, 75% will release in 4 months with 18,75% per month',
+    startAt: 1645624800,
+    endAt: 1645628400,
+    claimAt: 1645804800,
+    startDate: '2PM UTC 23rd Feb, 2022',
+    harvestDistribution: [25, 18.75, 18.75, 18.75, 18.75],
+    registerForm: "https://forms.gle/TpHeTFzW2GnLBWfdA"
   },
   {
     pid: 30,
@@ -1600,8 +1602,9 @@ export const supportedPools = [
     harvestDistribution: [25, 25, 25, 25],
     registerForm: 'https://forms.gle/6VvBTPWzv8g5g1so8',
   },
+
   {
-    pid: 32,
+    pid: 50,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1645,6 +1648,50 @@ export const supportedPools = [
     claimAt: 0,
     startDate: 'March, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
+  },
+  {
+    pid: 51,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'MeMusic',
+    symbol: 'MUSIC-PBR',
+    description: `MUSIC/BNB`,
+    introduce: `Memusic is a blockchain-based platform to provide an inclusive ecosystem through a multitude of services.`,
+    website: 'https://memusic.io/',
+    twitter: 'https://twitter.com/MeMusicNews',
+    telegram: 'https://t.me/memusic_official',
+    whitepaper: 'https://memusic.io/#',
+    tokenSymbol: 'MUSIC',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/memusic.png',
+    totalSupply: '100,000,000 MUSIC',
+    price: 0.1,
+    total: '166.6 BNB', // 1BNB = 600$, 100k$
+    ratio: 10909, //0.055$
+    min: 0.46, //300$
+    max: 0.76, //500$
+    maxTier1: 0.46, //300$
+    maxTier2: 0.61, //400$
+    maxTier3: 0.76, //500$
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '20% TGE, 20% per month in next 4 months',
+    startAt: 1648806287,
+    endAt: 1648806287,
+    claimAt: 0,
+    startDate: 'March, 2022',
   },
   // {
   //   pid: 50,
