@@ -183,9 +183,12 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
                 <img src={launchpad.icon} alt="" height="60" />
               </CardIcon>
             </div>
-            <StyledTitle>
-              {launchpad.name} {launchpad.access}
-            </StyledTitle>
+            <StyledTitle>{launchpad.name}</StyledTitle>
+            <StyledTitle2>
+              <span style={{ color: '#ff3465' }}>
+                <b>{launchpad.access}</b>
+              </span>
+            </StyledTitle2>
             {/* <StyledDetails>
               <StyledDetail>{launchpad.description}</StyledDetail>
             </StyledDetails> */}
@@ -429,10 +432,19 @@ const StyledTitle = styled.h4`
   padding: 0;
 `
 
+const StyledTitle2 = styled.h4`
+  color: ${(props) => props.theme.color.white};
+  font-size: 16px;
+  font-weight: 700;
+  margin: ${(props) => props.theme.spacing[2]}px 0 0;
+  padding: 0;
+`
+
 const StyledContent = styled.div`
-  align-items: center;
   display: flex;
   flex-direction: column;
+  align-items: center;
+  justify-content-center;
 `
 const StyledTopIcon = styled.div`
   // position: relative;
