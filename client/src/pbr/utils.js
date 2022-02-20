@@ -86,76 +86,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-        ({
-          pid,
-          name,
-          symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }) => ({
-          pid,
-          name,
-          id: symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }),
-      )
+      ({
+        pid,
+        name,
+        symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }) => ({
+        pid,
+        name,
+        id: symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }),
+    )
     : []
 }
 
@@ -816,6 +816,7 @@ const abiMapping = {
   '0xc479b7909dd33fb036fda62f66bc3ebbe480c766': launchpadBscAbi3,
   '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483': launchpadBscAbi3,
   '0xa090c395f674f74e1ac71a79769bd33ebaece502': launchpadBscAbi3,
+  '0x39f2e22e971eb1144643bc22d84e039e59768373': launchpadBscAbi3
 }
 
 const getCurrentLaunchpadContract = (
@@ -889,22 +890,22 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.moonriverRpc)
-        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+          ? new Web3.providers.HttpProvider(config.moonriverRpc)
+          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else {
     rpc =
       nativeNetwork === network

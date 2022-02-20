@@ -1423,8 +1423,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
+      56: '0x39f2e22e971eb1144643bc22d84e039e59768373',
+      97: '0x39f2e22e971eb1144643bc22d84e039e59768373',
     },
     tokenAddresses: {
       1: '',
@@ -1446,8 +1446,8 @@ export const supportedPools = [
     icon: '/img/tokens/cname.png',
     totalSupply: '380,000,000 CNAME',
     price: 0.06,
-    total: '125 BNB', // 1BNB = 400$, 50k$
-    ratio: 6666.6, //0.06$
+    total: '135 BNB', // 1BNB = 370$, 50k$
+    ratio: 6166.6, //0.06$
     min: 0, //300$
     max: 0, //500$
     maxTier1: 0, //300$
@@ -1458,7 +1458,7 @@ export const supportedPools = [
     distribution: '100% at TGE',
     startAt: 1645365600,
     endAt: 1645369200,
-    claimAt: 1645538400,
+    claimAt: 1645549200,
     startDate: '2PM UTC 20th Feb, 2022',
     harvestDistribution: [100],
     registerForm: "https://forms.gle/S7r2SRpVizgoH4X49"
