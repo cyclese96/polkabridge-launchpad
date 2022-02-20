@@ -645,7 +645,12 @@ export const getUserStakingData = async (account, network) => {
       currentConnection === 'mainnet'
         ? stakeContractAddresses.ethereum[1]
         : stakeContractAddresses.ethereum[42]
-    const stakeContract = getContractInstance(abi, address, 'ethereum', network)
+    const stakeContract = getContractInstance(
+      abi,
+      address,
+      'ethereum',
+      'public',
+    )
 
     const addressMatic =
       currentConnection === 'mainnet'
@@ -655,7 +660,7 @@ export const getUserStakingData = async (account, network) => {
       abi,
       addressMatic,
       'polygon',
-      network,
+      'public',
     )
 
     const [stakedDataEth, stakedDataPoly] = await Promise.all([
@@ -705,17 +710,22 @@ export const getUserInfo = async (lpAddress, pid, access, account, network) => {
   }
 }
 
-export const getPurchaseStats = async (pid, purchasedToken, ratio, network) => {
+export const getPurchaseStats = async (
+  tokenName,
+  purchasedToken,
+  ratio,
+  network,
+) => {
   const stats = { amountUsd: 0, profit: 0 }
   try {
-    const tokenId = getTokenId(pid, network)
+    const tokenId = getTokenId(tokenName, network)
 
     const [tokenCurrentPrice, nativeTokenPrice] = await Promise.all([
       tokenId ? getTokenPriceFromCoinGecko(network, tokenId) : 0,
       getTokenPriceFromCoinGecko(network),
     ])
 
-    const tokenCurrentUsdValue = new BigNumber(tokenCurrentPrice)
+    const tokenCurrentUsdValue = new BigNumber(purchasedToken)
       .times(tokenCurrentPrice)
       .toFixed(4)
       .toString()
@@ -868,42 +878,6 @@ const getCurrentLaunchpadContract = (
   )
 
   return _lpContract
-
-  // console.log('ethTest: ', { lpAddress, lpNetwork, currentNetwork, check: Object.keys(abiMapping).includes(lpAddress) })
-  // if (currentNetwork === bscNetwork) {
-
-  // } else if (currentNetwork === harmonyNetwork) {
-  //   const _hmyContract = getContractInstance(
-  //     LaunchpadAbi,
-  //     lpAddress,
-  //     lpNetwork,
-  //     currentNetwork,
-  //   )
-
-  //   return _hmyContract
-  // } else if (currentNetwork === polygonNetwork) {
-  //   const _polygonContract = getContractInstance(
-  //     LaunchpadAbi,
-  //     lpAddress,
-  //     lpNetwork,
-  //     currentNetwork,
-  //   )
-
-  //   return _polygonContract
-  // } else {
-  //   const abi = Object.keys(abiMapping).includes(lpAddress)
-  //     ? abiMapping[lpAddress]
-  //     : abiMapping[access]
-
-  //   const _lpContract = getContractInstance(
-  //     abi,
-  //     lpAddress,
-  //     lpNetwork,
-  //     currentNetwork,
-  //   )
-
-  //   return _lpContract
-  // }
 }
 
 const getWeb3Provider = (network, nativeNetwork) => {
@@ -914,7 +888,6 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : new Web3.providers.HttpProvider(config.ankrPolygonRpc)
-    // rpc = new Web3.providers.HttpProvider(process.env.REACT_APP_POLYGON_TESTNET_NODE)
   } else if (network === harmonyNetwork) {
     rpc =
       nativeNetwork === network

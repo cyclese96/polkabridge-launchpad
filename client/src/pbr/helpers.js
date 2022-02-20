@@ -97,9 +97,9 @@ export const getProfit = (initialValue, currentValue) => {
   }
 }
 
-export const getTokenId = (pid, network) => {
+export const getTokenId = (tokenName, network) => {
   const poolObj = supportedPools.find(
-    (item) => item.pid === pid && item.network === network,
+    (item) => item.name === tokenName && item.network === network,
   )
 
   if (!poolObj) {

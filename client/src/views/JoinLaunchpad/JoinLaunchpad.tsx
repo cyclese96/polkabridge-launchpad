@@ -24,6 +24,8 @@ import {
   verifyCaptcha,
   getMaxAllocation,
   getPurchaseStats,
+  formattedNetworkName,
+  getNetworkName,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -44,6 +46,7 @@ import {
   WHITELIST,
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
+import useNetwork from '../../hooks/useNetwork'
 
 interface JoinHistory {
   amount: number
@@ -162,6 +165,8 @@ const JoinLaunchpad: React.FC = () => {
     return _pid
   }
 
+  const { chainId } = useNetwork()
+
   const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
     if (!_userInfoData) {
       return 0
@@ -264,7 +269,7 @@ const JoinLaunchpad: React.FC = () => {
         ),
       ])
       const newPurchaseStats = await getPurchaseStats(
-        currentPoolId(pid, network),
+        name,
         newPurchasedAmount,
         ratio,
         network,
@@ -279,7 +284,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('ethTest: newETHBalance  ', newETHBalance)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
-      console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
+      // console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
       // console.log('ethTest: setStakedAmount   ', stakedTokens)
       // console.log('ethTest: userInfoData--->  ', userInfoData)
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
@@ -850,9 +855,15 @@ const JoinLaunchpad: React.FC = () => {
                     disabled={isButtonDisable()}
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
+                        const _networkName = formattedNetworkName(network)
+
+                        if (getNetworkName(chainId) !== network) {
+                          alert(
+                            `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                          )
+                          return
+                        }
                         setPendingTx(true)
-                        // const token = recaptchaRef?.current.executeAsync();
-                        // console.log('captcha test ', token)
                         var tx: any = await onJoinPool(
                           currentPoolId(pid, network),
                           access,
@@ -948,6 +959,15 @@ const JoinLaunchpad: React.FC = () => {
                   }
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
+                      const _networkName = formattedNetworkName(network)
+
+                      if (getNetworkName(chainId) !== network) {
+                        alert(
+                          `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                        )
+                        return
+                      }
+
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest(
                         currentPoolId(pid, network),
@@ -1054,14 +1074,39 @@ const JoinLaunchpad: React.FC = () => {
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
                 {' '}
                 <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
-                <h6 style={{ color: '#yellow', fontWeight: 600, marginTop: 4 }}>
-                  {purchaseStats
-                    ? new BigNumber(purchaseStats?.profit).eq(0)
-                      ? 'NA'
-                      : purchaseStats?.profit
-                    : 'NA'}
-                  %
-                </h6>
+                {purchaseStats && (
+                  <>
+                    {new BigNumber(purchaseStats?.profit).gt(0) && (
+                      <h6
+                        style={{
+                          color: 'green',
+                          fontWeight: 600,
+                          marginTop: 4,
+                        }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                    {new BigNumber(purchaseStats?.profit).eq(0) && (
+                      <h6
+                        style={{
+                          color: 'yellow',
+                          fontWeight: 600,
+                          marginTop: 4,
+                        }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                    {new BigNumber(purchaseStats?.profit).lt(0) && (
+                      <h6
+                        style={{ color: 'red', fontWeight: 600, marginTop: 4 }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                  </>
+                )}
               </div>
             </div>
           </div>
