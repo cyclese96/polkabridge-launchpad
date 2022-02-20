@@ -1,11 +1,15 @@
 import BigNumber from 'bignumber.js'
+import config from '../config'
 import {
   bscNetwork,
+  ethereumNetwork,
   harmonyNetwork,
   moonriverNetwork,
   polygonNetwork,
   supportedPools,
+  tokenIdMapping,
 } from './lib/constants'
+import axios from 'axios'
 
 export const networkSymbol = (network) => {
   if (network === bscNetwork) {
@@ -69,4 +73,65 @@ export const getTokenPrice = (pid, network) => {
   }
 
   return poolObj?.price
+}
+
+export const getProfit = (initialValue, currentValue) => {
+  try {
+    if (new BigNumber(currentValue).eq(0)) {
+      return '0'
+    }
+
+    if (new BigNumber(initialValue).eq(0)) {
+      return '0'
+    }
+
+    const profit = new BigNumber(currentValue)
+      .minus(initialValue)
+      .multipliedBy(100)
+      .div(initialValue)
+      .toFixed(2)
+      .toString()
+    return profit
+  } catch (error) {
+    return 0
+  }
+}
+
+export const getTokenId = (tokenName, network) => {
+  const poolObj = supportedPools.find(
+    (item) => item.name === tokenName && item.network === network,
+  )
+
+  if (!poolObj) {
+    return null
+  }
+
+  return poolObj.tokenId ? poolObj.tokenId : poolObj.name.toLowerCase()
+}
+
+export const getTokenPriceFromCoinGecko = async (network, tokenId = null) => {
+  try {
+    if (!network) {
+      return 0
+    }
+
+    if (!Object.keys(tokenIdMapping).includes(network)) {
+      return 0
+    }
+
+    const token_id = tokenId ? tokenId : tokenIdMapping?.[network]
+
+    const priceRes = await axios.get(
+      config.coingecko +
+        `/v3/simple/price?ids=${token_id}&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
+    )
+
+    const priceData = priceRes.data
+    const tokenPrice = priceData?.[token_id] ? priceData[token_id].usd : '0'
+
+    return tokenPrice
+  } catch (error) {
+    console.log('fetchTokenPrice ', { error })
+    return 0
+  }
 }

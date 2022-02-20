@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import Button from '../../components/Button'
@@ -12,7 +12,6 @@ import {
   formattedNetworkName,
   fromWei,
   getMaxAllocation,
-  getNetworkName,
   getProgress,
   getUserStakingData,
 } from '../../pbr/utils'
@@ -20,12 +19,8 @@ import Countdown, { CountdownRenderProps } from 'react-countdown'
 
 import { white } from '../../theme/colors'
 import {
-  bscNetwork,
-  ethereumNetwork,
   getPoolId,
   GUARANTEED,
-  harmonyNetwork,
-  polygonNetwork,
   PRIVATE,
   PUBLIC,
   tierConditions,
@@ -116,7 +111,6 @@ const Launchpad: React.FC = () => {
   const [maxGuaranteed, setMaxGuaranteed] = useState('0')
 
   const history = useHistory()
-  const { chainId } = useNetwork()
 
   const currentPoolId = (pid: number, network: string) => {
     return getPoolId(pid, network)
@@ -168,28 +162,20 @@ const Launchpad: React.FC = () => {
     )
   }
 
-  const showNetworkAlert = () => {
-    const _networkName =
-      network === bscNetwork
-        ? 'Binance Smart Chain'
-        : network === polygonNetwork
-        ? 'Polygon'
-        : 'Ethereum'
-    if (getNetworkName(chainId) !== network) {
-      alert(
-        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-      )
-    }
-  }
+  // const showNetworkAlert = () => {
+  //   const _networkName =
+  //     network === bscNetwork
+  //       ? 'Binance Smart Chain'
+  //       : network === polygonNetwork
+  //       ? 'Polygon'
+  //       : 'Ethereum'
+  //   if (getNetworkName(chainId) !== network) {
+  //     alert(
+  //       `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+  //     )
+  //   }
+  // }
   const handleJoinPool = () => {
-    const _networkName = formattedNetworkName(network)
-
-    if (getNetworkName(chainId) !== network) {
-      alert(
-        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-      )
-      return
-    }
     history.push(`/launchpads/join/${launchpadId}/${poolId}`)
   }
 

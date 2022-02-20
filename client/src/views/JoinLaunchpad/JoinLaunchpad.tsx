@@ -9,7 +9,7 @@ import useLaunchpad from '../../hooks/useLaunchpad'
 import useModal from '../../hooks/useModal'
 import usePolkaBridge from '../../hooks/usePolkaBridge'
 import { BigNumber } from '../../pbr'
-import ReCAPTCHA from "react-google-recaptcha";
+import ReCAPTCHA from 'react-google-recaptcha'
 import {
   getProgress,
   getHistory,
@@ -22,7 +22,10 @@ import {
   formatFloatValue,
   getPoolClaimTimeArr,
   verifyCaptcha,
-  getMaxAllocation
+  getMaxAllocation,
+  getPurchaseStats,
+  formattedNetworkName,
+  getNetworkName,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -43,6 +46,7 @@ import {
   WHITELIST,
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
+import useNetwork from '../../hooks/useNetwork'
 
 interface JoinHistory {
   amount: number
@@ -128,7 +132,7 @@ const JoinLaunchpad: React.FC = () => {
   const [progress, setProgress] = useState<BigNumber>()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('0')
-  const [tokenValue, setTokenValue] = useState('')//max output purchase token based on the ratio
+  const [tokenValue, setTokenValue] = useState('') //max output purchase token based on the ratio
   const [pendingTx, setPendingTx] = useState(false)
   const [pendingHarvestTx, setPendingHarvestTx] = useState(false)
   const [successTx, setSuccessTx] = useState(false)
@@ -136,7 +140,7 @@ const JoinLaunchpad: React.FC = () => {
   const [errorTxt, setErrorTxt] = useState('')
   const [txhash, setTxhash] = useState('')
   const [ethBalance, setETHBalance] = useState(0)
-  const [history, setHistory] = useState<JoinHistory[]>([])
+  // const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
   const [tokenPurchased, setTokenPurchased] = useState('') // token purchase by the user so far
@@ -147,7 +151,8 @@ const JoinLaunchpad: React.FC = () => {
   const { onJoinPool } = useJoinPool()
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
-  const [maxGuaranteed, setMaxGuaranteed] = useState('0');
+  const [maxGuaranteed, setMaxGuaranteed] = useState('0')
+  const [purchaseStats, setPurchaseStats] = useState(null)
   // const [dataLoading, setDataLoading] = useState({ state: false, message: '' });
 
   const [captchaVerified, setCaptchaVerified] = useState(false)
@@ -159,6 +164,8 @@ const JoinLaunchpad: React.FC = () => {
 
     return _pid
   }
+
+  const { chainId } = useNetwork()
 
   const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
     if (!_userInfoData) {
@@ -178,22 +185,21 @@ const JoinLaunchpad: React.FC = () => {
 
   const parseTokenPurchased = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
-    return fromWei(_userInfoObject?.userInfo?.[1]);
-
+    return fromWei(_userInfoObject?.userInfo?.[1])
   }
 
   const parseNumberClaimed = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
     return _userInfoObject?.harvestInfo?.NumberClaimed
   }
 
   const parsePercentClaimed = (_userInfoObject: any) => {
     if (!_userInfoObject) {
-      return '0';
+      return '0'
     }
 
     return _userInfoObject.userInfo ? _userInfoObject.userInfo[3] : 0
@@ -211,15 +217,19 @@ const JoinLaunchpad: React.FC = () => {
 
       if (access === GUARANTEED) {
         // fetch max allocation for guaranteed pools
-        const _max = await getMaxAllocation(lpAddress, currentPoolId(pid, network), access, account, network);
+        const _max = await getMaxAllocation(
+          lpAddress,
+          currentPoolId(pid, network),
+          access,
+          account,
+          network,
+        )
         setMaxGuaranteed(fromWei(_max))
-
       }
 
       const [
         newIsWhitelist,
         newETHBalance,
-        newHistory,
         newProgress,
         newPurchasedAmount,
         stakedTokens,
@@ -234,7 +244,6 @@ const JoinLaunchpad: React.FC = () => {
           network,
         ),
         getETHBalance(ethereum, account),
-        getHistory(account),
         getProgress(
           lpAddress,
           currentPoolId(pid, network),
@@ -251,9 +260,21 @@ const JoinLaunchpad: React.FC = () => {
           network,
         ),
         getUserStakingData(account, network),
-        getUserInfo(lpAddress, currentPoolId(pid, network), access, account, network),
+        getUserInfo(
+          lpAddress,
+          currentPoolId(pid, network),
+          access,
+          account,
+          network,
+        ),
       ])
-      setLoading(false);
+      const newPurchaseStats = await getPurchaseStats(
+        name,
+        newPurchasedAmount,
+        ratio,
+        network,
+      )
+      setLoading(false)
       // setDataLoading({ state: false, message: "" });
 
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
@@ -261,17 +282,15 @@ const JoinLaunchpad: React.FC = () => {
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
       // console.log('ethTest: newETHBalance  ', newETHBalance)
-      // console.log('ethTest newHistory--->  ', newHistory)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
-      // console.log('ethTest: setPurchasedAmount--->  ', newPurchasedAmount)
+      // console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
       // console.log('ethTest: setStakedAmount   ', stakedTokens)
       // console.log('ethTest: userInfoData--->  ', userInfoData)
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
-      setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
@@ -282,6 +301,7 @@ const JoinLaunchpad: React.FC = () => {
       setTotalRewardClaims(
         claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1,
       )
+      setPurchaseStats(newPurchaseStats)
       //set current claimAt time
     }
     if (pid >= 0) {
@@ -301,7 +321,6 @@ const JoinLaunchpad: React.FC = () => {
     totalRewardClaims,
     setIsWhitelist,
     setETHBalance,
-    setHistory,
     setProgress,
     setPurchasedAmount,
     setStakedAmount,
@@ -364,13 +383,12 @@ const JoinLaunchpad: React.FC = () => {
     return maxValue
   }
 
-
   const onMax = useCallback(async () => {
     let _max = 0
     if (access === WHITELIST) {
       _max = maxWhitelistPurchase
     } else if (access === GUARANTEED) {
-      _max = Number(maxGuaranteed);
+      _max = Number(maxGuaranteed)
     } else {
       _max = access === 'Public' ? maxTier2 : getMaxValue()
     }
@@ -385,7 +403,6 @@ const JoinLaunchpad: React.FC = () => {
     // console.log({ value1: new BigNumber(newTokenValue).toFixed(3).toString(), value2: new BigNumber(tokenPurchased).toFixed(3).toString() })
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
-
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -393,97 +410,96 @@ const JoinLaunchpad: React.FC = () => {
 
     //time check
     if (endAt * 1000 <= new Date().getTime()) {
-      return "Ended";
+      return 'Ended'
     }
 
     if (pendingTx) {
-      return 'Pending Confirmation';
+      return 'Pending Confirmation'
     }
 
-
-    if (access === 'Private' && new BigNumber(stakedAmount).lt(tierConditions.maxTier1.min)) {
-      return 'You have not participated in the staking';
+    if (
+      access === 'Private' &&
+      new BigNumber(stakedAmount).lt(tierConditions.maxTier1.min)
+    ) {
+      return 'You have not participated in the staking'
     }
 
     if (!isWhitelist) {
-
       return startAt * 1000 <= new Date().getTime()
         ? 'You are not whitelisted'
-        : 'Pool not started yet';
-
+        : 'Pool not started yet'
     }
 
-
     if (startAt * 1000 <= new Date().getTime()) {
-
       if (access === 'Whitelist') {
-
-        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= maxWhitelistPurchase
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+        return parseFloat(ethValue) > 0 &&
+          parseFloat(ethValue) <= maxWhitelistPurchase
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
-
       } else if (access === 'Public') {
-
         return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${_max}  ${networkSymbol(network)}`
-
       } else if (access === GUARANTEED) {
-
-        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= Number(maxGuaranteed)
-          ? isEqual(tokenPurchased, tokenValue) ? "Already Purchased" : 'Join Pool'
+        return parseFloat(ethValue) > 0 &&
+          parseFloat(ethValue) <= Number(maxGuaranteed)
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already Purchased'
+            : 'Join Pool'
           : `Max:  ${maxGuaranteed}  ${networkSymbol(network)}`
-
       } else {
-
         return parseFloat(ethValue) >= min && parseFloat(ethValue) <= _max
-          ? isEqual(tokenPurchased, tokenValue) ? "Already purchased" : 'Join pool'
-          : `Min: ${min}   ${networkSymbol(network)}   - Max:  ${_max}  ${networkSymbol(network)}`
-
+          ? isEqual(tokenPurchased, tokenValue)
+            ? 'Already purchased'
+            : 'Join pool'
+          : `Min: ${min}   ${networkSymbol(
+              network,
+            )}   - Max:  ${_max}  ${networkSymbol(network)}`
       }
-
     } else {
-      return progress == new BigNumber('100')
-        ? 'Ended'
-        : undefined
+      return progress == new BigNumber('100') ? 'Ended' : undefined
     }
   }
 
   const isButtonDisable = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
-    const flag1 = startAt * 1000 > new Date().getTime() ||
+    const flag1 =
+      startAt * 1000 > new Date().getTime() ||
       endAt * 1000 <= new Date().getTime() ||
       !isWhitelist ||
       progress == new BigNumber('100') ||
       pendingTx ||
       !ethValue ||
       !tokenValue ||
-      isEqual(tokenPurchased, tokenValue);
+      isEqual(tokenPurchased, tokenValue)
 
     if (access === 'Whitelist') {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > maxWhitelistPurchase);
-
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > maxWhitelistPurchase
+      )
     } else if (access === 'Public') {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max);
-
+      return flag1 || parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max
     } else if (access === GUARANTEED) {
-
-      return flag1 || (parseFloat(ethValue) <= 0 || parseFloat(ethValue) > Number(maxGuaranteed));
-
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > Number(maxGuaranteed)
+      )
     } else {
-
-      return flag1 || (parseFloat(ethValue) < min || parseFloat(ethValue) > _max);
-
+      return flag1 || parseFloat(ethValue) < min || parseFloat(ethValue) > _max
     }
-
   }
 
   const reset = useCallback(async () => {
     const newETHBalance = await getETHBalance(ethereum, account)
-    const newHistory = await getHistory(account)
+    // const newHistory = await getHistory(account)
     const newProgress = await getProgress(
       lpAddress,
       currentPoolId(pid, network),
@@ -506,7 +522,6 @@ const JoinLaunchpad: React.FC = () => {
     )
 
     setETHBalance(newETHBalance)
-    setHistory(newHistory)
     setProgress(newProgress)
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
@@ -521,7 +536,6 @@ const JoinLaunchpad: React.FC = () => {
     lpContract,
     pid,
     setETHBalance,
-    setHistory,
     setProgress,
     setPurchasedAmount,
     setTokenValue,
@@ -712,7 +726,6 @@ const JoinLaunchpad: React.FC = () => {
               )}
             </StyledBox>
           </StyledInfo>
-
           {access === 'Private' && (
             <StyledBox className="col-10">
               <StyledCenterRow>
@@ -721,7 +734,8 @@ const JoinLaunchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount?.toString())) + ' PBR'}
                 </StyledInfoLabel>
                 <StyledInfoLabel>
-                  Your max purchase: {getMaxValue() + ' ' + networkSymbol(network)}
+                  Your max purchase:{' '}
+                  {getMaxValue() + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
@@ -735,12 +749,12 @@ const JoinLaunchpad: React.FC = () => {
                   {formatFloatValue(fromWei(stakedAmount.toString())) + ' PBR'}
                 </StyledInfoLabel> */}
                 <StyledInfoLabel>
-                  Your Allocation: {maxGuaranteed + ' ' + networkSymbol(network)}
+                  Your Allocation:{' '}
+                  {maxGuaranteed + ' ' + networkSymbol(network)}
                 </StyledInfoLabel>
               </StyledCenterRow>
             </StyledBox>
           )}
-
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
@@ -767,7 +781,9 @@ const JoinLaunchpad: React.FC = () => {
                             alt="icon"
                           ></StyledTokenIcon>
                         </StyledTokenIconWrap>
-                        <StyledTokenSymbol>{networkSymbol(network)}</StyledTokenSymbol>
+                        <StyledTokenSymbol>
+                          {networkSymbol(network)}
+                        </StyledTokenSymbol>
                       </StyledTokenGroup>
                     </StyledRow>
                   </StyledInputRow>
@@ -837,12 +853,17 @@ const JoinLaunchpad: React.FC = () => {
                 ) : (
                   <Button
                     disabled={isButtonDisable()}
-
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
+                        const _networkName = formattedNetworkName(network)
+
+                        if (getNetworkName(chainId) !== network) {
+                          alert(
+                            `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                          )
+                          return
+                        }
                         setPendingTx(true)
-                        // const token = recaptchaRef?.current.executeAsync();
-                        // console.log('captcha test ', token)
                         var tx: any = await onJoinPool(
                           currentPoolId(pid, network),
                           access,
@@ -863,25 +884,25 @@ const JoinLaunchpad: React.FC = () => {
                       }
                     }}
                   >
-                    <div className='d-flex flex-column justify-content-around'>
+                    <div className="d-flex flex-column justify-content-around">
                       <div style={{ paddingRight: 10 }}>
-                        {getJoinButtonText()}</div>
+                        {getJoinButtonText()}
+                      </div>
                       <div style={{ color: '#ffee58' }}>
                         {startAt * 1000 > new Date().getTime() && (
                           <Countdown
                             date={new Date(startAt * 1000)}
                             renderer={renderer}
                           />
-                        )}</div>
+                        )}
+                      </div>
                     </div>
-
                   </Button>
                 )}
               </StyledSwapWrap>
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
-
           <StyledInfoSolid>
             <StyledBox className="col-10">
               <StyledSwapWrap>
@@ -921,23 +942,32 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
                 <Button
                   disabled={
-                    purchasedAmount <= 0 
-                    || recentClaimTime * 1000 > new Date().getTime() 
-                    || pendingHarvestTx 
-                    || new BigNumber(percentClaimed).gte(100) 
-                    || claimAt === 0
+                    purchasedAmount <= 0 ||
+                    recentClaimTime * 1000 > new Date().getTime() ||
+                    pendingHarvestTx ||
+                    new BigNumber(percentClaimed).gte(100) ||
+                    claimAt === 0
                   }
                   text={
                     pendingHarvestTx
                       ? 'Pending Confirmation'
                       : recentClaimTime * 1000 <= new Date().getTime()
-                        ? new BigNumber(percentClaimed).gte(100)
-                          ? 'Already claimed'
-                          : 'Harvest'
-                        : undefined
+                      ? new BigNumber(percentClaimed).gte(100)
+                        ? 'Already claimed'
+                        : 'Harvest'
+                      : undefined
                   }
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
+                      const _networkName = formattedNetworkName(network)
+
+                      if (getNetworkName(chainId) !== network) {
+                        alert(
+                          `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                        )
+                        return
+                      }
+
                       setPendingHarvestTx(true)
                       var tx: any = await onHarvest(
                         currentPoolId(pid, network),
@@ -967,7 +997,7 @@ const JoinLaunchpad: React.FC = () => {
                 </Button>
                 <StyledCenterRow>
                   {claimAt * 1000 > new Date().getTime() ||
-                    new BigNumber(tokenPurchased).lte(0) ? (
+                  new BigNumber(tokenPurchased).lte(0) ? (
                     ''
                   ) : (
                     <StyledInfoLabel className="mt-4">
@@ -980,8 +1010,7 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
-
-          {!!history.length && (
+          {/* {!!history.length && (
             <>
               <StyledInfoSolid>
                 <StyledBox className="col-10">
@@ -1012,8 +1041,76 @@ const JoinLaunchpad: React.FC = () => {
               </StyledInfoSolid>
               <Spacer size="md" />
             </>
-          )}
+          )} */}
         </StyledInfoWrap>
+        <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+          <h6 style={{ color: 'white', textAlign: 'center', fontWeight: 600 }}>
+            Purchase History
+          </h6>
+          <div className="d-flex justify-content-center w-100 mb-3">
+            <div
+              className="text-center d-flex justify-content-center"
+              style={{
+                width: 'fit-content',
+                border: '1px solid #454545',
+                borderRadius: 5,
+                paddingTop: 10,
+                paddingBottom: 10,
+              }}
+            >
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                <p style={{ color: '#bdbdbd' }}>Token purchased</p>
+                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
+                  {purchasedAmount} {tokenSymbol}
+                </h6>
+              </div>
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                {' '}
+                <p style={{ color: '#bdbdbd' }}>Amount (USD)</p>
+                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
+                  {purchaseStats ? purchaseStats?.amountUsd : 0}$
+                </h6>
+              </div>
+              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                {' '}
+                <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
+                {purchaseStats && (
+                  <>
+                    {new BigNumber(purchaseStats?.profit).gt(0) && (
+                      <h6
+                        style={{
+                          color: 'green',
+                          fontWeight: 600,
+                          marginTop: 4,
+                        }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                    {new BigNumber(purchaseStats?.profit).eq(0) && (
+                      <h6
+                        style={{
+                          color: 'yellow',
+                          fontWeight: 600,
+                          marginTop: 4,
+                        }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                    {new BigNumber(purchaseStats?.profit).lt(0) && (
+                      <h6
+                        style={{ color: 'red', fontWeight: 600, marginTop: 4 }}
+                      >
+                        {purchaseStats?.profit}%
+                      </h6>
+                    )}
+                  </>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
       </StyledLaunchpad>
     </>
   )
