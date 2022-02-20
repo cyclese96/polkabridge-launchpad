@@ -23,6 +23,7 @@ import launchpadBscAbi3 from './lib/abi/ido/launchpad3.json'
 import ERC20Abi from './lib/abi/erc20.json'
 
 import { getBalanceNumber } from '../utils/formatBalance'
+import { getProfit, getTokenId, getTokenPriceFromCoinGecko } from './helpers'
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80,
@@ -433,8 +434,8 @@ export const getPurchasesAmount = async (
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
-    console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
-    return getBalanceNumber(new BigNumber('3000'))
+    // console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
+    return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
     console.log('ethTest: getPurchasesAmount', { e, lpAddress })
     return null
@@ -701,6 +702,36 @@ export const getUserInfo = async (lpAddress, pid, access, account, network) => {
   } catch (e) {
     console.log('getUserInfo ', e)
     return {}
+  }
+}
+
+export const getPurchaseStats = async (pid, purchasedToken, ratio, network) => {
+  const stats = { amountUsd: 0, profit: 0 }
+  try {
+    const tokenId = getTokenId(pid, network)
+
+    const [tokenCurrentPrice, nativeTokenPrice] = await Promise.all([
+      tokenId ? getTokenPriceFromCoinGecko(network, tokenId) : 0,
+      getTokenPriceFromCoinGecko(network),
+    ])
+
+    const tokenCurrentUsdValue = new BigNumber(tokenCurrentPrice)
+      .times(tokenCurrentPrice)
+      .toFixed(4)
+      .toString()
+
+    const tokenInitialUsdValue = new BigNumber(purchasedToken)
+      .times(nativeTokenPrice)
+      .div(ratio)
+      .toFixed(4)
+      .toString()
+
+    stats.amountUsd = tokenInitialUsdValue
+    stats.profit = getProfit(tokenInitialUsdValue, tokenCurrentUsdValue)
+    return stats
+  } catch (error) {
+    console.log('ethTest: getPurchaseStats', error)
+    return stats
   }
 }
 

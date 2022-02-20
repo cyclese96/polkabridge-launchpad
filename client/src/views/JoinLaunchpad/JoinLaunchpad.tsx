@@ -23,6 +23,7 @@ import {
   getPoolClaimTimeArr,
   verifyCaptcha,
   getMaxAllocation,
+  getPurchaseStats,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
 import useJoinPool from '../../hooks/useJoinPool'
@@ -136,7 +137,7 @@ const JoinLaunchpad: React.FC = () => {
   const [errorTxt, setErrorTxt] = useState('')
   const [txhash, setTxhash] = useState('')
   const [ethBalance, setETHBalance] = useState(0)
-  const [history, setHistory] = useState<JoinHistory[]>([])
+  // const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
   const [tokenPurchased, setTokenPurchased] = useState('') // token purchase by the user so far
@@ -148,6 +149,7 @@ const JoinLaunchpad: React.FC = () => {
   const { onHarvest } = useHarvest()
   const [loading, setLoading] = useState(true)
   const [maxGuaranteed, setMaxGuaranteed] = useState('0')
+  const [purchaseStats, setPurchaseStats] = useState(null)
   // const [dataLoading, setDataLoading] = useState({ state: false, message: '' });
 
   const [captchaVerified, setCaptchaVerified] = useState(false)
@@ -223,7 +225,6 @@ const JoinLaunchpad: React.FC = () => {
       const [
         newIsWhitelist,
         newETHBalance,
-        newHistory,
         newProgress,
         newPurchasedAmount,
         stakedTokens,
@@ -238,7 +239,6 @@ const JoinLaunchpad: React.FC = () => {
           network,
         ),
         getETHBalance(ethereum, account),
-        getHistory(account),
         getProgress(
           lpAddress,
           currentPoolId(pid, network),
@@ -263,6 +263,12 @@ const JoinLaunchpad: React.FC = () => {
           network,
         ),
       ])
+      const newPurchaseStats = await getPurchaseStats(
+        currentPoolId(pid, network),
+        newPurchasedAmount,
+        ratio,
+        network,
+      )
       setLoading(false)
       // setDataLoading({ state: false, message: "" });
 
@@ -271,17 +277,15 @@ const JoinLaunchpad: React.FC = () => {
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       // console.log('ethTest: isWhiteList  ', newIsWhitelist)
       // console.log('ethTest: newETHBalance  ', newETHBalance)
-      // console.log('ethTest newHistory--->  ', newHistory)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
-      // console.log('ethTest: setPurchasedAmount--->  ', newPurchasedAmount)
+      console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
       // console.log('ethTest: setStakedAmount   ', stakedTokens)
       // console.log('ethTest: userInfoData--->  ', userInfoData)
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
       setETHBalance(newETHBalance)
-      setHistory(newHistory)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
@@ -292,6 +296,7 @@ const JoinLaunchpad: React.FC = () => {
       setTotalRewardClaims(
         claimTimeArr && claimTimeArr.length > 0 ? claimTimeArr.length : 1,
       )
+      setPurchaseStats(newPurchaseStats)
       //set current claimAt time
     }
     if (pid >= 0) {
@@ -311,7 +316,6 @@ const JoinLaunchpad: React.FC = () => {
     totalRewardClaims,
     setIsWhitelist,
     setETHBalance,
-    setHistory,
     setProgress,
     setPurchasedAmount,
     setStakedAmount,
@@ -490,7 +494,7 @@ const JoinLaunchpad: React.FC = () => {
 
   const reset = useCallback(async () => {
     const newETHBalance = await getETHBalance(ethereum, account)
-    const newHistory = await getHistory(account)
+    // const newHistory = await getHistory(account)
     const newProgress = await getProgress(
       lpAddress,
       currentPoolId(pid, network),
@@ -513,7 +517,6 @@ const JoinLaunchpad: React.FC = () => {
     )
 
     setETHBalance(newETHBalance)
-    setHistory(newHistory)
     setProgress(newProgress)
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
@@ -528,7 +531,6 @@ const JoinLaunchpad: React.FC = () => {
     lpContract,
     pid,
     setETHBalance,
-    setHistory,
     setProgress,
     setPurchasedAmount,
     setTokenValue,
@@ -988,7 +990,7 @@ const JoinLaunchpad: React.FC = () => {
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
-          {!!history.length && (
+          {/* {!!history.length && (
             <>
               <StyledInfoSolid>
                 <StyledBox className="col-10">
@@ -1019,7 +1021,7 @@ const JoinLaunchpad: React.FC = () => {
               </StyledInfoSolid>
               <Spacer size="md" />
             </>
-          )}
+          )} */}
         </StyledInfoWrap>
         <div style={{ paddingTop: 10, paddingBottom: 10 }}>
           <h6 style={{ color: 'white', textAlign: 'center', fontWeight: 600 }}>
@@ -1037,23 +1039,28 @@ const JoinLaunchpad: React.FC = () => {
               }}
             >
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-                <p style={{ color: '#bdbdbd' }}>Tokens Purchased</p>
+                <p style={{ color: '#bdbdbd' }}>Token purchased</p>
                 <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  3232
+                  {purchasedAmount} {tokenSymbol}
                 </h6>
               </div>
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
                 {' '}
-                <p style={{ color: '#bdbdbd' }}>Amount (USDT)</p>
+                <p style={{ color: '#bdbdbd' }}>Amount (USD)</p>
                 <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  400$
+                  {purchaseStats ? purchaseStats?.amountUsd : 0}$
                 </h6>
               </div>
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
                 {' '}
                 <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
-                <h6 style={{ color: '#90EE90', fontWeight: 600, marginTop: 4 }}>
-                  +12%
+                <h6 style={{ color: '#yellow', fontWeight: 600, marginTop: 4 }}>
+                  {purchaseStats
+                    ? new BigNumber(purchaseStats?.profit).eq(0)
+                      ? 'NA'
+                      : purchaseStats?.profit
+                    : 'NA'}
+                  %
                 </h6>
               </div>
             </div>

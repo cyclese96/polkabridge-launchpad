@@ -32,6 +32,14 @@ export const polygonNetwork = 'polygon'
 export const harmonyNetwork = 'harmony'
 export const moonriverNetwork = 'moonriver'
 
+export const tokenIdMapping = {
+  ethereum: 'ethereum',
+  bsc: 'binancecoin',
+  polygon: 'polygon',
+  harmony: 'harmony',
+  moonriver: 'moonriver',
+}
+
 // TODO: change the address & set LP pool
 export const contractAddresses = {
   pbr: {
@@ -574,7 +582,7 @@ export const supportedPools = [
     claimAt: 1636812000,
     startDate: '2PM UTC 8th Nov, 2021',
     claimTimeArr: [1636812000, 1639328400, 1642006800],
-    harvestDistribution: [25, 25, 25]
+    harvestDistribution: [25, 25, 25],
   },
   {
     pid: 10,
@@ -1409,13 +1417,14 @@ export const supportedPools = [
     maxTier3: 2,
     access: PUBLIC,
     network: bscNetwork,
-    distribution: 'Vested over 9 months with daily linear unlock at DefiYield portal (will be shared in another announcement)',
+    distribution:
+      'Vested over 9 months with daily linear unlock at DefiYield portal (will be shared in another announcement)',
     startAt: 1645110900,
     endAt: 1645113600,
     claimAt: 0,
     startDate: '2PM UTC 17th Feb, 2022',
     harvestDistribution: [0],
-    registerForm: "https://forms.gle/7FTfZH5XWhifJwBa9"
+    registerForm: 'https://forms.gle/7FTfZH5XWhifJwBa9',
   },
   {
     pid: 28,
@@ -1461,7 +1470,7 @@ export const supportedPools = [
     claimAt: 1645538400,
     startDate: '2PM UTC 20th Feb, 2022',
     harvestDistribution: [100],
-    registerForm: "https://forms.gle/S7r2SRpVizgoH4X49"
+    registerForm: 'https://forms.gle/S7r2SRpVizgoH4X49',
   },
   {
     pid: 29,
@@ -1478,7 +1487,8 @@ export const supportedPools = [
       56: '0xA41eE9a01fd417c372B318746d8891c0C240A73c',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    lpExplorer:
+      'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
     name: 'Endless Battlefield',
     symbol: 'EB-PBR',
     description: `EB/BNB`,
@@ -1486,9 +1496,11 @@ export const supportedPools = [
     website: 'https://ebgame.io/',
     twitter: 'https://twitter.com/EBMetaverse',
     telegram: 'https://t.me/ebgame_global',
-    whitepaper: 'https://ebgame.io/files/EndlessBattlefield_Introduction.V2.7.en.pdf?v=1',
+    whitepaper:
+      'https://ebgame.io/files/EndlessBattlefield_Introduction.V2.7.en.pdf?v=1',
     tokenSymbol: 'EB',
-    tokenExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    tokenExplorer:
+      'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
     icon: '/img/tokens/eb.JPG',
     totalSupply: '1,000,000,000 EB',
     price: 0.2,
@@ -1501,13 +1513,14 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution: '25% at TGE, 75% will release in 4 months with 18,75% per month',
+    distribution:
+      '25% at TGE, 75% will release in 4 months with 18,75% per month',
     startAt: 1645624800,
     endAt: 1645628400,
     claimAt: 1645804800,
     startDate: '2PM UTC 23rd Feb, 2022',
     harvestDistribution: [25, 18.75, 18.75, 18.75, 18.75],
-    registerForm: "https://forms.gle/TpHeTFzW2GnLBWfdA"
+    registerForm: 'https://forms.gle/TpHeTFzW2GnLBWfdA',
   },
   {
     pid: 30,
