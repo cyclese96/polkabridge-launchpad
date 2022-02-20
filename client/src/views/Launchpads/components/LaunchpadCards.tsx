@@ -151,23 +151,23 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
   }
 
   const handleLaunchpadClick = (launchpad: any) => {
-    const _networkName = formattedNetworkName(launchpad.network)
+    // const _networkName = formattedNetworkName(launchpad.network)
 
-    if (!account) {
-      alert(`Please connect your wallet to proceed`)
-      return
-    }
+    // if (!account) {
+    //   alert(`Please connect your wallet to proceed`)
+    //   return
+    // }
 
-    if (
-      getNetworkName(isMobile ? localStorage.chainId : chainId) !==
-      launchpad.network
-    ) {
-      // alert(`Your networ: ${_yourNetwork} `)
-      alert(
-        `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-      )
-      return
-    }
+    // if (
+    //   getNetworkName(isMobile ? localStorage.chainId : chainId) !==
+    //   launchpad.network
+    // ) {
+    //   // alert(`Your networ: ${_yourNetwork} `)
+    //   alert(
+    //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+    //   )
+    //   return
+    // }
     history.push(`/launchpads/view/${launchpad.id}/${launchpad.pid}`)
   }
 

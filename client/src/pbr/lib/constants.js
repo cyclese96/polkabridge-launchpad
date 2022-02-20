@@ -32,6 +32,14 @@ export const polygonNetwork = 'polygon'
 export const harmonyNetwork = 'harmony'
 export const moonriverNetwork = 'moonriver'
 
+export const tokenIdMapping = {
+  ethereum: 'ethereum',
+  bsc: 'binancecoin',
+  polygon: 'polygon',
+  harmony: 'harmony',
+  moonriver: 'moonriver',
+}
+
 // TODO: change the address & set LP pool
 export const contractAddresses = {
   pbr: {
@@ -547,6 +555,7 @@ export const supportedPools = [
     lpExplorer:
       'https://etherscan.io/address/0xdefac16715671b7b6aeefe012125f1e19ee4b7d7',
     name: 'Defactor',
+    tokenId: 'defactor',
     symbol: 'FACTR-PBR',
     description: `FACTR/ETH`,
     introduce: `Defactor reduces the barriers to entry for Real World Asset Originators by providing tools to manage and scale their processes and giving investors transparency and governance over the assets being traded.`,
@@ -574,7 +583,7 @@ export const supportedPools = [
     claimAt: 1636812000,
     startDate: '2PM UTC 8th Nov, 2021',
     claimTimeArr: [1636812000, 1639328400, 1642006800],
-    harvestDistribution: [25, 25, 25]
+    harvestDistribution: [25, 25, 25],
   },
   {
     pid: 10,
@@ -594,6 +603,7 @@ export const supportedPools = [
     lpExplorer:
       'https://polygonscan.com/address/0x23e8b6a3f6891254988b84da3738d2bfe5e703b9',
     name: 'FabWelt',
+    tokenId: 'fabwelt',
     symbol: 'WELT-PBR',
     description: `WELT/MATIC`,
     introduce: `FABWELT creates a gaming platform that brings blockchain technology into the core of high quality games of all types or genres. We achieve this by utilizing the finest tech of both worlds, beautiful high-quality games and the latest blockchain technology.`,
@@ -641,6 +651,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'PlayerMon',
+    tokenId: 'playermon',
     symbol: 'PYM-PBR',
     description: `PYM/MATIC`,
     introduce: `Playermon is a boundless NFT Game where anyone can explore and battle in the universe with their favorite space companions called Playermons!`,
@@ -685,6 +696,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://polygonscan.com/address',
     name: 'TryHards',
+    tokenId: 'tryhards',
     symbol: 'TRY-PBR',
     description: `TRY/MATIC`,
     introduce: `Tryhards is an NFT Based Blockchain Shooter game. Play Win Earn. Gain more power, Fight for honour and conquer Planet X.`,
@@ -730,6 +742,7 @@ export const supportedPools = [
     lpExplorer:
       'https://bscscan.com/address/0xa2e3e2817f00822f3c1e71a604eca4196af923d6',
     name: 'Torekko',
+    tokenId: 'torekko',
     symbol: 'TRK-PBR',
     description: `TRK/BNB`,
     introduce: `Torekko is an ecosystem that allows users to acquire NFT collectibles representing characters, places or entities from the world of Japanese animation with real licences. The project is based on the Bsc and Eth blockchain (BEP-20 / ERC-721).`,
@@ -824,6 +837,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'PeopleZ',
+    tokenId: 'peoplez',
     symbol: 'LEZ-PBR',
     description: `LEZ/BNB`,
     introduce: `The engagment between a VIP and the community is always hard, and the social network are not a solution. Peoplez is here to give you a new experience, where you can be part of something that actually is impossible. A total involvment where you can finally touch something of concrete, and have an interaction with your idols which seemed impossible until now. `,
@@ -871,6 +885,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'WidiLand',
+    tokenId: 'widiland',
     symbol: 'WIDI-PBR',
     description: `WIDI/BNB`,
     introduce: `WidiLand is an NFT Game started in June 2021, aiming to become a globally well-known social networking game.`,
@@ -918,6 +933,7 @@ export const supportedPools = [
     lpExplorer:
       'https://bscscan.com/address/0x3Fb2Adf906030a5BebDBf9EF42AAD978151a2676',
     name: 'ArcadeNetwork',
+    tokenId: 'arcadenetwork',
     symbol: 'ARC-PBR',
     description: `ARC/BNB`,
     introduce: `ArcadeNetwork is the world’s first decentralised platform providing cross metaverse asset interoperability. Making use of Blockchain technology & NFTs, ArcadeNetwork creates a unified relayer bridge that enables seamless movement of in-game assets`,
@@ -963,6 +979,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address',
     name: 'SolClout',
+    tokenId: 'solclout',
     symbol: 'SCT-PBR',
     description: `SCT/ETH`,
     introduce: `SolClout is envisioning a platform to build a formidable community powered by Solana, a high throughput, scalable public blockchain project. Powered by blockchain technology, users are able to also utilize a social networking platform free from censorship.`,
@@ -1058,6 +1075,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'CasperPad',
+    tokenId: 'casperpad',
     symbol: 'CSPD-PBR',
     description: `CSPD/BNB`,
     introduce: `CasperPad is the first Casper-supported decentralized Launchpad built to launch next level projects on the Casper Network.`,
@@ -1107,6 +1125,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'SnapEx',
+    tokenId: 'snapex',
     symbol: 'SNAP-PBR',
     description: `SNAP/BNB`,
     introduce: `THE SNAP TOKEN IS THE NATIVE BLOCKCHAIN PROTOCOL OF SNAPEX, BRINGING TOGETHER BOTH DEFI AND CEX MODELS, ALLOWING BOTH RETAIL AND INSTITUTIONAL-LEVEL CUSTOMERS TO PARTICIPATE IN CRYPTO CFD TRADING (CONTRACT FOR DIFFERENCES). WE ARE MAKING THE MASS-ADOPTION OF DIGITAL ASSETS HAPPEN BY ACTING AS THE FINAL BRIDGE BETWEEN TRADITIONAL AND DIGITAL FINANCE.`,
@@ -1202,6 +1221,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'Graviton Zero',
+    tokenId: 'graviton-zero',
     symbol: 'GRAV-PBR',
     description: `GRAV/BNB`,
     introduce: `Graviton Zero is a Play to Earn Star Citizen Eve Online inspired next gen Sci-Fi MMORPG METAVERSE that will enable players to actually own in game Assets, Ships and Land all verified on the blockchain. Players will be able to trade/fight/explore in a fully decentralized universe with immersive and groundbreaking gameplay. Ecosystem to be fully player run, with player trade missions and bounties.`,
@@ -1248,6 +1268,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://bscscan.com/address/',
     name: 'Battle Saga',
+    tokenId: 'battle-saga',
     symbol: 'BTL-PBR',
     description: `BTL/BNB`,
     introduce: `Battle Saga is a decentralized and innovative DAO gaming platform. Players can build their base camps, train troops and crush their opponents.`,
@@ -1409,13 +1430,14 @@ export const supportedPools = [
     maxTier3: 2,
     access: PUBLIC,
     network: bscNetwork,
-    distribution: 'Vested over 9 months with daily linear unlock at DefiYield portal (will be shared in another announcement)',
+    distribution:
+      'Vested over 9 months with daily linear unlock at DefiYield portal (will be shared in another announcement)',
     startAt: 1645110900,
     endAt: 1645113600,
     claimAt: 0,
     startDate: '2PM UTC 17th Feb, 2022',
     harvestDistribution: [0],
-    registerForm: "https://forms.gle/7FTfZH5XWhifJwBa9"
+    registerForm: 'https://forms.gle/7FTfZH5XWhifJwBa9',
   },
   {
     pid: 28,
@@ -1461,7 +1483,7 @@ export const supportedPools = [
     claimAt: 1645549200,
     startDate: '2PM UTC 20th Feb, 2022',
     harvestDistribution: [100],
-    registerForm: "https://forms.gle/S7r2SRpVizgoH4X49"
+    registerForm: 'https://forms.gle/S7r2SRpVizgoH4X49',
   },
   {
     pid: 29,
@@ -1478,7 +1500,8 @@ export const supportedPools = [
       56: '0xA41eE9a01fd417c372B318746d8891c0C240A73c',
       97: '',
     },
-    lpExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    lpExplorer:
+      'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
     name: 'Endless Battlefield',
     symbol: 'EB-PBR',
     description: `EB/BNB`,
@@ -1486,9 +1509,11 @@ export const supportedPools = [
     website: 'https://ebgame.io/',
     twitter: 'https://twitter.com/EBMetaverse',
     telegram: 'https://t.me/ebgame_global',
-    whitepaper: 'https://ebgame.io/files/EndlessBattlefield_Introduction.V2.7.en.pdf?v=1',
+    whitepaper:
+      'https://ebgame.io/files/EndlessBattlefield_Introduction.V2.7.en.pdf?v=1',
     tokenSymbol: 'EB',
-    tokenExplorer: 'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
+    tokenExplorer:
+      'https://bscscan.com/address/0xA41eE9a01fd417c372B318746d8891c0C240A73c',
     icon: '/img/tokens/eb.JPG',
     totalSupply: '1,000,000,000 EB',
     price: 0.2,
@@ -1501,13 +1526,14 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution: '25% at TGE, 75% will release in 4 months with 18,75% per month',
+    distribution:
+      '25% at TGE, 75% will release in 4 months with 18,75% per month',
     startAt: 1645624800,
     endAt: 1645628400,
     claimAt: 1645804800,
     startDate: '2PM UTC 23rd Feb, 2022',
     harvestDistribution: [25, 18.75, 18.75, 18.75, 18.75],
-    registerForm: "https://forms.gle/TpHeTFzW2GnLBWfdA"
+    registerForm: 'https://forms.gle/TpHeTFzW2GnLBWfdA',
   },
   {
     pid: 30,
@@ -1526,6 +1552,7 @@ export const supportedPools = [
     },
     lpExplorer: 'https://moonriver.moonscan.io/address/',
     name: 'AlphaDex',
+    tokenId: 'alphadex',
     symbol: 'ROAR-PBR',
     description: `ROAR/MOVR`,
     introduce: `Alphadex is an innovative decentralized AMM, Incubator, Yield Farming & NFT Launch solution powered by MoonRiver & Ethereum.`,
