@@ -434,7 +434,7 @@ export const getPurchasesAmount = async (
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
-    // console.log('ethTest: purchasesAmount fetched ', purchasesAmount)
+
     return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
     console.log('ethTest: getPurchasesAmount', { e, lpAddress })
