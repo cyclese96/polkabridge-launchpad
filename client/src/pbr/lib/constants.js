@@ -1470,16 +1470,16 @@ export const supportedPools = [
     price: 0.06,
     total: '135 BNB', // 1BNB = 370$, 50k$
     ratio: 6166.6, //0.06$
-    min: 0, //300$
-    max: 0, //500$
-    maxTier1: 0, //300$
-    maxTier2: 0, //400$
-    maxTier3: 0, //500$
-    access: GUARANTEED,
+    min: 0.3, //300$
+    max: 0.5, //500$
+    maxTier1: 0.3, //300$
+    maxTier2: 0.4, //400$
+    maxTier3: 0.5, //500$
+    access: PRIVATE,
     network: bscNetwork,
     distribution: '100% at TGE',
-    startAt: 1645365600,
-    endAt: 1645369200,
+    startAt: 1645370103,
+    endAt: 1645372800,
     claimAt: 1645549200,
     startDate: '2PM UTC 20th Feb, 2022',
     harvestDistribution: [100],
@@ -1491,8 +1491,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
+      56: '0x2b728f8b396e8f8cfc390a65186a1d2eb0623685',
+      97: '0x2b728f8b396e8f8cfc390a65186a1d2eb0623685',
     },
     tokenAddresses: {
       1: '',
@@ -1517,21 +1517,20 @@ export const supportedPools = [
     icon: '/img/tokens/eb.JPG',
     totalSupply: '1,000,000,000 EB',
     price: 0.2,
-    total: '125 BNB', // 1BNB = 400$, 50k$
-    ratio: 2000, //0.2$
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    total: '133.3 BNB', // 1BNB = 375$, 50k$
+    ratio: 1875, //0.2$
+    min: 0.37,
+    max: 1,
+    maxTier1: 0.37,
+    maxTier2: 0.7,
+    maxTier3: 1,
+    access: PRIVATE,
     network: bscNetwork,
-    distribution:
-      '25% at TGE, 75% will release in 4 months with 18,75% per month',
-    startAt: 1645624800,
-    endAt: 1645628400,
+    distribution: '25% at TGE, 75% will release in 4 months with 18,75% per month',
+    startAt: 1645634700,
+    endAt: 1645639200,
     claimAt: 1645804800,
-    startDate: '2PM UTC 23rd Feb, 2022',
+    startDate: '3:30PM UTC 23rd Feb, 2022',
     harvestDistribution: [25, 18.75, 18.75, 18.75, 18.75],
     registerForm: 'https://forms.gle/TpHeTFzW2GnLBWfdA',
   },
@@ -1623,12 +1622,57 @@ export const supportedPools = [
     distribution: '25% TGE, 25% every 2 months in next 6 months',
     startAt: 1642522500,
     endAt: 1642525140,
-    claimAt: 1646030920,
+    claimAt: 1648562400,
     startDate: '2PM UTC 18th Jan, 2022',
-    claimTimeArr: [1646030920, 1646030920, 1646030920, 1646030920],
+    claimTimeArr: [1648562400, 1651240800, 1653832800, 1656511200],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: 'https://forms.gle/6VvBTPWzv8g5g1so8',
   },
+  // {
+  //   pid: 49,
+  //   poolId: 1,
+  //   lpAddresses: {
+  //     1: '',
+  //     42: '',
+  //     56: '',
+  //     97: '',
+  //   },
+  //   tokenAddresses: {
+  //     1: '',
+  //     42: '',
+  //     56: '',
+  //     97: '',
+  //   },
+  //   lpExplorer: 'https://bscscan.com/address',
+  //   name: 'GameYoo',
+  //   symbol: 'GYC-PBR',
+  //   description: `GYC/BNB`,
+  //   introduce: `A Bridge for Traditional and Blockchain Gaming. It seeks to rebalance the industry by bringing more traditional gamers into the GameFi fold`,
+  //   website: 'https://www.gameyoo.com/',
+  //   twitter: 'https://twitter.com/GameYooOfficial',
+  //   telegram: 'https://t.me/gameyoo_official',
+  //   whitepaper: 'https://gameyoo.io/pdf/gameyoo-doc-1.pdf',
+  //   tokenSymbol: 'GYC',
+  //   tokenExplorer: 'https://bscscan.com/address',
+  //   icon: '/img/tokens/gyc.png',
+  //   totalSupply: '210,000,000 GYC',
+  //   price: 0.18,
+  //   total: '285 BNB', // 1BNB = 350$, 100k$
+  //   ratio: 1944.4, //0.18$
+  //   min: 0, //300$
+  //   max: 0, //500$
+  //   maxTier1: 0, //300$
+  //   maxTier2: 0, //400$
+  //   maxTier3: 0, //500$
+  //   access: GUARANTEED,
+  //   network: bscNetwork,
+  //   distribution: '20% TGE, 26.6% per month in next 3 months',
+  //   startAt: 1647612000,
+  //   endAt: 1647615600,
+  //   claimAt: 0,
+  //   startDate: '2PM UTC 18th March, 2022',
+  //   registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
+  // },
 
   {
     pid: 50,
@@ -1670,10 +1714,10 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1647330221,
-    endAt: 1745346411,
+    startAt: 1651289682,
+    endAt: 1651289682,
     claimAt: 0,
-    startDate: 'March, 2022',
+    startDate: 'April, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
   },
   {
@@ -1715,11 +1759,12 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '20% TGE, 20% per month in next 4 months',
-    startAt: 1648806287,
-    endAt: 1648806287,
+    startAt: 1651289682,
+    endAt: 1651289682,
     claimAt: 0,
     startDate: 'March, 2022',
   },
+
   // {
   //   pid: 50,
   //   poolId: 2,
