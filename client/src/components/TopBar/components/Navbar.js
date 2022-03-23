@@ -287,6 +287,12 @@ const Navbar = () => {
             id: 'characters',
             icon: <PeopleAltOutlined />,
           },
+          {
+            name: 'INO',
+            link: 'https://ino.polkabridge.org/',
+            id: 'characters',
+            icon: <PeopleAltOutlined />,
+          },
           { name: 'Swap', link: 'https://swap.polkabridge.org', id: 'items', icon: <VpnLockOutlined /> },
           {
             name: 'Lending',
@@ -367,6 +373,16 @@ const Navbar = () => {
               Launchpad <DotCircle />
             </a>
           </div>
+          <div>
+            <a
+              href="https://ino.polkabridge.org"
+              target="_blank"
+              className={classes.navbarItemsDesktopActive}
+            >
+              INO <DotCircle />
+            </a>
+          </div>
+
           <div>
             <a href="https://swap.polkabridge.org" className={classes.navbarItemsDesktop}>
               Swap <DotCircle />
