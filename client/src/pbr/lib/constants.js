@@ -1624,55 +1624,60 @@ export const supportedPools = [
     endAt: 1642525140,
     claimAt: 1648634400,
     startDate: '2PM UTC 18th Jan, 2022',
-    claimTimeArr: [1648634400, 1651312800, 1653904800, 1656583200],
+    claimTimeArr: [1648634400, 1653904800, 1659175200, 1664532000],
     harvestDistribution: [25, 25, 25, 25],
     registerForm: 'https://forms.gle/6VvBTPWzv8g5g1so8',
   },
-  // {
-  //   pid: 49,
-  //   poolId: 1,
-  //   lpAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   tokenAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   lpExplorer: 'https://bscscan.com/address',
-  //   name: 'GameYoo',
-  //   symbol: 'GYC-PBR',
-  //   description: `GYC/BNB`,
-  //   introduce: `A Bridge for Traditional and Blockchain Gaming. It seeks to rebalance the industry by bringing more traditional gamers into the GameFi fold`,
-  //   website: 'https://www.gameyoo.com/',
-  //   twitter: 'https://twitter.com/GameYooOfficial',
-  //   telegram: 'https://t.me/gameyoo_official',
-  //   whitepaper: 'https://gameyoo.io/pdf/gameyoo-doc-1.pdf',
-  //   tokenSymbol: 'GYC',
-  //   tokenExplorer: 'https://bscscan.com/address',
-  //   icon: '/img/tokens/gyc.png',
-  //   totalSupply: '210,000,000 GYC',
-  //   price: 0.18,
-  //   total: '285 BNB', // 1BNB = 350$, 100k$
-  //   ratio: 1944.4, //0.18$
-  //   min: 0, //300$
-  //   max: 0, //500$
-  //   maxTier1: 0, //300$
-  //   maxTier2: 0, //400$
-  //   maxTier3: 0, //500$
-  //   access: GUARANTEED,
-  //   network: bscNetwork,
-  //   distribution: '20% TGE, 26.6% per month in next 3 months',
-  //   startAt: 1647612000,
-  //   endAt: 1647615600,
-  //   claimAt: 0,
-  //   startDate: '2PM UTC 18th March, 2022',
-  //   registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
-  // },
+  {
+    pid: 32,
+    poolId: 1,
+    lpAddresses: {
+      1: '0x55ad2ff5363f2a155187e644bbb66f3584fd18dc',
+      42: '0x55ad2ff5363f2a155187e644bbb66f3584fd18dc',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer:
+      'https://bscscan.com/address/',
+    name: 'Nomad Exiles',
+    symbol: 'PRIDE-PBR',
+    description: `PRIDE/BNB`,
+    introduce: `Nomad Exiles is an exciting crypto RPG game with the integrated NFTs and free-to-play mechanics! The project is being developed on the basis of a mobile RPG game with more than a million installations around the world.`,
+    website: 'https://pridemetaverse.io/',
+    twitter: 'https://twitter.com/NomadExiles',
+    telegram: 'https://t.me/NomadExiles',
+    whitepaper:
+      'https://nomad-exiles.gitbook.io/internal-wiki/nomad-exiles/about-the-game',
+    tokenSymbol: 'PRIDE',
+    tokenExplorer:
+      'https://bscscan.com/address/',
+    icon: '/img/tokens/nomad.svg',
+    totalSupply: '250,000,000 PRIDE',
+    price: 0.1,
+    total: '246.9 BNB', // 1BNB = 405$
+    ratio: 4050, //0.1$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '10% at TGE, 90% will release in 9 months with 10% per month',
+    startAt: 1648303200,
+    endAt: 1648306800,
+    claimAt: 1648652400,
+    startDate: '2PM UTC 26th March, 2022',
+    harvestDistribution: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
+    claimTimeArr: [],
+    registerForm: 'https://forms.gle/1G6w1AUfRZvCCVvP6',
+  },
 
   {
     pid: 50,
@@ -1762,7 +1767,7 @@ export const supportedPools = [
     startAt: 1651289682,
     endAt: 1651289682,
     claimAt: 0,
-    startDate: 'March, 2022',
+    startDate: 'April, 2022',
   },
 
   // {
