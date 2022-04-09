@@ -1678,7 +1678,56 @@ export const supportedPools = [
     claimTimeArr: [1648905000, 1651496400, 1654088400, 1656680400, 1659272400, 1661864400, 1664456400, 1667048400, 1669640400, 1672232400],
     registerForm: 'https://forms.gle/1G6w1AUfRZvCCVvP6',
   },
-
+  {
+    pid: 33,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer:
+      'https://bscscan.com/address/',
+    name: 'Kyte',
+    symbol: 'KTE-PBR',
+    description: `KTE/BNB`,
+    introduce: `Innovative tools for blockchain startups & traditional marketers alike. Run customized campaigns, distribute rewards on-chain & boost your project instantaneously.`,
+    website: 'https://www.kyte.one/',
+    twitter: 'https://twitter.com/kyteone',
+    telegram: 'https://t.me/kyteone',
+    whitepaper:
+      'https://www.kyte.one/papers/whitepaper.pdf',
+    tokenSymbol: 'KTE',
+    tokenExplorer:
+      'https://bscscan.com/address/',
+    icon: '/img/tokens/kyte.png',
+    totalSupply: '50,000,000 KTE',
+    price: 0.18,
+    total: '125 BNB', // 1BNB = 400$
+    ratio: 2222.2, //0.18$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0.,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '40% upfront release, then 20% every month',
+    startAt: 1650290400,
+    endAt: 1650294000,
+    claimAt: 1650556800,
+    startDate: '2PM UTC 18th April, 2022',
+    harvestDistribution: [40, 20, 20, 20],
+    claimTimeArr: [],
+    registerForm: 'https://forms.gle/oCXMEGtNchuUrjHS6',
+  },
   {
     pid: 50,
     poolId: 1,
