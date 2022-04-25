@@ -205,7 +205,7 @@ const LaunchpadCard: React.FC<LaunchpadCardProps> = ({ launchpad }) => {
 
               <span>
                 <b>
-                  1 {networkSymbol(launchpad.network)} {launchpad.ratio}{' '}
+                  1 {networkSymbol(launchpad.network)} {'='} {launchpad.ratio}{' '}
                   {launchpad.tokenSymbol}
                 </b>
               </span>

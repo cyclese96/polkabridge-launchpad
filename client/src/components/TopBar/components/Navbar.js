@@ -377,7 +377,7 @@ const Navbar = () => {
             <a
               href="https://ino.polkabridge.org"
               target="_blank"
-              className={classes.navbarItemsDesktopActive}
+              className={classes.navbarItemsDesktop}
             >
               INO <DotCircle />
             </a>

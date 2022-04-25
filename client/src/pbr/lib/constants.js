@@ -1734,8 +1734,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
+      56: '0xcb705a6101e9250c7c867bd50a23f3aa6242f982',
+      97: '0xcb705a6101e9250c7c867bd50a23f3aa6242f982',
     },
     tokenAddresses: {
       1: '',
@@ -1749,7 +1749,7 @@ export const supportedPools = [
     symbol: 'GAE-PBR',
     description: `GAE/BNB`,
     introduce: `Legend of Galaxy is an appealing blockchain game with personalized NFT integrated in LFW Gamehub and ecosystem toward a true metaverse for the community. Players will embark on a galactic adventure, collect stylish and powerful NFT hero cards as rewards of fierce battles. Everyone is free to explore the galaxy, team up with friends and build forces to wage wars against other clans for valuable lands. `,
-    website: 'https://legendofgalaxy.io//',
+    website: 'https://legendofgalaxy.io/',
     twitter: 'https://twitter.com/Legend_LFW',
     telegram: 'https://t.me/LFWCommunity',
     whitepaper:
@@ -1760,8 +1760,8 @@ export const supportedPools = [
     icon: '/img/tokens/legend.png',
     totalSupply: '500,000,000 GAE',
     price: 0.02,
-    total: '125 BNB', // 1BNB = 400$
-    ratio: 20000, //0.02$
+    total: '129.8 BNB', // 1BNB = 385$
+    ratio: 19250, //0.02$
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -1794,7 +1794,7 @@ export const supportedPools = [
       97: '',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'GEMS',
+    name: 'GEMS (PBR Pool)',
     symbol: 'GEMS-PBR',
     description: `GEMS/BNB`,
     introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. It propels Esports into 3.0 by integrating Gamefi, Metaverse and Socialfi elements, and leverages on its founding partners' chain of Esports hotels. GEMS core business pillars include a portal, a NFT rental library, a Fanfi studio and a competitive pools arena. GEMS is an one stop destination for gamers that integrates the young population into the new sharing economy.`,
@@ -1806,7 +1806,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/gems.png',
     totalSupply: '10,000,000,000 GEMS',
-    total: '500 BNB', // 1BNB = 400$, 200k$
+    total: '125 BNB', // 1BNB = 400$, 50k$
     ratio: 80000, //$0.005
     price: 0.005,
     min: 0,
@@ -1818,14 +1818,60 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1651289682,
-    endAt: 1651289682,
+    startAt: 1651759200,
+    endAt: 1651762800,
     claimAt: 0,
-    startDate: 'April, 2022',
+    startDate: '2PM UTC 5th May, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
   },
   {
     pid: 51,
+    poolId: 2,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'GEMS (LABS Pool)',
+    symbol: 'GEMS-LABS',
+    description: `GEMS/BNB`,
+    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. It propels Esports into 3.0 by integrating Gamefi, Metaverse and Socialfi elements, and leverages on its founding partners' chain of Esports hotels. GEMS core business pillars include a portal, a NFT rental library, a Fanfi studio and a competitive pools arena. GEMS is an one stop destination for gamers that integrates the young population into the new sharing economy.`,
+    website: 'https://thegems.gg/',
+    twitter: 'https://twitter.com/gemsgg_official',
+    telegram: 'https://t.me/thegemsgg',
+    whitepaper: 'https://official-gems.gitbook.io/gemsofficial/',
+    tokenSymbol: 'GEMS',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/gems.png',
+    totalSupply: '10,000,000,000 GEMS',
+    total: '250 BNB', // 1BNB = 400$, 100k$
+    ratio: 80000, //$0.005
+    price: 0.005,
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution:
+      '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
+    startAt: 1651759200,
+    endAt: 1651762800,
+    claimAt: 0,
+    startDate: '2PM UTC 5th May, 2022',
+    registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
+  },
+  {
+    pid: 52,
     poolId: 1,
     lpAddresses: {
       1: '',
@@ -1863,10 +1909,10 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '20% TGE, 20% per month in next 4 months',
-    startAt: 1651289682,
-    endAt: 1651289682,
+    startAt: 1658706599,
+    endAt: 1658706599,
     claimAt: 0,
-    startDate: 'April, 2022',
+    startDate: 'TBA',
   },
 
   // {
