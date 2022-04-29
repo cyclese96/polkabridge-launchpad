@@ -1762,20 +1762,20 @@ export const supportedPools = [
     price: 0.02,
     total: '129.8 BNB', // 1BNB = 385$
     ratio: 19250, //0.02$
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    min: 0.4,
+    max: 1.2,
+    maxTier1: 0.4,
+    maxTier2: 0.8,
+    maxTier3: 1.2,
+    access: PRIVATE,
     network: bscNetwork,
     distribution: '100% TGE',
-    startAt: 1650895200,
-    endAt: 1650898800,
-    claimAt: 0,
+    startAt: 1650899700,
+    endAt: 1650902400,
+    claimAt: 1651069800,
     startDate: '2PM UTC 25th April, 2022',
     harvestDistribution: [100],
-    claimTimeArr: [],
+    claimTimeArr: [1651069800],
     registerForm: 'https://forms.gle/sM7YGtzjthrmfNEp7',
   },
   {
@@ -1818,10 +1818,10 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1651759200,
-    endAt: 1651762800,
+    startAt: 1651672800,
+    endAt: 1651676400,
     claimAt: 0,
-    startDate: '2PM UTC 5th May, 2022',
+    startDate: '2PM UTC 4th May, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
   },
   {
@@ -1852,7 +1852,7 @@ export const supportedPools = [
     tokenExplorer: 'https://bscscan.com/address',
     icon: '/img/tokens/gems.png',
     totalSupply: '10,000,000,000 GEMS',
-    total: '250 BNB', // 1BNB = 400$, 100k$
+    total: '125 BNB', // 1BNB = 400$, 100k$
     ratio: 80000, //$0.005
     price: 0.005,
     min: 0,
@@ -1864,10 +1864,10 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1651759200,
-    endAt: 1651762800,
+    startAt: 1651672800,
+    endAt: 1651676400,
     claimAt: 0,
-    startDate: '2PM UTC 5th May, 2022',
+    startDate: '2PM UTC 4th May, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
   },
   {
