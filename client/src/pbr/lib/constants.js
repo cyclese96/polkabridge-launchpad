@@ -1818,11 +1818,13 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1651672800,
-    endAt: 1651676400,
+    startAt: 1656569665,
+    endAt: 1656569665,
     claimAt: 0,
-    startDate: '2PM UTC 4th May, 2022',
+    startDate: 'June, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
+    harvestDistribution: [10, 30, 30, 30],
+    claimTimeArr: [0],
   },
   {
     pid: 51,
@@ -1864,11 +1866,13 @@ export const supportedPools = [
     network: bscNetwork,
     distribution:
       '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1651672800,
-    endAt: 1651676400,
+    startAt: 1656569665,
+    endAt: 1656569665,
     claimAt: 0,
-    startDate: '2PM UTC 4th May, 2022',
+    startDate: 'June, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
+    harvestDistribution: [10, 30, 30, 30],
+    claimTimeArr: [0],
   },
   {
     pid: 52,
