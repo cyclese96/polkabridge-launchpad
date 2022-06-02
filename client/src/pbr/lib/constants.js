@@ -1779,6 +1779,57 @@ export const supportedPools = [
     registerForm: 'https://forms.gle/sM7YGtzjthrmfNEp7',
   },
   {
+    pid: 35,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer:
+      'https://bscscan.com/address/',
+    name: 'Outlanders',
+    symbol: 'LAND-PBR',
+    description: `LAND/BNB`,
+    introduce: `Outlanders is an MMORPG that allows players to compete in an adventure-based gameplay environment where they can compete conquests and battle players to tap into lucrative earning opportunities.`,
+    website: 'https://outlanders.com',
+    twitter: 'https://twitter.com/PlayOutlanders',
+    telegram: 'https://t.me/OutlandersOfficial',
+    whitepaper:
+      'https://outlanders.com/docs/Outlanders_Whitepaper.pdf',
+    tokenSymbol: 'LAND',
+    tokenExplorer:
+      'https://bscscan.com/address/',
+    icon: '/img/tokens/land.png',
+    totalSupply: '2,000,000,000 LAND',
+    price: 0.012,
+    total: '166.6 BNB', // 1BNB = 300$
+    ratio: 25000, //0.012$
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '50% TGE, 25% in next 30 days and 25% in next 60 days',
+    startAt: 1654869600,
+    endAt: 1654873200,
+    claimAt: 0,
+    startDate: '2PM UTC 10th June, 2022',
+    harvestDistribution: [50, 25, 25],
+    claimTimeArr: [],
+    registerForm: 'https://forms.gle/H2udQb5w4PvqorTt9',
+  },
+
+  {
     pid: 50,
     poolId: 1,
     lpAddresses: {
