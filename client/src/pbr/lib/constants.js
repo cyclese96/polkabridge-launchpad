@@ -1784,8 +1784,8 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
-      97: '',
+      56: '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0',
+      97: '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0',
     },
     tokenAddresses: {
       1: '',
@@ -1810,18 +1810,18 @@ export const supportedPools = [
     icon: '/img/tokens/land.png',
     totalSupply: '2,000,000,000 LAND',
     price: 0.012,
-    total: '166.6 BNB', // 1BNB = 300$
-    ratio: 25000, //0.012$
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    total: '178.5 BNB', // 1BNB = 280$
+    ratio: 23333.3, //0.012$
+    min: 0.5,
+    max: 2,
+    maxTier1: 0.5,
+    maxTier2: 1,
+    maxTier3: 2,
+    access: PRIVATE,
     network: bscNetwork,
     distribution: '50% TGE, 25% in next 30 days and 25% in next 60 days',
-    startAt: 1654869600,
-    endAt: 1654873200,
+    startAt: 1654874100,
+    endAt: 1654876800,
     claimAt: 0,
     startDate: '2PM UTC 10th June, 2022',
     harvestDistribution: [50, 25, 25],
