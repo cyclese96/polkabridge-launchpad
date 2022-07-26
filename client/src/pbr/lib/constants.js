@@ -1845,20 +1845,22 @@ export const supportedPools = [
       97: '',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'GEMS (PBR Pool)',
+    name: 'GEMS ESPORTS 3.0 PLATFORM - PBR Pool',
     symbol: 'GEMS-PBR',
     description: `GEMS/BNB`,
-    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. It propels Esports into 3.0 by integrating Gamefi, Metaverse and Socialfi elements, and leverages on its founding partners' chain of Esports hotels. GEMS core business pillars include a portal, a NFT rental library, a Fanfi studio and a competitive pools arena. GEMS is an one stop destination for gamers that integrates the young population into the new sharing economy.`,
+    introduce: `GEMS stands for GameFi, Esports, Metaverse and SocialFi.
+
+    Proudly presenting Esports 3.0, GEMS is an Esports 3.0 Aggregator Platform within a unique O2O (online-to-offline) Ecosystem. Our one-of-a-kind ecosystem is designed to be the ultimate, one-stop GameFi destination, allowing crypto and Esports gamers to learn, connect, and immerse themselves in different metaverses and GameFi worlds via online and offline touch points.`,
     website: 'https://thegems.gg/',
     twitter: 'https://twitter.com/gemsgg_official',
     telegram: 'https://t.me/thegemsgg',
     whitepaper: 'https://official-gems.gitbook.io/gemsofficial/',
     tokenSymbol: 'GEMS',
     tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/gems.png',
+    icon: '/img/tokens/gems.webp',
     totalSupply: '10,000,000,000 GEMS',
-    total: '125 BNB', // 1BNB = 400$, 50k$
-    ratio: 80000, //$0.005
+    total: '227 BNB', // 1BNB = 220$, 50k$
+    ratio: 44000, //$0.005
     price: 0.005,
     min: 0,
     max: 0,
@@ -1868,11 +1870,11 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution:
-      '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1656569665,
-    endAt: 1656569665,
+      '10% @TGE, 3 Months Vesting With Monthly Unlock',
+    startAt: 1658930400,
+    endAt: 1658934000,
     claimAt: 0,
-    startDate: 'June, 2022',
+    startDate: '2PM UTC 27th July, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
     harvestDistribution: [10, 30, 30, 30],
     claimTimeArr: [0],
@@ -1893,20 +1895,22 @@ export const supportedPools = [
       97: '',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'GEMS (LABS Pool)',
+    name: 'GEMS ESPORTS 3.0 PLATFORM - LABS Pool',
     symbol: 'GEMS-LABS',
     description: `GEMS/BNB`,
-    introduce: `GEMS is an Esports 3.0 aggregator platform within an O2O ecosystem. It propels Esports into 3.0 by integrating Gamefi, Metaverse and Socialfi elements, and leverages on its founding partners' chain of Esports hotels. GEMS core business pillars include a portal, a NFT rental library, a Fanfi studio and a competitive pools arena. GEMS is an one stop destination for gamers that integrates the young population into the new sharing economy.`,
+    introduce: `GEMS stands for GameFi, Esports, Metaverse and SocialFi.
+
+    Proudly presenting Esports 3.0, GEMS is an Esports 3.0 Aggregator Platform within a unique O2O (online-to-offline) Ecosystem. Our one-of-a-kind ecosystem is designed to be the ultimate, one-stop GameFi destination, allowing crypto and Esports gamers to learn, connect, and immerse themselves in different metaverses and GameFi worlds via online and offline touch points.`,
     website: 'https://thegems.gg/',
     twitter: 'https://twitter.com/gemsgg_official',
     telegram: 'https://t.me/thegemsgg',
     whitepaper: 'https://official-gems.gitbook.io/gemsofficial/',
     tokenSymbol: 'GEMS',
     tokenExplorer: 'https://bscscan.com/address',
-    icon: '/img/tokens/gems.png',
+    icon: '/img/tokens/gems.webp',
     totalSupply: '10,000,000,000 GEMS',
-    total: '125 BNB', // 1BNB = 400$, 100k$
-    ratio: 80000, //$0.005
+    total: '227 BNB', // 1BNB = 220$, 50k$
+    ratio: 44000, //$0.005
     price: 0.005,
     min: 0,
     max: 0,
@@ -1916,11 +1920,11 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution:
-      '10% TGE, 7 days locked, 3 months vesting with monthly unlock',
-    startAt: 1656569665,
-    endAt: 1656569665,
+      '10% @TGE, 3 Months Vesting With Monthly Unlock',
+    startAt: 1658930400,
+    endAt: 1658934000,
     claimAt: 0,
-    startDate: 'June, 2022',
+    startDate: '2PM UTC 27th July, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
     harvestDistribution: [10, 30, 30, 30],
     claimTimeArr: [0],
