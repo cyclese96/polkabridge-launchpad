@@ -1835,7 +1835,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xce673d1326ff6772dc8a5d8c651330a883b72a8e',
       97: '',
     },
     tokenAddresses: {
@@ -1862,30 +1862,30 @@ export const supportedPools = [
     total: '227 BNB', // 1BNB = 220$, 50k$
     ratio: 44000, //$0.005
     price: 0.005,
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    min: 2,
+    max: 2,
+    maxTier1: 2,
+    maxTier2: 2,
+    maxTier3: 2,
+    access: PUBLIC,
     network: bscNetwork,
     distribution:
       '10% @TGE, 3 Months Vesting With Monthly Unlock',
-    startAt: 1658930400,
-    endAt: 1658934000,
+    startAt: 1659024000,
+    endAt: 1659024000,
     claimAt: 0,
     startDate: '2PM UTC 27th July, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
     harvestDistribution: [10, 30, 30, 30],
-    claimTimeArr: [0],
+    claimTimeArr: [],
   },
   {
     pid: 51,
-    poolId: 2,
+    poolId: 3,
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xce673d1326ff6772dc8a5d8c651330a883b72a8e',
       97: '',
     },
     tokenAddresses: {
@@ -1895,7 +1895,7 @@ export const supportedPools = [
       97: '',
     },
     lpExplorer: 'https://bscscan.com/address',
-    name: 'GEMS ESPORTS 3.0 PLATFORM - LABS Pool',
+    name: 'GEMS ESPORTS 3.0 PLATFORM',
     symbol: 'GEMS-LABS',
     description: `GEMS/BNB`,
     introduce: `GEMS stands for GameFi, Esports, Metaverse and SocialFi.
@@ -1912,22 +1912,22 @@ export const supportedPools = [
     total: '227 BNB', // 1BNB = 220$, 50k$
     ratio: 44000, //$0.005
     price: 0.005,
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    access: GUARANTEED,
+    min: 2,
+    max: 2,
+    maxTier1: 2,
+    maxTier2: 2,
+    maxTier3: 2,
+    access: PUBLIC,
     network: bscNetwork,
     distribution:
       '10% @TGE, 3 Months Vesting With Monthly Unlock',
-    startAt: 1658930400,
-    endAt: 1658934000,
+    startAt: 1659103200,
+    endAt: 1659110400,
     claimAt: 0,
     startDate: '2PM UTC 27th July, 2022',
     registerForm: 'https://forms.gle/jqadUuQmKhzSrf678',
     harvestDistribution: [10, 30, 30, 30],
-    claimTimeArr: [0],
+    claimTimeArr: [],
   },
   {
     pid: 52,
@@ -1968,12 +1968,56 @@ export const supportedPools = [
     access: GUARANTEED,
     network: bscNetwork,
     distribution: '20% TGE, 20% per month in next 4 months',
-    startAt: 1658706599,
-    endAt: 1658706599,
+    startAt: 1669940201,
+    endAt: 1669940201,
     claimAt: 0,
     startDate: 'TBA',
   },
-
+  {
+    pid: 53,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://bscscan.com/address',
+    name: 'CrypCade',
+    symbol: 'iCADE-PBR',
+    description: `iCADE/BNB`,
+    introduce: `CrypCade City - a functional fullstack open entertainment metaverse on blockchain. Enter a world of spectacular graphics, fully functional NFTs, social interactions and engaging Play 2 Earn games.`,
+    website: 'https://www.crypcade.city/',
+    twitter: 'https://twitter.com/CrypCade',
+    telegram: 'https://t.me/CrypCade',
+    whitepaper: 'https://docsend.com/view/igdgawrgjub3fr7n',
+    tokenSymbol: 'iCADE',
+    tokenExplorer: 'https://bscscan.com/address',
+    icon: '/img/tokens/icade.png',
+    totalSupply: '750,000,000 iCADE',
+    price: 0.04,
+    total: '185 BNB', // 1BNB = 270$, 50k$
+    ratio: 6750, //0.04
+    min: 0, //300$
+    max: 0, //500$
+    maxTier1: 0, //300$
+    maxTier2: 0, //400$
+    maxTier3: 0, //500$
+    access: GUARANTEED,
+    network: bscNetwork,
+    distribution: '20% TGE, 3% after 30 days, 5 months linear vesting https://bit.ly/3d5IHgi',
+    startAt: 1660140000,
+    endAt: 1660143600,
+    claimAt: 0,
+    startDate: '2PM UTC 10th Aug, 2022',
+    registerForm: "https://forms.gle/CX8tFawfE6qwinYYA"
+  },
   // {
   //   pid: 50,
   //   poolId: 2,
