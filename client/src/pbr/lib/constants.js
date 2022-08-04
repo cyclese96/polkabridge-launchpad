@@ -77,6 +77,9 @@ export const stakeContractAddresses = {
     137: '0x6335aF028e77B574423733443678aD4cb9e15B3D',
     80001: '0x55950cF279Ba5b43263f4Df54833b85F684B333F',
   },
+  bsc: {
+    56: '0x064dE1e65df3F40Afd7fb9E8A1Af61bD4545f4a1',
+  },
   harmony: {
     //todo:
   },
@@ -1526,7 +1529,8 @@ export const supportedPools = [
     maxTier3: 1,
     access: PRIVATE,
     network: bscNetwork,
-    distribution: '25% at TGE, 75% will release in 4 months with 18,75% per month',
+    distribution:
+      '25% at TGE, 75% will release in 4 months with 18,75% per month',
     startAt: 1645634700,
     endAt: 1645639200,
     claimAt: 1645804800,
@@ -1643,8 +1647,7 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer:
-      'https://bscscan.com/address/',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'Nomad Exiles',
     symbol: 'PRIDE-PBR',
     description: `PRIDE/BNB`,
@@ -1655,8 +1658,7 @@ export const supportedPools = [
     whitepaper:
       'https://nomad-exiles.gitbook.io/internal-wiki/nomad-exiles/about-the-game',
     tokenSymbol: 'PRIDE',
-    tokenExplorer:
-      'https://bscscan.com/address/',
+    tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/nomad.svg',
     totalSupply: '250,000,000 PRIDE',
     price: 0.1,
@@ -1666,7 +1668,7 @@ export const supportedPools = [
     max: 2,
     maxTier1: 1,
     maxTier2: 1.5,
-    maxTier3: 2.,
+    maxTier3: 2,
     access: PRIVATE,
     network: bscNetwork,
     distribution: '10% at TGE, 90% will release in 9 months with 10% per month',
@@ -1675,7 +1677,10 @@ export const supportedPools = [
     claimAt: 1648905000,
     startDate: '2PM UTC 26th March, 2022',
     harvestDistribution: [10, 10, 10, 10, 10, 10, 10, 10, 10, 10],
-    claimTimeArr: [1648905000, 1651496400, 1654088400, 1656680400, 1659272400, 1661864400, 1664456400, 1667048400, 1669640400, 1672232400],
+    claimTimeArr: [
+      1648905000, 1651496400, 1654088400, 1656680400, 1659272400, 1661864400,
+      1664456400, 1667048400, 1669640400, 1672232400,
+    ],
     registerForm: 'https://forms.gle/1G6w1AUfRZvCCVvP6',
   },
   {
@@ -1693,8 +1698,7 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer:
-      'https://bscscan.com/address/',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'Kyte',
     symbol: 'KTE-PBR',
     description: `KTE/BNB`,
@@ -1702,11 +1706,9 @@ export const supportedPools = [
     website: 'https://www.kyte.one/',
     twitter: 'https://twitter.com/kyteone',
     telegram: 'https://t.me/kyteone',
-    whitepaper:
-      'https://www.kyte.one/papers/whitepaper.pdf',
+    whitepaper: 'https://www.kyte.one/papers/whitepaper.pdf',
     tokenSymbol: 'KTE',
-    tokenExplorer:
-      'https://bscscan.com/address/',
+    tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/kyte.png',
     totalSupply: '50,000,000 KTE',
     price: 0.18,
@@ -1743,8 +1745,7 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer:
-      'https://bscscan.com/address/',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'Legend of Galaxy',
     symbol: 'GAE-PBR',
     description: `GAE/BNB`,
@@ -1752,11 +1753,9 @@ export const supportedPools = [
     website: 'https://legendofgalaxy.io/',
     twitter: 'https://twitter.com/Legend_LFW',
     telegram: 'https://t.me/LFWCommunity',
-    whitepaper:
-      'https://docs.legendofgalaxy.io/',
+    whitepaper: 'https://docs.legendofgalaxy.io/',
     tokenSymbol: 'GAE',
-    tokenExplorer:
-      'https://bscscan.com/address/',
+    tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/legend.png',
     totalSupply: '500,000,000 GAE',
     price: 0.02,
@@ -1793,8 +1792,7 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer:
-      'https://bscscan.com/address/',
+    lpExplorer: 'https://bscscan.com/address/',
     name: 'Outlanders',
     symbol: 'LAND-PBR',
     description: `LAND/BNB`,
@@ -1802,11 +1800,9 @@ export const supportedPools = [
     website: 'https://outlanders.com',
     twitter: 'https://twitter.com/PlayOutlanders',
     telegram: 'https://t.me/OutlandersOfficial',
-    whitepaper:
-      'https://outlanders.com/docs/Outlanders_Whitepaper.pdf',
+    whitepaper: 'https://outlanders.com/docs/Outlanders_Whitepaper.pdf',
     tokenSymbol: 'LAND',
-    tokenExplorer:
-      'https://bscscan.com/address/',
+    tokenExplorer: 'https://bscscan.com/address/',
     icon: '/img/tokens/land.png',
     totalSupply: '2,000,000,000 LAND',
     price: 0.012,
@@ -1869,8 +1865,7 @@ export const supportedPools = [
     maxTier3: 2,
     access: PUBLIC,
     network: bscNetwork,
-    distribution:
-      '10% @TGE, 3 Months Vesting With Monthly Unlock',
+    distribution: '10% @TGE, 3 Months Vesting With Monthly Unlock',
     startAt: 1659024000,
     endAt: 1659024000,
     claimAt: 0,
@@ -1919,8 +1914,7 @@ export const supportedPools = [
     maxTier3: 2,
     access: PUBLIC,
     network: bscNetwork,
-    distribution:
-      '10% @TGE, 3 Months Vesting With Monthly Unlock',
+    distribution: '10% @TGE, 3 Months Vesting With Monthly Unlock',
     startAt: 1659103200,
     endAt: 1659110400,
     claimAt: 0,

@@ -87,76 +87,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-      ({
-        pid,
-        name,
-        symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }) => ({
-        pid,
-        name,
-        id: symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }),
-    )
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }) => ({
+          pid,
+          name,
+          id: symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }),
+      )
     : []
 }
 
@@ -434,7 +434,6 @@ export const getPurchasesAmount = async (
       .getUserTotalPurchase(pid)
       .call({ from: account })
 
-
     return getBalanceNumber(new BigNumber(purchasesAmount))
   } catch (e) {
     console.log('ethTest: getPurchasesAmount', { e, lpAddress })
@@ -663,18 +662,29 @@ export const getUserStakingData = async (account, network) => {
       'public',
     )
 
-    const [stakedDataEth, stakedDataPoly] = await Promise.all([
+    const addressBsc = stakeContractAddresses.bsc[56]
+    const bscStakeContract = getContractInstance(
+      abi,
+      addressBsc,
+      'bsc',
+      'public',
+    )
+
+    const [stakedDataEth, stakedDataPoly, stakeDataBsc] = await Promise.all([
       stakeContract.methods.userInfo(0, account).call(),
       maticStakeContract.methods.userInfo(0, account).call(),
+      bscStakeContract.methods.userInfo(5, account).call(),
     ])
 
     // console.log('stakeAmount', { stakedDataEth, stakedDataPoly })
 
     const _totalStakedAmount = new BigNumber(stakedDataEth.amount)
       .plus(stakedDataPoly.amount)
+      .plus(stakeDataBsc?.amount)
       .toFixed(0)
       .toString()
 
+    console.log('total staked ', _totalStakedAmount)
     return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', { e })
@@ -863,7 +873,6 @@ const abiMapping = {
   '0x17c40b2a10d7f05cac876247d8d9e4d561e27fcf': launchpadBscAbi3,
   '0xcb705a6101e9250c7c867bd50a23f3aa6242f982': launchpadBscAbi3,
   '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
-  '0xce673d1326ff6772dc8a5d8c651330a883b72a8e': launchpadBscAbi3
 }
 
 const getCurrentLaunchpadContract = (
@@ -900,22 +909,22 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.moonriverRpc)
-          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else {
     rpc =
       nativeNetwork === network
