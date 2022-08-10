@@ -1973,7 +1973,7 @@ export const supportedPools = [
     lpAddresses: {
       1: '',
       42: '',
-      56: '',
+      56: '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0',
       97: '',
     },
     tokenAddresses: {
@@ -1996,8 +1996,8 @@ export const supportedPools = [
     icon: '/img/tokens/icade.png',
     totalSupply: '750,000,000 iCADE',
     price: 0.04,
-    total: '185 BNB', // 1BNB = 270$, 50k$
-    ratio: 6750, //0.04
+    total: '172.4 BNB', // 1BNB = 290$, 50k$
+    ratio: 7250, //0.04
     min: 0, //300$
     max: 0, //500$
     maxTier1: 0, //300$
@@ -2011,6 +2011,51 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 10th Aug, 2022',
     registerForm: "https://forms.gle/CX8tFawfE6qwinYYA"
+  },
+  {
+    pid: 54,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+    },
+    tokenAddresses: {
+      1: '0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+      42: '',
+      56: '',
+      97: '',
+    },
+    lpExplorer: 'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+    name: 'Spume',
+    symbol: 'SPUME-PBR',
+    description: `SPUME/BNB`,
+    introduce: `Spume is a community governed holder-owned NFT marketplace that facilitates the non-fungible tokenization of physical and digital assets and removes brokers, banks, and other centralized authorities from unjustifiably taxing the transactions and property of individuals.`,
+    website: 'http://spume.io/',
+    twitter: 'http://www.twitter.com/spumeio',
+    telegram: 'https://www.t.me/spumeio',
+    whitepaper: 'https://spume.io/wp-content/uploads/2022/01/spume-white-paper.pdf',
+    tokenSymbol: 'SPUME',
+    tokenExplorer: 'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+    icon: '/img/tokens/spume.png',
+    totalSupply: '100,000,000 SPUME',
+    price: 0.4,
+    total: '59 ETH', // 1eth = 1k6, 100k$
+    ratio: 4250, //0.4
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: ethereumNetwork,
+    distribution: '50% TGE, then 50%  20 days after TGE.',
+    startAt: 1660572000,
+    endAt: 1660575600,
+    claimAt: 0,
+    startDate: '2PM UTC 15th Aug, 2022',
+    registerForm: "https://forms.gle/1g3oKeS7wKtNQbeT7"
   },
   // {
   //   pid: 50,
