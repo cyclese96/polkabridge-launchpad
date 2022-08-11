@@ -2100,8 +2100,8 @@ export const supportedPools = [
     access: GUARANTEED,
     network: astarNetwork,
     distribution: '20% TGE, then 16% monthly in 5 months',
-    startAt: 1660485600,
-    endAt: 1660489200,
+    startAt: 1660485600,//test:1660223103
+    endAt: 1660489200,//test:1660568703
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
     registerForm: ""
