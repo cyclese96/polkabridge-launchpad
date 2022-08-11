@@ -31,6 +31,7 @@ export const bscNetwork = 'bsc'
 export const polygonNetwork = 'polygon'
 export const harmonyNetwork = 'harmony'
 export const moonriverNetwork = 'moonriver'
+export const astarNetwork = 'astar'
 
 export const tokenIdMapping = {
   ethereum: 'ethereum',
@@ -1998,16 +1999,16 @@ export const supportedPools = [
     price: 0.04,
     total: '172.4 BNB', // 1BNB = 290$, 50k$
     ratio: 7250, //0.04
-    min: 0, //300$
-    max: 0, //500$
-    maxTier1: 0, //300$
-    maxTier2: 0, //400$
-    maxTier3: 0, //500$
-    access: GUARANTEED,
+    min: 1, //300$
+    max: 2, //500$
+    maxTier1: 2, //300$
+    maxTier2: 2, //400$
+    maxTier3: 2, //500$
+    access: PUBLIC,
     network: bscNetwork,
     distribution: '20% TGE, 3% after 30 days, 5 months linear vesting https://bit.ly/3d5IHgi',
-    startAt: 1660140000,
-    endAt: 1660143600,
+    startAt: 1660144500,
+    endAt: 1660147200,
     claimAt: 0,
     startDate: '2PM UTC 10th Aug, 2022',
     registerForm: "https://forms.gle/CX8tFawfE6qwinYYA"
@@ -2056,6 +2057,53 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 15th Aug, 2022',
     registerForm: "https://forms.gle/1g3oKeS7wKtNQbeT7"
+  },
+  {
+    pid: 56,
+    poolId: 1,
+    lpAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+      8217: ''
+    },
+    tokenAddresses: {
+      1: '',
+      42: '',
+      56: '',
+      97: '',
+      8217: '0x9448610696659de8F72e1831d392214aE1ca4838'
+    },
+    lpExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
+    name: 'Sirius Finance',
+    symbol: 'SRS-PBR',
+    description: `SRS/ASTAR`,
+    introduce: `Sirius Finance is the first stablecoin AMM infrastructure on Astar Network, easy for everyone to begin their journey on Polkadot.`,
+    website: 'https://www.sirius.finance/',
+    twitter: 'http://www.twitter.com/Sirius_Finance',
+    telegram: 'https://www.t.me/siriusfinanceofficial',
+    whitepaper: 'https://github.com/SiriusFinance/gitbook/blob/main/Litepaper.pdf',
+    tokenSymbol: 'SRS',
+    tokenExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
+    icon: '/img/tokens/srs.svg',
+    totalSupply: '1,000,000,000 SRS',
+    price: 0.08,
+    total: '1,000,000 ASTR', // 1astar=0.05, 
+    ratio: 0.625, //0.08
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0,
+    maxTier3: 0,
+    access: GUARANTEED,
+    network: astarNetwork,
+    distribution: '20% TGE, then 16% monthly in 5 months',
+    startAt: 1660485600,
+    endAt: 1660489200,
+    claimAt: 0,
+    startDate: '2PM UTC 14th Aug, 2022',
+    registerForm: ""
   },
   // {
   //   pid: 50,
