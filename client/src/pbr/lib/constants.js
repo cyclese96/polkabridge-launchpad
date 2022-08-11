@@ -2083,7 +2083,7 @@ export const supportedPools = [
     introduce: `Sirius Finance is the first stablecoin AMM infrastructure on Astar Network, easy for everyone to begin their journey on Polkadot.`,
     website: 'https://www.sirius.finance/',
     twitter: 'http://www.twitter.com/Sirius_Finance',
-    telegram: 'https://www.t.me/siriusfinanceofficial',
+    telegram: 'https://t.me/siriusfinanceofficial',
     whitepaper: 'https://github.com/SiriusFinance/gitbook/blob/main/Litepaper.pdf',
     tokenSymbol: 'SRS',
     tokenExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
@@ -2104,7 +2104,7 @@ export const supportedPools = [
     endAt: 1660489200,//test:1660568703
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
-    registerForm: ""
+    registerForm: "https://forms.gle/VLMmi5tbdK1GC72m6"
   },
   // {
   //   pid: 50,
