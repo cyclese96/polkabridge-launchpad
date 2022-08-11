@@ -1,6 +1,7 @@
 import BigNumber from 'bignumber.js'
 import config from '../config'
 import {
+  astarNetwork,
   bscNetwork,
   ethereumNetwork,
   harmonyNetwork,
@@ -20,6 +21,8 @@ export const networkSymbol = (network) => {
     return 'ONE'
   } else if (network === moonriverNetwork) {
     return 'MOVR'
+  } else if (network === astarNetwork) {
+    return 'ASTR'
   } else {
     return 'ETH'
   }
@@ -34,7 +37,11 @@ export const networkIcon = (network) => {
     return '/img/tokens/one.png'
   } else if (network === moonriverNetwork) {
     return '/img/moon.png'
-  } else {
+  }
+  else if (network === astarNetwork) {
+    return '/img/astar.png'
+  }
+  else {
     return '/img/tokens/eth.png'
   }
 }
@@ -123,7 +130,7 @@ export const getTokenPriceFromCoinGecko = async (network, tokenId = null) => {
 
     const priceRes = await axios.get(
       config.coingecko +
-        `/v3/simple/price?ids=${token_id}&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
+      `/v3/simple/price?ids=${token_id}&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
     )
 
     const priceData = priceRes.data

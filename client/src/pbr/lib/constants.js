@@ -39,6 +39,7 @@ export const tokenIdMapping = {
   polygon: 'polygon',
   harmony: 'harmony',
   moonriver: 'moonriver',
+  astar: "astar"
 }
 
 // TODO: change the address & set LP pool

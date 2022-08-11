@@ -87,76 +87,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-        ({
-          pid,
-          name,
-          symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }) => ({
-          pid,
-          name,
-          id: symbol,
-          icon,
-          description,
-          introduce,
-          website,
-          twitter,
-          telegram,
-          whitepaper,
-          lpAddress,
-          lpContract,
-          lpExplorer,
-          tokenAddress,
-          tokenContract,
-          tokenExplorer,
-          tokenSymbol,
-          total,
-          totalSupply,
-          ratio,
-          min,
-          max,
-          maxTier1,
-          maxTier2,
-          maxTier3,
-          maxWhitelistPurchase,
-          access,
-          network,
-          distribution,
-          startAt,
-          endAt,
-          claimAt,
-          startDate,
-        }),
-      )
+      ({
+        pid,
+        name,
+        symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }) => ({
+        pid,
+        name,
+        id: symbol,
+        icon,
+        description,
+        introduce,
+        website,
+        twitter,
+        telegram,
+        whitepaper,
+        lpAddress,
+        lpContract,
+        lpExplorer,
+        tokenAddress,
+        tokenContract,
+        tokenExplorer,
+        tokenSymbol,
+        total,
+        totalSupply,
+        ratio,
+        min,
+        max,
+        maxTier1,
+        maxTier2,
+        maxTier3,
+        maxWhitelistPurchase,
+        access,
+        network,
+        distribution,
+        startAt,
+        endAt,
+        claimAt,
+        startDate,
+      }),
+    )
     : []
 }
 
@@ -908,22 +908,22 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-        ? new Web3.providers.HttpProvider(config.moonriverRpc)
-        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+          ? new Web3.providers.HttpProvider(config.moonriverRpc)
+          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else {
     rpc =
       nativeNetwork === network
@@ -962,6 +962,7 @@ export const formattedNetworkName = (network) => {
     harmony: 'Harmony',
     polygon: 'Polygon',
     moonriver: 'Moonriver',
+    astar: "Astar"
   }
   if (Object.keys(networks).includes(network)) {
     return networks[network]
