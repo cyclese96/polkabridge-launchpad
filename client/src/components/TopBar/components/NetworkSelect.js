@@ -5,6 +5,7 @@ import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import {
+  astarNetworkDetail,
   bscNetworkDetail,
   ethereumNetworkDetail,
   harmonyNetworkDetail,
@@ -48,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: 8,
   },
 }))
-export default function NetworkSelect({ }) {
+export default function NetworkSelect({}) {
   const classes = useStyles()
 
   const { chainId, status } = useNetwork()
@@ -93,10 +94,12 @@ export default function NetworkSelect({ }) {
       [config.moonriverChain, config.moonriverChainTestent].includes(_selected)
     ) {
       setupNetwork(
-        currentConnection === "mainnet"
+        currentConnection === 'mainnet'
           ? moonriverNetworkDetail.mainnet
-          : moonriverNetworkDetail.testnet
-      );
+          : moonriverNetworkDetail.testnet,
+      )
+    } else if ([config.astarChain].includes(_selected)) {
+      setupNetwork(astarNetworkDetail.mainnet)
     } else {
       setupNetwork(
         currentConnection === 'mainnet'
@@ -168,6 +171,11 @@ export default function NetworkSelect({ }) {
           >
             <span style={{ paddingLeft: 7 }}>Moonriver</span>
             <img className={classes.imgIcon} src="/img/moon.png" />
+          </MenuItem>
+
+          <MenuItem value={config.astarChain} className={classes.buttonDrop}>
+            <span style={{ paddingLeft: 7 }}>Astar</span>
+            <img className={classes.imgIcon} src="/img/astar.png" />
           </MenuItem>
         </Select>
       </FormControl>

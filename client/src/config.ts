@@ -26,4 +26,5 @@ export default {
   ankrPolygonRpc: 'https://rpc.ankr.com/polygon',
   ankrHmyRpc: '',
   ankrMoonriverRpc: '',
+  astarChain: 592,
 }
