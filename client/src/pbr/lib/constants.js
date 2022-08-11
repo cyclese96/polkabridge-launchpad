@@ -2066,19 +2066,19 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-      8217: ''
+      592: ''
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-      8217: '0x9448610696659de8F72e1831d392214aE1ca4838'
+      592: '0x9448610696659de8F72e1831d392214aE1ca4838'
     },
     lpExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
     name: 'Sirius Finance',
     symbol: 'SRS-PBR',
-    description: `SRS/ASTAR`,
+    description: `SRS/ASTR`,
     introduce: `Sirius Finance is the first stablecoin AMM infrastructure on Astar Network, easy for everyone to begin their journey on Polkadot.`,
     website: 'https://www.sirius.finance/',
     twitter: 'http://www.twitter.com/Sirius_Finance',
