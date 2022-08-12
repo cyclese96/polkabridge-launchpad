@@ -280,7 +280,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
       // console.log('process REACT_APP_POLYGON_TESTNET_NODE', process.env.REACT_APP_POLYGON_TESTNET_NODE)
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      // console.log('ethTest: isWhiteList  ', newIsWhitelist)
+      console.log('ethTest: isWhiteList  ', newIsWhitelist)
       // console.log('ethTest: newETHBalance  ', newETHBalance)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
@@ -1068,7 +1068,7 @@ const JoinLaunchpad: React.FC = () => {
                 {' '}
                 <p style={{ color: '#bdbdbd' }}>Amount (USD)</p>
                 <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  {purchaseStats ? purchaseStats?.amountUsd : 0}$
+                  {!purchaseStats ? 0 : purchaseStats?.amountUsd}$
                 </h6>
               </div>
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
@@ -1095,7 +1095,7 @@ const JoinLaunchpad: React.FC = () => {
                           marginTop: 4,
                         }}
                       >
-                        {purchaseStats?.profit}%
+                        {!purchaseStats?.profit ? 0 : purchaseStats?.profit}%
                       </h6>
                     )}
                     {new BigNumber(purchaseStats?.profit).lt(0) && (

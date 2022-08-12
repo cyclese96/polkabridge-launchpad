@@ -39,7 +39,7 @@ export const tokenIdMapping = {
   polygon: 'polygon',
   harmony: 'harmony',
   moonriver: 'moonriver',
-  astar: "astar"
+  astar: 'astar',
 }
 
 // TODO: change the address & set LP pool
@@ -2007,12 +2007,13 @@ export const supportedPools = [
     maxTier3: 2, //500$
     access: PUBLIC,
     network: bscNetwork,
-    distribution: '20% TGE, 3% after 30 days, 5 months linear vesting https://bit.ly/3d5IHgi',
+    distribution:
+      '20% TGE, 3% after 30 days, 5 months linear vesting https://bit.ly/3d5IHgi',
     startAt: 1660144500,
     endAt: 1660147200,
     claimAt: 0,
     startDate: '2PM UTC 10th Aug, 2022',
-    registerForm: "https://forms.gle/CX8tFawfE6qwinYYA"
+    registerForm: 'https://forms.gle/CX8tFawfE6qwinYYA',
   },
   {
     pid: 54,
@@ -2029,7 +2030,8 @@ export const supportedPools = [
       56: '',
       97: '',
     },
-    lpExplorer: 'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+    lpExplorer:
+      'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
     name: 'Spume',
     symbol: 'SPUME-PBR',
     description: `SPUME/BNB`,
@@ -2037,9 +2039,11 @@ export const supportedPools = [
     website: 'http://spume.io/',
     twitter: 'http://www.twitter.com/spumeio',
     telegram: 'https://www.t.me/spumeio',
-    whitepaper: 'https://spume.io/wp-content/uploads/2022/01/spume-white-paper.pdf',
+    whitepaper:
+      'https://spume.io/wp-content/uploads/2022/01/spume-white-paper.pdf',
     tokenSymbol: 'SPUME',
-    tokenExplorer: 'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+    tokenExplorer:
+      'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
     icon: '/img/tokens/spume.png',
     totalSupply: '100,000,000 SPUME',
     price: 0.4,
@@ -2057,7 +2061,7 @@ export const supportedPools = [
     endAt: 1660575600,
     claimAt: 0,
     startDate: '2PM UTC 15th Aug, 2022',
-    registerForm: "https://forms.gle/1g3oKeS7wKtNQbeT7"
+    registerForm: 'https://forms.gle/1g3oKeS7wKtNQbeT7',
   },
   {
     pid: 56,
@@ -2067,16 +2071,17 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-      592: ''
+      592: '0xdebB6227FA8593A26F7C84B4c288518c7A5e242B',
     },
     tokenAddresses: {
       1: '',
       42: '',
       56: '',
       97: '',
-      592: '0x9448610696659de8F72e1831d392214aE1ca4838'
+      592: '0x9448610696659de8F72e1831d392214aE1ca4838',
     },
-    lpExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
+    lpExplorer:
+      'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
     name: 'Sirius Finance',
     symbol: 'SRS-PBR',
     description: `SRS/ASTR`,
@@ -2084,13 +2089,15 @@ export const supportedPools = [
     website: 'https://www.sirius.finance/',
     twitter: 'http://www.twitter.com/Sirius_Finance',
     telegram: 'https://t.me/siriusfinanceofficial',
-    whitepaper: 'https://github.com/SiriusFinance/gitbook/blob/main/Litepaper.pdf',
+    whitepaper:
+      'https://github.com/SiriusFinance/gitbook/blob/main/Litepaper.pdf',
     tokenSymbol: 'SRS',
-    tokenExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
+    tokenExplorer:
+      'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
     icon: '/img/tokens/srs.svg',
     totalSupply: '1,000,000,000 SRS',
     price: 0.08,
-    total: '1,000,000 ASTR', // 1astar=0.05, 
+    total: '1,000,000 ASTR', // 1astar=0.05,
     ratio: 0.625, //0.08
     min: 0,
     max: 0,
@@ -2100,11 +2107,11 @@ export const supportedPools = [
     access: GUARANTEED,
     network: astarNetwork,
     distribution: '20% TGE, then 16% monthly in 5 months',
-    startAt: 1660485600,//test:1660223103
-    endAt: 1660489200,//test:1660568703
+    startAt: 1660223103, //test:1660223103
+    endAt: 1660568703, //test:1660568703
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
-    registerForm: "https://forms.gle/VLMmi5tbdK1GC72m6"
+    registerForm: 'https://forms.gle/VLMmi5tbdK1GC72m6',
   },
   // {
   //   pid: 50,

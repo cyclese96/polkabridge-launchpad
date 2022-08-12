@@ -1,0 +1,449 @@
+[
+  {
+    "type": "constructor",
+    "stateMutability": "nonpayable",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "receiveTokenAdd",
+        "internalType": "address payable"
+      }
+    ]
+  },
+  {
+    "type": "event",
+    "name": "OwnershipTransferred",
+    "inputs": [
+      {
+        "type": "address",
+        "name": "previousOwner",
+        "internalType": "address",
+        "indexed": true
+      },
+      {
+        "type": "address",
+        "name": "newOwner",
+        "internalType": "address",
+        "indexed": true
+      }
+    ],
+    "anonymous": false
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "IsWhitelist",
+    "inputs": [
+      { "type": "address", "name": "user", "internalType": "address" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "uint256", "name": "stackAmount", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "addClaimInfo",
+    "inputs": [
+      { "type": "uint256", "name": "percentClaim1", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime1", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim2", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime2", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim3", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime3", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim4", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime4", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim5", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime5", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim6", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime6", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim7", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime7", "internalType": "uint256" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "addMulWhitelist",
+    "inputs": [
+      { "type": "address[]", "name": "user", "internalType": "address[]" },
+      {
+        "type": "uint256[]",
+        "name": "allocation",
+        "internalType": "uint256[]"
+      },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "addPool",
+    "inputs": [
+      { "type": "uint256", "name": "begin", "internalType": "uint256" },
+      { "type": "uint256", "name": "end", "internalType": "uint256" },
+      { "type": "uint256", "name": "_type", "internalType": "uint256" },
+      {
+        "type": "address",
+        "name": "idoToken",
+        "internalType": "contract IERC20"
+      },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier1",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier2",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier3",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxSpecialPurchase",
+        "internalType": "uint256"
+      },
+      { "type": "uint256", "name": "totalCap", "internalType": "uint256" },
+      { "type": "uint256", "name": "totalToken", "internalType": "uint256" },
+      { "type": "uint256", "name": "ratePerETH", "internalType": "uint256" },
+      {
+        "type": "uint256",
+        "name": "minimumTokenSoldout",
+        "internalType": "uint256"
+      }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "uint256", "name": "ClaimTime1", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim1", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime2", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim2", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime3", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim3", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime4", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim4", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime5", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim5", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime6", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim6", "internalType": "uint256" },
+      { "type": "uint256", "name": "ClaimTime7", "internalType": "uint256" },
+      { "type": "uint256", "name": "PercentClaim7", "internalType": "uint256" }
+    ],
+    "name": "claimInfos",
+    "inputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "claimToken",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getBalanceTokenByPoolId",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" }
+    ],
+    "name": "getClaimInfo",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "address", "name": "", "internalType": "contract IERC20" }
+    ],
+    "name": "getPoolInfo",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getPoolSoldInfo",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getRemainIDOToken",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "bool", "name": "", "internalType": "bool" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" }
+    ],
+    "name": "getUserInfo",
+    "inputs": [
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "address", "name": "user", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getUserPurchaseAllocation",
+    "inputs": [
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "address", "name": "user", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "uint256", "name": "", "internalType": "uint256" }],
+    "name": "getUserTotalPurchase",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "bool", "name": "", "internalType": "bool" },
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "uint256", "name": "", "internalType": "uint256" }
+    ],
+    "name": "getWhitelistfo",
+    "inputs": [{ "type": "uint256", "name": "pid", "internalType": "uint256" }]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "bool", "name": "", "internalType": "bool" }],
+    "name": "isOwner",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "string", "name": "", "internalType": "string" }],
+    "name": "name",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [{ "type": "address", "name": "", "internalType": "address" }],
+    "name": "owner",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "payable",
+    "outputs": [],
+    "name": "purchaseIDO",
+    "inputs": [
+      { "type": "uint256", "name": "stakeAmount", "internalType": "uint256" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "uint8", "name": "v", "internalType": "uint8" },
+      { "type": "bytes32", "name": "r", "internalType": "bytes32" },
+      { "type": "bytes32", "name": "s", "internalType": "bytes32" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "renounceOwnership",
+    "inputs": []
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "sign",
+    "inputs": [
+      { "type": "address[]", "name": "user", "internalType": "address[]" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "transferOwnership",
+    "inputs": [
+      { "type": "address", "name": "newOwner", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "updateClaimInfo",
+    "inputs": [
+      { "type": "uint256", "name": "percentClaim1", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime1", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim2", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime2", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim3", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime3", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim4", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime4", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim5", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime5", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim6", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime6", "internalType": "uint256" },
+      { "type": "uint256", "name": "percentClaim7", "internalType": "uint256" },
+      { "type": "uint256", "name": "claimTime7", "internalType": "uint256" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "updateMinimumStake",
+    "inputs": [
+      { "type": "uint256", "name": "_minimum", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "updatePool",
+    "inputs": [
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "uint256", "name": "begin", "internalType": "uint256" },
+      { "type": "uint256", "name": "end", "internalType": "uint256" },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier1",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier2",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxPurchaseTier3",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "maxSpecialPurchase",
+        "internalType": "uint256"
+      },
+      { "type": "uint256", "name": "totalCap", "internalType": "uint256" },
+      { "type": "uint256", "name": "totalToken", "internalType": "uint256" },
+      { "type": "uint256", "name": "ratePerETH", "internalType": "uint256" },
+      {
+        "type": "address",
+        "name": "idoToken",
+        "internalType": "contract IERC20"
+      },
+      { "type": "uint256", "name": "pooltype", "internalType": "uint256" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "updateWhitelist",
+    "inputs": [
+      { "type": "address", "name": "user", "internalType": "address" },
+      { "type": "uint256", "name": "pid", "internalType": "uint256" },
+      { "type": "bool", "name": "isWhitelist", "internalType": "bool" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "view",
+    "outputs": [
+      { "type": "uint256", "name": "Id", "internalType": "uint256" },
+      { "type": "bool", "name": "IsWhitelist", "internalType": "bool" },
+      {
+        "type": "uint256",
+        "name": "TotalTokenPurchase",
+        "internalType": "uint256"
+      },
+      {
+        "type": "uint256",
+        "name": "TotalETHPurchase",
+        "internalType": "uint256"
+      },
+      { "type": "uint256", "name": "PurchaseTime", "internalType": "uint256" },
+      { "type": "uint256", "name": "LastClaimed", "internalType": "uint256" },
+      {
+        "type": "uint256",
+        "name": "TotalPercentClaimed",
+        "internalType": "uint256"
+      },
+      { "type": "uint256", "name": "NumberClaimed", "internalType": "uint256" },
+      {
+        "type": "uint256",
+        "name": "PurchaseAllocation",
+        "internalType": "uint256"
+      }
+    ],
+    "name": "users",
+    "inputs": [
+      { "type": "uint256", "name": "", "internalType": "uint256" },
+      { "type": "address", "name": "", "internalType": "address" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "withdrawErc20",
+    "inputs": [
+      { "type": "address", "name": "token", "internalType": "contract IERC20" }
+    ]
+  },
+  {
+    "type": "function",
+    "stateMutability": "nonpayable",
+    "outputs": [],
+    "name": "withdrawPoolFund",
+    "inputs": []
+  }
+]
