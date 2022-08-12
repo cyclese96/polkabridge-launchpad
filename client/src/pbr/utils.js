@@ -11,6 +11,7 @@ import {
   harmonyNetwork,
   harmonyChainIds,
   moonriverNetwork,
+  astarNetwork,
 } from './lib/constants'
 import Web3 from 'web3'
 
@@ -19,6 +20,7 @@ import LaunchpadAbi from './lib/abi/masterLaunchpad.json'
 import launchpadBscAbi from './lib/abi/ido/launchpad.json'
 import launchpadBscAbi2 from './lib/abi/ido/launchpad2.json'
 import launchpadBscAbi3 from './lib/abi/ido/launchpad3.json'
+import lpAstarAbi from './lib/abi/ido/astarLp.json'
 
 import ERC20Abi from './lib/abi/erc20.json'
 
@@ -87,76 +89,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-      ({
-        pid,
-        name,
-        symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }) => ({
-        pid,
-        name,
-        id: symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }),
-    )
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }) => ({
+          pid,
+          name,
+          id: symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }),
+      )
     : []
 }
 
@@ -199,6 +201,13 @@ export const getDefaultLaunchpads = () => {
         currentConnection === 'mainnet'
           ? config.moonriverChain
           : config.moonriverChainTestent
+
+      return Object.assign(pool, {
+        tokenAddress: pool.tokenAddresses?.[_chain],
+        lpAddress: pool.lpAddresses?.[_chain],
+      })
+    } else if (pool.network === astarNetwork) {
+      const _chain = config.astarChain
 
       return Object.assign(pool, {
         tokenAddress: pool.tokenAddresses?.[_chain],
@@ -389,12 +398,26 @@ export const getIsWhitelist = async (
     const isWhitelist = await lpContract.methods
       .IsWhitelist(account, pid, stakeAmount)
       .call()
+
+    // console.log('iswhitelist response ', {
+    //   isWhitelist,
+    //   pid,
+    //   lpAddress,
+    //   stakeAmount,
+    // })
+
     // console.log('ethTest: getIsWhitelistInfo ', { isWhitelist, pid })
 
     return isWhitelist
   } catch (e) {
-    // console.log('ethTest:  getIsWhitelist error', { pid, e, stakeAmount: stakeAmount })
-    return
+    console.log('ethTest:  isWhiteList error', {
+      pid,
+      e,
+      stakeAmount: stakeAmount,
+      lpAddress,
+      lpNetwork,
+    })
+    return false
   }
 }
 
@@ -539,6 +562,7 @@ export const joinpool = async (
           return tx.transactionHash
         })
     }
+    // console.log('purchase ido params', { stakeAmount, pid, v, r, s })
     return _launchpadContract.methods
       .purchaseIDO(stakeAmount, pid, v, r, s)
       .send({ from: account, value: convertToWei(ethValue) })
@@ -682,7 +706,7 @@ export const getUserStakingData = async (account, network) => {
       .toFixed(0)
       .toString()
 
-    console.log('total staked ', _totalStakedAmount)
+    // console.log('total staked ', _totalStakedAmount)
     return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', { e })
@@ -738,7 +762,9 @@ export const getPurchaseStats = async (
       .toFixed(4)
       .toString()
 
-    const tokenInitialUsdValue = new BigNumber(purchasedToken)
+    const tokenInitialUsdValue = new BigNumber(
+      purchasedToken ? purchasedToken : 0,
+    )
       .times(nativeTokenPrice)
       .div(ratio)
       .toFixed(4)
@@ -831,6 +857,8 @@ export const getNetworkName = (networkId) => {
     )
   ) {
     return moonriverNetwork
+  } else if (config.astarChain === parseInt(networkId)) {
+    return astarNetwork
   } else {
     return ethereumNetwork
   }
@@ -872,6 +900,7 @@ const abiMapping = {
   '0xcb705a6101e9250c7c867bd50a23f3aa6242f982': launchpadBscAbi3,
   '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
   '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0': launchpadBscAbi3,
+  '0xdebB6227FA8593A26F7C84B4c288518c7A5e242B': lpAstarAbi,
 }
 
 const getCurrentLaunchpadContract = (
@@ -908,22 +937,29 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.moonriverRpc)
-          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+  } else if (network === astarNetwork) {
+    rpc =
+      nativeNetwork === network
+        ? window.ethereum
+        : currentConnection === 'mainnet'
+        ? new Web3.providers.HttpProvider(config.astarRpc)
+        : new Web3.providers.HttpProvider(config.astarRpc)
   } else {
     rpc =
       nativeNetwork === network
@@ -962,7 +998,7 @@ export const formattedNetworkName = (network) => {
     harmony: 'Harmony',
     polygon: 'Polygon',
     moonriver: 'Moonriver',
-    astar: "Astar"
+    astar: 'Astar',
   }
   if (Object.keys(networks).includes(network)) {
     return networks[network]

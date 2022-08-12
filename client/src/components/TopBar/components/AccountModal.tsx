@@ -23,6 +23,7 @@ import { Link, useHistory } from 'react-router-dom'
 // import useUnlock from '../../../hooks/useUnlock'
 import useNetwork from '../../../hooks/useNetwork'
 import {
+  astarNetwork,
   bscNetwork,
   ethereumNetwork,
   harmonyNetwork,
@@ -60,6 +61,8 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
       return 'ONE'
     } else if (getNetworkName(chainId) === moonriverNetwork) {
       return 'MOVR'
+    } else if (getNetworkName(chainId) === astarNetwork) {
+      return 'ASTAR'
     } else {
       return 'ETH'
     }

@@ -27,4 +27,5 @@ export default {
   ankrHmyRpc: '',
   ankrMoonriverRpc: '',
   astarChain: 592,
+  astarRpc: 'https://rpc.astar.network:8545',
 }

@@ -2,6 +2,7 @@ import PolkaBridgeAbi from './abi/pbr.json'
 
 import WETHAbi from './abi/weth.json'
 import {
+  astarNetwork,
   bscNetwork,
   currentConnection,
   harmonyNetwork,
@@ -63,6 +64,14 @@ export class Contracts {
       } else if (pool.network === moonriverNetwork) {
 
         const _chain = currentConnection === 'mainnet' ? config.moonriverChain : config.moonriverChainTestent;
+        return Object.assign(pool, {
+          tokenAddress: pool.tokenAddresses[_chain],
+          lpAddress: pool.lpAddresses[_chain],
+        });
+
+      } else if (pool.network === astarNetwork) {
+
+        const _chain = config.astarChain
         return Object.assign(pool, {
           tokenAddress: pool.tokenAddresses[_chain],
           lpAddress: pool.lpAddresses[_chain],
