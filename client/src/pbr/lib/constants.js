@@ -2096,9 +2096,9 @@ export const supportedPools = [
       'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
     icon: '/img/tokens/srs.svg',
     totalSupply: '1,000,000,000 SRS',
-    price: 0.08,
+    price: 0.036,
     total: '1,000,000 ASTR', // 1astar=0.05,
-    ratio: 0.625, //0.08
+    ratio: 1.38, //0.036
     min: 0,
     max: 0,
     maxTier1: 0,
@@ -2112,6 +2112,8 @@ export const supportedPools = [
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
     registerForm: 'https://forms.gle/VLMmi5tbdK1GC72m6',
+    harvestDistribution: [20, 16, 16, 16, 16],
+    claimTimeArr: [],
   },
   // {
   //   pid: 50,
