@@ -2089,9 +2089,9 @@ export const supportedPools = [
     tokenExplorer: 'https://blockscout.com/astar/address/0x9448610696659de8F72e1831d392214aE1ca4838',
     icon: '/img/tokens/srs.svg',
     totalSupply: '1,000,000,000 SRS',
-    price: 0.08,
+    price: 0.036,
     total: '1,000,000 ASTR', // 1astar=0.05, 
-    ratio: 0.625, //0.08
+    ratio: 1.38, //0.036
     min: 0,
     max: 0,
     maxTier1: 0,
