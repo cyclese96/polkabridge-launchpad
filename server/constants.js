@@ -112,7 +112,7 @@ const pools = [
     pid: 1,
     network: astarNetwork,
     symbol: "SRS-PBR",
-    startAt: 1660223103, //test:1660223103
+    startAt: 1660485600, //test:1660223103
   },
 ];
 

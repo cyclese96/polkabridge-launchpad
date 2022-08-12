@@ -2071,7 +2071,7 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-      592: '0xdebB6227FA8593A26F7C84B4c288518c7A5e242B',
+      592: '0x5e427d7a4E6e55e6B8f6E3A5C31cF19AcC364fc7',
     },
     tokenAddresses: {
       1: '',
@@ -2107,8 +2107,8 @@ export const supportedPools = [
     access: GUARANTEED,
     network: astarNetwork,
     distribution: '20% TGE, then 16% monthly in 5 months',
-    startAt: 1660223103, //test:1660223103
-    endAt: 1660568703, //test:1660568703
+    startAt: 1660485600, //test:1660223103
+    endAt: 1660489200, //test:1660568703
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
     registerForm: 'https://forms.gle/VLMmi5tbdK1GC72m6',

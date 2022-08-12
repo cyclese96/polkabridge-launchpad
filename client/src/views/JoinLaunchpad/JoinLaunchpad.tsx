@@ -393,10 +393,7 @@ const JoinLaunchpad: React.FC = () => {
       _max = access === 'Public' ? maxTier2 : getMaxValue()
     }
 
-    let newTokenValue = new BigNumber(_max)
-      .multipliedBy(ratio)
-      .toFixed(0)
-      .toString()
+    let newTokenValue = new BigNumber(_max).multipliedBy(ratio).toString()
     setETHValue(_max.toString())
     setTokenValue(newTokenValue.toString())
     // console.log({ newTokenValue, tokenPurchased, ratio, _max })
