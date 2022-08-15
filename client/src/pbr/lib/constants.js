@@ -2019,19 +2019,19 @@ export const supportedPools = [
     pid: 54,
     poolId: 1,
     lpAddresses: {
-      1: '',
+      1: '0x584fc75ca47910150441d0751d031a33297dc085',
       42: '',
       56: '',
       97: '',
     },
     tokenAddresses: {
-      1: '0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+      1: '0xa16a609fF4e1A15b6cCb469E7a5dD14E89305283',
       42: '',
       56: '',
       97: '',
     },
     lpExplorer:
-      'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+      'https://etherscan.io/address/0xa16a609fF4e1A15b6cCb469E7a5dD14E89305283',
     name: 'Spume',
     symbol: 'SPUME-PBR',
     description: `SPUME/BNB`,
@@ -2043,11 +2043,11 @@ export const supportedPools = [
       'https://spume.io/wp-content/uploads/2022/01/spume-white-paper.pdf',
     tokenSymbol: 'SPUME',
     tokenExplorer:
-      'https://etherscan.io/address/0x637b1c41e3e34a2B0C77BeB57BCFEE3c88cC50fC',
+      'https://etherscan.io/address/0xa16a609fF4e1A15b6cCb469E7a5dD14E89305283',
     icon: '/img/tokens/spume.png',
     totalSupply: '100,000,000 SPUME',
     price: 0.4,
-    total: '59 ETH', // 1eth = 1k6, 100k$
+    total: '58.8 ETH', // 1eth = 1k7, 100k$
     ratio: 4250, //0.4
     min: 0,
     max: 0,
@@ -2056,10 +2056,10 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: ethereumNetwork,
-    distribution: '50% TGE, then 50%  20 days after TGE.',
+    distribution: '20% TGE, then 13.3% in week2, week3, week4 and 50% at 2nd month.',
     startAt: 1660572000,
     endAt: 1660575600,
-    claimAt: 0,
+    claimAt: 1661781600,
     startDate: '2PM UTC 15th Aug, 2022',
     registerForm: 'https://forms.gle/1g3oKeS7wKtNQbeT7',
   },
@@ -2071,7 +2071,7 @@ export const supportedPools = [
       42: '',
       56: '',
       97: '',
-      592: '0x5e427d7a4E6e55e6B8f6E3A5C31cF19AcC364fc7',
+      592: '0xB9Ffb5Fe5760f0dCb537e50Bee620CFbA646Ea71',
     },
     tokenAddresses: {
       1: '',
@@ -2097,23 +2097,23 @@ export const supportedPools = [
     icon: '/img/tokens/srs.svg',
     totalSupply: '1,000,000,000 SRS',
     price: 0.036,
-    total: '1,000,000 ASTR', // 1astar=0.05,
-    ratio: 1.38, //0.036
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
+    total: '1,000,000 ASTR', // 1astar=0.045,
+    ratio: 1.25, //0.036
+    min: 12000,
+    max: 12000,
+    maxTier1: 12000,
+    maxTier2: 12000,
+    maxTier3: 12000,
     access: GUARANTEED,
     network: astarNetwork,
     distribution: '20% TGE, then 16% monthly in 5 months',
-    startAt: 1660485600, //test:1660223103
-    endAt: 1660489200, //test:1660568703
+    startAt: 1660493700, //test:1660223103
+    endAt: 1660496400, //test:1660568703
     claimAt: 0,
     startDate: '2PM UTC 14th Aug, 2022',
     registerForm: 'https://forms.gle/VLMmi5tbdK1GC72m6',
     harvestDistribution: [20, 16, 16, 16, 16],
-    claimTimeArr: [],
+    claimTimeArr: [1660651200, 1663329600, 1665921600, 1668600000, 1671192000, 1673870400],
   },
   // {
   //   pid: 50,
