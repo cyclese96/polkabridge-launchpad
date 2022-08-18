@@ -212,6 +212,8 @@ const Home: React.FC = () => {
           RPC powered by ANKR protocol
         </div>
         <LaunchpadATH />
+      </Box>
+      <Box>
         <LaunchpadCards />
       </Box>
     </Page>
