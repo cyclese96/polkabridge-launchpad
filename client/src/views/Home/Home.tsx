@@ -9,6 +9,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useNetwork from '../../hooks/useNetwork'
 import NetworkSelect from '../../components/TopBar/components/NetworkSelect'
 import { Link } from 'react-router-dom'
+import LaunchpadATH from '../LaunchpadATH/LaunchpadATH'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -201,6 +202,7 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
       <Box className="mt-3">
         <div className={classes.rpcLabel}>
           <img
@@ -209,6 +211,7 @@ const Home: React.FC = () => {
           />
           RPC powered by ANKR protocol
         </div>
+        <LaunchpadATH />
         <LaunchpadCards />
       </Box>
     </Page>
