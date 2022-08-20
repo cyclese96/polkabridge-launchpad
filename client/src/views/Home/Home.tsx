@@ -9,6 +9,7 @@ import { useWallet } from '@binance-chain/bsc-use-wallet'
 import useNetwork from '../../hooks/useNetwork'
 import NetworkSelect from '../../components/TopBar/components/NetworkSelect'
 import { Link } from 'react-router-dom'
+import LaunchpadATH from '../LaunchpadATH/LaunchpadATH'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -109,6 +110,15 @@ const useStyles = makeStyles((theme) => ({
       fontSize: 22,
     },
   },
+  heading: {
+    color: '#e5e5e5',
+    fontSize: 24,
+    fontWeight: 500,
+    textAlign: 'center',
+    [theme.breakpoints.down('sm')]: {
+      fontSize: 22,
+    },
+  },
   rpcLabel: {
     textAlign: 'center',
     color: '#f9f9f9',
@@ -201,14 +211,12 @@ const Home: React.FC = () => {
           </div>
         </div>
       </div>
+
       <Box className="mt-3">
-        <div className={classes.rpcLabel}>
-          <img
-            src="https://assets.coingecko.com/coins/images/4324/small/U85xTl2.png?1608111978"
-            className={classes.icon}
-          />
-          RPC powered by ANKR protocol
-        </div>
+        <div className={classes.heading}>Funding raised projects</div>
+        <LaunchpadATH />
+      </Box>
+      <Box>
         <LaunchpadCards />
       </Box>
     </Page>
