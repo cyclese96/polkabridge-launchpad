@@ -901,6 +901,7 @@ const abiMapping = {
   '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
   '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0': launchpadBscAbi3,
   '0xB9Ffb5Fe5760f0dCb537e50Bee620CFbA646Ea71': lpAstarAbi,
+  '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3
 }
 
 const getCurrentLaunchpadContract = (
