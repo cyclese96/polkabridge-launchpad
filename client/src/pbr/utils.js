@@ -89,76 +89,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-      ({
-        pid,
-        name,
-        symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }) => ({
-        pid,
-        name,
-        id: symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }),
-    )
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }) => ({
+          pid,
+          name,
+          id: symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }),
+      )
     : []
 }
 
@@ -835,8 +835,8 @@ const isHarmonyNetwork = (networkId) => {
   let _flag = false
   Object.keys(harmonyChainIds).forEach((value, index) => {
     if (
-      harmonyChainIds[value].testnet.toString() === networkId.toString() ||
-      harmonyChainIds[value].mainnet.toString() === networkId.toString()
+      harmonyChainIds?.[value]?.testnet.toString() === networkId?.toString() ||
+      harmonyChainIds?.[value]?.mainnet.toString() === networkId?.toString()
     ) {
       _flag = true
     }
@@ -901,7 +901,7 @@ const abiMapping = {
   '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
   '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0': launchpadBscAbi3,
   '0xB9Ffb5Fe5760f0dCb537e50Bee620CFbA646Ea71': lpAstarAbi,
-  '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3
+  '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3,
 }
 
 const getCurrentLaunchpadContract = (
@@ -938,29 +938,29 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.moonriverRpc)
-          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else if (network === astarNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.astarRpc)
-          : new Web3.providers.HttpProvider(config.astarRpc)
+        ? new Web3.providers.HttpProvider(config.astarRpc)
+        : new Web3.providers.HttpProvider(config.astarRpc)
   } else {
     rpc =
       nativeNetwork === network
@@ -1054,4 +1054,29 @@ export const getPoolClaimTimeArr = (poolId, network) => {
   } else {
     return [[lp.claimAt], distribution]
   }
+}
+
+export const formatCurrency = (
+  value,
+  usd = false,
+  fractionDigits = 1,
+  currencyFormat = false,
+) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: 4,
+  })
+
+  //for currency format with $symbol
+  if (usd) {
+    return formatter.format(value ? value : 0)?.slice(1)
+  }
+
+  if (typeof window.web3 === 'undefined') {
+    return formatter.format(value ? value : 0).slice(1)
+  }
+
+  return formatter.format(value ? value : 0).slice(1)
 }

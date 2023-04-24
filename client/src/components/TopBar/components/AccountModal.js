@@ -1,27 +1,13 @@
-import React, { useCallback, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
-// import { useWallet } from 'use-wallet'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import useTokenBalance from '../../../hooks/useTokenBalance'
-import usePolkaBridge from '../../../hooks/usePolkaBridge'
-import { getNetworkName, getPolkaBridgeAddress } from '../../../pbr/utils'
-import { getBalanceNumber } from '../../../utils/formatBalance'
-import Button from '../../Button'
-import CardIcon from '../../CardIcon'
-import Label from '../../Label'
-import Modal, { ModalProps } from '../../Modal'
+import { formatCurrency, getNetworkName } from '../../../pbr/utils'
+import MaterialButton from '../../Button/MaterialButton'
+
 import ModalActions from '../../ModalActions'
 import ModalContent from '../../ModalContent'
-import ModalTitle from '../../ModalTitle'
-import Spacer from '../../Spacer'
-import Value from '../../Value'
-import qrCode from '../../../assets/img/qr-code.png'
-import IconView from '../../../assets/img/icon-view.svg'
-import { Link, useHistory } from 'react-router-dom'
 
-// import useLockBalance from '../../../hooks/useLockBalance'
-// import useUnlock from '../../../hooks/useUnlock'
-import useNetwork from '../../../hooks/useNetwork'
+import IconView from '../../../assets/img/icon-view.svg'
+
 import {
   astarNetwork,
   bscNetwork,
@@ -30,27 +16,40 @@ import {
   moonriverNetwork,
   polygonNetwork,
 } from '../../../pbr/lib/constants'
-import BigNumber from 'bignumber.js'
+import useWallet from '../../../hooks/useWallet'
+import { useBalance, useDisconnect } from 'wagmi'
+import { Dialog } from '@material-ui/core'
+import { useWeb3Modal } from '@web3modal/react'
 
-const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
-  const { account, reset } = useWallet()
-  const { chainId } = useNetwork()
+const AccountModal = ({ resetPopup, popupActive }) => {
+  const { account, chainId } = useWallet()
+  const { disconnect } = useDisconnect()
+  const { isOpen } = useWeb3Modal()
+  const handleClose = () => {
+    resetPopup()
+  }
+
+  useEffect(() => {
+    if (isOpen) {
+      resetPopup()
+    }
+  }, [isOpen, resetPopup])
 
   const handleSignOutClick = useCallback(() => {
-    onDismiss!()
-    reset()
+    disconnect()
     localStorage.useWalletConnectStatus = 'disconnected'
     localStorage.useWalletConnectType = ''
     localStorage.removeItem('walletconnect')
-  }, [onDismiss])
+    resetPopup()
+  }, [resetPopup, disconnect])
 
-  const pbr = usePolkaBridge()
-  const { pbrBalance, ether } = useTokenBalance(getPolkaBridgeAddress(pbr))
-
-  // const history = useHistory()
-
-  const [pendingTx, setPendingTx] = useState(false)
-  // const { onUnlock } = useUnlock()
+  const { data } = useBalance({
+    address: account,
+    chainId: chainId,
+    formatUnits: 'ether',
+  })
+  // native token balance
+  const balance = useMemo(() => data?.formatted, [data])
 
   const getTokenSymbol = () => {
     if (getNetworkName(chainId) === bscNetwork) {
@@ -69,12 +68,15 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
   }
 
   return (
-    <ModalLarge>
-      <Modal>
+    <Dialog
+      onClose={handleClose}
+      aria-labelledby="simple-dialog-title"
+      open={popupActive}
+    >
+      <ModalLarge>
         <div
           style={{
             backgroundColor: 'rgba(41, 42, 66, 1)',
-            borderRadius: 20,
           }}
         >
           <ModalContent>
@@ -102,34 +104,7 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
                             Balance <img src={IconView} alt="View" />
                           </TextMin>
                           <TextMedium>
-                            <strong>
-                              {/* {getNetworkName(chainId) === ethereumNetwork
-                                ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
-                                : parseFloat(
-                                    getBalanceNumber(pbrBalance).toFixed(4),
-                                  ).toLocaleString('en-US')} */}
-                              {getNetworkName(chainId) === bscNetwork
-                                ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
-                                : getNetworkName(chainId) === polygonNetwork
-                                ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
-                                : getNetworkName(chainId) === moonriverNetwork
-                                ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
-                                : getNetworkName(chainId) === harmonyNetwork
-                                ? parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )
-                                : parseFloat(ether.toString()).toLocaleString(
-                                    'en-US',
-                                  )}
-                            </strong>
+                            <strong>{formatCurrency(balance)}</strong>
                             <span>{getTokenSymbol()}</span>
                           </TextMedium>
                         </Col>
@@ -143,20 +118,21 @@ const AccountModal: React.FC<ModalProps> = ({ onDismiss }) => {
           <ModalActions>
             <Row>
               <Col className="col-6 align-center">
-                <Button
-                  onClick={handleSignOutClick}
-                  text="Sign out"
-                  variant="secondary"
-                />
+                <MaterialButton variant="secondary" onClick={resetPopup}>
+                  Close
+                </MaterialButton>
               </Col>
               <Col className="col-6 align-center">
-                <Button onClick={onDismiss} text="Close" />
+                <MaterialButton onClick={handleSignOutClick}>
+                  Sign out
+                </MaterialButton>
               </Col>
             </Row>
           </ModalActions>
         </div>
-      </Modal>
-    </ModalLarge>
+        {/* </Modal> */}
+      </ModalLarge>
+    </Dialog>
   )
 }
 
@@ -241,12 +217,12 @@ const Heading3 = styled.div`
   font-weight: 800;
   color: #e0077d;
   padding: 12px 20px;
-  border-radius: 16px 16px 0 0;
+  // border-radius: 16px 16px 0 0;
 `
 
 const Box = styled.div`
   background: rgba(41, 42, 66, 1);
-  border-radius: 16px;
+  // border-radius: 16px;
   *,
   *:before,
   *:after {

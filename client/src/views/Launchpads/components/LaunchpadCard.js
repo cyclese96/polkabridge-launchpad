@@ -1,151 +1,8 @@
-import BigNumber from 'bignumber.js'
-import React, { useEffect, useMemo, useState } from 'react'
-import { CountdownRenderProps } from 'react-countdown'
-import styled, { keyframes } from 'styled-components'
-import MaterialButton from '../../../components/Button/MaterialButton'
-import Card from '../../../components/Card'
-import CardContent from '../../../components/CardContent'
-import CardIcon from '../../../components/CardIcon'
-import Spacer from '../../../components/Spacer'
-import usePoolActive from '../../../hooks/usePoolActive'
-import { formattedNetworkName, getProgress } from '../../../pbr/utils'
-import { getPoolId } from '../../../pbr/lib/constants'
-import { useHistory } from 'react-router-dom'
-import {
-  getPoolReigsterLink,
-  getTokenPrice,
-  networkSymbol,
-} from '../../../pbr/helpers'
-import useIdoPool from '../../../hooks/useIdoPool'
-import { Link } from '@material-ui/core'
+import { Button, Card, CardContent } from '@material-ui/core'
+import React from 'react'
+import styled from 'styled-components'
 
-const LaunchpadCards: React.FC = () => {
-  const { upcomingIdos, endedIdos } = useIdoPool()
-
-  return (
-    <StyledCards>
-      <StyledHeading> UPCOMING POOLS</StyledHeading>
-      <Wrapper>
-        <div className="container mt-4" style={{ marginBottom: 60 }}>
-          {/* {true && ( */}
-          <div className="row d-flex justify-content-center">
-            {upcomingIdos.map((singleLaunchpad: any, i) => {
-              {
-                return (
-                  singleLaunchpad.endAt * 1000 > new Date().getTime() && (
-                    <div
-                      className="col-md-4 d-flex justify-content-center mt-4"
-                      key={i}
-                    >
-                      <LaunchpadCard launchpad={singleLaunchpad} />
-                      {<StyledSpacer />}
-                    </div>
-                  )
-                )
-              }
-            })}
-          </div>
-          {/* )} */}
-        </div>
-      </Wrapper>
-      <Spacer size="lg" />
-
-      <StyledHeading>ENDED POOLS</StyledHeading>
-      <Wrapper>
-        <div className="container mt-4">
-          <div className="row d-flex justify-content-center">
-            {endedIdos.map((singleLaunchpad: any, i) => {
-              {
-                return (
-                  singleLaunchpad.endAt * 1000 < new Date().getTime() && (
-                    <div
-                      className="col-md-4 d-flex justify-content-center mt-4"
-                      key={i}
-                    >
-                      <LaunchpadCard launchpad={singleLaunchpad} />
-                      {<StyledSpacer />}
-                    </div>
-                  )
-                )
-              }
-            })}
-          </div>
-        </div>
-      </Wrapper>
-    </StyledCards>
-  )
-}
-
-// interface LaunchpadCardProps {
-//   launchpad: Launchpad
-// }
-
-const LaunchpadCard: React.FC = ({ launchpad }) => {
-  const poolActive = usePoolActive(launchpad.startAt)
-  const history = useHistory()
-
-  const [progress, setProgress] = useState<BigNumber>()
-  const [registerForm, setRegisterForm] = useState(null)
-
-  useEffect(() => {
-    async function fetchData() {
-      // console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
-      const link = getPoolReigsterLink(launchpad.pid, launchpad.network)
-      setRegisterForm(link)
-      const newProgress = await getProgress(
-        launchpad.lpAddress,
-        getPoolId(launchpad.pid, launchpad.network),
-        launchpad.access,
-        launchpad.startAt,
-        launchpad.endAt,
-        launchpad.network,
-      )
-      setProgress(newProgress)
-    }
-    if (launchpad) {
-      fetchData()
-    }
-  }, [launchpad.pid, setProgress, poolActive])
-
-  const tokenPrice = useMemo(
-    () => getTokenPrice(launchpad.pid, launchpad.network),
-    [launchpad.pid, launchpad.network],
-  )
-
-  const renderer = (countdownProps: CountdownRenderProps) => {
-    var { days, hours, minutes, seconds } = countdownProps
-    const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
-    const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
-    // hours = days * 24 + hours
-    const paddedHours = hours < 10 ? `0${hours}` : hours
-    return (
-      <span style={{ width: '100%' }}>
-        {days}D:{hours}H:{minutes}m:{seconds}s
-      </span>
-    )
-  }
-
-  const handleLaunchpadClick = (launchpad: any) => {
-    // const _networkName = formattedNetworkName(launchpad.network)
-
-    // if (!account) {
-    //   alert(`Please connect your wallet to proceed`)
-    //   return
-    // }
-
-    // if (
-    //   getNetworkName(isMobile ? localStorage.chainId : chainId) !==
-    //   launchpad.network
-    // ) {
-    //   // alert(`Your networ: ${_yourNetwork} `)
-    //   alert(
-    //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-    //   )
-    //   return
-    // }
-    history.push(`/launchpads/view/${launchpad.id}/${launchpad.pid}`)
-  }
-
+export default function LaunchpadCard({ launchpad }) {
   return (
     <StyledCardWrapper>
       {launchpad.tokenSymbol === 'PBR' && <StyledCardAccent />}
@@ -165,8 +22,8 @@ const LaunchpadCard: React.FC = ({ launchpad }) => {
               </span>
             </StyledTitle2>
             {/* <StyledDetails>
-              <StyledDetail>{launchpad.description}</StyledDetail>
-            </StyledDetails> */}
+            <StyledDetail>{launchpad.description}</StyledDetail>
+          </StyledDetails> */}
             <br />
             <StyledInsight>
               <span>Total funds</span>
@@ -208,8 +65,8 @@ const LaunchpadCard: React.FC = ({ launchpad }) => {
               <span style={{ color: '#ff3465' }}>
                 <b>
                   {/* {launchpad.network === 'bsc'
-                    ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
-                      : 'Ethereum'} */}
+                  ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
+                    : 'Ethereum'} */}
                   {formattedNetworkName(launchpad.network)}
                 </b>
               </span>
@@ -243,34 +100,32 @@ const LaunchpadCard: React.FC = ({ launchpad }) => {
             )}
 
             {!registerForm && (
-              <MaterialButton onClick={() => handleLaunchpadClick(launchpad)}>
-                View
-              </MaterialButton>
+              <Button
+                text="View"
+                onClick={() => handleLaunchpadClick(launchpad)}
+              ></Button>
             )}
             {registerForm && launchpad.endAt * 1000 < new Date().getTime() && (
-              <MaterialButton onClick={() => handleLaunchpadClick(launchpad)}>
-                View
-              </MaterialButton>
+              <Button
+                text="View"
+                onClick={() => handleLaunchpadClick(launchpad)}
+              ></Button>
             )}
             {registerForm && launchpad.endAt * 1000 > new Date().getTime() && (
               <StyledInfo>
                 <StyledBox className="col-5">
-                  <MaterialButton
+                  <Button
+                    text="View"
                     onClick={() => handleLaunchpadClick(launchpad)}
-                  >
-                    View
-                  </MaterialButton>
+                  ></Button>
                 </StyledBox>
                 <StyledBox className="col-1"></StyledBox>
                 <StyledBox className="col-5">
-                  <Link
-                    target="_blank"
-                    href="https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page"
-                  >
-                    <MaterialButton onClick={() => {}} variant="transparent">
-                      Register
-                    </MaterialButton>
-                  </Link>
+                  <Button
+                    text="Register"
+                    href={registerForm}
+                    variant="transparent"
+                  ></Button>
                 </StyledBox>
               </StyledInfo>
             )}
@@ -504,4 +359,3 @@ const StyledProgressBar = styled.i`
   border-radius: 5px;
   font-size: 14px;
 `
-export default LaunchpadCards

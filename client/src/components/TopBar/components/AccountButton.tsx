@@ -1,11 +1,11 @@
-import React, { useCallback, useEffect } from 'react'
+import React, { useCallback, useState } from 'react'
 import styled from 'styled-components'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import useModal from '../../../hooks/useModal'
-import Button from '../../Button'
-import WalletProviderModal from '../../WalletProviderModal'
-import AccountModal from './AccountModal'
+import MaterialButton from '../../Button/MaterialButton'
+import WalletProviderModal from '../../WalletProviderModal/WalletProviderModal'
 import { isMobile } from 'react-device-detect'
+import { useAccount } from 'wagmi'
+import useWallet from '../../../hooks/useWallet'
+import AccountModal from './AccountModal'
 
 interface AccountButtonProps {
   account: string
@@ -13,47 +13,53 @@ interface AccountButtonProps {
 }
 
 const AccountButton: React.FC<AccountButtonProps> = (props) => {
-  const [onPresentAccountModal] = useModal(<AccountModal />)
-  const [onPresentWalletProviderModal] = useModal(
-    <WalletProviderModal />,
-    'provider',
-  )
+  const [connectModal, setConnectModal] = useState(false)
+  const [accountModal, setAccountModal] = useState(false)
+  const { isActive } = useWallet()
+  // const [onPresentAccountModal] = useModal(<AccountModal />)
+  // const [onPresentWalletProviderModal] = useModal(
+  //   <WalletProviderModal />,
+  //   'provider',
+  // )
 
-  const { account, connect } = useWallet()
-
-  useEffect(() => {
-    setTimeout(() => {
-      if (
-        localStorage.useWalletConnectStatus === 'connected' &&
-        localStorage.useWalletConnectType
-      ) {
-        connect(localStorage.useWalletConnectType)
-      }
-    }, 500)
-  }, [])
+  const { address: account } = useAccount()
 
   const handleUnlockClick = useCallback(() => {
-    onPresentWalletProviderModal()
-  }, [onPresentWalletProviderModal])
+    if (!isActive) {
+      setConnectModal(true)
+    } else {
+      setAccountModal(true)
+    }
+  }, [setConnectModal, isActive])
 
   return (
     <StyledAccountButton>
+      <WalletProviderModal
+        popupActive={connectModal}
+        resetPopup={() => setConnectModal(false)}
+      />
+      <AccountModal
+        popupActive={accountModal}
+        resetPopup={() => setAccountModal(false)}
+      />
       {!account ? (
-        <Button
+        <MaterialButton
           onClick={handleUnlockClick}
-          size="sm"
-          variant="secondary"
-          text="Connect Wallet"
-        />
+          // size="sm"
+          // variant="secondary"
+        >
+          Connect Wallet
+        </MaterialButton>
       ) : (
         <BoxWallet>
           <div>{account && account.substr(0, 7)}...</div>
-          <Button
-            onClick={onPresentAccountModal}
-            size="sm"
-            variant="secondary"
-            text="My Wallet"
-          />
+          <MaterialButton
+            onClick={handleUnlockClick}
+            // size="sm"
+            // variant="secondary"
+          >
+            My Wallet
+          </MaterialButton>
         </BoxWallet>
       )}
     </StyledAccountButton>

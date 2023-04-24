@@ -1,9 +1,9 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../../components/Button'
+import MaterialButton from '../../components/Button/MaterialButton'
 import Spacer from '../../components/Spacer'
 import Cup from '../../assets/img/Cup.svg'
-import Modal, { ModalProps } from '../Modal/Modal';
+import Modal, { ModalProps } from '../Modal/Modal'
 
 interface SuccessProps extends ModalProps {
   text: string
@@ -16,7 +16,7 @@ const ModalSuccess: React.FC<SuccessProps> = ({
   amount,
   symbol,
   txhash,
-  onDismiss
+  onDismiss,
 }) => {
   return (
     <Modal>
@@ -28,7 +28,9 @@ const ModalSuccess: React.FC<SuccessProps> = ({
           <Spacer size="md" />
           <StyleInfo>
             <StyleLabel>Amount:</StyleLabel>
-            <StyleContent>{amount} {symbol}</StyleContent>
+            <StyleContent>
+              {amount} {symbol}
+            </StyleContent>
           </StyleInfo>
           {/* <Spacer size="md" />
           <StyleInfo>
@@ -36,11 +38,12 @@ const ModalSuccess: React.FC<SuccessProps> = ({
               <StyledLink target="_blank" href={'https://etherscan.io/tx/' + txhash}>{txhash}</StyledLink>
           </StyleInfo> */}
           <Spacer size="md" />
-          <Button text="Close" variant="secondary" onClick={onDismiss} />
+          <MaterialButton variant="secondary" onClick={onDismiss}>
+            Close
+          </MaterialButton>
         </StyledModalSuccess>
       </StyledSuccessWrap>
     </Modal>
-
   )
 }
 
@@ -71,7 +74,7 @@ const StyleContent = styled.div`
 `
 const StyledLink = styled.a`
   color: #fff;
-  &.other-stake{
+  &.other-stake {
     padding: 10px;
     background-color: ${(props) => props.theme.color.primary.main};
     display: block;

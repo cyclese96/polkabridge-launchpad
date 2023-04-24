@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import styled from 'styled-components'
 import Page from '../../components/Page'
-import { START_REWARD_AT_BLOCK } from '../../pbr/lib/constants'
 import LaunchpadCards from '../Launchpads/components/LaunchpadCards'
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Button } from '@material-ui/core'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import useNetwork from '../../hooks/useNetwork'
-import NetworkSelect from '../../components/TopBar/components/NetworkSelect'
+import { Button } from '@material-ui/core'
 import { Link } from 'react-router-dom'
 import LaunchpadATH from '../LaunchpadATH/LaunchpadATH'
 
@@ -135,12 +131,6 @@ const useStyles = makeStyles((theme) => ({
 
 const Home: React.FC = () => {
   const classes = useStyles()
-
-  var block = 99999999999
-  const launchBlock = START_REWARD_AT_BLOCK
-  const [atDate, setDate] = useState<any>()
-
-  const { account, connect, status } = useWallet()
 
   return (
     <Page>

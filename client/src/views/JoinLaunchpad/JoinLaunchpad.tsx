@@ -1,13 +1,11 @@
 import React, { useEffect, useMemo, useState, useCallback } from 'react'
 import { useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import Button from '../../components/Button'
+import MaterialButton from '../../components/Button/MaterialButton'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useLaunchpad from '../../hooks/useLaunchpad'
 import useModal from '../../hooks/useModal'
-import usePolkaBridge from '../../hooks/usePolkaBridge'
 import { BigNumber } from '../../pbr'
 import ReCAPTCHA from 'react-google-recaptcha'
 import {
@@ -47,6 +45,7 @@ import {
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
 import useNetwork from '../../hooks/useNetwork'
+import useWallet from '../../hooks/useWallet'
 
 interface JoinHistory {
   amount: number
@@ -127,8 +126,7 @@ const JoinLaunchpad: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const pbr = usePolkaBridge()
-  const { ethereum, account } = useWallet()
+  const { account } = useWallet()
   const [progress, setProgress] = useState<BigNumber>()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('0')
@@ -229,7 +227,7 @@ const JoinLaunchpad: React.FC = () => {
 
       const [
         newIsWhitelist,
-        newETHBalance,
+        // newETHBalance,
         newProgress,
         newPurchasedAmount,
         stakedTokens,
@@ -243,7 +241,7 @@ const JoinLaunchpad: React.FC = () => {
           account,
           network,
         ),
-        getETHBalance(ethereum, account),
+        // getETHBalance(ethereum, account),
         getProgress(
           lpAddress,
           currentPoolId(pid, network),
@@ -281,7 +279,6 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('process REACT_APP_POLYGON_TESTNET_NODE', process.env.REACT_APP_POLYGON_TESTNET_NODE)
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
       console.log('ethTest: isWhiteList  ', newIsWhitelist)
-      // console.log('ethTest: newETHBalance  ', newETHBalance)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
       // console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
@@ -290,7 +287,7 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
-      setETHBalance(newETHBalance)
+      setETHBalance(0)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
@@ -309,7 +306,6 @@ const JoinLaunchpad: React.FC = () => {
     }
   }, [
     isWhitelist,
-    ethereum,
     account,
     lpContract,
     pid,
@@ -495,7 +491,6 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const reset = useCallback(async () => {
-    const newETHBalance = await getETHBalance(ethereum, account)
     // const newHistory = await getHistory(account)
     const newProgress = await getProgress(
       lpAddress,
@@ -518,7 +513,6 @@ const JoinLaunchpad: React.FC = () => {
       network,
     )
 
-    setETHBalance(newETHBalance)
     setProgress(newProgress)
     setPurchasedAmount(newPurchasedAmount)
     setETHValue('')
@@ -528,7 +522,6 @@ const JoinLaunchpad: React.FC = () => {
     )
     setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0)
   }, [
-    ethereum,
     account,
     lpContract,
     pid,
@@ -848,7 +841,7 @@ const JoinLaunchpad: React.FC = () => {
                     />
                   </StyledCenterRow>
                 ) : (
-                  <Button
+                  <MaterialButton
                     disabled={isButtonDisable()}
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
@@ -894,7 +887,7 @@ const JoinLaunchpad: React.FC = () => {
                         )}
                       </div>
                     </div>
-                  </Button>
+                  </MaterialButton>
                 )}
               </StyledSwapWrap>
             </StyledBox>
@@ -937,7 +930,7 @@ const JoinLaunchpad: React.FC = () => {
                   </StyledCenterRow>
                 </StyledInputContainer>
                 <Spacer size="md" />
-                <Button
+                <MaterialButton
                   disabled={
                     purchasedAmount <= 0 ||
                     recentClaimTime * 1000 > new Date().getTime() ||
@@ -991,7 +984,7 @@ const JoinLaunchpad: React.FC = () => {
                         renderer={renderer}
                       />
                     )}
-                </Button>
+                </MaterialButton>
                 <StyledCenterRow>
                   {claimAt * 1000 > new Date().getTime() ||
                   new BigNumber(tokenPurchased).lte(0) ? (

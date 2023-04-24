@@ -1,14 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import Page from '../../components/Page'
-import { START_REWARD_AT_BLOCK } from '../../pbr/lib/constants'
-import LaunchpadCards from '../Launchpads/components/LaunchpadCards'
+
 import { makeStyles } from '@material-ui/core/styles'
-import { Avatar, Button } from '@material-ui/core'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
-import useNetwork from '../../hooks/useNetwork'
-import NetworkSelect from '../../components/TopBar/components/NetworkSelect'
-import { Link } from 'react-router-dom'
 
 const useStyles = makeStyles((theme) => ({
   card: {
@@ -132,7 +126,6 @@ const Rules = () => {
                   You need to stake minimum 10,000 PBR tokens to staking pool
                   either on Polygon network or Ethereum network.
                 </li>
-
               </ul>
             </div>
             <div className="mt-3">
@@ -141,7 +134,15 @@ const Rules = () => {
               </h6>
               <ul className={classes.listing}>
                 <li>
-                  Guaranteed Allocation (Read more at <a style={{ color: "#DF097C" }} target="_blank" href="https://polkabridge.medium.com/polkabridge-announces-new-tier-system-for-launchpad-ido-guaranteed-allocation-93c3b3036ac1">here</a>)
+                  Guaranteed Allocation (Read more at{' '}
+                  <a
+                    style={{ color: '#DF097C' }}
+                    target="_blank"
+                    href="https://polkabridge.medium.com/polkabridge-announces-new-tier-system-for-launchpad-ido-guaranteed-allocation-93c3b3036ac1"
+                  >
+                    here
+                  </a>
+                  )
                 </li>
                 <li>
                   For more details and latest updates you can join our{' '}

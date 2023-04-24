@@ -2,6 +2,7 @@ import React, { useContext, useMemo } from 'react'
 import styled, { ThemeContext } from 'styled-components'
 
 import { Link } from 'react-router-dom'
+import { useTheme } from '@material-ui/core'
 
 interface ButtonProps {
   children?: React.ReactNode
@@ -28,7 +29,9 @@ const Button: React.FC<ButtonProps> = ({
   margin,
   justify,
 }) => {
-  const { color, spacing } = useContext(ThemeContext)
+  const theme = useTheme()
+  const color = theme.palette
+  const spacing = theme.spacing
 
   let buttonColor: string
   let bgColor: string

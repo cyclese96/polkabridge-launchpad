@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
-import Button from '../../components/Button'
+import MaterialButton from '../../components/Button/MaterialButton'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useLaunchpad from '../../hooks/useLaunchpad'
@@ -27,8 +27,8 @@ import {
   WHITELIST,
 } from '../../pbr/lib/constants'
 import useNetwork from '../../hooks/useNetwork'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import { networkSymbol } from '../../pbr/helpers'
+import useWallet from '../../hooks/useWallet'
 
 const Launchpad: React.FC = () => {
   const { launchpadId, poolId } = useParams() as any
@@ -104,10 +104,9 @@ const Launchpad: React.FC = () => {
     window.scrollTo(0, 0)
   }, [])
 
-  const pbr = usePolkaBridge()
   const [progress, setProgress] = useState<BigNumber>()
   const [stakedAmount, setStakedAmount] = useState('0')
-  const { ethereum, account } = useWallet()
+  const { account } = useWallet()
   const [maxGuaranteed, setMaxGuaranteed] = useState('0')
 
   const history = useHistory()
@@ -147,7 +146,7 @@ const Launchpad: React.FC = () => {
     if (pid >= 0) {
       fetchData()
     }
-  }, [ethereum, account, lpContract, pid, setStakedAmount, setProgress])
+  }, [account, lpContract, pid, setStakedAmount, setProgress])
 
   const renderer = (countdownProps: CountdownRenderProps) => {
     var { days, hours, minutes, seconds } = countdownProps
@@ -280,32 +279,31 @@ const Launchpad: React.FC = () => {
 
           <StyledInfo>
             <StyledBox className="col-4">
-              <Button
+              <MaterialButton
                 disabled={startAt * 1000 > new Date().getTime()}
-                text={
-                  startAt * 1000 <= new Date().getTime()
-                    ? 'Join Pool'
-                    : undefined
-                }
                 onClick={handleJoinPool}
                 // to={`/launchpads/join/${launchpadId}/${poolId}`}
               >
+                {startAt * 1000 <= new Date().getTime()
+                  ? 'Join Pool'
+                  : undefined}
                 {startAt * 1000 > new Date().getTime() && (
                   <Countdown
                     date={new Date(startAt * 1000)}
                     renderer={renderer}
                   />
                 )}
-              </Button>
+              </MaterialButton>
             </StyledBox>
             <StyledBox className="col-2"></StyledBox>
             <StyledBox className="col-4">
-              <Button
+              <MaterialButton
                 variant="tertiary"
-                text="View Explorer"
-                href={lpExplorer}
+                onClick={() => (window.location.href = lpExplorer)}
                 disabled={!tokenAddress}
-              ></Button>
+              >
+                View Explorer
+              </MaterialButton>
             </StyledBox>
           </StyledInfo>
           <StyledInfo>

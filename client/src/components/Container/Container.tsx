@@ -7,7 +7,8 @@ interface ContainerProps {
 }
 
 const Container: React.FC<ContainerProps> = ({ children, size = 'md' }) => {
-  const { siteWidth } = useContext<{ siteWidth: number }>(ThemeContext)
+  // const { siteWidth } = useContext<{ siteWidth: number }>(ThemeContext)
+  const siteWidth = window.innerWidth
   let width: number
   switch (size) {
     case 'sm':
