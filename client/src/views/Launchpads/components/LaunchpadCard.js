@@ -6,7 +6,7 @@ import CardIcon from '../../../components/CardIcon'
 import BigNumber from 'bignumber.js'
 import Spacer from 'components/Spacer/Spacer'
 import { getPoolReigsterLink, getTokenPrice, networkSymbol } from 'pbr/helpers'
-import { getPoolId } from 'pbr/lib/constants'
+import { getPoolId, networkToChain } from 'pbr/lib/constants'
 import { formattedNetworkName, getProgress } from 'pbr/utils'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
@@ -19,14 +19,33 @@ export default function LaunchpadCard({ launchpad }) {
   const [progress, setProgress] = useState(0)
   const [registerForm, setRegisterForm] = useState(null)
 
+  const poolChain = useMemo(() => {
+    return networkToChain?.[launchpad?.network]
+  }, [launchpad?.network])
+
+  const lpAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+    return launchpad?.lpAddresses?.[parseInt(poolChain)]
+  }, [launchpad?.lpAddresses, poolChain])
+
+  const tokenAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+
+    return launchpad?.tokenAddresses?.[parseInt(poolChain)]
+  }, [launchpad?.tokenAddresses, poolChain])
+
   useEffect(() => {
     async function fetchData() {
       // console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
       const link = getPoolReigsterLink(launchpad.pid, launchpad.network)
       setRegisterForm(link)
       const newProgress = await getProgress(
-        launchpad.lpAddress,
-        getPoolId(launchpad.pid, launchpad.network),
+        lpAddress,
+        launchpad.poolId,
         launchpad.access,
         launchpad.startAt,
         launchpad.endAt,
@@ -37,7 +56,7 @@ export default function LaunchpadCard({ launchpad }) {
     if (launchpad) {
       fetchData()
     }
-  }, [launchpad.pid, setProgress])
+  }, [lpAddress, launchpad.poolId, setProgress])
 
   const tokenPrice = useMemo(
     () => getTokenPrice(launchpad.pid, launchpad.network),

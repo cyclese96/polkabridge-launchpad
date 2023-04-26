@@ -2275,7 +2275,7 @@ export const supportedPools = [
     },
     tokenAddresses: {
       421613: '0xd3E56A0c0f7fb93653398E319791B2F88De2a559',
-      42161: '',
+      42161: '0xB9AF4762c039D63e30039F1712dfaB77026408c7',
     },
     lpExplorer: 'https://arbiscan.io/address',
     name: 'BULLBEAR',
@@ -2291,7 +2291,7 @@ export const supportedPools = [
     icon: '/img/tokens/chrp.png',
     totalSupply: '1,000,000,000 BULLBEAR',
     tokenId: 'bullbear',
-    price: 0.021,
+    price: 0.021, // set this if token is not listed and price is preset
     total: '185 ETH', // 1BNB = 270$, 50k$
     ratio: 12857.1, //1
     min: 0,
@@ -2308,7 +2308,7 @@ export const supportedPools = [
     startDate: '2PM UTC 29th Apr, 2023',
     registerForm: 'https://forms.gle/i9vdwH6Ao4DjgN3R9',
     harvestDistribution: [50, 50],
-    claimTimeArr: [1682471864, 1682472324],
+    claimTimeArr: [1682471864, 1682471864],
   },
 ]
 // given pid and network name -> launchpad pool id

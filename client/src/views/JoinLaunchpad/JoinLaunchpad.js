@@ -26,8 +26,6 @@ import {
   formatCurrency,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-// import useJoinPool from '../../hooks/useJoinPool'
-import useHarvest from '../../hooks/useHarvest'
 import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
 import ModalSuccessHarvest from '../../components/ModalSuccessHarvest'
@@ -45,7 +43,6 @@ import {
   WHITELIST,
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
-import useNetwork from '../../hooks/useNetwork'
 import useWallet from '../../hooks/useWallet'
 import useEthBalance from 'hooks/useEthBalance'
 import {
@@ -91,6 +88,8 @@ const JoinLaunchpad = () => {
     claimAt,
   } = launchpad
 
+  const { account, isActive, chainId } = useWallet()
+
   const lpPoolId = useMemo(() => {
     return launchpad?.poolId
   }, [launchpad])
@@ -119,7 +118,6 @@ const JoinLaunchpad = () => {
   }, [])
   const ethBalance = useEthBalance()
 
-  const { account } = useWallet()
   const [progress, setProgress] = useState()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('0')
@@ -154,8 +152,6 @@ const JoinLaunchpad = () => {
   const [harvestDistribution, setHarestDistribution] = useState([])
 
   const recaptchaRef = React.useRef()
-
-  const { chainId } = useNetwork()
 
   const getCurrentClaimTime = (_userInfoData, _claimTimeArr) => {
     if (!_userInfoData) {
@@ -846,14 +842,12 @@ const JoinLaunchpad = () => {
                     disabled={isButtonDisable()}
                     onClick={async () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
-                        const _networkName = formattedNetworkName(network)
-
-                        // if (getNetworkName(chainId) !== network) {
-                        //   alert(
-                        //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-                        //   )
-                        //   return
-                        // }
+                        if (chainId !== poolChain) {
+                          alert(
+                            `This pool works on ${network} Network. Please switch your network to ${network}`,
+                          )
+                          return
+                        }
                         setPendingTx(true)
                         var tx = await handleJoinPool(
                           lpPoolId,
@@ -943,14 +937,14 @@ const JoinLaunchpad = () => {
                   }
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
-                      const _networkName = formattedNetworkName(network)
+                      // const _networkName = formattedNetworkName(network)
 
-                      // if (getNetworkName(chainId) !== network) {
-                      //   alert(
-                      //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-                      //   )
-                      //   return
-                      // }
+                      if (chainId !== poolChain) {
+                        alert(
+                          `This pool works on ${network} Network. Please switch your network to ${network}`,
+                        )
+                        return
+                      }
 
                       setPendingHarvestTx(true)
                       var tx = await handleHarvest(

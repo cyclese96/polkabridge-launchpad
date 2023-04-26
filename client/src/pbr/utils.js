@@ -363,6 +363,15 @@ export const getProgress = async (
   lpNetwork,
 ) => {
   try {
+    // console.log('progress test params ', {
+    //   lpAddress,
+    //   pid,
+    //   access,
+    //   startAt,
+    //   endAt,
+    //   lpNetwork,
+    // })
+
     if (!lpAddress) {
       return
     }
