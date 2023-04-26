@@ -80,6 +80,12 @@ const Launchpad = () => {
     return networkToChain?.[network]
   }, [network])
 
+  console.log('chain test ', {
+    poolChain,
+    env: process?.env?.REACT_APP_DEPLOYMENT_MODE,
+    networkToChain,
+  })
+
   const lpAddress = useMemo(() => {
     if (!poolChain) {
       return null

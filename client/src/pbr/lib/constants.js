@@ -34,15 +34,6 @@ export const moonriverNetwork = 'moonriver'
 export const astarNetwork = 'astar'
 export const arbitrum = 'arbitrum'
 
-export const networkToChain = {
-  ethereum: currentConnection === 'mainnet' ? 1 : 5,
-  bsc: currentConnection === 'mainnet' ? 56 : 97,
-  polygon: currentConnection === 'mainnet' ? 137 : 80001,
-  harmony: currentConnection === 'mainnet' ? 1666600000 : 1666700000,
-  moonriver: currentConnection === 'mainnet' ? 1285 : 1287,
-  arbitrum: currentConnection === 'mainnet' ? 42161 : 421613,
-}
-
 export const tokenIdMapping = {
   ethereum: 'ethereum',
   bsc: 'binancecoin',
@@ -77,9 +68,17 @@ export const contractAddresses = {
   // }
 }
 
-const testing = true
+export const currentConnection =
+  process.env.REACT_APP_DEPLOYMENT_MODE || 'mainnet'
 
-export const currentConnection = testing ? 'testnet' : 'mainnet'
+export const networkToChain = {
+  ethereum: currentConnection === 'mainnet' ? 1 : 5,
+  bsc: currentConnection === 'mainnet' ? 56 : 97,
+  polygon: currentConnection === 'mainnet' ? 137 : 80001,
+  harmony: currentConnection === 'mainnet' ? 1666600000 : 1666700000,
+  moonriver: currentConnection === 'mainnet' ? 1285 : 1287,
+  arbitrum: currentConnection === 'mainnet' ? 42161 : 421613,
+}
 
 export const stakeContractAddresses = {
   ethereum: {
@@ -2292,11 +2291,11 @@ export const supportedPools = [
     totalSupply: '100,000,000,000,000,000 AIBB',
     tokenId: 'bullbearai',
     price: 0.00000000003, // set this if token is not listed and price is preset
-    total: '500 ETH', 
+    total: '500 ETH',
     ratio: 60000000000000,
     min: 0.2,
     max: 1.5,
-    maxTier1:1.5,
+    maxTier1: 1.5,
     maxTier2: 1.5,
     maxTier3: 1.5,
     access: PUBLIC,
