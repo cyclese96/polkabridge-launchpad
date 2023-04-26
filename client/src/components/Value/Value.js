@@ -3,12 +3,12 @@ import CountUp from 'react-countup'
 
 import styled from 'styled-components'
 
-interface ValueProps {
-  value: string | number
-  decimals?: number
-}
+// interface ValueProps {
+//   value: string | number
+//   decimals?: number
+// }
 
-const Value: React.FC<ValueProps> = ({ value, decimals }) => {
+const Value = ({ value, decimals }) => {
   const [start, updateStart] = useState(0)
   const [end, updateEnd] = useState(0)
 

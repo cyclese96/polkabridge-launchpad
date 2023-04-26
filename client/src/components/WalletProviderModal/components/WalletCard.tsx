@@ -1,10 +1,7 @@
 import React from 'react'
-import Button from '../../Button'
 import Card from '../../Card'
 import CardContentWallet from '../../CardContentWallet'
-import CardIcon from '../../CardIcon'
 import CardTitle from '../../CardTitle'
-import Spacer from '../../Spacer'
 
 interface WalletCardProps {
   icon: React.ReactNode

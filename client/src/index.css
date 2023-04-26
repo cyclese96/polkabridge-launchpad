@@ -42,12 +42,20 @@ a {
   --total-marquee-items: 5;
   height: 50px;
   width: calc(250px * (var(--total-marquee-items)));
+  /* width: 300px; */
   overflow: hidden;
   box-sizing: border-box;
   position: relative;
   margin: 5px auto;
   padding: 30px 0;
 }
+
+@media only screen and (max-width: 950px) {
+  .marquee-wrapper  {
+    width: 300px;
+  }  
+}
+
 .marquee-inner {
   display: block;
   width: 200%;

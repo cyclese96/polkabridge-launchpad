@@ -12,6 +12,7 @@ import {
   harmonyChainIds,
   moonriverNetwork,
   astarNetwork,
+  networkToChain,
 } from './lib/constants'
 import Web3 from 'web3'
 
@@ -21,15 +22,54 @@ import launchpadBscAbi from './lib/abi/ido/launchpad.json'
 import launchpadBscAbi2 from './lib/abi/ido/launchpad2.json'
 import launchpadBscAbi3 from './lib/abi/ido/launchpad3.json'
 import lpAstarAbi from './lib/abi/ido/astarLp.json'
+import arbitrumIdoABI from './lib/abi/ido/abitrumIdo.json'
 
 import ERC20Abi from './lib/abi/erc20.json'
 
 import { getBalanceNumber } from '../utils/formatBalance'
-import { getProfit, getTokenId, getTokenPriceFromCoinGecko } from './helpers'
+import {
+  constantPrice,
+  getProfit,
+  getTokenId,
+  getTokenPriceFromCoinGecko,
+} from './helpers'
+import { readContract, readContracts } from '@wagmi/core'
+
 BigNumber.config({
   EXPONENTIAL_AT: 1000,
   DECIMAL_PLACES: 80,
 })
+
+export const abiMapping = {
+  Private: launchpadBscAbi,
+  Public: LaunchpadAbi,
+  Whitelist: launchpadBscAbi,
+  Guaranteed: launchpadBscAbi2,
+  '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2, //solclout mainnet
+  '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439': launchpadBscAbi2, // solclout testnet
+  '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA': launchpadBscAbi3, // deflyBall testnet
+  '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69': launchpadBscAbi3, // deflyBall testnet
+  '0xc95d0846dd8342c112844c6c3d04199897acf903': launchpadBscAbi3, // snapEx mainnet
+  '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3': launchpadBscAbi3, // Calo mainnet
+  '0x302b7F2351F7f064F7c2BE48386e0762c0cF5348': launchpadBscAbi3, // Gravitation zero mainnet
+  '0x56d750197ec332fceb574ca22cd4e40965712c86': launchpadBscAbi3, // put battle saga  mainnet address if ABi same
+  '0x9ce703762878c69874e8951f92e8ba2142dc9dce': launchpadBscAbi3,
+  '0xf5658d4a37975489541f8dc03fedada605c78c8b': launchpadBscAbi3,
+  '0xc479b7909dd33fb036fda62f66bc3ebbe480c766': launchpadBscAbi3,
+  '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483': launchpadBscAbi3,
+  '0xa090c395f674f74e1ac71a79769bd33ebaece502': launchpadBscAbi3,
+  '0x39f2e22e971eb1144643bc22d84e039e59768373': launchpadBscAbi3,
+  '0x2b728f8b396e8f8cfc390a65186a1d2eb0623685': launchpadBscAbi3,
+  '0x55ad2ff5363f2a155187e644bbb66f3584fd18dc': launchpadBscAbi3,
+  '0x17c40b2a10d7f05cac876247d8d9e4d561e27fcf': launchpadBscAbi3,
+  '0xcb705a6101e9250c7c867bd50a23f3aa6242f982': launchpadBscAbi3,
+  '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
+  '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0': launchpadBscAbi3,
+  '0xB9Ffb5Fe5760f0dCb537e50Bee620CFbA646Ea71': lpAstarAbi,
+  '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3,
+  '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86': arbitrumIdoABI, //arbitrum testnet
+  '0x58Cd3C39541A077ac464b49BBd98E9bb11Cfc831': arbitrumIdoABI, //arbitrum  mainnet
+}
 
 const MaxUint256 = '999999999900000000000000000000000000000'
 
@@ -89,76 +129,76 @@ export const getLaunchpads = (pbr) => {
   }
   return pbr
     ? pbr.contracts.pools.map(
-      ({
-        pid,
-        name,
-        symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }) => ({
-        pid,
-        name,
-        id: symbol,
-        icon,
-        description,
-        introduce,
-        website,
-        twitter,
-        telegram,
-        whitepaper,
-        lpAddress,
-        lpContract,
-        lpExplorer,
-        tokenAddress,
-        tokenContract,
-        tokenExplorer,
-        tokenSymbol,
-        total,
-        totalSupply,
-        ratio,
-        min,
-        max,
-        maxTier1,
-        maxTier2,
-        maxTier3,
-        maxWhitelistPurchase,
-        access,
-        network,
-        distribution,
-        startAt,
-        endAt,
-        claimAt,
-        startDate,
-      }),
-    )
+        ({
+          pid,
+          name,
+          symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }) => ({
+          pid,
+          name,
+          id: symbol,
+          icon,
+          description,
+          introduce,
+          website,
+          twitter,
+          telegram,
+          whitepaper,
+          lpAddress,
+          lpContract,
+          lpExplorer,
+          tokenAddress,
+          tokenContract,
+          tokenExplorer,
+          tokenSymbol,
+          total,
+          totalSupply,
+          ratio,
+          min,
+          max,
+          maxTier1,
+          maxTier2,
+          maxTier3,
+          maxWhitelistPurchase,
+          access,
+          network,
+          distribution,
+          startAt,
+          endAt,
+          claimAt,
+          startDate,
+        }),
+      )
     : []
 }
 
@@ -323,20 +363,18 @@ export const getProgress = async (
   lpNetwork,
 ) => {
   try {
+    // console.log('progress test params ', {
+    //   lpAddress,
+    //   pid,
+    //   access,
+    //   startAt,
+    //   endAt,
+    //   lpNetwork,
+    // })
+
     if (!lpAddress) {
       return
     }
-
-    const chainId = await getCurrentNetworkId()
-    const currentNetwork = getNetworkName(chainId)
-
-    const lpContract = getCurrentLaunchpadContract(
-      lpAddress,
-      pid,
-      access,
-      lpNetwork,
-      currentNetwork,
-    )
 
     //if pool not started yet show no progress
     if (startAt && startAt * 1000 >= new Date().getTime()) {
@@ -348,23 +386,37 @@ export const getProgress = async (
       return new BigNumber(100)
     }
 
-    // if pool is currently active calculate and show progress
+    const idoContract = {
+      address: lpAddress,
+      abi: abiMapping?.[lpAddress],
+    }
 
-    const [remainToken, totalToken] = await Promise.all([
-      lpContract.methods.getRemainIDOToken(pid).call(),
-      lpContract.methods.getBalanceTokenByPoolId(pid).call(),
-    ])
+    const [remainToken, totalToken] = await readContracts({
+      contracts: [
+        {
+          ...idoContract,
+          functionName: 'getRemainIDOToken',
+          args: [pid],
+          chainId: networkToChain?.[lpNetwork],
+        },
+        {
+          ...idoContract,
+          functionName: 'getBalanceTokenByPoolId',
+          args: [pid],
+          chainId: networkToChain?.[lpNetwork],
+        },
+      ],
+    })
 
-    // console.log({remainToken, totalToken } )
-    if (remainToken && totalToken) {
-      let remain = new BigNumber(remainToken)
-      let total = new BigNumber(totalToken)
+    if (remainToken?.toString() && totalToken?.toString()) {
+      let remain = new BigNumber(remainToken.toString())
+      let total = new BigNumber(totalToken.toString())
 
       if (total > 0) {
-        //return pid === 1 ? total.minus(remain).div(total).times(100) : new BigNumber(100) //
         return total.minus(remain).div(total).times(100)
       }
     }
+    return null
   } catch (e) {
     console.log('lpTest: getProgress error: ', { e, pid, lpAddress })
     if (pid < 0) {
@@ -384,35 +436,20 @@ export const getIsWhitelist = async (
   lpNetwork,
 ) => {
   try {
-    const chainId = await getCurrentNetworkId()
-    const currentNetwork = getNetworkName(chainId)
+    const data = await readContract({
+      address: lpAddress,
+      abi: abiMapping?.[lpAddress],
+      functionName: 'IsWhitelist',
+      args: [account, 1, stakeAmount],
+      chainId: networkToChain?.[lpNetwork],
+    })
 
-    const lpContract = getCurrentLaunchpadContract(
-      lpAddress,
-      pid,
-      access,
-      lpNetwork,
-      currentNetwork,
-    )
-
-    const isWhitelist = await lpContract.methods
-      .IsWhitelist(account, pid, stakeAmount)
-      .call()
-
-    // console.log('iswhitelist response ', {
-    //   isWhitelist,
-    //   pid,
-    //   lpAddress,
-    //   stakeAmount,
-    // })
-
-    // console.log('ethTest: getIsWhitelistInfo ', { isWhitelist, pid })
-
-    return isWhitelist
+    return data
   } catch (e) {
     console.log('ethTest:  isWhiteList error', {
       pid,
       e,
+      account,
       stakeAmount: stakeAmount,
       lpAddress,
       lpNetwork,
@@ -433,38 +470,66 @@ export const getPurchasesAmount = async (
       return null
     }
 
-    const chainId = await getCurrentNetworkId()
-    const currentNetwork = getNetworkName(chainId)
+    // const chainId = await getCurrentNetworkId()
+    // const currentNetwork = getNetworkName(chainId)
 
-    const lpContract = getCurrentLaunchpadContract(
-      lpAddress,
-      pid,
-      access,
-      lpNetwork,
-      currentNetwork,
-    )
+    // const lpContract = getCurrentLaunchpadContract(
+    //   lpAddress,
+    //   pid,
+    //   access,
+    //   lpNetwork,
+    //   currentNetwork,
+    // )
 
-    const info = await lpContract.methods
-      .getWhitelistfo(pid)
-      .call({ from: account })
+    // const info = await lpContract.methods
+    //   .getWhitelistfo(pid)
+    //   .call({ from: account })
 
-    // console.log('getPurchased amount from lpcontarct ', info)
-    if (info[5]) {
-      return getBalanceNumber(new BigNumber('0'))
+    const idoContract = {
+      address: lpAddress,
+      abi: abiMapping?.[lpAddress],
     }
 
-    const purchasesAmount = await lpContract.methods
-      .getUserTotalPurchase(pid)
-      .call({ from: account })
+    const [info, purchasesAmount] = await readContracts({
+      contracts: [
+        {
+          ...idoContract,
+          functionName: 'getWhitelistfo',
+          args: [pid],
+          chainId: networkToChain?.[lpNetwork],
+        },
+        {
+          ...idoContract,
+          functionName: 'getUserTotalPurchasenew',
+          args: [pid, account],
+          chainId: networkToChain?.[lpNetwork],
+        },
+      ],
+      overrides: { from: account },
+    })
 
-    return getBalanceNumber(new BigNumber(purchasesAmount))
+    console.log('getPurchased amount from lpcontarct ', {
+      purchasesAmount: purchasesAmount.toString(),
+      account,
+      info: info.toString(),
+    })
+
+    // if (info[5]) {
+    //   return getBalanceNumber(new BigNumber('0'))
+    // }
+
+    // // const purchasesAmount = await lpContract.methods
+    // //   .getUserTotalPurchase(pid)
+    // //   .call({ from: account })
+
+    return getBalanceNumber(new BigNumber(purchasesAmount?.toString()))
   } catch (e) {
-    console.log('ethTest: getPurchasesAmount', { e, lpAddress })
+    console.log('getPurchased error: ', { e, lpAddress })
     return null
   }
 }
 
-const signedIdoString = async (account, network, symbol) => {
+export const signedIdoString = async (account, network, symbol) => {
   try {
     const _api =
       process.env.NODE_ENV === 'production'
@@ -480,7 +545,7 @@ const signedIdoString = async (account, network, symbol) => {
 
     return signedRes.data
   } catch (error) {
-    console.log('signedIdoString', error)
+    console.log('join pool test signedIdoString', error)
     return null
   }
 }
@@ -657,56 +722,58 @@ export const getMaxAllocation = async (
 }
 
 // fetch user staking data
-export const getUserStakingData = async (account, network) => {
+export const getUserStakingData = async (account) => {
   try {
     if (!account) {
       return null
     }
 
-    const abi = stakingAbi
-    const address =
-      currentConnection === 'mainnet'
-        ? stakeContractAddresses.ethereum[1]
-        : stakeContractAddresses.ethereum[42]
-    const stakeContract = getContractInstance(
-      abi,
-      address,
-      'ethereum',
-      'public',
-    )
+    const stakingContractEth = {
+      address: stakeContractAddresses.ethereum?.[1],
+      abi: stakingAbi,
+    }
+    const stakingContractBsc = {
+      address: stakeContractAddresses.bsc[56],
+      abi: stakingAbi,
+    }
+    const stakingContractPolygon = {
+      address: stakeContractAddresses.polygon[137],
+      abi: stakingAbi,
+    }
 
-    const addressMatic =
-      currentConnection === 'mainnet'
-        ? stakeContractAddresses.polygon[137]
-        : stakeContractAddresses.polygon[80001]
-    const maticStakeContract = getContractInstance(
-      abi,
-      addressMatic,
-      'polygon',
-      'public',
-    )
+    const [stakedDataEth, stakedDataPoly, stakeDataBsc] = await readContracts({
+      contracts: [
+        {
+          ...stakingContractEth,
+          functionName: 'userInfo',
+          args: [0, account],
+          chainId: 1,
+        },
 
-    const addressBsc = stakeContractAddresses.bsc[56]
-    const bscStakeContract = getContractInstance(
-      abi,
-      addressBsc,
-      'bsc',
-      'public',
-    )
+        {
+          ...stakingContractPolygon,
+          functionName: 'userInfo',
+          args: [0, account],
+          chainId: 137,
+        },
+        {
+          ...stakingContractBsc,
+          functionName: 'userInfo',
+          args: [5, account],
+          chainId: 56,
+        },
+      ],
+    })
 
-    const [stakedDataEth, stakedDataPoly, stakeDataBsc] = await Promise.all([
-      stakeContract.methods.userInfo(0, account).call(),
-      maticStakeContract.methods.userInfo(0, account).call(),
-      bscStakeContract.methods.userInfo(5, account).call(),
-    ])
-
-    const _totalStakedAmount = new BigNumber(stakedDataEth.amount)
-      .plus(stakedDataPoly.amount)
-      .plus(stakeDataBsc?.amount)
+    const _totalStakedAmount = new BigNumber(stakedDataEth?.amount?.toString())
+      .plus(stakedDataPoly?.amount?.toString())
+      .plus(stakeDataBsc?.amount?.toString())
       .toFixed(0)
       .toString()
 
-    // console.log('total staked ', _totalStakedAmount)
+    console.log('getUserStakingData total staked ', {
+      _totalStakedAmount,
+    })
     return _totalStakedAmount
   } catch (e) {
     console.log('getUserStakingData', { e })
@@ -720,20 +787,29 @@ export const getUserInfo = async (lpAddress, pid, access, account, network) => {
       return null
     }
 
-    const chainId = await getCurrentNetworkId()
-    const currentNetwork = getNetworkName(chainId)
-    const lpContract = getCurrentLaunchpadContract(
-      lpAddress,
-      pid,
-      access,
-      network,
-      currentNetwork,
-    )
+    const idoContract = {
+      address: lpAddress,
+      abi: abiMapping?.[lpAddress],
+    }
 
-    const [userInfo, harvestInfo] = await Promise.all([
-      lpContract.methods.getUserInfo(pid, account).call(),
-      lpContract.methods.users(pid, account).call(),
-    ])
+    const [userInfo, harvestInfo] = await readContracts({
+      contracts: [
+        {
+          ...idoContract,
+          functionName: 'getUserInfo',
+          args: [pid, account],
+          chainId: networkToChain?.[network],
+        },
+        {
+          ...idoContract,
+          functionName: 'users',
+          args: [pid, account],
+          chainId: networkToChain?.[network],
+        },
+      ],
+    })
+
+    // console.log('harvest fetched ', { userInfo, harvestInfo })
 
     return { userInfo, harvestInfo }
   } catch (e) {
@@ -752,10 +828,19 @@ export const getPurchaseStats = async (
   try {
     const tokenId = getTokenId(tokenName, network)
 
+    const defaultTokenPrice = constantPrice(tokenName, network)
+
     const [tokenCurrentPrice, nativeTokenPrice] = await Promise.all([
-      tokenId ? getTokenPriceFromCoinGecko(network, tokenId) : 0,
+      !defaultTokenPrice
+        ? getTokenPriceFromCoinGecko(network, tokenId)
+        : defaultTokenPrice,
       getTokenPriceFromCoinGecko(network),
     ])
+
+    // console.log('getPurchaseStats state', {
+    //   tokenCurrentPrice,
+    //   nativeTokenPrice,
+    // })
 
     const tokenCurrentUsdValue = new BigNumber(purchasedToken)
       .times(tokenCurrentPrice)
@@ -835,8 +920,8 @@ const isHarmonyNetwork = (networkId) => {
   let _flag = false
   Object.keys(harmonyChainIds).forEach((value, index) => {
     if (
-      harmonyChainIds[value].testnet.toString() === networkId.toString() ||
-      harmonyChainIds[value].mainnet.toString() === networkId.toString()
+      harmonyChainIds?.[value]?.testnet.toString() === networkId?.toString() ||
+      harmonyChainIds?.[value]?.mainnet.toString() === networkId?.toString()
     ) {
       _flag = true
     }
@@ -875,35 +960,6 @@ const getTokenContract = (tokenAddress, account, lpNetwork, currentNetwork) => {
   return tokenContract
 }
 
-const abiMapping = {
-  Private: launchpadBscAbi,
-  Public: LaunchpadAbi,
-  Whitelist: launchpadBscAbi,
-  Guaranteed: launchpadBscAbi2,
-  '0xb1a6dd107d6c2885497a6fb6d5b13218244154e8': launchpadBscAbi2, //solclout mainnet
-  '0x978E55b71E74051B136AAbAE2d6e4bD0cA714439': launchpadBscAbi2, // solclout testnet
-  '0x259D9aD2D584477A99396Eef8A4fee1798B0daaA': launchpadBscAbi3, // deflyBall testnet
-  '0x921cad4688dc908b89f83cd3b2c7c69bc3838d69': launchpadBscAbi3, // deflyBall testnet
-  '0xc95d0846dd8342c112844c6c3d04199897acf903': launchpadBscAbi3, // snapEx mainnet
-  '0xcd4f3d7ed4fd3dfb675a329dc72a4f8f1795a2d3': launchpadBscAbi3, // Calo mainnet
-  '0x302b7F2351F7f064F7c2BE48386e0762c0cF5348': launchpadBscAbi3, // Gravitation zero mainnet
-  '0x56d750197ec332fceb574ca22cd4e40965712c86': launchpadBscAbi3, // put battle saga  mainnet address if ABi same
-  '0x9ce703762878c69874e8951f92e8ba2142dc9dce': launchpadBscAbi3,
-  '0xf5658d4a37975489541f8dc03fedada605c78c8b': launchpadBscAbi3,
-  '0xc479b7909dd33fb036fda62f66bc3ebbe480c766': launchpadBscAbi3,
-  '0xe8a46C6CE5c39b54b854bf91a1CC34F72c97B483': launchpadBscAbi3,
-  '0xa090c395f674f74e1ac71a79769bd33ebaece502': launchpadBscAbi3,
-  '0x39f2e22e971eb1144643bc22d84e039e59768373': launchpadBscAbi3,
-  '0x2b728f8b396e8f8cfc390a65186a1d2eb0623685': launchpadBscAbi3,
-  '0x55ad2ff5363f2a155187e644bbb66f3584fd18dc': launchpadBscAbi3,
-  '0x17c40b2a10d7f05cac876247d8d9e4d561e27fcf': launchpadBscAbi3,
-  '0xcb705a6101e9250c7c867bd50a23f3aa6242f982': launchpadBscAbi3,
-  '0x57724e83cc64d76e79c68caf0fb1b8b882a13ef0': launchpadBscAbi3,
-  '0xe77105e3eef6e6f1d0e43a38dff735530cd6fda0': launchpadBscAbi3,
-  '0xB9Ffb5Fe5760f0dCb537e50Bee620CFbA646Ea71': lpAstarAbi,
-  '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3
-}
-
 const getCurrentLaunchpadContract = (
   lpAddress,
   poolId,
@@ -938,29 +994,29 @@ const getWeb3Provider = (network, nativeNetwork) => {
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
-          : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
+        ? new Web3.providers.HttpProvider(config.hmy_rpc_mainnet)
+        : new Web3.providers.HttpProvider(config.hmy_rpc_testnet)
   } else if (network === bscNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
-          : new Web3.providers.HttpProvider(config.bscRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.bscRpcMainnet)
+        : new Web3.providers.HttpProvider(config.bscRpcTestnet)
   } else if (network === moonriverNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.moonriverRpc)
-          : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
+        ? new Web3.providers.HttpProvider(config.moonriverRpc)
+        : new Web3.providers.HttpProvider(config.moonriverRpcTestnet)
   } else if (network === astarNetwork) {
     rpc =
       nativeNetwork === network
         ? window.ethereum
         : currentConnection === 'mainnet'
-          ? new Web3.providers.HttpProvider(config.astarRpc)
-          : new Web3.providers.HttpProvider(config.astarRpc)
+        ? new Web3.providers.HttpProvider(config.astarRpc)
+        : new Web3.providers.HttpProvider(config.astarRpc)
   } else {
     rpc =
       nativeNetwork === network
@@ -1000,11 +1056,12 @@ export const formattedNetworkName = (network) => {
     polygon: 'Polygon',
     moonriver: 'Moonriver',
     astar: 'Astar',
+    arbitrum: 'Arbitrum One',
   }
   if (Object.keys(networks).includes(network)) {
     return networks[network]
   }
-  return 'Unknown'
+  return network
 }
 
 //input  { chainId, chainName, currency: {name, symbol, decimals }, rpcUrls, blockExplorer }
@@ -1054,4 +1111,29 @@ export const getPoolClaimTimeArr = (poolId, network) => {
   } else {
     return [[lp.claimAt], distribution]
   }
+}
+
+export const formatCurrency = (
+  value,
+  usd = false,
+  fractionDigits = 1,
+  currencyFormat = false,
+) => {
+  const formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: fractionDigits,
+    maximumFractionDigits: 4,
+  })
+
+  //for currency format with $symbol
+  if (usd) {
+    return formatter.format(value ? value : 0)?.slice(1)
+  }
+
+  if (typeof window.web3 === 'undefined') {
+    return formatter.format(value ? value : 0).slice(1)
+  }
+
+  return formatter.format(value ? value : 0).slice(1)
 }

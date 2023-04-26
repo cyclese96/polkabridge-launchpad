@@ -1,19 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../../components/Button'
+import MaterialButton from '../../components/Button/MaterialButton'
 import Spacer from '../../components/Spacer'
 import ErrorImg from '../../assets/img/Error.svg'
-import Modal, { ModalProps } from '../Modal/Modal';
+import Modal, { ModalProps } from '../Modal/Modal'
 
 interface SuccessProps extends ModalProps {
   text: string
   txhash: string
 }
-const ModalError: React.FC<SuccessProps> = ({
-  text,
-  txhash,
-  onDismiss
-}) => {
+const ModalError: React.FC<SuccessProps> = ({ text, txhash, onDismiss }) => {
   return (
     <Modal>
       <StyledSuccessWrap>
@@ -27,13 +23,14 @@ const ModalError: React.FC<SuccessProps> = ({
                         <StyledLink target="_blank" href={'https://etherscan.io/tx/' + txhash}>{txhash}</StyledLink>
                     </StyleInfo> */}
           <Spacer size="md" />
-          <Button text="Close" variant="secondary" onClick={onDismiss} />
+          <MaterialButton variant="secondary" onClick={onDismiss}>
+            Close
+          </MaterialButton>
 
           <Spacer size="md" />
         </StyledModalSuccess>
       </StyledSuccessWrap>
     </Modal>
-
   )
 }
 
@@ -64,7 +61,7 @@ const StyleContent = styled.div`
 `
 const StyledLink = styled.a`
   color: #fff;
-  &.other-stake{
+  &.other-stake {
     padding: 10px;
     background-color: ${(props) => props.theme.color.primary.main};
     display: block;

@@ -28,7 +28,7 @@ const TopBar: React.FC<TopBarProps> = ({ onPresentMobileMenu }) => {
             </WrapMenuDesktop>
           </div>
           <StyledAccountButtonWrapper>
-            {/* <AccountButton account="" status={true} /> */}
+            <AccountButton account="" status={true} />
             <WrapIconMenu>
               <img
                 onClick={() => setShowMenu(!showMenu)}

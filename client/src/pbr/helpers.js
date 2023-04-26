@@ -37,11 +37,9 @@ export const networkIcon = (network) => {
     return '/img/tokens/one.png'
   } else if (network === moonriverNetwork) {
     return '/img/moon.png'
-  }
-  else if (network === astarNetwork) {
+  } else if (network === astarNetwork) {
     return '/img/astar.png'
-  }
-  else {
+  } else {
     return '/img/tokens/eth.png'
   }
 }
@@ -116,6 +114,18 @@ export const getTokenId = (tokenName, network) => {
   return poolObj.tokenId ? poolObj.tokenId : poolObj.name.toLowerCase()
 }
 
+export const constantPrice = (tokenName, network) => {
+  const poolObj = supportedPools.find(
+    (item) => item.name === tokenName && item.network === network,
+  )
+
+  if (!poolObj.price) {
+    return null
+  }
+
+  return poolObj.price
+}
+
 export const getTokenPriceFromCoinGecko = async (network, tokenId = null) => {
   try {
     if (!network) {
@@ -130,12 +140,12 @@ export const getTokenPriceFromCoinGecko = async (network, tokenId = null) => {
 
     const priceRes = await axios.get(
       config.coingecko +
-      `/v3/simple/price?ids=${token_id}&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
+        `/v3/simple/price?ids=${token_id}&vs_currencies=usd&include_market_cap=false&include_24hr_vol=false&include_24hr_change=false&include_last_updated_at=false`,
     )
 
     const priceData = priceRes.data
     const tokenPrice = priceData?.[token_id] ? priceData[token_id].usd : '0'
-
+    console.log('fetchTokenPrice , ', tokenPrice)
     return tokenPrice
   } catch (error) {
     console.log('fetchTokenPrice ', { error })

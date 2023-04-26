@@ -1,13 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../../components/Button'
+import MaterialButton from '../../components/Button/MaterialButton'
 import Spacer from '../../components/Spacer'
 import Cup from '../../assets/img/Cup.svg'
-import Modal, { ModalProps } from '../Modal/Modal';
+import Modal, { ModalProps } from '../Modal/Modal'
 
 interface SuccessProps extends ModalProps {
   text: string
-  amount: string,
+  amount: string
   symbol: string
   txhash: string
 }
@@ -16,10 +16,8 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
   amount,
   symbol,
   txhash,
-  onDismiss
+  onDismiss,
 }) => {
-
-
   return (
     <Modal>
       <StyledSuccessWrap>
@@ -30,7 +28,9 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
           <Spacer size="md" />
           <StyleInfo>
             <StyleLabel>Purchased Amount:</StyleLabel>
-            <StyleContent>{amount} {symbol}</StyleContent>
+            <StyleContent>
+              {amount} {symbol}
+            </StyleContent>
           </StyleInfo>
           {/* <Spacer size="md" />
         <StyleInfo>
@@ -40,11 +40,12 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
         </StyledModalSuccess>
       </StyledSuccessWrap>
       <Spacer size="md" />
-      <Button text="Close" variant="secondary" onClick={onDismiss} />
+      <MaterialButton variant="secondary" onClick={onDismiss}>
+        Close
+      </MaterialButton>
 
       <Spacer size="md" />
     </Modal>
-
   )
 }
 
@@ -75,7 +76,7 @@ const StyleContent = styled.div`
 `
 const StyledLink = styled.a`
   color: #fff;
-  &.other-stake{
+  &.other-stake {
     padding: 10px;
     background-color: ${(props) => props.theme.color.primary.main};
     display: block;

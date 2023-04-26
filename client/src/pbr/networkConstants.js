@@ -1,5 +1,6 @@
 import config from '../config'
 import {
+  arbitrumRpcNodes,
   astarRpcNodes,
   bscNodes,
   bscNodesTestnet,
@@ -137,5 +138,19 @@ export const astarNetworkDetail = {
     },
     rpcUrls: astarRpcNodes,
     blockExplorerUrls: [`https://astar.subscan.io`],
+  },
+}
+
+export const arbitrumNetworkDetail = {
+  mainnet: {
+    chainId: `0x${config.arbitrumChain.toString(16)}`,
+    chainName: 'Arbitrum One',
+    nativeCurrency: {
+      name: 'ETH',
+      symbol: 'eth',
+      decimals: 18,
+    },
+    rpcUrls: arbitrumRpcNodes,
+    blockExplorerUrls: [`https://arbiscan.io`],
   },
 }

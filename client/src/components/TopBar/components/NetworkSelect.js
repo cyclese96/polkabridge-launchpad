@@ -1,22 +1,13 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
-import InputLabel from '@material-ui/core/InputLabel'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
-import {
-  astarNetworkDetail,
-  bscNetworkDetail,
-  ethereumNetworkDetail,
-  harmonyNetworkDetail,
-  moonriverNetworkDetail,
-  polygonNetworkDetail,
-} from '../../../pbr/networkConstants'
-import { setupNetwork } from '../../../pbr/utils'
+
 import config from '../../../config'
 import { currentConnection } from '../../../pbr/lib/constants'
-import useNetwork from '../../../hooks/useNetwork'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
+import useWallet from '../../../hooks/useWallet'
+import { useSwitchNetwork } from 'wagmi'
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -52,69 +43,37 @@ const useStyles = makeStyles((theme) => ({
 export default function NetworkSelect({}) {
   const classes = useStyles()
 
-  const { chainId, status } = useNetwork()
-  const { account } = useWallet()
+  const { account, chainId } = useWallet()
+  const { chains, switchNetwork } = useSwitchNetwork()
+  const [selectedChain, setSelectedChain] = useState(1)
+
+  const handleChainSelection = useCallback(
+    async (targetChain) => {
+      try {
+        switchNetwork(targetChain)
+      } catch (error) {
+        setSelectedChain(targetChain)
+        console.log('chain switch error ', error)
+      }
+    },
+    [switchNetwork],
+  )
 
   useEffect(() => {
-    // console.log('selected chain id', selectedNetwork)
-    if (!account) {
+    if (!chainId) {
       return
     }
-    if (status === 'connected') {
-      handleChange(chainId)
-    }
-  }, [chainId, status])
 
-  const handleChange = (_selected) => {
-    if ([config.bscChain, config.bscChainTestent].includes(_selected)) {
-      setupNetwork(
-        currentConnection === 'mainnet'
-          ? bscNetworkDetail.mainnet
-          : bscNetworkDetail.testnet,
-      )
-    } else if (
-      [config.polygon_chain_mainnet, config.polygon_chain_testnet].includes(
-        _selected,
-      )
-    ) {
-      setupNetwork(
-        currentConnection === 'mainnet'
-          ? polygonNetworkDetail.mainnet
-          : polygonNetworkDetail.testnet,
-      )
-    } else if (
-      [config.hmyChainMainnet, config.hmyChainTestnet].includes(_selected)
-    ) {
-      setupNetwork(
-        currentConnection === 'mainnet'
-          ? harmonyNetworkDetail.mainnet
-          : harmonyNetworkDetail.testnet,
-      )
-    } else if (
-      [config.moonriverChain, config.moonriverChainTestent].includes(_selected)
-    ) {
-      setupNetwork(
-        currentConnection === 'mainnet'
-          ? moonriverNetworkDetail.mainnet
-          : moonriverNetworkDetail.testnet,
-      )
-    } else if ([config.astarChain].includes(_selected)) {
-      setupNetwork(astarNetworkDetail.mainnet)
-    } else {
-      setupNetwork(
-        currentConnection === 'mainnet'
-          ? ethereumNetworkDetail.mainnet
-          : ethereumNetworkDetail.testnet,
-      )
-    }
-  }
+    setSelectedChain(chainId)
+  }, [chainId])
+
   return (
     <div>
       <FormControl variant="standard" className={classes.root}>
         <Select
           className={classes.main}
-          value={chainId}
-          onChange={({ target: { value } }) => handleChange(value)}
+          value={selectedChain}
+          onChange={({ target: { value } }) => handleChainSelection(value)}
           disableUnderline
         >
           <MenuItem
@@ -127,6 +86,21 @@ export default function NetworkSelect({}) {
           >
             <span style={{ paddingLeft: 7 }}>Ethereum</span>
             <img className={classes.imgIcon} src="/img/tokens/eth.png" />
+          </MenuItem>
+
+          <MenuItem
+            value={
+              currentConnection === 'testnet'
+                ? config.arbitrumGoerliChain
+                : config.arbitrumChain
+            }
+            className={classes.buttonDrop}
+          >
+            <span style={{ paddingLeft: 7 }}>Arbitrum One</span>
+            <img
+              className={classes.imgIcon}
+              src="https://s2.coinmarketcap.com/static/img/coins/64x64/11841.png"
+            />
           </MenuItem>
           <MenuItem
             value={
@@ -171,11 +145,6 @@ export default function NetworkSelect({}) {
           >
             <span style={{ paddingLeft: 7 }}>Moonriver</span>
             <img className={classes.imgIcon} src="/img/moon.png" />
-          </MenuItem>
-
-          <MenuItem value={config.astarChain} className={classes.buttonDrop}>
-            <span style={{ paddingLeft: 7 }}>Astar</span>
-            <img className={classes.imgIcon} src="/img/astar.png" />
           </MenuItem>
         </Select>
       </FormControl>

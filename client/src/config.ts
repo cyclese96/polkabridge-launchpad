@@ -1,6 +1,6 @@
 export default {
   chainId: 1,
-  chainIdTestnet: 42,
+  chainIdTestnet: 5,
   bscChain: 56,
   bscChainTestent: 97,
   bscRpcTestnet: 'https://data-seed-prebsc-1-s1.binance.org:8545/',
@@ -28,4 +28,8 @@ export default {
   ankrMoonriverRpc: '',
   astarChain: 592,
   astarRpc: 'https://rpc.astar.network:8545',
+  arbitrumChain: 42161,
+  arbitrumRpc: 'https://arb1.arbitrum.io/rpc',
+  arbitrumGoerliChain: 421613,
+  arbitrumGoerliRpc: 'https://goerli-rollup.arbitrum.io/rpc',
 }

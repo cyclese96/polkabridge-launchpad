@@ -1,18 +1,18 @@
 import React from 'react'
 import styled from 'styled-components'
-import Button from '../Button'
+import MaterialButton from '../Button/MaterialButton'
 import Spacer from '../Spacer'
 import Cup from '../../assets/img/Cup.svg'
-import Modal, { ModalProps } from '../Modal/Modal';
+import Modal, { ModalProps } from '../Modal/Modal'
 import { Dialog } from '@material-ui/core'
 
 interface SuccessProps extends ModalProps {
   text: string
-  amount: string,
+  amount: string
   symbol: string
-  txhash: string,
-  percent: number,
-  open: boolean,
+  txhash: string
+  percent: number
+  open: boolean
   loading: boolean
 }
 const ModalSuccessHarvest: React.FC<SuccessProps> = ({
@@ -23,13 +23,17 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
   onDismiss,
   percent,
   open,
-  loading
+  loading,
 }) => {
-
   return (
-    <Dialog style={{ width: '100%' }} open={open} onClose={onDismiss} PaperProps={{
-      style: { borderRadius: 25, backgroundColor: "transparent" },
-    }} >
+    <Dialog
+      style={{ width: '100%' }}
+      open={open}
+      onClose={onDismiss}
+      PaperProps={{
+        style: { borderRadius: 25, backgroundColor: 'transparent' },
+      }}
+    >
       <StyledSuccessWrap>
         <StyledModalSuccess>
           <img height="200px" src={Cup} alt="Confirm Success" />
@@ -38,7 +42,9 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
           <Spacer size="md" />
           <StyleInfo>
             <StyleLabel>Purchased Amount:</StyleLabel>
-            <StyleContent>{amount} {symbol}</StyleContent>
+            <StyleContent>
+              {amount} {symbol}
+            </StyleContent>
           </StyleInfo>
           <StyleInfo>
             <StyleLabel>Claimed Amount:</StyleLabel>
@@ -52,17 +58,16 @@ const ModalSuccessHarvest: React.FC<SuccessProps> = ({
         </StyledModalSuccess>
       </StyledSuccessWrap>
       <Spacer size="md" />
-      <Button text="Close" variant="secondary" onClick={onDismiss} />
+      <MaterialButton variant="secondary" onClick={onDismiss}>
+        Close
+      </MaterialButton>
 
       <Spacer size="md" />
     </Dialog>
-
   )
 }
 
-const StyledSuccessWrap = styled.div`
-
-`
+const StyledSuccessWrap = styled.div``
 
 const StyledModalSuccess = styled.div`
   padding: ${(props) => props.theme.spacing[4]}px;
@@ -91,7 +96,7 @@ const StyleContent = styled.div`
 `
 const StyledLink = styled.a`
   color: #fff;
-  &.other-stake{
+  &.other-stake {
     padding: 10px;
     background-color: ${(props) => props.theme.color.primary.main};
     display: block;

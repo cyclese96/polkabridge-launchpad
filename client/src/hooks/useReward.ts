@@ -1,9 +1,9 @@
 import { useCallback } from 'react'
 
 import usePolkaBridge from './usePolkaBridge'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 
 import { harvest, getMasterChefContract } from '../pbr/utils'
+import useWallet from './useWallet'
 
 const useReward = (pid: number) => {
   const { account } = useWallet()
@@ -15,8 +15,7 @@ const useReward = (pid: number) => {
       const txHash = await harvest(masterChefContract, pid, account)
       console.log(txHash)
       return txHash
-    }
-    catch (ex) {
+    } catch (ex) {
       console.error(ex)
       return ''
     }

@@ -20,9 +20,9 @@ import CategoryIcon from '@material-ui/icons/Category'
 import { EqualizerOutlined } from '@material-ui/icons'
 import DotCircle from './DotCircle'
 import AccountButton from './AccountButton'
-import useNetwork from '../../../hooks/useNetwork'
 import { Link } from 'react-router-dom'
 import NetworkSelect from './NetworkSelect'
+import useWallet from '../../../hooks/useWallet'
 
 const useStyles = makeStyles((theme) => ({
   grow: {
@@ -243,20 +243,37 @@ const Navbar = () => {
     showAlert({ status: false, message: '' })
   }
 
-  const { chainId, status } = useNetwork()
+  const { chainId, account } = useWallet()
 
   useEffect(() => {
-    // console.log('useNetwork:  network id', chainId)
-    // console.log('useNetwork: status', status)
-    if (status === 'network changing') {
-      var result = window.confirm('Do you want reload the page ?')
-      if (result) {
-        window.location.reload()
-      } else {
-        console.log('closed')
-      }
+    if (!chainId) {
+      return
     }
-  }, [chainId])
+    const cachedChain = localStorage.getItem('cachedChain')
+
+    if (cachedChain && chainId?.toString() !== cachedChain) {
+      localStorage.setItem('cachedChain', chainId?.toString())
+
+      window.location.reload()
+    } else if (!cachedChain) {
+      localStorage.setItem('cachedChain', chainId?.toString())
+    }
+  }, [chainId, account])
+
+  useEffect(() => {
+    if (!account) {
+      return
+    }
+    const cachedAccount = localStorage.getItem('cachedAccount')
+
+    if (cachedAccount && account?.toString() !== cachedAccount) {
+      localStorage.setItem('cachedAccount', account?.toString())
+
+      window.location.reload()
+    } else if (!cachedAccount) {
+      localStorage.setItem('cachedAccount', account?.toString())
+    }
+  }, [account])
 
   const list = (anchor) => (
     <div
@@ -293,7 +310,12 @@ const Navbar = () => {
             id: 'characters',
             icon: <PeopleAltOutlined />,
           },
-          { name: 'Swap', link: 'https://swap.polkabridge.org', id: 'items', icon: <VpnLockOutlined /> },
+          {
+            name: 'Swap',
+            link: 'https://swap.polkabridge.org',
+            id: 'items',
+            icon: <VpnLockOutlined />,
+          },
           {
             name: 'P2P',
             link: 'https://p2p.polkabridge.org/',
@@ -317,7 +339,7 @@ const Navbar = () => {
           <AccountButton onWalletClick={() => setAccountDialog(true)} />
         </ListItem>
         <ListItem button style={{ marginLeft: 20 }}>
-          <div >
+          <div>
             <NetworkSelect selectedNetwork={chainId} />
           </div>
         </ListItem>
@@ -337,18 +359,22 @@ const Navbar = () => {
         className={classes.appBarBackground}
       >
         <Toolbar className={classes.sectionDesktop}>
-          <Link to='/'>
+          <Link to="/">
             <Avatar
               variant="square"
               src="img/logo-white.png"
               className={classes.logo}
-            /></Link>
+            />
+          </Link>
 
           <div className={classes.leftMargin} />
 
           <div className="d-flex justify-content-end">
             <div>
-              <a href="https://stake.polkabridge.org" className={classes.navbarItemsDesktop}>
+              <a
+                href="https://stake.polkabridge.org"
+                className={classes.navbarItemsDesktop}
+              >
                 Stake <DotCircle active={true} />
               </a>
             </div>
@@ -384,22 +410,25 @@ const Navbar = () => {
           </div>
 
           <div>
-            <a href="https://swap.polkabridge.org" className={classes.navbarItemsDesktop}>
+            <a
+              href="https://swap.polkabridge.org"
+              className={classes.navbarItemsDesktop}
+            >
               Swap <DotCircle />
             </a>
           </div>
 
           <div>
-            <a href="https://p2p.polkabridge.org/" className={classes.navbarItemsDesktop}>
+            <a
+              href="https://p2p.polkabridge.org/"
+              className={classes.navbarItemsDesktop}
+            >
               P2P <DotCircle />
             </a>
           </div>
 
-
-
-
           <div className={classes.grow} />
-          <div >
+          <div>
             <NetworkSelect selectedNetwork={chainId} />
           </div>
           <div style={{ paddingRight: 10 }}></div>
@@ -408,13 +437,13 @@ const Navbar = () => {
 
         <Toolbar className={classes.sectionMobile}>
           <div className="d-flex justify-content-center align-items-center">
-
-            <Link to='/'>
+            <Link to="/">
               <Avatar
                 variant="square"
                 src="img/logo-white.png"
                 style={{ height: 38, width: 150 }}
-              /></Link>
+              />
+            </Link>
             {/* <div >
               <NetworkSelect selectedNetwork={chainId} />
             </div> */}

@@ -1,9 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-// import { useWallet } from 'use-wallet'
-import { useWallet } from '@binance-chain/bsc-use-wallet'
 import usePendingTransactions from '../../../hooks/usePendingTransactions'
-import Button from '../../Button'
+import MaterialButton from '../../Button/MaterialButton'
+import useWallet from '../../../hooks/useWallet'
 
 interface TxButtonProps {}
 
@@ -14,11 +13,11 @@ const TxButton: React.FC<TxButtonProps> = () => {
     <>
       {!!account && !!pendingTransactions.length ? (
         <StyledTxButton>
-          <Button
-            size="sm"
-            text={`${pendingTransactions.length} Transaction(s)`}
-            href={`https://etherscan.io/address/${account}`}
-          />
+          <MaterialButton onClick={() => {}}>
+            <a
+              href={`https://etherscan.io/address/${account}`}
+            >{`${pendingTransactions.length} Transaction(s)`}</a>{' '}
+          </MaterialButton>
         </StyledTxButton>
       ) : null}
     </>

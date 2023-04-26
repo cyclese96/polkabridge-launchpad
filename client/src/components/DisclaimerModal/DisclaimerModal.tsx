@@ -1,6 +1,6 @@
 import React, { useCallback, useState, useMemo } from 'react'
 
-import Button from '../Button'
+import MaterialButton from '../Button/MaterialButton'
 import CardIcon from '../CardIcon'
 import Modal, { ModalProps } from '..//Modal'
 import ModalActions from '..//ModalActions'
@@ -19,7 +19,7 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
 
   const handleConfirm = useCallback(() => {
     onConfirm()
-    onDismiss()
+    // onDismiss()
   }, [onConfirm, onDismiss])
 
   const modalContent = useMemo(() => {
@@ -28,12 +28,11 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
         <div>
           <p>Audits: None.</p>
           <p>
-            While the initial creators of the PBR protocol have made
-            reasonable efforts to attempt to ensure the security of the
-            contracts, including forking much of the codebase from existing
-            well-audited projects and soliciting review from friends, nothing
-            approaching the rigor of a formal audit has been conducted at this
-            time.
+            While the initial creators of the PBR protocol have made reasonable
+            efforts to attempt to ensure the security of the contracts,
+            including forking much of the codebase from existing well-audited
+            projects and soliciting review from friends, nothing approaching the
+            rigor of a formal audit has been conducted at this time.
           </p>
           <p>
             We STRONGLY urge caution to anyone who chooses to engage with these
@@ -42,24 +41,21 @@ const DisclaimerModal: React.FC<DisclaimerModal> = ({
         </div>
       )
     } else {
-      return (
-        <div>
-        </div>
-      )
+      return <div></div>
     }
   }, [step])
 
   const button = useMemo(() => {
     if (step === 'disclaimer') {
       return (
-        <Button
-          text="Next"
-          variant="secondary"
-          onClick={() => setStep('uniswap')}
-        />
+        <MaterialButton variant="secondary" onClick={() => setStep('uniswap')}>
+          Next
+        </MaterialButton>
       )
     } else {
-      return <Button text="I understand" onClick={handleConfirm} />
+      return (
+        <MaterialButton onClick={handleConfirm}>I understand</MaterialButton>
+      )
     }
   }, [setStep, step, handleConfirm])
 

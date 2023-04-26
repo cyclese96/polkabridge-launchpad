@@ -34,4 +34,9 @@ export const astarRpcNodes = [
   'https://rpc.astar.network:8545',
 ]
 
+export const arbitrumRpcNodes = [
+  'https://arb1.arbitrum.io/rpc',
+  'https://arb-mainnet.g.alchemy.com/v2',
+]
+
 // export default { getBscNodeUrl };
