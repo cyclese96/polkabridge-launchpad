@@ -96,7 +96,7 @@ export default function NetworkSelect({}) {
             }
             className={classes.buttonDrop}
           >
-            <span style={{ paddingLeft: 7 }}>Arbitrum One</span>
+            <span style={{ paddingLeft: 7 }}>Arbitrum</span>
             <img
               className={classes.imgIcon}
               src="https://s2.coinmarketcap.com/static/img/coins/64x64/11841.png"

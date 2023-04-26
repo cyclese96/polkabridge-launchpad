@@ -144,7 +144,7 @@ export const astarNetworkDetail = {
 export const arbitrumNetworkDetail = {
   mainnet: {
     chainId: `0x${config.arbitrumChain.toString(16)}`,
-    chainName: 'Arbitrum One',
+    chainName: 'Arbitrum',
     nativeCurrency: {
       name: 'ETH',
       symbol: 'eth',

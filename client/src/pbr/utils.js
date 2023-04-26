@@ -1056,7 +1056,7 @@ export const formattedNetworkName = (network) => {
     polygon: 'Polygon',
     moonriver: 'Moonriver',
     astar: 'Astar',
-    arbitrum: 'Arbitrum One',
+    arbitrum: 'Arbitrum',
   }
   if (Object.keys(networks).includes(network)) {
     return networks[network]
