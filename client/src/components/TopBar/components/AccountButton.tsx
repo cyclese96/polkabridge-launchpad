@@ -6,6 +6,7 @@ import { isMobile } from 'react-device-detect'
 import { useAccount } from 'wagmi'
 import useWallet from '../../../hooks/useWallet'
 import AccountModal from './AccountModal'
+import { useMediaQuery, useTheme } from '@material-ui/core'
 
 interface AccountButtonProps {
   account: string
@@ -21,7 +22,8 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
   //   <WalletProviderModal />,
   //   'provider',
   // )
-
+  const theme = useTheme()
+  const sm = useMediaQuery(theme.breakpoints.down('sm'))
   const { address: account } = useAccount()
 
   const handleUnlockClick = useCallback(() => {
@@ -52,7 +54,7 @@ const AccountButton: React.FC<AccountButtonProps> = (props) => {
         </MaterialButton>
       ) : (
         <BoxWallet>
-          <div>{account && account.substr(0, 7)}...</div>
+          <div>{account && account.substr(0, sm ? 4 : 7)}...</div>
           <MaterialButton
             onClick={handleUnlockClick}
             // size="sm"

@@ -336,7 +336,7 @@ const Navbar = () => {
         ))}
         <Divider />
         <ListItem button style={{ marginLeft: 20 }}>
-          <AccountButton onWalletClick={() => setAccountDialog(true)} />
+          {/* <AccountButton onWalletClick={() => setAccountDialog(true)} /> */}
         </ListItem>
         <ListItem button style={{ marginLeft: 20 }}>
           <div>
@@ -444,9 +444,9 @@ const Navbar = () => {
                 style={{ height: 38, width: 150 }}
               />
             </Link>
-            {/* <div >
-              <NetworkSelect selectedNetwork={chainId} />
-            </div> */}
+            <div>
+              <AccountButton onWalletClick={() => setAccountDialog(true)} />
+            </div>
           </div>
 
           <div>
