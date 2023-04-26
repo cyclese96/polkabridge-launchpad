@@ -20,6 +20,7 @@ import useWallet from '../../../hooks/useWallet'
 import { useBalance, useDisconnect } from 'wagmi'
 import { Dialog } from '@material-ui/core'
 import { useWeb3Modal } from '@web3modal/react'
+import useEthBalance from '../../../hooks/useEthBalance'
 
 const AccountModal = ({ resetPopup, popupActive }) => {
   const { account, chainId } = useWallet()
@@ -43,13 +44,14 @@ const AccountModal = ({ resetPopup, popupActive }) => {
     resetPopup()
   }, [resetPopup, disconnect])
 
-  const { data } = useBalance({
-    address: account,
-    chainId: chainId,
-    formatUnits: 'ether',
-  })
-  // native token balance
-  const balance = useMemo(() => data?.formatted, [data])
+  // const { data } = useBalance({
+  //   address: account,
+  //   chainId: chainId,
+  //   formatUnits: 'ether',
+  // })
+  // // native token balance
+  // const balance = useMemo(() => data?.formatted, [data])
+  const balance = useEthBalance()
 
   const getTokenSymbol = () => {
     if (getNetworkName(chainId) === bscNetwork) {

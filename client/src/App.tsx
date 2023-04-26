@@ -65,6 +65,7 @@ const App: React.FC = () => {
     <ThemeProvider theme={theme}>
       <WagmiConfig client={wagmiClient}>
         <Router>
+        <ModalsProvider>
           <Navbar />
 
           <Switch>
@@ -80,6 +81,7 @@ const App: React.FC = () => {
           </Switch>
 
           <Disclaimer />
+          </ModalsProvider>
         </Router>
       </WagmiConfig>
       <Web3Modal projectId={projectId} ethereumClient={ethereumClient} />

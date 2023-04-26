@@ -1,11 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import styled from 'styled-components'
 import MaterialButton from '../../components/Button/MaterialButton'
 import PageHeader from '../../components/PageHeader'
 import Spacer from '../../components/Spacer'
 import useLaunchpad from '../../hooks/useLaunchpad'
-import usePolkaBridge from '../../hooks/usePolkaBridge'
 import { BigNumber } from '../../pbr'
 import {
   formatFloatValue,
@@ -21,99 +20,80 @@ import { white } from '../../theme/colors'
 import {
   getPoolId,
   GUARANTEED,
+  networkToChain,
   PRIVATE,
   PUBLIC,
   tierConditions,
   WHITELIST,
 } from '../../pbr/lib/constants'
-import useNetwork from '../../hooks/useNetwork'
 import { networkSymbol } from '../../pbr/helpers'
 import useWallet from '../../hooks/useWallet'
+import { Link } from '@material-ui/core'
 
-const Launchpad: React.FC = () => {
-  const { launchpadId, poolId } = useParams() as any
-  const {
-    pid,
-    name,
-    id,
-    icon,
-    description,
-    introduce,
-    website,
-    twitter,
-    telegram,
-    whitepaper,
-    lpAddress,
-    lpContract,
-    lpExplorer,
-    tokenAddress,
-    tokenExplorer,
-    tokenSymbol,
-    total,
-    totalSupply,
-    ratio,
-    min,
-    max,
-    maxTier1,
-    maxTier2,
-    maxTier3,
-    maxWhitelistPurchase,
-    access,
-    network,
-    distribution,
-    startAt,
-    endAt,
-    claimAt,
-    startDate,
-  } = useLaunchpad(launchpadId, Number(poolId)) || {
-    pid: 0,
-    name: '',
-    id: '',
-    icon: '',
-    description: '',
-    introduce: '',
-    website: '',
-    twitter: '',
-    telegram: '',
-    whitepaper: '',
-    lpAddress: '',
-    lpContract: null,
-    lpExplorer: '',
-    tokenAddress: '',
-    tokenExplorer: '',
-    tokenSymbol: '',
-    total: '',
-    totalSupply: '',
-    ratio: 0,
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    maxWhitelistPurchase: 0,
-    access: '',
-    network: '',
-    distribution: '',
-    startAt: 0,
-    endAt: 0,
-    claimAt: 0,
-    startDate: 'TBA',
-  }
+const Launchpad = () => {
+  const { launchpadId, poolId } = useParams()
+
+  const launchpad = useLaunchpad(launchpadId, poolId)
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
 
-  const [progress, setProgress] = useState<BigNumber>()
+  const [progress, setProgress] = useState()
   const [stakedAmount, setStakedAmount] = useState('0')
   const { account } = useWallet()
   const [maxGuaranteed, setMaxGuaranteed] = useState('0')
 
   const history = useHistory()
 
-  const currentPoolId = (pid: number, network: string) => {
+  const currentPoolId = (pid, network) => {
     return getPoolId(pid, network)
   }
+
+  const {
+    lpAddresses,
+    pid,
+    name,
+    access,
+    startAt,
+    endAt,
+    network,
+    maxWhitelistPurchase,
+    maxTier1,
+    maxTier2,
+    maxTier3,
+    icon,
+    tokenAddresses,
+    website,
+    twitter,
+    telegram,
+    whitepaper,
+    lpExplorer,
+    distribution,
+    introduce,
+    min,
+    max,
+    totalSupply,
+  } = launchpad
+
+  const poolChain = useMemo(() => {
+    return networkToChain?.[network]
+  }, [network])
+
+  const lpAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+    return lpAddresses?.[parseInt(poolChain)]
+  }, [lpAddresses, poolChain])
+
+  const tokenAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+
+    return tokenAddresses?.[parseInt(poolChain)]
+  }, [tokenAddresses, poolChain])
 
   useEffect(() => {
     async function fetchData() {
@@ -137,7 +117,7 @@ const Launchpad: React.FC = () => {
         setMaxGuaranteed(fromWei(_max))
       }
 
-      const stakedTokens = await getUserStakingData(account, network)
+      const stakedTokens = await getUserStakingData(account)
 
       setProgress(newProgress)
 
@@ -146,9 +126,9 @@ const Launchpad: React.FC = () => {
     if (pid >= 0) {
       fetchData()
     }
-  }, [account, lpContract, pid, setStakedAmount, setProgress])
+  }, [account, pid, setStakedAmount, setProgress])
 
-  const renderer = (countdownProps: CountdownRenderProps) => {
+  const renderer = (countdownProps) => {
     var { days, hours, minutes, seconds } = countdownProps
     const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
     const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
@@ -161,21 +141,8 @@ const Launchpad: React.FC = () => {
     )
   }
 
-  // const showNetworkAlert = () => {
-  //   const _networkName =
-  //     network === bscNetwork
-  //       ? 'Binance Smart Chain'
-  //       : network === polygonNetwork
-  //       ? 'Polygon'
-  //       : 'Ethereum'
-  //   if (getNetworkName(chainId) !== network) {
-  //     alert(
-  //       `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-  //     )
-  //   }
-  // }
   const handleJoinPool = () => {
-    history.push(`/launchpads/join/${launchpadId}/${poolId}`)
+    history.push(`/launchpads/join/${launchpad.symbol}/${launchpad.pid}`)
   }
 
   const getMaxValue = () => {
@@ -297,13 +264,27 @@ const Launchpad: React.FC = () => {
             </StyledBox>
             <StyledBox className="col-2"></StyledBox>
             <StyledBox className="col-4">
-              <MaterialButton
-                variant="tertiary"
-                onClick={() => (window.location.href = lpExplorer)}
-                disabled={!tokenAddress}
-              >
-                View Explorer
-              </MaterialButton>
+              {!tokenAddress ? (
+                <Link target="_blank">
+                  <MaterialButton
+                    variant="secondary"
+                    onClick={() => {}}
+                    // disabled={!tokenAddress}
+                  >
+                    View Explorer
+                  </MaterialButton>
+                </Link>
+              ) : (
+                <Link href={`${lpExplorer}/${tokenAddress}`} target="_blank">
+                  <MaterialButton
+                    variant="secondary"
+                    onClick={() => {}}
+                    // disabled={!tokenAddress}
+                  >
+                    View Explorer
+                  </MaterialButton>
+                </Link>
+              )}
             </StyledBox>
           </StyledInfo>
           <StyledInfo>

@@ -174,7 +174,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
         .status(403)
         .send({ message: "Access denied, Not enough staked tokens!" });
     }
-    console.log("total stake amount ", { _totalStakeAmount, userAddress });
+    // console.log("total stake amount ", { _totalStakeAmount, userAddress });
     const userSting = Web3.utils.soliditySha3(
       { t: "address", v: userAddress },
       { t: "uint256", v: _totalStakeAmount }
@@ -192,6 +192,7 @@ app.post("/api/ido/sign/v1", async (req, res) => {
     const v = data.v;
     const r = data.r;
     const s = data.s;
+    console.log("srv returned ", { v, r, s, _totalStakeAmount });
     return res.status(201).send({ v, r, s, totalStaked: _totalStakeAmount });
   } catch (error) {
     console.log("API error", error);

@@ -14,7 +14,7 @@ import {
   useTheme,
 } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import { isMetaMaskWallet } from '../../utils/index'
+import { isMetaMaskInstalled } from '../../pbr/utils'
 
 const useStyles = makeStyles((theme) => ({
   background: {
@@ -252,7 +252,7 @@ const ConnectModal = ({
                         'linear-gradient(315deg, #0abcf9 0%, #2c69d1 74%)',
                     }}
                     onClick={() => {
-                      isMetaMaskWallet
+                      isMetaMaskInstalled()
                         ? connectAsync({ connector: connectors?.[1] })
                         : window.open(
                             'https://link.trustwallet.com/open_url?coin_id=637&url=https://p2p.polkabridge.org/',
@@ -293,7 +293,7 @@ const ConnectModal = ({
                               'linear-gradient(315deg, #f39f86 0%, #f9d976 74%)',
                           }}
                           onClick={() => {
-                            isMetaMaskWallet
+                            isMetaMaskInstalled()
                               ? connectAsync({ connector: connector })
                               : window.open(
                                   'https://metamask.app.link/dapp/p2p.polkabridge.org/',

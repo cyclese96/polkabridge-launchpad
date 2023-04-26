@@ -11,7 +11,6 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import {
   getProgress,
   getHistory,
-  getETHBalance,
   getPurchasesAmount,
   getIsWhitelist,
   getUserStakingData,
@@ -24,9 +23,10 @@ import {
   getPurchaseStats,
   formattedNetworkName,
   getNetworkName,
+  formatCurrency,
 } from '../../pbr/utils'
 import Countdown, { CountdownRenderProps } from 'react-countdown'
-import useJoinPool from '../../hooks/useJoinPool'
+// import useJoinPool from '../../hooks/useJoinPool'
 import useHarvest from '../../hooks/useHarvest'
 import ModalError from '../../components/ModalError'
 import ModalSuccess from '../../components/ModalSuccess'
@@ -39,6 +39,7 @@ import {
   GUARANTEED,
   harmonyNetwork,
   moonriverNetwork,
+  networkToChain,
   polygonNetwork,
   tierConditions,
   WHITELIST,
@@ -46,20 +47,21 @@ import {
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
 import useNetwork from '../../hooks/useNetwork'
 import useWallet from '../../hooks/useWallet'
+import useEthBalance from 'hooks/useEthBalance'
+import {
+  TransactionState,
+  useJoinPoolCallback,
+} from '../../hooks/useJoinPoolCallback'
+import { useHarvestCallback } from 'hooks/useHarvestCallback'
 
-interface JoinHistory {
-  amount: number
-  symbol: string
-  status: string
-  joinDate: string
-}
+const JoinLaunchpad = () => {
+  const { launchpadId, poolId } = useParams()
 
-const JoinLaunchpad: React.FC = () => {
-  const { launchpadId, poolId } = useParams() as any
+  const launchpad = useLaunchpad(launchpadId, poolId)
   const {
     pid,
     name,
-    id,
+    symbol,
     icon,
     description,
     introduce,
@@ -67,12 +69,11 @@ const JoinLaunchpad: React.FC = () => {
     twitter,
     telegram,
     whitepaper,
-    lpAddress,
-    lpContract,
     lpExplorer,
-    tokenAddress,
+    lpAddresses,
     tokenExplorer,
     tokenSymbol,
+    tokenAddresses,
     total,
     totalSupply,
     ratio,
@@ -88,46 +89,38 @@ const JoinLaunchpad: React.FC = () => {
     startAt,
     endAt,
     claimAt,
-  } = useLaunchpad(launchpadId, Number(poolId)) || {
-    pid: 0,
-    name: '',
-    id: '',
-    icon: '',
-    description: '',
-    introduce: '',
-    website: '',
-    twitter: '',
-    telegram: '',
-    whitepaper: '',
-    lpAddress: '',
-    lpContract: null,
-    lpExplorer: '',
-    tokenAddress: '',
-    tokenExplorer: '',
-    tokenSymbol: '',
-    total: '',
-    totalSupply: '',
-    ratio: 0,
-    min: 0,
-    max: 0,
-    maxTier1: 0,
-    maxTier2: 0,
-    maxTier3: 0,
-    maxWhitelistPurchase: 0,
-    access: '',
-    network: '',
-    distribution: '',
-    startAt: 0,
-    endAt: 0,
-    claimAt: 0,
-  }
+  } = launchpad
+
+  const lpPoolId = useMemo(() => {
+    return launchpad?.poolId
+  }, [launchpad])
+
+  const poolChain = useMemo(() => {
+    return networkToChain?.[network]
+  }, [network])
+
+  const lpAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+    return lpAddresses?.[parseInt(poolChain)]
+  }, [lpAddresses, poolChain])
+
+  const tokenAddress = useMemo(() => {
+    if (!poolChain) {
+      return null
+    }
+
+    return lpAddresses?.[parseInt(poolChain)]
+  }, [tokenAddresses, poolChain])
 
   useEffect(() => {
     window.scrollTo(0, 0)
   }, [])
+  const ethBalance = useEthBalance()
 
   const { account } = useWallet()
-  const [progress, setProgress] = useState<BigNumber>()
+  const [progress, setProgress] = useState()
   const [isWhitelist, setIsWhitelist] = useState(false)
   const [ethValue, setETHValue] = useState('0')
   const [tokenValue, setTokenValue] = useState('') //max output purchase token based on the ratio
@@ -137,7 +130,7 @@ const JoinLaunchpad: React.FC = () => {
   const [successHarvestTx, setSuccessHarvestTx] = useState(false)
   const [errorTxt, setErrorTxt] = useState('')
   const [txhash, setTxhash] = useState('')
-  const [ethBalance, setETHBalance] = useState(0)
+
   // const [history, setHistory] = useState<JoinHistory[]>([])
   const [purchasedAmount, setPurchasedAmount] = useState(0)
   const [stakedAmount, setStakedAmount] = useState('0') // user total staked amount across the network: ethereum+matic
@@ -146,26 +139,25 @@ const JoinLaunchpad: React.FC = () => {
   const [numberClaimed, setNumberClaimed] = useState(0) // number of times users has claimed/harvested so far
   const [recentClaimTime, setRecentClaimTime] = useState(claimAt)
   const [totalRewardClaims, setTotalRewardClaims] = useState(1)
-  const { onJoinPool } = useJoinPool()
-  const { onHarvest } = useHarvest()
+  const { handleJoinPool, joinTrxStatus, resetJoinTrxState } =
+    useJoinPoolCallback()
+  // const { onHarvest } = useHarvest()
+
+  const { handleHarvest, harvestTrxStatus, resetHarvestTrxState } =
+    useHarvestCallback()
   const [loading, setLoading] = useState(true)
   const [maxGuaranteed, setMaxGuaranteed] = useState('0')
   const [purchaseStats, setPurchaseStats] = useState(null)
   // const [dataLoading, setDataLoading] = useState({ state: false, message: '' });
 
-  const [captchaVerified, setCaptchaVerified] = useState(false)
+  const [captchaVerified, setCaptchaVerified] = useState(true)
   const [harvestDistribution, setHarestDistribution] = useState([])
 
   const recaptchaRef = React.useRef()
-  const currentPoolId = (pid: number, network: string) => {
-    const _pid = getPoolId(pid, network)
-
-    return _pid
-  }
 
   const { chainId } = useNetwork()
 
-  const getCurrentClaimTime = (_userInfoData: any, _claimTimeArr: number[]) => {
+  const getCurrentClaimTime = (_userInfoData, _claimTimeArr) => {
     if (!_userInfoData) {
       return 0
     }
@@ -173,40 +165,69 @@ const JoinLaunchpad: React.FC = () => {
     if (
       _claimTimeArr &&
       _claimTimeArr.length > 1 &&
-      parseInt(_userInfoData?.harvestInfo?.NumberClaimed) < _claimTimeArr.length
+      parseInt(_userInfoData?.harvestInfo?.NumberClaimed?.toString()) <
+        _claimTimeArr.length
     ) {
-      return _claimTimeArr[parseInt(_userInfoData.harvestInfo.NumberClaimed)]
+      return _claimTimeArr[
+        parseInt(_userInfoData?.harvestInfo?.NumberClaimed?.toString())
+      ]
     } else {
       return claimAt
     }
   }
 
-  const parseTokenPurchased = (_userInfoObject: any) => {
+  const parseTokenPurchased = (_userInfoObject) => {
     if (!_userInfoObject) {
       return '0'
     }
-    return fromWei(_userInfoObject?.userInfo?.[1])
+    return fromWei(_userInfoObject?.userInfo?.[1]?.toString())
   }
 
-  const parseNumberClaimed = (_userInfoObject: any) => {
+  const parseNumberClaimed = (_userInfoObject) => {
     if (!_userInfoObject) {
       return '0'
     }
-    return _userInfoObject?.harvestInfo?.NumberClaimed
+    return _userInfoObject?.harvestInfo?.NumberClaimed?.toString()
   }
 
-  const parsePercentClaimed = (_userInfoObject: any) => {
+  const parsePercentClaimed = (_userInfoObject) => {
     if (!_userInfoObject) {
       return '0'
     }
 
-    return _userInfoObject.userInfo ? _userInfoObject.userInfo[3] : 0
+    return _userInfoObject?.userInfo?.toString()
+      ? _userInfoObject?.userInfo?.[3]?.toString()
+      : 0
   }
+
+  useEffect(() => {
+    if (joinTrxStatus.status === TransactionState.COMPLETED) {
+      setSuccessTx(true)
+      onPresentSuccess()
+      setPendingTx(false)
+      reset()
+    } else if (joinTrxStatus.status === TransactionState.FAILED) {
+      setPendingTx(false)
+      onPresentError()
+    }
+  }, [joinTrxStatus])
+
+  useEffect(() => {
+    if (harvestTrxStatus.status === TransactionState.COMPLETED) {
+      setPendingHarvestTx(false)
+      setSuccessHarvestTx(true)
+      onPresentSuccessHarvest()
+      reset()
+    } else if (harvestTrxStatus.status === TransactionState.FAILED) {
+      setPendingHarvestTx(false)
+      onPresentError()
+    }
+  }, [harvestTrxStatus])
 
   useEffect(() => {
     async function fetchData() {
       setLoading(true)
-      // setDataLoading({ state: true, message: "Loading pool..." })
+
       const [claimTimeArr, claimDistribution] = getPoolClaimTimeArr(
         poolId,
         network,
@@ -217,7 +238,7 @@ const JoinLaunchpad: React.FC = () => {
         // fetch max allocation for guaranteed pools
         const _max = await getMaxAllocation(
           lpAddress,
-          currentPoolId(pid, network),
+          lpPoolId,
           access,
           account,
           network,
@@ -227,7 +248,6 @@ const JoinLaunchpad: React.FC = () => {
 
       const [
         newIsWhitelist,
-        // newETHBalance,
         newProgress,
         newPurchasedAmount,
         stakedTokens,
@@ -235,36 +255,17 @@ const JoinLaunchpad: React.FC = () => {
       ] = await Promise.all([
         getIsWhitelist(
           lpAddress,
-          currentPoolId(pid, network),
+          lpPoolId,
           access,
           stakedAmount,
           account,
           network,
         ),
-        // getETHBalance(ethereum, account),
-        getProgress(
-          lpAddress,
-          currentPoolId(pid, network),
-          access,
-          startAt,
-          endAt,
-          network,
-        ),
-        getPurchasesAmount(
-          lpAddress,
-          currentPoolId(pid, network),
-          access,
-          account,
-          network,
-        ),
-        getUserStakingData(account, network),
-        getUserInfo(
-          lpAddress,
-          currentPoolId(pid, network),
-          access,
-          account,
-          network,
-        ),
+
+        getProgress(lpAddress, lpPoolId, access, startAt, endAt, network),
+        getPurchasesAmount(lpAddress, lpPoolId, access, account, network),
+        getUserStakingData(account),
+        getUserInfo(lpAddress, lpPoolId, access, account, network),
       ])
       const newPurchaseStats = await getPurchaseStats(
         name,
@@ -278,16 +279,15 @@ const JoinLaunchpad: React.FC = () => {
       // console.log('process.env.REACR_APP_CAPTCHA_KEY', process.env.REACR_APP_CAPTCHA_KEY)
       // console.log('process REACT_APP_POLYGON_TESTNET_NODE', process.env.REACT_APP_POLYGON_TESTNET_NODE)
       // const bscUserInfo = await getUserInfoBsc(lpBscContract, pid, account)
-      console.log('ethTest: isWhiteList  ', newIsWhitelist)
+      // console.log('ethTest: isWhiteList  ', newIsWhitelist)
 
       // console.log('ethTest newProgress--->  ', newProgress?.toString())
-      // console.log('ethTest: newPurchaseStats--->  ', newPurchaseStats)
+      console.log('ethTest: newPurchasedAmount--->  ', { newPurchasedAmount })
       // console.log('ethTest: setStakedAmount   ', stakedTokens)
       // console.log('ethTest: userInfoData--->  ', userInfoData)
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
       setIsWhitelist(newIsWhitelist)
-      setETHBalance(0)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
@@ -307,8 +307,8 @@ const JoinLaunchpad: React.FC = () => {
   }, [
     isWhitelist,
     account,
-    lpContract,
     pid,
+    lpPoolId,
     stakedAmount,
     tokenPurchased,
     percentClaimed,
@@ -316,7 +316,6 @@ const JoinLaunchpad: React.FC = () => {
     recentClaimTime,
     totalRewardClaims,
     setIsWhitelist,
-    setETHBalance,
     setProgress,
     setPurchasedAmount,
     setStakedAmount,
@@ -327,7 +326,7 @@ const JoinLaunchpad: React.FC = () => {
     setTotalRewardClaims,
   ])
 
-  const renderer = (countdownProps: CountdownRenderProps) => {
+  const renderer = (countdownProps) => {
     var { days, hours, minutes, seconds } = countdownProps
     const paddedSeconds = seconds < 10 ? `0${seconds}` : seconds
     const paddedMinutes = minutes < 10 ? `0${minutes}` : minutes
@@ -341,7 +340,7 @@ const JoinLaunchpad: React.FC = () => {
   }
 
   const onChangeETH = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
+    (e) => {
       var newTokenValue = parseFloat(e.currentTarget.value) * ratio
       setETHValue(e.currentTarget.value)
       setTokenValue(newTokenValue.toString())
@@ -350,7 +349,7 @@ const JoinLaunchpad: React.FC = () => {
   )
 
   const onChangeToken = useCallback(
-    (e: React.FormEvent<HTMLInputElement>) => {
+    (e) => {
       var newETHValue = parseFloat(e.currentTarget.value) / ratio
       setTokenValue(e.currentTarget.value)
       setETHValue(newETHValue.toString())
@@ -492,22 +491,17 @@ const JoinLaunchpad: React.FC = () => {
 
   const reset = useCallback(async () => {
     // const newHistory = await getHistory(account)
-    const newProgress = await getProgress(
-      lpAddress,
-      currentPoolId(pid, network),
-      access,
-      network,
-    )
+    const newProgress = await getProgress(lpAddress, lpPoolId, access, network)
     const newPurchasedAmount = await getPurchasesAmount(
       lpAddress,
-      currentPoolId(pid, network),
+      lpPoolId,
       access,
       account,
       network,
     )
     const userInfoData = await getUserInfo(
       lpAddress,
-      currentPoolId(pid, network),
+      lpPoolId,
       access,
       account,
       network,
@@ -518,14 +512,19 @@ const JoinLaunchpad: React.FC = () => {
     setETHValue('')
     setTokenValue('')
     setTokenPurchased(
-      userInfoData.userInfo ? fromWei(userInfoData.userInfo[1]) : '0',
+      userInfoData.userInfo?.toString()
+        ? fromWei(userInfoData.userInfo?.[1]?.toString())
+        : '0',
     )
-    setPercentClaimed(userInfoData.userInfo ? userInfoData.userInfo[3] : 0)
+    setPercentClaimed(
+      userInfoData?.userInfo?.toString()
+        ? userInfoData?.userInfo?.[3]?.toString()
+        : 0,
+    )
   }, [
     account,
-    lpContract,
+    lpPoolId,
     pid,
-    setETHBalance,
     setProgress,
     setPurchasedAmount,
     setTokenValue,
@@ -534,8 +533,9 @@ const JoinLaunchpad: React.FC = () => {
     setPercentClaimed,
   ])
 
-  const [onPresentSuccess] = useModal(
+  const [onPresentSuccess, onDismiss] = useModal(
     <ModalSuccess
+      onDismiss={onDismiss}
       amount={tokenValue}
       symbol={name}
       txhash="4f95c6770c75ddd3388f525"
@@ -543,23 +543,27 @@ const JoinLaunchpad: React.FC = () => {
     />,
   )
 
-  const [onPresentError] = useModal(
-    <ModalError text="Transaction failed" txhash={txhash} />,
+  const [onPresentError, onDismiss2] = useModal(
+    <ModalError
+      onDismiss={onDismiss2}
+      text="Transaction failed"
+      txhash={txhash}
+    />,
   )
 
-  // const [onPresentSuccessHarvest] = useModal(
-  //   <ModalSuccessHarvest
-  //     amount={tokenPurchased.toString()}
-  //     symbol={name}
-  //     txhash={txhash}
-  //     text="harvest"
-  //   />,
-  // )
+  const [onPresentSuccessHarvest] = useModal(
+    <ModalSuccessHarvest
+      amount={tokenPurchased.toString()}
+      symbol={name}
+      txhash={txhash}
+      text="harvest"
+    />,
+  )
   const handleClose = () => {
     setSuccessHarvestTx(false)
   }
 
-  const getRemainTokenPercentToClaim = (_percentClaimed: number) => {
+  const getRemainTokenPercentToClaim = (_percentClaimed) => {
     if (
       new BigNumber(100).minus(_percentClaimed).eq(0) ||
       new BigNumber(100).minus(_percentClaimed).gt(1)
@@ -569,10 +573,7 @@ const JoinLaunchpad: React.FC = () => {
     return new BigNumber(100).minus(_percentClaimed).toFixed(3).toString()
   }
 
-  const getRemainTokensToClaim = (
-    _tokenPurchased: string,
-    _percentClaimed: number,
-  ) => {
+  const getRemainTokensToClaim = (_tokenPurchased, _percentClaimed) => {
     if (!_tokenPurchased) {
       return 0
     }
@@ -593,15 +594,15 @@ const JoinLaunchpad: React.FC = () => {
       .toString()
   }
 
-  const getPercent = (value: number, total: number) => {
+  const getPercent = (value, total) => {
     return parseFloat(
       new BigNumber((value / total) * 100).toFixed(2).toString(),
     )
   }
   const claimStatusText = (
-    _recentClaimTime: number,
-    _numberClaimed: number,
-    _totalRewardClaims: number,
+    _recentClaimTime,
+    _numberClaimed,
+    _totalRewardClaims,
   ) => {
     if (_totalRewardClaims > 1) {
       if (_recentClaimTime * 1000 > new Date().getTime()) {
@@ -657,7 +658,7 @@ const JoinLaunchpad: React.FC = () => {
     }
   }
 
-  const handleCaptchaVerification = async (value: string) => {
+  const handleCaptchaVerification = async (value) => {
     try {
       const verificationStatus = await verifyCaptcha(value)
 
@@ -752,7 +753,7 @@ const JoinLaunchpad: React.FC = () => {
                   <StyledRow>
                     <StyledLabel>INPUT</StyledLabel>
                     <StyledLabel>
-                      Your Wallet Balance: {ethBalance.toFixed(4)}
+                      Your Wallet Balance: {formatCurrency(ethBalance)}
                     </StyledLabel>
                   </StyledRow>
                   <StyledInputRow>
@@ -847,30 +848,30 @@ const JoinLaunchpad: React.FC = () => {
                       if (ethValue && parseFloat(ethValue) > 0) {
                         const _networkName = formattedNetworkName(network)
 
-                        if (getNetworkName(chainId) !== network) {
-                          alert(
-                            `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-                          )
-                          return
-                        }
+                        // if (getNetworkName(chainId) !== network) {
+                        //   alert(
+                        //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                        //   )
+                        //   return
+                        // }
                         setPendingTx(true)
-                        var tx: any = await onJoinPool(
-                          currentPoolId(pid, network),
+                        var tx = await handleJoinPool(
+                          lpPoolId,
                           access,
                           ethValue,
                           stakedAmount,
                           lpAddress,
                           network,
-                          id,
+                          symbol,
                         )
-                        setPendingTx(false)
-                        if (tx) {
-                          setSuccessTx(true)
-                          onPresentSuccess()
-                          reset()
-                        } else {
-                          onPresentError()
-                        }
+                        // setPendingTx(false)
+                        // if (tx) {
+                        //   setSuccessTx(true)
+                        //   onPresentSuccess()
+                        //   reset()
+                        // } else {
+                        //   onPresentError()
+                        // }
                       }
                     }}
                   >
@@ -932,51 +933,51 @@ const JoinLaunchpad: React.FC = () => {
                 <Spacer size="md" />
                 <MaterialButton
                   disabled={
-                    purchasedAmount <= 0 ||
+                    new BigNumber(
+                      getRemainTokensToClaim(tokenPurchased, percentClaimed),
+                    ).lte(0) ||
                     recentClaimTime * 1000 > new Date().getTime() ||
                     pendingHarvestTx ||
                     new BigNumber(percentClaimed).gte(100) ||
                     claimAt === 0
                   }
-                  text={
-                    pendingHarvestTx
-                      ? 'Pending Confirmation'
-                      : recentClaimTime * 1000 <= new Date().getTime()
-                      ? new BigNumber(percentClaimed).gte(100)
-                        ? 'Already claimed'
-                        : 'Harvest'
-                      : undefined
-                  }
                   onClick={async () => {
                     if (new BigNumber(tokenPurchased).gt(0)) {
                       const _networkName = formattedNetworkName(network)
 
-                      if (getNetworkName(chainId) !== network) {
-                        alert(
-                          `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
-                        )
-                        return
-                      }
+                      // if (getNetworkName(chainId) !== network) {
+                      //   alert(
+                      //     `This pool works on ${_networkName} Network. Please switch your network to ${_networkName}`,
+                      //   )
+                      //   return
+                      // }
 
                       setPendingHarvestTx(true)
-                      var tx: any = await onHarvest(
-                        currentPoolId(pid, network),
+                      var tx = await handleHarvest(
+                        lpPoolId,
                         access,
                         lpAddress,
                         network,
                       )
-                      setPendingHarvestTx(false)
-                      if (tx) {
-                        console.log('harvest ' + tx)
-                        setSuccessHarvestTx(true)
-                        // onPresentSuccessHarvest()
-                        reset()
-                      } else {
-                        onPresentError()
-                      }
+                      // setPendingHarvestTx(false)
+                      // if (tx) {
+                      //   console.log('harvest ' + tx)
+                      //   setSuccessHarvestTx(true)
+                      //   // onPresentSuccessHarvest()
+                      //   reset()
+                      // } else {
+                      //   onPresentError()
+                      // }
                     }
                   }}
                 >
+                  {pendingHarvestTx
+                    ? 'Pending Confirmation'
+                    : recentClaimTime * 1000 <= new Date().getTime()
+                    ? new BigNumber(percentClaimed).gte(100)
+                      ? 'Already claimed'
+                      : 'Harvest'
+                    : undefined}
                   {new BigNumber(tokenPurchased).gt(0) &&
                     recentClaimTime * 1000 > new Date().getTime() && (
                       <Countdown
@@ -1051,7 +1052,8 @@ const JoinLaunchpad: React.FC = () => {
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
                 <p style={{ color: '#bdbdbd' }}>Token purchased</p>
                 <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  {purchasedAmount} {tokenSymbol}
+                  {formatCurrency(purchasedAmount?.toString(), false, 4)}{' '}
+                  {tokenSymbol}
                 </h6>
               </div>
               <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>

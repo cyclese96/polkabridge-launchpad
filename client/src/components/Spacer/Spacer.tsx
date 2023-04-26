@@ -1,41 +1,38 @@
-import React, { useContext } from 'react'
-import styled, { ThemeContext } from 'styled-components'
+import React from 'react'
+import styled from 'styled-components'
+import theme from '../../theme/index'
 
 interface SpacerProps {
   size?: 'sm' | 'md' | 'lg' | 'bg'
 }
 
 const Spacer: React.FC<SpacerProps> = ({ size = 'md' }) => {
-  const { spacing } = useContext(ThemeContext)
-  
   let s: number
   switch (size) {
     case 'bg':
-      s = spacing[7]
+      s = theme.spacing[7]
       break
     case 'lg':
-      s = spacing[6]
+      s = theme.spacing[6]
       break
     case 'sm':
-      s = spacing[2]
+      s = theme.spacing[2]
       break
     case 'md':
     default:
-      s = spacing[4]
+      s = theme.spacing[4]
   }
-  
-  return (
-    <StyledSpacer size={s} />
-  )
+
+  return <StyledSpacer size={s} />
 }
 
 interface StyledSpacerProps {
-  size: number,
+  size: number
 }
 
 const StyledSpacer = styled.div<StyledSpacerProps>`
-  height: ${props => props.size}px;
-  width: ${props => props.size}px;
+  height: ${(props) => props.size}px;
+  width: ${(props) => props.size}px;
 `
 
 export default Spacer

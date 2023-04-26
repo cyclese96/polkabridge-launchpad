@@ -32,6 +32,16 @@ export const polygonNetwork = 'polygon'
 export const harmonyNetwork = 'harmony'
 export const moonriverNetwork = 'moonriver'
 export const astarNetwork = 'astar'
+export const arbitrum = 'arbitrum'
+
+export const networkToChain = {
+  ethereum: currentConnection === 'mainnet' ? 1 : 5,
+  bsc: currentConnection === 'mainnet' ? 56 : 97,
+  polygon: currentConnection === 'mainnet' ? 137 : 80001,
+  harmony: currentConnection === 'mainnet' ? 1666600000 : 1666700000,
+  moonriver: currentConnection === 'mainnet' ? 1285 : 1287,
+  arbitrum: currentConnection === 'mainnet' ? 42161 : 421613,
+}
 
 export const tokenIdMapping = {
   ethereum: 'ethereum',
@@ -40,6 +50,7 @@ export const tokenIdMapping = {
   harmony: 'harmony',
   moonriver: 'moonriver',
   astar: 'astar',
+  arbitrum: 'arbitrum',
 }
 
 // TODO: change the address & set LP pool
@@ -66,7 +77,7 @@ export const contractAddresses = {
   // }
 }
 
-const testing = false
+const testing = true
 
 export const currentConnection = testing ? 'testnet' : 'mainnet'
 
@@ -2056,7 +2067,8 @@ export const supportedPools = [
     maxTier3: 0.5,
     access: PUBLIC,
     network: ethereumNetwork,
-    distribution: '20% TGE, then 13.3% in week2, week3, week4 and 40% at 2nd month.',
+    distribution:
+      '20% TGE, then 13.3% in week2, week3, week4 and 40% at 2nd month.',
     startAt: 1660576500,
     endAt: 1660579200,
     claimAt: 1661781600,
@@ -2114,7 +2126,9 @@ export const supportedPools = [
     startDate: '2PM UTC 14th Aug, 2022',
     registerForm: 'https://forms.gle/VLMmi5tbdK1GC72m6',
     harvestDistribution: [20, 16, 16, 16, 16],
-    claimTimeArr: [1660644000, 1663329600, 1665921600, 1668600000, 1671192000, 1673870400],
+    claimTimeArr: [
+      1660644000, 1663329600, 1665921600, 1668600000, 1671192000, 1673870400,
+    ],
   },
   {
     pid: 57,
@@ -2154,8 +2168,7 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution:
-      '100% at TGE',
+    distribution: '100% at TGE',
     startAt: 1662040800,
     endAt: 1662044400,
     claimAt: 0,
@@ -2201,8 +2214,7 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution:
-      '20% at TGE, 20% unlock every week',
+    distribution: '20% at TGE, 20% unlock every week',
     startAt: 1662213600,
     endAt: 1662217200,
     claimAt: 0,
@@ -2247,58 +2259,57 @@ export const supportedPools = [
     maxTier3: 0,
     access: GUARANTEED,
     network: bscNetwork,
-    distribution:
-      '15% RELEASED AT TGE, THEN LINEAR OVER 6 MONTHS',
+    distribution: '15% RELEASED AT TGE, THEN LINEAR OVER 6 MONTHS',
     startAt: 1662386400,
     endAt: 1662390000,
     claimAt: 0,
     startDate: '2PM UTC 05th Sep, 2022',
     registerForm: 'https://forms.gle/i9vdwH6Ao4DjgN3R9',
   },
-  // {
-  //   pid: 50,
-  //   poolId: 2,
-  //   lpAddresses: {
-  //     1: '0x7Df76A64aE3dc2f818f969fe081ea52ab8cBC350',
-  //     42: '0xdB1B2cCdca2142a6297994101E83Da279F6c20dD',
-  //     1666700000: '0x5d59e661ebe223e6b5f6ea865eab2c7e51e79b2a',  //testnet
-  //     1666600000: '0xdcad5608a4ec6b5146b1873c2c9aea19b329769c'//mainnet
-  //   },
-  //   tokenAddresses: {
-  //     1: '',
-  //     42: '',
-  //     56: '',
-  //     97: '',
-  //   },
-  //   lpExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   name: 'HarmonyLauncher Private Pool',
-  //   symbol: 'IDO-PBR',
-  //   description: `IDO/ONE`,
-  //   introduce: `Harmony Launcher is the first Decentralized IGO + IDO Incubation Launchpad on Harmony Blockchain`,
-  //   website: 'https://harmonylauncher.io/',
-  //   twitter: 'https://twitter.com/Harmonylauncher',
-  //   telegram: 'https://t.me/Harmonylauncher',
-  //   whitepaper: '',
-  //   tokenSymbol: 'IDO',
-  //   tokenExplorer: 'https://explorer.pops.one/address/0xfc649ce83d2b25086bf645ca88a9621b5e8a36fa',
-  //   icon: '/img/tokens/harmonylauncher.png',
-  //   totalSupply: '100,000,000 IDO',
-  //   total: '1000000 ONE',
-  //   ratio: 100,
-  //   min: 5, //300$
-  //   max: 10, //500$
-  //   maxTier1: 5, //300$
-  //   maxTier2: 7, //400$
-  //   maxTier3: 10, //500$
-  //   access: 'Public',
-  //   network: harmonyNetwork,
-  //   distribution: '50% at TGE, 50% after 1 month',
-  //   startAt: 1533939514,
-  //   endAt: 1734569200,
-  //   claimAt: 1533939514,
-  //   startDate: '11th November',
-  // claimTimeArr: [1533939514, 1639029546]
-  // }
+  {
+    pid: 58,
+    poolId: 1, //actual pool id in contract
+    lpAddresses: {
+      421613: '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
+      42161: '0x58Cd3C39541A077ac464b49BBd98E9bb11Cfc831',
+    },
+    tokenAddresses: {
+      421613: '0xd3E56A0c0f7fb93653398E319791B2F88De2a559',
+      42161: '',
+    },
+    lpExplorer: 'https://arbiscan.io/address',
+    name: 'BULLBEAR',
+    symbol: 'BULLBEAR-ETH',
+    description: `BULLBEAR/ETH`,
+    introduce: `Bull Bear IDO Test`,
+    website: 'https://chirpley.ai/',
+    twitter: 'https://twitter.com/chirpley',
+    telegram: 'https://t.me/chirpley',
+    whitepaper: 'https://chirpley.gitbook.io/project/',
+    tokenSymbol: 'BULLBEAR',
+    tokenExplorer: 'https://arbiscan.io/address',
+    icon: '/img/tokens/chrp.png',
+    totalSupply: '1,000,000,000 BULLBEAR',
+    tokenId: 'bullbear',
+    price: 0.021,
+    total: '185 ETH', // 1BNB = 270$, 50k$
+    ratio: 12857.1, //1
+    min: 0,
+    max: 0,
+    maxTier1: 0,
+    maxTier2: 0.001,
+    maxTier3: 0,
+    access: PUBLIC,
+    network: arbitrum,
+    distribution: '15% RELEASED AT TGE, THEN LINEAR OVER 6 MONTHS',
+    startAt: 1682471864,
+    endAt: 1682522264,
+    claimAt: 1682471864,
+    startDate: '2PM UTC 29th Apr, 2023',
+    registerForm: 'https://forms.gle/i9vdwH6Ao4DjgN3R9',
+    harvestDistribution: [50, 50],
+    claimTimeArr: [1682471864, 1682472324],
+  },
 ]
 // given pid and network name -> launchpad pool id
 export const getPoolId = (pid, network) => {

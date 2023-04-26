@@ -4,6 +4,7 @@ const polygonNetwork = "polygon";
 const harmonyNetwork = "harmony";
 const moonriverNetwork = "moonriver";
 const astarNetwork = "astar";
+const arbitrum = "arbitrum";
 
 const pools = [
   {
@@ -113,6 +114,12 @@ const pools = [
     network: astarNetwork,
     symbol: "SRS-PBR",
     startAt: 1660485600, //test:1660223103
+  },
+  {
+    pid: 1,
+    network: arbitrum,
+    symbol: "BULLBEAR-ETH",
+    startAt: 1682386527,
   },
 ];
 

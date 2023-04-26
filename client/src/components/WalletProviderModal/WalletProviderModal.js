@@ -2,8 +2,6 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import metamaskLogo from '../../assets/img/metamask-fox.svg'
 import walletConnectLogo from '../../assets/img/walletConnect.svg'
-
-import Button from '../Button'
 import ModalActions from '../ModalActions'
 import ModalContent from '../ModalContent'
 import ModalTitle from '../ModalTitle'

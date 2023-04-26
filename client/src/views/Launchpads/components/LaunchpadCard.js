@@ -1,8 +1,53 @@
-import { Button, Card, CardContent } from '@material-ui/core'
-import React from 'react'
-import styled from 'styled-components'
+import MaterialButton from 'components/Button/MaterialButton'
+import Card from '../../../components/Card'
+import CardContent from '../../../components/CardContent'
+import CardIcon from '../../../components/CardIcon'
+
+import BigNumber from 'bignumber.js'
+import Spacer from 'components/Spacer/Spacer'
+import { getPoolReigsterLink, getTokenPrice, networkSymbol } from 'pbr/helpers'
+import { getPoolId } from 'pbr/lib/constants'
+import { formattedNetworkName, getProgress } from 'pbr/utils'
+import React, { useEffect, useMemo, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import styled, { keyframes } from 'styled-components'
 
 export default function LaunchpadCard({ launchpad }) {
+  // const poolActive = usePoolActive(launchpad.startAt)
+  const history = useHistory()
+
+  const [progress, setProgress] = useState(0)
+  const [registerForm, setRegisterForm] = useState(null)
+
+  useEffect(() => {
+    async function fetchData() {
+      // console.log('ethTest: lpAddress', { address: launchpad.lpAddress, network: launchpad.network, name: launchpad.name })
+      const link = getPoolReigsterLink(launchpad.pid, launchpad.network)
+      setRegisterForm(link)
+      const newProgress = await getProgress(
+        launchpad.lpAddress,
+        getPoolId(launchpad.pid, launchpad.network),
+        launchpad.access,
+        launchpad.startAt,
+        launchpad.endAt,
+        launchpad.network,
+      )
+      setProgress(newProgress)
+    }
+    if (launchpad) {
+      fetchData()
+    }
+  }, [launchpad.pid, setProgress])
+
+  const tokenPrice = useMemo(
+    () => getTokenPrice(launchpad.pid, launchpad.network),
+    [launchpad.pid, launchpad.network],
+  )
+
+  const handleLaunchpadClick = (launchpad) => {
+    history.push(`/launchpads/view/${launchpad.symbol}/${launchpad.pid}`)
+  }
+
   return (
     <StyledCardWrapper>
       {launchpad.tokenSymbol === 'PBR' && <StyledCardAccent />}
@@ -22,8 +67,8 @@ export default function LaunchpadCard({ launchpad }) {
               </span>
             </StyledTitle2>
             {/* <StyledDetails>
-            <StyledDetail>{launchpad.description}</StyledDetail>
-          </StyledDetails> */}
+              <StyledDetail>{launchpad.description}</StyledDetail>
+            </StyledDetails> */}
             <br />
             <StyledInsight>
               <span>Total funds</span>
@@ -65,8 +110,8 @@ export default function LaunchpadCard({ launchpad }) {
               <span style={{ color: '#ff3465' }}>
                 <b>
                   {/* {launchpad.network === 'bsc'
-                  ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
-                    : 'Ethereum'} */}
+                    ? 'Binance Smart Chain' : launchpad.network === "polygon" ? "Polygon"
+                      : 'Ethereum'} */}
                   {formattedNetworkName(launchpad.network)}
                 </b>
               </span>
@@ -100,32 +145,34 @@ export default function LaunchpadCard({ launchpad }) {
             )}
 
             {!registerForm && (
-              <Button
-                text="View"
-                onClick={() => handleLaunchpadClick(launchpad)}
-              ></Button>
+              <MaterialButton onClick={() => handleLaunchpadClick(launchpad)}>
+                View
+              </MaterialButton>
             )}
             {registerForm && launchpad.endAt * 1000 < new Date().getTime() && (
-              <Button
-                text="View"
-                onClick={() => handleLaunchpadClick(launchpad)}
-              ></Button>
+              <MaterialButton onClick={() => handleLaunchpadClick(launchpad)}>
+                View
+              </MaterialButton>
             )}
             {registerForm && launchpad.endAt * 1000 > new Date().getTime() && (
               <StyledInfo>
                 <StyledBox className="col-5">
-                  <Button
-                    text="View"
+                  <MaterialButton
                     onClick={() => handleLaunchpadClick(launchpad)}
-                  ></Button>
+                  >
+                    View
+                  </MaterialButton>
                 </StyledBox>
                 <StyledBox className="col-1"></StyledBox>
                 <StyledBox className="col-5">
-                  <Button
-                    text="Register"
-                    href={registerForm}
-                    variant="transparent"
-                  ></Button>
+                  <Link
+                    target="_blank"
+                    href="https://stackoverflow.com/questions/50644976/react-button-onclick-redirect-page"
+                  >
+                    <MaterialButton onClick={() => {}} variant="transparent">
+                      Register
+                    </MaterialButton>
+                  </Link>
                 </StyledBox>
               </StyledInfo>
             )}

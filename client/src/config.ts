@@ -1,6 +1,6 @@
 export default {
   chainId: 1,
-  chainIdTestnet: 42,
+  chainIdTestnet: 5,
   bscChain: 56,
   bscChainTestent: 97,
   bscRpcTestnet: 'https://data-seed-prebsc-1-s1.binance.org:8545/',

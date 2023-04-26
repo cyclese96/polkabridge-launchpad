@@ -2,9 +2,9 @@ import React, { createContext, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
 interface ModalsContext {
-  content?: React.ReactNode,
-  isOpen?: boolean,
-  onPresent: (content: React.ReactNode, key?: string) => void,
+  content?: React.ReactNode
+  isOpen?: boolean
+  onPresent: (content: React.ReactNode, key?: string) => void
   onDismiss: () => void
 }
 
@@ -18,11 +18,14 @@ const Modals: React.FC = ({ children }) => {
   const [content, setContent] = useState<React.ReactNode>()
   const [modalKey, setModalKey] = useState<string>()
 
-  const handlePresent = useCallback((modalContent: React.ReactNode, key?: string) => {
-    setModalKey(key)
-    setContent(modalContent)
-    setIsOpen(true)
-  }, [setContent, setIsOpen, setModalKey])
+  const handlePresent = useCallback(
+    (modalContent: React.ReactNode, key?: string) => {
+      setModalKey(key)
+      setContent(modalContent)
+      setIsOpen(true)
+    },
+    [setContent, setIsOpen, setModalKey],
+  )
 
   const handleDismiss = useCallback(() => {
     setContent(undefined)
@@ -30,19 +33,22 @@ const Modals: React.FC = ({ children }) => {
   }, [setContent, setIsOpen, modalKey])
 
   return (
-    <Context.Provider value={{
-      content,
-      isOpen,
-      onPresent: handlePresent,
-      onDismiss: handleDismiss,
-    }}>
+    <Context.Provider
+      value={{
+        content,
+        isOpen,
+        onPresent: handlePresent,
+        onDismiss: handleDismiss,
+      }}
+    >
       {children}
       {isOpen && (
         <StyledModalWrapper>
           <StyledModalBackdrop onClick={handleDismiss} />
-          {React.isValidElement(content) && React.cloneElement(content, {
-            onDismiss: handleDismiss,
-          })}
+          {React.isValidElement(content) &&
+            React.cloneElement(content, {
+              onDismiss: handleDismiss,
+            })}
         </StyledModalWrapper>
       )}
     </Context.Provider>
@@ -56,13 +62,19 @@ const StyledModalWrapper = styled.div`
   justify-content: center;
   position: fixed;
   z-index: 90;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 `
 
 const StyledModalBackdrop = styled.div`
   background-color: rgba(0, 0, 0, 0.3);
   position: absolute;
-  top: 0; right: 0; bottom: 0; left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
 `
 
 export default Modals
