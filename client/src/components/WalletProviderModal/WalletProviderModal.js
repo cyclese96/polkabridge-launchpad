@@ -12,8 +12,8 @@ import { Web3Button, useWeb3Modal } from '@web3modal/react'
 import { isMetaMaskInstalled } from '../../pbr/utils'
 import { Box, Dialog, makeStyles } from '@material-ui/core'
 import { Close } from '@material-ui/icons'
-import CardTitle from 'components/CardTitle/CardTitle'
-import MaterialButton from 'components/Button/MaterialButton'
+import CardTitle from '../../components/CardTitle/CardTitle'
+import MaterialButton from '../../components/Button/MaterialButton'
 
 const useStyles = makeStyles((theme) => ({
   container: {

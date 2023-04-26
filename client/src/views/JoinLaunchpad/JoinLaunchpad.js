@@ -44,12 +44,12 @@ import {
 } from '../../pbr/lib/constants'
 import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
 import useWallet from '../../hooks/useWallet'
-import useEthBalance from 'hooks/useEthBalance'
+import useEthBalance from '../../hooks/useEthBalance'
 import {
   TransactionState,
   useJoinPoolCallback,
 } from '../../hooks/useJoinPoolCallback'
-import { useHarvestCallback } from 'hooks/useHarvestCallback'
+import { useHarvestCallback } from '../../hooks/useHarvestCallback'
 
 const JoinLaunchpad = () => {
   const { launchpadId, poolId } = useParams()
