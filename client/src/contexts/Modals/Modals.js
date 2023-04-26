@@ -1,25 +1,25 @@
 import React, { createContext, useCallback, useState } from 'react'
 import styled from 'styled-components'
 
-interface ModalsContext {
-  content?: React.ReactNode
-  isOpen?: boolean
-  onPresent: (content: React.ReactNode, key?: string) => void
-  onDismiss: () => void
-}
+// interface ModalsContext {
+//   content?: React.ReactNode
+//   isOpen?: boolean
+//   onPresent: (content: React.ReactNode, key?: string) => void
+//   onDismiss: () => void
+// }
 
-export const Context = createContext<ModalsContext>({
+export const Context = createContext({
   onPresent: () => {},
   onDismiss: () => {},
 })
 
-const Modals: React.FC = ({ children }) => {
+const Modals = ({ children }) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [content, setContent] = useState<React.ReactNode>()
-  const [modalKey, setModalKey] = useState<string>()
+  const [content, setContent] = useState()
+  const [modalKey, setModalKey] = useState()
 
   const handlePresent = useCallback(
-    (modalContent: React.ReactNode, key?: string) => {
+    (modalContent, key) => {
       setModalKey(key)
       setContent(modalContent)
       setIsOpen(true)

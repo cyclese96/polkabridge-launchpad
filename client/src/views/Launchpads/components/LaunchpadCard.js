@@ -1,13 +1,17 @@
-import MaterialButton from 'components/Button/MaterialButton'
+import MaterialButton from '../../../components/Button/MaterialButton'
 import Card from '../../../components/Card'
 import CardContent from '../../../components/CardContent'
 import CardIcon from '../../../components/CardIcon'
 
 import BigNumber from 'bignumber.js'
-import Spacer from 'components/Spacer/Spacer'
-import { getPoolReigsterLink, getTokenPrice, networkSymbol } from 'pbr/helpers'
-import { getPoolId, networkToChain } from 'pbr/lib/constants'
-import { formattedNetworkName, getProgress } from 'pbr/utils'
+import Spacer from '../../../components/Spacer/Spacer'
+import {
+  getPoolReigsterLink,
+  getTokenPrice,
+  networkSymbol,
+} from '../../../pbr/helpers'
+import { getPoolId, networkToChain } from '../../../pbr/lib/constants'
+import { formattedNetworkName, getProgress } from '../../../pbr/utils'
 import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
