@@ -342,9 +342,7 @@ const Launchpad = () => {
                         </StyledTableLabel>
                         <StyledTableValue>
                           {access === PUBLIC &&
-                            `${min} ${networkSymbol(
-                              network,
-                            )} - ${max} ${networkSymbol(network)}`}
+                            `Min ${min} ${networkSymbol(network)}`}
                           {access === WHITELIST &&
                             `${maxWhitelistPurchase}  ${networkSymbol(
                               network,

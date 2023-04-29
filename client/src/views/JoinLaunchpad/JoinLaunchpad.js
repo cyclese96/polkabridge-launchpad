@@ -411,12 +411,7 @@ const JoinLaunchpad = () => {
         parseFloat(ethValue) > maxWhitelistPurchase
       )
     } else if (access === 'Public') {
-      return (
-        flag1 ||
-        parseFloat(ethValue) <= 0 ||
-        parseFloat(ethValue) > _max ||
-        parseFloat(ethValue) < min
-      )
+      return flag1 || parseFloat(ethValue) <= 0 || parseFloat(ethValue) < min
     } else if (access === GUARANTEED) {
       return (
         flag1 ||
@@ -464,15 +459,11 @@ const JoinLaunchpad = () => {
             : 'Join Pool'
           : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
       } else if (access === 'Public') {
-        return parseFloat(ethValue) > 0 &&
-          parseFloat(ethValue) <= _max &&
-          parseFloat(ethValue) >= min
+        return parseFloat(ethValue) > 0 && parseFloat(ethValue) >= min
           ? isEqual(tokenPurchased, tokenValue)
             ? 'Already Purchased'
             : 'Join Pool'
-          : `Min: ${min}   ${networkSymbol(
-              network,
-            )}   - Max:  ${_max}  ${networkSymbol(network)}`
+          : `Min: ${min}   ${networkSymbol(network)}`
       } else if (access === GUARANTEED) {
         return parseFloat(ethValue) > 0 &&
           parseFloat(ethValue) <= Number(maxGuaranteed)
