@@ -887,12 +887,13 @@ export const getPurchaseStats = async (
       !defaultTokenPrice
         ? getTokenPriceFromCoinGecko(network, tokenId)
         : defaultTokenPrice,
-      getTokenPriceFromCoinGecko(network),
+      getTokenPriceFromCoinGecko(network, 'ethereum'),
     ])
 
     // console.log('getPurchaseStats state', {
     //   tokenCurrentPrice,
     //   nativeTokenPrice,
+    //   tokenId,
     // })
 
     const tokenCurrentUsdValue = new BigNumber(purchasedToken)
