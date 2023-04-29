@@ -89,7 +89,14 @@ export function useJoinPoolCallback() {
       //   value: convertToWei(ethValue),
       //   gasPrice: 100000000000,
       // })
-
+      console.log('data test ', {
+        stakedAmount,
+        lpPoolId,
+        v,
+        r,
+        s,
+        value: toWei(ethValue),
+      })
       try {
         const data = await writeContract({
           address: lpAddress,
