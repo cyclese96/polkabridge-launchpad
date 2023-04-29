@@ -119,7 +119,7 @@ const JoinLaunchpad = () => {
   const ethBalance = useEthBalance()
 
   const [progress, setProgress] = useState()
-  const [isWhitelist, setIsWhitelist] = useState(false)
+  const [isWhitelist, setIsWhitelist] = useState(true)
   const [ethValue, setETHValue] = useState('0')
   const [tokenValue, setTokenValue] = useState('') //max output purchase token based on the ratio
   const [pendingTx, setPendingTx] = useState(false)
@@ -283,7 +283,7 @@ const JoinLaunchpad = () => {
       // console.log('ethTest: userInfoData--->  ', userInfoData)
       // console.log('ethTest: claimTimeArr  ', claimTimeArr)
 
-      setIsWhitelist(newIsWhitelist)
+      setIsWhitelist(true)
       setProgress(newProgress)
       setPurchasedAmount(newPurchasedAmount)
       setStakedAmount(stakedTokens)
