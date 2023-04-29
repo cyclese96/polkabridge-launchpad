@@ -99,8 +99,9 @@ export function useJoinPoolCallback() {
           overrides: {
             from: account,
             value: toWei(ethValue),
-            gasPrice: 100000000000,
+            gasLimit: 5950000,
           },
+          chainId: chainId,
         })
         console.log('join pool test trx  ', data)
         setTrxData({
