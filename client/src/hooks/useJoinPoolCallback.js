@@ -33,6 +33,13 @@ export function useJoinPoolCallback() {
       id,
     ) => {
       if (!chainId || !account) {
+        console.log('invalid chain id or account')
+        setTrxData({
+          ...trxData,
+          status: TransactionState.FAILED,
+          state: 4,
+          type: 'join',
+        })
         return
       }
 
@@ -54,6 +61,17 @@ export function useJoinPoolCallback() {
       })
 
       const signedData = await signedIdoString(account, network, id)
+
+      if (!signedData) {
+        console.log('falied to verify staked amount from server')
+        setTrxData({
+          ...trxData,
+          status: TransactionState.FAILED,
+          state: 4,
+          type: 'join',
+        })
+        return
+      }
 
       const v = signedData && signedData.v
       const r = signedData && signedData.r
@@ -81,7 +99,7 @@ export function useJoinPoolCallback() {
           overrides: {
             from: account,
             value: toWei(ethValue),
-            // gasPrice: 100000000000,
+            gasPrice: 100000000000,
           },
         })
         console.log('join pool test trx  ', data)
