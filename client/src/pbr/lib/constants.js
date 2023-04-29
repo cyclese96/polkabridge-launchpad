@@ -2301,9 +2301,9 @@ export const supportedPools = [
     access: PUBLIC,
     network: arbitrum,
     distribution: '50% unlock after listing, 50% next month ',
-    startAt: 1682776800,
-    endAt: 1682949600,
-    claimAt: 0,
+    startAt: 1682776800,//main 1682776800
+    endAt: 1682949600,//main 1682949600
+    claimAt: 1582776800,
     startDate: '2PM UTC 29th Apr, 2023',
     harvestDistribution: [50, 50],
     claimTimeArr: [],

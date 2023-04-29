@@ -118,8 +118,8 @@ const pools = [
   {
     pid: 1,
     network: arbitrum,
-    symbol: "BULLBEAR-ETH",
-    startAt: 1682386527,
+    symbol: "AIBB-PBR",
+    startAt: 1682776800,
   },
 ];
 
