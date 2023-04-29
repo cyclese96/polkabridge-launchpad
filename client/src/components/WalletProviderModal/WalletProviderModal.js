@@ -103,7 +103,7 @@ const WalletProviderModal = ({ resetPopup, popupActive }) => {
                         isMetaMaskInstalled()
                           ? connectAsync({ connector: connector })
                           : window.open(
-                              'https://metamask.app.link/dapp/p2p.polkabridge.org/',
+                              'https://metamask.app.link/dapp/launchpad.polkabridge.org/',
                               '_blank',
                               'noopener,noreferrer',
                             )
