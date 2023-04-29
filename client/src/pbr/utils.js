@@ -69,6 +69,8 @@ export const abiMapping = {
   '0x584fc75ca47910150441d0751d031a33297dc085': launchpadBscAbi3,
   '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86': arbitrumIdoABI, //arbitrum testnet
   '0x58Cd3C39541A077ac464b49BBd98E9bb11Cfc831': arbitrumIdoABI, //arbitrum  mainnet
+
+'0x44a25c655e8fad0275a26d22542d12e3e81f97c6':arbitrumIdoABI
 }
 
 const MaxUint256 = '999999999900000000000000000000000000000'

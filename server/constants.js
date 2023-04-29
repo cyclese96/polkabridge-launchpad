@@ -119,7 +119,7 @@ const pools = [
     pid: 1,
     network: arbitrum,
     symbol: "AIBB-PBR",
-    startAt: 1682776800,
+    startAt: 1682737935,
   },
 ];
 

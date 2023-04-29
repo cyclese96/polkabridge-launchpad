@@ -2269,18 +2269,18 @@ export const supportedPools = [
     pid: 58,
     poolId: 1, //actual pool id in contract
     lpAddresses: {
-      421613: '0x29b1B910b62fE3AEDBb59F77fE94aDCd09e38b86',
-      42161: '0x58Cd3C39541A077ac464b49BBd98E9bb11Cfc831',
+      421613: '0x44a25c655e8fad0275a26d22542d12e3e81f97c6',
+      42161: '0x44a25c655e8fad0275a26d22542d12e3e81f97c6',
     },
     tokenAddresses: {
-      421613: '0xd3E56A0c0f7fb93653398E319791B2F88De2a559',
+      421613: '0xB9AF4762c039D63e30039F1712dfaB77026408c7',
       42161: '0xB9AF4762c039D63e30039F1712dfaB77026408c7',
     },
     lpExplorer: 'https://arbiscan.io/address',
     name: 'BullBear AI',
     symbol: 'AIBB-PBR',
     description: `AIBB/ETH`,
-    introduce: `  BullBear AI is developed using AI to predict the BULL and BEAR markets through User Behaviors and Price Action, generating profit for users. AI will be trained based on historical data of users and price line history, along with market movements to make the most accurate predictions.`,
+    introduce: `BullBear AI is developed using AI to predict the BULL and BEAR markets through User Behaviors and Price Action, generating profit for users. AI will be trained based on historical data of users and price line history, along with market movements to make the most accurate predictions.`,
     website: 'https://bull-bear.ai/',
     twitter: 'https://twitter.com/bullbear_ai',
     telegram: 'https://t.me/ai_bullbear',
@@ -2301,12 +2301,12 @@ export const supportedPools = [
     access: PUBLIC,
     network: arbitrum,
     distribution: '50% unlock after listing, 50% next month ',
-    startAt: 1682776800,//main 1682776800
+    startAt: 1682737935,//main 1682776800
     endAt: 1682949600,//main 1682949600
-    claimAt: 1582776800,
+    claimAt: 1682737935,
     startDate: '2PM UTC 29th Apr, 2023',
     harvestDistribution: [50, 50],
-    claimTimeArr: [],
+    claimTimeArr: [1682737935,1692737935],
   },
 ]
 // given pid and network name -> launchpad pool id
