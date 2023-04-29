@@ -721,64 +721,117 @@ export const getMaxAllocation = async (
   }
 }
 
-// fetch user staking data
-export const getUserStakingData = async (account) => {
+const fetchStakeAmount = async (account) => {
   try {
-    if (!account) {
-      return null
-    }
+    const maticStakeAbi = stakingAbi
+    const maticStakeAddress =
+      currentConnection === 'mainnet'
+        ? stakeContractAddresses.polygon[137]
+        : stakeContractAddresses.polygon[80001]
+    const maticStakeContract = getContractInstance(
+      maticStakeAbi,
+      maticStakeAddress,
+      'polygon',
+    )
 
-    const stakingContractEth = {
-      address: stakeContractAddresses.ethereum?.[1],
-      abi: stakingAbi,
-    }
-    const stakingContractBsc = {
-      address: stakeContractAddresses.bsc[56],
-      abi: stakingAbi,
-    }
-    const stakingContractPolygon = {
-      address: stakeContractAddresses.polygon[137],
-      abi: stakingAbi,
-    }
+    const ethereumStakeAbi = stakingAbi
+    const ethereumStakeAddress =
+      currentConnection === 'mainnet'
+        ? stakeContractAddresses.ethereum[1]
+        : stakeContractAddresses.ethereum[42]
+    const ethereumStakeContract = getContractInstance(
+      ethereumStakeAbi,
+      ethereumStakeAddress,
+      'ethereum',
+    )
 
-    const [stakedDataEth, stakedDataPoly, stakeDataBsc] = await readContracts({
-      contracts: [
-        {
-          ...stakingContractEth,
-          functionName: 'userInfo',
-          args: [0, account],
-          chainId: 1,
-        },
+    const bscStakeAddress = stakeContractAddresses.bsc[56]
+    const bscStakeContract = getContractInstance(
+      stakingAbi,
+      bscStakeAddress,
+      'bsc',
+    )
 
-        {
-          ...stakingContractPolygon,
-          functionName: 'userInfo',
-          args: [0, account],
-          chainId: 137,
-        },
-        {
-          ...stakingContractBsc,
-          functionName: 'userInfo',
-          args: [5, account],
-          chainId: 56,
-        },
-      ],
-    })
+    const [etherStakeData, maticStakeData, bscStakeData] = await Promise.all([
+      ethereumStakeContract.methods.userInfo(0, account).call(),
+      maticStakeContract.methods.userInfo(0, account).call(),
+      bscStakeContract.methods.userInfo(5, account).call(),
+    ])
 
-    const _totalStakedAmount = new BigNumber(stakedDataEth?.amount?.toString())
-      .plus(stakedDataPoly?.amount?.toString())
-      .plus(stakeDataBsc?.amount?.toString())
+    const totalStakeAmount = new BigNumber(etherStakeData.amount)
+      .plus(maticStakeData.amount)
+      .plus(bscStakeData.amount)
       .toFixed(0)
       .toString()
 
-    console.log('getUserStakingData total staked ', {
-      _totalStakedAmount,
-    })
-    return _totalStakedAmount
-  } catch (e) {
-    console.log('getUserStakingData', { e })
-    return '0'
+    return totalStakeAmount
+  } catch (error) {
+    console.log('fetchStakeAmount', error)
+    return new BigNumber(0).toFixed(0).toString()
   }
+}
+
+// fetch user staking data
+export const getUserStakingData = async (account) => {
+  // try {
+  //   if (!account) {
+  //     return null
+  //   }
+
+  //   const stakingContractEth = {
+  //     address: stakeContractAddresses.ethereum?.[1],
+  //     abi: stakingAbi,
+  //   }
+  //   const stakingContractBsc = {
+  //     address: stakeContractAddresses.bsc[56],
+  //     abi: stakingAbi,
+  //   }
+  //   const stakingContractPolygon = {
+  //     address: stakeContractAddresses.polygon[137],
+  //     abi: stakingAbi,
+  //   }
+
+  //   const [stakedDataEth, stakedDataPoly, stakeDataBsc] = await readContracts({
+  //     contracts: [
+  //       {
+  //         ...stakingContractEth,
+  //         functionName: 'userInfo',
+  //         args: [0, account],
+  //         // chainId: 1,
+  //       },
+
+  //       {
+  //         ...stakingContractPolygon,
+  //         functionName: 'userInfo',
+  //         args: [0, account],
+  //         // chainId: 137,
+  //       },
+  //       {
+  //         ...stakingContractBsc,
+  //         functionName: 'userInfo',
+  //         args: [5, account],
+  //         // chainId: 56,
+  //       },
+  //     ],
+  //   })
+
+  //   const _totalStakedAmount = new BigNumber(stakedDataEth?.amount?.toString())
+  //     .plus(stakedDataPoly?.amount?.toString())
+  //     .plus(stakeDataBsc?.amount?.toString())
+  //     .toFixed(0)
+  //     .toString()
+
+  //   console.log('getUserStakingData total staked ', {
+  //     _totalStakedAmount,
+  //   })
+  //   return _totalStakedAmount
+  // } catch (e) {
+  //   console.log('getUserStakingData', { e })
+  //   return '0'
+  // }
+
+  const stakedAmount = await fetchStakeAmount(account)
+  return stakedAmount
 }
 
 export const getUserInfo = async (lpAddress, pid, access, account, network) => {
