@@ -110,7 +110,7 @@ const JoinLaunchpad = () => {
       return null
     }
 
-    return lpAddresses?.[parseInt(poolChain)]
+    return tokenAddresses?.[parseInt(poolChain)]
   }, [tokenAddresses, poolChain])
 
   useEffect(() => {
@@ -391,6 +391,43 @@ const JoinLaunchpad = () => {
     // console.log({ value1: new BigNumber(newTokenValue).toFixed(3).toString(), value2: new BigNumber(tokenPurchased).toFixed(3).toString() })
   }, [ethBalance, ratio, setTokenValue, setETHValue, getMaxValue])
 
+  const isButtonDisable = () => {
+    const _max = access === 'Public' ? maxTier2 : getMaxValue()
+
+    const flag1 =
+      startAt * 1000 > new Date().getTime() ||
+      endAt * 1000 <= new Date().getTime() ||
+      !isWhitelist ||
+      progress == new BigNumber('100') ||
+      pendingTx ||
+      !ethValue ||
+      !tokenValue ||
+      isEqual(tokenPurchased, tokenValue)
+
+    if (access === 'Whitelist') {
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > maxWhitelistPurchase
+      )
+    } else if (access === 'Public') {
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > _max ||
+        parseFloat(ethValue) < min
+      )
+    } else if (access === GUARANTEED) {
+      return (
+        flag1 ||
+        parseFloat(ethValue) <= 0 ||
+        parseFloat(ethValue) > Number(maxGuaranteed)
+      )
+    } else {
+      return flag1 || parseFloat(ethValue) < min || parseFloat(ethValue) > _max
+    }
+  }
+
   const getJoinButtonText = () => {
     const _max = access === 'Public' ? maxTier2 : getMaxValue()
 
@@ -427,11 +464,15 @@ const JoinLaunchpad = () => {
             : 'Join Pool'
           : `Max:  ${maxWhitelistPurchase}  ${networkSymbol(network)}`
       } else if (access === 'Public') {
-        return parseFloat(ethValue) > 0 && parseFloat(ethValue) <= _max
+        return parseFloat(ethValue) > 0 &&
+          parseFloat(ethValue) <= _max &&
+          parseFloat(ethValue) >= min
           ? isEqual(tokenPurchased, tokenValue)
             ? 'Already Purchased'
             : 'Join Pool'
-          : `Max:  ${_max}  ${networkSymbol(network)}`
+          : `Min: ${min}   ${networkSymbol(
+              network,
+            )}   - Max:  ${_max}  ${networkSymbol(network)}`
       } else if (access === GUARANTEED) {
         return parseFloat(ethValue) > 0 &&
           parseFloat(ethValue) <= Number(maxGuaranteed)
@@ -450,38 +491,6 @@ const JoinLaunchpad = () => {
       }
     } else {
       return progress == new BigNumber('100') ? 'Ended' : undefined
-    }
-  }
-
-  const isButtonDisable = () => {
-    const _max = access === 'Public' ? maxTier2 : getMaxValue()
-
-    const flag1 =
-      startAt * 1000 > new Date().getTime() ||
-      endAt * 1000 <= new Date().getTime() ||
-      !isWhitelist ||
-      progress == new BigNumber('100') ||
-      pendingTx ||
-      !ethValue ||
-      !tokenValue ||
-      isEqual(tokenPurchased, tokenValue)
-
-    if (access === 'Whitelist') {
-      return (
-        flag1 ||
-        parseFloat(ethValue) <= 0 ||
-        parseFloat(ethValue) > maxWhitelistPurchase
-      )
-    } else if (access === 'Public') {
-      return flag1 || parseFloat(ethValue) <= 0 || parseFloat(ethValue) > _max
-    } else if (access === GUARANTEED) {
-      return (
-        flag1 ||
-        parseFloat(ethValue) <= 0 ||
-        parseFloat(ethValue) > Number(maxGuaranteed)
-      )
-    } else {
-      return flag1 || parseFloat(ethValue) < min || parseFloat(ethValue) > _max
     }
   }
 
