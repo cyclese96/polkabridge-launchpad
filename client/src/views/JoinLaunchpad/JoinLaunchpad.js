@@ -890,8 +890,9 @@ const JoinLaunchpad = () => {
           <Spacer size="md" />
           <StyledInfoSolid>
             <StyledBox className="col-10">
-              <StyledSwapWrap>
-                {/* {claimAt * 1000 > new Date().getTime() ? (
+              {symbol !== 'AIBB-PBR' ? (
+                <StyledSwapWrap>
+                  {/* {claimAt * 1000 > new Date().getTime() ? (
                   <StyledTitle>
                     Reward tokens will be available to harvest in approx -{' '}
                     <Countdown
@@ -909,89 +910,106 @@ const JoinLaunchpad = () => {
                   </StyledCenterRow>
                 )} */}
 
-                {new BigNumber(tokenPurchased).gt(0) &&
-                  claimStatusText(
-                    recentClaimTime,
-                    numberClaimed,
-                    totalRewardClaims,
-                  )}
-
-                <StyledInputContainer>
-                  <StyledCenterRow>
-                    <StyledHarvestAmount>
-                      {getRemainTokensToClaim(tokenPurchased, percentClaimed)}{' '}
-                      {tokenSymbol}
-                    </StyledHarvestAmount>
-                  </StyledCenterRow>
-                </StyledInputContainer>
-                <Spacer size="md" />
-                <MaterialButton
-                  disabled={
-                    new BigNumber(
-                      getRemainTokensToClaim(tokenPurchased, percentClaimed),
-                    ).lte(0) ||
-                    recentClaimTime * 1000 > new Date().getTime() ||
-                    pendingHarvestTx ||
-                    new BigNumber(percentClaimed).gte(100) ||
-                    claimAt === 0
-                  }
-                  onClick={async () => {
-                    if (new BigNumber(tokenPurchased).gt(0)) {
-                      // const _networkName = formattedNetworkName(network)
-
-                      if (chainId !== poolChain) {
-                        alert(
-                          `This pool works on ${network} Network. Please switch your network to ${network}`,
-                        )
-                        return
-                      }
-
-                      setPendingHarvestTx(true)
-                      var tx = await handleHarvest(
-                        lpPoolId,
-                        access,
-                        lpAddress,
-                        network,
-                      )
-                      // setPendingHarvestTx(false)
-                      // if (tx) {
-                      //   console.log('harvest ' + tx)
-                      //   setSuccessHarvestTx(true)
-                      //   // onPresentSuccessHarvest()
-                      //   reset()
-                      // } else {
-                      //   onPresentError()
-                      // }
-                    }
-                  }}
-                >
-                  {pendingHarvestTx
-                    ? 'Pending Confirmation'
-                    : recentClaimTime * 1000 <= new Date().getTime()
-                    ? new BigNumber(percentClaimed).gte(100)
-                      ? 'Already claimed'
-                      : 'Harvest'
-                    : undefined}
                   {new BigNumber(tokenPurchased).gt(0) &&
-                    recentClaimTime * 1000 > new Date().getTime() && (
-                      <Countdown
-                        date={new Date(recentClaimTime * 1000)}
-                        renderer={renderer}
-                      />
+                    claimStatusText(
+                      recentClaimTime,
+                      numberClaimed,
+                      totalRewardClaims,
                     )}
-                </MaterialButton>
-                <StyledCenterRow>
-                  {claimAt * 1000 > new Date().getTime() ||
-                  new BigNumber(tokenPurchased).lte(0) ? (
-                    ''
-                  ) : (
+
+                  <StyledInputContainer>
+                    <StyledCenterRow>
+                      <StyledHarvestAmount>
+                        {getRemainTokensToClaim(tokenPurchased, percentClaimed)}{' '}
+                        {tokenSymbol}
+                      </StyledHarvestAmount>
+                    </StyledCenterRow>
+                  </StyledInputContainer>
+                  <Spacer size="md" />
+                  <MaterialButton
+                    disabled={
+                      new BigNumber(
+                        getRemainTokensToClaim(tokenPurchased, percentClaimed),
+                      ).lte(0) ||
+                      recentClaimTime * 1000 > new Date().getTime() ||
+                      pendingHarvestTx ||
+                      new BigNumber(percentClaimed).gte(100) ||
+                      claimAt === 0
+                    }
+                    onClick={async () => {
+                      if (new BigNumber(tokenPurchased).gt(0)) {
+                        // const _networkName = formattedNetworkName(network)
+
+                        if (chainId !== poolChain) {
+                          alert(
+                            `This pool works on ${network} Network. Please switch your network to ${network}`,
+                          )
+                          return
+                        }
+
+                        setPendingHarvestTx(true)
+                        var tx = await handleHarvest(
+                          lpPoolId,
+                          access,
+                          lpAddress,
+                          network,
+                        )
+                        // setPendingHarvestTx(false)
+                        // if (tx) {
+                        //   console.log('harvest ' + tx)
+                        //   setSuccessHarvestTx(true)
+                        //   // onPresentSuccessHarvest()
+                        //   reset()
+                        // } else {
+                        //   onPresentError()
+                        // }
+                      }
+                    }}
+                  >
+                    {pendingHarvestTx
+                      ? 'Pending Confirmation'
+                      : recentClaimTime * 1000 <= new Date().getTime()
+                      ? new BigNumber(percentClaimed).gte(100)
+                        ? 'Already claimed'
+                        : 'Harvest'
+                      : undefined}
+                    {new BigNumber(tokenPurchased).gt(0) &&
+                      recentClaimTime * 1000 > new Date().getTime() && (
+                        <Countdown
+                          date={new Date(recentClaimTime * 1000)}
+                          renderer={renderer}
+                        />
+                      )}
+                  </MaterialButton>
+                  <StyledCenterRow>
+                    {claimAt * 1000 > new Date().getTime() ||
+                    new BigNumber(tokenPurchased).lte(0) ? (
+                      ''
+                    ) : (
+                      <StyledInfoLabel className="mt-4">
+                        Remain tokens to claim{' '}
+                        {getRemainTokenPercentToClaim(percentClaimed)}%
+                      </StyledInfoLabel>
+                    )}
+                  </StyledCenterRow>
+                </StyledSwapWrap>
+              ) : (
+                <StyledInfoWrap>
+                  <StyledCenterRow>
                     <StyledInfoLabel className="mt-4">
-                      Remain tokens to claim{' '}
-                      {getRemainTokenPercentToClaim(percentClaimed)}%
+                      This IDO has refunded,{' '}
+                      <a
+                        target="_blank"
+                        href="https://twitter.com/realpolkabridge/status/1653087305773780992"
+                        style={{ color: '#BF1088' }}
+                      >
+                        Check at
+                      </a>
                     </StyledInfoLabel>
-                  )}
-                </StyledCenterRow>
-              </StyledSwapWrap>
+                  </StyledCenterRow>
+                  <StyledCenterRow></StyledCenterRow>
+                </StyledInfoWrap>
+              )}
             </StyledBox>
           </StyledInfoSolid>
           <Spacer size="md" />
@@ -1028,75 +1046,87 @@ const JoinLaunchpad = () => {
             </>
           )} */}
         </StyledInfoWrap>
-        <div style={{ paddingTop: 10, paddingBottom: 10 }}>
-          <h6 style={{ color: 'white', textAlign: 'center', fontWeight: 600 }}>
-            Purchase History
-          </h6>
-          <div className="d-flex justify-content-center w-100 mb-3">
-            <div
-              className="text-center d-flex justify-content-center"
-              style={{
-                width: 'fit-content',
-                border: '1px solid #454545',
-                borderRadius: 5,
-                paddingTop: 10,
-                paddingBottom: 10,
-              }}
+        {symbol !== 'AIBB-PBR' && (
+          <div style={{ paddingTop: 10, paddingBottom: 10 }}>
+            <h6
+              style={{ color: 'white', textAlign: 'center', fontWeight: 600 }}
             >
-              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-                <p style={{ color: '#bdbdbd' }}>Token purchased</p>
-                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  {formatCurrency(purchasedAmount?.toString(), false, 4)}{' '}
-                  {tokenSymbol}
-                </h6>
-              </div>
-              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-                {' '}
-                <p style={{ color: '#bdbdbd' }}>Amount (USD)</p>
-                <h6 style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}>
-                  {!purchaseStats ? 0 : purchaseStats?.amountUsd}$
-                </h6>
-              </div>
-              <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
-                {' '}
-                <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
-                {purchaseStats && (
-                  <>
-                    {new BigNumber(purchaseStats?.profit).gt(0) && (
-                      <h6
-                        style={{
-                          color: 'green',
-                          fontWeight: 600,
-                          marginTop: 4,
-                        }}
-                      >
-                        {purchaseStats?.profit}%
-                      </h6>
-                    )}
-                    {new BigNumber(purchaseStats?.profit).eq(0) && (
-                      <h6
-                        style={{
-                          color: 'yellow',
-                          fontWeight: 600,
-                          marginTop: 4,
-                        }}
-                      >
-                        {!purchaseStats?.profit ? 0 : purchaseStats?.profit}%
-                      </h6>
-                    )}
-                    {new BigNumber(purchaseStats?.profit).lt(0) && (
-                      <h6
-                        style={{ color: 'red', fontWeight: 600, marginTop: 4 }}
-                      >
-                        {purchaseStats?.profit}%
-                      </h6>
-                    )}
-                  </>
-                )}
+              Purchase History
+            </h6>
+            <div className="d-flex justify-content-center w-100 mb-3">
+              <div
+                className="text-center d-flex justify-content-center"
+                style={{
+                  width: 'fit-content',
+                  border: '1px solid #454545',
+                  borderRadius: 5,
+                  paddingTop: 10,
+                  paddingBottom: 10,
+                }}
+              >
+                <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                  <p style={{ color: '#bdbdbd' }}>Token purchased</p>
+                  <h6
+                    style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}
+                  >
+                    {formatCurrency(purchasedAmount?.toString(), false, 4)}{' '}
+                    {tokenSymbol}
+                  </h6>
+                </div>
+                <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                  {' '}
+                  <p style={{ color: '#bdbdbd' }}>Amount (USD)</p>
+                  <h6
+                    style={{ color: 'yellow', fontWeight: 600, marginTop: 4 }}
+                  >
+                    {!purchaseStats ? 0 : purchaseStats?.amountUsd}$
+                  </h6>
+                </div>
+                <div style={{ width: window.innerWidth > 600 ? 200 : '30%' }}>
+                  {' '}
+                  <p style={{ color: '#bdbdbd' }}>Profit/Loss (%)</p>
+                  {purchaseStats && (
+                    <>
+                      {new BigNumber(purchaseStats?.profit).gt(0) && (
+                        <h6
+                          style={{
+                            color: 'green',
+                            fontWeight: 600,
+                            marginTop: 4,
+                          }}
+                        >
+                          {purchaseStats?.profit}%
+                        </h6>
+                      )}
+                      {new BigNumber(purchaseStats?.profit).eq(0) && (
+                        <h6
+                          style={{
+                            color: 'yellow',
+                            fontWeight: 600,
+                            marginTop: 4,
+                          }}
+                        >
+                          {!purchaseStats?.profit ? 0 : purchaseStats?.profit}%
+                        </h6>
+                      )}
+                      {new BigNumber(purchaseStats?.profit).lt(0) && (
+                        <h6
+                          style={{
+                            color: 'red',
+                            fontWeight: 600,
+                            marginTop: 4,
+                          }}
+                        >
+                          {purchaseStats?.profit}%
+                        </h6>
+                      )}
+                    </>
+                  )}
+                </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
       </StyledLaunchpad>
     </>
   )
