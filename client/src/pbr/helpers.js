@@ -152,3 +152,11 @@ export const getTokenPriceFromCoinGecko = async (network, tokenId = null) => {
     return 0
   }
 }
+
+export const isPoolEnded = (endAt) => {
+  if (!endAt) {
+    return true
+  }
+
+  return endAt * 1000 < new Date().getTime()
+}

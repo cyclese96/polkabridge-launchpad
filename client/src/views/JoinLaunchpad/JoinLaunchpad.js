@@ -42,7 +42,12 @@ import {
   tierConditions,
   WHITELIST,
 } from '../../pbr/lib/constants'
-import { isEqual, networkIcon, networkSymbol } from '../../pbr/helpers'
+import {
+  isEqual,
+  isPoolEnded,
+  networkIcon,
+  networkSymbol,
+} from '../../pbr/helpers'
 import useWallet from '../../hooks/useWallet'
 import useEthBalance from '../../hooks/useEthBalance'
 import {
@@ -696,7 +701,7 @@ const JoinLaunchpad = () => {
         <StyledInfoWrap>
           <StyledInfo>
             <StyledBox className="col-10">
-              {progress && (
+              {progress && !isPoolEnded(endAt) && (
                 <>
                   <div style={{ width: `100%` }}>
                     <StyledProgress>

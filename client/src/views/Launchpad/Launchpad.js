@@ -26,7 +26,7 @@ import {
   tierConditions,
   WHITELIST,
 } from '../../pbr/lib/constants'
-import { networkSymbol } from '../../pbr/helpers'
+import { isPoolEnded, networkSymbol } from '../../pbr/helpers'
 import useWallet from '../../hooks/useWallet'
 import { Link } from '@material-ui/core'
 
@@ -295,7 +295,7 @@ const Launchpad = () => {
           </StyledInfo>
           <StyledInfo>
             <StyledBox className="col-10">
-              {progress && (
+              {progress && !isPoolEnded(endAt) && (
                 <>
                   <div style={{ width: `100%` }}>
                     <StyledProgress>

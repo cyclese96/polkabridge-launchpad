@@ -16,7 +16,7 @@ import React, { useEffect, useMemo, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 import styled, { keyframes } from 'styled-components'
 
-export default function LaunchpadCard({ launchpad }) {
+export default function LaunchpadCard({ launchpad, ended = false }) {
   // const poolActive = usePoolActive(launchpad.startAt)
   const history = useHistory()
 
@@ -149,7 +149,7 @@ export default function LaunchpadCard({ launchpad }) {
             <StyledInsight>
               <span>{progress && 'Progress'} </span>
             </StyledInsight>
-            {!progress ? (
+            {!progress || ended ? (
               <Spacer />
             ) : (
               <>

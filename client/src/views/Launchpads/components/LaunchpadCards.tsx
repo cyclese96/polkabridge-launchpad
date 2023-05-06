@@ -50,7 +50,11 @@ const LaunchpadCards: React.FC = () => {
                       className="col-md-4 d-flex justify-content-center mt-4"
                       key={i}
                     >
-                      <LaunchpadCard launchpad={singleLaunchpad} />
+                      <LaunchpadCard
+                        launchpad={singleLaunchpad}
+                        key={i}
+                        ended={true}
+                      />
                       {<StyledSpacer />}
                     </div>
                   )
