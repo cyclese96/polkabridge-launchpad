@@ -384,10 +384,11 @@ export const getProgress = async (
     }
 
     // if pool ended show 100% progress
-    if (endAt && endAt * 1000 <= new Date().getTime()) {
+    if (endAt && endAt * 1000 <= new Date().getTime()&& lpAddress!=="0x58Cd3C39541A077ac464b49BBd98E9bb11Cfc831") {
+   
       return new BigNumber(100)
     }
-
+    console.log("=====lpAddress=======",lpAddress);
     const idoContract = {
       address: lpAddress,
       abi: abiMapping?.[lpAddress],
